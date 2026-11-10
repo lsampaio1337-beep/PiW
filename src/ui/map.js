@@ -524,12 +524,12 @@ export function showMap() {
     html += `
             <div id="map-inner-modal-overlay" onclick="if(event.target === this) { window.closeMapInnerModal(); }" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 1000; align-items: center; justify-content: center; padding: 2%; box-sizing: border-box;">
                 <div id="map-inner-modal" class="floating-window" onclick="event.stopPropagation()" style="max-height: 96%; max-width: 96%; box-sizing: border-box; display: flex; flex-direction: column; margin: 2%;">
-                    <div class="window-header" style="position: relative; cursor: default;">
+                    <div class="window-header" style="position: relative; cursor: default; flex-shrink: 0;">
                         <span id="map-inner-modal-title">Gym</span>
                         <span id="btn-close-map-inner-modal" onclick="window.closeMapInnerModal()" style="position: absolute; top: 5px; right: 5px; font-size: 12px; font-weight: bold; line-height: 1; padding: 0; cursor: pointer; color: white;">X</span>
                     </div>
-                    <div class="window-content-container" style="flex: 1; display: flex;">
-                        <div id="map-inner-modal-content" class="content-panel" style="width: 100%; height: auto; overflow-y: auto; position: relative;">
+                    <div class="window-content-container" style="display: flex; min-height: 0; justify-content: center;">
+                        <div id="map-inner-modal-content" class="content-panel" style="position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden;">
                             <!-- Content injected via JS -->
                         </div>
                     </div>
@@ -648,6 +648,8 @@ export function navigateToLocation(locationName) {
         vModal.style.display = "flex";
         vModal.style.alignItems = "center";
         vModal.style.justifyContent = "center";
+        vModal.style.width = "100%";
+        vModal.style.padding = "0";
 
         let html = `
             <div style="position: relative; display: inline-block; max-width: 100%; max-height: 100%;">
@@ -677,17 +679,19 @@ export function navigateToLocation(locationName) {
         vModal.style.alignItems = "center";
         vModal.style.justifyContent = "center";
         vModal.style.backgroundColor = "transparent";
+        vModal.style.width = "100%";
+        vModal.style.padding = "0";
 
         const completedChallenges = state.stats.completedChallengeIds || [];
         const isUnlockedByAreaId = (areaId) => completedChallenges.some(id => parseAreaNames(id).includes(areaId));
 
         let machinesHtml = `
-            <div style="position: relative; display: inline-block; max-width: 100%; max-height: 100%; width: 100%; height: 100%;">
-                <img src="./Assets/BG/Casino.png" style="display: block; width: 100%; height: 100%; object-fit: fill; position: absolute; top: 0; left: 0; z-index: 0;">
-                <div style="position: absolute; top: 20px; left: 0; width: 100%; text-align: center; z-index: 10; color: white; text-shadow: 2px 2px 4px black; font-size: 20px;">
-                    <h3>Standard Route $${state.config.balance.casinoPrices?.standard || 75} 2x Shiny $${state.config.balance.casinoPrices?.doubleShiny || 200}</h3>
+            <div style="position: relative; display: inline-block; max-width: 100%; max-height: 100%;">
+                <img src="./Assets/BG/Casino.png" style="display: block; max-width: 100%; max-height: 100%; object-fit: contain; z-index: 0;">
+                <div style="position: absolute; top: 5%; left: 0; width: 100%; text-align: center; z-index: 10; color: white; text-shadow: 2px 2px 4px black; font-size: 20px;">
+                    <h3 style="margin: 0;">Standard Route $${state.config.balance.casinoPrices?.standard || 75} 2x Shiny $${state.config.balance.casinoPrices?.doubleShiny || 200}</h3>
                 </div>
-                <div style="display: flex; justify-content: space-evenly; align-items: center; width: 100%; height: 100%; padding: 15px; box-sizing: border-box; z-index: 1; position: relative;">
+                <div style="position: absolute; top: 15%; left: 0; right: 0; bottom: 0; display: flex; justify-content: space-evenly; align-items: center; padding: 15px; box-sizing: border-box; z-index: 1;">
                     <div style="position: relative; text-align: center; flex: 1 1 0; max-width: 200px; margin: 0 5px;">
                         <img src="./Assets/Extra/Casino/${window.currentMapRegion === 'Johto' ? (window.currentCasinoHub === 'Goldenrod Game Corner' ? 'Region2 Johto Babies.png' : 'Region2 Kanto Starter Troupe.png') : 'Region1 Starter Troupe.png'}" alt="Starter Troupe" style="width: 100%; display: block; filter: drop-shadow(0 0 10px black);">
                         <div onclick="window.startCasinoEncounter(false, window.currentMapRegion === 'Johto' && window.currentCasinoHub === 'Goldenrod Game Corner' ? 'Goldenrod Babies Corner' : 'Celadon Casino Starter Troupe')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter ($${state.config.balance.casinoPrices?.standard || 75})"></div>
@@ -777,6 +781,8 @@ export function navigateToLocation(locationName) {
         vModal.style.display = "flex";
         vModal.style.alignItems = "center";
         vModal.style.justifyContent = "center";
+        vModal.style.width = "100%";
+        vModal.style.padding = "0";
 
         const stdLeft = 16.3;
         const stdTop = 34.16;

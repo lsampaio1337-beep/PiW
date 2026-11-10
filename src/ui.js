@@ -2401,9 +2401,6 @@ async function init() {
 
         // Money deduction and validation are handled by battleSystem.searchNext()
         switchView("BATTLE_ARENA");
-        if (typeof window.closeMapInnerModal === 'function') {
-            window.closeMapInnerModal();
-        }
         if (globals.battleSystem) {
              globals.battleSystem.stop();
              globals.battleSystem.activeEncounter = null;
@@ -3225,9 +3222,6 @@ window.showGameAlert = function(message, attachToElementId = null) {
 
 window.enterSafariZone = () => {
     switchView("BATTLE_ARENA");
-    if (typeof window.closeMapInnerModal === 'function') {
-        window.closeMapInnerModal();
-    }
     if (window.globals && window.globals.battleSystem) {
         window.globals.battleSystem.stop();
         window.globals.battleSystem.activeEncounter = null;
