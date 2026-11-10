@@ -597,7 +597,12 @@ export function navigateToLocation(locationName) {
     }
 
     const battleSystem = globals.battleSystem;
-    state.currentRoute = locationName;
+
+    // Do not set currentRoute to Gym or Pokemon League to keep player fighting on current route
+    if (!locationName.includes("Gym") && !locationName.includes("Pokemon League")) {
+        state.currentRoute = locationName;
+    }
+
     if (window.closeModal) window.closeModal();
 
     // Ensure main view and party windows are open when navigating, especially to places like Professor Lab
@@ -834,11 +839,6 @@ export function navigateToLocation(locationName) {
             vGymTitle.innerText = locationName;
         }
 
-        // Stop current battle system
-        if (battleSystem) {
-            battleSystem.stop();
-        }
-
         vGym.replaceChildren();
 
         if (gymConfig && state.config.gymAssets && state.config.gymAssets[gymConfig.leader]) {
@@ -911,7 +911,7 @@ export function navigateToLocation(locationName) {
         vGym.appendChild(uiContainer);
 
         if (gymConfig && contentArea) {
-            let buttonText = lookupName.includes("Pokemon League") ? "Challenge" : "Battle Gym";
+            let buttonText = lookupName.includes("Pokemon League") ? "Challenge" : "Enter Gym";
             const btn = document.createElement('button');
             btn.className = "action-btn action-btn-primary";
             btn.style.marginTop = "10px";

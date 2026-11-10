@@ -764,14 +764,14 @@ class BattleSystem {
         if (trainer) {
             let trainerButtonsHtml = gym.trainers.map((t, index) => {
                 const isLeader = index === gym.trainers.length - 1;
-                const buttonText = isLeader ? `Fight Gym Leader` : `Fight Gym Trainer`;
+                const buttonText = isLeader ? `Leader ${escapeHTML(t.name)}` : `${escapeHTML(t.name)}`;
 
                 if (index < this.gymState.currentTrainerIndex) {
                     return `<button disabled class="action-btn" style="opacity: 0.5; width: 100%;">${buttonText} (Defeated)</button>`;
                 } else if (index === this.gymState.currentTrainerIndex) {
-                    return `<button id="btn-start-gym-battle" class="action-btn action-btn-primary" onclick="window.battleEngine.startNextGymBattle()" style="width: 100%;">${buttonText} (${escapeHTML(t.name)})</button>`;
+                    return `<button id="btn-start-gym-battle" class="action-btn action-btn-primary" onclick="window.battleEngine.startNextGymBattle()" style="width: 100%;">${buttonText}</button>`;
                 } else {
-                    return `<button disabled class="action-btn" style="opacity: 0.5; width: 100%;">${buttonText} (${escapeHTML(t.name)})</button>`;
+                    return `<button disabled class="action-btn" style="opacity: 0.5; width: 100%;">${buttonText}</button>`;
                 }
             }).join('');
 
