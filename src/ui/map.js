@@ -523,7 +523,7 @@ export function showMap() {
     // Inner modal for gym overlays natively locked to the map
     html += `
             <div id="map-inner-modal-overlay" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 1000; align-items: center; justify-content: center;">
-                <div id="map-inner-modal-body" style="position: relative; width: 100%; height: 100%;">
+                <div id="map-inner-modal-body" style="position: relative; width: 70%; height: 70%; border-radius: 8px; box-shadow: 0px 4px 15px rgba(0,0,0,0.8); overflow: hidden; background: black;">
                     <!-- Content injected via JS -->
                 </div>
             </div>
