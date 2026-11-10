@@ -203,11 +203,11 @@ window.getCurrentRoutes = function() {
     if (state.currentRegionName === 'Hoenn' && state.config.hoennRoutes) return state.config.hoennRoutes;
     if (state.currentRegionName === 'Sinnoh' && state.config.sinnohRoutes) return state.config.sinnohRoutes;
     if (state.currentRegionName === 'Unova' && state.config.unovaRoutes) return state.config.unovaRoutes;
-    if (state.currentRegionName === 'Kalos' && state.config.kalosRoutes) return state.config.kalosRoutes;
-    if (state.currentRegionName === 'Alola' && state.config.alolaRoutes) return state.config.alolaRoutes;
-    if (state.currentRegionName === 'Galar' && state.config.galarRoutes) return state.config.galarRoutes;
-    if (state.currentRegionName === 'Hisui' && state.config.hisuiRoutes) return state.config.hisuiRoutes;
-    if (state.currentRegionName === 'Paldea' && state.config.paldeaRoutes) return state.config.paldeaRoutes;
+    if (state.currentRegionName === 'Region 60' && state.config.region60Routes) return state.config.region60Routes;
+    if (state.currentRegionName === 'Region 70' && state.config.region70Routes) return state.config.region70Routes;
+    if (state.currentRegionName === 'Region 80' && state.config.region80Routes) return state.config.region80Routes;
+    if (state.currentRegionName === 'Region 90' && state.config.region90Routes) return state.config.region90Routes;
+    if (state.currentRegionName === 'Region 100' && state.config.region100Routes) return state.config.region100Routes;
     return state.config.routes || [];
 };
 
@@ -217,10 +217,10 @@ window.getCurrentUnlocks = function() {
     if (state.currentRegionName === 'Hoenn' && state.config.hoennUnlocks) return state.config.hoennUnlocks;
     if (state.currentRegionName === 'Sinnoh' && state.config.sinnohUnlocks) return state.config.sinnohUnlocks;
     if (state.currentRegionName === 'Unova' && state.config.unovaUnlocks) return state.config.unovaUnlocks;
-    if (state.currentRegionName === 'Kalos' && state.config.kalosUnlocks) return state.config.kalosUnlocks;
-    if (state.currentRegionName === 'Alola' && state.config.alolaUnlocks) return state.config.alolaUnlocks;
-    if (state.currentRegionName === 'Galar' && state.config.galarUnlocks) return state.config.galarUnlocks;
-    if (state.currentRegionName === 'Hisui' && state.config.hisuiUnlocks) return state.config.hisuiUnlocks;
-    if (state.currentRegionName === 'Paldea' && state.config.paldeaUnlocks) return state.config.paldeaUnlocks;
+    if (state.currentRegionName === 'Region 60' && state.config.region60Unlocks) return state.config.region60Unlocks;
+    if (state.currentRegionName === 'Region 70' && state.config.region70Unlocks) return state.config.region70Unlocks;
+    if (state.currentRegionName === 'Region 80' && state.config.region80Unlocks) return state.config.region80Unlocks;
+    if (state.currentRegionName === 'Region 90' && state.config.region90Unlocks) return state.config.region90Unlocks;
+    if (state.currentRegionName === 'Region 100' && state.config.region100Unlocks) return state.config.region100Unlocks;
     return state.config.unlocks || [];
 };
