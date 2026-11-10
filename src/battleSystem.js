@@ -649,16 +649,46 @@ class BattleSystem {
         if (gymIndex === -1) gymIndex = 0; // Fallback
 
         this.stop();
+
+        // Store previous route so we can restore it on flee
+        const previousRoute = this.state.currentRoute;
+
+        // Actually set current route to Gym Name when entering
+        this.state.currentRoute = gymName;
+
         this.gymState = {
             gymIndex: gymIndex,
             isActive: true,
             gym: gym,
             currentTrainerIndex: 0,
-            inCombat: false
+            inCombat: false,
+            previousRoute: previousRoute
         };
+
+        if (typeof window.switchView === 'function') {
+            window.switchView("GYM"); // Switch behind Map Modal
+        }
 
         // Update gym UI specifically to show current trainer
         this.updateGymUI();
+
+        // Disable Map Window Buttons and overlay interactions
+        const mapCloseBtn = document.getElementById("window-map")?.querySelector(".window-header span");
+        if (mapCloseBtn) mapCloseBtn.style.display = "none"; // Hide X on map window
+
+        const mapInnerCloseBtn = document.getElementById("btn-close-map-inner-modal");
+        if (mapInnerCloseBtn) mapInnerCloseBtn.style.display = "none"; // Hide X on gym modal
+
+        const regionTabs = document.getElementById("window-map")?.querySelectorAll("button");
+        if (regionTabs) {
+             regionTabs.forEach(btn => btn.style.pointerEvents = "none"); // Disable tabs
+        }
+
+        // Remove click to close on overlay
+        const overlay = document.getElementById("map-inner-modal-overlay");
+        if (overlay) {
+            overlay.dataset.gymActive = "true";
+        }
     }
 
 
@@ -764,23 +794,28 @@ class BattleSystem {
         if (trainer) {
             let trainerButtonsHtml = gym.trainers.map((t, index) => {
                 const isLeader = index === gym.trainers.length - 1;
-                const buttonText = isLeader ? `Fight Gym Leader` : `Fight Gym Trainer`;
+                const buttonText = isLeader ? `Leader ${escapeHTML(t.name)}` : `Gym Trainer #${index + 1}`;
+
+                // In combat, we disable all buttons
+                const disabledStr = this.gymState.inCombat ? 'disabled style="opacity: 0.5; width: 100%;"' : '';
 
                 if (index < this.gymState.currentTrainerIndex) {
                     return `<button disabled class="action-btn" style="opacity: 0.5; width: 100%;">${buttonText} (Defeated)</button>`;
                 } else if (index === this.gymState.currentTrainerIndex) {
-                    return `<button id="btn-start-gym-battle" class="action-btn action-btn-primary" onclick="window.battleEngine.startNextGymBattle()" style="width: 100%;">${buttonText} (${escapeHTML(t.name)})</button>`;
+                    return `<button id="btn-start-gym-battle" class="action-btn action-btn-primary" onclick="window.battleEngine.startNextGymBattle()" ${disabledStr} style="width: 100%;">${buttonText}</button>`;
                 } else {
-                    return `<button disabled class="action-btn" style="opacity: 0.5; width: 100%;">${buttonText} (${escapeHTML(t.name)})</button>`;
+                    return `<button disabled class="action-btn" style="opacity: 0.5; width: 100%;">${buttonText}</button>`;
                 }
             }).join('');
 
             // Rest phase UI
+            const fleeDisabled = this.gymState.inCombat ? 'disabled style="margin-top: 10px; width: 100%; opacity: 0.5;"' : 'style="margin-top: 10px; width: 100%;"';
+
             contentArea.innerHTML = `
                 <div id="gym-rest-area" style="display: flex; flex-direction: column; gap: 10px; width: 100%;">
                     <p style="font-size: 14px; margin-bottom: 10px;">You may organize your party.</p>
                     ${trainerButtonsHtml}
-                    <button class="action-btn action-btn-danger" onclick="window.battleEngine.stopGymBattle()" style="margin-top: 10px; width: 100%;">Flee Gym</button>
+                    <button id="btn-flee-gym" class="action-btn action-btn-danger" onclick="window.battleEngine.stopGymBattle()" ${fleeDisabled}>Flee Gym</button>
                 </div>
             `;
             // Temporary expose for the button
@@ -789,8 +824,11 @@ class BattleSystem {
             // Re-bind to use our special gym start func that toggles visibility
             window.battleEngine.startNextGymBattle = () => {
                 this.gymState.inCombat = true;
+                // Re-render UI to disable buttons immediately
+                this.updateGymUI();
+
                 if (typeof window.switchView === 'function') {
-                    window.switchView("BATTLE_ARENA");
+                    window.switchView("GYM"); // Keep main view as Gym background during combat
                 }
                 const leaderSpeed = this.state.party[0].currentStats.spe;
                 const speedMult = this.getSpeedMultiplier();
@@ -801,9 +839,11 @@ class BattleSystem {
         } else {
             // Gym completed
             const htmlContent = `
-                <h3>You defeated ${escapeHTML(gym.leader)}!</h3>
-                <p>A Gift is awaiting for you.</p>
-                <button class="action-btn action-btn-primary" onclick="window.battleEngine.stopGymBattle()" style="margin-top: 10px; width: 100%;">Leave</button>
+                <div id="gym-rest-area" style="display: flex; flex-direction: column; gap: 10px; width: 100%;">
+                    <h3>You defeated ${escapeHTML(gym.leader)}!</h3>
+                    <p>A Gift is awaiting for you.</p>
+                    <button class="action-btn action-btn-primary" onclick="window.battleEngine.stopGymBattle()" style="margin-top: 10px; width: 100%;">Leave</button>
+                </div>
             `;
             const parser = new DOMParser();
             const doc = parser.parseFromString(htmlContent, 'text/html');
@@ -821,8 +861,39 @@ class BattleSystem {
         this.gymState.gymIndex = 0;
         this.stop();
 
+        // Restore Map Window Buttons and overlay interactions
+        const mapCloseBtn = document.getElementById("window-map")?.querySelector(".window-header span");
+        if (mapCloseBtn) mapCloseBtn.style.display = ""; // Restore X on map window
+
+        const mapInnerCloseBtn = document.getElementById("btn-close-map-inner-modal");
+        if (mapInnerCloseBtn) mapInnerCloseBtn.style.display = ""; // Restore X on gym modal
+
+        const regionTabs = document.getElementById("window-map")?.querySelectorAll("button");
+        if (regionTabs) {
+             regionTabs.forEach(btn => btn.style.pointerEvents = ""); // Restore tabs
+        }
+
+        // Restore click to close on overlay
+        const overlay = document.getElementById("map-inner-modal-overlay");
+        if (overlay) {
+            overlay.dataset.gymActive = "false";
+        }
+
+        // Ensure map is front again
+        if (typeof window.switchView === 'function') {
+            window.switchView("BATTLE_ARENA");
+        }
+
         if (typeof window.closeMapInnerModal === 'function') {
-             window.closeMapInnerModal();
+             // Let closeMapInnerModal handle the DOM elements
+             // Actually, requirements say: "Keep Gym modal opened in first screen."
+             // We can just not call closeMapInnerModal, and let navigateToLocation re-render it.
+             // Wait, if we navigateToLocation, it'll show the Enter screen again, which is "first screen".
+        }
+
+        // Restore route to what it was before gym
+        if (this.gymState.previousRoute) {
+            this.state.currentRoute = this.gymState.previousRoute;
         }
 
         // Return to normal map or idle
@@ -1917,6 +1988,10 @@ class BattleSystem {
             this.gymState.inCombat = false; // Return to rest phase
             this.stop(); // Stop loop to show next button
 
+            if (typeof window.switchView === 'function') {
+                window.switchView("GYM"); // Return main view to gym background behind map
+            }
+
             if (this.gymState.currentTrainerIndex >= gym.trainers.length) {
                 // Defeated Gym!
                 if (!this.state.trainer.badges) this.state.trainer.badges = 0;
@@ -1958,7 +2033,7 @@ class BattleSystem {
             if (typeof window.switchView === 'function') {
                 // Return main view to normal state (safari, center, etc., but since we are in map, maybe BATTLE_ARENA or idle)
                 // Gym overlay is still active on the map window.
-                window.switchView("BATTLE_ARENA");
+                window.switchView("GYM"); // Keep gym background
             }
         } else {
             // Next pokemon

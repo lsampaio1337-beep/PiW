@@ -1344,11 +1344,35 @@ export function switchView(viewName) {
     } else if (viewName === 'BATTLE_ARENA') {
         document.getElementById('view-battle-arena').style.display = 'flex';
         document.getElementById('view-battle-arena').style.flexDirection = 'column';
+        // Ensure regular styles are restored just in case we switch from GYM
+        document.getElementById('view-battle-arena').style.zIndex = 'initial';
+        document.getElementById('view-battle-arena').style.position = 'initial';
+        document.getElementById('view-battle-arena').style.background = '';
     } else if (viewName === 'POKEMON_CENTER_MARKET') {
         document.getElementById('view-center-market').style.display = 'block';
         setupMarket(document.getElementById('view-center-market'));
     } else if (viewName === 'GYM') {
+        // Just show BATTLE_ARENA, but with the gym background applied to view-gym instead
+        // Wait, if BATTLE_ARENA is not shown, combat UI is invisible!
+        // We MUST show BATTLE_ARENA to see combat!
+        document.getElementById('view-battle-arena').style.display = 'flex';
+        document.getElementById('view-battle-arena').style.flexDirection = 'column';
+
+        // Also show view-gym to render the background behind it?
+        // Actually, BATTLE_ARENA's background is transparent if we don't set it.
+        // Let's set the background directly on BATTLE_ARENA when GYM is active, or use view-gym as a full background layer.
         document.getElementById('view-gym').style.display = 'block';
+        document.getElementById('view-gym').style.position = 'absolute';
+        document.getElementById('view-gym').style.top = '0';
+        document.getElementById('view-gym').style.left = '0';
+        document.getElementById('view-gym').style.width = '100%';
+        document.getElementById('view-gym').style.height = '100%';
+        document.getElementById('view-gym').style.zIndex = '1';
+
+        document.getElementById('view-battle-arena').style.zIndex = '2';
+        document.getElementById('view-battle-arena').style.position = 'relative';
+        document.getElementById('view-battle-arena').style.background = 'transparent';
+
     } else if (viewName === 'CASINO_HUB') {
         document.getElementById('view-casino').style.display = 'block';
     } else if (viewName === 'BATTLE_STADIUM') {

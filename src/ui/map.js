@@ -522,7 +522,7 @@ export function showMap() {
 
     // Inner modal for gym overlays natively locked to the map
     html += `
-            <div id="map-inner-modal-overlay" onclick="if(event.target === this) { window.closeMapInnerModal(); }" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 1000; align-items: center; justify-content: center; padding: 20px 0; box-sizing: border-box;">
+            <div id="map-inner-modal-overlay" onclick="if(event.target === this && this.dataset.gymActive !== 'true') { window.closeMapInnerModal(); }" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 1000; align-items: center; justify-content: center; padding: 20px 0; box-sizing: border-box;">
                 <div id="map-inner-modal" class="floating-window">
                     <div class="window-header" style="position: relative; cursor: default;">
                         <span id="map-inner-modal-title">Gym</span>
@@ -911,7 +911,7 @@ export function navigateToLocation(locationName) {
         vGym.appendChild(uiContainer);
 
         if (gymConfig && contentArea) {
-            let buttonText = lookupName.includes("Pokemon League") ? "Challenge" : "Battle Gym";
+            let buttonText = lookupName.includes("Pokemon League") ? "Challenge" : "Enter";
             const btn = document.createElement('button');
             btn.className = "action-btn action-btn-primary";
             btn.style.marginTop = "10px";
