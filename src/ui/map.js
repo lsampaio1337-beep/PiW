@@ -648,11 +648,38 @@ export function navigateToLocation(locationName) {
         vGym.style.position = "relative";
         vGym.style.height = "100%";
         vGym.style.width = "100%";
-        vGym.style.backgroundImage = "url('Assets/BG/SafariZone.png')";
-        vGym.style.backgroundSize = "contain";
-        vGym.style.backgroundPosition = "center";
-        vGym.style.backgroundRepeat = "no-repeat";
+        vGym.style.backgroundImage = "none";
         vGym.style.backgroundColor = "black";
+
+        const flexContainer = document.createElement('div');
+        flexContainer.style.width = '100%';
+        flexContainer.style.height = '100%';
+        flexContainer.style.display = 'flex';
+        flexContainer.style.justifyContent = 'center';
+        flexContainer.style.alignItems = 'center';
+        flexContainer.style.position = 'relative';
+
+        const wrapper = document.createElement('div');
+        wrapper.style.position = 'relative';
+        wrapper.style.display = 'inline-block';
+        wrapper.style.maxWidth = '100%';
+        wrapper.style.maxHeight = '100%';
+
+        const imgEl = document.createElement('img');
+        imgEl.src = "Assets/BG/SafariZone.png";
+        imgEl.style.maxWidth = '100%';
+        imgEl.style.maxHeight = '100%';
+        imgEl.style.display = 'block';
+        imgEl.style.objectFit = 'contain';
+
+        wrapper.appendChild(imgEl);
+
+        const overlayContainer = document.createElement('div');
+        overlayContainer.style.position = 'absolute';
+        overlayContainer.style.top = '0';
+        overlayContainer.style.left = '0';
+        overlayContainer.style.width = '100%';
+        overlayContainer.style.height = '100%';
 
         const safariCost = state.config.balance.safariZonePrice || 500;
         const uiContainer = document.createElement('div');
@@ -692,7 +719,11 @@ export function navigateToLocation(locationName) {
 
         uiContainer.appendChild(msg);
         uiContainer.appendChild(btn);
-        vGym.appendChild(uiContainer);
+
+        overlayContainer.appendChild(uiContainer);
+        wrapper.appendChild(overlayContainer);
+        flexContainer.appendChild(wrapper);
+        vGym.appendChild(flexContainer);
 
         const overlay = document.getElementById('map-inner-modal-overlay');
         if (overlay) overlay.style.display = 'flex';
@@ -717,24 +748,44 @@ export function navigateToLocation(locationName) {
         vGym.style.position = "relative";
         vGym.style.height = "100%";
         vGym.style.width = "100%";
-        vGym.style.backgroundImage = "url('./Assets/BG/Casino.png')";
-        vGym.style.backgroundSize = "contain";
-        vGym.style.backgroundPosition = "center";
-        vGym.style.backgroundRepeat = "no-repeat";
+        vGym.style.backgroundImage = "none";
         vGym.style.backgroundColor = "black";
+
+        const flexContainer = document.createElement('div');
+        flexContainer.style.width = '100%';
+        flexContainer.style.height = '100%';
+        flexContainer.style.display = 'flex';
+        flexContainer.style.justifyContent = 'center';
+        flexContainer.style.alignItems = 'center';
+        flexContainer.style.position = 'relative';
+
+        const wrapper = document.createElement('div');
+        wrapper.style.position = 'relative';
+        wrapper.style.display = 'inline-block';
+        wrapper.style.maxWidth = '100%';
+        wrapper.style.maxHeight = '100%';
+
+        const imgEl = document.createElement('img');
+        imgEl.src = "./Assets/BG/Casino.png";
+        imgEl.style.maxWidth = '100%';
+        imgEl.style.maxHeight = '100%';
+        imgEl.style.display = 'block';
+        imgEl.style.objectFit = 'contain';
+
+        wrapper.appendChild(imgEl);
 
         const completedChallenges = state.stats.completedChallengeIds || [];
         const isUnlockedByAreaId = (areaId) => completedChallenges.some(id => parseAreaNames(id).includes(areaId));
 
         let machinesHtml = `
             <div style="position: absolute; top: 20px; left: 0; width: 100%; text-align: center; z-index: 10; color: white; text-shadow: 2px 2px 4px black; font-size: 24px;">
-                <h3>Standard Route $${state.config.balance.casinoPrices?.standard || 75} 2x Shiny $${state.config.balance.casinoPrices?.doubleShiny || 200}</h3>
+                <h3>Standard Route ${state.config.balance.casinoPrices?.standard || 75} 2x Shiny ${state.config.balance.casinoPrices?.doubleShiny || 200}</h3>
             </div>
-            <div style="display: flex; justify-content: space-evenly; align-items: center; width: 100%; height: 100%; padding: 15px; box-sizing: border-box;">
+            <div style="position: absolute; top: 0; left: 0; display: flex; justify-content: space-evenly; align-items: center; width: 100%; height: 100%; padding: 15px; box-sizing: border-box;">
                     <div style="position: relative; text-align: center; flex: 1 1 0; max-width: 200px; margin: 0 5px;">
                         <img src="./Assets/Extra/Casino/${window.currentMapRegion === 'Johto' ? (window.currentCasinoHub === 'Goldenrod Game Corner' ? 'Region2 Johto Babies.png' : 'Region2 Kanto Starter Troupe.png') : 'Region1 Starter Troupe.png'}" alt="Starter Troupe" style="width: 100%; display: block; filter: drop-shadow(0 0 10px black);">
-                        <div onclick="window.startCasinoEncounter(false, window.currentMapRegion === 'Johto' && window.currentCasinoHub === 'Goldenrod Game Corner' ? 'Goldenrod Babies Corner' : 'Celadon Casino Starter Troupe')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter ($${state.config.balance.casinoPrices?.standard || 75})"></div>
-                        <div onclick="window.startCasinoEncounter(true, window.currentMapRegion === 'Johto' && window.currentCasinoHub === 'Goldenrod Game Corner' ? 'Goldenrod Babies Corner' : 'Celadon Casino Starter Troupe')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="2x Shiny ($${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>
+                        <div onclick="window.startCasinoEncounter(false, window.currentMapRegion === 'Johto' && window.currentCasinoHub === 'Goldenrod Game Corner' ? 'Goldenrod Babies Corner' : 'Celadon Casino Starter Troupe')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter (${state.config.balance.casinoPrices?.standard || 75})"></div>
+                        <div onclick="window.startCasinoEncounter(true, window.currentMapRegion === 'Johto' && window.currentCasinoHub === 'Goldenrod Game Corner' ? 'Goldenrod Babies Corner' : 'Celadon Casino Starter Troupe')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="2x Shiny (${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>
                     </div>
             `;
 
@@ -742,8 +793,8 @@ export function navigateToLocation(locationName) {
                 machinesHtml += `
                     <div style="position: relative; text-align: center; flex: 1 1 0; max-width: 200px; margin: 0 5px;">
                         <img src="./Assets/Extra/Casino/${window.currentMapRegion === 'Johto' ? (window.currentCasinoHub === 'Goldenrod Game Corner' ? 'Region2 Johto Lucky Spot.png' : 'Region2 Kanto Babies.png') : 'Region1 Mid Troupe.png'}" alt="${window.currentMapRegion === 'Johto' ? 'Babies' : 'Mid Troupe'}" style="width: 100%; display: block; filter: drop-shadow(0 0 10px black);">
-                        <div onclick="window.startCasinoEncounter(false, window.currentMapRegion === 'Johto' && window.currentCasinoHub === 'Goldenrod Game Corner' ? 'Goldenrod Lucky Spot Corner' : 'Celadon Casino Mid Troupe')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter ($${state.config.balance.casinoPrices?.standard || 75})"></div>
-                        <div onclick="window.startCasinoEncounter(true, window.currentMapRegion === 'Johto' && window.currentCasinoHub === 'Goldenrod Game Corner' ? 'Goldenrod Lucky Spot Corner' : 'Celadon Casino Mid Troupe')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="2x Shiny ($${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>
+                        <div onclick="window.startCasinoEncounter(false, window.currentMapRegion === 'Johto' && window.currentCasinoHub === 'Goldenrod Game Corner' ? 'Goldenrod Lucky Spot Corner' : 'Celadon Casino Mid Troupe')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter (${state.config.balance.casinoPrices?.standard || 75})"></div>
+                        <div onclick="window.startCasinoEncounter(true, window.currentMapRegion === 'Johto' && window.currentCasinoHub === 'Goldenrod Game Corner' ? 'Goldenrod Lucky Spot Corner' : 'Celadon Casino Mid Troupe')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="2x Shiny (${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>
                     </div>
                 `;
             }
@@ -752,8 +803,8 @@ export function navigateToLocation(locationName) {
                 machinesHtml += `
                     <div style="position: relative; text-align: center; flex: 1 1 0; max-width: 200px; margin: 0 5px;">
                         <img src="./Assets/Extra/Casino/${window.currentMapRegion === 'Johto' ? 'Region2 Late Troupe Kanto.png' : 'Region1 Late Troupe.png'}" alt="Late Troupe" style="width: 100%; display: block; filter: drop-shadow(0 0 10px black);">
-                        <div onclick="window.startCasinoEncounter(false, 'Celadon Casino Late Troupe')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter ($${state.config.balance.casinoPrices?.standard || 75})"></div>
-                        <div onclick="window.startCasinoEncounter(true, 'Celadon Casino Late Troupe')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="2x Shiny ($${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>
+                        <div onclick="window.startCasinoEncounter(false, 'Celadon Casino Late Troupe')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter (${state.config.balance.casinoPrices?.standard || 75})"></div>
+                        <div onclick="window.startCasinoEncounter(true, 'Celadon Casino Late Troupe')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="2x Shiny (${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>
                     </div>
                 `;
             }
@@ -762,8 +813,8 @@ export function navigateToLocation(locationName) {
                 machinesHtml += `
                     <div style="position: relative; text-align: center; flex: 1 1 0; max-width: 200px; margin: 0 5px;">
                         <img src="./Assets/Extra/Casino/${window.currentMapRegion === 'Johto' ? 'Region2 Kanto Eeveelutions.png' : 'Region1 Eeveelutions.png'}" alt="Eeveelutions" style="width: 100%; display: block; filter: drop-shadow(0 0 10px black);">
-                        <div onclick="window.startCasinoEncounter(false, 'Celadon Casino Eeveelutions')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter ($${state.config.balance.casinoPrices?.standard || 75})"></div>
-                        <div onclick="window.startCasinoEncounter(true, 'Celadon Casino Eeveelutions')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="2x Shiny ($${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>
+                        <div onclick="window.startCasinoEncounter(false, 'Celadon Casino Eeveelutions')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter (${state.config.balance.casinoPrices?.standard || 75})"></div>
+                        <div onclick="window.startCasinoEncounter(true, 'Celadon Casino Eeveelutions')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="2x Shiny (${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>
                     </div>
                 `;
             }
@@ -772,22 +823,25 @@ export function navigateToLocation(locationName) {
                 machinesHtml += `
                     <div style="position: relative; text-align: center; flex: 1 1 0; max-width: 200px; margin: 0 5px;">
                         <img src="./Assets/Extra/Casino/${window.currentMapRegion === 'Johto' ? 'Region2 Kanto Special Spot.png' : 'Region1 Special Spot.png'}" alt="Special Spot" style="width: 100%; display: block; filter: drop-shadow(0 0 10px black);">
-                        <div onclick="window.startCasinoEncounter(false, 'Celadon Casino Special Spot')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter ($${state.config.balance.casinoPrices?.standard || 75})"></div>
-                        <div onclick="window.startCasinoEncounter(true, 'Celadon Casino Special Spot')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="2x Shiny ($${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>
+                        <div onclick="window.startCasinoEncounter(false, 'Celadon Casino Special Spot')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter (${state.config.balance.casinoPrices?.standard || 75})"></div>
+                        <div onclick="window.startCasinoEncounter(true, 'Celadon Casino Special Spot')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="2x Shiny (${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>
                     </div>
                 `;
             }
 
             machinesHtml += `</div>`;
 
-            // Render it in inner modal instead of a view container
-            const containerDiv = document.createElement('div');
-            containerDiv.style.width = '100%';
-            containerDiv.style.height = '100%';
-            containerDiv.style.display = 'flex';
-            containerDiv.style.flexDirection = 'column';
-            containerDiv.innerHTML = machinesHtml;
-            vGym.appendChild(containerDiv);
+            const overlayContainer = document.createElement('div');
+            overlayContainer.style.position = 'absolute';
+            overlayContainer.style.top = '0';
+            overlayContainer.style.left = '0';
+            overlayContainer.style.width = '100%';
+            overlayContainer.style.height = '100%';
+            overlayContainer.innerHTML = machinesHtml;
+
+            wrapper.appendChild(overlayContainer);
+            flexContainer.appendChild(wrapper);
+            vGym.appendChild(flexContainer);
 
         const overlay = document.getElementById('map-inner-modal-overlay');
         if (overlay) overlay.style.display = 'flex';
