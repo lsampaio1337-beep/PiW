@@ -40,11 +40,11 @@ const REGIONS = [
     { num: 3, name: 'Hoenn', prefix: 'hoenn', routesVar: 'hoennRoutes', unlocksVar: 'hoennUnlocks', mapVar: 'hoennMapCoordinates' },
     { num: 4, name: 'Sinnoh', prefix: 'sinnoh', routesVar: 'sinnohRoutes', unlocksVar: 'sinnohUnlocks', mapVar: 'sinnohMapCoordinates' },
     { num: 5, name: 'Unova', prefix: 'unova', routesVar: 'unovaRoutes', unlocksVar: 'unovaUnlocks', mapVar: 'unovaMapCoordinates' },
-    { num: 6, name: 'Kalos', prefix: 'kalos', routesVar: 'kalosRoutes', unlocksVar: 'kalosUnlocks', mapVar: 'kalosMapCoordinates' },
-    { num: 7, name: 'Alola', prefix: 'alola', routesVar: 'alolaRoutes', unlocksVar: 'alolaUnlocks', mapVar: 'alolaMapCoordinates' },
-    { num: 8, name: 'Galar', prefix: 'galar', routesVar: 'galarRoutes', unlocksVar: 'galarUnlocks', mapVar: 'galarMapCoordinates' },
-    { num: 9, name: 'Hisui', prefix: 'hisui', routesVar: 'hisuiRoutes', unlocksVar: 'hisuiUnlocks', mapVar: 'hisuiMapCoordinates' },
-    { num: 10, name: 'Paldea', prefix: 'paldea', routesVar: 'paldeaRoutes', unlocksVar: 'paldeaUnlocks', mapVar: 'paldeaMapCoordinates' }
+    { num: 60, name: 'Region 60', prefix: 'region60', routesVar: 'region60Routes', unlocksVar: 'region60Unlocks', mapVar: 'region60MapCoordinates' },
+    { num: 70, name: 'Region 70', prefix: 'region70', routesVar: 'region70Routes', unlocksVar: 'region70Unlocks', mapVar: 'region70MapCoordinates' },
+    { num: 80, name: 'Region 80', prefix: 'region80', routesVar: 'region80Routes', unlocksVar: 'region80Unlocks', mapVar: 'region80MapCoordinates' },
+    { num: 90, name: 'Region 90', prefix: 'region90', routesVar: 'region90Routes', unlocksVar: 'region90Unlocks', mapVar: 'region90MapCoordinates' },
+    { num: 100, name: 'Region 100', prefix: 'region100', routesVar: 'region100Routes', unlocksVar: 'region100Unlocks', mapVar: 'region100MapCoordinates' }
 ];
 
 

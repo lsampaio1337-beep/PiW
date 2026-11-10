@@ -301,21 +301,41 @@ if (req.catchSpeciesByQuality) {
         let beaten = state.stats.defeatedBosses && state.stats.defeatedBosses["Unova Champion"];
         progress.push({ type: 'defeatLeague', region: 'Unova', isMet: beaten });
     }
+    if (req.defeatRegion60Champion) {
+        let beaten = state.stats.defeatedBosses && state.stats.defeatedBosses["Region60 Champion"];
+        progress.push({ type: 'defeatLeague', region: 'Region 60', isMet: beaten });
+    }
     if (req.defeatKalosChampion) {
         let beaten = state.stats.defeatedBosses && state.stats.defeatedBosses["Kalos Champion"];
         progress.push({ type: 'defeatLeague', region: 'Kalos', isMet: beaten });
+    }
+    if (req.defeatRegion70Champion) {
+        let beaten = state.stats.defeatedBosses && state.stats.defeatedBosses["Region70 Champion"];
+        progress.push({ type: 'defeatLeague', region: 'Region 70', isMet: beaten });
     }
     if (req.defeatAlolaChampion) {
         let beaten = state.stats.defeatedBosses && state.stats.defeatedBosses["Alola Champion"];
         progress.push({ type: 'defeatLeague', region: 'Alola', isMet: beaten });
     }
+    if (req.defeatRegion90Champion) {
+        let beaten = state.stats.defeatedBosses && state.stats.defeatedBosses["Region90 Champion"];
+        progress.push({ type: 'defeatLeague', region: 'Region 90', isMet: beaten });
+    }
     if (req.defeatHisuiChampion) {
         let beaten = state.stats.defeatedBosses && state.stats.defeatedBosses["Hisui Champion"];
         progress.push({ type: 'defeatLeague', region: 'Hisui', isMet: beaten });
     }
+    if (req.defeatRegion80Champion) {
+        let beaten = state.stats.defeatedBosses && state.stats.defeatedBosses["Region80 Champion"];
+        progress.push({ type: 'defeatLeague', region: 'Region 80', isMet: beaten });
+    }
     if (req.defeatGalarChampion) {
         let beaten = state.stats.defeatedBosses && state.stats.defeatedBosses["Galar Champion"];
         progress.push({ type: 'defeatLeague', region: 'Galar', isMet: beaten });
+    }
+    if (req.defeatRegion100Champion) {
+        let beaten = state.stats.defeatedBosses && state.stats.defeatedBosses["Region100 Champion"];
+        progress.push({ type: 'defeatLeague', region: 'Region 100', isMet: beaten });
     }
     if (req.defeatRed) {
         let beatenRed = state.stats.defeatedBosses && state.stats.defeatedBosses["Red"];
