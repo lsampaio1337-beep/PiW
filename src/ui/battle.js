@@ -690,11 +690,6 @@ function prepareCloneWrapper(originalSpriteWrapper, elEnemySide) {
     cloneWrapper.style.width = '100%';
     cloneWrapper.style.height = '100%';
 
-    const floatingDamages = elEnemySide.querySelectorAll('.floating-damage');
-    floatingDamages.forEach(node => {
-        cloneWrapper.appendChild(node);
-    });
-
     return cloneWrapper;
 }
 
@@ -839,8 +834,8 @@ function animateModals(cloneWrapper) {
     }
 }
 
-function animateDamageTexts(cloneWrapper) {
-    const clonedDamages = cloneWrapper.querySelectorAll('.floating-damage');
+function animateDamageTexts(defeatContainer) {
+    const clonedDamages = defeatContainer.querySelectorAll('.floating-damage');
     clonedDamages.forEach(dmg => {
         // Cancel the ongoing animation from showDamage
         dmg.style.transition = 'none';
@@ -858,7 +853,7 @@ function startDefeatAnimations(defeatContainer, cloneWrapper, targetLeft, slideD
     animateContainerSlide(defeatContainer, targetLeft, slideDuration);
     animatePokemonSprite(cloneWrapper);
     animateModals(cloneWrapper);
-    animateDamageTexts(cloneWrapper);
+    animateDamageTexts(defeatContainer);
 }
 
 function scheduleDefeatCallbacks(ball, ballResult, shakeInterval, captureCallback, defeatContainer, captureCheckDelay, slideDuration) {
