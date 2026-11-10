@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+    html, body { height: 100%; margin: 0; display: flex; align-items: center; justify-content: center; background: #333; }
+
+    #map-inner-modal-overlay {
+        position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5);
+        display: flex; align-items: center; justify-content: center; padding: 2%; box-sizing: border-box;
+    }
+    #map-inner-modal {
+        background: white; max-height: 96%; max-width: 96%; box-sizing: border-box;
+        display: flex; flex-direction: column;
+    }
+    #map-inner-modal-content {
+        flex: 1; position: relative; overflow-y: auto; display: flex; flex-direction: column; align-items: center; justify-content: center;
+        background: black; /* Test bg */
+    }
+
+    .modal-image-wrapper {
+        position: relative;
+        display: inline-block;
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    .modal-image-wrapper img {
+        display: block;
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+    }
+
+</style>
+</head>
+<body>
+    <div style="width: 800px; height: 600px; position: relative; background: #999;">
+        <div id="map-inner-modal-overlay">
+            <div id="map-inner-modal">
+                <div style="height: 30px; background: #555; color: white;">Header</div>
+                <div id="map-inner-modal-content">
+                    <div class="modal-image-wrapper">
+                        <img src="https://via.placeholder.com/1200x800.png?text=Safari+Zone">
+                        <div style="position: absolute; top: 30%; left: 50%; transform: translateX(-50%); text-align: center; color: white; background: rgba(0,0,0,0.8); padding: 20px; border-radius: 10px; font-size: 20px; width: 60%;">
+                          <p>Welcome to Safari Zone!</p>
+                          <button>Enter ($500)</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
