@@ -701,7 +701,6 @@ class BattleSystem {
             // Check for dynamic background config
             if (this.state.config && this.state.config.gymAssets && this.state.config.gymAssets[gym.leader]) {
                 const assetConfig = this.state.config.gymAssets[gym.leader];
-                const spritePath = `./Assets/Gym/GymLeaders/${assetConfig.sprite}`;
                 const bgPath = `./Assets/Gym/BG/${assetConfig.background}`;
 
                 const dynamicBg = document.createElement('div');
@@ -716,17 +715,20 @@ class BattleSystem {
                 dynamicBg.style.backgroundSize = '100% 100%';
                 dynamicBg.style.overflow = 'hidden';
 
-                const img = document.createElement('img');
-                img.src = spritePath;
-                img.style.position = 'absolute';
-                img.style.left = `${assetConfig.position.rel_x * 100}%`;
-                img.style.top = `${assetConfig.position.rel_y * 100}%`;
-                img.style.width = `${(assetConfig.size.px_width / 1800) * 100}%`;
-                img.style.transform = `rotate(${assetConfig.tilt.angle_deg}deg)`;
-                img.style.transformOrigin = assetConfig.tilt.origin;
-                img.style.pointerEvents = 'none';
                 dynamicBg.replaceChildren();
-                dynamicBg.appendChild(img);
+
+                if (!this.gymState.isActive) {
+                    const img = document.createElement('img');
+                    img.src = `./Assets/Gym/GymLeaders/${assetConfig.sprite}`;
+                    img.style.position = 'absolute';
+                    img.style.left = `${assetConfig.position.rel_x * 100}%`;
+                    img.style.top = `${assetConfig.position.rel_y * 100}%`;
+                    img.style.width = `${(assetConfig.size.px_width / 1800) * 100}%`;
+                    img.style.transform = `rotate(${assetConfig.tilt.angle_deg}deg)`;
+                    img.style.transformOrigin = assetConfig.tilt.origin;
+                    img.style.pointerEvents = 'none';
+                    dynamicBg.appendChild(img);
+                }
 
                 vGym.style.backgroundImage = 'none';
                 vGym.style.position = 'relative'; // Ensure relative positioning
