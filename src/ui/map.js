@@ -529,7 +529,7 @@ export function showMap() {
                         <span id="btn-close-map-inner-modal" onclick="window.closeMapInnerModal()" style="position: absolute; top: 5px; right: 5px; font-size: 12px; font-weight: bold; line-height: 1; padding: 0; cursor: pointer; color: white;">X</span>
                     </div>
                     <div class="window-content-container" style="flex: 1; display: flex;">
-                        <div id="map-inner-modal-content" class="content-panel" style="width: 100%; height: auto; overflow-y: auto; position: relative;">
+                        <div id="map-inner-modal-content" class="content-panel" style="width: 100%; height: 100%; overflow-y: auto; position: relative;">
                             <!-- Content injected via JS -->
                         </div>
                     </div>
