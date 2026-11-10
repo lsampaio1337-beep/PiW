@@ -202,7 +202,7 @@ if (!Array.isArray(routes)) {
     const routesData = [];
     const challengesData = [];
     const routeSpawnedPokemon = new Set();
-    const seenPokemon = new Set();
+    const seenPokemon = new Map();
 
 
 
@@ -218,7 +218,7 @@ if (!Array.isArray(routes)) {
     };
 const mainSeenSets = [];
     const processUnlocks = (challengeList, isMain, startChallengeIndex, initialSeenSet) => {
-        let currentSeen = new Set(initialSeenSet);
+        let currentSeen = new Map(initialSeenSet);
         for (let i = 0; i < challengeList.length; i++) {
             const c = challengeList[i];
             const areaNames = [c.areaId || c.name];
@@ -291,8 +291,12 @@ const mainSeenSets = [];
                         "Route (Secondary)": primaryAdded ? "Yes" : "",
                         "Pokemon Name": "",
                         "First?": "",
-                        "Level": "",
-                        "Sugested Level": "",
+                        "Type 1": "",
+                        "Type 2": "",
+                        "LvlMin": "",
+                        "LvlMax": "",
+                        "Sugest LvlMin": "",
+                        "Sugest LvlMax": "",
                         "Peer to Peer": "",
                         "% Appearance": "",
                         "% Appearance Ok?": "",
@@ -337,10 +341,13 @@ const mainSeenSets = [];
 
                         let first = "";
                         if (currentSeen.has(s.pokemonId)) {
-                            first = "NONONO";
+                            let count = currentSeen.get(s.pokemonId);
+                            first = "NO " + count;
+                            currentSeen.set(s.pokemonId, count + 1);
+                            seenPokemon.set(s.pokemonId, count + 1);
                         } else {
-                            currentSeen.add(s.pokemonId);
-                            seenPokemon.add(s.pokemonId);
+                            currentSeen.set(s.pokemonId, 1);
+                            seenPokemon.set(s.pokemonId, 1);
                         }
 
                         let bst = getBST(pk);
@@ -461,8 +468,12 @@ const mainSeenSets = [];
                             "Route (Secondary)": primaryAdded ? "Yes" : "",
                             "Pokemon Name": pkName,
                             "First?": first,
-                            "Level": `${s.minLevel || 1}-${s.maxLevel || 80}`,
-                            "Sugested Level": `${sugMin}-${sugMax}`,
+                            "Type 1": pk.types && pk.types.length > 0 ? pk.types[0] : "",
+                            "Type 2": pk.types && pk.types.length > 1 ? pk.types[1] : (pk.types && pk.types.length > 0 ? pk.types[0] : ""),
+                            "LvlMin": s.minLevel || 1,
+                            "LvlMax": s.maxLevel || 80,
+                            "Sugest LvlMin": sugMin,
+                            "Sugest LvlMax": sugMax,
                             "Peer to Peer": p2p,
                             "% Appearance": chancePct,
                             "% Appearance Ok?": appOk,
@@ -530,7 +541,7 @@ const mainSeenSets = [];
         }
     };
 
-    const mainSeenSet = processUnlocks(mainChallenges, true, 0, new Set());
+    const mainSeenSet = processUnlocks(mainChallenges, true, 0, new Map());
     Object.keys(extraChallenges).sort().forEach(k => {
         let splitSeenSet = new Set(mainSeenSet);
         if (extraChallenges[k].length > 0) {
@@ -586,8 +597,12 @@ const mainSeenSets = [];
                     "Route (Secondary)": "",
                     "Pokemon Name": "",
                     "First?": "",
-                    "Level": "",
-                    "Sugested Level": "",
+                        "Type 1": "",
+                        "Type 2": "",
+                        "LvlMin": "",
+                        "LvlMax": "",
+                        "Sugest LvlMin": "",
+                        "Sugest LvlMax": "",
                     "Peer to Peer": "",
                     "% Appearance": "",
                     "% Appearance Ok?": "",
@@ -632,9 +647,11 @@ const mainSeenSets = [];
 
                     let first = "";
                     if (seenPokemon.has(s.pokemonId)) {
-                        first = "NONONO";
+                        let count = seenPokemon.get(s.pokemonId);
+                        first = "NO " + count;
+                        seenPokemon.set(s.pokemonId, count + 1);
                     } else {
-                        seenPokemon.add(s.pokemonId);
+                        seenPokemon.set(s.pokemonId, 1);
                     }
 
                     let bst = getBST(pk);
@@ -689,8 +706,12 @@ const mainSeenSets = [];
                         "Route (Secondary)": "",
                         "Pokemon Name": pkName,
                         "First?": first,
-                        "Level": `${s.minLevel || 1}-${s.maxLevel || 80}`,
-                        "Sugested Level": `${sugMin}-${sugMax}`,
+                        "Type 1": pk.types && pk.types.length > 0 ? pk.types[0] : "",
+                            "Type 2": pk.types && pk.types.length > 1 ? pk.types[1] : (pk.types && pk.types.length > 0 ? pk.types[0] : ""),
+                            "LvlMin": s.minLevel || 1,
+                            "LvlMax": s.maxLevel || 80,
+                            "Sugest LvlMin": sugMin,
+                            "Sugest LvlMax": sugMax,
                         "Peer to Peer": p2p,
                         "% Appearance": chancePct,
                         "% Appearance Ok?": appOk,
@@ -804,7 +825,8 @@ const missingData = [];
     const wsMissing = xlsx.utils.json_to_sheet(missingData);
     xlsx.utils.book_append_sheet(wb, wsMissing, "Missing PK");
 
-const outFile = path.join(__dirname, '..', 'xdata', `${region.num}_${region.name}_Data.xlsx`);
+const rnd = Math.floor(Math.random() * 999) + 1;
+    const outFile = path.join(__dirname, '..', 'xdata', `${region.num}_${region.name}_Data_${rnd}.xlsx`);
 
     // Formatting cols
     const colsRoutes = ["% Appearance", "% Appearance Ok?"];
@@ -828,19 +850,12 @@ const outFile = path.join(__dirname, '..', 'xdata', `${region.num}_${region.name
 (async () => {
     const args = process.argv.slice(2);
 
-    let counterFile = '';
-    let counter = 1;
-    const xlsxMdPath = path.join(__dirname, '..', 'xlsx.md');
-    if (fs.existsSync(xlsxMdPath)) {
-        counterFile = fs.readFileSync(xlsxMdPath, 'utf8');
-        const counterMatch = counterFile.match(/Last Generation Counter:\s*(\d+)/);
-        if (counterMatch) counter = parseInt(counterMatch[1]);
-    }
+
 
     if (args.length === 0) {
         console.log("Generating data for all regions...");
         for (const region of REGIONS) {
-            await processRegion(region, counter);
+            await processRegion(region, 0); // counter unused
         }
     } else {
         const regionArg = args[0].toLowerCase();
@@ -851,12 +866,8 @@ const outFile = path.join(__dirname, '..', 'xdata', `${region.num}_${region.name
             process.exit(1);
         }
 
-        await processRegion(regionToProcess, counter);
+        await processRegion(regionToProcess, 0); // counter unused
     }
 
-    // Increment counter
-    if (counterFile) {
-        const newCounterFile = counterFile.replace(/Last Generation Counter:\s*\d+/, `Last Generation Counter: ${counter + 1}`);
-        fs.writeFileSync(xlsxMdPath, newCounterFile);
-    }
+
 })();

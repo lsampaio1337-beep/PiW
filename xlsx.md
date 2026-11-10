@@ -1,6 +1,6 @@
 # Regional Excel Data Documentation
 
-This document explains the structure and logic behind the auto-generated regional `.xlsx` files (`#_$_DataCounter.xlsx` (e.g., `1_Kanto_Data14.xlsx`) where `#` is the region number and `$` is the region name). These files provide a comprehensive overview of regional progression, route balance, challenges, and missing Pokémon.
+This document explains the structure and logic behind the auto-generated regional `.xlsx` files (`#_$_Data_$Rnd.xlsx` (e.g., `1_Kanto_Data_123.xlsx`) where `$Rnd` is a random number from 1 to 999 where `#` is the region number and `$` is the region name). These files provide a comprehensive overview of regional progression, route balance, challenges, and missing Pokémon.
 
 All generated `.xlsx` files based on these instructions should be stored in the `xdata/` folder at the root of the project.
 
@@ -18,13 +18,14 @@ This sheet analyzes the spawn encounters, level scaling, and statistical balance
 *   **Route (Secondary):** A secondary identifier for the route, if applicable (often blank; column is removed if entirely blank across the sheet).
 *   **Pokemon Name:** The name of the Pokémon spawning on the route.
 *   **First?:** Indicates if this is the first time the player can encounter this Pokémon in the region.
-    *   `NONONO`: The Pokémon has appeared in a previous route based on chronological challenge progression.
     *   *Blank*: This is the first time the Pokémon appears.
+    *   `NO $`: The Pokémon has already appeared in a previous route, where `$` is the previous number of times it has appeared (e.g., "NO 1" on its second appearance).
     *   *Chronology Logic:* Main Challenges (1 to N) are checked first. Extra Challenges (A1, A2... B1, B2...) branch off from a specific Main Challenge. The "First?" check for an Extra Challenge only looks at the preceding Extra Challenges in its chain and the Main Challenges up to the point where the Extra chain branched off.
-*   **Level:** The natural level interval of the Pokémon on the route (`LevelMin-LevelMax`).
+*   **Type 1** / **Type 2:** The elemental types of the Pokémon. If a Pokémon only has one type, it is duplicated in both columns.
+*   **LvlMin** / **LvlMax:** The natural level bounds of the Pokémon on the route.
     *   *Scaling:* Base levels scale linearly from 1 to 80 across the Main Challenges before the Pokémon League. Post-league Extra Challenges scale up to 100.
     *   *Interval size:* If `min < 12`, interval is 2. If `12 <= min < 30`, interval is 3. If `min >= 30`, interval is 10% of the minimum level rounded down (capped at a max interval of 8).
-*   **Sugested Level:** The suggested level after applying Peer-to-Peer Base Stat Total (BST) adjustments. Format is `min-max`.
+*   **Sugest LvlMin** / **Sugest LvlMax:** The suggested level bounds after applying Peer-to-Peer Base Stat Total (BST) adjustments.
 *   **Peer to Peer:** Modifies the level of the Pokémon based on how its individual BST compares to the average BST of all unique Pokémon on that route.
     *   If `BST - AvgBST > 150`: +4 levels
     *   If `100 <= BST - AvgBST <= 150`: +2 levels
@@ -82,5 +83,3 @@ This sheet lists all Pokémon native to the region (according to the regional Po
     *   `#xEvolution`: Requires evolving a caught Pokémon multiple times (e.g., `2xEvolution`).
     *   `Breed`: Can be obtained by breeding a wild-caught Pokémon once to get its pre-evolution.
     *   `#xBreed`: Requires chain-breeding multiple times to reach this pre-evolution (e.g., `2xBreed`).
-
-Last Generation Counter: 40
