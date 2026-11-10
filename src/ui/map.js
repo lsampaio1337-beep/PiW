@@ -520,7 +520,21 @@ export function showMap() {
 
     html += generateMarkersForRegion(window.currentMapRegion, unlockedAreas);
 
+    // Inner modal for gym overlays natively locked to the map
     html += `
+            <div id="map-inner-modal-overlay" onclick="if(event.target === this) { window.closeMapInnerModal(); }" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 1000; align-items: center; justify-content: center; padding: 20px 0; box-sizing: border-box;">
+                <div id="map-inner-modal" class="floating-window">
+                    <div class="window-header" style="position: relative; cursor: default;">
+                        <span id="map-inner-modal-title">Gym</span>
+                        <span id="btn-close-map-inner-modal" onclick="window.closeMapInnerModal()" style="position: absolute; top: 5px; right: 5px; font-size: 12px; font-weight: bold; line-height: 1; padding: 0; cursor: pointer; color: white;">X</span>
+                    </div>
+                    <div class="window-content-container" style="flex: 1; display: flex;">
+                        <div id="map-inner-modal-content" class="content-panel" style="width: 100%; height: auto; overflow-y: auto; position: relative;">
+                            <!-- Content injected via JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     `;
 
@@ -545,6 +559,15 @@ export function showMap() {
         setupMapWindowDimensions(currentRegionObj, targetWidth);
     }
 }
+
+window.closeMapInnerModal = function() {
+    const overlay = document.getElementById('map-inner-modal-overlay');
+    if (overlay) {
+        overlay.style.display = 'none';
+        const content = document.getElementById('map-inner-modal-content');
+        if (content) content.innerHTML = '';
+    }
+};
 
 export function navigateToLocation(locationName) {
     if (globals.battleSystem && globals.battleSystem.gymState && globals.battleSystem.gymState.isActive) {
@@ -787,7 +810,6 @@ export function navigateToLocation(locationName) {
         const vCenter = document.getElementById("view-center-market");
         setupMarket(vCenter);
     } else if (locationName.includes("Gym") || locationName.includes("Pokemon League")) {
-        switchView("GYM");
         let bgImg = "";
         let lookupName = locationName;
 
@@ -804,8 +826,13 @@ export function navigateToLocation(locationName) {
             lookupName = "Kanto Pokemon League";
         }
 
-        const vGym = document.getElementById("view-gym");
+        const vGym = document.getElementById("map-inner-modal-content");
+        const vGymTitle = document.getElementById("map-inner-modal-title");
         const gymConfig = state.config.gyms.find(g => g.name === lookupName);
+
+        if (vGymTitle) {
+            vGymTitle.innerText = locationName;
+        }
 
         // Stop current battle system
         if (battleSystem) {
@@ -901,6 +928,11 @@ export function navigateToLocation(locationName) {
         } else {
             vGym.style.backgroundImage = "none";
         }
+
+        // Show the inner modal overlay instead of closing the map modal
+        const overlay = document.getElementById('map-inner-modal-overlay');
+        if (overlay) overlay.style.display = 'flex';
+
     } else {
         switchView("BATTLE_ARENA");
         if (battleSystem) {

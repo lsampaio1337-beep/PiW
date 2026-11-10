@@ -663,7 +663,7 @@ class BattleSystem {
 
 
     updateGymUI() {
-        const vGym = document.getElementById("view-gym");
+        const vGym = document.getElementById("map-inner-modal-content");
         const contentArea = document.getElementById("gym-content-area");
         if (!vGym || !contentArea) return;
 
@@ -820,6 +820,10 @@ class BattleSystem {
         this.gymState.gym = null;
         this.gymState.gymIndex = 0;
         this.stop();
+
+        if (typeof window.closeMapInnerModal === 'function') {
+             window.closeMapInnerModal();
+        }
 
         // Return to normal map or idle
         if (typeof window.navigateToLocation === 'function') {
@@ -1952,7 +1956,9 @@ class BattleSystem {
             }
             this.updateGymUI();
             if (typeof window.switchView === 'function') {
-                window.switchView("GYM");
+                // Return main view to normal state (safari, center, etc., but since we are in map, maybe BATTLE_ARENA or idle)
+                // Gym overlay is still active on the map window.
+                window.switchView("BATTLE_ARENA");
             }
         } else {
             // Next pokemon
@@ -2182,8 +2188,9 @@ class BattleSystem {
                 this.gymState.gym = null;
                 this.gymState.gymIndex = 0;
                 this.gymState.inCombat = false;
-            if (typeof window.switchView === 'function') {
-                window.switchView("GYM");
+
+            if (typeof window.closeMapInnerModal === 'function') {
+                 window.closeMapInnerModal();
             }
 
             // Return to poke center
