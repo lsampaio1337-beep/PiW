@@ -522,8 +522,8 @@ export function showMap() {
 
     // Inner modal for gym overlays natively locked to the map
     html += `
-            <div id="map-inner-modal-overlay" onclick="if(event.target === this) { window.closeMapInnerModal(); }" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 1000; align-items: center; justify-content: center; padding: 20px 0; box-sizing: border-box;">
-                <div id="map-inner-modal" class="floating-window">
+            <div id="map-inner-modal-overlay" onclick="if(event.target === this) { window.closeMapInnerModal(); }" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 1000; align-items: center; justify-content: center; padding: 2%; box-sizing: border-box;">
+                <div id="map-inner-modal" class="floating-window" onclick="event.stopPropagation()" style="max-height: 96%; max-width: 96%; box-sizing: border-box; display: flex; flex-direction: column; margin: 2%;">
                     <div class="window-header" style="position: relative; cursor: default;">
                         <span id="map-inner-modal-title">Gym</span>
                         <span id="btn-close-map-inner-modal" onclick="window.closeMapInnerModal()" style="position: absolute; top: 5px; right: 5px; font-size: 12px; font-weight: bold; line-height: 1; padding: 0; cursor: pointer; color: white;">X</span>
@@ -597,7 +597,12 @@ export function navigateToLocation(locationName) {
     }
 
     const battleSystem = globals.battleSystem;
-    state.currentRoute = locationName;
+
+    // Do not set currentRoute to Gym or Pokemon League to keep player fighting on current route
+    if (!locationName.includes("Gym") && !locationName.includes("Pokemon League")) {
+        state.currentRoute = locationName;
+    }
+
     if (window.closeModal) window.closeModal();
 
     // Ensure main view and party windows are open when navigating, especially to places like Professor Lab
@@ -834,11 +839,6 @@ export function navigateToLocation(locationName) {
             vGymTitle.innerText = locationName;
         }
 
-        // Stop current battle system
-        if (battleSystem) {
-            battleSystem.stop();
-        }
-
         vGym.replaceChildren();
 
         if (gymConfig && state.config.gymAssets && state.config.gymAssets[gymConfig.leader]) {
@@ -911,7 +911,7 @@ export function navigateToLocation(locationName) {
         vGym.appendChild(uiContainer);
 
         if (gymConfig && contentArea) {
-            let buttonText = lookupName.includes("Pokemon League") ? "Challenge" : "Battle Gym";
+            let buttonText = lookupName.includes("Pokemon League") ? "Challenge" : "Enter Gym";
             const btn = document.createElement('button');
             btn.className = "action-btn action-btn-primary";
             btn.style.marginTop = "10px";
