@@ -1,19 +1,4 @@
 export const kalosMapCoordinates = {
-  "vanivilletown": {
-    "name": "Vaniville Town",
-    "x": 10,
-    "y": 10
-  },
-  "route1vanivillepathway": {
-    "name": "Route 1 (Vaniville Pathway)",
-    "x": 20,
-    "y": 10
-  },
-  "aquacordetown": {
-    "name": "Aquacorde Town",
-    "x": 30,
-    "y": 10
-  },
   "route2avancetrail": {
     "name": "Route 2 (Avance Trail)",
     "x": 40,

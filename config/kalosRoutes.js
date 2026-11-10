@@ -1,17 +1,5 @@
 export const kalosRoutes = [
   {
-    "name": "Vaniville Town",
-    "spawns": []
-  },
-  {
-    "name": "Route 1 (Vaniville Pathway)",
-    "spawns": []
-  },
-  {
-    "name": "Aquacorde Town",
-    "spawns": []
-  },
-  {
     "name": "Route 2 (Avance Trail)",
     "spawns": [
       {
@@ -56,7 +44,8 @@ export const kalosRoutes = [
         "maxLevel": 4,
         "chance": 0.14259999999999995
       }
-    ]
+    ],
+    "challengeName": "Challenge 1"
   },
   {
     "name": "Santalune Forest",
@@ -121,7 +110,8 @@ export const kalosRoutes = [
         "maxLevel": 4,
         "chance": 0.10000000000000009
       }
-    ]
+    ],
+    "challengeName": "Challenge 2"
   },
   {
     "name": "Route 3 (Ouvert Way)",
@@ -174,7 +164,8 @@ export const kalosRoutes = [
         "maxLevel": 5,
         "chance": 0.125
       }
-    ]
+    ],
+    "challengeName": "Challenge 3"
   },
   {
     "name": "Route 3 (Water)",
@@ -221,7 +212,8 @@ export const kalosRoutes = [
         "maxLevel": 37,
         "chance": 0.14259999999999995
       }
-    ]
+    ],
+    "challengeName": "Challenge 4"
   },
   {
     "name": "Santalune City",
@@ -296,7 +288,8 @@ export const kalosRoutes = [
         "maxLevel": 7,
         "chance": 0.09100000000000008
       }
-    ]
+    ],
+    "challengeName": "Challenge 5"
   },
   {
     "name": "Route 22 (Water)",
@@ -343,7 +336,8 @@ export const kalosRoutes = [
         "maxLevel": 37,
         "chance": 0.14259999999999995
       }
-    ]
+    ],
+    "challengeName": "Challenge 6"
   },
   {
     "name": "Santalune City Gym",
@@ -388,7 +382,8 @@ export const kalosRoutes = [
         "maxLevel": 8,
         "chance": 0.1665000000000001
       }
-    ]
+    ],
+    "challengeName": "Challenge 7"
   },
   {
     "name": "Lumiose City (South Boulevard)",
@@ -451,7 +446,8 @@ export const kalosRoutes = [
         "maxLevel": 10,
         "chance": 0.11120000000000008
       }
-    ]
+    ],
+    "challengeName": "Challenge 8"
   },
   {
     "name": "Camphrier Town",
@@ -520,7 +516,8 @@ export const kalosRoutes = [
         "maxLevel": 16,
         "chance": 0.10000000000000009
       }
-    ]
+    ],
+    "challengeName": "Challenge 9"
   },
   {
     "name": "Route 6 (Palais Lane)",
@@ -561,7 +558,8 @@ export const kalosRoutes = [
         "maxLevel": 13,
         "chance": 0.1665000000000001
       }
-    ]
+    ],
+    "challengeName": "Challenge 10"
   },
   {
     "name": "Parfum Palace",
@@ -630,7 +628,8 @@ export const kalosRoutes = [
         "maxLevel": 16,
         "chance": 0.10000000000000009
       }
-    ]
+    ],
+    "challengeName": "Challenge 11"
   },
   {
     "name": "Connecting Cave (Zubat Roost)",
@@ -659,7 +658,8 @@ export const kalosRoutes = [
         "maxLevel": 16,
         "chance": 0.25
       }
-    ]
+    ],
+    "challengeName": "Challenge 12"
   },
   {
     "name": "Route 8 (Muraille Coast — Upper Cliffs)",
@@ -724,7 +724,8 @@ export const kalosRoutes = [
         "maxLevel": 15,
         "chance": 0.10000000000000009
       }
-    ]
+    ],
+    "challengeName": "Challenge 13"
   },
   {
     "name": "Route 8 (Water)",
@@ -795,7 +796,8 @@ export const kalosRoutes = [
         "maxLevel": 37,
         "chance": 0.09100000000000008
       }
-    ]
+    ],
+    "challengeName": "Challenge 14"
   },
   {
     "name": "Ambrette Town",
@@ -822,7 +824,8 @@ export const kalosRoutes = [
         "maxLevel": 17,
         "chance": 0.33340000000000003
       }
-    ]
+    ],
+    "challengeName": "Challenge 15"
   },
   {
     "name": "Glittering Cave",
@@ -893,7 +896,8 @@ export const kalosRoutes = [
         "maxLevel": 17,
         "chance": 0.09100000000000008
       }
-    ]
+    ],
+    "challengeName": "Challenge 16"
   },
   {
     "name": "Route 8 (Muraille Coast — Lower Beach)",
@@ -958,7 +962,8 @@ export const kalosRoutes = [
         "maxLevel": 15,
         "chance": 0.10000000000000009
       }
-    ]
+    ],
+    "challengeName": "Challenge 17"
   },
   {
     "name": "Cyllage City",
@@ -981,7 +986,8 @@ export const kalosRoutes = [
         "maxLevel": 15,
         "chance": 0.33340000000000003
       }
-    ]
+    ],
+    "challengeName": "Challenge 18"
   },
   {
     "name": "Cyllage City (Water)",
@@ -1046,7 +1052,8 @@ export const kalosRoutes = [
         "maxLevel": 37,
         "chance": 0.10000000000000009
       }
-    ]
+    ],
+    "challengeName": "Challenge 19"
   },
   {
     "name": "Cyllage City Gym",
@@ -1069,7 +1076,8 @@ export const kalosRoutes = [
         "maxLevel": 15,
         "chance": 0.33340000000000003
       }
-    ]
+    ],
+    "challengeName": "Challenge 20"
   },
   {
     "name": "Route 10 (Menhir Trail)",
@@ -1122,7 +1130,8 @@ export const kalosRoutes = [
         "maxLevel": 21,
         "chance": 0.125
       }
-    ]
+    ],
+    "challengeName": "Challenge 21"
   },
   {
     "name": "Geosenge Town",
@@ -1185,7 +1194,8 @@ export const kalosRoutes = [
         "maxLevel": 23,
         "chance": 0.11120000000000008
       }
-    ]
+    ],
+    "challengeName": "Challenge 22"
   },
   {
     "name": "Reflection Cave",
@@ -1232,7 +1242,8 @@ export const kalosRoutes = [
         "maxLevel": 25,
         "chance": 0.14259999999999995
       }
-    ]
+    ],
+    "challengeName": "Challenge 23"
   },
   {
     "name": "Shalour City",
@@ -1313,7 +1324,8 @@ export const kalosRoutes = [
         "maxLevel": 25,
         "chance": 0.10000000000000009
       }
-    ]
+    ],
+    "challengeName": "Challenge 24"
   },
   {
     "name": "Route 12 (Water)",
@@ -1378,7 +1390,8 @@ export const kalosRoutes = [
         "maxLevel": 29,
         "chance": 0.10000000000000009
       }
-    ]
+    ],
+    "challengeName": "Challenge 25"
   },
   {
     "name": "Azure Bay",
@@ -1419,7 +1432,8 @@ export const kalosRoutes = [
         "maxLevel": 25,
         "chance": 0.1665000000000001
       }
-    ]
+    ],
+    "challengeName": "Challenge 26"
   },
   {
     "name": "Azure Bay (Water)",
@@ -1478,7 +1492,8 @@ export const kalosRoutes = [
         "maxLevel": 27,
         "chance": 0.11120000000000008
       }
-    ]
+    ],
+    "challengeName": "Challenge 27"
   },
   {
     "name": "Sea Spirit's Den",
@@ -1525,7 +1540,8 @@ export const kalosRoutes = [
         "maxLevel": 28,
         "chance": 0.19999999999999996
       }
-    ]
+    ],
+    "challengeName": "Challenge 28"
   },
   {
     "name": "Kalos Power Plant",
@@ -1596,7 +1612,8 @@ export const kalosRoutes = [
         "maxLevel": 32,
         "chance": 0.11120000000000008
       }
-    ]
+    ],
+    "challengeName": "Challenge 29"
   },
   {
     "name": "Laverre City",
@@ -1655,7 +1672,8 @@ export const kalosRoutes = [
         "maxLevel": 36,
         "chance": 0.14259999999999995
       }
-    ]
+    ],
+    "challengeName": "Challenge 30"
   },
   {
     "name": "Lost Hotel",
@@ -1690,7 +1708,8 @@ export const kalosRoutes = [
         "maxLevel": 39,
         "chance": 0.19999999999999996
       }
-    ]
+    ],
+    "challengeName": "Challenge 31"
   },
   {
     "name": "Route 16 (Mélancolie Path)",
@@ -1737,7 +1756,8 @@ export const kalosRoutes = [
         "maxLevel": 36,
         "chance": 0.14259999999999995
       }
-    ]
+    ],
+    "challengeName": "Challenge 32"
   },
   {
     "name": "Dendemille Town",
@@ -1782,7 +1802,8 @@ export const kalosRoutes = [
         "maxLevel": 41,
         "chance": 0.1665000000000001
       }
-    ]
+    ],
+    "challengeName": "Challenge 33"
   },
   {
     "name": "Route 17 (Mamoswine Road)",
@@ -1811,7 +1832,8 @@ export const kalosRoutes = [
         "maxLevel": 42,
         "chance": 0.25
       }
-    ]
+    ],
+    "challengeName": "Challenge 34"
   },
   {
     "name": "Anistar City",
@@ -1886,7 +1908,8 @@ export const kalosRoutes = [
         "maxLevel": 46,
         "chance": 0.11120000000000008
       }
-    ]
+    ],
+    "challengeName": "Challenge 35"
   },
   {
     "name": "Terminus Cave",
@@ -1927,7 +1950,8 @@ export const kalosRoutes = [
         "maxLevel": 46,
         "chance": 0.1665000000000001
       }
-    ]
+    ],
+    "challengeName": "Challenge 36"
   },
   {
     "name": "Couriway Town",
@@ -1990,7 +2014,8 @@ export const kalosRoutes = [
         "maxLevel": 48,
         "chance": 0.11120000000000008
       }
-    ]
+    ],
+    "challengeName": "Challenge 37"
   },
   {
     "name": "Route 19 (Water)",
@@ -2031,7 +2056,8 @@ export const kalosRoutes = [
         "maxLevel": 48,
         "chance": 0.1665000000000001
       }
-    ]
+    ],
+    "challengeName": "Challenge 38"
   },
   {
     "name": "Snowbelle City",
@@ -2076,7 +2102,8 @@ export const kalosRoutes = [
         "maxLevel": 50,
         "chance": 0.1665000000000001
       }
-    ]
+    ],
+    "challengeName": "Challenge 39"
   },
   {
     "name": "Pokémon Village",
@@ -2123,7 +2150,8 @@ export const kalosRoutes = [
         "maxLevel": 51,
         "chance": 0.14259999999999995
       }
-    ]
+    ],
+    "challengeName": "Challenge 40"
   },
   {
     "name": "Snowbelle City Gym",
@@ -2162,7 +2190,8 @@ export const kalosRoutes = [
         "maxLevel": 52,
         "chance": 0.19999999999999996
       }
-    ]
+    ],
+    "challengeName": "Challenge 41"
   },
   {
     "name": "Route 21 (Water)",
@@ -2215,7 +2244,8 @@ export const kalosRoutes = [
         "maxLevel": 42,
         "chance": 0.125
       }
-    ]
+    ],
+    "challengeName": "Challenge 42"
   },
   {
     "name": "Route 22 (Lower River & Chamber of Emptiness)",
@@ -2286,7 +2316,8 @@ export const kalosRoutes = [
         "maxLevel": 7,
         "chance": 0.09100000000000008
       }
-    ]
+    ],
+    "challengeName": "Challenge 43"
   },
   {
     "name": "Victory Road",
@@ -2339,7 +2370,8 @@ export const kalosRoutes = [
         "maxLevel": 61,
         "chance": 0.125
       }
-    ]
+    ],
+    "challengeName": "Challenge 44"
   },
   {
     "name": "Pokémon League",
@@ -2366,7 +2398,8 @@ export const kalosRoutes = [
         "maxLevel": 72,
         "chance": 1
       }
-    ]
+    ],
+    "challengeName": "Challenge 45"
   },
   {
     "name": "Sea Spirit's Den Legendary",
@@ -2389,47 +2422,1095 @@ export const kalosRoutes = [
         "maxLevel": 72,
         "chance": 0.33340000000000003
       }
-    ]
+    ],
+    "challengeName": "Challenge 46"
   },
   {
     "name": "Looker Bureau (Lumiose City)",
     "spawns": []
+  },
+  {
+    "name": "Farm Road",
+    "challengeName": "Extra Challenge A 01",
+    "spawns": [
+      {
+        "pokemonId": 276,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.25
+      },
+      {
+        "pokemonId": 165,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.25
+      },
+      {
+        "pokemonId": 290,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.25
+      },
+      {
+        "pokemonId": 660,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.25
+      }
+    ]
+  },
+  {
+    "name": "Mist Shore",
+    "challengeName": "Extra Challenge A 02",
+    "spawns": [
+      {
+        "pokemonId": 692,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 418,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 370,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 570,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 459,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.2
+      }
+    ]
+  },
+  {
+    "name": "Quiet Marsh",
+    "challengeName": "Extra Challenge A 03",
+    "spawns": [
+      {
+        "pokemonId": 662,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.17
+      },
+      {
+        "pokemonId": 61,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.17
+      },
+      {
+        "pokemonId": 108,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.17
+      },
+      {
+        "pokemonId": 193,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.17
+      },
+      {
+        "pokemonId": 708,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.17
+      },
+      {
+        "pokemonId": 63,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.15
+      }
+    ]
+  },
+  {
+    "name": "Starter Depot",
+    "challengeName": "Extra Challenge B 01",
+    "spawns": [
+      {
+        "pokemonId": 656,
+        "minLevel": 59,
+        "maxLevel": 61,
+        "chance": 0.11
+      },
+      {
+        "pokemonId": 653,
+        "minLevel": 59,
+        "maxLevel": 61,
+        "chance": 0.11
+      },
+      {
+        "pokemonId": 650,
+        "minLevel": 59,
+        "maxLevel": 61,
+        "chance": 0.11
+      },
+      {
+        "pokemonId": 722,
+        "minLevel": 59,
+        "maxLevel": 61,
+        "chance": 0.11
+      },
+      {
+        "pokemonId": 725,
+        "minLevel": 59,
+        "maxLevel": 61,
+        "chance": 0.11
+      },
+      {
+        "pokemonId": 728,
+        "minLevel": 59,
+        "maxLevel": 61,
+        "chance": 0.11
+      },
+      {
+        "pokemonId": 1,
+        "minLevel": 59,
+        "maxLevel": 61,
+        "chance": 0.11
+      },
+      {
+        "pokemonId": 4,
+        "minLevel": 59,
+        "maxLevel": 61,
+        "chance": 0.11
+      },
+      {
+        "pokemonId": 7,
+        "minLevel": 59,
+        "maxLevel": 61,
+        "chance": 0.12
+      }
+    ]
+  },
+  {
+    "name": "Lone Mountain",
+    "challengeName": "Extra Challenge B 02",
+    "spawns": [
+      {
+        "pokemonId": 443,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.17
+      },
+      {
+        "pokemonId": 122,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.17
+      },
+      {
+        "pokemonId": 209,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.17
+      },
+      {
+        "pokemonId": 27,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.17
+      },
+      {
+        "pokemonId": 29,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.17
+      },
+      {
+        "pokemonId": 246,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.15
+      }
+    ]
+  },
+  {
+    "name": "Fierce Riverhead",
+    "challengeName": "Extra Challenge B 03",
+    "spawns": [
+      {
+        "pokemonId": 119,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.17
+      },
+      {
+        "pokemonId": 130,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.17
+      },
+      {
+        "pokemonId": 335,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.17
+      },
+      {
+        "pokemonId": 336,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.17
+      },
+      {
+        "pokemonId": 319,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.17
+      },
+      {
+        "pokemonId": 550,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.15
+      }
+    ]
+  },
+  {
+    "name": "Starter Evolved Depot",
+    "challengeName": "Extra Challenge B 04",
+    "spawns": [
+      {
+        "pokemonId": 723,
+        "minLevel": 60,
+        "maxLevel": 62,
+        "chance": 0.17
+      },
+      {
+        "pokemonId": 726,
+        "minLevel": 60,
+        "maxLevel": 62,
+        "chance": 0.17
+      },
+      {
+        "pokemonId": 729,
+        "minLevel": 60,
+        "maxLevel": 62,
+        "chance": 0.17
+      },
+      {
+        "pokemonId": 2,
+        "minLevel": 60,
+        "maxLevel": 62,
+        "chance": 0.17
+      },
+      {
+        "pokemonId": 5,
+        "minLevel": 60,
+        "maxLevel": 62,
+        "chance": 0.17
+      },
+      {
+        "pokemonId": 9,
+        "minLevel": 60,
+        "maxLevel": 62,
+        "chance": 0.15
+      }
+    ]
+  },
+  {
+    "name": "Friend Safari Near Entrance",
+    "challengeName": "Extra Challenge C 01",
+    "spawns": [
+      {
+        "pokemonId": 538,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.11
+      },
+      {
+        "pokemonId": 82,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.11
+      },
+      {
+        "pokemonId": 227,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.11
+      },
+      {
+        "pokemonId": 539,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.11
+      },
+      {
+        "pokemonId": 359,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.11
+      },
+      {
+        "pokemonId": 164,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.11
+      },
+      {
+        "pokemonId": 569,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.11
+      },
+      {
+        "pokemonId": 702,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.11
+      },
+      {
+        "pokemonId": 651,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.12
+      }
+    ]
+  },
+  {
+    "name": "Friend Safari Surroundings",
+    "challengeName": "Extra Challenge C 02",
+    "spawns": [
+      {
+        "pokemonId": 70,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.13
+      },
+      {
+        "pokemonId": 560,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.13
+      },
+      {
+        "pokemonId": 241,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.13
+      },
+      {
+        "pokemonId": 182,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.13
+      },
+      {
+        "pokemonId": 212,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.13
+      },
+      {
+        "pokemonId": 94,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.13
+      },
+      {
+        "pokemonId": 65,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.13
+      },
+      {
+        "pokemonId": 321,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.09
+      }
+    ]
+  },
+  {
+    "name": "Friend Safari Deep Inside",
+    "challengeName": "Extra Challenge C 03",
+    "spawns": [
+      {
+        "pokemonId": 553,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.17
+      },
+      {
+        "pokemonId": 609,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.17
+      },
+      {
+        "pokemonId": 330,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.17
+      },
+      {
+        "pokemonId": 217,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.17
+      },
+      {
+        "pokemonId": 657,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.17
+      },
+      {
+        "pokemonId": 654,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.15
+      }
+    ]
+  },
+  {
+    "name": "Path to Dragon Territory",
+    "challengeName": "Extra Challenge D 01",
+    "spawns": [
+      {
+        "pokemonId": 50,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.17
+      },
+      {
+        "pokemonId": 304,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.17
+      },
+      {
+        "pokemonId": 95,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.17
+      },
+      {
+        "pokemonId": 525,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.17
+      },
+      {
+        "pokemonId": 621,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.17
+      },
+      {
+        "pokemonId": 598,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.15
+      }
+    ]
+  },
+  {
+    "name": "Narrow river",
+    "challengeName": "Extra Challenge D 02",
+    "spawns": [
+      {
+        "pokemonId": 278,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 400,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 283,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 90,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 318,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 688,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 341,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.16
+      }
+    ]
+  },
+  {
+    "name": "Abandoned Excavation Site",
+    "challengeName": "Extra Challenge D 03",
+    "spawns": [
+      {
+        "pokemonId": 696,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.25
+      },
+      {
+        "pokemonId": 697,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.25
+      },
+      {
+        "pokemonId": 698,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.25
+      },
+      {
+        "pokemonId": 699,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.25
+      }
+    ]
+  },
+  {
+    "name": "Forsaken Dragon Territory",
+    "challengeName": "Extra Challenge D 04",
+    "spawns": [
+      {
+        "pokemonId": 706,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.17
+      },
+      {
+        "pokemonId": 373,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.17
+      },
+      {
+        "pokemonId": 248,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.17
+      },
+      {
+        "pokemonId": 445,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.17
+      },
+      {
+        "pokemonId": 635,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.17
+      },
+      {
+        "pokemonId": 149,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.15
+      }
+    ]
+  },
+  {
+    "name": "Path to Team Flare Secret HQ",
+    "challengeName": "Extra Challenge E 01",
+    "spawns": [
+      {
+        "pokemonId": 124,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 455,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 102,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 73,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 407,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.2
+      }
+    ]
+  },
+  {
+    "name": "Team Flare Secret HQ Gate",
+    "challengeName": "Extra Challenge E 02",
+    "spawns": [
+      {
+        "pokemonId": 339,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 316,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 127,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 691,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 195,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.2
+      }
+    ]
+  },
+  {
+    "name": "Team Flare Secret HQ Entrance",
+    "challengeName": "Extra Challenge E 03",
+    "spawns": [
+      {
+        "pokemonId": 169,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 464,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 131,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 715,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 612,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.2
+      }
+    ]
+  },
+  {
+    "name": "Team Flare Secret HQ Hall",
+    "challengeName": "Extra Challenge E 04",
+    "spawns": [
+      {
+        "pokemonId": 407,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.17
+      },
+      {
+        "pokemonId": 526,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.17
+      },
+      {
+        "pokemonId": 463,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.17
+      },
+      {
+        "pokemonId": 615,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.17
+      },
+      {
+        "pokemonId": 282,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.17
+      },
+      {
+        "pokemonId": 671,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.15
+      }
+    ]
+  },
+  {
+    "name": "Team Flare Battle (4 mix fighters)",
+    "challengeName": "Extra Challenge E 05",
+    "spawns": []
+  },
+  {
+    "name": "Path to Sea Spirit Den",
+    "challengeName": "Extra Challenge F 01",
+    "spawns": [
+      {
+        "pokemonId": 584,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 609,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 104,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 624,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 142,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.2
+      }
+    ]
+  },
+  {
+    "name": "Sea Spirit Den Outer Depths",
+    "challengeName": "Extra Challenge F 02",
+    "spawns": [
+      {
+        "pokemonId": 471,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 612,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 367,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 9,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 713,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.2
+      }
+    ]
+  },
+  {
+    "name": "Sea Spirit Den Entrance",
+    "challengeName": "Extra Challenge F 03",
+    "spawns": [
+      {
+        "pokemonId": 450,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 471,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 3,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 197,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 135,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.2
+      }
+    ]
+  },
+  {
+    "name": "Sea Spirit Den Tunnels",
+    "challengeName": "Extra Challenge F 04",
+    "spawns": [
+      {
+        "pokemonId": 470,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 91,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 9,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 652,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 473,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.2
+      }
+    ]
+  },
+  {
+    "name": "Sea Spirit Den Hall",
+    "challengeName": "Extra Challenge F 05",
+    "spawns": [
+      {
+        "pokemonId": 144,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.33
+      },
+      {
+        "pokemonId": 145,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.33
+      },
+      {
+        "pokemonId": 146,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.34
+      }
+    ]
+  },
+  {
+    "name": "Path to Secret Chambers",
+    "challengeName": "Extra Challenge G 01",
+    "spawns": [
+      {
+        "pokemonId": 635,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 28,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 613,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 263,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 182,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.2
+      }
+    ]
+  },
+  {
+    "name": "Chambers of Emptiness",
+    "challengeName": "Extra Challenge G 02",
+    "spawns": [
+      {
+        "pokemonId": 658,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 306,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 673,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 655,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 584,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.2
+      }
+    ]
+  },
+  {
+    "name": "Underground Chambers",
+    "challengeName": "Extra Challenge G 03",
+    "spawns": [
+      {
+        "pokemonId": 712,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 703,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 300,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 42,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 708,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.2
+      }
+    ]
+  },
+  {
+    "name": "Ultimate Chamber",
+    "challengeName": "Extra Challenge G 04",
+    "spawns": [
+      {
+        "pokemonId": 721,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.25
+      },
+      {
+        "pokemonId": 719,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.25
+      },
+      {
+        "pokemonId": 720,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.25
+      },
+      {
+        "pokemonId": 150,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.25
+      }
+    ]
   }
 ];
 
 export const kalosUnlocks = [
   {
-    "areaId": "Vaniville Town",
-    "unlocks": [
-      "Route 1 (Vaniville Pathway)"
-    ],
-    "requirements": {}
-  },
-  {
-    "areaId": "Route 1 (Vaniville Pathway)",
-    "unlocks": [
-      "Aquacorde Town"
-    ],
-    "requirements": {}
-  },
-  {
-    "areaId": "Aquacorde Town",
-    "unlocks": [
-      "Route 2 (Avance Trail)"
-    ],
-    "requirements": {}
-  },
-  {
     "areaId": "Route 2 (Avance Trail)",
     "unlocks": [
       "Santalune Forest"
     ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Route 2 (Avance Trail)",
-        "count": 10
-      }
-    }
+    "requirements": {}
   },
   {
     "areaId": "Santalune Forest",
@@ -3240,6 +4321,337 @@ export const kalosUnlocks = [
   },
   {
     "areaId": "Looker Bureau (Lumiose City)",
-    "requirements": {}
+    "requirements": {},
+    "unlocks": [
+      "Farm Road"
+    ]
+  },
+  {
+    "areaId": "Farm Road",
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Farm Road",
+        "count": 10
+      }
+    },
+    "unlocks": [
+      "Mist Shore"
+    ]
+  },
+  {
+    "areaId": "Mist Shore",
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Mist Shore",
+        "count": 10
+      }
+    },
+    "unlocks": [
+      "Quiet Marsh"
+    ]
+  },
+  {
+    "areaId": "Quiet Marsh",
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Quiet Marsh",
+        "count": 10
+      }
+    },
+    "unlocks": [
+      "Starter Depot"
+    ]
+  },
+  {
+    "areaId": "Starter Depot",
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Starter Depot",
+        "count": 10
+      }
+    },
+    "unlocks": [
+      "Lone Mountain"
+    ]
+  },
+  {
+    "areaId": "Lone Mountain",
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Lone Mountain",
+        "count": 10
+      }
+    },
+    "unlocks": [
+      "Fierce Riverhead"
+    ]
+  },
+  {
+    "areaId": "Fierce Riverhead",
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Fierce Riverhead",
+        "count": 10
+      }
+    },
+    "unlocks": [
+      "Starter Evolved Depot"
+    ]
+  },
+  {
+    "areaId": "Starter Evolved Depot",
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Starter Evolved Depot",
+        "count": 10
+      }
+    },
+    "unlocks": [
+      "Friend Safari Near Entrance"
+    ]
+  },
+  {
+    "areaId": "Friend Safari Near Entrance",
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Friend Safari Near Entrance",
+        "count": 10
+      }
+    },
+    "unlocks": [
+      "Friend Safari Surroundings"
+    ]
+  },
+  {
+    "areaId": "Friend Safari Surroundings",
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Friend Safari Surroundings",
+        "count": 10
+      }
+    },
+    "unlocks": [
+      "Friend Safari Deep Inside"
+    ]
+  },
+  {
+    "areaId": "Friend Safari Deep Inside",
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Friend Safari Deep Inside",
+        "count": 10
+      }
+    },
+    "unlocks": [
+      "Path to Dragon Territory"
+    ]
+  },
+  {
+    "areaId": "Path to Dragon Territory",
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Path to Dragon Territory",
+        "count": 10
+      }
+    },
+    "unlocks": [
+      "Narrow river"
+    ]
+  },
+  {
+    "areaId": "Narrow river",
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Narrow river",
+        "count": 10
+      }
+    },
+    "unlocks": [
+      "Abandoned Excavation Site"
+    ]
+  },
+  {
+    "areaId": "Abandoned Excavation Site",
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Abandoned Excavation Site",
+        "count": 10
+      }
+    },
+    "unlocks": [
+      "Forsaken Dragon Territory"
+    ]
+  },
+  {
+    "areaId": "Forsaken Dragon Territory",
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Forsaken Dragon Territory",
+        "count": 10
+      }
+    },
+    "unlocks": [
+      "Path to Team Flare Secret HQ"
+    ]
+  },
+  {
+    "areaId": "Path to Team Flare Secret HQ",
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Path to Team Flare Secret HQ",
+        "count": 10
+      }
+    },
+    "unlocks": [
+      "Team Flare Secret HQ Gate"
+    ]
+  },
+  {
+    "areaId": "Team Flare Secret HQ Gate",
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Team Flare Secret HQ Gate",
+        "count": 10
+      }
+    },
+    "unlocks": [
+      "Team Flare Secret HQ Entrance"
+    ]
+  },
+  {
+    "areaId": "Team Flare Secret HQ Entrance",
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Team Flare Secret HQ Entrance",
+        "count": 10
+      }
+    },
+    "unlocks": [
+      "Team Flare Secret HQ Hall"
+    ]
+  },
+  {
+    "areaId": "Team Flare Secret HQ Hall",
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Team Flare Secret HQ Hall",
+        "count": 10
+      }
+    },
+    "unlocks": [
+      "Team Flare Battle (4 mix fighters)"
+    ]
+  },
+  {
+    "areaId": "Team Flare Battle (4 mix fighters)",
+    "requirements": {},
+    "unlocks": [
+      "Path to Sea Spirit Den"
+    ]
+  },
+  {
+    "areaId": "Path to Sea Spirit Den",
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Path to Sea Spirit Den",
+        "count": 10
+      }
+    },
+    "unlocks": [
+      "Sea Spirit Den Outer Depths"
+    ]
+  },
+  {
+    "areaId": "Sea Spirit Den Outer Depths",
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Sea Spirit Den Outer Depths",
+        "count": 10
+      }
+    },
+    "unlocks": [
+      "Sea Spirit Den Entrance"
+    ]
+  },
+  {
+    "areaId": "Sea Spirit Den Entrance",
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Sea Spirit Den Entrance",
+        "count": 10
+      }
+    },
+    "unlocks": [
+      "Sea Spirit Den Tunnels"
+    ]
+  },
+  {
+    "areaId": "Sea Spirit Den Tunnels",
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Sea Spirit Den Tunnels",
+        "count": 10
+      }
+    },
+    "unlocks": [
+      "Sea Spirit Den Hall"
+    ]
+  },
+  {
+    "areaId": "Sea Spirit Den Hall",
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Sea Spirit Den Hall",
+        "count": 10
+      }
+    },
+    "unlocks": [
+      "Path to Secret Chambers"
+    ]
+  },
+  {
+    "areaId": "Path to Secret Chambers",
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Path to Secret Chambers",
+        "count": 10
+      }
+    },
+    "unlocks": [
+      "Chambers of Emptiness"
+    ]
+  },
+  {
+    "areaId": "Chambers of Emptiness",
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Chambers of Emptiness",
+        "count": 10
+      }
+    },
+    "unlocks": [
+      "Underground Chambers"
+    ]
+  },
+  {
+    "areaId": "Underground Chambers",
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Underground Chambers",
+        "count": 10
+      }
+    },
+    "unlocks": [
+      "Ultimate Chamber"
+    ]
+  },
+  {
+    "areaId": "Ultimate Chamber",
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Ultimate Chamber",
+        "count": 10
+      }
+    }
   }
 ];
