@@ -57,11 +57,11 @@ const routeFiles = [
     { region: 3, file: 'config/hoennRoutes.js', objName: 'hoennRoutes' },
     { region: 4, file: 'config/sinnohRoutes.js', objName: 'sinnohRoutes' },
     { region: 5, file: 'config/unovaRoutes.js', objName: 'unovaRoutes' },
-    { region: 60, file: 'config/region60Routes.js', objName: 'region60Routes' },
-    { region: 70, file: 'config/region70Routes.js', objName: 'region70Routes' },
-    { region: 80, file: 'config/region80Routes.js', objName: 'region80Routes' },
-    { region: 90, file: 'config/region90Routes.js', objName: 'region90Routes', isObj: true },
-    { region: 100, file: 'config/region100Routes.js', objName: 'region100Routes' },
+    { region: 6, file: 'config/kalosRoutes.js', objName: 'kalosRoutes' },
+    { region: 7, file: 'config/alolaRoutes.js', objName: 'alolaRoutes' },
+    { region: 8, file: 'config/galarRoutes.js', objName: 'galarRoutes' },
+    { region: 9, file: 'config/hisuiRoutes.js', objName: 'hisuiRoutes', isObj: true },
+    { region: 10, file: 'config/paldeaRoutes.js', objName: 'paldeaRoutes' },
 ];
 
 function parseRoutes(file, isObj) {

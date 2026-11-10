@@ -518,41 +518,21 @@ if (req.catchSpeciesByQuality) {
             if (!state.stats.defeatedBosses) state.stats.defeatedBosses = {};
             state.stats.defeatedBosses["Unova Champion"] = true;
         }
-        if (req.defeatRegion60Champion) {
-            if (!state.stats.defeatedBosses) state.stats.defeatedBosses = {};
-            state.stats.defeatedBosses["Region60 Champion"] = true;
-        }
         if (req.defeatKalosChampion) {
             if (!state.stats.defeatedBosses) state.stats.defeatedBosses = {};
             state.stats.defeatedBosses["Kalos Champion"] = true;
-        }
-        if (req.defeatRegion70Champion) {
-            if (!state.stats.defeatedBosses) state.stats.defeatedBosses = {};
-            state.stats.defeatedBosses["Region70 Champion"] = true;
         }
         if (req.defeatAlolaChampion) {
             if (!state.stats.defeatedBosses) state.stats.defeatedBosses = {};
             state.stats.defeatedBosses["Alola Champion"] = true;
         }
-        if (req.defeatRegion90Champion) {
-            if (!state.stats.defeatedBosses) state.stats.defeatedBosses = {};
-            state.stats.defeatedBosses["Region90 Champion"] = true;
-        }
         if (req.defeatHisuiChampion) {
             if (!state.stats.defeatedBosses) state.stats.defeatedBosses = {};
             state.stats.defeatedBosses["Hisui Champion"] = true;
         }
-        if (req.defeatRegion80Champion) {
-            if (!state.stats.defeatedBosses) state.stats.defeatedBosses = {};
-            state.stats.defeatedBosses["Region80 Champion"] = true;
-        }
         if (req.defeatGalarChampion) {
             if (!state.stats.defeatedBosses) state.stats.defeatedBosses = {};
             state.stats.defeatedBosses["Galar Champion"] = true;
-        }
-        if (req.defeatRegion100Champion) {
-            if (!state.stats.defeatedBosses) state.stats.defeatedBosses = {};
-            state.stats.defeatedBosses["Region100 Champion"] = true;
         }
         if (req.defeatRed) {
             if (!state.stats.defeatedBosses) state.stats.defeatedBosses = {};
@@ -1462,7 +1442,7 @@ async function loadConfigs() {
     const unlocksModule = await import('../config/routes.js');
     state.config.unlocks = unlocksModule.unlocks;
 
-    const regions = ['Johto', 'Hoenn', 'Sinnoh', 'Unova', 'Kalos', 'Alola', 'Galar', 'Hisui', 'Paldea', 'Region60', 'Region70', 'Region80', 'Region90', 'Region100'];
+    const regions = ['Johto', 'Hoenn', 'Sinnoh', 'Unova', 'Kalos', 'Alola', 'Galar', 'Hisui', 'Paldea'];
     for (const region of regions) {
         const prefix = region.toLowerCase();
         try {

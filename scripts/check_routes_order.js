@@ -18,11 +18,7 @@ const REGIONS = [
     { num: 3, name: 'Hoenn', prefix: 'hoenn', routesVar: 'hoennRoutes', unlocksVar: 'hoennUnlocks' },
     { num: 4, name: 'Sinnoh', prefix: 'sinnoh', routesVar: 'sinnohRoutes', unlocksVar: 'sinnohUnlocks' },
     { num: 5, name: 'Unova', prefix: 'unova', routesVar: 'unovaRoutes', unlocksVar: 'unovaUnlocks' },
-    { num: 60, name: 'Region 60', prefix: 'region60', routesVar: 'region60Routes', unlocksVar: 'region60Unlocks' },
-    { num: 70, name: 'Region 70', prefix: 'region70', routesVar: 'region70Routes', unlocksVar: 'region70Unlocks' },
-    { num: 80, name: 'Region 80', prefix: 'region80', routesVar: 'region80Routes', unlocksVar: 'region80Unlocks' },
-    { num: 90, name: 'Region 90', prefix: 'region90', routesVar: 'region90Routes', unlocksVar: 'region90Unlocks' },
-    { num: 100, name: 'Region 100', prefix: 'region100', routesVar: 'region100Routes', unlocksVar: 'region100Unlocks' }
+    { num: 6, name: 'Kalos', prefix: 'kalos', routesVar: 'kalosRoutes', unlocksVar: 'kalosUnlocks' }
 ];
 
 const regionData = {};
