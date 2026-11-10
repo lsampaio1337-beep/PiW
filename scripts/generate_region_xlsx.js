@@ -496,12 +496,12 @@ const mainSeenSets = [];
                 if (spawns.length > 0) {
                     spawns.forEach(s => {
                         let cPct = (s.chance || 0);
-                        let b = getBST(pokemonData[s.pokemonId]);
-                        if (routesData.find(rd => rd["Route"] === areaName && rd["Pokemon Name"] === pokemonData[s.pokemonId].name && rd["First?"] === "")) {
+                        let b = pokemonData[s.pokemonId] ? getBST(pokemonData[s.pokemonId]) : 0;
+                        if (routesData.find(rd => rd["Route"] === areaName && rd["Pokemon Name"] === (pokemonData[s.pokemonId] ? pokemonData[s.pokemonId].name : "UNKNOWN") && rd["First?"] === "")) {
                             newPkCount++;
                             if (cPct > 0.20 && b < 350) highAppLowBstPk = pokemonData[s.pokemonId];
                         }
-                        if (cPct < 0.10) lowAppPk = pokemonData[s.pokemonId];
+                        if (cPct < 0.10 && pokemonData[s.pokemonId]) lowAppPk = pokemonData[s.pokemonId];
                     });
                 }
 
