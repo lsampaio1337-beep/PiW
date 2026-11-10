@@ -560,17 +560,30 @@ window.showInnerMapModal = function(htmlContent) {
         overlay.style.left = '0';
         overlay.style.width = '100%';
         overlay.style.height = '100%';
-        overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.85)';
+        overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
         overlay.style.zIndex = '9000';
         overlay.style.display = 'flex';
         overlay.style.justifyContent = 'center';
         overlay.style.alignItems = 'center';
-        overlay.style.overflow = 'auto'; // allow scrolling if content is tall
+
         mapWindowElem.style.position = 'relative'; // ensure map window content handles absolute positioning
         mapWindowElem.appendChild(overlay);
     }
 
-    overlay.innerHTML = htmlContent;
+    // Wrap the provided html in a window-like container
+    const windowStyleHTML = `
+        <div style="background-color: var(--bg-color-main, #222); border-radius: 8px; border: 2px solid var(--border-color, #444); box-shadow: 0 4px 12px rgba(0,0,0,0.5); display: flex; flex-direction: column; overflow: hidden; max-width: 95%; max-height: 95%;">
+            <div style="background-color: var(--bg-color-header, #333); color: white; padding: 10px; font-weight: bold; text-align: center; border-bottom: 2px solid var(--border-color, #444); display: flex; justify-content: space-between; align-items: center;">
+                <span>Encounter Hub</span>
+                <button onclick="window.hideInnerMapModal()" style="background: transparent; border: none; color: white; font-size: 16px; cursor: pointer;">&times;</button>
+            </div>
+            <div style="padding: 15px; overflow-y: auto; max-height: calc(100vh - 200px);">
+                ${htmlContent}
+            </div>
+        </div>
+    `;
+
+    overlay.innerHTML = windowStyleHTML;
     overlay.style.display = 'flex';
 };
 
