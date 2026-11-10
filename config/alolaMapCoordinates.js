@@ -1,432 +1,462 @@
-const alolaMapCoordinates = {
-  "Crystal Depths": {
+export const alolaMapCoordinates = {
+  "Route 1": {
+    "x": 50,
+    "y": 50
+  },
+  "Iki Town": {
+    "x": 100,
+    "y": 50
+  },
+  "Mahalo Trail": {
+    "x": 150,
+    "y": 50
+  },
+  "Trainers' School": {
+    "x": 200,
+    "y": 50
+  },
+  "Hau'oli City": {
+    "x": 250,
+    "y": 50
+  },
+  "Hau'oli City (Water)": {
+    "x": 300,
+    "y": 50
+  },
+  "Route 2": {
+    "x": 350,
+    "y": 50
+  },
+  "Hau'oli Cemetery": {
+    "x": 400,
+    "y": 50
+  },
+  "Berry Fields": {
+    "x": 450,
+    "y": 50
+  },
+  "Big Wave Beach": {
+    "x": 500,
+    "y": 50
+  },
+  "Sandy Cave": {
+    "x": 550,
+    "y": 50
+  },
+  "Verdant Cavern": {
+    "x": 600,
+    "y": 50
+  },
+  "Route 3": {
+    "x": 650,
+    "y": 50
+  },
+  "Melemele Meadow": {
+    "x": 700,
+    "y": 50
+  },
+  "Seaward Cave": {
+    "x": 750,
+    "y": 50
+  },
+  "Seaward Cave (Water)": {
+    "x": 800,
+    "y": 50
+  },
+  "Kala'e Bay": {
+    "x": 850,
+    "y": 50
+  },
+  "Ten Carat Hill": {
+    "x": 900,
+    "y": 50
+  },
+  "Heahea Beach": {
+    "x": 50,
+    "y": 100
+  },
+  "Heahea City": {
     "x": 100,
     "y": 100
   },
-  "Dragon's Peak": {
+  "Route 4": {
+    "x": 150,
+    "y": 100
+  },
+  "Pikachu Valley": {
+    "x": 200,
+    "y": 100
+  },
+  "Paniola Town": {
+    "x": 250,
+    "y": 100
+  },
+  "Paniola Ranch": {
+    "x": 300,
+    "y": 100
+  },
+  "Route 5": {
+    "x": 350,
+    "y": 100
+  },
+  "Brooklet Hill": {
+    "x": 400,
+    "y": 100
+  },
+  "Route 6": {
+    "x": 450,
+    "y": 100
+  },
+  "Royal Avenue": {
+    "x": 500,
+    "y": 100
+  },
+  "Route 7": {
+    "x": 550,
+    "y": 100
+  },
+  "Route 7 (Water)": {
+    "x": 600,
+    "y": 100
+  },
+  "Wela Volcano Park": {
+    "x": 650,
+    "y": 100
+  },
+  "Dividing Peak Tunnel": {
+    "x": 700,
+    "y": 100
+  },
+  "Route 8": {
+    "x": 750,
+    "y": 100
+  },
+  "Lush Jungle": {
+    "x": 800,
+    "y": 100
+  },
+  "Dimensional Research Lab": {
+    "x": 850,
+    "y": 100
+  },
+  "Diglett's Tunnel": {
+    "x": 900,
+    "y": 100
+  },
+  "Route 9": {
+    "x": 50,
+    "y": 150
+  },
+  "Konikoni City": {
+    "x": 100,
+    "y": 150
+  },
+  "Memorial Hill": {
     "x": 150,
     "y": 150
   },
-  "Serene Meadows": {
+  "Akala Outskirts": {
+    "x": 200,
+    "y": 150
+  },
+  "Ruins of Life": {
+    "x": 250,
+    "y": 150
+  },
+  "Hano Beach": {
+    "x": 300,
+    "y": 150
+  },
+  "Hano Beach (Water)": {
+    "x": 350,
+    "y": 150
+  },
+  "Hano Grand Resort": {
+    "x": 400,
+    "y": 150
+  },
+  "Aether Paradise": {
+    "x": 450,
+    "y": 150
+  },
+  "Malie City": {
+    "x": 500,
+    "y": 150
+  },
+  "Malie Garden": {
+    "x": 550,
+    "y": 150
+  },
+  "Malie Garden (Water)": {
+    "x": 600,
+    "y": 150
+  },
+  "Kantonian Gym": {
+    "x": 650,
+    "y": 150
+  },
+  "Outer Cape": {
+    "x": 700,
+    "y": 150
+  },
+  "Route 10": {
+    "x": 750,
+    "y": 150
+  },
+  "Mount Hokulani": {
+    "x": 800,
+    "y": 150
+  },
+  "Hokulani Observatory": {
+    "x": 850,
+    "y": 150
+  },
+  "Route 11": {
+    "x": 900,
+    "y": 150
+  },
+  "Route 12": {
+    "x": 50,
+    "y": 200
+  },
+  "Blush Mountain": {
+    "x": 100,
+    "y": 200
+  },
+  "Secluded Shore": {
+    "x": 150,
+    "y": 200
+  },
+  "Route 13": {
     "x": 200,
     "y": 200
   },
-  "Shadow Forge": {
+  "Tapu Village": {
+    "x": 250,
+    "y": 200
+  },
+  "Aether House": {
+    "x": 300,
+    "y": 200
+  },
+  "Route 14": {
+    "x": 350,
+    "y": 200
+  },
+  "Route 14 (Water)": {
+    "x": 400,
+    "y": 200
+  },
+  "Abandoned Thrifty Megamart": {
+    "x": 450,
+    "y": 200
+  },
+  "Haina Desert": {
+    "x": 500,
+    "y": 200
+  },
+  "Route 15": {
+    "x": 550,
+    "y": 200
+  },
+  "Route 15 (Water)": {
+    "x": 600,
+    "y": 200
+  },
+  "Route 16": {
+    "x": 650,
+    "y": 200
+  },
+  "Route 16 (Water)": {
+    "x": 700,
+    "y": 200
+  },
+  "Ula'ula Meadow": {
+    "x": 750,
+    "y": 200
+  },
+  "Lake of the Moone / Lake of the Sunne": {
+    "x": 800,
+    "y": 200
+  },
+  "Route 17": {
+    "x": 850,
+    "y": 200
+  },
+  "Po Town": {
+    "x": 900,
+    "y": 200
+  },
+  "Shady House": {
+    "x": 50,
+    "y": 250
+  },
+  "Seafolk Village": {
+    "x": 100,
+    "y": 250
+  },
+  "Poni Wilds": {
+    "x": 150,
+    "y": 250
+  },
+  "Poni Beach": {
+    "x": 200,
+    "y": 250
+  },
+  "Ancient Poni Path": {
     "x": 250,
     "y": 250
   },
-  "Mystic Grotto": {
+  "Poni Breaker Coast": {
     "x": 300,
+    "y": 250
+  },
+  "Ruins of Hope": {
+    "x": 350,
+    "y": 250
+  },
+  "Exeggutor Island": {
+    "x": 400,
+    "y": 250
+  },
+  "Vast Poni Canyon": {
+    "x": 450,
+    "y": 250
+  },
+  "Vast Poni Canyon (Water)": {
+    "x": 500,
+    "y": 250
+  },
+  "Altar of the Sunne / Altar of the Moone": {
+    "x": 550,
+    "y": 250
+  },
+  "Ultra Megalopolis": {
+    "x": 600,
+    "y": 250
+  },
+  "Megalo Tower": {
+    "x": 650,
+    "y": 250
+  },
+  "Mount Lanakila": {
+    "x": 700,
+    "y": 250
+  },
+  "Pokémon League": {
+    "x": 750,
+    "y": 250
+  },
+  "Ruins of Conflict": {
+    "x": 800,
+    "y": 250
+  },
+  "Poni Grove": {
+    "x": 850,
+    "y": 250
+  },
+  "Festival Plaza": {
+    "x": 900,
+    "y": 250
+  },
+  "Team Rocket's Castle": {
+    "x": 50,
     "y": 300
   },
-  "Alola Forest W": {
-    "x": 50,
-    "y": 50,
-    "type": "route",
-    "reqArea": "Factory",
-    "reqCount": 1,
-    "description": "A mysterious forest area."
-  },
-  "Alola Plain W": {
-    "x": 50,
-    "y": 50,
-    "type": "route",
-    "reqArea": "Mystic Grotto",
-    "reqCount": 1,
-    "description": "A mysterious plain area."
-  },
-  "Alola Swamp W": {
-    "x": 50,
-    "y": 50,
-    "type": "route",
-    "reqArea": "Mystic Grotto",
-    "reqCount": 1,
-    "description": "A mysterious swamp area."
-  },
-  "Alola Power Plant W": {
-    "x": 50,
-    "y": 50,
-    "type": "route",
-    "reqArea": "Mystic Grotto",
-    "reqCount": 1,
-    "description": "A mysterious power plant area."
-  },
-  "Alola Desert W": {
-    "x": 50,
-    "y": 50,
-    "type": "route",
-    "reqArea": "Mystic Grotto",
-    "reqCount": 1,
-    "description": "A mysterious desert area."
-  },
-  "Alola Meadow W": {
-    "x": 50,
-    "y": 50,
-    "type": "route",
-    "reqArea": "Mystic Grotto",
-    "reqCount": 1,
-    "description": "A mysterious meadow area."
-  },
-  "Alola Volcano W": {
-    "x": 50,
-    "y": 50,
-    "type": "route",
-    "reqArea": "Mystic Grotto",
-    "reqCount": 1,
-    "description": "A mysterious volcano area."
-  },
-  "Alola Ocean W": {
-    "x": 50,
-    "y": 50,
-    "type": "route",
-    "reqArea": "Mystic Grotto",
-    "reqCount": 1,
-    "description": "A mysterious ocean area."
-  },
-  "Alola Dojo W": {
-    "x": 50,
-    "y": 50,
-    "type": "route",
-    "reqArea": "Mystic Grotto",
-    "reqCount": 1,
-    "description": "A mysterious dojo area."
-  },
-  "Alola Mind W": {
-    "x": 50,
-    "y": 50,
-    "type": "route",
-    "reqArea": "Mystic Grotto",
-    "reqCount": 1,
-    "description": "A mysterious mind area."
-  },
-  "Alola Crag W": {
-    "x": 50,
-    "y": 50,
-    "type": "route",
-    "reqArea": "Mystic Grotto",
-    "reqCount": 1,
-    "description": "A mysterious crag area."
-  },
-  "Alola Graveyard W": {
-    "x": 50,
-    "y": 50,
-    "type": "route",
-    "reqArea": "Mystic Grotto",
-    "reqCount": 1,
-    "description": "A mysterious graveyard area."
-  },
-  "Alola Jungle W": {
-    "x": 50,
-    "y": 50,
-    "type": "route",
-    "reqArea": "Mystic Grotto",
-    "reqCount": 1,
-    "description": "A mysterious jungle area."
-  },
-  "Alola Den W": {
-    "x": 50,
-    "y": 50,
-    "type": "route",
-    "reqArea": "Mystic Grotto",
-    "reqCount": 1,
-    "description": "A mysterious den area."
-  },
-  "Alola Shadow W": {
-    "x": 50,
-    "y": 50,
-    "type": "route",
-    "reqArea": "Mystic Grotto",
-    "reqCount": 1,
-    "description": "A mysterious shadow area."
-  },
-  "Alola Glacier W": {
-    "x": 50,
-    "y": 50,
-    "type": "route",
-    "reqArea": "Mystic Grotto",
-    "reqCount": 1,
-    "description": "A mysterious glacier area."
-  },
-  "Alola Factory W": {
-    "x": 50,
-    "y": 50,
-    "type": "route",
-    "reqArea": "Mystic Grotto",
-    "reqCount": 1,
-    "description": "A mysterious factory area."
-  },
-  "Alola Sky W": {
-    "x": 50,
-    "y": 50,
-    "type": "route",
-    "reqArea": "Mystic Grotto",
-    "reqCount": 1,
-    "description": "A mysterious sky area."
-  },
-  "Alola Forest Weak": {
-    "x": 50,
-    "y": 50,
-    "type": "route",
-    "reqArea": "Mystic Grotto",
-    "reqCount": 1,
-    "description": "M Challenge Route"
-  },
-  "Alola Forest Strong": {
-    "x": 55,
-    "y": 55,
-    "type": "route",
-    "reqArea": "Alola Forest Weak",
-    "reqCount": 1,
-    "description": "M Challenge Route"
-  },
-  "Alola Plain Weak": {
-    "x": 60,
-    "y": 60,
-    "type": "route",
-    "reqArea": "Alola Forest Strong",
-    "reqCount": 1,
-    "description": "M Challenge Route"
-  },
-  "Alola Plain Regular": {
-    "x": 65,
-    "y": 65,
-    "type": "route",
-    "reqArea": "Alola Plain Weak",
-    "reqCount": 1,
-    "description": "M Challenge Route"
-  },
-  "Alola Plain Strong": {
-    "x": 70,
-    "y": 70,
-    "type": "route",
-    "reqArea": "Alola Plain Regular",
-    "reqCount": 1,
-    "description": "M Challenge Route"
-  },
-  "Alola Swamp": {
-    "x": 75,
-    "y": 75,
-    "type": "route",
-    "reqArea": "Alola Plain Strong",
-    "reqCount": 1,
-    "description": "M Challenge Route"
-  },
-  "Alola Power Plant Weak": {
-    "x": 80,
-    "y": 80,
-    "type": "route",
-    "reqArea": "Alola Swamp",
-    "reqCount": 1,
-    "description": "M Challenge Route"
-  },
-  "Alola Power Plant Strong": {
-    "x": 85,
-    "y": 85,
-    "type": "route",
-    "reqArea": "Alola Power Plant Weak",
-    "reqCount": 1,
-    "description": "M Challenge Route"
-  },
-  "Alola Desert": {
-    "x": 90,
-    "y": 90,
-    "type": "route",
-    "reqArea": "Alola Power Plant Strong",
-    "reqCount": 1,
-    "description": "M Challenge Route"
-  },
-  "Meadow": {
-    "x": 95,
-    "y": 95,
-    "type": "route",
-    "reqArea": "Alola Desert",
-    "reqCount": 1,
-    "description": "M Challenge Route"
-  },
-  "Volcano Base": {
+  "Poni Plains": {
     "x": 100,
-    "y": 100,
-    "type": "route",
-    "reqArea": "Meadow",
-    "reqCount": 1,
-    "description": "M Challenge Route"
+    "y": 300
   },
-  "Volcano Peak": {
-    "x": 105,
-    "y": 105,
-    "type": "route",
-    "reqArea": "Volcano Base",
-    "reqCount": 1,
-    "description": "M Challenge Route"
-  },
-  "Ocean 1": {
-    "x": 110,
-    "y": 110,
-    "type": "route",
-    "reqArea": "Volcano Peak",
-    "reqCount": 1,
-    "description": "M Challenge Route"
-  },
-  "Ocean 2": {
-    "x": 115,
-    "y": 115,
-    "type": "route",
-    "reqArea": "Ocean 1",
-    "reqCount": 1,
-    "description": "M Challenge Route"
-  },
-  "Ocean 3": {
-    "x": 120,
-    "y": 120,
-    "type": "route",
-    "reqArea": "Ocean 2",
-    "reqCount": 1,
-    "description": "M Challenge Route"
-  },
-  "Dojo": {
-    "x": 125,
-    "y": 125,
-    "type": "route",
-    "reqArea": "Ocean 3",
-    "reqCount": 1,
-    "description": "M Challenge Route"
-  },
-  "Mind": {
-    "x": 130,
-    "y": 130,
-    "type": "route",
-    "reqArea": "Dojo",
-    "reqCount": 1,
-    "description": "M Challenge Route"
-  },
-  "Crag Weak": {
-    "x": 135,
-    "y": 135,
-    "type": "route",
-    "reqArea": "Mind",
-    "reqCount": 1,
-    "description": "M Challenge Route"
-  },
-  "Crag Regular": {
-    "x": 140,
-    "y": 140,
-    "type": "route",
-    "reqArea": "Crag Weak",
-    "reqCount": 1,
-    "description": "M Challenge Route"
-  },
-  "Crag Strong": {
-    "x": 145,
-    "y": 145,
-    "type": "route",
-    "reqArea": "Crag Regular",
-    "reqCount": 1,
-    "description": "M Challenge Route"
-  },
-  "Graveyard": {
+  "Poni Meadow": {
     "x": 150,
-    "y": 150,
-    "type": "route",
-    "reqArea": "Crag Strong",
-    "reqCount": 1,
-    "description": "M Challenge Route"
+    "y": 300
   },
-  "Jungle Weak": {
-    "x": 155,
-    "y": 155,
-    "type": "route",
-    "reqArea": "Graveyard",
-    "reqCount": 1,
-    "description": "M Challenge Route"
+  "Resolution Cave": {
+    "x": 200,
+    "y": 300
   },
-  "Alola Jungle Strong": {
-    "x": 160,
-    "y": 160,
-    "type": "route",
-    "reqArea": "Jungle Weak",
-    "reqCount": 1,
-    "description": "M Challenge Route"
+  "Poni Coast": {
+    "x": 150,
+    "y": 350
   },
-  "Outer Dragon Den": {
-    "x": 165,
-    "y": 165,
-    "type": "route",
-    "reqArea": "Alola Jungle Strong",
-    "reqCount": 1,
-    "description": "M Challenge Route"
+  "Poni Gauntlet": {
+    "x": 200,
+    "y": 350
   },
-  "Dragon Den Core": {
-    "x": 170,
-    "y": 170,
-    "type": "route",
-    "reqArea": "Outer Dragon Den",
-    "reqCount": 1,
-    "description": "M Challenge Route"
+  "Poni Gauntlet (Water)": {
+    "x": 250,
+    "y": 350
   },
-  "Shadow Weak": {
-    "x": 175,
-    "y": 175,
-    "type": "route",
-    "reqArea": "Dragon Den Core",
-    "reqCount": 1,
-    "description": "M Challenge Route"
+  "Battle Tree": {
+    "x": 400,
+    "y": 300
   },
-  "Shadow Strong": {
-    "x": 180,
-    "y": 180,
-    "type": "route",
-    "reqArea": "Shadow Weak",
-    "reqCount": 1,
-    "description": "M Challenge Route"
+  "Aether House (Mina's Trial — Kahuna Nanu Petal)": {
+    "x": 450,
+    "y": 300
   },
-  "Glacier": {
-    "x": 185,
-    "y": 185,
-    "type": "route",
-    "reqArea": "Shadow Strong",
-    "reqCount": 1,
-    "description": "M Challenge Route"
+  "Seafolk Village (Trial #8 Completion — Totem Ribombee)": {
+    "x": 500,
+    "y": 300
   },
-  "Factory": {
-    "x": 190,
-    "y": 190,
-    "type": "route",
-    "reqArea": "Glacier",
-    "reqCount": 1,
-    "description": "M Challenge Route"
+  "Exeggutor Island (Second Visit — Poni Grand Trial: Kahuna Hapu)": {
+    "x": 550,
+    "y": 300
   },
-  "Weak Wormhole Protectors": {
-    "x": 510,
-    "y": 510,
-    "type": "route",
-    "reqArea": "Sacred Shrine",
-    "reqCount": 1,
-    "description": "Special Challenge Rift"
+  "Tapu Village (Mount Lanakila Entrance)": {
+    "x": 600,
+    "y": 300
   },
-  "Ultra Beasts": {
-    "x": 520,
-    "y": 520,
-    "type": "route",
-    "reqArea": "Weak Wormhole Protectors",
-    "reqCount": 1,
-    "description": "Special Challenge Rift"
+  "Mount Lanakila (Base, Crater Necrozma Encounter, Icy Cave & Peak)": {
+    "x": 650,
+    "y": 300
   },
-  "Strong Wormhole Protectors": {
-    "x": 530,
-    "y": 530,
-    "type": "route",
-    "reqArea": "Ultra Beasts",
-    "reqCount": 1,
-    "description": "Special Challenge Rift"
+  "Pokémon League (Elite Four Molayne, Olivia, Acerola, Kahili & Champion Battle vs. Hau)": {
+    "x": 700,
+    "y": 300
   },
-  "Evolved Starter Depot": {
-    "x": 175,
-    "y": 685,
-    "type": "route",
-    "reqArea": "Starter Depot",
-    "reqCount": 1,
-    "description": "Final stage starters."
+  "Ruins of Conflict (Tapu Koko Encounter)": {
+    "x": 750,
+    "y": 300
+  },
+  "Poni Grove (Ultra Beast Hunt — Blacephalon / Stakataka)": {
+    "x": 800,
+    "y": 300
+  },
+  "Festival Plaza (Episode RR Start — Battle Agency)": {
+    "x": 850,
+    "y": 300
+  },
+  "Team Rocket's Castle (Aether Paradise — Episode RR)": {
+    "x": 900,
+    "y": 300
+  },
+  "Poni Plains & Plains Grotto": {
+    "x": 50,
+    "y": 350
+  },
+  "Poni Meadow & Resolution Cave": {
+    "x": 100,
+    "y": 350
+  },
+  "Poni Coast (2)": {
+    "x": 50,
+    "y": 50
+  },
+  "Poni Gauntlet (2)": {
+    "x": 100,
+    "y": 50
+  },
+  "Poni Gauntlet (Water) (2)": {
+    "x": 150,
+    "y": 50
+  },
+  "Battle Tree (Red & Blue Battle)": {
+    "x": 300,
+    "y": 350
+  },
+  "Altar of the Sunne/Moone & Lake of the Sunne/Moone (Solgaleo/Lunala & Cosmog)": {
+    "x": 350,
+    "y": 350
   }
 };
-
-export default alolaMapCoordinates;
