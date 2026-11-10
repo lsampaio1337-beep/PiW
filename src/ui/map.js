@@ -572,13 +572,17 @@ window.showInnerMapModal = function(htmlContent) {
 
     // Wrap the provided html in a window-like container
     const windowStyleHTML = `
-        <div style="background-color: var(--bg-color-main, #222); border-radius: 8px; border: 2px solid var(--border-color, #444); box-shadow: 0 4px 12px rgba(0,0,0,0.5); display: flex; flex-direction: column; overflow: hidden; max-width: 95%; max-height: 95%;">
-            <div style="background-color: var(--bg-color-header, #333); color: white; padding: 10px; font-weight: bold; text-align: center; border-bottom: 2px solid var(--border-color, #444); display: flex; justify-content: space-between; align-items: center;">
-                <span>Encounter Hub</span>
-                <button onclick="window.hideInnerMapModal()" style="background: transparent; border: none; color: white; font-size: 16px; cursor: pointer;">&times;</button>
+        <div class="modal-content floating-window" style="width: 800px; height: auto; display: flex; flex-direction: column; position: relative;">
+            <div class="window-header" style="display: flex; justify-content: space-between; align-items: center; padding-right: 15px;">
+                <span style="flex-grow: 1; text-align: center;">Encounter Hub</span>
+                <button onclick="window.hideInnerMapModal()" style="background: transparent; border: none; color: white; font-size: 20px; font-weight: bold; cursor: pointer; padding: 0;">&times;</button>
             </div>
-            <div style="padding: 15px; overflow-y: auto; max-height: calc(100vh - 200px);">
-                ${htmlContent}
+            <div class="window-content-container">
+                <div class="window-content-scaler">
+                    <div class="content-panel" style="flex: 1; overflow-y: auto; height: 100%; padding: 15px;">
+                        ${htmlContent}
+                    </div>
+                </div>
             </div>
         </div>
     `;
