@@ -73,5 +73,18 @@ export default {
     "Lake Valor": { x: 0, y: 0 },
     "Lake of Trials": { x: 0, y: 0 },
     "Incarnate Fields": { x: 0, y: 0 },
-    "Special Route": { x: 0, y: 0 }
+    "Special Route": { x: 0, y: 0 },
+    "Verity Cavern": { x: 0, y: 0 },
+    "Valor Cavern": { x: 0, y: 0 },
+    "??????": { x: 0, y: 0 },
+    "Mythical Spot": { x: 0, y: 0 },
+    "Obsidian Fieldlands": { x: 0, y: 0 },
+    "Crimson Mirelands": { x: 0, y: 0 },
+    "Cobalt Coastlands": { x: 0, y: 0 },
+    "Coronet Highlands": { x: 0, y: 0 },
+    "Alabaster Icelands": { x: 0, y: 0 },
+    "Before Arceus": { x: 0, y: 0 },
+    "Lake Acuity": { x: 0, y: 0 },
+    "Snowpoint Temple": { x: 0, y: 0 },
+    "Firespit Island": { x: 0, y: 0 }
 };

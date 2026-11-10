@@ -4389,32 +4389,16 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Etertime Citadel": {
+    "Etertime Citadel": {
     "pokes": [
-      {
-        "id": 483,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.25
-      },
-      {
-        "id": 484,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.25
-      },
-      {
-        "id": 487,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.25
-      },
-      {
-        "id": 493,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.25
-      }
+      { "id": 493, "minLevel": 110, "maxLevel": 110, "probability": 0.125 },
+      { "id": 483, "minLevel": 110, "maxLevel": 110, "probability": 0.125 },
+      { "id": 483.1, "minLevel": 110, "maxLevel": 110, "probability": 0.125 },
+      { "id": 484, "minLevel": 110, "maxLevel": 110, "probability": 0.125 },
+      { "id": 484.1, "minLevel": 110, "maxLevel": 110, "probability": 0.125 },
+      { "id": 487, "minLevel": 110, "maxLevel": 110, "probability": 0.125 },
+      { "id": 487.1, "minLevel": 110, "maxLevel": 110, "probability": 0.125 },
+      { "id": 487.2, "minLevel": 110, "maxLevel": 110, "probability": 0.125 }
     ]
   },
   "Gym of Etertime": {
@@ -4675,302 +4659,22 @@ export const hisuiRoutes = {
   "Incarnate Fields": {
     "pokes": []
   },
-  "Special Route": {
+    "Special Route": {
     "pokes": [
-      {
-        "id": 59.1,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0208
-      },
-      {
-        "id": 101.1,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0204
-      },
-      {
-        "id": 443,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0204
-      },
-      {
-        "id": 444,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0204
-      },
-      {
-        "id": 445,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0204
-      },
-      {
-        "id": 480,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0204
-      },
-      {
-        "id": 481,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0204
-      },
-      {
-        "id": 482,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0204
-      },
-      {
-        "id": 483,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0204
-      },
-      {
-        "id": 483.1,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0204
-      },
-      {
-        "id": 484,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0204
-      },
-      {
-        "id": 484.1,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0204
-      },
-      {
-        "id": 485,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0204
-      },
-      {
-        "id": 486,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0204
-      },
-      {
-        "id": 487,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0204
-      },
-      {
-        "id": 487.1,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0204
-      },
-      {
-        "id": 487.2,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0204
-      },
-      {
-        "id": 488,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0204
-      },
-      {
-        "id": 489,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0204
-      },
-      {
-        "id": 490,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0204
-      },
-      {
-        "id": 491,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0204
-      },
-      {
-        "id": 492,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0204
-      },
-      {
-        "id": 492.1,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0204
-      },
-      {
-        "id": 492.2,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0204
-      },
-      {
-        "id": 493,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0204
-      },
-      {
-        "id": 549.1,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0204
-      },
-      {
-        "id": 628.1,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0204
-      },
-      {
-        "id": 641,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0204
-      },
-      {
-        "id": 641.1,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0204
-      },
-      {
-        "id": 641.2,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0204
-      },
-      {
-        "id": 642,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0204
-      },
-      {
-        "id": 642.1,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0204
-      },
-      {
-        "id": 642.2,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0204
-      },
-      {
-        "id": 645,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0204
-      },
-      {
-        "id": 645.1,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0204
-      },
-      {
-        "id": 645.2,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0204
-      },
-      {
-        "id": 704,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0204
-      },
-      {
-        "id": 705.1,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0204
-      },
-      {
-        "id": 706.1,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0204
-      },
-      {
-        "id": 713.1,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0204
-      },
-      {
-        "id": 899,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0204
-      },
-      {
-        "id": 900,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0204
-      },
-      {
-        "id": 901,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0204
-      },
-      {
-        "id": 901.1,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0204
-      },
-      {
-        "id": 902,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0204
-      },
-      {
-        "id": 903,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0204
-      },
-      {
-        "id": 905,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0204
-      },
-      {
-        "id": 905.1,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0204
-      },
-      {
-        "id": 905.2,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0204
-      }
+      { "id": 641, "minLevel": 110, "maxLevel": 110, "probability": 0.0714 },
+      { "id": 641.1, "minLevel": 110, "maxLevel": 110, "probability": 0.0714 },
+      { "id": 641.2, "minLevel": 110, "maxLevel": 110, "probability": 0.0714 },
+      { "id": 642, "minLevel": 110, "maxLevel": 110, "probability": 0.0714 },
+      { "id": 642.1, "minLevel": 110, "maxLevel": 110, "probability": 0.0714 },
+      { "id": 642.2, "minLevel": 110, "maxLevel": 110, "probability": 0.0714 },
+      { "id": 645, "minLevel": 110, "maxLevel": 110, "probability": 0.0714 },
+      { "id": 645.1, "minLevel": 110, "maxLevel": 110, "probability": 0.0714 },
+      { "id": 645.2, "minLevel": 110, "maxLevel": 110, "probability": 0.0714 },
+      { "id": 905, "minLevel": 110, "maxLevel": 110, "probability": 0.0714 },
+      { "id": 905.1, "minLevel": 110, "maxLevel": 110, "probability": 0.0714 },
+      { "id": 905.2, "minLevel": 110, "maxLevel": 110, "probability": 0.0714 },
+      { "id": 706.1, "minLevel": 110, "maxLevel": 110, "probability": 0.0714 },
+      { "id": 445, "minLevel": 110, "maxLevel": 110, "probability": 0.0718 }
     ]
   },
   "Bonechill Wastes (Space-time Distortion)": {
@@ -6219,7 +5923,20 @@ export const hisuiRoutes = {
   },
   "Moonview Arena (Coronet Highlands)": {
     "pokes": []
-  }
+  },
+  "Lake Acuity": { "pokes": [{ "id": 480, "minLevel": 110, "maxLevel": 110, "probability": 1.0 }] },
+  "Verity Cavern": { "pokes": [{ "id": 481, "minLevel": 110, "maxLevel": 110, "probability": 1.0 }] },
+  "Valor Cavern": { "pokes": [{ "id": 482, "minLevel": 110, "maxLevel": 110, "probability": 1.0 }] },
+  "Snowpoint Temple": { "pokes": [{ "id": 486, "minLevel": 110, "maxLevel": 110, "probability": 1.0 }] },
+  "Firespit Island": { "pokes": [{ "id": 485, "minLevel": 110, "maxLevel": 110, "probability": 1.0 }] },
+  "??????": { "pokes": [{ "id": 488, "minLevel": 110, "maxLevel": 110, "probability": 1.0 }] },
+  "Mythical Spot": { "pokes": [{ "id": 490, "minLevel": 110, "maxLevel": 110, "probability": 0.1667 }, { "id": 489, "minLevel": 110, "maxLevel": 110, "probability": 0.1667 }, { "id": 491, "minLevel": 110, "maxLevel": 110, "probability": 0.1667 }, { "id": 492, "minLevel": 110, "maxLevel": 110, "probability": 0.1667 }, { "id": 492.1, "minLevel": 110, "maxLevel": 110, "probability": 0.1666 }, { "id": 492.2, "minLevel": 110, "maxLevel": 110, "probability": 0.1666 }] },
+  "Obsidian Fieldlands": { "pokes": [{ "id": 900, "minLevel": 110, "maxLevel": 110, "probability": 1.0 }] },
+  "Crimson Mirelands": { "pokes": [{ "id": 549.1, "minLevel": 110, "maxLevel": 110, "probability": 1.0 }] },
+  "Cobalt Coastlands": { "pokes": [{ "id": 59.1, "minLevel": 110, "maxLevel": 110, "probability": 1.0 }] },
+  "Coronet Highlands": { "pokes": [{ "id": 101.1, "minLevel": 110, "maxLevel": 110, "probability": 1.0 }] },
+  "Alabaster Icelands": { "pokes": [{ "id": 713.1, "minLevel": 110, "maxLevel": 110, "probability": 1.0 }] },
+  "Before Arceus": { "pokes": [{ "id": 899, "minLevel": 110, "maxLevel": 110, "probability": 0.2 }, { "id": 901, "minLevel": 110, "maxLevel": 110, "probability": 0.2 }, { "id": 902, "minLevel": 110, "maxLevel": 110, "probability": 0.2 }, { "id": 903, "minLevel": 110, "maxLevel": 110, "probability": 0.2 }, { "id": 628.1, "minLevel": 110, "maxLevel": 110, "probability": 0.2 }] }
 };
 
 export const hisuiUnlocks = [
@@ -7108,10 +6825,10 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge E 01",
+    "challengeName": "Super Special Challenge",
     "areaId": "Gym of Etertime",
     "unlocks": [
-      "Space-Time Distortion"
+      "Etertime Citadel"
     ],
     "requirements": {
       "defeatMultipleSpecific": [
@@ -7125,76 +6842,193 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge E 02",
-    "areaId": "Space-Time Distortion",
+    "challengeName": "Super Special Challenge",
+    "areaId": "Etertime Citadel",
     "unlocks": [
-      "Moonview Arena (Coronet Highlands)"
+      "Lake Acuity"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "routeName": "Space-Time Distortion",
+        "routeName": "Etertime Citadel",
         "count": 10
       }
     }
   },
   {
-    "challengeName": "Extra Challenge E 03",
-    "areaId": "Moonview Arena (Coronet Highlands)",
+    "challengeName": "Super Special Challenge",
+    "areaId": "Lake Acuity",
     "unlocks": [
-      "Lake Verity (Obsidian Fieldlands)"
+      "Verity Cavern"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "routeName": "Moonview Arena (Coronet Highlands)",
+        "routeName": "Lake Acuity",
         "count": 10
       }
     }
   },
   {
-    "challengeName": "Extra Challenge E 04",
-    "areaId": "Lake Verity (Obsidian Fieldlands)",
+    "challengeName": "Super Special Challenge",
+    "areaId": "Verity Cavern",
     "unlocks": [
-      "Lake Valor (Crimson Mirelands)"
+      "Valor Cavern"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "routeName": "Lake Verity (Obsidian Fieldlands)",
+        "routeName": "Verity Cavern",
         "count": 10
       }
     }
   },
   {
-    "challengeName": "Extra Challenge E 05",
-    "areaId": "Lake Valor (Crimson Mirelands)",
+    "challengeName": "Super Special Challenge",
+    "areaId": "Valor Cavern",
     "unlocks": [
-      "Lake of Trials"
+      "Snowpoint Temple"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "routeName": "Lake Valor (Crimson Mirelands)",
+        "routeName": "Valor Cavern",
         "count": 10
       }
     }
   },
   {
-    "challengeName": "Extra Challenge E 06",
-    "areaId": "Lake of Trials",
+    "challengeName": "Super Special Challenge",
+    "areaId": "Snowpoint Temple",
     "unlocks": [
-      "Incarnate Fields"
+      "Firespit Island"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "routeName": "Lake of Trials",
+        "routeName": "Snowpoint Temple",
         "count": 10
       }
     }
   },
   {
-    "challengeName": "Extra Challenge E 07",
-    "areaId": "Incarnate Fields",
+    "challengeName": "Super Special Challenge",
+    "areaId": "Firespit Island",
+    "unlocks": [
+      "??????"
+    ],
     "requirements": {
       "defeatCountRoute": {
-        "routeName": "Incarnate Fields",
+        "routeName": "Firespit Island",
+        "count": 10
+      }
+    }
+  },
+  {
+    "challengeName": "Super Special Challenge",
+    "areaId": "??????",
+    "unlocks": [
+      "Special Route"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "routeName": "??????",
+        "count": 10
+      }
+    }
+  },
+  {
+    "challengeName": "Super Special Challenge",
+    "areaId": "Special Route",
+    "unlocks": [
+      "Mythical Spot"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "routeName": "Special Route",
+        "count": 10
+      }
+    }
+  },
+  {
+    "challengeName": "Super Special Challenge",
+    "areaId": "Mythical Spot",
+    "unlocks": [
+      "Obsidian Fieldlands"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "routeName": "Mythical Spot",
+        "count": 10
+      }
+    }
+  },
+  {
+    "challengeName": "Super Special Challenge",
+    "areaId": "Obsidian Fieldlands",
+    "unlocks": [
+      "Crimson Mirelands"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "routeName": "Obsidian Fieldlands",
+        "count": 10
+      }
+    }
+  },
+  {
+    "challengeName": "Super Special Challenge",
+    "areaId": "Crimson Mirelands",
+    "unlocks": [
+      "Cobalt Coastlands"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "routeName": "Crimson Mirelands",
+        "count": 10
+      }
+    }
+  },
+  {
+    "challengeName": "Super Special Challenge",
+    "areaId": "Cobalt Coastlands",
+    "unlocks": [
+      "Coronet Highlands"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "routeName": "Cobalt Coastlands",
+        "count": 10
+      }
+    }
+  },
+  {
+    "challengeName": "Super Special Challenge",
+    "areaId": "Coronet Highlands",
+    "unlocks": [
+      "Alabaster Icelands"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "routeName": "Coronet Highlands",
+        "count": 10
+      }
+    }
+  },
+  {
+    "challengeName": "Super Special Challenge",
+    "areaId": "Alabaster Icelands",
+    "unlocks": [
+      "Before Arceus"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "routeName": "Alabaster Icelands",
+        "count": 10
+      }
+    }
+  },
+  {
+    "challengeName": "Super Special Challenge",
+    "areaId": "Before Arceus",
+    "requirements": {
+      "defeatCountRoute": {
+        "routeName": "Before Arceus",
         "count": 10
       }
     }
