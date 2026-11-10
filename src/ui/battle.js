@@ -842,7 +842,7 @@ function animateModals(cloneWrapper) {
 function animateDamageTexts(cloneWrapper) {
     const clonedDamages = cloneWrapper.querySelectorAll('.floating-damage');
     clonedDamages.forEach(dmg => {
-        dmg.style.transition = 'opacity 2000ms linear, transform 2000ms linear';
+        dmg.style.transition = 'all 2000ms linear';
         dmg.style.transformOrigin = 'center center';
         dmg.style.opacity = '0';
         dmg.style.transform = 'translate(-50%, -50%) scale(0.3)';
