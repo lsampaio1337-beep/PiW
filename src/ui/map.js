@@ -523,13 +523,13 @@ export function showMap() {
     // Inner modal for gym overlays natively locked to the map
     html += `
             <div id="map-inner-modal-overlay" onclick="if(event.target === this) { window.closeMapInnerModal(); }" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 1000; align-items: center; justify-content: center; padding: 2%; box-sizing: border-box;">
-                <div id="map-inner-modal" class="floating-window" onclick="event.stopPropagation()" style="max-height: 96%; max-width: 96%; box-sizing: border-box; display: flex; flex-direction: column; margin: 2%;">
+                <div id="map-inner-modal" class="floating-window" onclick="event.stopPropagation()" style="max-height: 100%; max-width: 100%; box-sizing: border-box; display: flex; flex-direction: column;">
                     <div class="window-header" style="position: relative; cursor: default;">
                         <span id="map-inner-modal-title">Gym</span>
                         <span id="btn-close-map-inner-modal" onclick="window.closeMapInnerModal()" style="position: absolute; top: 5px; right: 5px; font-size: 12px; font-weight: bold; line-height: 1; padding: 0; cursor: pointer; color: white;">X</span>
                     </div>
-                    <div class="window-content-container" style="flex: 1; display: flex;">
-                        <div id="map-inner-modal-content" class="content-panel" style="width: 100%; height: auto; overflow-y: auto; position: relative;">
+                    <div class="window-content-container" style="display: flex; justify-content: center; align-items: center; overflow: hidden; position: relative; min-height: 0; min-width: 0;">
+                        <div id="map-inner-modal-content" class="content-panel" style="position: relative; display: inline-block; min-height: 0; min-width: 0;">
                             <!-- Content injected via JS -->
                         </div>
                     </div>
@@ -855,15 +855,20 @@ export function navigateToLocation(locationName) {
 
             const dynamicGymBgUi = document.createElement('div');
             dynamicGymBgUi.id = 'dynamic-gym-bg-ui';
-            dynamicGymBgUi.style.position = 'absolute';
-            dynamicGymBgUi.style.top = '0';
-            dynamicGymBgUi.style.left = '0';
-            dynamicGymBgUi.style.width = '100%';
-            dynamicGymBgUi.style.height = '100%';
+            dynamicGymBgUi.style.position = 'relative';
+            dynamicGymBgUi.style.display = 'inline-block';
+            dynamicGymBgUi.style.maxWidth = '100%';
+            dynamicGymBgUi.style.maxHeight = '100%';
             dynamicGymBgUi.style.zIndex = '0';
-            dynamicGymBgUi.style.backgroundImage = `url('${bgPath}')`;
-            dynamicGymBgUi.style.backgroundSize = '100% 100%';
             dynamicGymBgUi.style.overflow = 'hidden';
+
+            const bgImgEl = document.createElement('img');
+            bgImgEl.src = bgPath;
+            bgImgEl.style.display = 'block';
+            bgImgEl.style.maxWidth = '100%';
+            bgImgEl.style.maxHeight = '100%';
+            bgImgEl.style.objectFit = 'contain';
+            dynamicGymBgUi.appendChild(bgImgEl);
 
             const gymLeaderImg = document.createElement('img');
             gymLeaderImg.src = spritePath;
@@ -912,7 +917,15 @@ export function navigateToLocation(locationName) {
 
         uiContainer.appendChild(headerEl);
         uiContainer.appendChild(contentArea);
-        vGym.appendChild(uiContainer);
+
+        // Append uiContainer to dynamicGymBgUi if it exists so it aligns with the scaled background image, otherwise fallback to vGym
+        // We query from vGym because vGym hasn't been appended to the main document yet
+        const dynamicBg = vGym.querySelector('#dynamic-gym-bg-ui');
+        if (dynamicBg) {
+            dynamicBg.appendChild(uiContainer);
+        } else {
+            vGym.appendChild(uiContainer);
+        }
 
         if (gymConfig && contentArea) {
             let buttonText = "Enter";
@@ -925,11 +938,12 @@ export function navigateToLocation(locationName) {
         }
 
         vGym.style.position = "relative";
-        vGym.style.height = "100%";
         if (bgImg) {
+            vGym.style.height = "100%";
             vGym.style.backgroundImage = `url('./Assets/BG/${bgImg}')`;
             vGym.style.backgroundSize = "cover";
         } else {
+            vGym.style.height = "auto";
             vGym.style.backgroundImage = "none";
         }
 
