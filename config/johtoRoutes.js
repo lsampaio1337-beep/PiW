@@ -10,31 +10,31 @@ export const johtoRoutes = [
         "pokemonId": 16,
         "minLevel": 2,
         "maxLevel": 5,
-        "chance": 0.25
+        "chance": 0.2777777777777778
       },
       {
         "pokemonId": 161,
         "minLevel": 2,
         "maxLevel": 5,
-        "chance": 0.2
+        "chance": 0.22222222222222227
       },
       {
         "pokemonId": 19,
         "minLevel": 2,
         "maxLevel": 4,
-        "chance": 0.25
+        "chance": 0.2777777777777778
       },
       {
         "pokemonId": 163,
         "minLevel": 3,
         "maxLevel": 5,
-        "chance": 0.1
+        "chance": 0.11111111111111113
       },
       {
         "pokemonId": 187,
         "minLevel": 3,
         "maxLevel": 5,
-        "chance": 0.1
+        "chance": 0.11111111111111113
       }
     ]
   },
@@ -891,19 +891,19 @@ export const johtoRoutes = [
         "pokemonId": 440,
         "minLevel": 18,
         "maxLevel": 22,
-        "chance": 0.33
+        "chance": 0.3333333333333333
       },
       {
         "pokemonId": 173,
         "minLevel": 18,
         "maxLevel": 22,
-        "chance": 0.33
+        "chance": 0.3333333333333333
       },
       {
         "pokemonId": 174,
         "minLevel": 18,
         "maxLevel": 22,
-        "chance": 0.34
+        "chance": 0.3333333333333333
       }
     ]
   },
@@ -926,7 +926,7 @@ export const johtoRoutes = [
         "pokemonId": 66,
         "minLevel": 25,
         "maxLevel": 29,
-        "chance": 0.20
+        "chance": 0.2
       },
       {
         "pokemonId": 104,
@@ -1459,12 +1459,37 @@ export const johtoRoutes = [
   {
     "name": "Fossil Revival Lab",
     "spawns": [
-      { "pokemonId": 138, "minLevel": 78, "maxLevel": 86, "chance": 0.2 },
-      { "pokemonId": 140, "minLevel": 78, "maxLevel": 86, "chance": 0.2 },
-      { "pokemonId": 142, "minLevel": 82, "maxLevel": 90, "chance": 0.2 },
-      { "pokemonId": 139, "minLevel": 80, "maxLevel": 88, "chance": 0.2 },
-      { "pokemonId": 141, "minLevel": 80, "maxLevel": 88, "chance": 0.2 }
-]
+      {
+        "pokemonId": 138,
+        "minLevel": 78,
+        "maxLevel": 86,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 140,
+        "minLevel": 78,
+        "maxLevel": 86,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 142,
+        "minLevel": 82,
+        "maxLevel": 90,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 139,
+        "minLevel": 80,
+        "maxLevel": 88,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 141,
+        "minLevel": 80,
+        "maxLevel": 88,
+        "chance": 0.2
+      }
+    ]
   },
   {
     "name": "Pokemon Mansion (Johto)",
@@ -1520,37 +1545,37 @@ export const johtoRoutes = [
         "pokemonId": 1,
         "minLevel": 80,
         "maxLevel": 85,
-        "chance": 0.16670000000000001
+        "chance": 0.16666666666666666
       },
       {
         "pokemonId": 4,
         "minLevel": 80,
         "maxLevel": 85,
-        "chance": 0.16670000000000001
+        "chance": 0.16666666666666666
       },
       {
         "pokemonId": 7,
         "minLevel": 80,
         "maxLevel": 85,
-        "chance": 0.16670000000000001
+        "chance": 0.16666666666666666
       },
       {
         "pokemonId": 152,
         "minLevel": 80,
         "maxLevel": 85,
-        "chance": 0.16670000000000001
+        "chance": 0.16666666666666666
       },
       {
         "pokemonId": 155,
         "minLevel": 80,
         "maxLevel": 85,
-        "chance": 0.16670000000000001
+        "chance": 0.16666666666666666
       },
       {
         "pokemonId": 158,
         "minLevel": 80,
         "maxLevel": 85,
-        "chance": 0.16670000000000001
+        "chance": 0.16666666666666666
       }
     ]
   },
@@ -1731,37 +1756,37 @@ export const johtoRoutes = [
         "pokemonId": 3,
         "minLevel": 90,
         "maxLevel": 98,
-        "chance": 0.17
+        "chance": 0.16666666666666666
       },
       {
         "pokemonId": 6,
         "minLevel": 90,
         "maxLevel": 98,
-        "chance": 0.17
+        "chance": 0.16666666666666666
       },
       {
         "pokemonId": 9,
         "minLevel": 90,
         "maxLevel": 98,
-        "chance": 0.17
+        "chance": 0.16666666666666666
       },
       {
         "pokemonId": 154,
         "minLevel": 90,
         "maxLevel": 98,
-        "chance": 0.17
+        "chance": 0.16666666666666666
       },
       {
         "pokemonId": 157,
         "minLevel": 90,
         "maxLevel": 98,
-        "chance": 0.17
+        "chance": 0.16666666666666666
       },
       {
         "pokemonId": 160,
         "minLevel": 90,
         "maxLevel": 98,
-        "chance": 0.17
+        "chance": 0.16666666666666666
       }
     ]
   },
@@ -1807,77 +1832,286 @@ export const johtoRoutes = [
         "pokemonId": 243,
         "minLevel": 105,
         "maxLevel": 105,
-        "chance": 0.2
+        "chance": 0.1769911504424779
       },
       {
         "pokemonId": 244,
         "minLevel": 105,
         "maxLevel": 105,
-        "chance": 0.2
+        "chance": 0.1769911504424779
       },
       {
         "pokemonId": 245,
         "minLevel": 105,
         "maxLevel": 105,
-        "chance": 0.2
+        "chance": 0.1769911504424779
       },
       {
         "pokemonId": 151,
         "minLevel": 110,
         "maxLevel": 110,
-        "chance": 0.2
+        "chance": 0.1769911504424779
       },
       {
         "pokemonId": 150,
         "minLevel": 110,
         "maxLevel": 110,
-        "chance": 0.2
+        "chance": 0.1769911504424779
       },
       {
         "pokemonId": 251,
         "minLevel": 110,
         "maxLevel": 110,
-        "chance": 0.13333333333333333
+        "chance": 0.11504424778761063
       }
     ]
-  }
-,
+  },
   {
     "name": "Trade With Friends Hub",
     "spawns": [
-      { "pokemonId": 65, "minLevel": 93, "maxLevel": 97, "chance": 0.25 },
-      { "pokemonId": 68, "minLevel": 93, "maxLevel": 97, "chance": 0.25 },
-      { "pokemonId": 76, "minLevel": 93, "maxLevel": 97, "chance": 0.25 },
-      { "pokemonId": 94, "minLevel": 93, "maxLevel": 97, "chance": 0.25 }
+      {
+        "pokemonId": 65,
+        "minLevel": 93,
+        "maxLevel": 97,
+        "chance": 0.25
+      },
+      {
+        "pokemonId": 68,
+        "minLevel": 93,
+        "maxLevel": 97,
+        "chance": 0.25
+      },
+      {
+        "pokemonId": 76,
+        "minLevel": 93,
+        "maxLevel": 97,
+        "chance": 0.25
+      },
+      {
+        "pokemonId": 94,
+        "minLevel": 93,
+        "maxLevel": 97,
+        "chance": 0.25
+      }
     ]
   },
   {
     "name": "Kanto Safari Zone (Johto)",
     "spawns": [
-      { "pokemonId": 186, "minLevel": 83, "maxLevel": 86, "chance": 0.125 },
-      { "pokemonId": 57, "minLevel": 84, "maxLevel": 87, "chance": 0.125 },
-      { "pokemonId": 224, "minLevel": 83, "maxLevel": 86, "chance": 0.125 },
-      { "pokemonId": 112, "minLevel": 86, "maxLevel": 89, "chance": 0.125 },
-      { "pokemonId": 71, "minLevel": 84, "maxLevel": 87, "chance": 0.125 },
-      { "pokemonId": 36, "minLevel": 83, "maxLevel": 86, "chance": 0.125 },
-      { "pokemonId": 40, "minLevel": 84, "maxLevel": 87, "chance": 0.125 },
-      { "pokemonId": 91, "minLevel": 86, "maxLevel": 89, "chance": 0.125 }
+      {
+        "pokemonId": 186,
+        "minLevel": 83,
+        "maxLevel": 86,
+        "chance": 0.125
+      },
+      {
+        "pokemonId": 57,
+        "minLevel": 84,
+        "maxLevel": 87,
+        "chance": 0.125
+      },
+      {
+        "pokemonId": 224,
+        "minLevel": 83,
+        "maxLevel": 86,
+        "chance": 0.125
+      },
+      {
+        "pokemonId": 112,
+        "minLevel": 86,
+        "maxLevel": 89,
+        "chance": 0.125
+      },
+      {
+        "pokemonId": 71,
+        "minLevel": 84,
+        "maxLevel": 87,
+        "chance": 0.125
+      },
+      {
+        "pokemonId": 36,
+        "minLevel": 83,
+        "maxLevel": 86,
+        "chance": 0.125
+      },
+      {
+        "pokemonId": 40,
+        "minLevel": 84,
+        "maxLevel": 87,
+        "chance": 0.125
+      },
+      {
+        "pokemonId": 91,
+        "minLevel": 86,
+        "maxLevel": 89,
+        "chance": 0.125
+      }
     ]
   },
   {
     "name": "Victory Road (Johto)",
     "spawns": [
-      { "pokemonId": 26, "minLevel": 95, "maxLevel": 99, "chance": 0.1 },
-      { "pokemonId": 31, "minLevel": 96, "maxLevel": 100, "chance": 0.1 },
-      { "pokemonId": 34, "minLevel": 96, "maxLevel": 100, "chance": 0.1 },
-      { "pokemonId": 59, "minLevel": 96, "maxLevel": 100, "chance": 0.1 },
-      { "pokemonId": 112, "minLevel": 96, "maxLevel": 100, "chance": 0.1 },
-      { "pokemonId": 57, "minLevel": 95, "maxLevel": 99, "chance": 0.1 },
-      { "pokemonId": 210, "minLevel": 94, "maxLevel": 98, "chance": 0.1 },
-      { "pokemonId": 178, "minLevel": 94, "maxLevel": 98, "chance": 0.1 },
-      { "pokemonId": 82, "minLevel": 95, "maxLevel": 99, "chance": 0.1 },
-      { "pokemonId": 89, "minLevel": 94, "maxLevel": 98, "chance": 0.1 }
+      {
+        "pokemonId": 26,
+        "minLevel": 95,
+        "maxLevel": 99,
+        "chance": 0.1
+      },
+      {
+        "pokemonId": 31,
+        "minLevel": 96,
+        "maxLevel": 100,
+        "chance": 0.1
+      },
+      {
+        "pokemonId": 34,
+        "minLevel": 96,
+        "maxLevel": 100,
+        "chance": 0.1
+      },
+      {
+        "pokemonId": 59,
+        "minLevel": 96,
+        "maxLevel": 100,
+        "chance": 0.1
+      },
+      {
+        "pokemonId": 112,
+        "minLevel": 96,
+        "maxLevel": 100,
+        "chance": 0.1
+      },
+      {
+        "pokemonId": 57,
+        "minLevel": 95,
+        "maxLevel": 99,
+        "chance": 0.1
+      },
+      {
+        "pokemonId": 210,
+        "minLevel": 94,
+        "maxLevel": 98,
+        "chance": 0.1
+      },
+      {
+        "pokemonId": 178,
+        "minLevel": 94,
+        "maxLevel": 98,
+        "chance": 0.1
+      },
+      {
+        "pokemonId": 82,
+        "minLevel": 95,
+        "maxLevel": 99,
+        "chance": 0.1
+      },
+      {
+        "pokemonId": 89,
+        "minLevel": 94,
+        "maxLevel": 98,
+        "chance": 0.1
+      }
     ]
+  },
+  {
+    "name": "Johto Professor Lab",
+    "spawns": []
+  },
+  {
+    "name": "PokeCenter & PokeMarket",
+    "spawns": []
+  },
+  {
+    "name": "Daycare",
+    "spawns": []
+  },
+  {
+    "name": "Celadon Casino",
+    "spawns": []
+  },
+  {
+    "name": "Johto Pokemon League",
+    "spawns": []
+  },
+  {
+    "name": "Battle Stadium",
+    "spawns": []
+  },
+  {
+    "name": "Violet Gym",
+    "spawns": []
+  },
+  {
+    "name": "Azalea Gym",
+    "spawns": []
+  },
+  {
+    "name": "Goldenrod Gym",
+    "spawns": []
+  },
+  {
+    "name": "Ecruteak Gym",
+    "spawns": []
+  },
+  {
+    "name": "Cianwood Gym",
+    "spawns": []
+  },
+  {
+    "name": "Olivine Gym",
+    "spawns": []
+  },
+  {
+    "name": "Mahogany Gym",
+    "spawns": []
+  },
+  {
+    "name": "Blackthorn Gym",
+    "spawns": []
+  },
+  {
+    "name": "Pokemon League",
+    "spawns": []
+  },
+  {
+    "name": "Pewter Gym",
+    "spawns": []
+  },
+  {
+    "name": "Cerulean Gym",
+    "spawns": []
+  },
+  {
+    "name": "Vermilion Gym",
+    "spawns": []
+  },
+  {
+    "name": "Celadon Gym",
+    "spawns": []
+  },
+  {
+    "name": "Saffron Gym",
+    "spawns": []
+  },
+  {
+    "name": "Fuchsia Gym",
+    "spawns": []
+  },
+  {
+    "name": "Cinnabar Gym",
+    "spawns": []
+  },
+  {
+    "name": "Viridian Gym",
+    "spawns": []
+  },
+  {
+    "name": "Red",
+    "spawns": []
+  },
+  {
+    "name": "Extra Challenge (Roaming)",
+    "spawns": []
   }
 ];
 
@@ -2083,11 +2317,11 @@ export const johtoUnlocks = [
     "requirements": {
       "catchSpecies": [
         {
-          "species": "Nidoran\u2640",
+          "species": "Nidoran♀",
           "count": 1
         },
         {
-          "species": "Nidoran\u2642",
+          "species": "Nidoran♂",
           "count": 1
         }
       ]
@@ -2680,7 +2914,10 @@ export const johtoUnlocks = [
     "requirements": {
       "catchSpeciesAnyOf": [
         {
-          "species": ["Nidoking", "Nidoqueen"],
+          "species": [
+            "Nidoking",
+            "Nidoqueen"
+          ],
           "count": 1
         }
       ]
@@ -3040,11 +3277,26 @@ export const johtoUnlocks = [
     "areaId": "Mount Silver Apex",
     "requirements": {
       "catchSpecies": [
-        { "species": "Raikou", "count": 1 },
-        { "species": "Entei", "count": 1 },
-        { "species": "Suicune", "count": 1 },
-        { "species": "Mew", "count": 1 },
-        { "species": "Mewtwo", "count": 1 }
+        {
+          "species": "Raikou",
+          "count": 1
+        },
+        {
+          "species": "Entei",
+          "count": 1
+        },
+        {
+          "species": "Suicune",
+          "count": 1
+        },
+        {
+          "species": "Mew",
+          "count": 1
+        },
+        {
+          "species": "Mewtwo",
+          "count": 1
+        }
       ]
     },
     "gifts": [
