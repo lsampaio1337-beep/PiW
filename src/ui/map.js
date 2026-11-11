@@ -654,7 +654,7 @@ export function navigateToLocation(locationName) {
             innerModal.style.overflow = 'hidden';
             innerModal.style.position = 'relative';
         }
-        const container = vModal.closest('.window-content-container');
+        const container = vModal ? vModal.closest('.window-content-container') : null;
         if (container) {
             container.style.display = "block";
             container.style.width = "max-content";
@@ -664,14 +664,14 @@ export function navigateToLocation(locationName) {
             container.style.margin = "0";
         }
 
-        vModal.replaceChildren();
-        vModal.style.position = "relative";
-        vModal.style.height = "max-content";
-        vModal.style.backgroundImage = "none";
-        vModal.style.display = "block";
-        vModal.style.width = "max-content";
-        vModal.style.padding = "0";
-        vModal.style.margin = "0";
+        if(vModal) vModal.replaceChildren();
+        if(vModal) vModal.style.position = 'relative';
+        if(vModal) vModal.style.height = 'max-content';
+        if(vModal) vModal.style.backgroundImage = 'none';
+        if(vModal) vModal.style.display = 'block';
+        if(vModal) vModal.style.width = 'max-content';
+        if(vModal) vModal.style.padding = '0';
+        if(vModal) vModal.style.margin = '0';
 
         let html = `
             <div style="position: relative; display: block; max-height: 90vh; max-width: 90vw;">
@@ -682,7 +682,7 @@ export function navigateToLocation(locationName) {
                 </div>
             </div>
         `;
-        vModal.innerHTML = html;
+        if(vModal) vModal.innerHTML = html;
 
         const overlay = document.getElementById('map-inner-modal-overlay');
         if (overlay) overlay.style.display = 'flex';
@@ -706,7 +706,7 @@ export function navigateToLocation(locationName) {
             innerModal.style.overflow = 'hidden';
             innerModal.style.position = 'relative';
         }
-        const container = vModal.closest('.window-content-container');
+        const container = vModal ? vModal.closest('.window-content-container') : null;
         if (container) {
             container.style.display = "block";
             container.style.width = "max-content";
@@ -716,15 +716,15 @@ export function navigateToLocation(locationName) {
             container.style.margin = "0";
         }
 
-        vModal.replaceChildren();
-        vModal.style.position = "relative";
-        vModal.style.height = "max-content";
-        vModal.style.backgroundImage = "none";
-        vModal.style.display = "block";
-        vModal.style.backgroundColor = "transparent";
-        vModal.style.width = "max-content";
-        vModal.style.padding = "0";
-        vModal.style.margin = "0";
+        if(vModal) vModal.replaceChildren();
+        if(vModal) vModal.style.position = 'relative';
+        if(vModal) vModal.style.height = 'max-content';
+        if(vModal) vModal.style.backgroundImage = 'none';
+        if(vModal) vModal.style.display = 'block';
+        if(vModal) vModal.style.backgroundColor = 'transparent';
+        if(vModal) vModal.style.width = 'max-content';
+        if(vModal) vModal.style.padding = '0';
+        if(vModal) vModal.style.margin = '0';
 
         const completedChallenges = state.stats.completedChallengeIds || [];
         const isUnlockedByAreaId = (areaId) => completedChallenges.some(id => parseAreaNames(id).includes(areaId));
@@ -787,7 +787,7 @@ export function navigateToLocation(locationName) {
                 </div>
             </div>
         `;
-        vModal.innerHTML = machinesHtml;
+        if(vModal) vModal.innerHTML = machinesHtml;
 
         const overlay = document.getElementById('map-inner-modal-overlay');
         if (overlay) overlay.style.display = 'flex';
@@ -831,7 +831,7 @@ export function navigateToLocation(locationName) {
             innerModal.style.overflow = 'hidden';
             innerModal.style.position = 'relative';
         }
-        const container = vModal.closest('.window-content-container');
+        const container = vModal ? vModal.closest('.window-content-container') : null;
         if (container) {
             container.style.display = "block";
             container.style.width = "max-content";
@@ -841,14 +841,14 @@ export function navigateToLocation(locationName) {
             container.style.margin = "0";
         }
 
-        vModal.replaceChildren();
-        vModal.style.position = "relative";
-        vModal.style.height = "max-content";
-        vModal.style.backgroundImage = "none";
-        vModal.style.display = "block";
-        vModal.style.width = "max-content";
-        vModal.style.padding = "0";
-        vModal.style.margin = "0";
+        if(vModal) vModal.replaceChildren();
+        if(vModal) vModal.style.position = 'relative';
+        if(vModal) vModal.style.height = 'max-content';
+        if(vModal) vModal.style.backgroundImage = 'none';
+        if(vModal) vModal.style.display = 'block';
+        if(vModal) vModal.style.width = 'max-content';
+        if(vModal) vModal.style.padding = '0';
+        if(vModal) vModal.style.margin = '0';
 
         const stdLeft = 16.3;
         const stdTop = 34.16;
@@ -868,7 +868,7 @@ export function navigateToLocation(locationName) {
                 <button onclick="window.navigateToLocation('${window.currentCasinoHub}')" class="action-btn action-btn-primary" style="position: absolute; top: 10px; left: 10px; z-index: 100; padding: 5px 10px; font-size: 12px;">Back to Lobby</button>
             </div>
         `;
-        vModal.innerHTML = html;
+        if(vModal) vModal.innerHTML = html;
 
         const overlay = document.getElementById('map-inner-modal-overlay');
         if (overlay) overlay.style.display = 'flex';
