@@ -447,11 +447,22 @@ def parse_requirements(req_str, area_id):
         defeat_specific = []
         catch_rare = []
 
-        # We need to split by "and" or "," but first fix specific edge cases
-        req_str_fixed = req_str.replace("Capture all 6 starters", "Catch 1 Bulbasaur, Catch 1 Charmander, Catch 1 Squirtle, Catch 1 Chikorita, Catch 1 Cyndaquil, Catch 1 Totodile")
-        req_str_fixed = re.sub(r"(?<!\band)(?<!,)\s+(Catch|Capture|Get|Defeat)\b", r", \1", req_str_fixed, flags=re.IGNORECASE)
+        req_str = req_str.replace("catch", "Catch")
+        req_str = req_str.replace("defeat", "Defeat")
 
-        parts = [p.strip() for p in req_str_fixed.replace(" and ", ",").split(",")]
+        # Special cases handling based on known structures
+        if " and " in req_str or "," in req_str:
+            # We need to split by "and" or "," but first fix specific edge cases
+            parts = [p.strip() for p in req_str.replace(" and ", ",").split(",")]
+
+            # Process parts to see if it's multiple catches or defeats
+            catch_parts = []
+            defeat_parts = []
+        else:
+            req_str_fixed = req_str.replace("Capture all 6 starters", "Catch 1 Bulbasaur, Catch 1 Charmander, Catch 1 Squirtle, Catch 1 Chikorita, Catch 1 Cyndaquil, Catch 1 Totodile")
+            req_str_fixed = re.sub(r"(?<!\band)(?<!,)\s+(Catch|Capture|Get|Defeat)\b", r", \1", req_str_fixed, flags=re.IGNORECASE)
+
+            parts = [p.strip() for p in req_str_fixed.replace(" and ", ",").split(",")]
 
         current_verb = "Catch"
         for part in parts:

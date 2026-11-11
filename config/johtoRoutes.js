@@ -193,12 +193,6 @@ export const johtoRoutes = [
     "name": "Route 33",
     "spawns": [
       {
-        "pokemonId": 190,
-        "minLevel": 1,
-        "maxLevel": 1,
-        "chance": 0
-      },
-      {
         "pokemonId": 74,
         "minLevel": 10,
         "maxLevel": 14,
@@ -231,13 +225,7 @@ export const johtoRoutes = [
         "pokemonId": 46,
         "minLevel": 13,
         "maxLevel": 17,
-        "chance": 0.15
-      },
-      {
-        "pokemonId": 48,
-        "minLevel": 13,
-        "maxLevel": 17,
-        "chance": 0.15
+        "chance": 0.3
       },
       {
         "pokemonId": 10,
@@ -590,12 +578,6 @@ export const johtoRoutes = [
     "name": "Route 47",
     "spawns": [
       {
-        "pokemonId": 214,
-        "minLevel": 1,
-        "maxLevel": 1,
-        "chance": 0
-      },
-      {
         "pokemonId": 56,
         "minLevel": 38,
         "maxLevel": 43,
@@ -885,64 +867,6 @@ export const johtoRoutes = [
     ]
   },
   {
-    "name": "Goldenrod Babies Corner",
-    "spawns": [
-      {
-        "pokemonId": 440,
-        "minLevel": 18,
-        "maxLevel": 22,
-        "chance": 0.33
-      },
-      {
-        "pokemonId": 173,
-        "minLevel": 18,
-        "maxLevel": 22,
-        "chance": 0.33
-      },
-      {
-        "pokemonId": 174,
-        "minLevel": 18,
-        "maxLevel": 22,
-        "chance": 0.34
-      }
-    ]
-  },
-  {
-    "name": "Goldenrod Lucky Spot Corner",
-    "spawns": [
-      {
-        "pokemonId": 63,
-        "minLevel": 24,
-        "maxLevel": 28,
-        "chance": 0.25
-      },
-      {
-        "pokemonId": 27,
-        "minLevel": 24,
-        "maxLevel": 28,
-        "chance": 0.25
-      },
-      {
-        "pokemonId": 66,
-        "minLevel": 25,
-        "maxLevel": 29,
-        "chance": 0.20
-      },
-      {
-        "pokemonId": 104,
-        "minLevel": 25,
-        "maxLevel": 29,
-        "chance": 0.15
-      },
-      {
-        "pokemonId": 133,
-        "minLevel": 26,
-        "maxLevel": 30,
-        "chance": 0.15
-      }
-    ]
-  },
-  {
     "name": "Goldenrod Game Corner",
     "spawns": [
       {
@@ -1011,22 +935,15 @@ export const johtoRoutes = [
     "spawns": [
       {
         "pokemonId": 129,
-        "minLevel": 50,
+        "minLevel": 48,
         "maxLevel": 55,
-        "chance": 0.75
+        "chance": 0.95
       },
       {
         "pokemonId": 130,
         "minLevel": 55,
         "maxLevel": 60,
-        "chance": 0.23
-      },
-      {
-        "pokemonId": 130,
-        "minLevel": 60,
-        "maxLevel": 65,
-        "chance": 0.02,
-        "quality": 2
+        "chance": 0.05
       }
     ]
   },
@@ -1078,25 +995,19 @@ export const johtoRoutes = [
         "pokemonId": 12,
         "minLevel": 80,
         "maxLevel": 86,
-        "chance": 0.25
+        "chance": 0.35
       },
       {
         "pokemonId": 15,
         "minLevel": 80,
         "maxLevel": 86,
-        "chance": 0.25
-      },
-      {
-        "pokemonId": 49,
-        "minLevel": 80,
-        "maxLevel": 86,
-        "chance": 0.25
+        "chance": 0.35
       },
       {
         "pokemonId": 47,
         "minLevel": 82,
         "maxLevel": 88,
-        "chance": 0.2
+        "chance": 0.25
       },
       {
         "pokemonId": 251,
@@ -1235,23 +1146,6 @@ export const johtoRoutes = [
     ]
   },
   {
-    "name": "Diglett Cave",
-    "spawns": [
-      {
-        "pokemonId": 50,
-        "minLevel": 82,
-        "maxLevel": 86,
-        "chance": 0.85
-      },
-      {
-        "pokemonId": 51,
-        "minLevel": 86,
-        "maxLevel": 90,
-        "chance": 0.15
-      }
-    ]
-  },
-  {
     "name": "Route 8",
     "spawns": [
       {
@@ -1319,40 +1213,28 @@ export const johtoRoutes = [
     "name": "Johto Safari Zone",
     "spawns": [
       {
-        "pokemonId": 203,
-        "minLevel": 85,
-        "maxLevel": 89,
-        "chance": 0.1
-      },
-      {
-        "pokemonId": 114,
-        "minLevel": 85,
-        "maxLevel": 89,
-        "chance": 0.1
-      },
-      {
         "pokemonId": 33,
         "minLevel": 86,
         "maxLevel": 90,
-        "chance": 0.1
+        "chance": 0.15
       },
       {
         "pokemonId": 30,
         "minLevel": 86,
         "maxLevel": 90,
-        "chance": 0.1
+        "chance": 0.15
       },
       {
         "pokemonId": 111,
         "minLevel": 87,
         "maxLevel": 90,
-        "chance": 0.1
+        "chance": 0.15
       },
       {
         "pokemonId": 115,
         "minLevel": 87,
         "maxLevel": 91,
-        "chance": 0.1
+        "chance": 0.15
       },
       {
         "pokemonId": 198,
@@ -1457,17 +1339,42 @@ export const johtoRoutes = [
     ]
   },
   {
-    "name": "Fossil Revival Lab",
+    "name": "Fossil Revival",
     "spawns": [
-      { "pokemonId": 138, "minLevel": 78, "maxLevel": 86, "chance": 0.2 },
-      { "pokemonId": 140, "minLevel": 78, "maxLevel": 86, "chance": 0.2 },
-      { "pokemonId": 142, "minLevel": 82, "maxLevel": 90, "chance": 0.2 },
-      { "pokemonId": 139, "minLevel": 80, "maxLevel": 88, "chance": 0.2 },
-      { "pokemonId": 141, "minLevel": 80, "maxLevel": 88, "chance": 0.2 }
-]
+      {
+        "pokemonId": 138,
+        "minLevel": 91,
+        "maxLevel": 93,
+        "chance": 0.3
+      },
+      {
+        "pokemonId": 140,
+        "minLevel": 91,
+        "maxLevel": 93,
+        "chance": 0.3
+      },
+      {
+        "pokemonId": 142,
+        "minLevel": 94,
+        "maxLevel": 95,
+        "chance": 0.1
+      },
+      {
+        "pokemonId": 139,
+        "minLevel": 92,
+        "maxLevel": 94,
+        "chance": 0.15
+      },
+      {
+        "pokemonId": 141,
+        "minLevel": 92,
+        "maxLevel": 94,
+        "chance": 0.15
+      }
+    ]
   },
   {
-    "name": "Pokemon Mansion",
+    "name": "Pok\u00e9mon Mansion",
     "spawns": [
       {
         "pokemonId": 109,
@@ -1801,7 +1708,7 @@ export const johtoRoutes = [
     ]
   },
   {
-    "name": "Mount Silver Apex",
+    "name": "Nebula Fissure",
     "spawns": [
       {
         "pokemonId": 243,
@@ -1825,13 +1732,13 @@ export const johtoRoutes = [
         "pokemonId": 151,
         "minLevel": 110,
         "maxLevel": 110,
-        "chance": 0.2
+        "chance": 0.13333333333333333
       },
       {
         "pokemonId": 150,
         "minLevel": 110,
         "maxLevel": 110,
-        "chance": 0.2
+        "chance": 0.13333333333333333
       },
       {
         "pokemonId": 251,
@@ -1841,49 +1748,11 @@ export const johtoRoutes = [
       }
     ]
   }
-,
-  {
-    "name": "Trade With Friends Hub",
-    "spawns": [
-      { "pokemonId": 65, "minLevel": 93, "maxLevel": 97, "chance": 0.25 },
-      { "pokemonId": 68, "minLevel": 93, "maxLevel": 97, "chance": 0.25 },
-      { "pokemonId": 76, "minLevel": 93, "maxLevel": 97, "chance": 0.25 },
-      { "pokemonId": 94, "minLevel": 93, "maxLevel": 97, "chance": 0.25 }
-    ]
-  },
-  {
-    "name": "Kanto Safari Zone",
-    "spawns": [
-      { "pokemonId": 186, "minLevel": 83, "maxLevel": 86, "chance": 0.125 },
-      { "pokemonId": 57, "minLevel": 84, "maxLevel": 87, "chance": 0.125 },
-      { "pokemonId": 224, "minLevel": 83, "maxLevel": 86, "chance": 0.125 },
-      { "pokemonId": 112, "minLevel": 86, "maxLevel": 89, "chance": 0.125 },
-      { "pokemonId": 71, "minLevel": 84, "maxLevel": 87, "chance": 0.125 },
-      { "pokemonId": 36, "minLevel": 83, "maxLevel": 86, "chance": 0.125 },
-      { "pokemonId": 40, "minLevel": 84, "maxLevel": 87, "chance": 0.125 },
-      { "pokemonId": 91, "minLevel": 86, "maxLevel": 89, "chance": 0.125 }
-    ]
-  },
-  {
-    "name": "Victory Road",
-    "spawns": [
-      { "pokemonId": 26, "minLevel": 95, "maxLevel": 99, "chance": 0.1 },
-      { "pokemonId": 31, "minLevel": 96, "maxLevel": 100, "chance": 0.1 },
-      { "pokemonId": 34, "minLevel": 96, "maxLevel": 100, "chance": 0.1 },
-      { "pokemonId": 59, "minLevel": 96, "maxLevel": 100, "chance": 0.1 },
-      { "pokemonId": 112, "minLevel": 96, "maxLevel": 100, "chance": 0.1 },
-      { "pokemonId": 57, "minLevel": 95, "maxLevel": 99, "chance": 0.1 },
-      { "pokemonId": 210, "minLevel": 94, "maxLevel": 98, "chance": 0.1 },
-      { "pokemonId": 178, "minLevel": 94, "maxLevel": 98, "chance": 0.1 },
-      { "pokemonId": 82, "minLevel": 95, "maxLevel": 99, "chance": 0.1 },
-      { "pokemonId": 89, "minLevel": 94, "maxLevel": 98, "chance": 0.1 }
-    ]
-  }
 ];
 
 export const johtoUnlocks = [
   {
-    "challengeName": "Challenge 01",
+    "challengeName": "Challenge 1",
     "areaId": "Route 29",
     "unlocks": [
       "Route 30"
@@ -1896,7 +1765,7 @@ export const johtoUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 02",
+    "challengeName": "Challenge 2",
     "areaId": "Route 30",
     "unlocks": [
       "Route 31"
@@ -1915,7 +1784,7 @@ export const johtoUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 03",
+    "challengeName": "Challenge 3",
     "areaId": "Route 31",
     "unlocks": [
       "Violet Gym"
@@ -1928,7 +1797,7 @@ export const johtoUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 04",
+    "challengeName": "Challenge 4",
     "areaId": "Violet Gym",
     "unlocks": [
       "Route 32"
@@ -1942,7 +1811,7 @@ export const johtoUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 05",
+    "challengeName": "Challenge 5",
     "areaId": "Route 32",
     "unlocks": [
       "Tiny Fishing Spot"
@@ -1961,7 +1830,7 @@ export const johtoUnlocks = [
     ]
   },
   {
-    "challengeName": "Challenge 06",
+    "challengeName": "Challenge 6",
     "areaId": "Tiny Fishing Spot",
     "unlocks": [
       "Route 33"
@@ -1974,7 +1843,7 @@ export const johtoUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 07",
+    "challengeName": "Challenge 7",
     "areaId": "Route 33",
     "unlocks": [
       "Ruins of Alph"
@@ -1989,7 +1858,7 @@ export const johtoUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 08",
+    "challengeName": "Challenge 8",
     "areaId": "Ruins of Alph",
     "unlocks": [
       "Azalea Gym"
@@ -2008,7 +1877,7 @@ export const johtoUnlocks = [
     ]
   },
   {
-    "challengeName": "Challenge 09",
+    "challengeName": "Challenge 9",
     "areaId": "Azalea Gym",
     "unlocks": [
       "Ilex Forest"
@@ -2457,7 +2326,7 @@ export const johtoUnlocks = [
     ]
   },
   {
-    "challengeName": "Challenge 35",
+    "challengeName": "Johto Final Challenge",
     "areaId": "Pokemon League",
     "unlocks": [
       "Viridian Forest"
@@ -2473,10 +2342,11 @@ export const johtoUnlocks = [
     ]
   },
   {
-    "challengeName": "Challenge 36",
+    "challengeName": "Challenge 35",
     "areaId": "Viridian Forest",
     "unlocks": [
-      "Pewter Gym"
+      "Pewter Gym",
+      "Fossil Revival"
     ],
     "requirements": {
       "catchSpecies": [
@@ -2488,11 +2358,10 @@ export const johtoUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 37",
+    "challengeName": "Challenge 36",
     "areaId": "Pewter Gym",
     "unlocks": [
-      "Mount Moon",
-      "Fossil Revival Lab"
+      "Mount Moon"
     ],
     "requirements": {
       "earnBadge": {
@@ -2503,7 +2372,7 @@ export const johtoUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 38",
+    "challengeName": "Challenge 37",
     "areaId": "Mount Moon",
     "unlocks": [
       "Cerulean Gym",
@@ -2519,7 +2388,7 @@ export const johtoUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 39",
+    "challengeName": "Challenge 38",
     "areaId": "Cerulean Gym",
     "unlocks": [
       "Vermilion Gym"
@@ -2533,11 +2402,10 @@ export const johtoUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 40",
+    "challengeName": "Challenge 39",
     "areaId": "Vermilion Gym",
     "unlocks": [
-      "Route 8",
-      "Diglett Cave"
+      "Route 8"
     ],
     "requirements": {
       "earnBadge": {
@@ -2548,11 +2416,10 @@ export const johtoUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 41",
+    "challengeName": "Challenge 40",
     "areaId": "Route 8",
     "unlocks": [
       "Celadon Gym",
-      "Celadon Casino",
       "Celadon Casino Starter Troupe"
     ],
     "requirements": {
@@ -2563,7 +2430,7 @@ export const johtoUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 42",
+    "challengeName": "Challenge 41",
     "areaId": "Celadon Gym",
     "unlocks": [
       "Saffron Gym"
@@ -2577,7 +2444,7 @@ export const johtoUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 43",
+    "challengeName": "Challenge 42",
     "areaId": "Saffron Gym",
     "unlocks": [
       "Route 12"
@@ -2591,11 +2458,11 @@ export const johtoUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 44",
+    "challengeName": "Challenge 43",
     "areaId": "Route 12",
     "unlocks": [
-      "Fuchsia Gym",
-      "Kanto Safari Zone"
+      "Fuschia Gym",
+      "Johto Safari Zone"
     ],
     "requirements": {
       "catchSpecies": [
@@ -2607,8 +2474,8 @@ export const johtoUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 45",
-    "areaId": "Fuchsia Gym",
+    "challengeName": "Challenge 44",
+    "areaId": "Fuschia Gym",
     "unlocks": [
       "Cycling Road",
       "Sea Routes"
@@ -2622,11 +2489,11 @@ export const johtoUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 46",
+    "challengeName": "Challenge 45",
     "areaId": "Sea Routes",
     "unlocks": [
       "Cinnabar Gym",
-      "Pokemon Mansion"
+      "Pokemansion"
     ],
     "requirements": {
       "defeatCountRoute": {
@@ -2636,12 +2503,11 @@ export const johtoUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 47",
+    "challengeName": "Challenge 46",
     "areaId": "Cinnabar Gym",
     "unlocks": [
       "Viridian Gym",
-      "Trade With Friends Hub",
-      "Battle Stadium"
+      "Trade With Friends Hub"
     ],
     "requirements": {
       "earnBadge": {
@@ -2652,10 +2518,10 @@ export const johtoUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 48",
+    "challengeName": "Challenge 47",
     "areaId": "Viridian Gym",
     "unlocks": [
-      "Victory Road"
+      "Red"
     ],
     "requirements": {
       "earnBadge": {
@@ -2672,22 +2538,7 @@ export const johtoUnlocks = [
     ]
   },
   {
-    "challengeName": "Challenge 49",
-    "areaId": "Victory Road",
-    "unlocks": [
-      "Red"
-    ],
-    "requirements": {
-      "catchSpeciesAnyOf": [
-        {
-          "species": ["Nidoking", "Nidoqueen"],
-          "count": 1
-        }
-      ]
-    }
-  },
-  {
-    "challengeName": "Challenge 50",
+    "challengeName": "Final Challenge",
     "areaId": "Red",
     "unlocks": [
       "Travel to a new Region"
@@ -2697,7 +2548,7 @@ export const johtoUnlocks = [
     }
   },
   {
-    "challengeName": "Johto Extra Challenge 01",
+    "challengeName": "Johto Extra Challenge 1",
     "areaId": "Goldenrod Game Corner",
     "unlocks": [
       "Team Rocket HQ"
@@ -2716,7 +2567,7 @@ export const johtoUnlocks = [
     ]
   },
   {
-    "challengeName": "Johto Extra Challenge 02",
+    "challengeName": "Johto Extra Challenge 2",
     "areaId": "Team Rocket HQ",
     "unlocks": [
       "Lake of Rage"
@@ -2735,7 +2586,7 @@ export const johtoUnlocks = [
     ]
   },
   {
-    "challengeName": "Johto Extra Challenge 03",
+    "challengeName": "Johto Extra Challenge 3",
     "areaId": "Lake of Rage",
     "unlocks": [
       "Mount Silver"
@@ -2756,7 +2607,7 @@ export const johtoUnlocks = [
     ]
   },
   {
-    "challengeName": "Johto Extra Challenge 04",
+    "challengeName": "Johto Extra Challenge 4",
     "areaId": "Mount Silver",
     "unlocks": [
       "Ilex Forest 2"
@@ -2781,10 +2632,10 @@ export const johtoUnlocks = [
     ]
   },
   {
-    "challengeName": "Johto Extra Challenge 05",
+    "challengeName": "Johto Extra Challenge 5",
     "areaId": "Ilex Forest 2",
     "unlocks": [
-      "Key to Mount Silver Apex Challenge"
+      "Nebula Fissure"
     ],
     "requirements": {
       "catchSpecies": [
@@ -2803,9 +2654,9 @@ export const johtoUnlocks = [
   },
   {
     "challengeName": "Extra Challenge (Roaming)",
-    "areaId": "Extra Challenge (Roaming)",
+    "areaId": "Roaming",
     "unlocks": [
-      "Key to Mount Silver Apex Challenge"
+      "Nebula Fissure"
     ],
     "requirements": {
       "defeatMultipleSpecific": [
@@ -2831,7 +2682,7 @@ export const johtoUnlocks = [
     ]
   },
   {
-    "challengeName": "Kanto Extra Challenge 01",
+    "challengeName": "Kanto Extra Challenge 1",
     "areaId": "Celadon Casino Starter Troupe",
     "unlocks": [
       "Celadon Casino Babies"
@@ -2880,7 +2731,7 @@ export const johtoUnlocks = [
     ]
   },
   {
-    "challengeName": "Kanto Extra Challenge 02",
+    "challengeName": "Kanto Extra Challenge 2",
     "areaId": "Celadon Casino Babies",
     "unlocks": [
       "Celadon Casino Special Spot"
@@ -2901,7 +2752,7 @@ export const johtoUnlocks = [
     ]
   },
   {
-    "challengeName": "Kanto Extra Challenge 03",
+    "challengeName": "Kanto Extra Challenge 3",
     "areaId": "Celadon Casino Special Spot",
     "unlocks": [
       "Celadon Casino Eeveelutions",
@@ -2923,7 +2774,7 @@ export const johtoUnlocks = [
     ]
   },
   {
-    "challengeName": "Kanto Extra Challenge 04",
+    "challengeName": "Kanto Extra Challenge 4",
     "areaId": "Dojo",
     "unlocks": [
       "Celadon Casino Late Troupe"
@@ -2952,7 +2803,7 @@ export const johtoUnlocks = [
     ]
   },
   {
-    "challengeName": "Kanto Extra Challenge 05",
+    "challengeName": "Kanto Extra Challenge 5",
     "areaId": "Celadon Casino Late Troupe",
     "unlocks": [
       "Legendaries Nest"
@@ -2993,10 +2844,10 @@ export const johtoUnlocks = [
     ]
   },
   {
-    "challengeName": "Kanto Extra Challenge 06",
+    "challengeName": "Kanto Extra Challenge 6",
     "areaId": "Legendaries Nest",
     "unlocks": [
-      "Key to Mount Silver Apex Challenge"
+      "Nebula Fissure"
     ],
     "requirements": {
       "catchSpecies": [
@@ -3012,39 +2863,6 @@ export const johtoUnlocks = [
           "species": "Moltres",
           "count": 1
         }
-      ]
-    },
-    "gifts": [
-      {
-        "item": "Masterball",
-        "count": 2
-      }
-    ]
-  },
-  {
-    "challengeName": "Key to Mount Silver Apex Challenge",
-    "areaId": "Key to Mount Silver Apex Challenge",
-    "unlocks": [
-      "Mount Silver Apex"
-    ],
-    "requirements": {
-      "completeChallenges": [
-        "Kanto Extra Challenge 06",
-        "Johto Extra Challenge 05",
-        "Extra Challenge (Roaming)"
-      ]
-    }
-  },
-  {
-    "challengeName": "Mount Silver Apex Challenge",
-    "areaId": "Mount Silver Apex",
-    "requirements": {
-      "catchSpecies": [
-        { "species": "Raikou", "count": 1 },
-        { "species": "Entei", "count": 1 },
-        { "species": "Suicune", "count": 1 },
-        { "species": "Mew", "count": 1 },
-        { "species": "Mewtwo", "count": 1 }
       ]
     },
     "gifts": [
