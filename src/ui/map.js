@@ -567,6 +567,10 @@ window.closeMapInnerModal = function() {
         const content = document.getElementById('map-inner-modal-content');
         if (content) content.innerHTML = '';
     }
+
+    if (globals.battleSystem && globals.battleSystem.gymState && globals.battleSystem.gymState.isActive) {
+        globals.battleSystem.stopGymBattle();
+    }
 };
 
 export function navigateToLocation(locationName) {
@@ -911,7 +915,7 @@ export function navigateToLocation(locationName) {
         vGym.appendChild(uiContainer);
 
         if (gymConfig && contentArea) {
-            let buttonText = lookupName.includes("Pokemon League") ? "Challenge" : "Enter Gym";
+            let buttonText = "Enter";
             const btn = document.createElement('button');
             btn.className = "action-btn action-btn-primary";
             btn.style.marginTop = "10px";

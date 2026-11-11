@@ -1,0 +1,12 @@
+--- src/battleSystem.js
++++ src/battleSystem.js
+@@ -659,6 +659,11 @@
+
+         // Update gym UI specifically to show current trainer
+         this.updateGymUI();
++
++        // Immediately start the next battle upon entering
++        if (window.battleEngine && window.battleEngine.startNextGymBattle) {
++            window.battleEngine.startNextGymBattle();
++        }
+     }
