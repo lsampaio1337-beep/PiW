@@ -1101,15 +1101,23 @@ class BattleSystem {
 
             // Check if Roaming challenge is active for the 1% beast spawn
             // Must not be in an active gym/league battle
-            if (!this.gymState?.isActive && this.state.stats.activeChallenges && (this.state.stats.activeChallenges.includes("Extra Challenge (Roaming)") || this.state.stats.activeChallenges.includes("Roaming Hoenn Skies"))) {
-                const randomVal = typeof crypto !== 'undefined' ? (crypto.getRandomValues(new Uint32Array(1))[0] / (0xFFFFFFFF + 1)) : Math.random();
-                if (randomVal < 0.01) {
-                    isRoamingEncounter = true;
+            let activeRoamingChallenge = null;
+            if (!this.gymState?.isActive && this.state.stats.activeChallenges) {
+                if (this.state.stats.activeChallenges.includes("Extra Challenge (Roaming)")) activeRoamingChallenge = "Extra Challenge (Roaming)";
+                else if (this.state.stats.activeChallenges.includes("Roaming Hoenn Skies")) activeRoamingChallenge = "Roaming Hoenn Skies";
+                else if (this.state.stats.activeChallenges.includes("Extra Challenge F (Roaming)") && ["Path to Sea Spirit Den", "Sea Spirit Den Outer Depths", "Sea Spirit Den Entrance", "Sea Spirit Den Tunnels"].includes(this.state.currentRoute)) activeRoamingChallenge = "Extra Challenge F (Roaming)";
+                else if (this.state.stats.activeChallenges.includes("Extra Challenge G (Roaming)") && ["Path to Secret Chambers", "Chambers of Emptiness", "Underground Chambers"].includes(this.state.currentRoute)) activeRoamingChallenge = "Extra Challenge G (Roaming)";
+
+                if (activeRoamingChallenge) {
+                    const randomVal = typeof crypto !== 'undefined' ? (crypto.getRandomValues(new Uint32Array(1))[0] / (0xFFFFFFFF + 1)) : Math.random();
+                    if (randomVal < 0.01) {
+                        isRoamingEncounter = true;
+                    }
                 }
             }
 
             if (isRoamingEncounter) {
-                if (this.state.currentRegionName === 'Hoenn') {
+                if (activeRoamingChallenge === 'Roaming Hoenn Skies' || (this.state.currentRegionName === 'Hoenn' && activeRoamingChallenge === 'Extra Challenge (Roaming)')) {
                     // Randomly select Latias (380) or Latios (381) for Hoenn
                     const beasts = [380, 381];
                     const selectedBeastId = beasts[Math.floor(Math.random() * beasts.length)];
@@ -1117,6 +1125,18 @@ class BattleSystem {
                     pokemonBase = actualPokemonBase;
 
                     // Flat level 110 for Hoenn roaming encounters
+                    level = 110;
+                } else if (activeRoamingChallenge === 'Extra Challenge F (Roaming)') {
+                    const beasts = [144, 145, 146]; // Articuno, Zapdos, Moltres
+                    const selectedBeastId = beasts[Math.floor(Math.random() * beasts.length)];
+                    actualPokemonBase = this.getPokemonBase(selectedBeastId);
+                    pokemonBase = actualPokemonBase;
+                    level = 110;
+                } else if (activeRoamingChallenge === 'Extra Challenge G (Roaming)') {
+                    const beasts = [721, 719, 720]; // Volcanion, Diancie, Hoopa
+                    const selectedBeastId = beasts[Math.floor(Math.random() * beasts.length)];
+                    actualPokemonBase = this.getPokemonBase(selectedBeastId);
+                    pokemonBase = actualPokemonBase;
                     level = 110;
                 } else {
                     // Default/Johto: Randomly select Raikou (243), Entei (244), or Suicune (245)
