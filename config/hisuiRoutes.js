@@ -46,106 +46,106 @@ export const hisuiRoutes = {
   "Bonechill Wastes (Alabaster Icelands)": {
     "pokes": [
       {
-        "id": 92,
-        "minLevel": 21,
-        "maxLevel": 24,
-        "probability": 0.0793
-      },
-      {
-        "id": 93,
-        "minLevel": 43,
-        "maxLevel": 56,
-        "probability": 0.0594
+        "id": 460,
+        "minLevel": 49,
+        "maxLevel": 52,
+        "probability": 0.019801980198019802
       },
       {
         "id": 190,
         "minLevel": 43,
         "maxLevel": 46,
-        "probability": 0.0693
-      },
-      {
-        "id": 220,
-        "minLevel": 29,
-        "maxLevel": 32,
-        "probability": 0.099
-      },
-      {
-        "id": 221,
-        "minLevel": 43,
-        "maxLevel": 46,
-        "probability": 0.0297
-      },
-      {
-        "id": 361,
-        "minLevel": 38,
-        "maxLevel": 41,
-        "probability": 0.0792
-      },
-      {
-        "id": 362,
-        "minLevel": 43,
-        "maxLevel": 56,
-        "probability": 0.0594
-      },
-      {
-        "id": 412,
-        "minLevel": 16,
-        "maxLevel": 19,
-        "probability": 0.1089
-      },
-      {
-        "id": 413,
-        "minLevel": 43,
-        "maxLevel": 46,
-        "probability": 0.0297
-      },
-      {
-        "id": 425,
-        "minLevel": 24,
-        "maxLevel": 27,
-        "probability": 0.0693
-      },
-      {
-        "id": 426,
-        "minLevel": 49,
-        "maxLevel": 52,
-        "probability": 0.0198
-      },
-      {
-        "id": 427,
-        "minLevel": 43,
-        "maxLevel": 46,
-        "probability": 0.0693
-      },
-      {
-        "id": 428,
-        "minLevel": 43,
-        "maxLevel": 46,
-        "probability": 0.0297
-      },
-      {
-        "id": 459,
-        "minLevel": 36,
-        "maxLevel": 39,
-        "probability": 0.0693
-      },
-      {
-        "id": 460,
-        "minLevel": 49,
-        "maxLevel": 52,
-        "probability": 0.0198
-      },
-      {
-        "id": 478,
-        "minLevel": 53,
-        "maxLevel": 56,
-        "probability": 0.0297
+        "probability": 0.06930693069306931
       },
       {
         "id": 712,
         "minLevel": 33,
         "maxLevel": 36,
-        "probability": 0.0792
+        "probability": 0.07920792079207921
+      },
+      {
+        "id": 427,
+        "minLevel": 43,
+        "maxLevel": 46,
+        "probability": 0.06930693069306931
+      },
+      {
+        "id": 412,
+        "minLevel": 16,
+        "maxLevel": 19,
+        "probability": 0.10891089108910891
+      },
+      {
+        "id": 426,
+        "minLevel": 49,
+        "maxLevel": 52,
+        "probability": 0.019801980198019802
+      },
+      {
+        "id": 425,
+        "minLevel": 24,
+        "maxLevel": 27,
+        "probability": 0.06930693069306931
+      },
+      {
+        "id": 478,
+        "minLevel": 53,
+        "maxLevel": 56,
+        "probability": 0.0297029702970297
+      },
+      {
+        "id": 92,
+        "minLevel": 21,
+        "maxLevel": 24,
+        "probability": 0.07920792079207921
+      },
+      {
+        "id": 362,
+        "minLevel": 43,
+        "maxLevel": 56,
+        "probability": 0.0594059405940594
+      },
+      {
+        "id": 93,
+        "minLevel": 43,
+        "maxLevel": 56,
+        "probability": 0.0594059405940594
+      },
+      {
+        "id": 428,
+        "minLevel": 43,
+        "maxLevel": 46,
+        "probability": 0.0297029702970297
+      },
+      {
+        "id": 221,
+        "minLevel": 43,
+        "maxLevel": 46,
+        "probability": 0.0297029702970297
+      },
+      {
+        "id": 361,
+        "minLevel": 38,
+        "maxLevel": 41,
+        "probability": 0.07920792079207921
+      },
+      {
+        "id": 459,
+        "minLevel": 36,
+        "maxLevel": 39,
+        "probability": 0.06930693069306931
+      },
+      {
+        "id": 220,
+        "minLevel": 29,
+        "maxLevel": 32,
+        "probability": 0.09900990099009901
+      },
+      {
+        "id": 413,
+        "minLevel": 43,
+        "maxLevel": 46,
+        "probability": 0.0297029702970297
       }
     ]
   },
@@ -460,236 +460,236 @@ export const hisuiRoutes = {
   "Avalanche Slopes (Alabaster Icelands)": {
     "pokes": [
       {
-        "id": 108,
-        "minLevel": 59,
-        "maxLevel": 62,
-        "probability": 0.062
-      },
-      {
-        "id": 113,
-        "minLevel": 59,
-        "maxLevel": 62,
-        "probability": 0.0206
-      },
-      {
         "id": 190,
         "minLevel": 50,
         "maxLevel": 62,
-        "probability": 0.1237
-      },
-      {
-        "id": 220,
-        "minLevel": 29,
-        "maxLevel": 32,
-        "probability": 0.0825
-      },
-      {
-        "id": 221,
-        "minLevel": 59,
-        "maxLevel": 62,
-        "probability": 0.0206
-      },
-      {
-        "id": 242,
-        "minLevel": 59,
-        "maxLevel": 62,
-        "probability": 0.0103
-      },
-      {
-        "id": 355,
-        "minLevel": 33,
-        "maxLevel": 52,
-        "probability": 0.1443
-      },
-      {
-        "id": 356,
-        "minLevel": 50,
-        "maxLevel": 62,
-        "probability": 0.0412
-      },
-      {
-        "id": 361,
-        "minLevel": 38,
-        "maxLevel": 41,
-        "probability": 0.0722
-      },
-      {
-        "id": 362,
-        "minLevel": 59,
-        "maxLevel": 62,
-        "probability": 0.0206
-      },
-      {
-        "id": 412,
-        "minLevel": 16,
-        "maxLevel": 19,
-        "probability": 0.0928
-      },
-      {
-        "id": 413,
-        "minLevel": 59,
-        "maxLevel": 62,
-        "probability": 0.0206
+        "probability": 0.12371134020618554
       },
       {
         "id": 424,
         "minLevel": 50,
         "maxLevel": 62,
-        "probability": 0.0412
+        "probability": 0.041237113402061855
       },
       {
-        "id": 440,
+        "id": 242,
         "minLevel": 59,
         "maxLevel": 62,
-        "probability": 0.1031
+        "probability": 0.010309278350515464
       },
       {
-        "id": 443,
-        "minLevel": 20,
-        "maxLevel": 23,
-        "probability": 0.0722
+        "id": 412,
+        "minLevel": 16,
+        "maxLevel": 19,
+        "probability": 0.09278350515463916
       },
       {
-        "id": 444,
-        "minLevel": 44,
-        "maxLevel": 47,
-        "probability": 0.0309
-      },
-      {
-        "id": 463,
+        "id": 113,
         "minLevel": 59,
         "maxLevel": 62,
-        "probability": 0.0206
+        "probability": 0.020618556701030927
+      },
+      {
+        "id": 356,
+        "minLevel": 50,
+        "maxLevel": 62,
+        "probability": 0.041237113402061855
+      },
+      {
+        "id": 355,
+        "minLevel": 33,
+        "maxLevel": 52,
+        "probability": 0.14432989690721648
       },
       {
         "id": 478,
         "minLevel": 59,
         "maxLevel": 62,
-        "probability": 0.0206
+        "probability": 0.020618556701030927
+      },
+      {
+        "id": 444,
+        "minLevel": 44,
+        "maxLevel": 47,
+        "probability": 0.030927835051546386
+      },
+      {
+        "id": 443,
+        "minLevel": 20,
+        "maxLevel": 23,
+        "probability": 0.07216494845360824
+      },
+      {
+        "id": 362,
+        "minLevel": 59,
+        "maxLevel": 62,
+        "probability": 0.020618556701030927
+      },
+      {
+        "id": 440,
+        "minLevel": 59,
+        "maxLevel": 62,
+        "probability": 0.10309278350515463
+      },
+      {
+        "id": 463,
+        "minLevel": 59,
+        "maxLevel": 62,
+        "probability": 0.020618556701030927
+      },
+      {
+        "id": 108,
+        "minLevel": 59,
+        "maxLevel": 62,
+        "probability": 0.06185567010309277
+      },
+      {
+        "id": 221,
+        "minLevel": 59,
+        "maxLevel": 62,
+        "probability": 0.020618556701030927
+      },
+      {
+        "id": 361,
+        "minLevel": 38,
+        "maxLevel": 41,
+        "probability": 0.07216494845360824
+      },
+      {
+        "id": 220,
+        "minLevel": 29,
+        "maxLevel": 32,
+        "probability": 0.08247422680412371
+      },
+      {
+        "id": 413,
+        "minLevel": 59,
+        "maxLevel": 62,
+        "probability": 0.020618556701030927
       }
     ]
   },
   "Arena's Approach (Alabaster Icelands)": {
     "pokes": [
       {
-        "id": 66,
-        "minLevel": 24,
-        "maxLevel": 27,
-        "probability": 0.0708
-      },
-      {
-        "id": 67,
-        "minLevel": 47,
-        "maxLevel": 50,
-        "probability": 0.0303
-      },
-      {
-        "id": 108,
-        "minLevel": 47,
-        "maxLevel": 50,
-        "probability": 0.0606
-      },
-      {
-        "id": 125,
-        "minLevel": 47,
-        "maxLevel": 50,
-        "probability": 0.0202
-      },
-      {
-        "id": 143,
-        "minLevel": 47,
-        "maxLevel": 50,
-        "probability": 0.0202
-      },
-      {
         "id": 190,
         "minLevel": 47,
         "maxLevel": 50,
-        "probability": 0.0606
-      },
-      {
-        "id": 207,
-        "minLevel": 47,
-        "maxLevel": 50,
-        "probability": 0.0505
-      },
-      {
-        "id": 239,
-        "minLevel": 26,
-        "maxLevel": 29,
-        "probability": 0.0606
-      },
-      {
-        "id": 355,
-        "minLevel": 33,
-        "maxLevel": 36,
-        "probability": 0.0707
-      },
-      {
-        "id": 356,
-        "minLevel": 47,
-        "maxLevel": 50,
-        "probability": 0.0202
-      },
-      {
-        "id": 361,
-        "minLevel": 38,
-        "maxLevel": 41,
-        "probability": 0.0707
-      },
-      {
-        "id": 362,
-        "minLevel": 47,
-        "maxLevel": 50,
-        "probability": 0.0202
-      },
-      {
-        "id": 412,
-        "minLevel": 16,
-        "maxLevel": 19,
-        "probability": 0.101
-      },
-      {
-        "id": 413,
-        "minLevel": 47,
-        "maxLevel": 50,
-        "probability": 0.0303
-      },
-      {
-        "id": 427,
-        "minLevel": 47,
-        "maxLevel": 50,
-        "probability": 0.0606
-      },
-      {
-        "id": 428,
-        "minLevel": 47,
-        "maxLevel": 50,
-        "probability": 0.0202
-      },
-      {
-        "id": 446,
-        "minLevel": 47,
-        "maxLevel": 50,
-        "probability": 0.0606
-      },
-      {
-        "id": 447,
-        "minLevel": 47,
-        "maxLevel": 50,
-        "probability": 0.0808
-      },
-      {
-        "id": 448,
-        "minLevel": 47,
-        "maxLevel": 50,
-        "probability": 0.0202
+        "probability": 0.060606060606060594
       },
       {
         "id": 712,
         "minLevel": 33,
         "maxLevel": 36,
-        "probability": 0.0707
+        "probability": 0.0707070707070707
+      },
+      {
+        "id": 427,
+        "minLevel": 47,
+        "maxLevel": 50,
+        "probability": 0.060606060606060594
+      },
+      {
+        "id": 412,
+        "minLevel": 16,
+        "maxLevel": 19,
+        "probability": 0.101010101010101
+      },
+      {
+        "id": 356,
+        "minLevel": 47,
+        "maxLevel": 50,
+        "probability": 0.0202020202020202
+      },
+      {
+        "id": 355,
+        "minLevel": 33,
+        "maxLevel": 36,
+        "probability": 0.0707070707070707
+      },
+      {
+        "id": 125,
+        "minLevel": 47,
+        "maxLevel": 50,
+        "probability": 0.0202020202020202
+      },
+      {
+        "id": 239,
+        "minLevel": 26,
+        "maxLevel": 29,
+        "probability": 0.060606060606060594
+      },
+      {
+        "id": 362,
+        "minLevel": 47,
+        "maxLevel": 50,
+        "probability": 0.0202020202020202
+      },
+      {
+        "id": 207,
+        "minLevel": 47,
+        "maxLevel": 50,
+        "probability": 0.0505050505050505
+      },
+      {
+        "id": 108,
+        "minLevel": 47,
+        "maxLevel": 50,
+        "probability": 0.060606060606060594
+      },
+      {
+        "id": 428,
+        "minLevel": 47,
+        "maxLevel": 50,
+        "probability": 0.0202020202020202
+      },
+      {
+        "id": 448,
+        "minLevel": 47,
+        "maxLevel": 50,
+        "probability": 0.0202020202020202
+      },
+      {
+        "id": 67,
+        "minLevel": 47,
+        "maxLevel": 50,
+        "probability": 0.030303030303030297
+      },
+      {
+        "id": 66,
+        "minLevel": 24,
+        "maxLevel": 27,
+        "probability": 0.0707070707070707
+      },
+      {
+        "id": 446,
+        "minLevel": 47,
+        "maxLevel": 50,
+        "probability": 0.060606060606060594
+      },
+      {
+        "id": 447,
+        "minLevel": 47,
+        "maxLevel": 50,
+        "probability": 0.0808080808080808
+      },
+      {
+        "id": 143,
+        "minLevel": 47,
+        "maxLevel": 50,
+        "probability": 0.0202020202020202
+      },
+      {
+        "id": 361,
+        "minLevel": 38,
+        "maxLevel": 41,
+        "probability": 0.0707070707070707
+      },
+      {
+        "id": 413,
+        "minLevel": 47,
+        "maxLevel": 50,
+        "probability": 0.030303030303030297
       }
     ]
   },
@@ -718,25 +718,7 @@ export const hisuiRoutes = {
         "probability": 0.16
       },
       {
-        "id": 280,
-        "minLevel": 16,
-        "maxLevel": 19,
-        "probability": 0.15
-      },
-      {
-        "id": 281,
-        "minLevel": 26,
-        "maxLevel": 29,
-        "probability": 0.05
-      },
-      {
-        "id": 361,
-        "minLevel": 38,
-        "maxLevel": 41,
-        "probability": 0.1
-      },
-      {
-        "id": 362,
+        "id": 424,
         "minLevel": 53,
         "maxLevel": 56,
         "probability": 0.03
@@ -748,14 +730,8 @@ export const hisuiRoutes = {
         "probability": 0.14
       },
       {
-        "id": 413,
-        "minLevel": 53,
-        "maxLevel": 56,
-        "probability": 0.04
-      },
-      {
-        "id": 424,
-        "minLevel": 53,
+        "id": 426,
+        "minLevel": 49,
         "maxLevel": 56,
         "probability": 0.03
       },
@@ -766,16 +742,40 @@ export const hisuiRoutes = {
         "probability": 0.18
       },
       {
-        "id": 426,
-        "minLevel": 49,
+        "id": 362,
+        "minLevel": 53,
         "maxLevel": 56,
         "probability": 0.03
+      },
+      {
+        "id": 281,
+        "minLevel": 26,
+        "maxLevel": 29,
+        "probability": 0.05
+      },
+      {
+        "id": 280,
+        "minLevel": 16,
+        "maxLevel": 19,
+        "probability": 0.15
       },
       {
         "id": 627,
         "minLevel": 50,
         "maxLevel": 53,
         "probability": 0.09
+      },
+      {
+        "id": 361,
+        "minLevel": 38,
+        "maxLevel": 41,
+        "probability": 0.1
+      },
+      {
+        "id": 413,
+        "minLevel": 53,
+        "maxLevel": 56,
+        "probability": 0.04
       }
     ]
   },
@@ -798,28 +798,16 @@ export const hisuiRoutes = {
   "Icepeak Cavern (Alabaster Icelands)": {
     "pokes": [
       {
-        "id": 200,
+        "id": 571,
         "minLevel": 49,
         "maxLevel": 52,
-        "probability": 0.24
+        "probability": 0.2380952380952381
       },
       {
         "id": 570,
         "minLevel": 26,
         "maxLevel": 29,
-        "probability": 0.32
-      },
-      {
-        "id": 571,
-        "minLevel": 49,
-        "maxLevel": 52,
-        "probability": 0.1
-      },
-      {
-        "id": 712,
-        "minLevel": 33,
-        "maxLevel": 36,
-        "probability": 0.34
+        "probability": 0.7619047619047619
       }
     ]
   },
@@ -900,139 +888,169 @@ export const hisuiRoutes = {
   "Crossing Slope (Cobalt Coastlands)": {
     "pokes": [
       {
-        "id": 74,
-        "minLevel": 21,
-        "maxLevel": 24,
-        "probability": 0.091
-      },
-      {
-        "id": 75,
-        "minLevel": 27,
-        "maxLevel": 30,
-        "probability": 0.0909
-      },
-      {
-        "id": 198,
-        "minLevel": 27,
-        "maxLevel": 30,
-        "probability": 0.0909
-      },
-      {
-        "id": 396,
-        "minLevel": 10,
-        "maxLevel": 13,
-        "probability": 0.0909
-      },
-      {
-        "id": 397,
-        "minLevel": 27,
-        "maxLevel": 30,
-        "probability": 0.0909
-      },
-      {
         "id": 412,
         "minLevel": 16,
         "maxLevel": 19,
-        "probability": 0.0909
-      },
-      {
-        "id": 413,
-        "minLevel": 27,
-        "maxLevel": 30,
-        "probability": 0.0909
-      },
-      {
-        "id": 425,
-        "minLevel": 24,
-        "maxLevel": 27,
-        "probability": 0.0909
+        "probability": 0.09090909090909093
       },
       {
         "id": 426,
         "minLevel": 28,
         "maxLevel": 31,
-        "probability": 0.0909
+        "probability": 0.09090909090909093
+      },
+      {
+        "id": 425,
+        "minLevel": 24,
+        "maxLevel": 27,
+        "probability": 0.09090909090909093
+      },
+      {
+        "id": 74,
+        "minLevel": 21,
+        "maxLevel": 24,
+        "probability": 0.09090909090909093
       },
       {
         "id": 431,
         "minLevel": 27,
         "maxLevel": 30,
-        "probability": 0.0909
+        "probability": 0.09090909090909093
+      },
+      {
+        "id": 75,
+        "minLevel": 27,
+        "maxLevel": 30,
+        "probability": 0.09090909090909093
+      },
+      {
+        "id": 198,
+        "minLevel": 27,
+        "maxLevel": 30,
+        "probability": 0.09090909090909093
       },
       {
         "id": 432,
         "minLevel": 38,
         "maxLevel": 41,
-        "probability": 0.0909
+        "probability": 0.09090909090909093
+      },
+      {
+        "id": 397,
+        "minLevel": 27,
+        "maxLevel": 30,
+        "probability": 0.09090909090909093
+      },
+      {
+        "id": 396,
+        "minLevel": 10,
+        "maxLevel": 13,
+        "probability": 0.09090909090909093
+      },
+      {
+        "id": 413,
+        "minLevel": 27,
+        "maxLevel": 30,
+        "probability": 0.09090909090909093
       }
     ]
   },
   "Ginkgo Landing (Cobalt Coastlands)": {
     "pokes": [
       {
-        "id": 74,
-        "minLevel": 21,
-        "maxLevel": 24,
-        "probability": 0.1288
-      },
-      {
-        "id": 75,
-        "minLevel": 27,
-        "maxLevel": 34,
-        "probability": 0.0495
-      },
-      {
-        "id": 198,
-        "minLevel": 27,
-        "maxLevel": 30,
-        "probability": 0.0891
-      },
-      {
-        "id": 363,
-        "minLevel": 27,
-        "maxLevel": 30,
-        "probability": 0.1287
+        "id": 418,
+        "minLevel": 22,
+        "maxLevel": 25,
+        "probability": 0.1188118811881188
       },
       {
         "id": 412,
         "minLevel": 16,
         "maxLevel": 19,
-        "probability": 0.1683
-      },
-      {
-        "id": 413,
-        "minLevel": 27,
-        "maxLevel": 30,
-        "probability": 0.0495
-      },
-      {
-        "id": 418,
-        "minLevel": 22,
-        "maxLevel": 25,
-        "probability": 0.1188
-      },
-      {
-        "id": 419,
-        "minLevel": 29,
-        "maxLevel": 32,
-        "probability": 0.0396
+        "probability": 0.16831683168316833
       },
       {
         "id": 425,
         "minLevel": 24,
         "maxLevel": 27,
-        "probability": 0.1089
+        "probability": 0.10891089108910891
+      },
+      {
+        "id": 419,
+        "minLevel": 29,
+        "maxLevel": 32,
+        "probability": 0.039603960396039604
+      },
+      {
+        "id": 74,
+        "minLevel": 21,
+        "maxLevel": 24,
+        "probability": 0.12871287128712872
+      },
+      {
+        "id": 75,
+        "minLevel": 27,
+        "maxLevel": 34,
+        "probability": 0.04950495049504951
+      },
+      {
+        "id": 198,
+        "minLevel": 27,
+        "maxLevel": 30,
+        "probability": 0.0891089108910891
       },
       {
         "id": 451,
         "minLevel": 27,
         "maxLevel": 30,
-        "probability": 0.1188
+        "probability": 0.1188118811881188
+      },
+      {
+        "id": 363,
+        "minLevel": 27,
+        "maxLevel": 30,
+        "probability": 0.12871287128712872
+      },
+      {
+        "id": 413,
+        "minLevel": 27,
+        "maxLevel": 30,
+        "probability": 0.04950495049504951
       }
     ]
   },
   "Deadwood Haunt (Cobalt Coastlands)": {
     "pokes": [
+      {
+        "id": 441,
+        "minLevel": 29,
+        "maxLevel": 32,
+        "probability": 0.11
+      },
+      {
+        "id": 426,
+        "minLevel": 29,
+        "maxLevel": 32,
+        "probability": 0.05
+      },
+      {
+        "id": 425,
+        "minLevel": 24,
+        "maxLevel": 27,
+        "probability": 0.13
+      },
+      {
+        "id": 356,
+        "minLevel": 37,
+        "maxLevel": 40,
+        "probability": 0.05
+      },
+      {
+        "id": 355,
+        "minLevel": 29,
+        "maxLevel": 32,
+        "probability": 0.16
+      },
       {
         "id": 74,
         "minLevel": 21,
@@ -1046,22 +1064,10 @@ export const hisuiRoutes = {
         "probability": 0.06
       },
       {
-        "id": 355,
-        "minLevel": 29,
-        "maxLevel": 32,
-        "probability": 0.16
-      },
-      {
-        "id": 356,
-        "minLevel": 37,
-        "maxLevel": 40,
-        "probability": 0.05
-      },
-      {
-        "id": 396,
-        "minLevel": 10,
-        "maxLevel": 13,
-        "probability": 0.19
+        "id": 398,
+        "minLevel": 34,
+        "maxLevel": 37,
+        "probability": 0.03
       },
       {
         "id": 397,
@@ -1070,28 +1076,10 @@ export const hisuiRoutes = {
         "probability": 0.07
       },
       {
-        "id": 398,
-        "minLevel": 34,
-        "maxLevel": 37,
-        "probability": 0.03
-      },
-      {
-        "id": 425,
-        "minLevel": 24,
-        "maxLevel": 27,
-        "probability": 0.13
-      },
-      {
-        "id": 426,
-        "minLevel": 29,
-        "maxLevel": 32,
-        "probability": 0.05
-      },
-      {
-        "id": 441,
-        "minLevel": 29,
-        "maxLevel": 32,
-        "probability": 0.11
+        "id": 396,
+        "minLevel": 10,
+        "maxLevel": 13,
+        "probability": 0.19
       }
     ]
   },
@@ -1379,19 +1367,19 @@ export const hisuiRoutes = {
         "id": 75,
         "minLevel": 31,
         "maxLevel": 34,
-        "probability": 0.2525
-      },
-      {
-        "id": 126,
-        "minLevel": 31,
-        "maxLevel": 34,
-        "probability": 0.202
+        "probability": 0.25
       },
       {
         "id": 240,
         "minLevel": 26,
         "maxLevel": 29,
-        "probability": 0.5455
+        "probability": 0.55
+      },
+      {
+        "id": 126,
+        "minLevel": 31,
+        "maxLevel": 34,
+        "probability": 0.2
       }
     ]
   },
@@ -1684,76 +1672,76 @@ export const hisuiRoutes = {
   "Tranquility Cove (Cobalt Coastlands)": {
     "pokes": [
       {
-        "id": 74,
-        "minLevel": 21,
-        "maxLevel": 24,
-        "probability": 0.1213
-      },
-      {
-        "id": 75,
-        "minLevel": 31,
-        "maxLevel": 34,
-        "probability": 0.0404
-      },
-      {
-        "id": 175,
-        "minLevel": 31,
-        "maxLevel": 34,
-        "probability": 0.1414
-      },
-      {
-        "id": 176,
-        "minLevel": 31,
-        "maxLevel": 34,
-        "probability": 0.0404
-      },
-      {
-        "id": 396,
-        "minLevel": 10,
-        "maxLevel": 13,
-        "probability": 0.1414
-      },
-      {
-        "id": 397,
-        "minLevel": 29,
-        "maxLevel": 33,
-        "probability": 0.0505
-      },
-      {
-        "id": 398,
-        "minLevel": 33,
-        "maxLevel": 37,
-        "probability": 0.0202
-      },
-      {
         "id": 412,
         "minLevel": 16,
         "maxLevel": 19,
-        "probability": 0.1616
-      },
-      {
-        "id": 413,
-        "minLevel": 31,
-        "maxLevel": 34,
-        "probability": 0.0404
-      },
-      {
-        "id": 422,
-        "minLevel": 31,
-        "maxLevel": 34,
-        "probability": 0.1111
-      },
-      {
-        "id": 425,
-        "minLevel": 24,
-        "maxLevel": 27,
-        "probability": 0.101
+        "probability": 0.1616161616161616
       },
       {
         "id": 426,
         "minLevel": 31,
         "maxLevel": 34,
-        "probability": 0.0303
+        "probability": 0.030303030303030297
+      },
+      {
+        "id": 425,
+        "minLevel": 24,
+        "maxLevel": 27,
+        "probability": 0.101010101010101
+      },
+      {
+        "id": 74,
+        "minLevel": 21,
+        "maxLevel": 24,
+        "probability": 0.12121212121212119
+      },
+      {
+        "id": 75,
+        "minLevel": 31,
+        "maxLevel": 34,
+        "probability": 0.0404040404040404
+      },
+      {
+        "id": 422,
+        "minLevel": 31,
+        "maxLevel": 34,
+        "probability": 0.11111111111111109
+      },
+      {
+        "id": 398,
+        "minLevel": 33,
+        "maxLevel": 37,
+        "probability": 0.0202020202020202
+      },
+      {
+        "id": 397,
+        "minLevel": 29,
+        "maxLevel": 33,
+        "probability": 0.0505050505050505
+      },
+      {
+        "id": 396,
+        "minLevel": 10,
+        "maxLevel": 13,
+        "probability": 0.1414141414141414
+      },
+      {
+        "id": 175,
+        "minLevel": 31,
+        "maxLevel": 34,
+        "probability": 0.1414141414141414
+      },
+      {
+        "id": 176,
+        "minLevel": 31,
+        "maxLevel": 34,
+        "probability": 0.0404040404040404
+      },
+      {
+        "id": 413,
+        "minLevel": 31,
+        "maxLevel": 34,
+        "probability": 0.0404040404040404
       }
     ]
   },
@@ -1910,34 +1898,16 @@ export const hisuiRoutes = {
   "Celestica Trail (Coronet Highlands)": {
     "pokes": [
       {
-        "id": 75,
-        "minLevel": 43,
-        "maxLevel": 46,
-        "probability": 0.1
-      },
-      {
-        "id": 95,
-        "minLevel": 43,
-        "maxLevel": 46,
-        "probability": 0.2
-      },
-      {
-        "id": 111,
-        "minLevel": 38,
-        "maxLevel": 41,
-        "probability": 0.22
-      },
-      {
-        "id": 112,
-        "minLevel": 43,
-        "maxLevel": 46,
-        "probability": 0.08
-      },
-      {
         "id": 358,
         "minLevel": 43,
         "maxLevel": 46,
         "probability": 0.09
+      },
+      {
+        "id": 75,
+        "minLevel": 43,
+        "maxLevel": 46,
+        "probability": 0.1
       },
       {
         "id": 449,
@@ -1950,35 +1920,29 @@ export const hisuiRoutes = {
         "minLevel": 43,
         "maxLevel": 46,
         "probability": 0.07
+      },
+      {
+        "id": 95,
+        "minLevel": 43,
+        "maxLevel": 46,
+        "probability": 0.2
+      },
+      {
+        "id": 112,
+        "minLevel": 43,
+        "maxLevel": 46,
+        "probability": 0.08
+      },
+      {
+        "id": 111,
+        "minLevel": 38,
+        "maxLevel": 41,
+        "probability": 0.22
       }
     ]
   },
   "Lonely Spring (Coronet Highlands)": {
     "pokes": [
-      {
-        "id": 54,
-        "minLevel": 29,
-        "maxLevel": 32,
-        "probability": 0.22
-      },
-      {
-        "id": 55,
-        "minLevel": 37,
-        "maxLevel": 40,
-        "probability": 0.07
-      },
-      {
-        "id": 420,
-        "minLevel": 21,
-        "maxLevel": 24,
-        "probability": 0.25
-      },
-      {
-        "id": 421,
-        "minLevel": 37,
-        "maxLevel": 40,
-        "probability": 0.08
-      },
       {
         "id": 436,
         "minLevel": 29,
@@ -1990,52 +1954,76 @@ export const hisuiRoutes = {
         "minLevel": 37,
         "maxLevel": 40,
         "probability": 0.15
+      },
+      {
+        "id": 421,
+        "minLevel": 37,
+        "maxLevel": 40,
+        "probability": 0.08
+      },
+      {
+        "id": 420,
+        "minLevel": 21,
+        "maxLevel": 24,
+        "probability": 0.25
+      },
+      {
+        "id": 55,
+        "minLevel": 37,
+        "maxLevel": 40,
+        "probability": 0.07
+      },
+      {
+        "id": 54,
+        "minLevel": 29,
+        "maxLevel": 32,
+        "probability": 0.22
       }
     ]
   },
   "Fabled Spring (Coronet Highlands)": {
     "pokes": [
       {
-        "id": 35,
-        "minLevel": 43,
-        "maxLevel": 46,
-        "probability": 0.0892
-      },
-      {
-        "id": 75,
-        "minLevel": 43,
-        "maxLevel": 46,
-        "probability": 0.0693
-      },
-      {
-        "id": 173,
-        "minLevel": 43,
-        "maxLevel": 46,
-        "probability": 0.2574
-      },
-      {
-        "id": 315,
-        "minLevel": 43,
-        "maxLevel": 46,
-        "probability": 0.0693
-      },
-      {
         "id": 406,
         "minLevel": 43,
         "maxLevel": 46,
-        "probability": 0.198
+        "probability": 0.19801980198019797
       },
       {
         "id": 412,
         "minLevel": 16,
         "maxLevel": 19,
-        "probability": 0.2475
+        "probability": 0.24752475247524747
+      },
+      {
+        "id": 35,
+        "minLevel": 43,
+        "maxLevel": 46,
+        "probability": 0.08910891089108909
+      },
+      {
+        "id": 173,
+        "minLevel": 43,
+        "maxLevel": 46,
+        "probability": 0.2574257425742574
+      },
+      {
+        "id": 75,
+        "minLevel": 43,
+        "maxLevel": 46,
+        "probability": 0.0693069306930693
+      },
+      {
+        "id": 315,
+        "minLevel": 43,
+        "maxLevel": 46,
+        "probability": 0.0693069306930693
       },
       {
         "id": 413,
         "minLevel": 43,
         "maxLevel": 46,
-        "probability": 0.0693
+        "probability": 0.0693069306930693
       }
     ]
   },
@@ -2156,34 +2144,10 @@ export const hisuiRoutes = {
   "Clamberclaw Cliffs (Coronet Highlands)": {
     "pokes": [
       {
-        "id": 74,
-        "minLevel": 21,
-        "maxLevel": 24,
+        "id": 436,
+        "minLevel": 29,
+        "maxLevel": 32,
         "probability": 0.14
-      },
-      {
-        "id": 75,
-        "minLevel": 39,
-        "maxLevel": 42,
-        "probability": 0.05
-      },
-      {
-        "id": 92,
-        "minLevel": 21,
-        "maxLevel": 24,
-        "probability": 0.14
-      },
-      {
-        "id": 93,
-        "minLevel": 39,
-        "maxLevel": 42,
-        "probability": 0.05
-      },
-      {
-        "id": 207,
-        "minLevel": 39,
-        "maxLevel": 42,
-        "probability": 0.1
       },
       {
         "id": 412,
@@ -2192,15 +2156,15 @@ export const hisuiRoutes = {
         "probability": 0.19
       },
       {
-        "id": 413,
-        "minLevel": 39,
-        "maxLevel": 42,
-        "probability": 0.05
+        "id": 92,
+        "minLevel": 21,
+        "maxLevel": 24,
+        "probability": 0.14
       },
       {
-        "id": 436,
-        "minLevel": 29,
-        "maxLevel": 32,
+        "id": 74,
+        "minLevel": 21,
+        "maxLevel": 24,
         "probability": 0.14
       },
       {
@@ -2208,76 +2172,100 @@ export const hisuiRoutes = {
         "minLevel": 20,
         "maxLevel": 23,
         "probability": 0.14
+      },
+      {
+        "id": 207,
+        "minLevel": 39,
+        "maxLevel": 42,
+        "probability": 0.1
+      },
+      {
+        "id": 75,
+        "minLevel": 39,
+        "maxLevel": 42,
+        "probability": 0.05
+      },
+      {
+        "id": 93,
+        "minLevel": 39,
+        "maxLevel": 42,
+        "probability": 0.05
+      },
+      {
+        "id": 413,
+        "minLevel": 39,
+        "maxLevel": 42,
+        "probability": 0.05
       }
     ]
   },
   "Celestica Ruins (Coronet Highlands)": {
     "pokes": [
       {
-        "id": 74,
-        "minLevel": 21,
-        "maxLevel": 24,
-        "probability": 0.1189
-      },
-      {
-        "id": 75,
+        "id": 438,
         "minLevel": 39,
         "maxLevel": 42,
-        "probability": 0.0495
-      },
-      {
-        "id": 92,
-        "minLevel": 21,
-        "maxLevel": 24,
-        "probability": 0.1188
-      },
-      {
-        "id": 93,
-        "minLevel": 39,
-        "maxLevel": 42,
-        "probability": 0.0495
-      },
-      {
-        "id": 185,
-        "minLevel": 39,
-        "maxLevel": 42,
-        "probability": 0.0495
-      },
-      {
-        "id": 200,
-        "minLevel": 39,
-        "maxLevel": 42,
-        "probability": 0.0891
-      },
-      {
-        "id": 207,
-        "minLevel": 39,
-        "maxLevel": 42,
-        "probability": 0.0891
-      },
-      {
-        "id": 299,
-        "minLevel": 39,
-        "maxLevel": 42,
-        "probability": 0.099
+        "probability": 0.12871287128712872
       },
       {
         "id": 412,
         "minLevel": 16,
         "maxLevel": 19,
-        "probability": 0.1683
+        "probability": 0.16831683168316833
+      },
+      {
+        "id": 92,
+        "minLevel": 21,
+        "maxLevel": 24,
+        "probability": 0.1188118811881188
+      },
+      {
+        "id": 74,
+        "minLevel": 21,
+        "maxLevel": 24,
+        "probability": 0.1188118811881188
+      },
+      {
+        "id": 207,
+        "minLevel": 39,
+        "maxLevel": 42,
+        "probability": 0.0891089108910891
+      },
+      {
+        "id": 75,
+        "minLevel": 39,
+        "maxLevel": 42,
+        "probability": 0.04950495049504951
+      },
+      {
+        "id": 93,
+        "minLevel": 39,
+        "maxLevel": 42,
+        "probability": 0.04950495049504951
+      },
+      {
+        "id": 200,
+        "minLevel": 39,
+        "maxLevel": 42,
+        "probability": 0.0891089108910891
+      },
+      {
+        "id": 299,
+        "minLevel": 39,
+        "maxLevel": 42,
+        "probability": 0.09900990099009901
+      },
+      {
+        "id": 185,
+        "minLevel": 39,
+        "maxLevel": 42,
+        "probability": 0.04950495049504951
       },
       {
         "id": 413,
         "minLevel": 39,
         "maxLevel": 42,
-        "probability": 0.0396
-      },
-      {
-        "id": 438,
-        "minLevel": 39,
-        "maxLevel": 42,
-        "probability": 0.1287
+        "probability": 0.039603960396039604
       }
     ]
   },
@@ -2330,10 +2318,16 @@ export const hisuiRoutes = {
   "Wayward Cave (Coronet Highlands)": {
     "pokes": [
       {
-        "id": 41,
-        "minLevel": 40,
-        "maxLevel": 42,
-        "probability": 0.31
+        "id": 339,
+        "minLevel": 26,
+        "maxLevel": 29,
+        "probability": 0.27
+      },
+      {
+        "id": 443,
+        "minLevel": 20,
+        "maxLevel": 23,
+        "probability": 0.26
       },
       {
         "id": 42,
@@ -2342,156 +2336,138 @@ export const hisuiRoutes = {
         "probability": 0.08
       },
       {
-        "id": 339,
-        "minLevel": 26,
-        "maxLevel": 29,
-        "probability": 0.27
-      },
-      {
         "id": 340,
         "minLevel": 35,
         "maxLevel": 38,
         "probability": 0.08
       },
       {
-        "id": 443,
-        "minLevel": 20,
-        "maxLevel": 23,
-        "probability": 0.26
+        "id": 41,
+        "minLevel": 40,
+        "maxLevel": 42,
+        "probability": 0.31
       }
     ]
   },
   "Sacred Plaza (Coronet Highlands)": {
     "pokes": [
       {
-        "id": 74,
-        "minLevel": 21,
-        "maxLevel": 24,
-        "probability": 0.0708
-      },
-      {
-        "id": 75,
-        "minLevel": 53,
-        "maxLevel": 56,
-        "probability": 0.0303
-      },
-      {
-        "id": 92,
-        "minLevel": 21,
-        "maxLevel": 24,
-        "probability": 0.0707
-      },
-      {
-        "id": 93,
-        "minLevel": 39,
-        "maxLevel": 56,
-        "probability": 0.0606
-      },
-      {
-        "id": 100,
-        "minLevel": 39,
-        "maxLevel": 58,
-        "probability": 0.1414
-      },
-      {
-        "id": 111,
-        "minLevel": 38,
-        "maxLevel": 41,
-        "probability": 0.0606
-      },
-      {
-        "id": 112,
-        "minLevel": 53,
-        "maxLevel": 56,
-        "probability": 0.0202
-      },
-      {
-        "id": 200,
-        "minLevel": 39,
-        "maxLevel": 42,
-        "probability": 0.0505
-      },
-      {
-        "id": 299,
-        "minLevel": 39,
-        "maxLevel": 42,
-        "probability": 0.0606
+        "id": 412,
+        "minLevel": 16,
+        "maxLevel": 19,
+        "probability": 0.101010101010101
       },
       {
         "id": 358,
         "minLevel": 53,
         "maxLevel": 56,
-        "probability": 0.0202
-      },
-      {
-        "id": 403,
-        "minLevel": 11,
-        "maxLevel": 14,
-        "probability": 0.0808
-      },
-      {
-        "id": 404,
-        "minLevel": 26,
-        "maxLevel": 29,
-        "probability": 0.0303
-      },
-      {
-        "id": 405,
-        "minLevel": 35,
-        "maxLevel": 38,
-        "probability": 0.0101
-      },
-      {
-        "id": 412,
-        "minLevel": 16,
-        "maxLevel": 19,
-        "probability": 0.101
-      },
-      {
-        "id": 413,
-        "minLevel": 39,
-        "maxLevel": 56,
-        "probability": 0.0606
+        "probability": 0.0202020202020202
       },
       {
         "id": 433,
         "minLevel": 53,
         "maxLevel": 56,
-        "probability": 0.0808
+        "probability": 0.0808080808080808
+      },
+      {
+        "id": 92,
+        "minLevel": 21,
+        "maxLevel": 24,
+        "probability": 0.0707070707070707
+      },
+      {
+        "id": 74,
+        "minLevel": 21,
+        "maxLevel": 24,
+        "probability": 0.0707070707070707
+      },
+      {
+        "id": 75,
+        "minLevel": 53,
+        "maxLevel": 56,
+        "probability": 0.030303030303030297
+      },
+      {
+        "id": 93,
+        "minLevel": 39,
+        "maxLevel": 56,
+        "probability": 0.060606060606060594
+      },
+      {
+        "id": 404,
+        "minLevel": 26,
+        "maxLevel": 29,
+        "probability": 0.030303030303030297
+      },
+      {
+        "id": 405,
+        "minLevel": 35,
+        "maxLevel": 38,
+        "probability": 0.0101010101010101
+      },
+      {
+        "id": 200,
+        "minLevel": 39,
+        "maxLevel": 42,
+        "probability": 0.0505050505050505
+      },
+      {
+        "id": 299,
+        "minLevel": 39,
+        "maxLevel": 42,
+        "probability": 0.060606060606060594
+      },
+      {
+        "id": 112,
+        "minLevel": 53,
+        "maxLevel": 56,
+        "probability": 0.0202020202020202
+      },
+      {
+        "id": 111,
+        "minLevel": 38,
+        "maxLevel": 41,
+        "probability": 0.060606060606060594
       },
       {
         "id": 479,
         "minLevel": 39,
         "maxLevel": 42,
-        "probability": 0.0505
+        "probability": 0.0505050505050505
+      },
+      {
+        "id": 403,
+        "minLevel": 11,
+        "maxLevel": 14,
+        "probability": 0.0808080808080808
+      },
+      {
+        "id": 100,
+        "minLevel": 39,
+        "maxLevel": 58,
+        "probability": 0.1414141414141414
+      },
+      {
+        "id": 413,
+        "minLevel": 39,
+        "maxLevel": 56,
+        "probability": 0.060606060606060594
       }
     ]
   },
   "Sonorous Path (Coronet Highlands)": {
     "pokes": [
       {
+        "id": 436,
+        "minLevel": 29,
+        "maxLevel": 32,
+        "probability": 0.22
+      },
+      {
         "id": 214,
         "minLevel": 37,
         "maxLevel": 40,
         "probability": 0.13
-      },
-      {
-        "id": 216,
-        "minLevel": 26,
-        "maxLevel": 29,
-        "probability": 0.2
-      },
-      {
-        "id": 217,
-        "minLevel": 37,
-        "maxLevel": 40,
-        "probability": 0.07
-      },
-      {
-        "id": 403,
-        "minLevel": 11,
-        "maxLevel": 14,
-        "probability": 0.25
       },
       {
         "id": 404,
@@ -2506,10 +2482,22 @@ export const hisuiRoutes = {
         "probability": 0.04
       },
       {
-        "id": 436,
-        "minLevel": 29,
-        "maxLevel": 32,
-        "probability": 0.22
+        "id": 403,
+        "minLevel": 11,
+        "maxLevel": 14,
+        "probability": 0.25
+      },
+      {
+        "id": 216,
+        "minLevel": 26,
+        "maxLevel": 29,
+        "probability": 0.2
+      },
+      {
+        "id": 217,
+        "minLevel": 37,
+        "maxLevel": 40,
+        "probability": 0.07
       }
     ]
   },
@@ -2596,106 +2584,106 @@ export const hisuiRoutes = {
   "Gapejaw Bog (Crimson Mirelands)": {
     "pokes": [
       {
-        "id": 54,
+        "id": 400,
         "minLevel": 19,
         "maxLevel": 22,
-        "probability": 0.0694
-      },
-      {
-        "id": 74,
-        "minLevel": 21,
-        "maxLevel": 24,
-        "probability": 0.0693
-      },
-      {
-        "id": 75,
-        "minLevel": 25,
-        "maxLevel": 28,
-        "probability": 0.0297
-      },
-      {
-        "id": 92,
-        "minLevel": 19,
-        "maxLevel": 24,
-        "probability": 0.0693
-      },
-      {
-        "id": 93,
-        "minLevel": 25,
-        "maxLevel": 28,
-        "probability": 0.0297
-      },
-      {
-        "id": 114,
-        "minLevel": 19,
-        "maxLevel": 22,
-        "probability": 0.0495
-      },
-      {
-        "id": 193,
-        "minLevel": 21,
-        "maxLevel": 24,
-        "probability": 0.0495
-      },
-      {
-        "id": 280,
-        "minLevel": 19,
-        "maxLevel": 22,
-        "probability": 0.1089
-      },
-      {
-        "id": 315,
-        "minLevel": 19,
-        "maxLevel": 22,
-        "probability": 0.0297
+        "probability": 0.029702970297029695
       },
       {
         "id": 399,
         "minLevel": 11,
         "maxLevel": 14,
-        "probability": 0.0792
-      },
-      {
-        "id": 400,
-        "minLevel": 19,
-        "maxLevel": 22,
-        "probability": 0.0297
+        "probability": 0.0792079207920792
       },
       {
         "id": 406,
         "minLevel": 19,
         "maxLevel": 22,
-        "probability": 0.0693
+        "probability": 0.0693069306930693
       },
       {
         "id": 412,
         "minLevel": 16,
         "maxLevel": 19,
-        "probability": 0.0891
-      },
-      {
-        "id": 417,
-        "minLevel": 19,
-        "maxLevel": 22,
-        "probability": 0.0495
-      },
-      {
-        "id": 449,
-        "minLevel": 21,
-        "maxLevel": 23,
-        "probability": 0.0594
-      },
-      {
-        "id": 453,
-        "minLevel": 19,
-        "maxLevel": 24,
-        "probability": 0.0693
+        "probability": 0.08910891089108909
       },
       {
         "id": 455,
         "minLevel": 17,
         "maxLevel": 22,
-        "probability": 0.0495
+        "probability": 0.04950495049504949
+      },
+      {
+        "id": 453,
+        "minLevel": 19,
+        "maxLevel": 24,
+        "probability": 0.0693069306930693
+      },
+      {
+        "id": 92,
+        "minLevel": 19,
+        "maxLevel": 24,
+        "probability": 0.0693069306930693
+      },
+      {
+        "id": 74,
+        "minLevel": 21,
+        "maxLevel": 24,
+        "probability": 0.0693069306930693
+      },
+      {
+        "id": 75,
+        "minLevel": 25,
+        "maxLevel": 28,
+        "probability": 0.029702970297029695
+      },
+      {
+        "id": 93,
+        "minLevel": 25,
+        "maxLevel": 28,
+        "probability": 0.029702970297029695
+      },
+      {
+        "id": 449,
+        "minLevel": 21,
+        "maxLevel": 23,
+        "probability": 0.05940594059405939
+      },
+      {
+        "id": 417,
+        "minLevel": 19,
+        "maxLevel": 22,
+        "probability": 0.04950495049504949
+      },
+      {
+        "id": 54,
+        "minLevel": 19,
+        "maxLevel": 22,
+        "probability": 0.0693069306930693
+      },
+      {
+        "id": 280,
+        "minLevel": 19,
+        "maxLevel": 22,
+        "probability": 0.10891089108910888
+      },
+      {
+        "id": 315,
+        "minLevel": 19,
+        "maxLevel": 22,
+        "probability": 0.029702970297029695
+      },
+      {
+        "id": 114,
+        "minLevel": 19,
+        "maxLevel": 22,
+        "probability": 0.04950495049504949
+      },
+      {
+        "id": 193,
+        "minLevel": 21,
+        "maxLevel": 24,
+        "probability": 0.04950495049504949
       }
     ]
   },
@@ -2718,6 +2706,18 @@ export const hisuiRoutes = {
   "Scarlet Bog (Crimson Mirelands)": {
     "pokes": [
       {
+        "id": 453,
+        "minLevel": 21,
+        "maxLevel": 24,
+        "probability": 0.15
+      },
+      {
+        "id": 92,
+        "minLevel": 21,
+        "maxLevel": 24,
+        "probability": 0.15
+      },
+      {
         "id": 74,
         "minLevel": 21,
         "maxLevel": 24,
@@ -2730,28 +2730,10 @@ export const hisuiRoutes = {
         "probability": 0.12
       },
       {
-        "id": 92,
-        "minLevel": 21,
-        "maxLevel": 24,
-        "probability": 0.15
-      },
-      {
         "id": 93,
         "minLevel": 25,
         "maxLevel": 28,
         "probability": 0.06
-      },
-      {
-        "id": 434,
-        "minLevel": 21,
-        "maxLevel": 24,
-        "probability": 0.14
-      },
-      {
-        "id": 435,
-        "minLevel": 34,
-        "maxLevel": 37,
-        "probability": 0.05
       },
       {
         "id": 449,
@@ -2766,50 +2748,56 @@ export const hisuiRoutes = {
         "probability": 0.04
       },
       {
-        "id": 453,
+        "id": 435,
+        "minLevel": 34,
+        "maxLevel": 37,
+        "probability": 0.05
+      },
+      {
+        "id": 434,
         "minLevel": 21,
         "maxLevel": 24,
-        "probability": 0.15
+        "probability": 0.14
       }
     ]
   },
   "Bolderoll Slope (Crimson Mirelands)": {
     "pokes": [
       {
-        "id": 41,
-        "minLevel": 18,
-        "maxLevel": 21,
-        "probability": 0.2425
-      },
-      {
-        "id": 42,
-        "minLevel": 23,
-        "maxLevel": 26,
-        "probability": 0.0606
+        "id": 412,
+        "minLevel": 16,
+        "maxLevel": 19,
+        "probability": 0.2626262626262626
       },
       {
         "id": 74,
         "minLevel": 18,
         "maxLevel": 24,
-        "probability": 0.1919
+        "probability": 0.19191919191919188
+      },
+      {
+        "id": 42,
+        "minLevel": 23,
+        "maxLevel": 26,
+        "probability": 0.060606060606060594
       },
       {
         "id": 75,
         "minLevel": 25,
         "maxLevel": 28,
-        "probability": 0.0707
+        "probability": 0.0707070707070707
       },
       {
         "id": 111,
         "minLevel": 23,
         "maxLevel": 26,
-        "probability": 0.1717
+        "probability": 0.1717171717171717
       },
       {
-        "id": 412,
-        "minLevel": 16,
-        "maxLevel": 19,
-        "probability": 0.2626
+        "id": 41,
+        "minLevel": 18,
+        "maxLevel": 21,
+        "probability": 0.24242424242424238
       }
     ]
   },
@@ -2908,152 +2896,152 @@ export const hisuiRoutes = {
   "Shrouded Ruins (Crimson Mirelands)": {
     "pokes": [
       {
-        "id": 74,
-        "minLevel": 21,
-        "maxLevel": 24,
-        "probability": 0.109
-      },
-      {
-        "id": 75,
-        "minLevel": 25,
-        "maxLevel": 28,
-        "probability": 0.0396
-      },
-      {
-        "id": 92,
-        "minLevel": 17,
-        "maxLevel": 24,
-        "probability": 0.1089
-      },
-      {
-        "id": 93,
-        "minLevel": 25,
-        "maxLevel": 30,
-        "probability": 0.0396
-      },
-      {
-        "id": 108,
-        "minLevel": 25,
-        "maxLevel": 28,
-        "probability": 0.0891
-      },
-      {
-        "id": 111,
-        "minLevel": 25,
-        "maxLevel": 28,
-        "probability": 0.099
-      },
-      {
-        "id": 280,
-        "minLevel": 16,
-        "maxLevel": 19,
-        "probability": 0.1683
-      },
-      {
-        "id": 281,
-        "minLevel": 23,
-        "maxLevel": 28,
-        "probability": 0.0594
-      },
-      {
         "id": 412,
         "minLevel": 16,
         "maxLevel": 19,
-        "probability": 0.1485
-      },
-      {
-        "id": 442,
-        "minLevel": 60,
-        "maxLevel": 60,
-        "probability": 0.0693
+        "probability": 0.1485148514851485
       },
       {
         "id": 455,
         "minLevel": 25,
         "maxLevel": 28,
-        "probability": 0.0693
+        "probability": 0.06930693069306931
+      },
+      {
+        "id": 92,
+        "minLevel": 17,
+        "maxLevel": 24,
+        "probability": 0.10891089108910891
+      },
+      {
+        "id": 74,
+        "minLevel": 21,
+        "maxLevel": 24,
+        "probability": 0.10891089108910891
+      },
+      {
+        "id": 75,
+        "minLevel": 25,
+        "maxLevel": 28,
+        "probability": 0.039603960396039604
+      },
+      {
+        "id": 93,
+        "minLevel": 25,
+        "maxLevel": 30,
+        "probability": 0.039603960396039604
+      },
+      {
+        "id": 281,
+        "minLevel": 23,
+        "maxLevel": 28,
+        "probability": 0.0594059405940594
+      },
+      {
+        "id": 108,
+        "minLevel": 25,
+        "maxLevel": 28,
+        "probability": 0.0891089108910891
+      },
+      {
+        "id": 280,
+        "minLevel": 16,
+        "maxLevel": 19,
+        "probability": 0.16831683168316833
+      },
+      {
+        "id": 111,
+        "minLevel": 25,
+        "maxLevel": 28,
+        "probability": 0.09900990099009901
+      },
+      {
+        "id": 442,
+        "minLevel": 60,
+        "maxLevel": 60,
+        "probability": 0.06930693069306931
       }
     ]
   },
   "Holm of Trials (Crimson Mirelands)": {
     "pokes": [
       {
-        "id": 54,
-        "minLevel": 29,
-        "maxLevel": 32,
-        "probability": 0.0892
-      },
-      {
-        "id": 55,
-        "minLevel": 33,
-        "maxLevel": 36,
-        "probability": 0.0297
-      },
-      {
-        "id": 74,
-        "minLevel": 21,
-        "maxLevel": 24,
-        "probability": 0.099
-      },
-      {
-        "id": 75,
-        "minLevel": 33,
-        "maxLevel": 36,
-        "probability": 0.0396
-      },
-      {
-        "id": 92,
-        "minLevel": 21,
-        "maxLevel": 24,
-        "probability": 0.099
-      },
-      {
-        "id": 93,
-        "minLevel": 33,
-        "maxLevel": 36,
-        "probability": 0.0396
-      },
-      {
         "id": 412,
         "minLevel": 16,
         "maxLevel": 19,
-        "probability": 0.1287
-      },
-      {
-        "id": 417,
-        "minLevel": 33,
-        "maxLevel": 36,
-        "probability": 0.0693
-      },
-      {
-        "id": 453,
-        "minLevel": 33,
-        "maxLevel": 36,
-        "probability": 0.099
-      },
-      {
-        "id": 454,
-        "minLevel": 37,
-        "maxLevel": 40,
-        "probability": 0.0297
+        "probability": 0.12871287128712872
       },
       {
         "id": 455,
         "minLevel": 33,
         "maxLevel": 36,
-        "probability": 0.0693
+        "probability": 0.06930693069306931
       },
       {
-        "id": 548,
+        "id": 453,
         "minLevel": 33,
         "maxLevel": 36,
-        "probability": 0.1089
+        "probability": 0.09900990099009901
+      },
+      {
+        "id": 92,
+        "minLevel": 21,
+        "maxLevel": 24,
+        "probability": 0.09900990099009901
+      },
+      {
+        "id": 74,
+        "minLevel": 21,
+        "maxLevel": 24,
+        "probability": 0.09900990099009901
+      },
+      {
+        "id": 55,
+        "minLevel": 33,
+        "maxLevel": 36,
+        "probability": 0.0297029702970297
       },
       {
         "id": 704,
         "minLevel": 30,
         "maxLevel": 32,
-        "probability": 0.099
+        "probability": 0.09900990099009901
+      },
+      {
+        "id": 75,
+        "minLevel": 33,
+        "maxLevel": 36,
+        "probability": 0.039603960396039604
+      },
+      {
+        "id": 93,
+        "minLevel": 33,
+        "maxLevel": 36,
+        "probability": 0.039603960396039604
+      },
+      {
+        "id": 417,
+        "minLevel": 33,
+        "maxLevel": 36,
+        "probability": 0.06930693069306931
+      },
+      {
+        "id": 548,
+        "minLevel": 33,
+        "maxLevel": 36,
+        "probability": 0.10891089108910891
+      },
+      {
+        "id": 54,
+        "minLevel": 29,
+        "maxLevel": 32,
+        "probability": 0.0891089108910891
+      },
+      {
+        "id": 454,
+        "minLevel": 37,
+        "maxLevel": 40,
+        "probability": 0.0297029702970297
       }
     ]
   },
@@ -3246,6 +3234,18 @@ export const hisuiRoutes = {
   "Ursa's Ring (Crimson Mirelands)": {
     "pokes": [
       {
+        "id": 412,
+        "minLevel": 16,
+        "maxLevel": 19,
+        "probability": 0.21
+      },
+      {
+        "id": 92,
+        "minLevel": 21,
+        "maxLevel": 24,
+        "probability": 0.15
+      },
+      {
         "id": 74,
         "minLevel": 21,
         "maxLevel": 24,
@@ -3258,22 +3258,16 @@ export const hisuiRoutes = {
         "probability": 0.06
       },
       {
-        "id": 92,
-        "minLevel": 21,
-        "maxLevel": 24,
-        "probability": 0.15
-      },
-      {
         "id": 93,
         "minLevel": 27,
         "maxLevel": 30,
         "probability": 0.06
       },
       {
-        "id": 193,
+        "id": 417,
         "minLevel": 27,
         "maxLevel": 30,
-        "probability": 0.12
+        "probability": 0.11
       },
       {
         "id": 216,
@@ -3282,27 +3276,15 @@ export const hisuiRoutes = {
         "probability": 0.14
       },
       {
-        "id": 412,
-        "minLevel": 16,
-        "maxLevel": 19,
-        "probability": 0.21
-      },
-      {
-        "id": 417,
+        "id": 193,
         "minLevel": 27,
         "maxLevel": 30,
-        "probability": 0.11
+        "probability": 0.12
       }
     ]
   },
   "Aspiration Hill (Obsidian Fieldlands)": {
     "pokes": [
-      {
-        "id": 396,
-        "minLevel": 2,
-        "maxLevel": 4,
-        "probability": 0.37
-      },
       {
         "id": 399,
         "minLevel": 2,
@@ -3314,93 +3296,75 @@ export const hisuiRoutes = {
         "minLevel": 2,
         "maxLevel": 4,
         "probability": 0.26
+      },
+      {
+        "id": 396,
+        "minLevel": 2,
+        "maxLevel": 4,
+        "probability": 0.37
       }
     ]
   },
   "Horseshoe Plains (Obsidian Fieldlands)": {
     "pokes": [
       {
-        "id": 77,
-        "minLevel": 3,
-        "maxLevel": 6,
-        "probability": 0.0809
-      },
-      {
-        "id": 133,
-        "minLevel": 2,
-        "maxLevel": 6,
-        "probability": 0.101
-      },
-      {
-        "id": 265,
-        "minLevel": 2,
-        "maxLevel": 6,
-        "probability": 0.1717
-      },
-      {
-        "id": 268,
-        "minLevel": 7,
-        "maxLevel": 9,
-        "probability": 0.0808
-      },
-      {
-        "id": 396,
-        "minLevel": 2,
-        "maxLevel": 4,
-        "probability": 0.1313
-      },
-      {
         "id": 399,
         "minLevel": 2,
         "maxLevel": 6,
-        "probability": 0.1313
+        "probability": 0.13131313131313133
       },
       {
         "id": 418,
         "minLevel": 2,
         "maxLevel": 4,
-        "probability": 0.101
+        "probability": 0.10101010101010102
+      },
+      {
+        "id": 268,
+        "minLevel": 7,
+        "maxLevel": 9,
+        "probability": 0.08080808080808081
       },
       {
         "id": 425,
         "minLevel": 2,
         "maxLevel": 6,
-        "probability": 0.0909
+        "probability": 0.09090909090909091
+      },
+      {
+        "id": 133,
+        "minLevel": 2,
+        "maxLevel": 6,
+        "probability": 0.10101010101010102
       },
       {
         "id": 439,
         "minLevel": 3,
         "maxLevel": 6,
-        "probability": 0.1111
+        "probability": 0.11111111111111112
+      },
+      {
+        "id": 77,
+        "minLevel": 3,
+        "maxLevel": 6,
+        "probability": 0.08080808080808081
+      },
+      {
+        "id": 396,
+        "minLevel": 2,
+        "maxLevel": 4,
+        "probability": 0.13131313131313133
+      },
+      {
+        "id": 265,
+        "minLevel": 2,
+        "maxLevel": 6,
+        "probability": 0.17171717171717174
       }
     ]
   },
   "Deertrack Path (Obsidian Fieldlands)": {
     "pokes": [
-      {
-        "id": 41,
-        "minLevel": 7,
-        "maxLevel": 10,
-        "probability": 0.15
-      },
-      {
-        "id": 74,
-        "minLevel": 7,
-        "maxLevel": 10,
-        "probability": 0.13
-      },
-      {
-        "id": 396,
-        "minLevel": 7,
-        "maxLevel": 10,
-        "probability": 0.15
-      },
-      {
-        "id": 401,
-        "minLevel": 6,
-        "maxLevel": 9,
-        "probability": 0.19
-      },
       {
         "id": 412,
         "minLevel": 7,
@@ -3414,74 +3378,98 @@ export const hisuiRoutes = {
         "probability": 0.11
       },
       {
+        "id": 74,
+        "minLevel": 7,
+        "maxLevel": 10,
+        "probability": 0.13
+      },
+      {
+        "id": 401,
+        "minLevel": 6,
+        "maxLevel": 9,
+        "probability": 0.19
+      },
+      {
         "id": 446,
         "minLevel": 7,
         "maxLevel": 10,
         "probability": 0.1
+      },
+      {
+        "id": 396,
+        "minLevel": 7,
+        "maxLevel": 10,
+        "probability": 0.15
+      },
+      {
+        "id": 41,
+        "minLevel": 7,
+        "maxLevel": 10,
+        "probability": 0.15
       }
     ]
   },
   "Deertrack Heights (Obsidian Fieldlands)": {
     "pokes": [
       {
-        "id": 41,
-        "minLevel": 7,
-        "maxLevel": 14,
-        "probability": 0.1415
-      },
-      {
-        "id": 42,
-        "minLevel": 22,
-        "maxLevel": 25,
-        "probability": 0.0404
-      },
-      {
-        "id": 74,
-        "minLevel": 7,
-        "maxLevel": 14,
-        "probability": 0.1212
-      },
-      {
-        "id": 234,
+        "id": 412,
         "minLevel": 9,
         "maxLevel": 14,
-        "probability": 0.0707
+        "probability": 0.15151515151515152
       },
       {
         "id": 390,
         "minLevel": 10,
         "maxLevel": 13,
-        "probability": 0.1111
+        "probability": 0.11111111111111112
+      },
+      {
+        "id": 74,
+        "minLevel": 7,
+        "maxLevel": 14,
+        "probability": 0.12121212121212122
+      },
+      {
+        "id": 42,
+        "minLevel": 22,
+        "maxLevel": 25,
+        "probability": 0.04040404040404041
       },
       {
         "id": 391,
         "minLevel": 14,
         "maxLevel": 17,
-        "probability": 0.0404
-      },
-      {
-        "id": 396,
-        "minLevel": 10,
-        "maxLevel": 13,
-        "probability": 0.1414
-      },
-      {
-        "id": 397,
-        "minLevel": 14,
-        "maxLevel": 17,
-        "probability": 0.0505
+        "probability": 0.04040404040404041
       },
       {
         "id": 403,
         "minLevel": 9,
         "maxLevel": 12,
-        "probability": 0.1313
+        "probability": 0.13131313131313133
       },
       {
-        "id": 412,
+        "id": 234,
         "minLevel": 9,
         "maxLevel": 14,
-        "probability": 0.1515
+        "probability": 0.07070707070707072
+      },
+      {
+        "id": 397,
+        "minLevel": 14,
+        "maxLevel": 17,
+        "probability": 0.05050505050505051
+      },
+      {
+        "id": 396,
+        "minLevel": 10,
+        "maxLevel": 13,
+        "probability": 0.14141414141414144
+      },
+      {
+        "id": 41,
+        "minLevel": 7,
+        "maxLevel": 14,
+        "probability": 0.14141414141414144
       }
     ]
   },
@@ -3498,180 +3486,180 @@ export const hisuiRoutes = {
   "Oreburrow Tunnel (Obsidian Fieldlands)": {
     "pokes": [
       {
-        "id": 41,
-        "minLevel": 13,
-        "maxLevel": 16,
-        "probability": 0.2476
-      },
-      {
-        "id": 66,
-        "minLevel": 13,
-        "maxLevel": 16,
-        "probability": 0.198
-      },
-      {
         "id": 74,
         "minLevel": 13,
         "maxLevel": 16,
-        "probability": 0.198
+        "probability": 0.19801980198019803
       },
       {
         "id": 75,
         "minLevel": 25,
         "maxLevel": 28,
-        "probability": 0.0792
+        "probability": 0.07920792079207921
       },
       {
         "id": 440,
         "minLevel": 13,
         "maxLevel": 16,
-        "probability": 0.2772
+        "probability": 0.27722772277227725
+      },
+      {
+        "id": 66,
+        "minLevel": 13,
+        "maxLevel": 16,
+        "probability": 0.19801980198019803
+      },
+      {
+        "id": 41,
+        "minLevel": 13,
+        "maxLevel": 16,
+        "probability": 0.24752475247524752
       }
     ]
   },
   "Nature's Pantry (Obsidian Fieldlands)": {
     "pokes": [
       {
-        "id": 25,
+        "id": 412,
         "minLevel": 9,
         "maxLevel": 12,
-        "probability": 0.0397
-      },
-      {
-        "id": 41,
-        "minLevel": 9,
-        "maxLevel": 13,
-        "probability": 0.1188
-      },
-      {
-        "id": 42,
-        "minLevel": 22,
-        "maxLevel": 25,
-        "probability": 0.0297
-      },
-      {
-        "id": 46,
-        "minLevel": 9,
-        "maxLevel": 12,
-        "probability": 0.099
+        "probability": 0.1287128712871287
       },
       {
         "id": 74,
         "minLevel": 9,
         "maxLevel": 12,
-        "probability": 0.099
+        "probability": 0.09900990099009899
       },
       {
-        "id": 172,
-        "minLevel": 9,
-        "maxLevel": 12,
-        "probability": 0.1386
-      },
-      {
-        "id": 396,
-        "minLevel": 9,
-        "maxLevel": 13,
-        "probability": 0.1188
-      },
-      {
-        "id": 397,
-        "minLevel": 14,
-        "maxLevel": 17,
-        "probability": 0.0396
+        "id": 42,
+        "minLevel": 22,
+        "maxLevel": 25,
+        "probability": 0.029702970297029695
       },
       {
         "id": 401,
         "minLevel": 6,
         "maxLevel": 9,
-        "probability": 0.1485
+        "probability": 0.14851485148514848
       },
       {
         "id": 402,
         "minLevel": 10,
         "maxLevel": 13,
-        "probability": 0.0396
+        "probability": 0.0396039603960396
       },
       {
-        "id": 412,
+        "id": 46,
         "minLevel": 9,
         "maxLevel": 12,
-        "probability": 0.1287
+        "probability": 0.09900990099009899
+      },
+      {
+        "id": 172,
+        "minLevel": 9,
+        "maxLevel": 12,
+        "probability": 0.1386138613861386
+      },
+      {
+        "id": 25,
+        "minLevel": 9,
+        "maxLevel": 12,
+        "probability": 0.0396039603960396
+      },
+      {
+        "id": 397,
+        "minLevel": 14,
+        "maxLevel": 17,
+        "probability": 0.0396039603960396
+      },
+      {
+        "id": 396,
+        "minLevel": 9,
+        "maxLevel": 13,
+        "probability": 0.11881188118811878
+      },
+      {
+        "id": 41,
+        "minLevel": 9,
+        "maxLevel": 13,
+        "probability": 0.11881188118811878
       }
     ]
   },
   "Heartwood (Obsidian Fieldlands)": {
     "pokes": [
       {
-        "id": 41,
-        "minLevel": 13,
-        "maxLevel": 16,
-        "probability": 0.1276
-      },
-      {
-        "id": 42,
-        "minLevel": 22,
-        "maxLevel": 25,
-        "probability": 0.0294
-      },
-      {
-        "id": 54,
-        "minLevel": 13,
-        "maxLevel": 16,
-        "probability": 0.098
-      },
-      {
-        "id": 74,
-        "minLevel": 13,
-        "maxLevel": 16,
-        "probability": 0.098
-      },
-      {
-        "id": 123,
-        "minLevel": 13,
-        "maxLevel": 16,
-        "probability": 0.0588
-      },
-      {
-        "id": 265,
-        "minLevel": 3,
-        "maxLevel": 6,
-        "probability": 0.1569
-      },
-      {
-        "id": 266,
-        "minLevel": 7,
-        "maxLevel": 9,
-        "probability": 0.0784
-      },
-      {
         "id": 267,
         "minLevel": 13,
         "maxLevel": 16,
-        "probability": 0.0294
-      },
-      {
-        "id": 268,
-        "minLevel": 7,
-        "maxLevel": 9,
-        "probability": 0.0784
-      },
-      {
-        "id": 269,
-        "minLevel": 13,
-        "maxLevel": 16,
-        "probability": 0.0294
-      },
-      {
-        "id": 415,
-        "minLevel": 13,
-        "maxLevel": 16,
-        "probability": 0.1275
+        "probability": 0.02941176470588235
       },
       {
         "id": 427,
         "minLevel": 13,
         "maxLevel": 16,
-        "probability": 0.0882
+        "probability": 0.08823529411764705
+      },
+      {
+        "id": 268,
+        "minLevel": 7,
+        "maxLevel": 9,
+        "probability": 0.0784313725490196
+      },
+      {
+        "id": 415,
+        "minLevel": 13,
+        "maxLevel": 16,
+        "probability": 0.12745098039215685
+      },
+      {
+        "id": 269,
+        "minLevel": 13,
+        "maxLevel": 16,
+        "probability": 0.02941176470588235
+      },
+      {
+        "id": 74,
+        "minLevel": 13,
+        "maxLevel": 16,
+        "probability": 0.09803921568627451
+      },
+      {
+        "id": 42,
+        "minLevel": 22,
+        "maxLevel": 25,
+        "probability": 0.02941176470588235
+      },
+      {
+        "id": 54,
+        "minLevel": 13,
+        "maxLevel": 16,
+        "probability": 0.09803921568627451
+      },
+      {
+        "id": 123,
+        "minLevel": 13,
+        "maxLevel": 16,
+        "probability": 0.0588235294117647
+      },
+      {
+        "id": 266,
+        "minLevel": 7,
+        "maxLevel": 9,
+        "probability": 0.0784313725490196
+      },
+      {
+        "id": 265,
+        "minLevel": 3,
+        "maxLevel": 6,
+        "probability": 0.1568627450980392
+      },
+      {
+        "id": 41,
+        "minLevel": 13,
+        "maxLevel": 16,
+        "probability": 0.12745098039215685
       }
     ]
   },
@@ -3681,37 +3669,37 @@ export const hisuiRoutes = {
         "id": 267,
         "minLevel": 15,
         "maxLevel": 18,
-        "probability": 0.0708
-      },
-      {
-        "id": 269,
-        "minLevel": 15,
-        "maxLevel": 18,
-        "probability": 0.0707
-      },
-      {
-        "id": 412,
-        "minLevel": 15,
-        "maxLevel": 18,
-        "probability": 0.3535
-      },
-      {
-        "id": 413,
-        "minLevel": 20,
-        "maxLevel": 23,
-        "probability": 0.0909
-      },
-      {
-        "id": 414,
-        "minLevel": 20,
-        "maxLevel": 23,
-        "probability": 0.0909
+        "probability": 0.07070707070707072
       },
       {
         "id": 415,
         "minLevel": 6,
         "maxLevel": 9,
-        "probability": 0.3232
+        "probability": 0.32323232323232326
+      },
+      {
+        "id": 269,
+        "minLevel": 15,
+        "maxLevel": 18,
+        "probability": 0.07070707070707072
+      },
+      {
+        "id": 414,
+        "minLevel": 20,
+        "maxLevel": 23,
+        "probability": 0.09090909090909091
+      },
+      {
+        "id": 416,
+        "minLevel": 15,
+        "maxLevel": 18,
+        "probability": 0.35353535353535354
+      },
+      {
+        "id": 413,
+        "minLevel": 20,
+        "maxLevel": 23,
+        "probability": 0.09090909090909091
       }
     ]
   },
@@ -3749,73 +3737,73 @@ export const hisuiRoutes = {
         "id": 63,
         "minLevel": 12,
         "maxLevel": 15,
-        "probability": 0.165
-      },
-      {
-        "id": 64,
-        "minLevel": 16,
-        "maxLevel": 19,
-        "probability": 0.0619
-      },
-      {
-        "id": 75,
-        "minLevel": 25,
-        "maxLevel": 28,
-        "probability": 0.0619
-      },
-      {
-        "id": 122,
-        "minLevel": 15,
-        "maxLevel": 18,
-        "probability": 0.0515
-      },
-      {
-        "id": 397,
-        "minLevel": 15,
-        "maxLevel": 18,
-        "probability": 0.0722
-      },
-      {
-        "id": 404,
-        "minLevel": 15,
-        "maxLevel": 18,
-        "probability": 0.0722
-      },
-      {
-        "id": 405,
-        "minLevel": 30,
-        "maxLevel": 33,
-        "probability": 0.0309
-      },
-      {
-        "id": 413,
-        "minLevel": 20,
-        "maxLevel": 23,
-        "probability": 0.0619
-      },
-      {
-        "id": 422,
-        "minLevel": 15,
-        "maxLevel": 18,
-        "probability": 0.1546
-      },
-      {
-        "id": 423,
-        "minLevel": 30,
-        "maxLevel": 33,
-        "probability": 0.0515
+        "probability": 0.173469387755102
       },
       {
         "id": 426,
         "minLevel": 28,
         "maxLevel": 31,
-        "probability": 0.0515
+        "probability": 0.0510204081632653
+      },
+      {
+        "id": 423,
+        "minLevel": 30,
+        "maxLevel": 33,
+        "probability": 0.0510204081632653
+      },
+      {
+        "id": 75,
+        "minLevel": 25,
+        "maxLevel": 28,
+        "probability": 0.06122448979591835
+      },
+      {
+        "id": 64,
+        "minLevel": 16,
+        "maxLevel": 19,
+        "probability": 0.06122448979591835
+      },
+      {
+        "id": 404,
+        "minLevel": 15,
+        "maxLevel": 18,
+        "probability": 0.07142857142857142
+      },
+      {
+        "id": 405,
+        "minLevel": 30,
+        "maxLevel": 33,
+        "probability": 0.030612244897959176
       },
       {
         "id": 439,
         "minLevel": 15,
         "maxLevel": 18,
-        "probability": 0.1649
+        "probability": 0.16326530612244894
+      },
+      {
+        "id": 122,
+        "minLevel": 15,
+        "maxLevel": 18,
+        "probability": 0.0510204081632653
+      },
+      {
+        "id": 422,
+        "minLevel": 15,
+        "maxLevel": 18,
+        "probability": 0.1530612244897959
+      },
+      {
+        "id": 397,
+        "minLevel": 15,
+        "maxLevel": 18,
+        "probability": 0.07142857142857142
+      },
+      {
+        "id": 413,
+        "minLevel": 20,
+        "maxLevel": 23,
+        "probability": 0.06122448979591835
       }
     ]
   },
@@ -4078,10 +4066,10 @@ export const hisuiRoutes = {
   "Worn Bridge (Obsidian Fieldlands)": {
     "pokes": [
       {
-        "id": 41,
+        "id": 412,
         "minLevel": 9,
         "maxLevel": 12,
-        "probability": 0.34
+        "probability": 0.38
       },
       {
         "id": 74,
@@ -4090,10 +4078,10 @@ export const hisuiRoutes = {
         "probability": 0.28
       },
       {
-        "id": 412,
+        "id": 41,
         "minLevel": 9,
         "maxLevel": 12,
-        "probability": 0.38
+        "probability": 0.34
       }
     ]
   },
@@ -4111,16 +4099,10 @@ export const hisuiRoutes = {
   "Obsidian Fieldlands Fishing Spot": {
     "pokes": [
       {
-        "id": 76,
+        "id": 550,
         "minLevel": 10,
         "maxLevel": 12,
-        "probability": 0.07
-      },
-      {
-        "id": 114,
-        "minLevel": 10,
-        "maxLevel": 12,
-        "probability": 0.24
+        "probability": 0.22
       },
       {
         "id": 269,
@@ -4129,7 +4111,7 @@ export const hisuiRoutes = {
         "probability": 0.09
       },
       {
-        "id": 389,
+        "id": 76,
         "minLevel": 10,
         "maxLevel": 12,
         "probability": 0.07
@@ -4141,10 +4123,16 @@ export const hisuiRoutes = {
         "probability": 0.31
       },
       {
-        "id": 550,
+        "id": 114,
         "minLevel": 10,
         "maxLevel": 12,
-        "probability": 0.22
+        "probability": 0.24
+      },
+      {
+        "id": 389,
+        "minLevel": 10,
+        "maxLevel": 12,
+        "probability": 0.07
       }
     ]
   },
@@ -4162,12 +4150,6 @@ export const hisuiRoutes = {
   "Crimson Mirelands Fishing Spot": {
     "pokes": [
       {
-        "id": 265,
-        "minLevel": 38,
-        "maxLevel": 40,
-        "probability": 0.5
-      },
-      {
         "id": 400,
         "minLevel": 38,
         "maxLevel": 40,
@@ -4184,40 +4166,46 @@ export const hisuiRoutes = {
         "minLevel": 38,
         "maxLevel": 40,
         "probability": 0.32
+      },
+      {
+        "id": 265,
+        "minLevel": 38,
+        "maxLevel": 40,
+        "probability": 0.5
       }
     ]
   },
   "Cobalt Coastlands Fishing Spot": {
     "pokes": [
       {
-        "id": 37,
-        "minLevel": 50,
-        "maxLevel": 52,
-        "probability": 0.3435
-      },
-      {
-        "id": 66,
-        "minLevel": 50,
-        "maxLevel": 52,
-        "probability": 0.3333
-      },
-      {
-        "id": 157,
-        "minLevel": 50,
-        "maxLevel": 52,
-        "probability": 0.0606
-      },
-      {
         "id": 400,
         "minLevel": 50,
         "maxLevel": 52,
-        "probability": 0.1212
+        "probability": 0.12121212121212119
       },
       {
         "id": 404,
         "minLevel": 50,
         "maxLevel": 52,
-        "probability": 0.1414
+        "probability": 0.1414141414141414
+      },
+      {
+        "id": 66,
+        "minLevel": 50,
+        "maxLevel": 52,
+        "probability": 0.3333333333333333
+      },
+      {
+        "id": 157,
+        "minLevel": 50,
+        "maxLevel": 52,
+        "probability": 0.060606060606060594
+      },
+      {
+        "id": 37,
+        "minLevel": 50,
+        "maxLevel": 52,
+        "probability": 0.3434343434343434
       }
     ]
   },
@@ -4235,22 +4223,10 @@ export const hisuiRoutes = {
   "Coronet Highlands": {
     "pokes": [
       {
-        "id": 413,
-        "minLevel": 65,
-        "maxLevel": 67,
-        "probability": 0.22
-      },
-      {
-        "id": 423,
-        "minLevel": 65,
-        "maxLevel": 67,
-        "probability": 0.2
-      },
-      {
-        "id": 570,
-        "minLevel": 65,
-        "maxLevel": 67,
-        "probability": 0.58
+        "id": 101.1,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 1
       }
     ]
   },
@@ -4279,46 +4255,46 @@ export const hisuiRoutes = {
   "Coronet Highlands Fishing Spot": {
     "pokes": [
       {
-        "id": 156,
-        "minLevel": 79,
-        "maxLevel": 81,
-        "probability": 0.0809
-      },
-      {
-        "id": 266,
-        "minLevel": 79,
-        "maxLevel": 81,
-        "probability": 0.1616
-      },
-      {
-        "id": 396,
-        "minLevel": 79,
-        "maxLevel": 81,
-        "probability": 0.2828
-      },
-      {
         "id": 400,
         "minLevel": 79,
         "maxLevel": 81,
-        "probability": 0.0808
-      },
-      {
-        "id": 403,
-        "minLevel": 79,
-        "maxLevel": 81,
-        "probability": 0.2626
+        "probability": 0.0808080808080808
       },
       {
         "id": 404,
         "minLevel": 79,
         "maxLevel": 81,
-        "probability": 0.0909
+        "probability": 0.0909090909090909
+      },
+      {
+        "id": 156,
+        "minLevel": 79,
+        "maxLevel": 81,
+        "probability": 0.0808080808080808
       },
       {
         "id": 503,
         "minLevel": 79,
         "maxLevel": 81,
-        "probability": 0.0404
+        "probability": 0.0404040404040404
+      },
+      {
+        "id": 403,
+        "minLevel": 79,
+        "maxLevel": 81,
+        "probability": 0.2626262626262626
+      },
+      {
+        "id": 266,
+        "minLevel": 79,
+        "maxLevel": 81,
+        "probability": 0.1616161616161616
+      },
+      {
+        "id": 396,
+        "minLevel": 79,
+        "maxLevel": 81,
+        "probability": 0.2828282828282828
       }
     ]
   },
@@ -4358,47 +4334,87 @@ export const hisuiRoutes = {
   "Etertime Storm": {
     "pokes": [
       {
-        "id": 155,
-        "minLevel": 80,
-        "maxLevel": 82,
-        "probability": 0.2179
-      },
-      {
-        "id": 265,
-        "minLevel": 80,
-        "maxLevel": 82,
-        "probability": 0.3366
-      },
-      {
-        "id": 397,
-        "minLevel": 80,
-        "maxLevel": 82,
-        "probability": 0.099
-      },
-      {
         "id": 399,
         "minLevel": 80,
         "maxLevel": 82,
-        "probability": 0.2673
+        "probability": 0.26732673267326734
+      },
+      {
+        "id": 155,
+        "minLevel": 80,
+        "maxLevel": 82,
+        "probability": 0.21782178217821782
       },
       {
         "id": 723,
         "minLevel": 80,
         "maxLevel": 82,
-        "probability": 0.0792
+        "probability": 0.07920792079207921
+      },
+      {
+        "id": 397,
+        "minLevel": 80,
+        "maxLevel": 82,
+        "probability": 0.09900990099009901
+      },
+      {
+        "id": 265,
+        "minLevel": 80,
+        "maxLevel": 82,
+        "probability": 0.33663366336633666
       }
     ]
   },
-    "Etertime Citadel": {
+  "Etertime Citadel": {
     "pokes": [
-      { "id": 493, "minLevel": 110, "maxLevel": 110, "probability": 0.125 },
-      { "id": 483, "minLevel": 110, "maxLevel": 110, "probability": 0.125 },
-      { "id": 483.1, "minLevel": 110, "maxLevel": 110, "probability": 0.125 },
-      { "id": 484, "minLevel": 110, "maxLevel": 110, "probability": 0.125 },
-      { "id": 484.1, "minLevel": 110, "maxLevel": 110, "probability": 0.125 },
-      { "id": 487, "minLevel": 110, "maxLevel": 110, "probability": 0.125 },
-      { "id": 487.1, "minLevel": 110, "maxLevel": 110, "probability": 0.125 },
-      { "id": 487.2, "minLevel": 110, "maxLevel": 110, "probability": 0.125 }
+      {
+        "id": 493,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 0.125
+      },
+      {
+        "id": 483,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 0.125
+      },
+      {
+        "id": 483.1,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 0.125
+      },
+      {
+        "id": 484,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 0.125
+      },
+      {
+        "id": 484.1,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 0.125
+      },
+      {
+        "id": 487,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 0.125
+      },
+      {
+        "id": 487.1,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 0.125
+      },
+      {
+        "id": 487.2,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 0.125
+      }
     ]
   },
   "Gym of Etertime": {
@@ -4659,249 +4675,319 @@ export const hisuiRoutes = {
   "Incarnate Fields": {
     "pokes": []
   },
-    "Special Route": {
+  "Special Route": {
     "pokes": [
-      { "id": 641, "minLevel": 110, "maxLevel": 110, "probability": 0.0714 },
-      { "id": 641.1, "minLevel": 110, "maxLevel": 110, "probability": 0.0714 },
-      { "id": 641.2, "minLevel": 110, "maxLevel": 110, "probability": 0.0714 },
-      { "id": 642, "minLevel": 110, "maxLevel": 110, "probability": 0.0714 },
-      { "id": 642.1, "minLevel": 110, "maxLevel": 110, "probability": 0.0714 },
-      { "id": 642.2, "minLevel": 110, "maxLevel": 110, "probability": 0.0714 },
-      { "id": 645, "minLevel": 110, "maxLevel": 110, "probability": 0.0714 },
-      { "id": 645.1, "minLevel": 110, "maxLevel": 110, "probability": 0.0714 },
-      { "id": 645.2, "minLevel": 110, "maxLevel": 110, "probability": 0.0714 },
-      { "id": 905, "minLevel": 110, "maxLevel": 110, "probability": 0.0714 },
-      { "id": 905.1, "minLevel": 110, "maxLevel": 110, "probability": 0.0714 },
-      { "id": 905.2, "minLevel": 110, "maxLevel": 110, "probability": 0.0714 },
-      { "id": 706.1, "minLevel": 110, "maxLevel": 110, "probability": 0.0714 },
-      { "id": 445, "minLevel": 110, "maxLevel": 110, "probability": 0.0718 }
+      {
+        "id": 641,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 0.0714
+      },
+      {
+        "id": 641.1,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 0.0714
+      },
+      {
+        "id": 641.2,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 0.0714
+      },
+      {
+        "id": 642,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 0.0714
+      },
+      {
+        "id": 642.1,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 0.0714
+      },
+      {
+        "id": 642.2,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 0.0714
+      },
+      {
+        "id": 645,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 0.0714
+      },
+      {
+        "id": 645.1,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 0.0714
+      },
+      {
+        "id": 645.2,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 0.0714
+      },
+      {
+        "id": 905,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 0.0714
+      },
+      {
+        "id": 905.1,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 0.0714
+      },
+      {
+        "id": 905.2,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 0.0714
+      },
+      {
+        "id": 706.1,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 0.0714
+      },
+      {
+        "id": 445,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 0.0718
+      }
     ]
   },
   "Bonechill Wastes (Space-time Distortion)": {
     "pokes": [
       {
-        "id": 25,
-        "minLevel": 45,
-        "maxLevel": 58,
-        "probability": 0.078
-      },
-      {
-        "id": 26,
-        "minLevel": 50,
+        "id": 502,
+        "minLevel": 60,
         "maxLevel": 63,
-        "probability": 0.0291
-      },
-      {
-        "id": 78,
-        "minLevel": 50,
-        "maxLevel": 63,
-        "probability": 0.0485
-      },
-      {
-        "id": 123,
-        "minLevel": 45,
-        "maxLevel": 58,
-        "probability": 0.0971
-      },
-      {
-        "id": 125,
-        "minLevel": 45,
-        "maxLevel": 58,
-        "probability": 0.0485
+        "probability": 0.05825242718446601
       },
       {
         "id": 133,
         "minLevel": 45,
         "maxLevel": 58,
-        "probability": 0.1456
+        "probability": 0.145631067961165
       },
       {
-        "id": 196,
-        "minLevel": 50,
-        "maxLevel": 63,
-        "probability": 0.0485
-      },
-      {
-        "id": 212,
-        "minLevel": 50,
-        "maxLevel": 63,
-        "probability": 0.0485
-      },
-      {
-        "id": 364,
+        "id": 125,
         "minLevel": 45,
         "maxLevel": 58,
-        "probability": 0.0583
-      },
-      {
-        "id": 365,
-        "minLevel": 50,
-        "maxLevel": 63,
-        "probability": 0.0291
-      },
-      {
-        "id": 465,
-        "minLevel": 50,
-        "maxLevel": 63,
-        "probability": 0.0485
+        "probability": 0.04854368932038834
       },
       {
         "id": 466,
         "minLevel": 50,
         "maxLevel": 63,
-        "probability": 0.0291
+        "probability": 0.029126213592233004
+      },
+      {
+        "id": 196,
+        "minLevel": 50,
+        "maxLevel": 63,
+        "probability": 0.04854368932038834
       },
       {
         "id": 471,
         "minLevel": 50,
         "maxLevel": 63,
-        "probability": 0.0485
+        "probability": 0.04854368932038834
       },
       {
         "id": 501,
         "minLevel": 55,
         "maxLevel": 58,
-        "probability": 0.1553
+        "probability": 0.15533980582524268
       },
       {
-        "id": 502,
-        "minLevel": 60,
+        "id": 25,
+        "minLevel": 45,
+        "maxLevel": 58,
+        "probability": 0.07766990291262134
+      },
+      {
+        "id": 26,
+        "minLevel": 50,
         "maxLevel": 63,
-        "probability": 0.0583
+        "probability": 0.029126213592233004
+      },
+      {
+        "id": 78,
+        "minLevel": 50,
+        "maxLevel": 63,
+        "probability": 0.04854368932038834
       },
       {
         "id": 503,
         "minLevel": 65,
         "maxLevel": 68,
-        "probability": 0.0291
+        "probability": 0.029126213592233004
+      },
+      {
+        "id": 212,
+        "minLevel": 50,
+        "maxLevel": 63,
+        "probability": 0.04854368932038834
+      },
+      {
+        "id": 123,
+        "minLevel": 45,
+        "maxLevel": 58,
+        "probability": 0.09708737864077668
+      },
+      {
+        "id": 364,
+        "minLevel": 45,
+        "maxLevel": 58,
+        "probability": 0.05825242718446601
+      },
+      {
+        "id": 465,
+        "minLevel": 50,
+        "maxLevel": 63,
+        "probability": 0.04854368932038834
+      },
+      {
+        "id": 365,
+        "minLevel": 50,
+        "maxLevel": 63,
+        "probability": 0.029126213592233004
       }
     ]
   },
   "Arena's Approach (Space-time Distortion)": {
     "pokes": [
       {
-        "id": 212,
-        "minLevel": 50,
+        "id": 502,
+        "minLevel": 60,
         "maxLevel": 63,
-        "probability": 0.1616
+        "probability": 0.2
       },
       {
         "id": 501,
         "minLevel": 55,
         "maxLevel": 58,
-        "probability": 0.5354
-      },
-      {
-        "id": 502,
-        "minLevel": 60,
-        "maxLevel": 63,
-        "probability": 0.202
+        "probability": 0.54
       },
       {
         "id": 503,
         "minLevel": 65,
         "maxLevel": 68,
-        "probability": 0.101
+        "probability": 0.1
+      },
+      {
+        "id": 212,
+        "minLevel": 50,
+        "maxLevel": 63,
+        "probability": 0.16
       }
     ]
   },
   "Heart's Crag (Space-time Distortion)": {
     "pokes": [
       {
-        "id": 25,
-        "minLevel": 45,
-        "maxLevel": 58,
-        "probability": 0.078
-      },
-      {
-        "id": 26,
-        "minLevel": 50,
+        "id": 502,
+        "minLevel": 60,
         "maxLevel": 63,
-        "probability": 0.0291
-      },
-      {
-        "id": 78,
-        "minLevel": 50,
-        "maxLevel": 63,
-        "probability": 0.0485
-      },
-      {
-        "id": 123,
-        "minLevel": 45,
-        "maxLevel": 58,
-        "probability": 0.0971
-      },
-      {
-        "id": 125,
-        "minLevel": 45,
-        "maxLevel": 58,
-        "probability": 0.0485
+        "probability": 0.05825242718446601
       },
       {
         "id": 133,
         "minLevel": 45,
         "maxLevel": 58,
-        "probability": 0.1456
+        "probability": 0.145631067961165
       },
       {
-        "id": 196,
-        "minLevel": 50,
-        "maxLevel": 63,
-        "probability": 0.0485
-      },
-      {
-        "id": 212,
-        "minLevel": 50,
-        "maxLevel": 63,
-        "probability": 0.0485
-      },
-      {
-        "id": 364,
+        "id": 125,
         "minLevel": 45,
         "maxLevel": 58,
-        "probability": 0.0583
-      },
-      {
-        "id": 365,
-        "minLevel": 50,
-        "maxLevel": 63,
-        "probability": 0.0291
-      },
-      {
-        "id": 465,
-        "minLevel": 50,
-        "maxLevel": 63,
-        "probability": 0.0485
+        "probability": 0.04854368932038834
       },
       {
         "id": 466,
         "minLevel": 50,
         "maxLevel": 63,
-        "probability": 0.0291
+        "probability": 0.029126213592233004
+      },
+      {
+        "id": 196,
+        "minLevel": 50,
+        "maxLevel": 63,
+        "probability": 0.04854368932038834
       },
       {
         "id": 471,
         "minLevel": 50,
         "maxLevel": 63,
-        "probability": 0.0485
+        "probability": 0.04854368932038834
       },
       {
         "id": 501,
         "minLevel": 55,
         "maxLevel": 58,
-        "probability": 0.1553
+        "probability": 0.15533980582524268
       },
       {
-        "id": 502,
-        "minLevel": 60,
+        "id": 25,
+        "minLevel": 45,
+        "maxLevel": 58,
+        "probability": 0.07766990291262134
+      },
+      {
+        "id": 26,
+        "minLevel": 50,
         "maxLevel": 63,
-        "probability": 0.0583
+        "probability": 0.029126213592233004
+      },
+      {
+        "id": 78,
+        "minLevel": 50,
+        "maxLevel": 63,
+        "probability": 0.04854368932038834
       },
       {
         "id": 503,
         "minLevel": 65,
         "maxLevel": 68,
-        "probability": 0.0291
+        "probability": 0.029126213592233004
+      },
+      {
+        "id": 212,
+        "minLevel": 50,
+        "maxLevel": 63,
+        "probability": 0.04854368932038834
+      },
+      {
+        "id": 123,
+        "minLevel": 45,
+        "maxLevel": 58,
+        "probability": 0.09708737864077668
+      },
+      {
+        "id": 364,
+        "minLevel": 45,
+        "maxLevel": 58,
+        "probability": 0.05825242718446601
+      },
+      {
+        "id": 465,
+        "minLevel": 50,
+        "maxLevel": 63,
+        "probability": 0.04854368932038834
+      },
+      {
+        "id": 365,
+        "minLevel": 50,
+        "maxLevel": 63,
+        "probability": 0.029126213592233004
       }
     ]
   },
@@ -4952,106 +5038,106 @@ export const hisuiRoutes = {
   "Celestica Trail (Space-time Distortion)": {
     "pokes": [
       {
-        "id": 126,
-        "minLevel": 35,
-        "maxLevel": 53,
-        "probability": 0.0397
-      },
-      {
-        "id": 133,
-        "minLevel": 35,
-        "maxLevel": 53,
-        "probability": 0.1287
-      },
-      {
-        "id": 135,
+        "id": 424,
         "minLevel": 40,
         "maxLevel": 58,
-        "probability": 0.0396
-      },
-      {
-        "id": 224,
-        "minLevel": 35,
-        "maxLevel": 53,
-        "probability": 0.0396
-      },
-      {
-        "id": 356,
-        "minLevel": 37,
-        "maxLevel": 55,
-        "probability": 0.0495
-      },
-      {
-        "id": 408,
-        "minLevel": 35,
-        "maxLevel": 53,
-        "probability": 0.1188
-      },
-      {
-        "id": 409,
-        "minLevel": 40,
-        "maxLevel": 58,
-        "probability": 0.0396
-      },
-      {
-        "id": 410,
-        "minLevel": 35,
-        "maxLevel": 53,
-        "probability": 0.1188
+        "probability": 0.0396039603960396
       },
       {
         "id": 411,
         "minLevel": 40,
         "maxLevel": 58,
-        "probability": 0.0396
+        "probability": 0.0396039603960396
       },
       {
-        "id": 424,
-        "minLevel": 40,
-        "maxLevel": 58,
-        "probability": 0.0396
-      },
-      {
-        "id": 452,
-        "minLevel": 40,
-        "maxLevel": 58,
-        "probability": 0.0396
-      },
-      {
-        "id": 467,
-        "minLevel": 40,
-        "maxLevel": 58,
-        "probability": 0.0297
-      },
-      {
-        "id": 477,
-        "minLevel": 45,
-        "maxLevel": 63,
-        "probability": 0.0297
-      },
-      {
-        "id": 700,
-        "minLevel": 40,
-        "maxLevel": 58,
-        "probability": 0.0396
-      },
-      {
-        "id": 722,
-        "minLevel": 50,
+        "id": 408,
+        "minLevel": 35,
         "maxLevel": 53,
-        "probability": 0.1287
+        "probability": 0.11881188118811878
       },
       {
         "id": 723,
         "minLevel": 55,
         "maxLevel": 58,
-        "probability": 0.0495
+        "probability": 0.04950495049504949
       },
       {
         "id": 724,
         "minLevel": 60,
         "maxLevel": 63,
-        "probability": 0.0297
+        "probability": 0.029702970297029695
+      },
+      {
+        "id": 452,
+        "minLevel": 40,
+        "maxLevel": 58,
+        "probability": 0.0396039603960396
+      },
+      {
+        "id": 356,
+        "minLevel": 37,
+        "maxLevel": 55,
+        "probability": 0.04950495049504949
+      },
+      {
+        "id": 477,
+        "minLevel": 45,
+        "maxLevel": 63,
+        "probability": 0.029702970297029695
+      },
+      {
+        "id": 133,
+        "minLevel": 35,
+        "maxLevel": 53,
+        "probability": 0.1287128712871287
+      },
+      {
+        "id": 135,
+        "minLevel": 40,
+        "maxLevel": 58,
+        "probability": 0.0396039603960396
+      },
+      {
+        "id": 126,
+        "minLevel": 35,
+        "maxLevel": 53,
+        "probability": 0.0396039603960396
+      },
+      {
+        "id": 467,
+        "minLevel": 40,
+        "maxLevel": 58,
+        "probability": 0.029702970297029695
+      },
+      {
+        "id": 224,
+        "minLevel": 35,
+        "maxLevel": 53,
+        "probability": 0.0396039603960396
+      },
+      {
+        "id": 409,
+        "minLevel": 40,
+        "maxLevel": 58,
+        "probability": 0.0396039603960396
+      },
+      {
+        "id": 722,
+        "minLevel": 50,
+        "maxLevel": 53,
+        "probability": 0.1287128712871287
+      },
+      {
+        "id": 410,
+        "minLevel": 35,
+        "maxLevel": 53,
+        "probability": 0.11881188118811878
+      },
+      {
+        "id": 700,
+        "minLevel": 40,
+        "maxLevel": 58,
+        "probability": 0.0396039603960396
       }
     ]
   },
@@ -5150,412 +5236,412 @@ export const hisuiRoutes = {
   "Celestica Ruins (Space-time Distortion)": {
     "pokes": [
       {
-        "id": 126,
-        "minLevel": 35,
-        "maxLevel": 53,
-        "probability": 0.0397
-      },
-      {
-        "id": 133,
-        "minLevel": 35,
-        "maxLevel": 53,
-        "probability": 0.1287
-      },
-      {
-        "id": 135,
+        "id": 424,
         "minLevel": 40,
         "maxLevel": 58,
-        "probability": 0.0396
-      },
-      {
-        "id": 224,
-        "minLevel": 35,
-        "maxLevel": 53,
-        "probability": 0.0396
-      },
-      {
-        "id": 356,
-        "minLevel": 37,
-        "maxLevel": 55,
-        "probability": 0.0495
-      },
-      {
-        "id": 408,
-        "minLevel": 35,
-        "maxLevel": 53,
-        "probability": 0.1188
-      },
-      {
-        "id": 409,
-        "minLevel": 40,
-        "maxLevel": 58,
-        "probability": 0.0396
-      },
-      {
-        "id": 410,
-        "minLevel": 35,
-        "maxLevel": 53,
-        "probability": 0.1188
+        "probability": 0.0396039603960396
       },
       {
         "id": 411,
         "minLevel": 40,
         "maxLevel": 58,
-        "probability": 0.0396
+        "probability": 0.0396039603960396
       },
       {
-        "id": 424,
-        "minLevel": 40,
-        "maxLevel": 58,
-        "probability": 0.0396
-      },
-      {
-        "id": 452,
-        "minLevel": 40,
-        "maxLevel": 58,
-        "probability": 0.0396
-      },
-      {
-        "id": 467,
-        "minLevel": 40,
-        "maxLevel": 58,
-        "probability": 0.0297
-      },
-      {
-        "id": 477,
-        "minLevel": 45,
-        "maxLevel": 63,
-        "probability": 0.0297
-      },
-      {
-        "id": 700,
-        "minLevel": 40,
-        "maxLevel": 58,
-        "probability": 0.0396
-      },
-      {
-        "id": 722,
-        "minLevel": 50,
+        "id": 408,
+        "minLevel": 35,
         "maxLevel": 53,
-        "probability": 0.1287
+        "probability": 0.11881188118811878
       },
       {
         "id": 723,
         "minLevel": 55,
         "maxLevel": 58,
-        "probability": 0.0495
+        "probability": 0.04950495049504949
       },
       {
         "id": 724,
         "minLevel": 60,
         "maxLevel": 63,
-        "probability": 0.0297
+        "probability": 0.029702970297029695
+      },
+      {
+        "id": 452,
+        "minLevel": 40,
+        "maxLevel": 58,
+        "probability": 0.0396039603960396
+      },
+      {
+        "id": 356,
+        "minLevel": 37,
+        "maxLevel": 55,
+        "probability": 0.04950495049504949
+      },
+      {
+        "id": 477,
+        "minLevel": 45,
+        "maxLevel": 63,
+        "probability": 0.029702970297029695
+      },
+      {
+        "id": 133,
+        "minLevel": 35,
+        "maxLevel": 53,
+        "probability": 0.1287128712871287
+      },
+      {
+        "id": 135,
+        "minLevel": 40,
+        "maxLevel": 58,
+        "probability": 0.0396039603960396
+      },
+      {
+        "id": 126,
+        "minLevel": 35,
+        "maxLevel": 53,
+        "probability": 0.0396039603960396
+      },
+      {
+        "id": 467,
+        "minLevel": 40,
+        "maxLevel": 58,
+        "probability": 0.029702970297029695
+      },
+      {
+        "id": 224,
+        "minLevel": 35,
+        "maxLevel": 53,
+        "probability": 0.0396039603960396
+      },
+      {
+        "id": 409,
+        "minLevel": 40,
+        "maxLevel": 58,
+        "probability": 0.0396039603960396
+      },
+      {
+        "id": 722,
+        "minLevel": 50,
+        "maxLevel": 53,
+        "probability": 0.1287128712871287
+      },
+      {
+        "id": 410,
+        "minLevel": 35,
+        "maxLevel": 53,
+        "probability": 0.11881188118811878
+      },
+      {
+        "id": 700,
+        "minLevel": 40,
+        "maxLevel": 58,
+        "probability": 0.0396039603960396
       }
     ]
   },
   "Sacred Plaza (Space-time Distortion)": {
     "pokes": [
       {
-        "id": 126,
-        "minLevel": 35,
-        "maxLevel": 53,
-        "probability": 0.0397
-      },
-      {
-        "id": 133,
-        "minLevel": 35,
-        "maxLevel": 53,
-        "probability": 0.1287
-      },
-      {
-        "id": 135,
+        "id": 424,
         "minLevel": 40,
         "maxLevel": 58,
-        "probability": 0.0396
-      },
-      {
-        "id": 224,
-        "minLevel": 35,
-        "maxLevel": 53,
-        "probability": 0.0396
-      },
-      {
-        "id": 356,
-        "minLevel": 37,
-        "maxLevel": 55,
-        "probability": 0.0495
-      },
-      {
-        "id": 408,
-        "minLevel": 35,
-        "maxLevel": 53,
-        "probability": 0.1188
-      },
-      {
-        "id": 409,
-        "minLevel": 40,
-        "maxLevel": 58,
-        "probability": 0.0396
-      },
-      {
-        "id": 410,
-        "minLevel": 35,
-        "maxLevel": 53,
-        "probability": 0.1188
+        "probability": 0.0396039603960396
       },
       {
         "id": 411,
         "minLevel": 40,
         "maxLevel": 58,
-        "probability": 0.0396
+        "probability": 0.0396039603960396
       },
       {
-        "id": 424,
-        "minLevel": 40,
-        "maxLevel": 58,
-        "probability": 0.0396
-      },
-      {
-        "id": 452,
-        "minLevel": 40,
-        "maxLevel": 58,
-        "probability": 0.0396
-      },
-      {
-        "id": 467,
-        "minLevel": 40,
-        "maxLevel": 58,
-        "probability": 0.0297
-      },
-      {
-        "id": 477,
-        "minLevel": 45,
-        "maxLevel": 63,
-        "probability": 0.0297
-      },
-      {
-        "id": 700,
-        "minLevel": 40,
-        "maxLevel": 58,
-        "probability": 0.0396
-      },
-      {
-        "id": 722,
-        "minLevel": 50,
+        "id": 408,
+        "minLevel": 35,
         "maxLevel": 53,
-        "probability": 0.1287
+        "probability": 0.11881188118811878
       },
       {
         "id": 723,
         "minLevel": 55,
         "maxLevel": 58,
-        "probability": 0.0495
+        "probability": 0.04950495049504949
       },
       {
         "id": 724,
         "minLevel": 60,
         "maxLevel": 63,
-        "probability": 0.0297
+        "probability": 0.029702970297029695
+      },
+      {
+        "id": 452,
+        "minLevel": 40,
+        "maxLevel": 58,
+        "probability": 0.0396039603960396
+      },
+      {
+        "id": 356,
+        "minLevel": 37,
+        "maxLevel": 55,
+        "probability": 0.04950495049504949
+      },
+      {
+        "id": 477,
+        "minLevel": 45,
+        "maxLevel": 63,
+        "probability": 0.029702970297029695
+      },
+      {
+        "id": 133,
+        "minLevel": 35,
+        "maxLevel": 53,
+        "probability": 0.1287128712871287
+      },
+      {
+        "id": 135,
+        "minLevel": 40,
+        "maxLevel": 58,
+        "probability": 0.0396039603960396
+      },
+      {
+        "id": 126,
+        "minLevel": 35,
+        "maxLevel": 53,
+        "probability": 0.0396039603960396
+      },
+      {
+        "id": 467,
+        "minLevel": 40,
+        "maxLevel": 58,
+        "probability": 0.029702970297029695
+      },
+      {
+        "id": 224,
+        "minLevel": 35,
+        "maxLevel": 53,
+        "probability": 0.0396039603960396
+      },
+      {
+        "id": 409,
+        "minLevel": 40,
+        "maxLevel": 58,
+        "probability": 0.0396039603960396
+      },
+      {
+        "id": 722,
+        "minLevel": 50,
+        "maxLevel": 53,
+        "probability": 0.1287128712871287
+      },
+      {
+        "id": 410,
+        "minLevel": 35,
+        "maxLevel": 53,
+        "probability": 0.11881188118811878
+      },
+      {
+        "id": 700,
+        "minLevel": 40,
+        "maxLevel": 58,
+        "probability": 0.0396039603960396
       }
     ]
   },
   "Gapejaw Bog (Space-time Distortion)": {
     "pokes": [
       {
-        "id": 133,
-        "minLevel": 20,
-        "maxLevel": 55,
-        "probability": 0.1387
-      },
-      {
-        "id": 136,
-        "minLevel": 25,
-        "maxLevel": 60,
-        "probability": 0.0396
-      },
-      {
-        "id": 137,
-        "minLevel": 20,
-        "maxLevel": 55,
-        "probability": 0.1089
-      },
-      {
-        "id": 143,
-        "minLevel": 30,
-        "maxLevel": 65,
-        "probability": 0.0396
-      },
-      {
         "id": 155,
         "minLevel": 52,
         "maxLevel": 55,
-        "probability": 0.1485
-      },
-      {
-        "id": 156,
-        "minLevel": 52,
-        "maxLevel": 55,
-        "probability": 0.0594
-      },
-      {
-        "id": 157,
-        "minLevel": 68,
-        "maxLevel": 71,
-        "probability": 0.0297
-      },
-      {
-        "id": 197,
-        "minLevel": 25,
-        "maxLevel": 60,
-        "probability": 0.0396
-      },
-      {
-        "id": 214,
-        "minLevel": 20,
-        "maxLevel": 55,
-        "probability": 0.0891
-      },
-      {
-        "id": 233,
-        "minLevel": 25,
-        "maxLevel": 60,
-        "probability": 0.0396
-      },
-      {
-        "id": 404,
-        "minLevel": 20,
-        "maxLevel": 55,
-        "probability": 0.0594
-      },
-      {
-        "id": 405,
-        "minLevel": 30,
-        "maxLevel": 65,
-        "probability": 0.0297
-      },
-      {
-        "id": 419,
-        "minLevel": 26,
-        "maxLevel": 61,
-        "probability": 0.0495
+        "probability": 0.14851485148514848
       },
       {
         "id": 426,
         "minLevel": 28,
         "maxLevel": 63,
-        "probability": 0.0495
+        "probability": 0.04950495049504949
+      },
+      {
+        "id": 133,
+        "minLevel": 20,
+        "maxLevel": 55,
+        "probability": 0.1386138613861386
+      },
+      {
+        "id": 136,
+        "minLevel": 25,
+        "maxLevel": 60,
+        "probability": 0.0396039603960396
+      },
+      {
+        "id": 419,
+        "minLevel": 26,
+        "maxLevel": 61,
+        "probability": 0.04950495049504949
+      },
+      {
+        "id": 214,
+        "minLevel": 20,
+        "maxLevel": 55,
+        "probability": 0.08910891089108909
       },
       {
         "id": 428,
         "minLevel": 25,
         "maxLevel": 60,
-        "probability": 0.0495
+        "probability": 0.04950495049504949
+      },
+      {
+        "id": 404,
+        "minLevel": 20,
+        "maxLevel": 55,
+        "probability": 0.05940594059405939
+      },
+      {
+        "id": 405,
+        "minLevel": 30,
+        "maxLevel": 65,
+        "probability": 0.029702970297029695
+      },
+      {
+        "id": 137,
+        "minLevel": 20,
+        "maxLevel": 55,
+        "probability": 0.10891089108910888
+      },
+      {
+        "id": 233,
+        "minLevel": 25,
+        "maxLevel": 60,
+        "probability": 0.0396039603960396
       },
       {
         "id": 474,
         "minLevel": 30,
         "maxLevel": 65,
-        "probability": 0.0297
+        "probability": 0.029702970297029695
+      },
+      {
+        "id": 156,
+        "minLevel": 52,
+        "maxLevel": 55,
+        "probability": 0.05940594059405939
+      },
+      {
+        "id": 143,
+        "minLevel": 30,
+        "maxLevel": 65,
+        "probability": 0.0396039603960396
+      },
+      {
+        "id": 157,
+        "minLevel": 68,
+        "maxLevel": 71,
+        "probability": 0.029702970297029695
+      },
+      {
+        "id": 197,
+        "minLevel": 25,
+        "maxLevel": 60,
+        "probability": 0.0396039603960396
       }
     ]
   },
   "Holm of Trials (Space-time Distortion)": {
     "pokes": [
       {
-        "id": 133,
-        "minLevel": 20,
-        "maxLevel": 55,
-        "probability": 0.1387
-      },
-      {
-        "id": 136,
-        "minLevel": 25,
-        "maxLevel": 60,
-        "probability": 0.0396
-      },
-      {
-        "id": 137,
-        "minLevel": 20,
-        "maxLevel": 55,
-        "probability": 0.1089
-      },
-      {
-        "id": 143,
-        "minLevel": 30,
-        "maxLevel": 65,
-        "probability": 0.0396
-      },
-      {
         "id": 155,
         "minLevel": 52,
         "maxLevel": 55,
-        "probability": 0.1485
-      },
-      {
-        "id": 156,
-        "minLevel": 52,
-        "maxLevel": 55,
-        "probability": 0.0594
-      },
-      {
-        "id": 157,
-        "minLevel": 68,
-        "maxLevel": 71,
-        "probability": 0.0297
-      },
-      {
-        "id": 197,
-        "minLevel": 25,
-        "maxLevel": 60,
-        "probability": 0.0396
-      },
-      {
-        "id": 214,
-        "minLevel": 20,
-        "maxLevel": 55,
-        "probability": 0.0891
-      },
-      {
-        "id": 233,
-        "minLevel": 25,
-        "maxLevel": 60,
-        "probability": 0.0396
-      },
-      {
-        "id": 404,
-        "minLevel": 20,
-        "maxLevel": 55,
-        "probability": 0.0594
-      },
-      {
-        "id": 405,
-        "minLevel": 30,
-        "maxLevel": 65,
-        "probability": 0.0297
-      },
-      {
-        "id": 419,
-        "minLevel": 26,
-        "maxLevel": 61,
-        "probability": 0.0495
+        "probability": 0.14851485148514848
       },
       {
         "id": 426,
         "minLevel": 28,
         "maxLevel": 63,
-        "probability": 0.0495
+        "probability": 0.04950495049504949
+      },
+      {
+        "id": 133,
+        "minLevel": 20,
+        "maxLevel": 55,
+        "probability": 0.1386138613861386
+      },
+      {
+        "id": 136,
+        "minLevel": 25,
+        "maxLevel": 60,
+        "probability": 0.0396039603960396
+      },
+      {
+        "id": 419,
+        "minLevel": 26,
+        "maxLevel": 61,
+        "probability": 0.04950495049504949
+      },
+      {
+        "id": 214,
+        "minLevel": 20,
+        "maxLevel": 55,
+        "probability": 0.08910891089108909
       },
       {
         "id": 428,
         "minLevel": 25,
         "maxLevel": 60,
-        "probability": 0.0495
+        "probability": 0.04950495049504949
+      },
+      {
+        "id": 404,
+        "minLevel": 20,
+        "maxLevel": 55,
+        "probability": 0.05940594059405939
+      },
+      {
+        "id": 405,
+        "minLevel": 30,
+        "maxLevel": 65,
+        "probability": 0.029702970297029695
+      },
+      {
+        "id": 137,
+        "minLevel": 20,
+        "maxLevel": 55,
+        "probability": 0.10891089108910888
+      },
+      {
+        "id": 233,
+        "minLevel": 25,
+        "maxLevel": 60,
+        "probability": 0.0396039603960396
       },
       {
         "id": 474,
         "minLevel": 30,
         "maxLevel": 65,
-        "probability": 0.0297
+        "probability": 0.029702970297029695
+      },
+      {
+        "id": 156,
+        "minLevel": 52,
+        "maxLevel": 55,
+        "probability": 0.05940594059405939
+      },
+      {
+        "id": 143,
+        "minLevel": 30,
+        "maxLevel": 65,
+        "probability": 0.0396039603960396
+      },
+      {
+        "id": 157,
+        "minLevel": 68,
+        "maxLevel": 71,
+        "probability": 0.029702970297029695
+      },
+      {
+        "id": 197,
+        "minLevel": 25,
+        "maxLevel": 60,
+        "probability": 0.0396039603960396
       }
     ]
   },
@@ -5662,164 +5748,164 @@ export const hisuiRoutes = {
   "Horseshoe Plains (Space-time Distortion)": {
     "pokes": [
       {
-        "id": 93,
-        "minLevel": 25,
-        "maxLevel": 60,
-        "probability": 0.0613
+        "id": 133,
+        "minLevel": 20,
+        "maxLevel": 55,
+        "probability": 0.16326530612244894
       },
       {
         "id": 94,
         "minLevel": 25,
         "maxLevel": 60,
-        "probability": 0.0306
+        "probability": 0.030612244897959176
       },
       {
-        "id": 95,
-        "minLevel": 20,
-        "maxLevel": 55,
-        "probability": 0.1327
-      },
-      {
-        "id": 108,
-        "minLevel": 20,
-        "maxLevel": 55,
-        "probability": 0.1327
-      },
-      {
-        "id": 133,
-        "minLevel": 20,
-        "maxLevel": 55,
-        "probability": 0.1633
-      },
-      {
-        "id": 208,
+        "id": 93,
         "minLevel": 25,
         "maxLevel": 60,
-        "probability": 0.051
-      },
-      {
-        "id": 215,
-        "minLevel": 20,
-        "maxLevel": 55,
-        "probability": 0.1224
-      },
-      {
-        "id": 217,
-        "minLevel": 30,
-        "maxLevel": 65,
-        "probability": 0.051
-      },
-      {
-        "id": 454,
-        "minLevel": 37,
-        "maxLevel": 72,
-        "probability": 0.051
-      },
-      {
-        "id": 461,
-        "minLevel": 25,
-        "maxLevel": 60,
-        "probability": 0.051
-      },
-      {
-        "id": 463,
-        "minLevel": 25,
-        "maxLevel": 60,
-        "probability": 0.051
+        "probability": 0.06122448979591835
       },
       {
         "id": 470,
         "minLevel": 25,
         "maxLevel": 60,
-        "probability": 0.051
+        "probability": 0.0510204081632653
+      },
+      {
+        "id": 463,
+        "minLevel": 25,
+        "maxLevel": 60,
+        "probability": 0.0510204081632653
+      },
+      {
+        "id": 108,
+        "minLevel": 20,
+        "maxLevel": 55,
+        "probability": 0.13265306122448978
+      },
+      {
+        "id": 95,
+        "minLevel": 20,
+        "maxLevel": 55,
+        "probability": 0.13265306122448978
+      },
+      {
+        "id": 215,
+        "minLevel": 20,
+        "maxLevel": 55,
+        "probability": 0.1224489795918367
+      },
+      {
+        "id": 208,
+        "minLevel": 25,
+        "maxLevel": 60,
+        "probability": 0.0510204081632653
       },
       {
         "id": 700,
         "minLevel": 25,
         "maxLevel": 60,
-        "probability": 0.051
+        "probability": 0.0510204081632653
+      },
+      {
+        "id": 454,
+        "minLevel": 37,
+        "maxLevel": 72,
+        "probability": 0.0510204081632653
+      },
+      {
+        "id": 217,
+        "minLevel": 30,
+        "maxLevel": 65,
+        "probability": 0.0510204081632653
+      },
+      {
+        "id": 461,
+        "minLevel": 25,
+        "maxLevel": 60,
+        "probability": 0.0510204081632653
       }
     ]
   },
   "Sandgem Flats (Space-time Distortion)": {
     "pokes": [
       {
-        "id": 93,
-        "minLevel": 25,
-        "maxLevel": 60,
-        "probability": 0.0613
+        "id": 133,
+        "minLevel": 20,
+        "maxLevel": 55,
+        "probability": 0.16326530612244894
       },
       {
         "id": 94,
         "minLevel": 25,
         "maxLevel": 60,
-        "probability": 0.0306
+        "probability": 0.030612244897959176
       },
       {
-        "id": 95,
-        "minLevel": 20,
-        "maxLevel": 55,
-        "probability": 0.1327
-      },
-      {
-        "id": 108,
-        "minLevel": 20,
-        "maxLevel": 55,
-        "probability": 0.1327
-      },
-      {
-        "id": 133,
-        "minLevel": 20,
-        "maxLevel": 55,
-        "probability": 0.1633
-      },
-      {
-        "id": 208,
+        "id": 93,
         "minLevel": 25,
         "maxLevel": 60,
-        "probability": 0.051
-      },
-      {
-        "id": 215,
-        "minLevel": 20,
-        "maxLevel": 55,
-        "probability": 0.1224
-      },
-      {
-        "id": 217,
-        "minLevel": 30,
-        "maxLevel": 65,
-        "probability": 0.051
-      },
-      {
-        "id": 454,
-        "minLevel": 37,
-        "maxLevel": 72,
-        "probability": 0.051
-      },
-      {
-        "id": 461,
-        "minLevel": 25,
-        "maxLevel": 60,
-        "probability": 0.051
-      },
-      {
-        "id": 463,
-        "minLevel": 25,
-        "maxLevel": 60,
-        "probability": 0.051
+        "probability": 0.06122448979591835
       },
       {
         "id": 470,
         "minLevel": 25,
         "maxLevel": 60,
-        "probability": 0.051
+        "probability": 0.0510204081632653
+      },
+      {
+        "id": 463,
+        "minLevel": 25,
+        "maxLevel": 60,
+        "probability": 0.0510204081632653
+      },
+      {
+        "id": 108,
+        "minLevel": 20,
+        "maxLevel": 55,
+        "probability": 0.13265306122448978
+      },
+      {
+        "id": 95,
+        "minLevel": 20,
+        "maxLevel": 55,
+        "probability": 0.13265306122448978
+      },
+      {
+        "id": 215,
+        "minLevel": 20,
+        "maxLevel": 55,
+        "probability": 0.1224489795918367
+      },
+      {
+        "id": 208,
+        "minLevel": 25,
+        "maxLevel": 60,
+        "probability": 0.0510204081632653
       },
       {
         "id": 700,
         "minLevel": 25,
         "maxLevel": 60,
-        "probability": 0.051
+        "probability": 0.0510204081632653
+      },
+      {
+        "id": 454,
+        "minLevel": 37,
+        "maxLevel": 72,
+        "probability": 0.0510204081632653
+      },
+      {
+        "id": 217,
+        "minLevel": 30,
+        "maxLevel": 65,
+        "probability": 0.0510204081632653
+      },
+      {
+        "id": 461,
+        "minLevel": 25,
+        "maxLevel": 60,
+        "probability": 0.0510204081632653
       }
     ]
   },
@@ -5924,19 +6010,183 @@ export const hisuiRoutes = {
   "Moonview Arena (Coronet Highlands)": {
     "pokes": []
   },
-  "Lake Acuity": { "pokes": [{ "id": 480, "minLevel": 110, "maxLevel": 110, "probability": 1.0 }] },
-  "Verity Cavern": { "pokes": [{ "id": 481, "minLevel": 110, "maxLevel": 110, "probability": 1.0 }] },
-  "Valor Cavern": { "pokes": [{ "id": 482, "minLevel": 110, "maxLevel": 110, "probability": 1.0 }] },
-  "Snowpoint Temple": { "pokes": [{ "id": 486, "minLevel": 110, "maxLevel": 110, "probability": 1.0 }] },
-  "Firespit Island": { "pokes": [{ "id": 485, "minLevel": 110, "maxLevel": 110, "probability": 1.0 }] },
-  "??????": { "pokes": [{ "id": 488, "minLevel": 110, "maxLevel": 110, "probability": 1.0 }] },
-  "Mythical Spot": { "pokes": [{ "id": 490, "minLevel": 110, "maxLevel": 110, "probability": 0.1667 }, { "id": 489, "minLevel": 110, "maxLevel": 110, "probability": 0.1667 }, { "id": 491, "minLevel": 110, "maxLevel": 110, "probability": 0.1667 }, { "id": 492, "minLevel": 110, "maxLevel": 110, "probability": 0.1667 }, { "id": 492.1, "minLevel": 110, "maxLevel": 110, "probability": 0.1666 }, { "id": 492.2, "minLevel": 110, "maxLevel": 110, "probability": 0.1666 }] },
-  "Obsidian Fieldlands": { "pokes": [{ "id": 900, "minLevel": 110, "maxLevel": 110, "probability": 1.0 }] },
-  "Crimson Mirelands": { "pokes": [{ "id": 549.1, "minLevel": 110, "maxLevel": 110, "probability": 1.0 }] },
-  "Cobalt Coastlands": { "pokes": [{ "id": 59.1, "minLevel": 110, "maxLevel": 110, "probability": 1.0 }] },
-  "Coronet Highlands": { "pokes": [{ "id": 101.1, "minLevel": 110, "maxLevel": 110, "probability": 1.0 }] },
-  "Alabaster Icelands": { "pokes": [{ "id": 713.1, "minLevel": 110, "maxLevel": 110, "probability": 1.0 }] },
-  "Before Arceus": { "pokes": [{ "id": 899, "minLevel": 110, "maxLevel": 110, "probability": 0.2 }, { "id": 901, "minLevel": 110, "maxLevel": 110, "probability": 0.2 }, { "id": 902, "minLevel": 110, "maxLevel": 110, "probability": 0.2 }, { "id": 903, "minLevel": 110, "maxLevel": 110, "probability": 0.2 }, { "id": 628.1, "minLevel": 110, "maxLevel": 110, "probability": 0.2 }] }
+  "Lake Acuity": {
+    "pokes": [
+      {
+        "id": 480,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 1
+      }
+    ]
+  },
+  "Verity Cavern": {
+    "pokes": [
+      {
+        "id": 481,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 1
+      }
+    ]
+  },
+  "Valor Cavern": {
+    "pokes": [
+      {
+        "id": 482,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 1
+      }
+    ]
+  },
+  "Snowpoint Temple": {
+    "pokes": [
+      {
+        "id": 486,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 1
+      }
+    ]
+  },
+  "Firespit Island": {
+    "pokes": [
+      {
+        "id": 485,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 1
+      }
+    ]
+  },
+  "??????": {
+    "pokes": [
+      {
+        "id": 488,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 1
+      }
+    ]
+  },
+  "Mythical Spot": {
+    "pokes": [
+      {
+        "id": 490,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 0.1667
+      },
+      {
+        "id": 489,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 0.1667
+      },
+      {
+        "id": 491,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 0.1667
+      },
+      {
+        "id": 492,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 0.1667
+      },
+      {
+        "id": 492.1,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 0.1666
+      },
+      {
+        "id": 492.2,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 0.1666
+      }
+    ]
+  },
+  "Obsidian Fieldlands": {
+    "pokes": [
+      {
+        "id": 900,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 1
+      }
+    ]
+  },
+  "Crimson Mirelands": {
+    "pokes": [
+      {
+        "id": 549.1,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 1
+      }
+    ]
+  },
+  "Cobalt Coastlands": {
+    "pokes": [
+      {
+        "id": 59.1,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 1
+      }
+    ]
+  },
+  "Alabaster Icelands": {
+    "pokes": [
+      {
+        "id": 713.1,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 1
+      }
+    ]
+  },
+  "Before Arceus": {
+    "pokes": [
+      {
+        "id": 899,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 0.2
+      },
+      {
+        "id": 901,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 0.2
+      },
+      {
+        "id": 902,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 0.2
+      },
+      {
+        "id": 903,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 0.2
+      },
+      {
+        "id": 628.1,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 0.2
+      }
+    ]
+  },
+  "Moonview Arena": {
+    "pokes": []
+  }
 };
 
 export const hisuiUnlocks = [
@@ -5957,11 +6207,22 @@ export const hisuiUnlocks = [
     "challengeName": "Challenge 02",
     "areaId": "Horseshoe Plains (Obsidian Fieldlands)",
     "unlocks": [
-      "Deertrack Path (Obsidian Fieldlands)"
+      "Deertrack Path (Obsidian Fieldlands)",
+      "Horseshoe Plains (Space-time Distortion)"
     ],
     "requirements": {
       "defeatCountRoute": {
         "routeName": "Horseshoe Plains (Obsidian Fieldlands)",
+        "count": 10
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 02 S",
+    "areaId": "Horseshoe Plains (Space-time Distortion)",
+    "requirements": {
+      "defeatCountRoute": {
+        "routeName": "Horseshoe Plains (Space-time Distortion)",
         "count": 10
       }
     }
@@ -6100,7 +6361,8 @@ export const hisuiUnlocks = [
     "challengeName": "Challenge 13",
     "areaId": "Sandgem Flats (Obsidian Fieldlands)",
     "unlocks": [
-      "Sandgem Flats (Obsidian Fieldlands)"
+      "Sandgem Flats (Obsidian Fieldlands)",
+      "Sandgem Flats (Space-time Distortion)"
     ],
     "requirements": {
       "defeatCountRoute": {
@@ -6110,14 +6372,35 @@ export const hisuiUnlocks = [
     }
   },
   {
+    "challengeName": "Challenge 13 S",
+    "areaId": "Sandgem Flats (Space-time Distortion)",
+    "requirements": {
+      "defeatCountRoute": {
+        "routeName": "Sandgem Flats (Space-time Distortion)",
+        "count": 10
+      }
+    }
+  },
+  {
     "challengeName": "Challenge 14",
     "areaId": "Sandgem Flats (Obsidian Fieldlands)",
     "unlocks": [
-      "Ramanas Island (Obsidian Fieldlands)"
+      "Ramanas Island (Obsidian Fieldlands)",
+      "Sandgem Flats (Space-time Distortion)"
     ],
     "requirements": {
       "defeatCountRoute": {
         "routeName": "Sandgem Flats (Obsidian Fieldlands)",
+        "count": 10
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 14 S",
+    "areaId": "Sandgem Flats (Space-time Distortion)",
+    "requirements": {
+      "defeatCountRoute": {
+        "routeName": "Sandgem Flats (Space-time Distortion)",
         "count": 10
       }
     }
@@ -6139,7 +6422,8 @@ export const hisuiUnlocks = [
     "challengeName": "Challenge 16",
     "areaId": "Gapejaw Bog (Crimson Mirelands)",
     "unlocks": [
-      "Gapejaw Bog (Crimson Mirelands)"
+      "Gapejaw Bog (Crimson Mirelands)",
+      "Gapejaw Bog (Space-time Distortion)"
     ],
     "requirements": {
       "defeatCountRoute": {
@@ -6149,14 +6433,35 @@ export const hisuiUnlocks = [
     }
   },
   {
+    "challengeName": "Challenge 16 S",
+    "areaId": "Gapejaw Bog (Space-time Distortion)",
+    "requirements": {
+      "defeatCountRoute": {
+        "routeName": "Gapejaw Bog (Space-time Distortion)",
+        "count": 10
+      }
+    }
+  },
+  {
     "challengeName": "Challenge 17",
     "areaId": "Gapejaw Bog (Crimson Mirelands)",
     "unlocks": [
-      "Sludge Mound (Crimson Mirelands)"
+      "Sludge Mound (Crimson Mirelands)",
+      "Gapejaw Bog (Space-time Distortion)"
     ],
     "requirements": {
       "defeatCountRoute": {
         "routeName": "Gapejaw Bog (Crimson Mirelands)",
+        "count": 10
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 17 S",
+    "areaId": "Gapejaw Bog (Space-time Distortion)",
+    "requirements": {
+      "defeatCountRoute": {
+        "routeName": "Gapejaw Bog (Space-time Distortion)",
         "count": 10
       }
     }
@@ -6243,11 +6548,22 @@ export const hisuiUnlocks = [
     "challengeName": "Challenge 24",
     "areaId": "Holm of Trials (Crimson Mirelands)",
     "unlocks": [
-      "Ursa's Ring (Crimson Mirelands)"
+      "Ursa's Ring (Crimson Mirelands)",
+      "Holm of Trials (Space-time Distortion)"
     ],
     "requirements": {
       "defeatCountRoute": {
         "routeName": "Holm of Trials (Crimson Mirelands)",
+        "count": 10
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 24 S",
+    "areaId": "Holm of Trials (Space-time Distortion)",
+    "requirements": {
+      "defeatCountRoute": {
+        "routeName": "Holm of Trials (Space-time Distortion)",
         "count": 10
       }
     }
@@ -6282,11 +6598,22 @@ export const hisuiUnlocks = [
     "challengeName": "Challenge 27",
     "areaId": "Ginkgo Landing (Cobalt Coastlands)",
     "unlocks": [
-      "Shrouded Ruins (Crimson Mirelands)"
+      "Shrouded Ruins (Crimson Mirelands)",
+      "Ginkgo Landing (Space-time Distortion)"
     ],
     "requirements": {
       "defeatCountRoute": {
         "routeName": "Ginkgo Landing (Cobalt Coastlands)",
+        "count": 10
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 27 S",
+    "areaId": "Ginkgo Landing (Space-time Distortion)",
+    "requirements": {
+      "defeatCountRoute": {
+        "routeName": "Ginkgo Landing (Space-time Distortion)",
         "count": 10
       }
     }
@@ -6308,11 +6635,22 @@ export const hisuiUnlocks = [
     "challengeName": "Challenge 29",
     "areaId": "Droning Meadow (Crimson Mirelands)",
     "unlocks": [
-      "Grueling Grove (Obsidian Fieldlands)"
+      "Grueling Grove (Obsidian Fieldlands)",
+      "Droning Meadow (Space-time Distortion)"
     ],
     "requirements": {
       "defeatCountRoute": {
         "routeName": "Droning Meadow (Crimson Mirelands)",
+        "count": 10
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 29 S",
+    "areaId": "Droning Meadow (Space-time Distortion)",
+    "requirements": {
+      "defeatCountRoute": {
+        "routeName": "Droning Meadow (Space-time Distortion)",
         "count": 10
       }
     }
@@ -6438,11 +6776,22 @@ export const hisuiUnlocks = [
     "challengeName": "Challenge 39",
     "areaId": "Spring Path (Cobalt Coastlands)",
     "unlocks": [
-      "Firespit Island (Cobalt Coastlands)"
+      "Firespit Island (Cobalt Coastlands)",
+      "Spring Path (Space-time Distortion)"
     ],
     "requirements": {
       "defeatCountRoute": {
         "routeName": "Spring Path (Cobalt Coastlands)",
+        "count": 10
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 39 S",
+    "areaId": "Spring Path (Space-time Distortion)",
+    "requirements": {
+      "defeatCountRoute": {
+        "routeName": "Spring Path (Space-time Distortion)",
         "count": 10
       }
     }
@@ -6529,11 +6878,22 @@ export const hisuiUnlocks = [
     "challengeName": "Challenge 46",
     "areaId": "Celestica Trail (Coronet Highlands)",
     "unlocks": [
-      "Gym - Warden Ingo"
+      "Gym - Warden Ingo",
+      "Celestica Trail (Space-time Distortion)"
     ],
     "requirements": {
       "defeatCountRoute": {
         "routeName": "Celestica Trail (Coronet Highlands)",
+        "count": 10
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 46 S",
+    "areaId": "Celestica Trail (Space-time Distortion)",
+    "requirements": {
+      "defeatCountRoute": {
+        "routeName": "Celestica Trail (Space-time Distortion)",
         "count": 10
       }
     }
@@ -6555,7 +6915,8 @@ export const hisuiUnlocks = [
     "challengeName": "Challenge 48",
     "areaId": "Celestica Ruins (Coronet Highlands)",
     "unlocks": [
-      "Sacred Plaza (Coronet Highlands)"
+      "Sacred Plaza (Coronet Highlands)",
+      "Celestica Ruins (Space-time Distortion)"
     ],
     "requirements": {
       "defeatCountRoute": {
@@ -6565,10 +6926,21 @@ export const hisuiUnlocks = [
     }
   },
   {
+    "challengeName": "Challenge 48 S",
+    "areaId": "Celestica Ruins (Space-time Distortion)",
+    "requirements": {
+      "defeatCountRoute": {
+        "routeName": "Celestica Ruins (Space-time Distortion)",
+        "count": 10
+      }
+    }
+  },
+  {
     "challengeName": "Challenge 49",
     "areaId": "Sacred Plaza (Coronet Highlands)",
     "unlocks": [
-      "Stonetooth Rows (Coronet Highlands)"
+      "Stonetooth Rows (Coronet Highlands)",
+      "Sacred Plaza (Space-time Distortion)"
     ],
     "requirements": {
       "defeatCountRoute": {
@@ -6578,14 +6950,35 @@ export const hisuiUnlocks = [
     }
   },
   {
+    "challengeName": "Challenge 49 S",
+    "areaId": "Sacred Plaza (Space-time Distortion)",
+    "requirements": {
+      "defeatCountRoute": {
+        "routeName": "Sacred Plaza (Space-time Distortion)",
+        "count": 10
+      }
+    }
+  },
+  {
     "challengeName": "Challenge 50",
     "areaId": "Stonetooth Rows (Coronet Highlands)",
     "unlocks": [
-      "Primeval Grotto (Coronet Highlands)"
+      "Primeval Grotto (Coronet Highlands)",
+      "Stonetooth Rows (Space-time Distortion)"
     ],
     "requirements": {
       "defeatCountRoute": {
         "routeName": "Stonetooth Rows (Coronet Highlands)",
+        "count": 10
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 50 S",
+    "areaId": "Stonetooth Rows (Space-time Distortion)",
+    "requirements": {
+      "defeatCountRoute": {
+        "routeName": "Stonetooth Rows (Space-time Distortion)",
         "count": 10
       }
     }
@@ -6672,7 +7065,8 @@ export const hisuiUnlocks = [
     "challengeName": "Challenge 57",
     "areaId": "Bonechill Wastes (Alabaster Icelands)",
     "unlocks": [
-      "Bonechill Wastes (Alabaster Icelands)"
+      "Bonechill Wastes (Alabaster Icelands)",
+      "Bonechill Wastes (Space-time Distortion)"
     ],
     "requirements": {
       "defeatCountRoute": {
@@ -6682,14 +7076,35 @@ export const hisuiUnlocks = [
     }
   },
   {
+    "challengeName": "Challenge 57 S",
+    "areaId": "Bonechill Wastes (Space-time Distortion)",
+    "requirements": {
+      "defeatCountRoute": {
+        "routeName": "Bonechill Wastes (Space-time Distortion)",
+        "count": 10
+      }
+    }
+  },
+  {
     "challengeName": "Challenge 58",
     "areaId": "Bonechill Wastes (Alabaster Icelands)",
     "unlocks": [
-      "Glacier Terrace (Alabaster Icelands)"
+      "Glacier Terrace (Alabaster Icelands)",
+      "Bonechill Wastes (Space-time Distortion)"
     ],
     "requirements": {
       "defeatCountRoute": {
         "routeName": "Bonechill Wastes (Alabaster Icelands)",
+        "count": 10
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 58 S",
+    "areaId": "Bonechill Wastes (Space-time Distortion)",
+    "requirements": {
+      "defeatCountRoute": {
+        "routeName": "Bonechill Wastes (Space-time Distortion)",
         "count": 10
       }
     }
@@ -6711,11 +7126,22 @@ export const hisuiUnlocks = [
     "challengeName": "Challenge 60",
     "areaId": "Heart's Crag (Alabaster Icelands)",
     "unlocks": [
-      "Snowpoint Temple (Alabaster Icelands)"
+      "Snowpoint Temple (Alabaster Icelands)",
+      "Heart's Crag (Space-time Distortion)"
     ],
     "requirements": {
       "defeatCountRoute": {
         "routeName": "Heart's Crag (Alabaster Icelands)",
+        "count": 10
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 60 S",
+    "areaId": "Heart's Crag (Space-time Distortion)",
+    "requirements": {
+      "defeatCountRoute": {
+        "routeName": "Heart's Crag (Space-time Distortion)",
         "count": 10
       }
     }
@@ -6737,11 +7163,22 @@ export const hisuiUnlocks = [
     "challengeName": "Challenge 62",
     "areaId": "Arena's Approach (Alabaster Icelands)",
     "unlocks": [
-      "Gym - Avalugg"
+      "Gym - Avalugg",
+      "Arena's Approach (Space-time Distortion)"
     ],
     "requirements": {
       "defeatCountRoute": {
         "routeName": "Arena's Approach (Alabaster Icelands)",
+        "count": 10
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 62 S",
+    "areaId": "Arena's Approach (Space-time Distortion)",
+    "requirements": {
+      "defeatCountRoute": {
+        "routeName": "Arena's Approach (Space-time Distortion)",
         "count": 10
       }
     }
