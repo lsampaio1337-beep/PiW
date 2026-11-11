@@ -889,32 +889,43 @@ function scheduleDefeatCallbacks(ball, ballResult, shakeInterval, captureCallbac
 
 
 
-function logGymCombat(target, moveName, moveType, amount) {
-    const log = document.getElementById('gym-combat-log');
-    if (!log) return;
+export function getGymCombatInfo(target, moveName, moveType, amount) {
+    const attacker = target === 'player' ? 'Enemy' : 'You';
+    const typeColor = TYPE_COLORS[moveType] || '#ffffff';
+    return { attacker, typeColor, moveName, amount };
+}
+
+function createGymCombatNode(target, moveName, moveType, amount) {
+    const info = getGymCombatInfo(target, moveName, moveType, amount);
 
     const entry = document.createElement('div');
     entry.style.marginBottom = '2px';
-    const attacker = target === 'player' ? 'Enemy' : 'You';
-    const typeColor = TYPE_COLORS[moveType] || '#ffffff';
 
     // Mitigate XSS: Build inner node safely
-    entry.textContent = `${attacker} used `;
+    entry.textContent = `${info.attacker} used `;
 
     const bNode = document.createElement('b');
-    bNode.style.color = typeColor;
-    bNode.textContent = moveName;
+    bNode.style.color = info.typeColor;
+    bNode.textContent = info.moveName;
     entry.appendChild(bNode);
 
     entry.appendChild(document.createTextNode(' for '));
 
     const spanNode = document.createElement('span');
-    spanNode.style.color = typeColor;
-    spanNode.textContent = amount;
+    spanNode.style.color = info.typeColor;
+    spanNode.textContent = info.amount;
     entry.appendChild(spanNode);
 
     entry.appendChild(document.createTextNode(' dmg!'));
 
+    return entry;
+}
+
+function logGymCombat(target, moveName, moveType, amount) {
+    const log = document.getElementById('gym-combat-log');
+    if (!log) return;
+
+    const entry = createGymCombatNode(target, moveName, moveType, amount);
     log.appendChild(entry);
 
     // Keep only last 4 entries
