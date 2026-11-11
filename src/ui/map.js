@@ -641,19 +641,41 @@ export function navigateToLocation(locationName) {
 
         const safariCost = state.config.balance.safariZonePrice || 500;
 
+        const innerModal = document.getElementById("map-inner-modal");
+        if (innerModal) {
+            innerModal.classList.remove('floating-window');
+            innerModal.style.display = 'inline-block';
+            innerModal.style.width = 'max-content';
+            innerModal.style.height = 'max-content';
+            innerModal.style.backgroundColor = '#34495e';
+            innerModal.style.border = '2px solid #1abc9c';
+            innerModal.style.borderRadius = '8px';
+            innerModal.style.boxShadow = '0 4px 15px rgba(0,0,0,0.5)';
+            innerModal.style.overflow = 'hidden';
+            innerModal.style.position = 'relative';
+        }
+        const container = vModal.closest('.window-content-container');
+        if (container) {
+            container.style.display = "block";
+            container.style.width = "max-content";
+            container.style.height = "max-content";
+            container.style.overflow = "visible";
+            container.style.padding = "0";
+            container.style.margin = "0";
+        }
+
         vModal.replaceChildren();
         vModal.style.position = "relative";
-        vModal.style.height = "100%";
+        vModal.style.height = "max-content";
         vModal.style.backgroundImage = "none";
-        vModal.style.display = "flex";
-        vModal.style.alignItems = "center";
-        vModal.style.justifyContent = "center";
-        vModal.style.width = "100%";
+        vModal.style.display = "block";
+        vModal.style.width = "max-content";
         vModal.style.padding = "0";
+        vModal.style.margin = "0";
 
         let html = `
-            <div style="position: relative; display: inline-block; max-width: 100%; max-height: 100%;">
-                <img src="Assets/BG/SafariZone.png" style="display: block; max-width: 100%; max-height: 100%; object-fit: contain;">
+            <div style="position: relative; display: block; max-height: 90vh; max-width: 90vw;">
+                <img src="Assets/BG/SafariZone.png" style="display: block; max-height: 90vh; max-width: 90vw; object-fit: contain;">
                 <div style="position: absolute; top: 30%; left: 50%; transform: translateX(-50%); text-align: center; color: white; background: rgba(0,0,0,0.8); padding: 20px; border-radius: 10px; font-size: 14px; width: 80%; font-family: monospace;">
                     <p style="margin:0 0 15px 0;">Welcome to ${locationName}! Here we charge a fee per battle you have and you can use our SafariBalls at will. Do you wanna enter ${locationName}?</p>
                     <button onclick="window.enterSafariZone()" class="action-btn action-btn-primary">Enter ($${safariCost})</button>
@@ -671,23 +693,45 @@ export function navigateToLocation(locationName) {
         const vModalTitle = document.getElementById("map-inner-modal-title");
         if (vModalTitle) vModalTitle.innerText = locationName;
 
+        const innerModal = document.getElementById("map-inner-modal");
+        if (innerModal) {
+            innerModal.classList.remove('floating-window');
+            innerModal.style.display = 'inline-block';
+            innerModal.style.width = 'max-content';
+            innerModal.style.height = 'max-content';
+            innerModal.style.backgroundColor = '#34495e';
+            innerModal.style.border = '2px solid #1abc9c';
+            innerModal.style.borderRadius = '8px';
+            innerModal.style.boxShadow = '0 4px 15px rgba(0,0,0,0.5)';
+            innerModal.style.overflow = 'hidden';
+            innerModal.style.position = 'relative';
+        }
+        const container = vModal.closest('.window-content-container');
+        if (container) {
+            container.style.display = "block";
+            container.style.width = "max-content";
+            container.style.height = "max-content";
+            container.style.overflow = "visible";
+            container.style.padding = "0";
+            container.style.margin = "0";
+        }
+
         vModal.replaceChildren();
         vModal.style.position = "relative";
-        vModal.style.height = "100%";
+        vModal.style.height = "max-content";
         vModal.style.backgroundImage = "none";
-        vModal.style.display = "flex";
-        vModal.style.alignItems = "center";
-        vModal.style.justifyContent = "center";
+        vModal.style.display = "block";
         vModal.style.backgroundColor = "transparent";
-        vModal.style.width = "100%";
+        vModal.style.width = "max-content";
         vModal.style.padding = "0";
+        vModal.style.margin = "0";
 
         const completedChallenges = state.stats.completedChallengeIds || [];
         const isUnlockedByAreaId = (areaId) => completedChallenges.some(id => parseAreaNames(id).includes(areaId));
 
         let machinesHtml = `
-            <div style="position: relative; display: inline-block; max-width: 100%; max-height: 100%;">
-                <img src="./Assets/BG/Casino.png" style="display: block; max-width: 100%; max-height: 100%; object-fit: contain; z-index: 0;">
+            <div style="position: relative; display: block; max-height: 90vh; max-width: 90vw;">
+                <img src="./Assets/BG/Casino.png" style="display: block; max-height: 90vh; max-width: 90vw; object-fit: contain; z-index: 0;">
                 <div style="position: absolute; top: 5%; left: 0; width: 100%; text-align: center; z-index: 10; color: white; text-shadow: 2px 2px 4px black; font-size: 20px;">
                     <h3 style="margin: 0;">Standard Route $${state.config.balance.casinoPrices?.standard || 75} 2x Shiny $${state.config.balance.casinoPrices?.doubleShiny || 200}</h3>
                 </div>
@@ -774,15 +818,37 @@ export function navigateToLocation(locationName) {
             bgImg = window.currentMapRegion === 'Johto' ? (isGoldenrod ? '' : 'Region2 Kanto Special Spot.png') : 'Region1 Special Spot.png';
         }
 
+        const innerModal = document.getElementById("map-inner-modal");
+        if (innerModal) {
+            innerModal.classList.remove('floating-window');
+            innerModal.style.display = 'inline-block';
+            innerModal.style.width = 'max-content';
+            innerModal.style.height = 'max-content';
+            innerModal.style.backgroundColor = '#34495e';
+            innerModal.style.border = '2px solid #1abc9c';
+            innerModal.style.borderRadius = '8px';
+            innerModal.style.boxShadow = '0 4px 15px rgba(0,0,0,0.5)';
+            innerModal.style.overflow = 'hidden';
+            innerModal.style.position = 'relative';
+        }
+        const container = vModal.closest('.window-content-container');
+        if (container) {
+            container.style.display = "block";
+            container.style.width = "max-content";
+            container.style.height = "max-content";
+            container.style.overflow = "visible";
+            container.style.padding = "0";
+            container.style.margin = "0";
+        }
+
         vModal.replaceChildren();
         vModal.style.position = "relative";
-        vModal.style.height = "100%";
+        vModal.style.height = "max-content";
         vModal.style.backgroundImage = "none";
-        vModal.style.display = "flex";
-        vModal.style.alignItems = "center";
-        vModal.style.justifyContent = "center";
-        vModal.style.width = "100%";
+        vModal.style.display = "block";
+        vModal.style.width = "max-content";
         vModal.style.padding = "0";
+        vModal.style.margin = "0";
 
         const stdLeft = 16.3;
         const stdTop = 34.16;
@@ -795,8 +861,8 @@ export function navigateToLocation(locationName) {
         const shinyHeight = 94.72 - 85.96;
 
         let html = `
-            <div style="position: relative; display: inline-block; max-width: 100%; max-height: 100%;">
-                <img src="./Assets/Extra/Casino/${bgImg}" style="display: block; max-width: 100%; max-height: 100%; object-fit: contain;">
+            <div style="position: relative; display: block; max-height: 90vh; max-width: 90vw;">
+                <img src="./Assets/Extra/Casino/${bgImg}" style="display: block; max-height: 90vh; max-width: 90vw; object-fit: contain;">
                 <div onclick="window.startCasinoEncounter(false, '${locationName}')" style="position: absolute; left: ${stdLeft}%; top: ${stdTop}%; width: ${stdWidth}%; height: ${stdHeight}%; cursor: pointer;" title="Standard Encounter ($${state.config.balance.casinoPrices?.standard || 75})"></div>
                 <div onclick="window.startCasinoEncounter(true, '${locationName}')" style="position: absolute; left: ${shinyLeft}%; top: ${shinyTop}%; width: ${shinyWidth}%; height: ${shinyHeight}%; cursor: pointer;" title="2x Shiny ($${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>
                 <button onclick="window.navigateToLocation('${window.currentCasinoHub}')" class="action-btn action-btn-primary" style="position: absolute; top: 10px; left: 10px; z-index: 100; padding: 5px 10px; font-size: 12px;">Back to Lobby</button>
@@ -852,6 +918,44 @@ export function navigateToLocation(locationName) {
         const vGym = document.getElementById("map-inner-modal-content");
         const vGymTitle = document.getElementById("map-inner-modal-title");
         const gymConfig = state.config.gyms.find(g => g.name === lookupName);
+
+        // Reset any inline styles applied to the modal structure by Safari/Casino views to restore flex behavior
+        const innerModal = document.getElementById("map-inner-modal");
+        if (innerModal) {
+            innerModal.classList.add('floating-window');
+            innerModal.style.display = "flex";
+            innerModal.style.width = "";
+            innerModal.style.height = "";
+            innerModal.style.backgroundColor = "";
+            innerModal.style.border = "";
+            innerModal.style.borderRadius = "";
+            innerModal.style.boxShadow = "";
+            innerModal.style.overflow = "";
+            innerModal.style.position = "";
+        }
+        if (vGym) {
+            vGym.className = "content-panel";
+            vGym.style.display = "flex";
+            vGym.style.flexDirection = "column";
+            vGym.style.flex = "1";
+            vGym.style.overflowY = "auto";
+            vGym.style.alignItems = "center";
+            vGym.style.width = "100%";
+            vGym.style.height = "auto";
+            vGym.style.padding = "2%";
+            vGym.style.margin = "";
+            const container = vGym.closest('.window-content-container');
+            if (container) {
+                container.className = "window-content-container";
+                container.style.display = "flex";
+                container.style.width = "100%";
+                container.style.height = "auto";
+                container.style.overflow = "hidden";
+                container.style.flex = "1";
+                container.style.padding = "0";
+                container.style.margin = "";
+            }
+        }
 
         if (vGymTitle) {
             vGymTitle.innerText = locationName;

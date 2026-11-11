@@ -1,19 +1,22 @@
 const puppeteer = require('puppeteer');
 (async () => {
-  const browser = await puppeteer.launch({ headless: "new", args: ['--no-sandbox', '--disable-setuid-sandbox'] });
+  const browser = await puppeteer.launch({ headless: "new", args: ['--no-sandbox'] });
   const page = await browser.newPage();
+  page.on('console', msg => console.log('PAGE LOG:', msg.text()));
   await page.goto('http://localhost:8080');
 
-  // Wait for the game to initialize
-  await new Promise(resolve => setTimeout(resolve, 3000));
+  await new Promise(r => setTimeout(r, 2000));
+  await page.evaluate("window.showMap()");
+  await new Promise(r => setTimeout(r, 1000));
 
-  // We can just verify if puppeteer can load it without throwing fatal JS errors.
-  const title = await page.title();
-  console.log("Page title is:", title);
+  await page.evaluate("window.navigateToLocation('Kanto Safari Zone')");
+  await new Promise(r => setTimeout(r, 1000));
 
-  // Ensure no major console errors happen during load
-  page.on('console', msg => console.log('PAGE LOG:', msg.text()));
+  const metrics = await page.evaluate(() => {
+     const modal = document.querySelector('#map-inner-modal');
+     return modal ? JSON.stringify(modal.getBoundingClientRect()) : "No modal";
+  });
 
-  console.log("Visual verification test complete - app loads without crashing.");
+  console.log("Metrics:", metrics);
   await browser.close();
 })();
