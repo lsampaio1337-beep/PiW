@@ -748,7 +748,18 @@ class BattleSystem {
 
                 dynamicBg.replaceChildren();
 
-                // Leader sprite intentionally removed here based on user requirement
+                const gymLeaderImg = document.createElement('img');
+                const spritePath = `./Assets/Gym/GymLeaders/${assetConfig.sprite}`;
+                gymLeaderImg.src = spritePath;
+                gymLeaderImg.style.position = 'absolute';
+                gymLeaderImg.style.left = `${assetConfig.position.rel_x * 100}%`;
+                gymLeaderImg.style.top = `${assetConfig.position.rel_y * 100}%`;
+                gymLeaderImg.style.width = `${(assetConfig.size.px_width / 1800) * 100}%`;
+                gymLeaderImg.style.transform = `rotate(${assetConfig.tilt.angle_deg}deg)`;
+                gymLeaderImg.style.transformOrigin = assetConfig.tilt.origin;
+                gymLeaderImg.style.pointerEvents = 'none';
+                gymLeaderImg.style.zIndex = '1';
+                dynamicBg.appendChild(gymLeaderImg);
 
                 vGym.style.backgroundImage = 'none';
                 vGym.style.position = 'relative'; // Ensure relative positioning

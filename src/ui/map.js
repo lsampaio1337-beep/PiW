@@ -865,7 +865,18 @@ export function navigateToLocation(locationName) {
             dynamicGymBgUi.style.backgroundSize = '100% 100%';
             dynamicGymBgUi.style.overflow = 'hidden';
 
-            // Leader sprite intentionally removed here based on user requirement
+            const gymLeaderImg = document.createElement('img');
+            gymLeaderImg.src = spritePath;
+            gymLeaderImg.style.position = 'absolute';
+            gymLeaderImg.style.left = `${assetConfig.position.rel_x * 100}%`;
+            gymLeaderImg.style.top = `${assetConfig.position.rel_y * 100}%`;
+            gymLeaderImg.style.width = `${(assetConfig.size.px_width / 1800) * 100}%`;
+            gymLeaderImg.style.transform = `rotate(${assetConfig.tilt.angle_deg}deg)`;
+            gymLeaderImg.style.transformOrigin = assetConfig.tilt.origin;
+            gymLeaderImg.style.pointerEvents = 'none';
+            gymLeaderImg.style.zIndex = '1';
+
+            dynamicGymBgUi.appendChild(gymLeaderImg);
             vGym.appendChild(dynamicGymBgUi);
         }
 
