@@ -14,25 +14,10 @@ export const kalosMapCoordinates = {
     "x": 60,
     "y": 10
   },
-  "route3water": {
-    "name": "Route 3 (Water)",
-    "x": 70,
-    "y": 10
-  },
-  "santalunecity": {
-    "name": "Santalune City",
-    "x": 80,
-    "y": 10
-  },
-  "route22dtournerway": {
-    "name": "Route 22 (Détourner Way)",
-    "x": 90,
-    "y": 10
-  },
-  "route22water": {
-    "name": "Route 22 (Water)",
+  "route22south": {
+    "name": "Route 22 (South)",
     "x": 10,
-    "y": 20
+    "y": 10
   },
   "santalunecitygym": {
     "name": "Santalune City Gym",
@@ -44,40 +29,25 @@ export const kalosMapCoordinates = {
     "x": 30,
     "y": 20
   },
-  "lumiosecitysouthboulevard": {
-    "name": "Lumiose City (South Boulevard)",
-    "x": 40,
-    "y": 20
-  },
   "route5versantroad": {
     "name": "Route 5 (Versant Road)",
     "x": 50,
     "y": 20
   },
-  "camphriertown": {
-    "name": "Camphrier Town",
-    "x": 60,
+  "route22water": {
+    "name": "Route 22 (Water)",
+    "x": 10,
     "y": 20
   },
-  "route7rivirewalkeast": {
-    "name": "Route 7 (Rivière Walk — East)",
-    "x": 70,
-    "y": 20
+  "route7": {
+    "name": "Route 7",
+    "x": 20,
+    "y": 10
   },
   "route6palaislane": {
     "name": "Route 6 (Palais Lane)",
     "x": 80,
     "y": 20
-  },
-  "parfumpalace": {
-    "name": "Parfum Palace",
-    "x": 90,
-    "y": 20
-  },
-  "route7rivirewalkwest": {
-    "name": "Route 7 (Rivière Walk — West)",
-    "x": 10,
-    "y": 30
   },
   "connectingcavezubatroost": {
     "name": "Connecting Cave (Zubat Roost)",
@@ -94,11 +64,6 @@ export const kalosMapCoordinates = {
     "x": 40,
     "y": 30
   },
-  "ambrettetown": {
-    "name": "Ambrette Town",
-    "x": 50,
-    "y": 30
-  },
   "route9spikespassage": {
     "name": "Route 9 (Spikes Passage)",
     "x": 60,
@@ -109,34 +74,19 @@ export const kalosMapCoordinates = {
     "x": 70,
     "y": 30
   },
-  "route8muraillecoastlowerbeach": {
-    "name": "Route 8 (Muraille Coast — Lower Beach)",
-    "x": 80,
-    "y": 30
-  },
-  "cyllagecity": {
-    "name": "Cyllage City",
-    "x": 90,
-    "y": 30
-  },
   "cyllagecitywater": {
     "name": "Cyllage City (Water)",
     "x": 10,
     "y": 40
   },
-  "cyllagecitygym": {
-    "name": "Cyllage City Gym",
-    "x": 20,
-    "y": 40
+  "cyllagegym": {
+    "name": "Cyllage Gym",
+    "x": 30,
+    "y": 10
   },
   "route10menhirtrail": {
     "name": "Route 10 (Menhir Trail)",
     "x": 30,
-    "y": 40
-  },
-  "geosengetown": {
-    "name": "Geosenge Town",
-    "x": 40,
     "y": 40
   },
   "route11miroirway": {
@@ -149,25 +99,10 @@ export const kalosMapCoordinates = {
     "x": 60,
     "y": 40
   },
-  "shalourcity": {
-    "name": "Shalour City",
-    "x": 70,
-    "y": 40
-  },
-  "towerofmasteryfirstvisit": {
-    "name": "Tower of Mastery (First Visit)",
-    "x": 80,
-    "y": 40
-  },
   "shalourcitygym": {
     "name": "Shalour City Gym",
     "x": 90,
     "y": 40
-  },
-  "towerofmasterysecondvisit": {
-    "name": "Tower of Mastery (Second Visit)",
-    "x": 10,
-    "y": 50
   },
   "route12fourrageroad": {
     "name": "Route 12 (Fourrage Road)",
@@ -179,24 +114,9 @@ export const kalosMapCoordinates = {
     "x": 30,
     "y": 50
   },
-  "azurebay": {
-    "name": "Azure Bay",
-    "x": 40,
-    "y": 50
-  },
   "azurebaywater": {
     "name": "Azure Bay (Water)",
     "x": 50,
-    "y": 50
-  },
-  "seaspiritsden": {
-    "name": "Sea Spirit's Den",
-    "x": 60,
-    "y": 50
-  },
-  "coumarinecity": {
-    "name": "Coumarine City",
-    "x": 70,
     "y": 50
   },
   "coumarinecitygym": {
@@ -209,16 +129,6 @@ export const kalosMapCoordinates = {
     "x": 90,
     "y": 50
   },
-  "kalospowerplant": {
-    "name": "Kalos Power Plant",
-    "x": 10,
-    "y": 60
-  },
-  "lumiosecitynorthboulevardcentricoplaza": {
-    "name": "Lumiose City (North Boulevard & Centrico Plaza)",
-    "x": 20,
-    "y": 60
-  },
   "lumiosecitygym": {
     "name": "Lumiose City Gym",
     "x": 30,
@@ -229,19 +139,9 @@ export const kalosMapCoordinates = {
     "x": 40,
     "y": 60
   },
-  "laverrecity": {
-    "name": "Laverre City",
-    "x": 50,
-    "y": 60
-  },
   "laverrecitygym": {
     "name": "Laverre City Gym",
     "x": 60,
-    "y": 60
-  },
-  "pokballfactory": {
-    "name": "Poké Ball Factory",
-    "x": 70,
     "y": 60
   },
   "route15brunway": {
@@ -259,11 +159,6 @@ export const kalosMapCoordinates = {
     "x": 10,
     "y": 70
   },
-  "dendemilletown": {
-    "name": "Dendemille Town",
-    "x": 20,
-    "y": 70
-  },
   "frostcavern": {
     "name": "Frost Cavern",
     "x": 30,
@@ -274,19 +169,9 @@ export const kalosMapCoordinates = {
     "x": 40,
     "y": 70
   },
-  "anistarcity": {
-    "name": "Anistar City",
-    "x": 50,
-    "y": 70
-  },
   "anistarcitygym": {
     "name": "Anistar City Gym",
     "x": 60,
-    "y": 70
-  },
-  "lysandrecaflysandrelabslumiosecity": {
-    "name": "Lysandre Café & Lysandre Labs (Lumiose City)",
-    "x": 70,
     "y": 70
   },
   "teamflaresecrethqgeosengetown": {
@@ -299,39 +184,14 @@ export const kalosMapCoordinates = {
     "x": 90,
     "y": 70
   },
-  "terminuscave": {
-    "name": "Terminus Cave",
-    "x": 10,
-    "y": 80
-  },
-  "couriwaytown": {
-    "name": "Couriway Town",
-    "x": 20,
-    "y": 80
-  },
-  "route19grandevalleway": {
-    "name": "Route 19 (Grande Vallée Way)",
-    "x": 30,
-    "y": 80
-  },
   "route19water": {
     "name": "Route 19 (Water)",
     "x": 40,
     "y": 80
   },
-  "snowbellecity": {
-    "name": "Snowbelle City",
-    "x": 50,
-    "y": 80
-  },
   "route20windingwoods": {
     "name": "Route 20 (Winding Woods)",
     "x": 60,
-    "y": 80
-  },
-  "pokmonvillage": {
-    "name": "Pokémon Village",
-    "x": 70,
     "y": 80
   },
   "snowbellecitygym": {
@@ -349,10 +209,10 @@ export const kalosMapCoordinates = {
     "x": 10,
     "y": 90
   },
-  "route22lowerriverchamberofemptiness": {
-    "name": "Route 22 (Lower River & Chamber of Emptiness)",
-    "x": 20,
-    "y": 90
+  "route22north": {
+    "name": "Route 22 (North)",
+    "x": 40,
+    "y": 10
   },
   "victoryroad": {
     "name": "Victory Road",
@@ -364,34 +224,234 @@ export const kalosMapCoordinates = {
     "x": 40,
     "y": 90
   },
-  "lumiosestation": {
-    "name": "Lumiose Station",
+  "1farmroad": {
+    "name": "Farm Road",
     "x": 50,
-    "y": 90
+    "y": 10
   },
-  "kiloudecity": {
-    "name": "Kiloude City",
+  "2mistshore": {
+    "name": "Mist Shore",
     "x": 60,
-    "y": 90
+    "y": 10
   },
-  "unknowndungeon": {
-    "name": "Unknown Dungeon",
+  "3quietmarsh": {
+    "name": "Quiet Marsh",
     "x": 70,
-    "y": 90
+    "y": 10
   },
-  "terminuscavezygarde": {
-    "name": "Terminus Cave Zygarde",
+  "1starterdepot": {
+    "name": "Starter Depot",
     "x": 80,
-    "y": 90
+    "y": 10
   },
-  "seaspiritsdenlegendary": {
-    "name": "Sea Spirit's Den Legendary",
+  "2lonemountain": {
+    "name": "Lone Mountain",
     "x": 90,
-    "y": 90
+    "y": 10
   },
-  "lookerbureaulumiosecity": {
-    "name": "Looker Bureau (Lumiose City)",
+  "3fierceriverhead": {
+    "name": "Fierce Riverhead",
     "x": 10,
-    "y": 100
+    "y": 20
+  },
+  "4starterevolveddepot": {
+    "name": "Starter Evolved Depot",
+    "x": 20,
+    "y": 20
+  },
+  "1friendsafarinearentrance": {
+    "name": "Friend Safari Near Entrance",
+    "x": 30,
+    "y": 20
+  },
+  "2friendsafarisurroundings": {
+    "name": "Friend Safari Surroundings",
+    "x": 40,
+    "y": 20
+  },
+  "3friendsafarideepinside": {
+    "name": "Friend Safari Deep Inside",
+    "x": 50,
+    "y": 20
+  },
+  "1pathtodragonterritory": {
+    "name": "Path to Dragon Territory",
+    "x": 60,
+    "y": 20
+  },
+  "2narrowriver": {
+    "name": "Narrow river",
+    "x": 70,
+    "y": 20
+  },
+  "3abandonedexcavationsite": {
+    "name": "Abandoned Excavation Site",
+    "x": 80,
+    "y": 20
+  },
+  "4forsakendragonterritory": {
+    "name": "Forsaken Dragon Territory",
+    "x": 90,
+    "y": 20
+  },
+  "1pathtoteamflaresecrethq": {
+    "name": "Path to Team Flare Secret HQ",
+    "x": 10,
+    "y": 30
+  },
+  "2teamflaresecrethqgate": {
+    "name": "Team Flare Secret HQ Gate",
+    "x": 20,
+    "y": 30
+  },
+  "3teamflaresecrethqentrance": {
+    "name": "Team Flare Secret HQ Entrance",
+    "x": 30,
+    "y": 30
+  },
+  "4teamflaresecrethqhall": {
+    "name": "Team Flare Secret HQ Hall",
+    "x": 40,
+    "y": 30
+  },
+  "5teamflarebattle": {
+    "name": "5 Team Flare Battle",
+    "x": 50,
+    "y": 30
+  },
+  "extrachallengefroaming": {
+    "name": "Extra Challenge F (Roaming)",
+    "x": 60,
+    "y": 30
+  },
+  "1pathtoseaspiritden": {
+    "name": "Path to Sea Spirit Den",
+    "x": 70,
+    "y": 30
+  },
+  "2seaspiritdenouterdepths": {
+    "name": "Sea Spirit Den Outer Depths",
+    "x": 80,
+    "y": 30
+  },
+  "3seaspiritdenentrance": {
+    "name": "Sea Spirit Den Entrance",
+    "x": 90,
+    "y": 30
+  },
+  "4seaspiritdentunnels": {
+    "name": "Sea Spirit Den Tunnels",
+    "x": 10,
+    "y": 40
+  },
+  "5seaspiritdenhall": {
+    "name": "Sea Spirit Den Hall",
+    "x": 20,
+    "y": 40
+  },
+  "extrachallengegroaming": {
+    "name": "Extra Challenge G (Roaming)",
+    "x": 30,
+    "y": 40
+  },
+  "1pathtosecretchambers": {
+    "name": "Path to Secret Chambers",
+    "x": 40,
+    "y": 40
+  },
+  "2chambersofemptiness": {
+    "name": "Chambers of Emptiness",
+    "x": 50,
+    "y": 40
+  },
+  "3undergroundchambers": {
+    "name": "Underground Chambers",
+    "x": 60,
+    "y": 40
+  },
+  "4ultimatechamber": {
+    "name": "Ultimate Chamber",
+    "x": 70,
+    "y": 40
+  },
+  "sanctumoforder": {
+    "name": "Sanctum of Order",
+    "x": 80,
+    "y": 40
+  },
+  "bugbadge": {
+    "name": "Bug Badge",
+    "x": 90,
+    "y": 40
+  },
+  "rumblebadge": {
+    "name": "Rumble Badge",
+    "x": 10,
+    "y": 50
+  },
+  "plantbadge": {
+    "name": "Plant Badge",
+    "x": 20,
+    "y": 50
+  },
+  "voltagebadge": {
+    "name": "Voltage Badge",
+    "x": 30,
+    "y": 50
+  },
+  "fairybadge": {
+    "name": "Fairy Badge",
+    "x": 40,
+    "y": 50
+  },
+  "psychicbadge": {
+    "name": "Psychic Badge",
+    "x": 50,
+    "y": 50
+  },
+  "icebergbadge": {
+    "name": "Iceberg Badge",
+    "x": 60,
+    "y": 50
+  },
+  "zygardecompleteforme": {
+    "name": "Zygarde (Complete Forme)",
+    "x": 70,
+    "y": 50
+  },
+  "xerneas": {
+    "name": "Xerneas",
+    "x": 80,
+    "y": 50
+  },
+  "yveltal": {
+    "name": "Yveltal",
+    "x": 90,
+    "y": 50
+  },
+  "cliffbadge": {
+    "name": "Cliff Badge",
+    "x": 10,
+    "y": 60
+  },
+  "teamflarebattle": {
+    "name": "Team Flare Battle",
+    "x": 20,
+    "y": 60
+  },
+  "keytoseaspiritdenhallchallenge": {
+    "name": "Key to Sea Spirit Den Hall Challenge",
+    "x": 30,
+    "y": 60
+  },
+  "keytoultimatechamberchallenge": {
+    "name": "Key to Ultimate Chamber Challenge",
+    "x": 40,
+    "y": 60
+  },
+  "keystosanctumoforderchallenge": {
+    "name": "Keys to Sanctum of Order Challenge",
+    "x": 50,
+    "y": 60
   }
 };

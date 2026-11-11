@@ -1101,7 +1101,18 @@ class BattleSystem {
 
             // Check if Roaming challenge is active for the 1% beast spawn
             // Must not be in an active gym/league battle
-            if (!this.gymState?.isActive && this.state.stats.activeChallenges && (this.state.stats.activeChallenges.includes("Extra Challenge (Roaming)") || this.state.stats.activeChallenges.includes("Roaming Hoenn Skies"))) {
+
+            let kalosRoamingF = false;
+            let kalosRoamingG = false;
+            if (!this.gymState?.isActive && this.state.stats.activeChallenges) {
+                if (this.state.stats.activeChallenges.includes("Extra Challenge F (Roaming)") && ["Path to Sea Spirit Den", "Sea Spirit Den Outer Depths", "Sea Spirit Den Entrance", "Sea Spirit Den Tunnels"].includes(this.state.currentRoute)) {
+                    kalosRoamingF = true;
+                }
+                if (this.state.stats.activeChallenges.includes("Extra Challenge G (Roaming)") && ["Path to Secret Chambers", "Chambers of Emptiness", "Underground Chambers"].includes(this.state.currentRoute)) {
+                    kalosRoamingG = true;
+                }
+            }
+            if (!this.gymState?.isActive && this.state.stats.activeChallenges && (this.state.stats.activeChallenges.includes("Extra Challenge (Roaming)") || this.state.stats.activeChallenges.includes("Roaming Hoenn Skies") || kalosRoamingF || kalosRoamingG)) {
                 const randomVal = typeof crypto !== 'undefined' ? (crypto.getRandomValues(new Uint32Array(1))[0] / (0xFFFFFFFF + 1)) : Math.random();
                 if (randomVal < 0.01) {
                     isRoamingEncounter = true;
@@ -1109,7 +1120,19 @@ class BattleSystem {
             }
 
             if (isRoamingEncounter) {
-                if (this.state.currentRegionName === 'Hoenn') {
+                if (kalosRoamingF) {
+                    const beasts = [144, 145, 146]; // Articuno, Zapdos, Moltres
+                    const selectedBeastId = beasts[Math.floor(Math.random() * beasts.length)];
+                    actualPokemonBase = this.getPokemonBase(selectedBeastId);
+                    pokemonBase = actualPokemonBase;
+                    level = 75;
+                } else if (kalosRoamingG) {
+                    const beasts = [721, 719, 720]; // Volcanion, Diancie, Hoopa
+                    const selectedBeastId = beasts[Math.floor(Math.random() * beasts.length)];
+                    actualPokemonBase = this.getPokemonBase(selectedBeastId);
+                    pokemonBase = actualPokemonBase;
+                    level = 75;
+                } else if (this.state.currentRegionName === 'Hoenn') {
                     // Randomly select Latias (380) or Latios (381) for Hoenn
                     const beasts = [380, 381];
                     const selectedBeastId = beasts[Math.floor(Math.random() * beasts.length)];
