@@ -523,8 +523,8 @@ export function showMap() {
 
     // Inner modal for gym overlays natively locked to the map
     html += `
-            <div id="map-inner-modal-overlay" onclick="if(event.target === this) { window.closeMapInnerModal(); }" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 1000; align-items: center; justify-content: center; padding: 2%; box-sizing: border-box;">
-                <div id="map-inner-modal" class="floating-window" onclick="event.stopPropagation()" style="max-height: 96%; max-width: 96%; box-sizing: border-box; display: flex; flex-direction: column; margin: 2%;">
+            <div id="map-inner-modal-overlay" onmousedown="if(event.target === this) { window.closeMapInnerModal(); }" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 1000; align-items: center; justify-content: center; box-sizing: border-box; padding: 2%; /* Fallback padding */">
+                <div id="map-inner-modal" class="floating-window" onclick="event.stopPropagation()" style="box-sizing: border-box; display: flex; flex-direction: column; overflow: hidden; /* Dynamic sizing will be applied via JS */ max-width: 100%; max-height: 100%;">
                     <div class="window-header" style="position: relative; cursor: default;">
                         <span id="map-inner-modal-title">Gym</span>
                         <span id="btn-close-map-inner-modal" onclick="window.closeMapInnerModal()" style="position: absolute; top: 5px; right: 5px; font-size: 12px; font-weight: bold; line-height: 1; padding: 0; cursor: pointer; color: white;">X</span>
@@ -936,7 +936,41 @@ export function navigateToLocation(locationName) {
 
         // Show the inner modal overlay instead of closing the map modal
         const overlay = document.getElementById('map-inner-modal-overlay');
-        if (overlay) overlay.style.display = 'flex';
+        const modal = document.getElementById('map-inner-modal');
+        if (overlay && modal) {
+            overlay.style.display = 'flex';
+
+            // Ensure the dynamic layout and 2% padding based on largest window dimension
+            const mapWin = document.getElementById('interactive-map');
+            if (mapWin) {
+                const applyPaddingAndAspect = (aspectRatio) => {
+                    const mapW = mapWin.offsetWidth;
+                    const mapH = mapWin.offsetHeight;
+                    const maxDim = Math.max(mapW, mapH);
+                    const padding = maxDim * 0.02; // 2% of the biggest one
+                    overlay.style.padding = `${padding}px`;
+
+                    if (aspectRatio) {
+                        modal.style.aspectRatio = aspectRatio.toString();
+                    } else {
+                        modal.style.aspectRatio = 'auto'; // Fallback
+                    }
+
+                    // Force fit without exceeding bounds
+                    modal.style.maxHeight = '100%';
+                    modal.style.maxWidth = '100%';
+                };
+
+                const imgToLoad = bgImg ? `./Assets/BG/${bgImg}` : (gymConfig ? `./Assets/Gym/BG/${state.config.gymAssets[gymConfig.leader].background}` : null);
+                if (imgToLoad) {
+                    const img = new Image();
+                    img.onload = () => applyPaddingAndAspect(img.naturalWidth / img.naturalHeight);
+                    img.src = imgToLoad;
+                } else {
+                    applyPaddingAndAspect(null);
+                }
+            }
+        }
 
     } else {
         switchView("BATTLE_ARENA");
