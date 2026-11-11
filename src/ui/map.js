@@ -529,7 +529,7 @@ export function showMap() {
                         <span id="btn-close-map-inner-modal" onclick="window.closeMapInnerModal()" style="position: absolute; top: 5px; right: 5px; font-size: 12px; font-weight: bold; line-height: 1; padding: 0; cursor: pointer; color: white;">X</span>
                     </div>
                     <div class="window-content-container" style="display: flex; justify-content: center; align-items: center; overflow: hidden; position: relative; min-height: 0; min-width: 0;">
-                        <div id="map-inner-modal-content" class="content-panel" style="position: relative; display: inline-block; min-height: 0; min-width: 0;">
+                        <div id="map-inner-modal-content" class="content-panel" style="position: relative; display: flex; align-items: center; justify-content: center; min-height: 0; min-width: 0; height: 100%;">
                             <!-- Content injected via JS -->
                         </div>
                     </div>
@@ -856,7 +856,7 @@ export function navigateToLocation(locationName) {
             const dynamicGymBgUi = document.createElement('div');
             dynamicGymBgUi.id = 'dynamic-gym-bg-ui';
             dynamicGymBgUi.style.position = 'relative';
-            dynamicGymBgUi.style.display = 'inline-block';
+            dynamicGymBgUi.style.display = 'flex';
             dynamicGymBgUi.style.maxWidth = '100%';
             dynamicGymBgUi.style.maxHeight = '100%';
             dynamicGymBgUi.style.zIndex = '0';
@@ -867,6 +867,8 @@ export function navigateToLocation(locationName) {
             bgImgEl.style.display = 'block';
             bgImgEl.style.maxWidth = '100%';
             bgImgEl.style.maxHeight = '100%';
+            bgImgEl.style.width = 'auto';
+            bgImgEl.style.height = 'auto';
             bgImgEl.style.objectFit = 'contain';
             dynamicGymBgUi.appendChild(bgImgEl);
 
