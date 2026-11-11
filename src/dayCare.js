@@ -70,6 +70,30 @@ class DayCare {
         }
     }
 
+    assignQuality(p) {
+        let q = 1 + (Math.random() * 0.40);
+        if (Math.random() < 0.01) {
+            q += 0.50;
+        }
+
+        p.quality = q;
+        // Fix floating point precision
+        p.quality = Number(p.quality.toFixed(2));
+        p.qualityName = this.getQualityName(p.quality);
+
+        return p;
+    }
+
+    getQualityName(q) {
+        if (q >= 2.0) return "Shiny";
+        if (q >= 1.81) return "Legendary";
+        if (q >= 1.60) return "Epic";
+        if (q >= 1.40) return "Rare";
+        if (q >= 1.20) return "Uncommon";
+        if (q >= 1.00) return "Regular";
+        return "Weak";
+    }
+
     completeBreeding() {
         const p = this.slot1.pokemon;
         if (!p) return;
@@ -104,19 +128,7 @@ class DayCare {
         p.lastQBonus = Number((p.quality - oldQuality).toFixed(2));
 
         // Map Quality Tier if Q >= 1.5, 1.25, etc.
-        if (p.quality >= 1.81) {
-            p.qualityName = "Legendary";
-        } else if (p.quality >= 1.60) {
-            p.qualityName = "Epic";
-        } else if (p.quality >= 1.40) {
-            p.qualityName = "Rare";
-        } else if (p.quality >= 1.20) {
-            p.qualityName = "Uncommon";
-        } else if (p.quality >= 1.00) {
-            p.qualityName = "Regular";
-        } else {
-            p.qualityName = "Weak";
-        }
+        p.qualityName = this.getQualityName(p.quality);
 
         // Let UI know it's finished
         this.slot1.isFinished = true;
