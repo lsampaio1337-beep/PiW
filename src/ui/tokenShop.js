@@ -11,8 +11,8 @@ export function renderTokenShopHtml() {
                 </div>
             </div>
 
-            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; justify-content: center; width: 100%;">
-                ${getTokenShopItemsHtml()}
+            <div style="display: flex; flex-direction: column; gap: 20px; width: 100%;">
+                ${getTokenShopCategoriesHtml()}
             </div>
         </div>
     `;
@@ -170,19 +170,44 @@ function renderTokenShopItem(item) {
     return html;
 }
 
-function getTokenShopItemsHtml() {
+function renderCategory(title, items) {
+    if (items.length === 0) return '';
+    let html = `
+        <div style="display: flex; flex-direction: column; width: 100%; margin-bottom: 20px;">
+            <div style="font-size: 18px; font-weight: bold; color: #f1c40f; margin-bottom: 10px; border-bottom: 1px solid #f1c40f; padding-bottom: 5px;">${title}</div>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; justify-content: center; width: 100%;">
+    `;
+    items.forEach(item => {
+        html += renderTokenShopItem(item);
+    });
+    html += `
+            </div>
+        </div>
+    `;
+    return html;
+}
+
+function getTokenShopCategoriesHtml() {
     let html = '';
-    TOKEN_SHOP_ITEMS.forEach(item => {
+
+    // Filter out already unlocked items
+    const availableItems = TOKEN_SHOP_ITEMS.filter(item => {
         if (item.isUnlock) {
             if (!state.stats.upgradesUnlocked) {
                 state.stats.upgradesUnlocked = {};
             }
             if (state.stats.upgradesUnlocked[item.unlockKey]) {
-                return; // Skip if already unlocked
+                return false; // Skip if already unlocked
             }
         }
-        html += renderTokenShopItem(item);
+        return true;
     });
+
+    const consumables = availableItems.filter(item => !item.isUnlock);
+    const upgrades = availableItems.filter(item => item.isUnlock);
+
+    html += renderCategory('Consumables', consumables);
+    html += renderCategory('Upgrades', upgrades);
 
     return html;
 }
