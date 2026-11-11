@@ -355,7 +355,7 @@ window.cheatProgressChallenge = function(targetAreaId) {
         if (req.catchSpeciesUniqueCount) {
             if (!state.stats.caughtSpecies) state.stats.caughtSpecies = {};
             state.stats.caughtSpeciesCount = state.stats.caughtSpeciesCount || 0;
-            for (let i = 0; i < state.config.pokemonData.length; i++) {
+            for (let i = 1; i < state.config.pokemonData.length; i++) {
                  if (state.stats.caughtSpeciesCount >= req.catchSpeciesUniqueCount) break;
                  let p = state.config.pokemonData[i];
                  if (!state.stats.caughtSpecies[p.name]) {

@@ -45,6 +45,7 @@ describe('Pokedex UI Logic', () => {
             currentRegionName: 'Kanto',
             config: {
                 pokemonData: [
+                    { id: 0, name: "MissingNo", types: ["Normal"], hp: 0, atk: 0, def: 0, spa: 0, spd: 0, spe: 0 },
                     { id: 1, kanto_id: 1, name: "Bulbasaur", types: ["Grass", "Poison"], hp: 45, atk: 49, def: 49, spa: 65, spd: 65, spe: 45, evolutions: [{ level: 16, to: 2 }] },
                     { id: 2, kanto_id: 2, name: "Ivysaur", types: ["Grass", "Poison"], hp: 60, atk: 62, def: 63, spa: 80, spd: 80, spe: 60, evolutions: [{ level: 32, to: 3 }] },
                     { id: 3, kanto_id: 3, name: "Venusaur", types: ["Grass", "Poison"], hp: 80, atk: 82, def: 83, spa: 100, spd: 100, spe: 80 },
@@ -227,7 +228,7 @@ describe('showPokedex', () => {
         const { showPokedex } = require('../../src/ui/pokedex.js');
         const { showModal } = require('../../src/ui.js');
         state.currentRegionName = 'Johto';
-        state.config.pokemonData[0].johto_id = 1;
+        state.config.pokemonData[1].johto_id = 1;
 
         showPokedex();
 
@@ -320,7 +321,7 @@ describe('showDexEntry', () => {
 describe('buildEvolutionLineHtml', () => {
     test('builds html for evolution line recursively', () => {
         const { buildEvolutionLineHtml } = require('../../src/ui/pokedex.js');
-        const pData = state.config.pokemonData[0]; // Bulbasaur
+        const pData = state.config.pokemonData[1]; // Bulbasaur
 
         const html = buildEvolutionLineHtml(pData, state);
 
@@ -331,9 +332,9 @@ describe('buildEvolutionLineHtml', () => {
     test('handles missing pokemon data in evolution chain gracefully', () => {
         const { buildEvolutionLineHtml } = require('../../src/ui/pokedex.js');
         // Add fake evolution pointing to non-existent pokemon
-        state.config.pokemonData[0].evolutions.push({ level: 100, to: 999 });
+        state.config.pokemonData[1].evolutions.push({ level: 100, to: 999 });
 
-        const html = buildEvolutionLineHtml(state.config.pokemonData[0], state);
+        const html = buildEvolutionLineHtml(state.config.pokemonData[1], state);
         expect(html).toBeTruthy();
     });
 });
@@ -341,7 +342,7 @@ describe('buildEvolutionLineHtml', () => {
 describe('getSpeciesDataHtml', () => {
     test('renders species data, type effectiveness, and learnset', () => {
         const { getSpeciesDataHtml } = require('../../src/ui/pokedex.js');
-        const pData = state.config.pokemonData[3]; // Charmander (has learnset)
+        const pData = state.config.pokemonData[4]; // Charmander (has learnset)
 
         const html = getSpeciesDataHtml(pData, state);
 

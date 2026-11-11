@@ -497,7 +497,7 @@ const mainSeenSets = [];
                     spawns.forEach(s => {
                         let cPct = (s.chance || 0);
                         let b = getBST(pokemonData[s.pokemonId]);
-                        if (routesData.find(rd => rd["Route"] === areaName && rd["Pokemon Name"] === pokemonData[s.pokemonId].name && rd["First?"] === "")) {
+                        if (routesData.find(rd => rd["Route"] === areaName && rd["Pokemon Name"] === pokemonData[s.pokemonId]?.name && rd["First?"] === "")) {
                             newPkCount++;
                             if (cPct > 0.20 && b < 350) highAppLowBstPk = pokemonData[s.pokemonId];
                         }

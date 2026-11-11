@@ -17,7 +17,7 @@ let _cachedPokemonDataMap = null;
 function getPokemonDataMap() {
     if (!_cachedPokemonDataMap && state.config && state.config.pokemonData) {
         _cachedPokemonDataMap = new Map();
-        for (let i = 0; i < state.config.pokemonData.length; i++) {
+        for (let i = 1; i < state.config.pokemonData.length; i++) {
             _cachedPokemonDataMap.set(state.config.pokemonData[i].id, state.config.pokemonData[i]);
         }
     }
