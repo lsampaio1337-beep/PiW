@@ -35,9 +35,7 @@ function getChallengeAreaId(target) {
     return match ? match.areaId : target;
 }
 
-function evaluateRequirements(req, unlock) {
-    let progress = [];
-
+function evaluateDefeatRequirements(req, progress) {
     if (req.defeatCountRoute) {
         let route = req.defeatCountRoute.route;
         let reqCount = req.defeatCountRoute.count;
@@ -51,6 +49,35 @@ function evaluateRequirements(req, unlock) {
         });
     }
 
+    if (req.defeatSpecific) {
+        let defeated = state.stats.challengeSpecificDefeats ? (state.stats.challengeSpecificDefeats[req.defeatSpecific.name] || 0) : 0;
+        progress.push({
+            type: 'defeatSpecific',
+            name: req.defeatSpecific.name,
+            current: defeated,
+            required: req.defeatSpecific.count,
+            isMet: defeated >= req.defeatSpecific.count
+        });
+    }
+
+    if (req.defeatMultipleSpecific) {
+        for (let target of req.defeatMultipleSpecific) {
+            let key = target.name || target.pokemonId;
+            if (key === '__proto__' || key === 'constructor' || key === 'prototype') continue;
+            let defeated = state.stats.challengeSpecificDefeats ? (state.stats.challengeSpecificDefeats[key] || 0) : 0;
+            let displayName = target.name || target.pokemonId;
+            progress.push({
+                type: 'defeatMultipleSpecific',
+                name: displayName,
+                current: defeated,
+                required: target.count,
+                isMet: defeated >= target.count
+            });
+        }
+    }
+}
+
+function evaluateCatchSpeciesRequirements(req, progress) {
     if (req.catchSpecies) {
         for (let spec of req.catchSpecies) {
             let caughtCount = state.stats.caughtSpecies ? (state.stats.caughtSpecies[spec.species] || 0) : 0;
@@ -89,7 +116,7 @@ function evaluateRequirements(req, unlock) {
         });
     }
 
-if (req.catchSpeciesByQuality) {
+    if (req.catchSpeciesByQuality) {
         for (let spec of req.catchSpeciesByQuality) {
             let caughtKey = spec.species + "_" + spec.quality;
             let caughtCount = state.stats.challengeCaughtSpecific ? (state.stats.challengeCaughtSpecific[caughtKey] || 0) : 0;
@@ -165,7 +192,9 @@ if (req.catchSpeciesByQuality) {
              });
          }
     }
+}
 
+function evaluateCatchGeneralRequirements(req, unlock, progress) {
     if (req.catchEachFromSlotMachine) {
         if (req.catchEachFromSlotMachine.machines) {
             req.catchEachFromSlotMachine.machines.forEach(machine => {
@@ -240,6 +269,19 @@ if (req.catchSpeciesByQuality) {
         });
     }
 
+    if (req.catchSpeciesUniqueCount) {
+        let uniqueSpeciesCaught = state.stats.caughtSpeciesCount || 0;
+        let reqCount = req.catchSpeciesUniqueCount;
+        progress.push({
+            type: 'catchSpeciesUniqueCount',
+            current: uniqueSpeciesCaught,
+            required: reqCount,
+            isMet: uniqueSpeciesCaught >= reqCount
+        });
+    }
+}
+
+function evaluateLeagueAndBossRequirements(req, progress) {
     if (req.earnBadge) {
         let hasBadge = state.trainer.badges >= req.earnBadge.badgeCount;
         progress.push({
@@ -247,33 +289,6 @@ if (req.catchSpeciesByQuality) {
             name: req.earnBadge.name,
             isMet: hasBadge
         });
-    }
-
-    if (req.defeatSpecific) {
-        let defeated = state.stats.challengeSpecificDefeats ? (state.stats.challengeSpecificDefeats[req.defeatSpecific.name] || 0) : 0;
-        progress.push({
-            type: 'defeatSpecific',
-            name: req.defeatSpecific.name,
-            current: defeated,
-            required: req.defeatSpecific.count,
-            isMet: defeated >= req.defeatSpecific.count
-        });
-    }
-
-    if (req.defeatMultipleSpecific) {
-        for (let target of req.defeatMultipleSpecific) {
-            let key = target.name || target.pokemonId;
-            if (key === '__proto__' || key === 'constructor' || key === 'prototype') continue;
-            let defeated = state.stats.challengeSpecificDefeats ? (state.stats.challengeSpecificDefeats[key] || 0) : 0;
-            let displayName = target.name || target.pokemonId;
-            progress.push({
-                type: 'defeatMultipleSpecific',
-                name: displayName,
-                current: defeated,
-                required: target.count,
-                isMet: defeated >= target.count
-            });
-        }
     }
 
     if (req.defeatEliteFourAndChampion) {
@@ -321,18 +336,9 @@ if (req.catchSpeciesByQuality) {
         let beatenRed = state.stats.defeatedBosses && state.stats.defeatedBosses["Red"];
         progress.push({ type: 'defeatRed', isMet: beatenRed });
     }
+}
 
-    if (req.catchSpeciesUniqueCount) {
-        let uniqueSpeciesCaught = state.stats.caughtSpeciesCount || 0;
-        let reqCount = req.catchSpeciesUniqueCount;
-        progress.push({
-            type: 'catchSpeciesUniqueCount',
-            current: uniqueSpeciesCaught,
-            required: reqCount,
-            isMet: uniqueSpeciesCaught >= reqCount
-        });
-    }
-
+function evaluateChallengeRequirements(req, progress) {
     if (req.completeAnyOfChallenges) {
         let completedIds = state.stats.completedChallengeIds || [];
         let anyMet = false;
@@ -362,56 +368,67 @@ if (req.catchSpeciesByQuality) {
             });
         }
     }
+}
+
+function evaluateRequirements(req, unlock) {
+    let progress = [];
+
+    evaluateDefeatRequirements(req, progress);
+    evaluateCatchSpeciesRequirements(req, progress);
+    evaluateCatchGeneralRequirements(req, unlock, progress);
+    evaluateLeagueAndBossRequirements(req, progress);
+    evaluateChallengeRequirements(req, progress);
 
     return progress;
 }
 
-function formatRequirements(progressList) {
-    let textParts = [];
-    for (let p of progressList) {
-        if (p.type === 'defeatCountRoute') {
-            let routeText = p.route === "Route 1" ? " on Route 1" : ` on ${p.route}`;
-            textParts.push(`Defeat ${p.required} Pokémon${routeText} ${countDisplay(p.current, p.required)}${getStatusHtml(p.isMet)}`);
-        } else if (p.type === 'catchSpecies') {
-            textParts.push(`Catch ${p.required} ${formatSpecies(p.species)} ${countDisplay(p.current, p.required)}${getStatusHtml(p.isMet)}`);
-} else if (p.type === 'catchSpeciesByQuality') {
-            textParts.push(`Catch ${p.required} ${p.quality} ${formatSpecies(p.species)} ${countDisplay(p.current, p.required)}${getStatusHtml(p.isMet)}`);
-        } else if (p.type === 'catchSpeciesByQualityOrHigher') {
-            textParts.push(`Catch ${p.required} ${p.quality}+ ${formatSpecies(p.species)} ${countDisplay(p.current, p.required)}${getStatusHtml(p.isMet)}`);
-        } else if (p.type === 'catchSpeciesAnyOf') {
-            let speciesList = p.speciesList.map(s => formatSpecies(s)).join(' or ');
-            textParts.push(`Catch ${p.required} ${speciesList} ${countDisplay(p.current, p.required)}${getStatusHtml(p.isMet)}`);
-        } else if (p.type === 'catchSpeciesAnyOfByQuality') {
-            let speciesList = p.speciesList.map(formatSpecies).join(' or ');
-            textParts.push(`Catch ${p.required} ${p.quality} ${speciesList} ${countDisplay(p.current, p.required)}${getStatusHtml(p.isMet)}`);
-        } else if (p.type === 'catchEachFromSlotMachine') {
-            let machineStr = p.machine.map(formatSpecies).join(' or ');
-            textParts.push(`Catch 1 ${machineStr} ${getStatusHtml(p.isMet)}`);
-        } else if (p.type === 'catchByQuality') {
-            textParts.push(`Catch ${p.required} ${p.quality} Pokémon from ${p.areaId} ${countDisplay(p.current, p.required)}${getStatusHtml(p.isMet)}`);
-        } else if (p.type === 'catchByQualityAndType') {
-            textParts.push(`Catch ${p.required} ${p.quality} ${p.pokemonType}-type ${countDisplay(p.current, p.required)}${getStatusHtml(p.isMet)}`);
-        } else if (p.type === 'catchByType') {
-            textParts.push(`Catch ${p.required} ${p.pokemonType} Type Pokemons ${countDisplay(p.current, p.required)}${getStatusHtml(p.isMet)}`);
-        } else if (p.type === 'earnBadge') {
-            textParts.push(`Earn ${escapeHTML(p.name)}${getStatusHtml(p.isMet)}`);
-        } else if (p.type === 'defeatSpecific') {
-            textParts.push(`Defeat ${p.required} ${escapeHTML(p.name)} ${countDisplay(p.current, p.required)}${getStatusHtml(p.isMet)}`);
-        } else if (p.type === 'defeatMultipleSpecific') {
-            textParts.push(`Defeat ${p.required} ${escapeHTML(p.name)} ${countDisplay(p.current, p.required)}${getStatusHtml(p.isMet)}`);
-        } else if (p.type === 'defeatLeague') {
-            textParts.push(`Win ${p.region} Pokémon League${getStatusHtml(p.isMet)}`);
-        } else if (p.type === 'defeatRed') {
-            textParts.push(`Defeat Red${getStatusHtml(p.isMet)}`);
-        } else if (p.type === 'catchSpeciesUniqueCount') {
-            textParts.push(`Catch ${p.required} different Pokémon ${countDisplay(p.current, p.required)}${getStatusHtml(p.isMet)}`);
-        } else if (p.type === 'completeAnyOfChallenges') {
-            textParts.push(`Complete any of: ${p.targets.join(', ')}${getStatusHtml(p.isMet)}`);
-        } else if (p.type === 'completeChallenges') {
-            textParts.push(`Complete ${p.target}${getStatusHtml(p.isMet)}`);
-        }
+function formatRequirement(p) {
+    if (p.type === 'defeatCountRoute') {
+        let routeText = p.route === "Route 1" ? " on Route 1" : ` on ${p.route}`;
+        return `Defeat ${p.required} Pokémon${routeText} ${countDisplay(p.current, p.required)}${getStatusHtml(p.isMet)}`;
+    } else if (p.type === 'catchSpecies') {
+        return `Catch ${p.required} ${formatSpecies(p.species)} ${countDisplay(p.current, p.required)}${getStatusHtml(p.isMet)}`;
+    } else if (p.type === 'catchSpeciesByQuality') {
+        return `Catch ${p.required} ${p.quality} ${formatSpecies(p.species)} ${countDisplay(p.current, p.required)}${getStatusHtml(p.isMet)}`;
+    } else if (p.type === 'catchSpeciesByQualityOrHigher') {
+        return `Catch ${p.required} ${p.quality}+ ${formatSpecies(p.species)} ${countDisplay(p.current, p.required)}${getStatusHtml(p.isMet)}`;
+    } else if (p.type === 'catchSpeciesAnyOf') {
+        let speciesList = p.speciesList.map(s => formatSpecies(s)).join(' or ');
+        return `Catch ${p.required} ${speciesList} ${countDisplay(p.current, p.required)}${getStatusHtml(p.isMet)}`;
+    } else if (p.type === 'catchSpeciesAnyOfByQuality') {
+        let speciesList = p.speciesList.map(formatSpecies).join(' or ');
+        return `Catch ${p.required} ${p.quality} ${speciesList} ${countDisplay(p.current, p.required)}${getStatusHtml(p.isMet)}`;
+    } else if (p.type === 'catchEachFromSlotMachine') {
+        let machineStr = p.machine.map(formatSpecies).join(' or ');
+        return `Catch 1 ${machineStr} ${getStatusHtml(p.isMet)}`;
+    } else if (p.type === 'catchByQuality') {
+        return `Catch ${p.required} ${p.quality} Pokémon from ${p.areaId} ${countDisplay(p.current, p.required)}${getStatusHtml(p.isMet)}`;
+    } else if (p.type === 'catchByQualityAndType') {
+        return `Catch ${p.required} ${p.quality} ${p.pokemonType}-type ${countDisplay(p.current, p.required)}${getStatusHtml(p.isMet)}`;
+    } else if (p.type === 'catchByType') {
+        return `Catch ${p.required} ${p.pokemonType} Type Pokemons ${countDisplay(p.current, p.required)}${getStatusHtml(p.isMet)}`;
+    } else if (p.type === 'earnBadge') {
+        return `Earn ${escapeHTML(p.name)}${getStatusHtml(p.isMet)}`;
+    } else if (p.type === 'defeatSpecific') {
+        return `Defeat ${p.required} ${escapeHTML(p.name)} ${countDisplay(p.current, p.required)}${getStatusHtml(p.isMet)}`;
+    } else if (p.type === 'defeatMultipleSpecific') {
+        return `Defeat ${p.required} ${escapeHTML(p.name)} ${countDisplay(p.current, p.required)}${getStatusHtml(p.isMet)}`;
+    } else if (p.type === 'defeatLeague') {
+        return `Win ${p.region} Pokémon League${getStatusHtml(p.isMet)}`;
+    } else if (p.type === 'defeatRed') {
+        return `Defeat Red${getStatusHtml(p.isMet)}`;
+    } else if (p.type === 'catchSpeciesUniqueCount') {
+        return `Catch ${p.required} different Pokémon ${countDisplay(p.current, p.required)}${getStatusHtml(p.isMet)}`;
+    } else if (p.type === 'completeAnyOfChallenges') {
+        return `Complete any of: ${p.targets.join(', ')}${getStatusHtml(p.isMet)}`;
+    } else if (p.type === 'completeChallenges') {
+        return `Complete ${p.target}${getStatusHtml(p.isMet)}`;
     }
-    return textParts;
+    return '';
+}
+
+function formatRequirements(progressList) {
+    return progressList.map(formatRequirement).filter(text => text !== '');
 }
 
 export function getChallengeData(unlock) {
