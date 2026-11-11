@@ -554,7 +554,7 @@ export const paldeaRoutes = [
         "chance": 0.12
       },
       {
-        "pokemonId": 0,
+        "pokemonId": 1,
         "minLevel": 1,
         "maxLevel": 5,
         "chance": 0.12
@@ -5538,19 +5538,19 @@ export const paldeaRoutes = [
         "chance": 0.167
       },
       {
-        "pokemonId": 1290,
+        "pokemonId": 1024.1,
         "minLevel": 1,
         "maxLevel": 5,
         "chance": 0.167
       },
       {
-        "pokemonId": 1291,
+        "pokemonId": 1024.2,
         "minLevel": 1,
         "maxLevel": 5,
         "chance": 0.167
       },
       {
-        "pokemonId": 1292,
+        "pokemonId": 1024.3,
         "minLevel": 1,
         "maxLevel": 5,
         "chance": 0.165
@@ -5619,25 +5619,25 @@ export const paldeaRoutes = [
         "chance": 0.2
       },
       {
-        "pokemonId": 1286,
+        "pokemonId": 1017.1,
         "minLevel": 1,
         "maxLevel": 5,
         "chance": 0.2
       },
       {
-        "pokemonId": 1287,
+        "pokemonId": 1017.2,
         "minLevel": 1,
         "maxLevel": 5,
         "chance": 0.2
       },
       {
-        "pokemonId": 1288,
+        "pokemonId": 1017.3,
         "minLevel": 1,
         "maxLevel": 5,
         "chance": 0.2
       },
       {
-        "pokemonId": 1289,
+        "pokemonId": 1017.4,
         "minLevel": 1,
         "maxLevel": 5,
         "chance": 0.2
@@ -5677,7 +5677,7 @@ export const paldeaRoutes = [
         "chance": 0.25
       },
       {
-        "pokemonId": 1283,
+        "pokemonId": 998.1,
         "minLevel": 1,
         "maxLevel": 5,
         "chance": 0.25
@@ -5723,7 +5723,7 @@ export const paldeaRoutes = [
         "chance": 0.034
       },
       {
-        "pokemonId": 1081,
+        "pokemonId": 149.1,
         "minLevel": 1,
         "maxLevel": 5,
         "chance": 0.034
@@ -5747,7 +5747,7 @@ export const paldeaRoutes = [
         "chance": 0.034
       },
       {
-        "pokemonId": 1098,
+        "pokemonId": 248.1,
         "minLevel": 1,
         "maxLevel": 5,
         "chance": 0.034
@@ -5771,7 +5771,7 @@ export const paldeaRoutes = [
         "chance": 0.034
       },
       {
-        "pokemonId": 1121,
+        "pokemonId": 373.1,
         "minLevel": 1,
         "maxLevel": 5,
         "chance": 0.034
@@ -5795,7 +5795,7 @@ export const paldeaRoutes = [
         "chance": 0.034
       },
       {
-        "pokemonId": 1122,
+        "pokemonId": 376.1,
         "minLevel": 1,
         "maxLevel": 5,
         "chance": 0.034
@@ -5819,13 +5819,13 @@ export const paldeaRoutes = [
         "chance": 0.034
       },
       {
-        "pokemonId": 1140,
+        "pokemonId": 445.1,
         "minLevel": 1,
         "maxLevel": 5,
         "chance": 0.034
       },
       {
-        "pokemonId": 1141,
+        "pokemonId": 445.2,
         "minLevel": 1,
         "maxLevel": 5,
         "chance": 0.034
@@ -5861,7 +5861,7 @@ export const paldeaRoutes = [
         "chance": 0.034
       },
       {
-        "pokemonId": 1209,
+        "pokemonId": 705.1,
         "minLevel": 1,
         "maxLevel": 5,
         "chance": 0.034
@@ -5873,7 +5873,7 @@ export const paldeaRoutes = [
         "chance": 0.034
       },
       {
-        "pokemonId": 1210,
+        "pokemonId": 706.1,
         "minLevel": 1,
         "maxLevel": 5,
         "chance": 0.048
@@ -6044,25 +6044,25 @@ export const paldeaRoutes = [
         "chance": 0.111
       },
       {
-        "pokemonId": 1277,
+        "pokemonId": 978.1,
         "minLevel": 1,
         "maxLevel": 5,
         "chance": 0.111
       },
       {
-        "pokemonId": 1278,
+        "pokemonId": 978.2,
         "minLevel": 1,
         "maxLevel": 5,
         "chance": 0.111
       },
       {
-        "pokemonId": 1279,
+        "pokemonId": 978.3,
         "minLevel": 1,
         "maxLevel": 5,
         "chance": 0.111
       },
       {
-        "pokemonId": 1280,
+        "pokemonId": 978.4,
         "minLevel": 1,
         "maxLevel": 5,
         "chance": 0.112
@@ -6073,7 +6073,7 @@ export const paldeaRoutes = [
     "name": "Special Unique Form",
     "spawns": [
       {
-        "pokemonId": 1264,
+        "pokemonId": 901.1,
         "minLevel": 1,
         "maxLevel": 5,
         "chance": 1
