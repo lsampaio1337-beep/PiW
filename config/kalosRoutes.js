@@ -2320,7 +2320,7 @@ export const kalosRoutes = [
     "challengeName": "Challenge 43"
   },
   {
-    "name": "Victory Road",
+    "name": "Victory Road (Kalos)",
     "spawns": [
       {
         "pokemonId": 62,
@@ -4246,7 +4246,7 @@ export const kalosUnlocks = [
   {
     "areaId": "Route 22 (Lower River & Chamber of Emptiness)",
     "unlocks": [
-      "Victory Road"
+      "Victory Road (Kalos)"
     ],
     "requirements": {
       "defeatCountRoute": {
@@ -4256,13 +4256,13 @@ export const kalosUnlocks = [
     }
   },
   {
-    "areaId": "Victory Road",
+    "areaId": "Victory Road (Kalos)",
     "unlocks": [
       "Pokémon League"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "route": "Victory Road",
+        "route": "Victory Road (Kalos)",
         "count": 10
       }
     }

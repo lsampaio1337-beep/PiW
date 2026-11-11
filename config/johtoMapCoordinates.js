@@ -130,7 +130,7 @@ const johtoMapCoordinates = {
     "y": 48.25
   },
   "small_fishing_spot": {
-    "name": "Small Fishing Spot",
+    "name": "Small Fishing Spot (Johto)",
     "x": 16.74,
     "y": 58.9
   },
@@ -185,7 +185,7 @@ const johtoMapCoordinates = {
     "y": 48.49
   },
   "big_fishing_spot": {
-    "name": "Big Fishing Spot",
+    "name": "Big Fishing Spot (Johto)",
     "x": 50.18,
     "y": 67.9
   },
@@ -205,12 +205,12 @@ const johtoMapCoordinates = {
     "y": 37.92
   },
   "viridian_forest": {
-    "name": "Viridian Forest",
+    "name": "Viridian Forest (Johto)",
     "x": 67.46,
     "y": 33.13
   },
   "mount_moon": {
-    "name": "Mount Moon",
+    "name": "Mount Moon (Johto)",
     "x": 78.15,
     "y": 22.56
   },
@@ -220,12 +220,12 @@ const johtoMapCoordinates = {
     "y": 23.8
   },
   "fossil_revival_lab": {
-    "name": "Fossil Revival Lab",
+    "name": "Fossil Revival Lab (Johto)",
     "x": 70.69,
     "y": 18.76
   },
   "rock_tunnel": {
-    "name": "Rock Tunnel",
+    "name": "Rock Tunnel (Johto)",
     "x": 90.87,
     "y": 34.95
   },
@@ -235,12 +235,12 @@ const johtoMapCoordinates = {
     "y": 28.67
   },
   "route_8": {
-    "name": "Route 8",
+    "name": "Route 8 (Johto)",
     "x": 90.29,
     "y": 43.54
   },
   "route_12": {
-    "name": "Route 12",
+    "name": "Route 12 (Johto)",
     "x": 93.51,
     "y": 54.36
   },
@@ -285,17 +285,17 @@ const johtoMapCoordinates = {
     "y": 47.17
   },
   "cycling_road": {
-    "name": "Cycling Road",
+    "name": "Cycling Road (Johto)",
     "x": 74.67,
     "y": 60.8
   },
   "sea_routes": {
-    "name": "Sea Routes",
+    "name": "Sea Routes (Johto)",
     "x": 75.04,
     "y": 83.1
   },
   "pokemon_mansion": {
-    "name": "Pokemon Mansion",
+    "name": "Pokemon Mansion (Johto)",
     "x": 67.57,
     "y": 82.28
   },
@@ -315,7 +315,7 @@ const johtoMapCoordinates = {
     "y": 37.61
   },
   "victory_road": {
-    "name": "Victory Road",
+    "name": "Victory Road (Johto)",
     "x": 60.07,
     "y": 47.19
   },
@@ -335,7 +335,7 @@ const johtoMapCoordinates = {
     "y": 34.57
   },
   "trade_with_friends_hub": {
-    "name": "Trade With Friends Hub",
+    "name": "Trade With Friends Hub (Johto)",
     "x": 67.47,
     "y": 61.32
   },

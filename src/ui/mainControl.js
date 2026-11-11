@@ -388,7 +388,7 @@ function formatRequirements(progressList) {
             let machineStr = p.machine.map(formatSpecies).join(' or ');
             textParts.push(`Catch 1 ${machineStr} ${getStatusHtml(p.isMet)}`);
         } else if (p.type === 'catchByQuality') {
-            textParts.push(`Catch ${p.required} ${p.quality} Pokémon from ${p.areaId} ${countDisplay(p.current, p.required)}${getStatusHtml(p.isMet)}`);
+            textParts.push(`Catch ${p.required} ${p.quality} Pokémon from ${p.areaId.replace(/ \(.*?\)$/, '')} ${countDisplay(p.current, p.required)}${getStatusHtml(p.isMet)}`);
         } else if (p.type === 'catchByQualityAndType') {
             textParts.push(`Catch ${p.required} ${p.quality} ${p.pokemonType}-type ${countDisplay(p.current, p.required)}${getStatusHtml(p.isMet)}`);
         } else if (p.type === 'catchByType') {
@@ -632,8 +632,8 @@ export function getChallengeText() {
         let activeId = state.stats.activeChallenges[0];
         let unlock = window.getCurrentUnlocks().find(u => u.areaId === activeId);
         if (unlock) {
-            let unlocks = unlock.unlocks ? "Unlocks: " + unlock.unlocks.join(" + ") : "";
-            let displayName = unlock.challengeName || activeId;
+            let unlocks = unlock.unlocks ? "Unlocks: " + unlock.unlocks.map(u => u.replace(/ \(.*?\)$/, '')).join(" + ") : "";
+            let displayName = (unlock.challengeName || activeId).replace(/ \(.*?\)$/, '');
             return `Next Challenge: ${displayName}` + (unlocks ? ` - ${unlocks}` : ``);
         }
     }

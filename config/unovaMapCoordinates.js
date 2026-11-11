@@ -235,7 +235,7 @@ const unovaMapCoordinates = {
     "y": 12.18
   },
   "victory_road": {
-    "name": "Victory Road",
+    "name": "Victory Road (Unova)",
     "x": 69.69,
     "y": 10.75
   },

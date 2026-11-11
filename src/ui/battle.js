@@ -339,6 +339,7 @@ function updateGymBackground(combatArena, state, battleSystem) {
 }
 
 function getRouteBackgroundImage(route) {
+    if (route) route = route.replace(/ \(.*?\)$/, '');
     if (!route) return 'url(\'./Assets/BG/BattleMode/Test.png\')';
 
     if (["Johto Safari Zone", "Kanto Safari Zone"].includes(route)) {
@@ -383,7 +384,7 @@ function updateBattleBackground(combatArena, state, battleSystem, inGymCombat, i
 
 function updateBackgroundSliding(combatArena, state, battleSystem, inGymCombat) {
 
-    if (SCROLLING_ROUTES.includes(state.currentRoute) && !inGymCombat) {
+    if (SCROLLING_ROUTES.includes(state.currentRoute.replace(/ \(.*?\)$/, '')) && !inGymCombat) {
         combatArena.style.backgroundSize = 'auto 100%';
         combatArena.style.backgroundRepeat = 'repeat-x';
 

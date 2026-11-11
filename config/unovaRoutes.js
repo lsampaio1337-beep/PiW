@@ -1788,7 +1788,7 @@ export const unovaRoutes = [
     ]
   },
   {
-    "name": "Victory Road",
+    "name": "Victory Road (Unova)",
     "spawns": [
       {
         "pokemonId": 632,
@@ -3360,7 +3360,7 @@ export const unovaUnlocks = [
     "challengeName": "Challenge 47",
     "areaId": "Route 23",
     "unlocks": [
-      "Victory Road"
+      "Victory Road (Unova)"
     ],
     "requirements": {
       "catchSpecies": [
@@ -3373,7 +3373,7 @@ export const unovaUnlocks = [
   },
   {
     "challengeName": "Challenge 48",
-    "areaId": "Victory Road",
+    "areaId": "Victory Road (Unova)",
     "unlocks": [
       "Unova Pokemon League"
     ],

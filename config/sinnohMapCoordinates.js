@@ -205,7 +205,7 @@ const sinnohMapCoordinates = {
     "y": 63.74
   },
   "victory_road": {
-    "name": "Victory Road",
+    "name": "Victory Road (Sinnoh)",
     "x": 85.74,
     "y": 48.83
   },

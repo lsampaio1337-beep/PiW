@@ -410,7 +410,7 @@ const routes = [
         "pokemonId": 27,
         "minLevel": 24,
         "maxLevel": 29,
-        "chance": 0.15
+        "chance": 0.1
       }
     ]
   },
@@ -1264,8 +1264,7 @@ const routes = [
   },
   {
     "name": "Victory Road",
-    "spawns": [
-      {
+    "spawns": [{
         "pokemonId": 67,
         "minLevel": 82,
         "maxLevel": 90,
@@ -1300,17 +1299,7 @@ const routes = [
         "minLevel": 95,
         "maxLevel": 95,
         "chance": 0.02
-      },
-      { "pokemonId": 26, "minLevel": 95, "maxLevel": 99, "chance": 0.1 },
-      { "pokemonId": 31, "minLevel": 96, "maxLevel": 100, "chance": 0.1 },
-      { "pokemonId": 34, "minLevel": 96, "maxLevel": 100, "chance": 0.1 },
-      { "pokemonId": 59, "minLevel": 96, "maxLevel": 100, "chance": 0.1 },
-      { "pokemonId": 112, "minLevel": 96, "maxLevel": 100, "chance": 0.1 },
-      { "pokemonId": 57, "minLevel": 95, "maxLevel": 99, "chance": 0.1 },
-      { "pokemonId": 210, "minLevel": 94, "maxLevel": 98, "chance": 0.1 },
-      { "pokemonId": 178, "minLevel": 94, "maxLevel": 98, "chance": 0.1 },
-      { "pokemonId": 82, "minLevel": 95, "maxLevel": 99, "chance": 0.1 },
-      { "pokemonId": 89, "minLevel": 94, "maxLevel": 98, "chance": 0.1 }
+      }
     ]
   },
   {
@@ -1477,8 +1466,7 @@ const routes = [
   },
   {
     "name": "Trade With Friends Hub",
-    "spawns": [
-      {
+    "spawns": [{
         "pokemonId": 94,
         "minLevel": 64,
         "maxLevel": 71,
@@ -1501,11 +1489,7 @@ const routes = [
         "minLevel": 64,
         "maxLevel": 71,
         "chance": 0.25
-      },
-      { "pokemonId": 65, "minLevel": 93, "maxLevel": 97, "chance": 0.25 },
-      { "pokemonId": 68, "minLevel": 93, "maxLevel": 97, "chance": 0.25 },
-      { "pokemonId": 76, "minLevel": 93, "maxLevel": 97, "chance": 0.25 },
-      { "pokemonId": 94, "minLevel": 93, "maxLevel": 97, "chance": 0.25 }
+      }
     ]
   },
   {

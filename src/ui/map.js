@@ -973,7 +973,9 @@ export function showMapTooltip(e, locationName) {
     tooltip.style.padding = padding + 'px';
     tooltip.style.borderRadius = borderRadius + 'px';
 
-    let info = `<strong>${locationName}</strong><br>`;
+
+    const displayLocationName = locationName.replace(/ \(.*?\)$/, '');
+    let info = `<strong>${displayLocationName}</strong><br>`;
 
     // Fetch info to show on tooltip
     if (locationName.includes("Gym") || locationName.includes("Pokemon League")) {
@@ -986,12 +988,11 @@ export function showMapTooltip(e, locationName) {
                 info += `Trainers: ${gym.trainers.length}<br>`;
             }
         }
-    } else if (window.getCurrentRoutes()) {
-        let route = null;
-        if (globals.battleSystem && typeof globals.battleSystem.getRoute === 'function') {
-            route = globals.battleSystem.getRoute(locationName);
-        } else {
-            route = window.getCurrentRoutes().find(r => r.name === locationName);
+    } else if (window.getRoutesForRegion && window.getRoutesForRegion(window.currentMapRegion || state.currentRegionName)) {
+        let route = window.getRoutesForRegion(window.currentMapRegion || state.currentRegionName).find(r => r.name === locationName);
+        if (!route) {
+            // Fallback for names that might have been suffixed in the map config
+            route = window.getRoutesForRegion(window.currentMapRegion || state.currentRegionName).find(r => r.name === `${locationName} (${window.currentMapRegion || state.currentRegionName})`);
         }
 
         if (route) {

@@ -28,6 +28,7 @@ function parseAreaNames(id) {
     if (id.includes(",")) {
         let parts = id.split(",");
         let baseRoute = parts[0].replace(/[0-9]+$/, "").trim();
+        baseRoute = baseRoute.replace(/ \(.*?\)$/, "").trim();
         result.push(parts[0].replace(/\s*\(.*?\)/, "").trim());
         for (let i = 1; i < parts.length; i++) {
             let num = parts[i].trim();
@@ -316,11 +317,13 @@ export function getDailyChallengesHtml() {
         let progressText = c.completed ? "" : `${c.progress} / ${c.target}`;
         let color = c.claimed ? "#4CAF50" : "#ccc";
         let textDec = c.claimed ? "line-through" : "none";
+        let displayText = c.text;
+        if (typeof displayText === 'string') { displayText = displayText.replace(/ \(.*?\)$/, ''); }
 
         html += `
             <div style="background: rgba(0,0,0,0.4); border: 1px solid #444; border-radius: 5px; padding: 10px; display: flex; align-items: center; justify-content: space-between;">
                 <div style="flex: 1; text-align: left; color: ${color}; text-decoration: ${textDec}; font-size: 14px; display: flex; align-items: center; gap: 5px;">
-                    ${c.text}
+                    ${displayText}
                 </div>
                 <div style="display: flex; align-items: center; gap: 10px;">
                     <div style="font-weight: bold; color: ${color}; white-space: nowrap; font-size: 14px;">

@@ -197,19 +197,25 @@ export function swapRegion(newRegionName) {
     state.currentRegionName = newRegionName;
 }
 
-window.getCurrentRoutes = function() {
+window.getRoutesForRegion = function(regionName) {
     if (!state.config) return [];
-    if (state.currentRegionName === 'Johto' && state.config.johtoRoutes) return state.config.johtoRoutes;
-    if (state.currentRegionName === 'Hoenn' && state.config.hoennRoutes) return state.config.hoennRoutes;
-    if (state.currentRegionName === 'Sinnoh' && state.config.sinnohRoutes) return state.config.sinnohRoutes;
-    if (state.currentRegionName === 'Unova' && state.config.unovaRoutes) return state.config.unovaRoutes;
-    if (state.currentRegionName === 'Kalos' && state.config.kalosRoutes) return state.config.kalosRoutes;
-    if (state.currentRegionName === 'Alola' && state.config.alolaRoutes) return state.config.alolaRoutes;
-    if (state.currentRegionName === 'Galar' && state.config.galarRoutes) return state.config.galarRoutes;
-    if (state.currentRegionName === 'Hisui' && state.config.hisuiRoutes) return state.config.hisuiRoutes;
-    if (state.currentRegionName === 'Paldea' && state.config.paldeaRoutes) return state.config.paldeaRoutes;
+    if (regionName === 'Johto' && state.config.johtoRoutes) return state.config.johtoRoutes;
+    if (regionName === 'Hoenn' && state.config.hoennRoutes) return state.config.hoennRoutes;
+    if (regionName === 'Sinnoh' && state.config.sinnohRoutes) return state.config.sinnohRoutes;
+    if (regionName === 'Unova' && state.config.unovaRoutes) return state.config.unovaRoutes;
+    if (regionName === 'Kalos' && state.config.kalosRoutes) return state.config.kalosRoutes;
+    if (regionName === 'Alola' && state.config.alolaRoutes) return state.config.alolaRoutes;
+    if (regionName === 'Galar' && state.config.galarRoutes) return state.config.galarRoutes;
+    if (regionName === 'Hisui' && state.config.hisuiRoutes) return state.config.hisuiRoutes;
+    if (regionName === 'Paldea' && state.config.paldeaRoutes) return state.config.paldeaRoutes;
     return state.config.routes || [];
 };
+
+window.getCurrentRoutes = function() {
+    return window.getRoutesForRegion(state.currentRegionName);
+};
+
+
 
 window.getCurrentUnlocks = function() {
     if (!state.config) return [];

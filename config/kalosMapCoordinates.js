@@ -355,7 +355,7 @@ export const kalosMapCoordinates = {
     "y": 90
   },
   "victoryroad": {
-    "name": "Victory Road",
+    "name": "Victory Road (Kalos)",
     "x": 30,
     "y": 90
   },

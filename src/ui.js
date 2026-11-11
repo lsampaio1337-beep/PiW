@@ -2254,7 +2254,49 @@ async function init() {
                     };
                     deepMerge(state, pData);
 
-                    // Initialize caughtSpeciesCount for older saves
+
+
+                    // Backwards Compatibility: If a save has an older duplicate name, map it to the correct new region-suffixed name
+                    const routeMappings = {
+                        "Victory Road": { Kanto: "Victory Road", Johto: "Victory Road (Johto)", Hoenn: "Victory Road (Hoenn)", Sinnoh: "Victory Road (Sinnoh)", Unova: "Victory Road (Unova)", Kalos: "Victory Road (Kalos)", Alola: "Victory Road (Alola)" },
+                        "Trade With Friends Hub": { Kanto: "Trade With Friends Hub", Johto: "Trade With Friends Hub (Johto)" },
+                        "Trade Hub": { Kanto: "Trade Hub", Johto: "Trade Hub (Johto)" },
+                        "Team Rocket Hideout": { Kanto: "Team Rocket Hideout", Johto: "Team Rocket Hideout (Johto)" },
+                        "Safari Zone": { Kanto: "Kanto Safari Zone", Johto: "Johto Safari Zone" }
+                    };
+
+                    const resolveRouteName = (routeName, regionName) => {
+                        if (routeMappings[routeName] && routeMappings[routeName][regionName]) {
+                            return routeMappings[routeName][regionName];
+                        }
+                        return routeName;
+                    };
+
+                    if (state.currentRoute) {
+                        state.currentRoute = resolveRouteName(state.currentRoute, state.currentRegionName);
+                    }
+                    if (state.stats && state.stats.activeChallenges) {
+                        state.stats.activeChallenges = state.stats.activeChallenges.map(c => resolveRouteName(c, state.currentRegionName));
+                    }
+                    if (state.stats && state.stats.completedChallenges) {
+                        state.stats.completedChallenges = state.stats.completedChallenges.map(c => resolveRouteName(c, state.currentRegionName));
+                    }
+                    // Handle other regions
+                    if (state.regions) {
+                        Object.keys(state.regions).forEach(regKey => {
+                            let reg = state.regions[regKey];
+                            if (reg.stats) {
+                                if (reg.stats.activeChallenges) {
+                                    reg.stats.activeChallenges = reg.stats.activeChallenges.map(c => resolveRouteName(c, regKey));
+                                }
+                                if (reg.stats.completedChallenges) {
+                                    reg.stats.completedChallenges = reg.stats.completedChallenges.map(c => resolveRouteName(c, regKey));
+                                }
+                            }
+                        });
+                    }
+
+// Initialize caughtSpeciesCount for older saves
                     if (state.stats && state.stats.caughtSpecies) {
                         state.stats.caughtSpeciesCount = Object.keys(state.stats.caughtSpecies).length;
                     } else if (state.stats) {
@@ -3480,7 +3522,7 @@ window.simulateSleepFarm = function() {
     const resultsHtml = `
         <div class="content-panel">
         <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.3); padding: 8px 12px; border-radius: 8px; margin-bottom: 15px;">
-            <div style="font-size: 14px; color: #cbd5e1;">📍 <b>Route:</b> ${state.currentRoute}</div>
+            <div style="font-size: 14px; color: #cbd5e1;">📍 <b>Route:</b> ${state.currentRoute.replace(/ \(.*?\)$/, '')}</div>
             <div style="font-size: 14px; color: #cbd5e1;">⏳ <b>Time:</b> ${timeStr.trim()}</div>
         </div>
 
