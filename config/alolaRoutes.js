@@ -688,7 +688,7 @@ export const alolaRoutes = [
     ]
   },
   {
-    "name": "Route 8",
+    "name": "Route 8 (Alola)",
     "spawns": [
       {
         "pokemonId": 766,
@@ -1063,7 +1063,7 @@ export const alolaRoutes = [
     ]
   },
   {
-    "name": "Route 12",
+    "name": "Route 12 (Alola)",
     "spawns": [
       {
         "pokemonId": 112,
@@ -4758,7 +4758,7 @@ export const alolaUnlocks = [
     "challengeName": "Challenge 32",
     "areaId": "Dividing Peak Tunnel",
     "unlocks": [
-      "Route 8"
+      "Route 8 (Alola)"
     ],
     "requirements": {
       "defeatCountRoute": {
@@ -4769,13 +4769,13 @@ export const alolaUnlocks = [
   },
   {
     "challengeName": "Challenge 33",
-    "areaId": "Route 8",
+    "areaId": "Route 8 (Alola)",
     "unlocks": [
       "Lush Jungle"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "route": "Route 8",
+        "route": "Route 8 (Alola)",
         "count": 10
       }
     }
@@ -4989,7 +4989,7 @@ export const alolaUnlocks = [
     "challengeName": "Challenge 54",
     "areaId": "Route 11",
     "unlocks": [
-      "Route 12"
+      "Route 12 (Alola)"
     ],
     "requirements": {
       "defeatCountRoute": {
@@ -5000,13 +5000,13 @@ export const alolaUnlocks = [
   },
   {
     "challengeName": "Challenge 55",
-    "areaId": "Route 12",
+    "areaId": "Route 12 (Alola)",
     "unlocks": [
       "Blush Mountain"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "route": "Route 12",
+        "route": "Route 12 (Alola)",
         "count": 10
       }
     }

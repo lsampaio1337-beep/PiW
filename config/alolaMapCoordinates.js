@@ -127,7 +127,7 @@ export const alolaMapCoordinates = {
     "x": 700,
     "y": 100
   },
-  "Route 8": {
+  "Route 8 (Alola)": {
     "x": 750,
     "y": 100
   },
@@ -215,7 +215,7 @@ export const alolaMapCoordinates = {
     "x": 900,
     "y": 150
   },
-  "Route 12": {
+  "Route 12 (Alola)": {
     "x": 50,
     "y": 200
   },

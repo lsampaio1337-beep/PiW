@@ -973,7 +973,6 @@ export function showMapTooltip(e, locationName) {
     tooltip.style.padding = padding + 'px';
     tooltip.style.borderRadius = borderRadius + 'px';
 
-
     const displayLocationName = locationName.replace(/ \(.*?\)$/, '');
     let info = `<strong>${displayLocationName}</strong><br>`;
 

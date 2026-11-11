@@ -2255,14 +2255,31 @@ async function init() {
                     deepMerge(state, pData);
 
 
-
-                    // Backwards Compatibility: If a save has an older duplicate name, map it to the correct new region-suffixed name
+                    // Backwards Compatibility: Map older save route names to new suffixed versions
                     const routeMappings = {
                         "Victory Road": { Kanto: "Victory Road", Johto: "Victory Road (Johto)", Hoenn: "Victory Road (Hoenn)", Sinnoh: "Victory Road (Sinnoh)", Unova: "Victory Road (Unova)", Kalos: "Victory Road (Kalos)", Alola: "Victory Road (Alola)" },
                         "Trade With Friends Hub": { Kanto: "Trade With Friends Hub", Johto: "Trade With Friends Hub (Johto)" },
                         "Trade Hub": { Kanto: "Trade Hub", Johto: "Trade Hub (Johto)" },
                         "Team Rocket Hideout": { Kanto: "Team Rocket Hideout", Johto: "Team Rocket Hideout (Johto)" },
-                        "Safari Zone": { Kanto: "Kanto Safari Zone", Johto: "Johto Safari Zone" }
+                        "Safari Zone": { Kanto: "Kanto Safari Zone", Johto: "Johto Safari Zone" },
+                        "Celadon Casino Starter Troupe": { Kanto: "Celadon Casino Starter Troupe", Johto: "Celadon Casino Starter Troupe (Johto)" },
+                        "Celadon Casino Babies": { Kanto: "Celadon Casino Babies", Johto: "Celadon Casino Babies (Johto)" },
+                        "Celadon Casino Special Spot": { Kanto: "Celadon Casino Special Spot", Johto: "Celadon Casino Special Spot (Johto)" },
+                        "Celadon Casino Eeveelutions": { Kanto: "Celadon Casino Eeveelutions", Johto: "Celadon Casino Eeveelutions (Johto)" },
+                        "Celadon Casino Late Troupe": { Kanto: "Celadon Casino Late Troupe", Johto: "Celadon Casino Late Troupe (Johto)" },
+                        "Dojo": { Kanto: "Dojo", Johto: "Dojo (Johto)" },
+                        "Small Fishing Spot": { Kanto: "Small Fishing Spot", Johto: "Small Fishing Spot (Johto)" },
+                        "Big Fishing Spot": { Kanto: "Big Fishing Spot", Johto: "Big Fishing Spot (Johto)" },
+                        "Mount Moon": { Kanto: "Mount Moon", Johto: "Mount Moon (Johto)" },
+                        "Fossil Revival Lab": { Kanto: "Fossil Revival Lab", Johto: "Fossil Revival Lab (Johto)" },
+                        "Rock Tunnel": { Kanto: "Rock Tunnel", Johto: "Rock Tunnel (Johto)" },
+                        "Pokemon League": { Kanto: "Pokemon League", Johto: "Pokemon League (Johto)", Hoenn: "Pokemon League (Hoenn)", Sinnoh: "Pokemon League (Sinnoh)", Unova: "Pokemon League (Unova)", Kalos: "Pokemon League (Kalos)", Alola: "Pokemon League (Alola)", Galar: "Pokemon League (Galar)", Hisui: "Pokemon League (Hisui)", Paldea: "Pokemon League (Paldea)" },
+                        "Viridian Forest": { Kanto: "Viridian Forest", Johto: "Viridian Forest (Johto)" },
+                        "Route 8": { Kanto: "Route 8", Johto: "Route 8 (Johto)", Kalos: "Route 8 (Muraille Coast)", Alola: "Route 8 (Alola)", Galar: "Route 8 (Galar)", Paldea: "Route 8 (Paldea)" },
+                        "Route 12": { Kanto: "Route 12", Johto: "Route 12 (Johto)", Kalos: "Route 12 (Fourrage Road)", Alola: "Route 12 (Alola)", Paldea: "Route 12 (Paldea)" },
+                        "Cycling Road": { Kanto: "Cycling Road", Johto: "Cycling Road (Johto)" },
+                        "Sea Routes": { Kanto: "Sea Routes", Johto: "Sea Routes (Johto)" },
+                        "Pokemon Mansion": { Kanto: "Pokemon Mansion", Johto: "Pokemon Mansion (Johto)" }
                     };
 
                     const resolveRouteName = (routeName, regionName) => {
@@ -2281,7 +2298,7 @@ async function init() {
                     if (state.stats && state.stats.completedChallenges) {
                         state.stats.completedChallenges = state.stats.completedChallenges.map(c => resolveRouteName(c, state.currentRegionName));
                     }
-                    // Handle other regions
+
                     if (state.regions) {
                         Object.keys(state.regions).forEach(regKey => {
                             let reg = state.regions[regKey];
