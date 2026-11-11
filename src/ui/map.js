@@ -835,15 +835,21 @@ export function navigateToLocation(locationName) {
             lookupName = "Kanto Pokemon League";
         }
 
-        const vGym = document.getElementById("map-inner-modal-content");
-        const vGymTitle = document.getElementById("map-inner-modal-title");
+        const mapWindow = document.getElementById("window-map") || document;
+        const vGym = mapWindow.querySelector("#map-inner-modal-content");
+        const vGymTitle = mapWindow.querySelector("#map-inner-modal-title");
         const gymConfig = state.config.gyms.find(g => g.name === lookupName);
 
         if (vGymTitle) {
             vGymTitle.innerText = locationName;
         }
 
-        vGym.replaceChildren();
+        if (vGym) {
+            vGym.replaceChildren();
+        } else {
+            console.error("Gym inner modal content not found.");
+            return;
+        }
 
         if (gymConfig && state.config.gymAssets && state.config.gymAssets[gymConfig.leader]) {
             const assetConfig = state.config.gymAssets[gymConfig.leader];
