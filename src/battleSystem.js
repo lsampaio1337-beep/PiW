@@ -485,12 +485,12 @@ class BattleSystem {
         if (leader.currentHp <= 0) return;
 
         if (this.leaderCooldown <= 0) {
-            let delay = this.state.config.balance.baseAttackDelay * 1000 * (100 / (100 + leader.currentStats.spe));
+            let delay = (this.state.config.balance.baseAttackDelay * 1000) / (1 + Math.pow(leader.currentStats.spe, 0.4274212237346763) * 0.5845231314777131);
             this.leaderCooldown = Math.max(250, delay) / this.state.settings.gameSpeed;
         }
 
         if (this.enemyCooldown <= 0) {
-            let delay = this.state.config.balance.baseAttackDelay * 1000 * (100 / (100 + this.activeEncounter.currentStats.spe));
+            let delay = (this.state.config.balance.baseAttackDelay * 1000) / (1 + Math.pow(this.activeEncounter.currentStats.spe, 0.4274212237346763) * 0.5845231314777131);
             this.enemyCooldown = Math.max(250, delay) / this.state.settings.gameSpeed;
         }
 
@@ -1291,12 +1291,12 @@ class BattleSystem {
         }
 
         if (this.leaderCooldown <= 0) {
-            let delay = this.state.config.balance.baseAttackDelay * 1000 * (100 / (100 + leader.currentStats.spe));
+            let delay = (this.state.config.balance.baseAttackDelay * 1000) / (1 + Math.pow(leader.currentStats.spe, 0.4274212237346763) * 0.5845231314777131);
             this.leaderCooldown = Math.max(250, delay) / this.state.settings.gameSpeed;
         }
 
         if (this.enemyCooldown <= 0) {
-            let delay = this.state.config.balance.baseAttackDelay * 1000 * (100 / (100 + this.activeEncounter.currentStats.spe));
+            let delay = (this.state.config.balance.baseAttackDelay * 1000) / (1 + Math.pow(this.activeEncounter.currentStats.spe, 0.4274212237346763) * 0.5845231314777131);
             this.enemyCooldown = Math.max(250, delay) / this.state.settings.gameSpeed;
         }
 
@@ -2508,12 +2508,12 @@ class BattleSystem {
 
             while (leader.currentHp > 0 && this.activeEncounter.currentHp > 0) {
                 if (simLeaderCooldown <= 0) {
-                    let delay = this.state.config.balance.baseAttackDelay * 1000 * (100 / (100 + leaderSpe));
+                    let delay = (this.state.config.balance.baseAttackDelay * 1000) / (1 + Math.pow(leaderSpe, 0.4274212237346763) * 0.5845231314777131);
                     simLeaderCooldown = Math.max(250, delay);
                 }
 
                 if (simEnemyCooldown <= 0) {
-                    let delay = this.state.config.balance.baseAttackDelay * 1000 * (100 / (100 + enemySpe));
+                    let delay = (this.state.config.balance.baseAttackDelay * 1000) / (1 + Math.pow(enemySpe, 0.4274212237346763) * 0.5845231314777131);
                     simEnemyCooldown = Math.max(250, delay);
                 }
 
