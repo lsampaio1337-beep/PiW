@@ -205,12 +205,12 @@ const johtoMapCoordinates = {
     "y": 37.92
   },
   "viridian_forest": {
-    "name": "Viridian Forest",
+    "name": "Viridian Forest (Johto)",
     "x": 67.46,
     "y": 33.13
   },
   "mount_moon": {
-    "name": "Mount Moon",
+    "name": "Mount Moon (Johto)",
     "x": 78.15,
     "y": 22.56
   },
@@ -225,7 +225,7 @@ const johtoMapCoordinates = {
     "y": 18.76
   },
   "rock_tunnel": {
-    "name": "Rock Tunnel",
+    "name": "Rock Tunnel (Johto)",
     "x": 90.87,
     "y": 34.95
   },
@@ -235,12 +235,12 @@ const johtoMapCoordinates = {
     "y": 28.67
   },
   "route_8": {
-    "name": "Route 8",
+    "name": "Route 8 (Johto)",
     "x": 90.29,
     "y": 43.54
   },
   "route_12": {
-    "name": "Route 12",
+    "name": "Route 12 (Johto)",
     "x": 93.51,
     "y": 54.36
   },
@@ -265,7 +265,7 @@ const johtoMapCoordinates = {
     "y": 55.6
   },
   "kanto_safari_zone": {
-    "name": "Kanto Safari Zone",
+    "name": "Kanto Safari Zone (Johto)",
     "x": 79.96,
     "y": 67.57
   },
@@ -285,17 +285,17 @@ const johtoMapCoordinates = {
     "y": 47.17
   },
   "cycling_road": {
-    "name": "Cycling Road",
+    "name": "Cycling Road (Johto)",
     "x": 74.67,
     "y": 60.8
   },
   "sea_routes": {
-    "name": "Sea Routes",
+    "name": "Sea Routes (Johto)",
     "x": 75.04,
     "y": 83.1
   },
   "pokemon_mansion": {
-    "name": "Pokemon Mansion",
+    "name": "Pokemon Mansion (Johto)",
     "x": 67.57,
     "y": 82.28
   },
@@ -315,7 +315,7 @@ const johtoMapCoordinates = {
     "y": 37.61
   },
   "victory_road": {
-    "name": "Victory Road",
+    "name": "Victory Road (Johto)",
     "x": 60.07,
     "y": 47.19
   },

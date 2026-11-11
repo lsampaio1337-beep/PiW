@@ -167,7 +167,7 @@ window.dragStart = dragStart;
 window.completeChallenge = function(targetAreaId) {
 
     if (!state.stats.activeChallenges) {
-        state.stats.activeChallenges = ["Route 1"];
+        state.stats.activeChallenges = ["Route 1 (Kanto)"];
     }
     if (!state.stats.completedChallengeIds) {
         state.stats.completedChallengeIds = [];
@@ -1558,7 +1558,7 @@ function _initializeInitialRoutes(id) {
 
     // Add specific first routes for regions if applicable
     let currentRegion = state.currentRegionName || 'Kanto';
-    if (!state.stats.activeChallenges || state.stats.activeChallenges.length === 0 || state.stats.activeChallenges[0] === 'Route 1') {
+    if (!state.stats.activeChallenges || state.stats.activeChallenges.length === 0 || state.stats.activeChallenges[0] === "Route 1" || state.stats.activeChallenges[0] === "Route 1 (Kanto)") {
         if (currentRegion === 'Johto') state.stats.activeChallenges = ['Route 29'];
         else if (currentRegion === 'Hoenn') state.stats.activeChallenges = ['Route 101'];
         else if (currentRegion === 'Sinnoh') state.stats.activeChallenges = ['Route 201'];
@@ -2063,11 +2063,12 @@ async function init() {
                 // Get the reward from the LAST completed challenge
                 if (cIndex > 0) {
                     let pUnlock = window.getCurrentUnlocks()[cIndex - 1];
-                    lastRoute = pUnlock.unlocks ? pUnlock.unlocks.join(" + ") : "Next Area";
+                    lastRoute = pUnlock.unlocks ? pUnlock.unlocks.map(r => r.replace(/\s*\([^)]+\)$/, "")).join(" + ") : "Next Area";
                 }
             }
 
-            let zzzText = pData.isZzZMode ? ` - ZzZ: ${pData.currentRoute || 'Unknown Route'}` : '';
+            let displayZzZRoute = (pData.currentRoute || "Unknown Route").replace(/\s*\([^)]+\)$/, "");
+            let zzzText = pData.isZzZMode ? ` - ZzZ: ${displayZzZRoute}` : '';
 
             const btn = document.createElement('button');
             btn.style.padding = "10px";
@@ -2289,7 +2290,7 @@ async function init() {
                     // Handle backwards compatibility for challenges
                     if (state.stats.completedChallenges !== undefined && (!state.stats.completedChallengeIds || state.stats.completedChallengeIds.length === 0)) {
                         state.stats.completedChallengeIds = [];
-                        state.stats.activeChallenges = ["Route 1"];
+                        state.stats.activeChallenges = ["Route 1 (Kanto)"];
 
                         // Wait for configs to be available to build the list
                         // We will do this right after loadConfigs
@@ -2317,7 +2318,7 @@ async function init() {
                             }
                         }
                     }
-                    if (!state.stats.activeChallenges) state.stats.activeChallenges = ["Route 1"];
+                    if (!state.stats.activeChallenges) state.stats.activeChallenges = ["Route 1 (Kanto)"];
                     if (!state.stats.completedChallengeIds) state.stats.completedChallengeIds = [];
 
                     startGame();
@@ -3480,7 +3481,7 @@ window.simulateSleepFarm = function() {
     const resultsHtml = `
         <div class="content-panel">
         <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.3); padding: 8px 12px; border-radius: 8px; margin-bottom: 15px;">
-            <div style="font-size: 14px; color: #cbd5e1;">📍 <b>Route:</b> ${state.currentRoute}</div>
+            <div style="font-size: 14px; color: #cbd5e1;">📍 <b>Route:</b> ${(state.currentRoute || '').replace(/\s*\([^)]+\)$/, '')}</div>
             <div style="font-size: 14px; color: #cbd5e1;">⏳ <b>Time:</b> ${timeStr.trim()}</div>
         </div>
 

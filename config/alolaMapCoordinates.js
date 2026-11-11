@@ -1,5 +1,5 @@
 export const alolaMapCoordinates = {
-  "Route 1": {
+  "Route 1 (Alola)": {
     "x": 50,
     "y": 50
   },
@@ -23,7 +23,7 @@ export const alolaMapCoordinates = {
     "x": 300,
     "y": 50
   },
-  "Route 2": {
+  "Route 2 (Alola)": {
     "x": 350,
     "y": 50
   },
@@ -47,7 +47,7 @@ export const alolaMapCoordinates = {
     "x": 600,
     "y": 50
   },
-  "Route 3": {
+  "Route 3 (Alola)": {
     "x": 650,
     "y": 50
   },
@@ -79,7 +79,7 @@ export const alolaMapCoordinates = {
     "x": 100,
     "y": 100
   },
-  "Route 4": {
+  "Route 4 (Alola)": {
     "x": 150,
     "y": 100
   },
@@ -95,7 +95,7 @@ export const alolaMapCoordinates = {
     "x": 300,
     "y": 100
   },
-  "Route 5": {
+  "Route 5 (Alola)": {
     "x": 350,
     "y": 100
   },
@@ -103,7 +103,7 @@ export const alolaMapCoordinates = {
     "x": 400,
     "y": 100
   },
-  "Route 6": {
+  "Route 6 (Alola)": {
     "x": 450,
     "y": 100
   },
@@ -111,7 +111,7 @@ export const alolaMapCoordinates = {
     "x": 500,
     "y": 100
   },
-  "Route 7": {
+  "Route 7 (Alola)": {
     "x": 550,
     "y": 100
   },
@@ -127,7 +127,7 @@ export const alolaMapCoordinates = {
     "x": 700,
     "y": 100
   },
-  "Route 8": {
+  "Route 8 (Alola)": {
     "x": 750,
     "y": 100
   },
@@ -143,7 +143,7 @@ export const alolaMapCoordinates = {
     "x": 900,
     "y": 100
   },
-  "Route 9": {
+  "Route 9 (Alola)": {
     "x": 50,
     "y": 150
   },
@@ -199,7 +199,7 @@ export const alolaMapCoordinates = {
     "x": 700,
     "y": 150
   },
-  "Route 10": {
+  "Route 10 (Alola)": {
     "x": 750,
     "y": 150
   },
@@ -211,11 +211,11 @@ export const alolaMapCoordinates = {
     "x": 850,
     "y": 150
   },
-  "Route 11": {
+  "Route 11 (Alola)": {
     "x": 900,
     "y": 150
   },
-  "Route 12": {
+  "Route 12 (Alola)": {
     "x": 50,
     "y": 200
   },
@@ -227,7 +227,7 @@ export const alolaMapCoordinates = {
     "x": 150,
     "y": 200
   },
-  "Route 13": {
+  "Route 13 (Alola)": {
     "x": 200,
     "y": 200
   },
@@ -239,7 +239,7 @@ export const alolaMapCoordinates = {
     "x": 300,
     "y": 200
   },
-  "Route 14": {
+  "Route 14 (Alola)": {
     "x": 350,
     "y": 200
   },
@@ -255,7 +255,7 @@ export const alolaMapCoordinates = {
     "x": 500,
     "y": 200
   },
-  "Route 15": {
+  "Route 15 (Alola)": {
     "x": 550,
     "y": 200
   },
@@ -263,7 +263,7 @@ export const alolaMapCoordinates = {
     "x": 600,
     "y": 200
   },
-  "Route 16": {
+  "Route 16 (Alola)": {
     "x": 650,
     "y": 200
   },
@@ -343,7 +343,7 @@ export const alolaMapCoordinates = {
     "x": 700,
     "y": 250
   },
-  "Pokémon League": {
+  "Pokémon League (Alola)": {
     "x": 750,
     "y": 250
   },

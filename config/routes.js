@@ -5,7 +5,7 @@ const routes = [
     "spawns": []
   },
   {
-    "name": "Route 1",
+    "name": "Route 1 (Kanto)",
     "spawns": [
       {
         "pokemonId": 16,
@@ -22,7 +22,7 @@ const routes = [
     ]
   },
   {
-    "name": "Route 2",
+    "name": "Route 2 (Kanto)",
     "spawns": [
       {
         "pokemonId": 16,
@@ -51,7 +51,7 @@ const routes = [
     ]
   },
   {
-    "name": "Viridian Forest",
+    "name": "Viridian Forest (Kanto)",
     "spawns": [
       {
         "pokemonId": 10,
@@ -86,7 +86,7 @@ const routes = [
     ]
   },
   {
-    "name": "Route 3",
+    "name": "Route 3 (Kanto)",
     "spawns": [
       {
         "pokemonId": 16,
@@ -123,7 +123,7 @@ const routes = [
     ]
   },
   {
-    "name": "Mount Moon",
+    "name": "Mount Moon (Kanto)",
     "spawns": [
       {
         "pokemonId": 41,
@@ -147,7 +147,7 @@ const routes = [
     ]
   },
   {
-    "name": "Route 4",
+    "name": "Route 4 (Kanto)",
     "spawns": [
       {
         "pokemonId": 19,
@@ -252,7 +252,7 @@ const routes = [
     ]
   },
   {
-    "name": "Route 5",
+    "name": "Route 5 (Kanto)",
     "spawns": [
       {
         "pokemonId": 16,
@@ -281,7 +281,7 @@ const routes = [
     ]
   },
   {
-    "name": "Route 6",
+    "name": "Route 6 (Kanto)",
     "spawns": [
       {
         "pokemonId": 16,
@@ -322,7 +322,7 @@ const routes = [
     ]
   },
   {
-    "name": "Route 11",
+    "name": "Route 11 (Kanto)",
     "spawns": [
       {
         "pokemonId": 96,
@@ -380,7 +380,7 @@ const routes = [
     ]
   },
   {
-    "name": "Route 9",
+    "name": "Route 9 (Kanto)",
     "spawns": [
       {
         "pokemonId": 19,
@@ -415,7 +415,7 @@ const routes = [
     ]
   },
   {
-    "name": "Route 10",
+    "name": "Route 10 (Kanto)",
     "spawns": [
       {
         "pokemonId": 21,
@@ -450,7 +450,7 @@ const routes = [
     ]
   },
   {
-    "name": "Rock Tunnel",
+    "name": "Rock Tunnel (Kanto)",
     "spawns": [
       {
         "pokemonId": 41,
@@ -479,7 +479,7 @@ const routes = [
     ]
   },
   {
-    "name": "Route 8",
+    "name": "Route 8 (Kanto)",
     "spawns": [
       {
         "pokemonId": 58,
@@ -514,7 +514,7 @@ const routes = [
     ]
   },
   {
-    "name": "Route 7",
+    "name": "Route 7 (Kanto)",
     "spawns": [
       {
         "pokemonId": 17,
@@ -693,7 +693,7 @@ const routes = [
     ]
   },
   {
-    "name": "Route 12",
+    "name": "Route 12 (Kanto)",
     "spawns": [
       {
         "pokemonId": 69,
@@ -734,7 +734,7 @@ const routes = [
     ]
   },
   {
-    "name": "Route 13",
+    "name": "Route 13 (Kanto)",
     "spawns": [
       {
         "pokemonId": 69,
@@ -787,7 +787,7 @@ const routes = [
     ]
   },
   {
-    "name": "Route 14",
+    "name": "Route 14 (Kanto)",
     "spawns": [
       {
         "pokemonId": 17,
@@ -834,7 +834,7 @@ const routes = [
     ]
   },
   {
-    "name": "Route 15",
+    "name": "Route 15 (Kanto)",
     "spawns": [
       {
         "pokemonId": 17,
@@ -875,7 +875,7 @@ const routes = [
     ]
   },
   {
-    "name": "Cycling Road",
+    "name": "Cycling Road (Kanto)",
     "spawns": [
       {
         "pokemonId": 20,
@@ -910,7 +910,7 @@ const routes = [
     ]
   },
   {
-    "name": "Kanto Safari Zone",
+    "name": "Kanto Safari Zone (Kanto)",
     "spawns": [
       {
         "pokemonId": 33,
@@ -975,7 +975,7 @@ const routes = [
     ]
   },
   {
-    "name": "Sea Routes",
+    "name": "Sea Routes (Kanto)",
     "spawns": [
       {
         "pokemonId": 72,
@@ -1087,7 +1087,7 @@ const routes = [
     ]
   },
   {
-    "name": "Pokemon Mansion",
+    "name": "Pokemon Mansion (Kanto)",
     "spawns": [
       {
         "pokemonId": 109,
@@ -1181,7 +1181,7 @@ const routes = [
     ]
   },
   {
-    "name": "Route 22",
+    "name": "Route 22 (Kanto)",
     "spawns": [
       {
         "pokemonId": 113,
@@ -1222,7 +1222,7 @@ const routes = [
     ]
   },
   {
-    "name": "Route 23",
+    "name": "Route 23 (Kanto)",
     "spawns": [
       {
         "pokemonId": 22,
@@ -1263,7 +1263,7 @@ const routes = [
     ]
   },
   {
-    "name": "Victory Road",
+    "name": "Victory Road (Kanto)",
     "spawns": [
       {
         "pokemonId": 67,
@@ -1546,41 +1546,41 @@ const routes = [
 ];
 
 export const unlocks = [
-  { "challengeName": "Challenge 01", "areaId": "Route 1", "unlocks": ["Route 2"], "requirements": { "defeatCountRoute": { "route": "Route 1", "count": 25 } } },
-  { "challengeName": "Challenge 02", "areaId": "Route 2", "unlocks": ["Viridian Forest"], "requirements": { "catchSpecies": [{ "species": "Nidoran♀", "count": 1 }, { "species": "Nidoran♂", "count": 1 }] } },
-  { "challengeName": "Challenge 03", "areaId": "Viridian Forest", "unlocks": ["Pewter Gym"], "requirements": { "catchByQualityAndType": { "type": "Bug", "quality": "Rare", "count": 1 } } },
-  { "challengeName": "Challenge 04", "areaId": "Pewter Gym", "unlocks": ["Route 3"], "requirements": { "earnBadge": { "name": "Boulder Badge", "leader": "Brock", "badgeCount": 1 } } },
-  { "challengeName": "Challenge 05", "areaId": "Route 3", "unlocks": ["Mount Moon"], "requirements": { "catchSpecies": [{ "species": "Ekans", "count": 1 }, { "species": "Sandshrew", "count": 1 }] } },
-  { "challengeName": "Challenge 06", "areaId": "Mount Moon", "unlocks": ["Route 4"], "gift": { "item": "Fairy Stone", "count": 1 }, "requirements": { "catchSpecies": [{ "species": "Clefairy", "count": 1 }], "catchSpeciesByQualityOrHigher": [{ "species": "Zubat", "quality": "Uncommon", "count": 1 }] } },
-  { "challengeName": "Challenge 07", "areaId": "Route 4", "unlocks": ["Cerulean Gym"], "requirements": { "catchSpecies": [{ "species": "Mankey", "count": 2 }] } },
+  { "challengeName": "Challenge 01", "areaId": "Route 1 (Kanto)", "unlocks": ["Route 2 (Kanto)"], "requirements": { "defeatCountRoute": { "route": "Route 1 (Kanto)", "count": 25 } } },
+  { "challengeName": "Challenge 02", "areaId": "Route 2 (Kanto)", "unlocks": ["Viridian Forest (Kanto)"], "requirements": { "catchSpecies": [{ "species": "Nidoran♀", "count": 1 }, { "species": "Nidoran♂", "count": 1 }] } },
+  { "challengeName": "Challenge 03", "areaId": "Viridian Forest (Kanto)", "unlocks": ["Pewter Gym"], "requirements": { "catchByQualityAndType": { "type": "Bug", "quality": "Rare", "count": 1 } } },
+  { "challengeName": "Challenge 04", "areaId": "Pewter Gym", "unlocks": ["Route 3 (Kanto)"], "requirements": { "earnBadge": { "name": "Boulder Badge", "leader": "Brock", "badgeCount": 1 } } },
+  { "challengeName": "Challenge 05", "areaId": "Route 3 (Kanto)", "unlocks": ["Mount Moon (Kanto)"], "requirements": { "catchSpecies": [{ "species": "Ekans", "count": 1 }, { "species": "Sandshrew", "count": 1 }] } },
+  { "challengeName": "Challenge 06", "areaId": "Mount Moon (Kanto)", "unlocks": ["Route 4 (Kanto)"], "gift": { "item": "Fairy Stone", "count": 1 }, "requirements": { "catchSpecies": [{ "species": "Clefairy", "count": 1 }], "catchSpeciesByQualityOrHigher": [{ "species": "Zubat", "quality": "Uncommon", "count": 1 }] } },
+  { "challengeName": "Challenge 07", "areaId": "Route 4 (Kanto)", "unlocks": ["Cerulean Gym"], "requirements": { "catchSpecies": [{ "species": "Mankey", "count": 2 }] } },
   { "challengeName": "Challenge 08", "areaId": "Cerulean Gym", "unlocks": ["Route 24"], "requirements": { "earnBadge": { "name": "Cascade Badge", "leader": "Misty", "badgeCount": 2 } } },
   { "challengeName": "Challenge 09", "areaId": "Route 24", "unlocks": ["Route 25"], "requirements": { "catchSpecies": [{ "species": "Abra", "count": 2 }] } },
-  { "challengeName": "Challenge 10", "areaId": "Route 25", "unlocks": ["Route 5", "Daycare"], "gift": { "item": "Psychic Stone", "count": 1 }, "requirements": { "catchSpecies": [{ "species": "Abra", "count": 5 }] } },
-  { "challengeName": "Challenge 11", "areaId": "Route 5", "unlocks": ["Route 6"], "requirements": { "defeatCountRoute": { "route": "Route 5", "count": 100 } } },
-  { "challengeName": "Challenge 12", "areaId": "Route 6", "unlocks": ["Vermilion Gym"], "requirements": { "catchSpecies": [{ "species": "Psyduck", "count": 1 }, { "species": "Goldeen", "count": 1 }] } },
-  { "challengeName": "Challenge 13", "areaId": "Vermilion Gym", "unlocks": ["Route 11"], "requirements": { "earnBadge": { "name": "Thunder Badge", "leader": "Lt. Surge", "badgeCount": 3 } } },
-  { "challengeName": "Challenge 14", "areaId": "Route 11", "unlocks": ["Digglett Cave"], "requirements": { "catchSpecies": [{ "species": "Drowzee", "count": 5 }, { "species": "Raticate", "count": 1 }] } },
-  { "challengeName": "Challenge 15", "areaId": "Digglett Cave", "unlocks": ["Route 9"], "gift": { "item": "Ground Stone", "count": 1 }, "requirements": { "catchSpecies": [{ "species": "Dugtrio", "count": 2 }] } },
-  { "challengeName": "Challenge 16", "areaId": "Route 9", "unlocks": ["Route 10"], "requirements": { "catchSpecies": [{ "species": "Fearow", "count": 2 }] } },
-  { "challengeName": "Challenge 17", "areaId": "Route 10", "unlocks": ["Rock Tunnel"], "requirements": { "defeatCountRoute": { "route": "Route 10", "count": 100 } } },
-  { "challengeName": "Challenge 18", "areaId": "Rock Tunnel", "unlocks": ["Route 8"], "gift": { "item": "Rock Stone", "count": 1 }, "requirements": { "catchSpecies": [{ "species": "Onix", "count": 2 }, { "species": "Machop", "count": 2 }] } },
-  { "challengeName": "Challenge 19", "areaId": "Route 8", "unlocks": ["Celadon Gym"], "requirements": { "catchSpecies": [{ "species": "Kadabra", "count": 2 }], "catchByType": { "type": "Fire", "count": 10 } } },
-  { "challengeName": "Challenge 20", "areaId": "Celadon Gym", "unlocks": ["Route 7", "Celadon Casino", "Celadon Casino Starter Troupe"], "requirements": { "earnBadge": { "name": "Rainbow Badge", "leader": "Erika", "badgeCount": 4 } } },
-  { "challengeName": "Challenge 21", "areaId": "Route 7", "unlocks": ["Pokemon Tower"], "requirements": { "defeatCountRoute": { "route": "Route 7", "count": 150 } } },
-  { "challengeName": "Challenge 22", "areaId": "Pokemon Tower", "unlocks": ["Route 12"], "gift": { "item": "Ghost Stone", "count": 2 }, "requirements": { "catchSpecies": [{ "species": "Haunter", "count": 2 }, { "species": "Cubone", "count": 1 }] } },
-  { "challengeName": "Challenge 23", "areaId": "Route 12", "unlocks": ["Route 13"], "requirements": { "catchSpecies": [{ "species": "Farfetch'd", "count": 3 }] } },
-  { "challengeName": "Challenge 24", "areaId": "Route 13", "unlocks": ["Route 14,15"], "requirements": { "catchSpecies": [{ "species": "Victreebel", "count": 1 }, { "species": "Vileplume", "count": 1 }] } },
+  { "challengeName": "Challenge 10", "areaId": "Route 25", "unlocks": ["Route 5 (Kanto)", "Daycare"], "gift": { "item": "Psychic Stone", "count": 1 }, "requirements": { "catchSpecies": [{ "species": "Abra", "count": 5 }] } },
+  { "challengeName": "Challenge 11", "areaId": "Route 5 (Kanto)", "unlocks": ["Route 6 (Kanto)"], "requirements": { "defeatCountRoute": { "route": "Route 5 (Kanto)", "count": 100 } } },
+  { "challengeName": "Challenge 12", "areaId": "Route 6 (Kanto)", "unlocks": ["Vermilion Gym"], "requirements": { "catchSpecies": [{ "species": "Psyduck", "count": 1 }, { "species": "Goldeen", "count": 1 }] } },
+  { "challengeName": "Challenge 13", "areaId": "Vermilion Gym", "unlocks": ["Route 11 (Kanto)"], "requirements": { "earnBadge": { "name": "Thunder Badge", "leader": "Lt. Surge", "badgeCount": 3 } } },
+  { "challengeName": "Challenge 14", "areaId": "Route 11 (Kanto)", "unlocks": ["Digglett Cave"], "requirements": { "catchSpecies": [{ "species": "Drowzee", "count": 5 }, { "species": "Raticate", "count": 1 }] } },
+  { "challengeName": "Challenge 15", "areaId": "Digglett Cave", "unlocks": ["Route 9 (Kanto)"], "gift": { "item": "Ground Stone", "count": 1 }, "requirements": { "catchSpecies": [{ "species": "Dugtrio", "count": 2 }] } },
+  { "challengeName": "Challenge 16", "areaId": "Route 9 (Kanto)", "unlocks": ["Route 10 (Kanto)"], "requirements": { "catchSpecies": [{ "species": "Fearow", "count": 2 }] } },
+  { "challengeName": "Challenge 17", "areaId": "Route 10 (Kanto)", "unlocks": ["Rock Tunnel (Kanto)"], "requirements": { "defeatCountRoute": { "route": "Route 10 (Kanto)", "count": 100 } } },
+  { "challengeName": "Challenge 18", "areaId": "Rock Tunnel (Kanto)", "unlocks": ["Route 8 (Kanto)"], "gift": { "item": "Rock Stone", "count": 1 }, "requirements": { "catchSpecies": [{ "species": "Onix", "count": 2 }, { "species": "Machop", "count": 2 }] } },
+  { "challengeName": "Challenge 19", "areaId": "Route 8 (Kanto)", "unlocks": ["Celadon Gym"], "requirements": { "catchSpecies": [{ "species": "Kadabra", "count": 2 }], "catchByType": { "type": "Fire", "count": 10 } } },
+  { "challengeName": "Challenge 20", "areaId": "Celadon Gym", "unlocks": ["Route 7 (Kanto)", "Celadon Casino", "Celadon Casino Starter Troupe"], "requirements": { "earnBadge": { "name": "Rainbow Badge", "leader": "Erika", "badgeCount": 4 } } },
+  { "challengeName": "Challenge 21", "areaId": "Route 7 (Kanto)", "unlocks": ["Pokemon Tower"], "requirements": { "defeatCountRoute": { "route": "Route 7 (Kanto)", "count": 150 } } },
+  { "challengeName": "Challenge 22", "areaId": "Pokemon Tower", "unlocks": ["Route 12 (Kanto)"], "gift": { "item": "Ghost Stone", "count": 2 }, "requirements": { "catchSpecies": [{ "species": "Haunter", "count": 2 }, { "species": "Cubone", "count": 1 }] } },
+  { "challengeName": "Challenge 23", "areaId": "Route 12 (Kanto)", "unlocks": ["Route 13 (Kanto)"], "requirements": { "catchSpecies": [{ "species": "Farfetch'd", "count": 3 }] } },
+  { "challengeName": "Challenge 24", "areaId": "Route 13 (Kanto)", "unlocks": ["Route 14,15"], "requirements": { "catchSpecies": [{ "species": "Victreebel", "count": 1 }, { "species": "Vileplume", "count": 1 }] } },
   { "challengeName": "Challenge 25", "areaId": "Route 14,15", "unlocks": ["Saffron Gym"], "gift": { "item": "Normal Stone", "count": 2 }, "requirements": { "catchSpecies": [{ "species": "Ditto", "count": 5 }] } },
   { "challengeName": "Challenge 26", "areaId": "Saffron Gym", "unlocks": ["Cycling Road (16-18)"], "requirements": { "earnBadge": { "name": "Marsh Badge", "leader": "Sabrina", "badgeCount": 5 } } },
-  { "challengeName": "Challenge 27", "areaId": "Cycling Road (16-18)", "unlocks": ["Kanto Safari Zone"], "requirements": { "catchSpecies": [{ "species": "Dodrio", "count": 2 }] } },
-  { "challengeName": "Challenge 28", "areaId": "Kanto Safari Zone", "unlocks": ["Fuchsia Gym"], "gift": { "item": "Ultraball", "count": 10 }, "requirements": { "defeatCountRoute": { "route": "Kanto Safari Zone", "count": 100 } } },
-  { "challengeName": "Challenge 29", "areaId": "Fuchsia Gym", "unlocks": ["Sea Routes"], "requirements": { "earnBadge": { "name": "Soul Badge", "leader": "Koga", "badgeCount": 6 } } },
-  { "challengeName": "Challenge 30", "areaId": "Sea Routes", "unlocks": ["Pokemon Mansion"], "requirements": { "defeatCountRoute": { "route": "Sea Routes", "count": 250 } } },
-  { "challengeName": "Challenge 31", "areaId": "Pokemon Mansion", "unlocks": ["Cinnabar Gym"], "gift": { "item": "Fire Stone", "count": 3 }, "requirements": { "catchSpeciesByQuality": [{ "species": "Magmar", "quality": "Rare", "count": 1 }] } },
+  { "challengeName": "Challenge 27", "areaId": "Cycling Road (16-18)", "unlocks": ["Kanto Safari Zone (Kanto)"], "requirements": { "catchSpecies": [{ "species": "Dodrio", "count": 2 }] } },
+  { "challengeName": "Challenge 28", "areaId": "Kanto Safari Zone (Kanto)", "unlocks": ["Fuchsia Gym"], "gift": { "item": "Ultraball", "count": 10 }, "requirements": { "defeatCountRoute": { "route": "Kanto Safari Zone (Kanto)", "count": 100 } } },
+  { "challengeName": "Challenge 29", "areaId": "Fuchsia Gym", "unlocks": ["Sea Routes (Kanto)"], "requirements": { "earnBadge": { "name": "Soul Badge", "leader": "Koga", "badgeCount": 6 } } },
+  { "challengeName": "Challenge 30", "areaId": "Sea Routes (Kanto)", "unlocks": ["Pokemon Mansion (Kanto)"], "requirements": { "defeatCountRoute": { "route": "Sea Routes (Kanto)", "count": 250 } } },
+  { "challengeName": "Challenge 31", "areaId": "Pokemon Mansion (Kanto)", "unlocks": ["Cinnabar Gym"], "gift": { "item": "Fire Stone", "count": 3 }, "requirements": { "catchSpeciesByQuality": [{ "species": "Magmar", "quality": "Rare", "count": 1 }] } },
   { "challengeName": "Challenge 32", "areaId": "Cinnabar Gym", "unlocks": ["Viridian Gym"], "requirements": { "earnBadge": { "name": "Volcano Badge", "leader": "Blaine", "badgeCount": 7 } } },
-  { "challengeName": "Challenge 33", "areaId": "Viridian Gym", "unlocks": ["Route 22"], "requirements": { "earnBadge": { "name": "Earth Badge", "leader": "Giovanni", "badgeCount": 8 } } },
-  { "challengeName": "Challenge 34", "areaId": "Route 22", "unlocks": ["Route 23"], "gift": { "item": "Big Potion", "count": 10 }, "requirements": { "defeatCountRoute": { "route": "Route 22", "count": 350 } } },
-  { "challengeName": "Challenge 35", "areaId": "Route 23", "unlocks": ["Kanto Pokemon League"], "requirements": { "catchSpeciesAnyOfByQuality": [{ "species": ["Nidoking", "Nidoqueen"], "quality": "Rare", "count": 1 }] } },
+  { "challengeName": "Challenge 33", "areaId": "Viridian Gym", "unlocks": ["Route 22 (Kanto)"], "requirements": { "earnBadge": { "name": "Earth Badge", "leader": "Giovanni", "badgeCount": 8 } } },
+  { "challengeName": "Challenge 34", "areaId": "Route 22 (Kanto)", "unlocks": ["Route 23 (Kanto)"], "gift": { "item": "Big Potion", "count": 10 }, "requirements": { "defeatCountRoute": { "route": "Route 22 (Kanto)", "count": 350 } } },
+  { "challengeName": "Challenge 35", "areaId": "Route 23 (Kanto)", "unlocks": ["Kanto Pokemon League"], "requirements": { "catchSpeciesAnyOfByQuality": [{ "species": ["Nidoking", "Nidoqueen"], "quality": "Rare", "count": 1 }] } },
   { "challengeName": "Challenge 36", "areaId": "Kanto Pokemon League", "unlocks": ["New Region to Travel", "Extra Challenge B"], "requirements": { "defeatEliteFourAndChampion": true } },
   { "challengeName": "Extra Challenge A 01", "areaId": "Celadon Casino", "unlocks": [
       "Small Fishing Spot",
@@ -1592,8 +1592,8 @@ export const unlocks = [
   { "challengeName": "Extra Challenge A 05", "areaId": "Fossil Revival Lab", "unlocks": ["Trade With Friends Hub", "Battle Stadium"], "gift": { "item": "Ultraball", "count": 20 }, "requirements": { "catchSpeciesByQuality": [{ "species": "Aerodactyl", "quality": "Rare", "count": 1 }], "catchEachFromSlotMachine": { "machines": [["Venusaur", "Charizard", "Blastoise"]] } } },
   { "challengeName": "Extra Challenge A 06", "areaId": "Trade With Friends Hub", "unlocks": ["Power Plant"], "gift": { "item": "Ultraball", "count": 20 }, "requirements": { "catchSpecies": [{ "species": "Gengar", "count": 1 }, { "species": "Golem", "count": 1 }, { "species": "Alakazam", "count": 1 }, { "species": "Machamp", "count": 1 }] } },
   { "challengeName": "Extra Challenge A 07", "areaId": "Power Plant", "unlocks": ["Seafoam Islands"], "gift": { "item": "Masterball", "count": 1 }, "requirements": { "defeatSpecific": { "name": "Zapdos", "count": 5 } } },
-  { "challengeName": "Extra Challenge A 08", "areaId": "Seafoam Islands", "unlocks": ["Victory Road"], "gift": { "item": "Masterball", "count": 1 }, "requirements": { "defeatSpecific": { "name": "Articuno", "count": 5 } } },
-  { "challengeName": "Extra Challenge A 09", "areaId": "Victory Road", "unlocks": ["Cerulean Cave"], "gift": { "item": "Masterball", "count": 1 }, "requirements": { "defeatSpecific": { "name": "Moltres", "count": 5 } } },
+  { "challengeName": "Extra Challenge A 08", "areaId": "Seafoam Islands", "unlocks": ["Victory Road (Kanto)"], "gift": { "item": "Masterball", "count": 1 }, "requirements": { "defeatSpecific": { "name": "Articuno", "count": 5 } } },
+  { "challengeName": "Extra Challenge A 09", "areaId": "Victory Road (Kanto)", "unlocks": ["Cerulean Cave"], "gift": { "item": "Masterball", "count": 1 }, "requirements": { "defeatSpecific": { "name": "Moltres", "count": 5 } } },
   { "challengeName": "Extra Challenge A 10", "areaId": "Cerulean Cave", "unlocks": ["Kanto Pokemon League", "Key for Indigo Summit Challenge"], "gift": { "item": "Masterball", "count": 2 }, "requirements": { "defeatSpecific": { "name": "Mewtwo", "count": 5 } } },
   { "challengeName": "Extra Challenge B", "areaId": "Extra Challenge B", "unlocks": ["Key for Indigo Summit Challenge"], "requirements": { "catchSpeciesUniqueCount": 150 } },
   { "challengeName": "Key for Indigo Summit Challenge", "areaId": "Key for Indigo Summit Challenge", "unlocks": ["Indigo Summit", "Indigo Summit Challenge"], "requirements": { "completeChallenges": ["Extra Challenge A 10", "Extra Challenge B"] } },

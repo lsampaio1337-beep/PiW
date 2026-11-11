@@ -422,7 +422,7 @@ export const unovaRoutes = [
     "spawns": []
   },
   {
-    "name": "Route 4",
+    "name": "Route 4 (Unova)",
     "spawns": [
       {
         "pokemonId": 554,
@@ -598,7 +598,7 @@ export const unovaRoutes = [
     ]
   },
   {
-    "name": "Route 16",
+    "name": "Route 16 (Unova)",
     "spawns": [
       {
         "pokemonId": 576,
@@ -700,7 +700,7 @@ export const unovaRoutes = [
     "spawns": []
   },
   {
-    "name": "Route 6",
+    "name": "Route 6 (Unova)",
     "spawns": [
       {
         "pokemonId": 585,
@@ -818,7 +818,7 @@ export const unovaRoutes = [
     ]
   },
   {
-    "name": "Route 7",
+    "name": "Route 7 (Unova)",
     "spawns": [
       {
         "pokemonId": 585,
@@ -1123,7 +1123,7 @@ export const unovaRoutes = [
     ]
   },
   {
-    "name": "Route 14",
+    "name": "Route 14 (Unova)",
     "spawns": [
       {
         "pokemonId": 334,
@@ -1199,7 +1199,7 @@ export const unovaRoutes = [
     ]
   },
   {
-    "name": "Route 13",
+    "name": "Route 13 (Unova)",
     "spawns": [
       {
         "pokemonId": 114,
@@ -1293,7 +1293,7 @@ export const unovaRoutes = [
     ]
   },
   {
-    "name": "Route 12",
+    "name": "Route 12 (Unova)",
     "spawns": [
       {
         "pokemonId": 540,
@@ -1340,7 +1340,7 @@ export const unovaRoutes = [
     ]
   },
   {
-    "name": "Route 11",
+    "name": "Route 11 (Unova)",
     "spawns": [
       {
         "pokemonId": 207,
@@ -1375,7 +1375,7 @@ export const unovaRoutes = [
     ]
   },
   {
-    "name": "Route 9",
+    "name": "Route 9 (Unova)",
     "spawns": [
       {
         "pokemonId": 569,
@@ -1485,7 +1485,7 @@ export const unovaRoutes = [
     ]
   },
   {
-    "name": "Route 22",
+    "name": "Route 22 (Unova)",
     "spawns": [
       {
         "pokemonId": 279,
@@ -1729,7 +1729,7 @@ export const unovaRoutes = [
     ]
   },
   {
-    "name": "Route 23",
+    "name": "Route 23 (Unova)",
     "spawns": [
       {
         "pokemonId": 215,
@@ -1788,7 +1788,7 @@ export const unovaRoutes = [
     ]
   },
   {
-    "name": "Victory Road",
+    "name": "Victory Road (Unova)",
     "spawns": [
       {
         "pokemonId": 632,
@@ -1839,7 +1839,7 @@ export const unovaRoutes = [
     "spawns": []
   },
   {
-    "name": "Route 8",
+    "name": "Route 8 (Unova)",
     "spawns": [
       {
         "pokemonId": 536,
@@ -2079,7 +2079,7 @@ export const unovaRoutes = [
     ]
   },
   {
-    "name": "Route 15",
+    "name": "Route 15 (Unova)",
     "spawns": [
       {
         "pokemonId": 207,
@@ -2207,7 +2207,7 @@ export const unovaRoutes = [
     ]
   },
   {
-    "name": "Route 1",
+    "name": "Route 1 (Unova)",
     "spawns": [
       {
         "pokemonId": 498,
@@ -2253,7 +2253,7 @@ export const unovaRoutes = [
     ]
   },
   {
-    "name": "Route 2",
+    "name": "Route 2 (Unova)",
     "spawns": [
       {
         "pokemonId": 522,
@@ -2294,7 +2294,7 @@ export const unovaRoutes = [
     ]
   },
   {
-    "name": "Route 3",
+    "name": "Route 3 (Unova)",
     "spawns": [
       {
         "pokemonId": 538,
@@ -2484,7 +2484,7 @@ export const unovaRoutes = [
     ]
   },
   {
-    "name": "Route 10",
+    "name": "Route 10 (Unova)",
     "spawns": [
       {
         "pokemonId": 626,
@@ -2854,7 +2854,7 @@ export const unovaUnlocks = [
     "challengeName": "Challenge 13",
     "areaId": "Castelia Gym",
     "unlocks": [
-      "Route 4"
+      "Route 4 (Unova)"
     ],
     "requirements": {
       "earnBadge": {
@@ -2866,7 +2866,7 @@ export const unovaUnlocks = [
   },
   {
     "challengeName": "Challenge 14",
-    "areaId": "Route 4",
+    "areaId": "Route 4 (Unova)",
     "unlocks": [
       "Desert Resort"
     ],
@@ -2913,7 +2913,7 @@ export const unovaUnlocks = [
     "challengeName": "Challenge 17",
     "areaId": "Nimbasa City",
     "unlocks": [
-      "Route 16"
+      "Route 16 (Unova)"
     ],
     "requirements": {
       "catchSpecies": [
@@ -2926,7 +2926,7 @@ export const unovaUnlocks = [
   },
   {
     "challengeName": "Challenge 18",
-    "areaId": "Route 16",
+    "areaId": "Route 16 (Unova)",
     "unlocks": [
       "Lostlorn Forest"
     ],
@@ -2987,7 +2987,7 @@ export const unovaUnlocks = [
     "challengeName": "Challenge 22",
     "areaId": "Driftveil Gym",
     "unlocks": [
-      "Route 6"
+      "Route 6 (Unova)"
     ],
     "requirements": {
       "earnBadge": {
@@ -2999,7 +2999,7 @@ export const unovaUnlocks = [
   },
   {
     "challengeName": "Challenge 23",
-    "areaId": "Route 6",
+    "areaId": "Route 6 (Unova)",
     "unlocks": [
       "Chargestone Cave"
     ],
@@ -3016,7 +3016,7 @@ export const unovaUnlocks = [
     "challengeName": "Challenge 24",
     "areaId": "Chargestone Cave",
     "unlocks": [
-      "Route 7"
+      "Route 7 (Unova)"
     ],
     "requirements": {
       "catchSpecies": [
@@ -3029,7 +3029,7 @@ export const unovaUnlocks = [
   },
   {
     "challengeName": "Challenge 25",
-    "areaId": "Route 7",
+    "areaId": "Route 7 (Unova)",
     "unlocks": [
       "Celestial Tower"
     ],
@@ -3062,7 +3062,7 @@ export const unovaUnlocks = [
     "areaId": "Mistralton Gym",
     "unlocks": [
       "Strange House",
-      "Route 8"
+      "Route 8 (Unova)"
     ],
     "requirements": {
       "earnBadge": {
@@ -3106,7 +3106,7 @@ export const unovaUnlocks = [
     "challengeName": "Challenge 30",
     "areaId": "Undella Bay",
     "unlocks": [
-      "Route 14"
+      "Route 14 (Unova)"
     ],
     "requirements": {
       "catchSpecies": [
@@ -3119,10 +3119,10 @@ export const unovaUnlocks = [
   },
   {
     "challengeName": "Challenge 31",
-    "areaId": "Route 14",
+    "areaId": "Route 14 (Unova)",
     "unlocks": [
       "Abundant Shrine",
-      "Route 15"
+      "Route 15 (Unova)"
     ],
     "requirements": {
       "catchSpecies": [
@@ -3137,7 +3137,7 @@ export const unovaUnlocks = [
     "challengeName": "Challenge 32",
     "areaId": "Abundant Shrine",
     "unlocks": [
-      "Route 13"
+      "Route 13 (Unova)"
     ],
     "requirements": {
       "catchSpecies": [
@@ -3150,9 +3150,9 @@ export const unovaUnlocks = [
   },
   {
     "challengeName": "Challenge 33",
-    "areaId": "Route 13",
+    "areaId": "Route 13 (Unova)",
     "unlocks": [
-      "Route 12"
+      "Route 12 (Unova)"
     ],
     "requirements": {
       "catchSpecies": [
@@ -3167,7 +3167,7 @@ export const unovaUnlocks = [
     "challengeName": "Challenge 34",
     "areaId": "Village Bridge",
     "unlocks": [
-      "Route 11"
+      "Route 11 (Unova)"
     ],
     "requirements": {
       "catchSpecies": [
@@ -3180,7 +3180,7 @@ export const unovaUnlocks = [
   },
   {
     "challengeName": "Challenge 35",
-    "areaId": "Route 12",
+    "areaId": "Route 12 (Unova)",
     "unlocks": [
       "Village Bridge"
     ],
@@ -3195,9 +3195,9 @@ export const unovaUnlocks = [
   },
   {
     "challengeName": "Challenge 36",
-    "areaId": "Route 11",
+    "areaId": "Route 11 (Unova)",
     "unlocks": [
-      "Route 9"
+      "Route 9 (Unova)"
     ],
     "requirements": {
       "catchSpecies": [
@@ -3210,7 +3210,7 @@ export const unovaUnlocks = [
   },
   {
     "challengeName": "Challenge 37",
-    "areaId": "Route 9",
+    "areaId": "Route 9 (Unova)",
     "unlocks": [
       "Opelucid Gym"
     ],
@@ -3241,7 +3241,7 @@ export const unovaUnlocks = [
     "challengeName": "Challenge 39",
     "areaId": "Humilau Sea",
     "unlocks": [
-      "Route 22"
+      "Route 22 (Unova)"
     ],
     "requirements": {
       "catchSpecies": [
@@ -3254,7 +3254,7 @@ export const unovaUnlocks = [
   },
   {
     "challengeName": "Challenge 40",
-    "areaId": "Route 22",
+    "areaId": "Route 22 (Unova)",
     "unlocks": [
       "Humilau Gym"
     ],
@@ -3345,7 +3345,7 @@ export const unovaUnlocks = [
     "challengeName": "Challenge 46",
     "areaId": "Giant Chasm",
     "unlocks": [
-      "Route 23"
+      "Route 23 (Unova)"
     ],
     "requirements": {
       "catchSpecies": [
@@ -3358,9 +3358,9 @@ export const unovaUnlocks = [
   },
   {
     "challengeName": "Challenge 47",
-    "areaId": "Route 23",
+    "areaId": "Route 23 (Unova)",
     "unlocks": [
-      "Victory Road"
+      "Victory Road (Unova)"
     ],
     "requirements": {
       "catchSpecies": [
@@ -3373,7 +3373,7 @@ export const unovaUnlocks = [
   },
   {
     "challengeName": "Challenge 48",
-    "areaId": "Victory Road",
+    "areaId": "Victory Road (Unova)",
     "unlocks": [
       "Unova Pokemon League"
     ],
@@ -3391,9 +3391,9 @@ export const unovaUnlocks = [
     "areaId": "Unova Pokemon League",
     "unlocks": [
       "New Region to Travel",
-      "Route 1",
+      "Route 1 (Unova)",
       "Daycare",
-      "Route 10"
+      "Route 10 (Unova)"
     ],
     "requirements": {
       "defeatUnovaChampion": true
@@ -3417,7 +3417,7 @@ export const unovaUnlocks = [
   },
   {
     "challengeName": "Extra Challenge A 01",
-    "areaId": "Route 8",
+    "areaId": "Route 8 (Unova)",
     "unlocks": [
       "Moor of Icirrus"
     ],
@@ -3525,7 +3525,7 @@ export const unovaUnlocks = [
   },
   {
     "challengeName": "Extra Challenge B 01",
-    "areaId": "Route 15",
+    "areaId": "Route 15 (Unova)",
     "unlocks": [
       "Striaton City"
     ],
@@ -3603,7 +3603,7 @@ export const unovaUnlocks = [
   },
   {
     "challengeName": "Extra Challenge C 01",
-    "areaId": "Route 1",
+    "areaId": "Route 1 (Unova)",
     "unlocks": [
       "Nuvema Town"
     ],
@@ -3620,7 +3620,7 @@ export const unovaUnlocks = [
     "challengeName": "Extra Challenge C 02",
     "areaId": "Nuvema Town",
     "unlocks": [
-      "Route 2"
+      "Route 2 (Unova)"
     ],
     "requirements": {
       "catchSpecies": [
@@ -3633,9 +3633,9 @@ export const unovaUnlocks = [
   },
   {
     "challengeName": "Extra Challenge C 03",
-    "areaId": "Route 2",
+    "areaId": "Route 2 (Unova)",
     "unlocks": [
-      "Route 3"
+      "Route 3 (Unova)"
     ],
     "requirements": {
       "catchSpecies": [
@@ -3648,7 +3648,7 @@ export const unovaUnlocks = [
   },
   {
     "challengeName": "Extra Challenge C 04",
-    "areaId": "Route 3",
+    "areaId": "Route 3 (Unova)",
     "unlocks": [
       "Moor of Icirrus Depths"
     ],
@@ -3741,7 +3741,7 @@ export const unovaUnlocks = [
   },
   {
     "challengeName": "Extra Challenge E 01",
-    "areaId": "Route 10",
+    "areaId": "Route 10 (Unova)",
     "unlocks": [
       "Nature Sanctuary"
     ],

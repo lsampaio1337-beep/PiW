@@ -1130,7 +1130,7 @@ export const johtoRoutes = [
     ]
   },
   {
-    "name": "Viridian Forest",
+    "name": "Viridian Forest (Johto)",
     "spawns": [
       {
         "pokemonId": 43,
@@ -1171,7 +1171,7 @@ export const johtoRoutes = [
     ]
   },
   {
-    "name": "Mount Moon",
+    "name": "Mount Moon (Johto)",
     "spawns": [
       {
         "pokemonId": 74,
@@ -1206,7 +1206,7 @@ export const johtoRoutes = [
     ]
   },
   {
-    "name": "Rock Tunnel",
+    "name": "Rock Tunnel (Johto)",
     "spawns": [
       {
         "pokemonId": 42,
@@ -1252,7 +1252,7 @@ export const johtoRoutes = [
     ]
   },
   {
-    "name": "Route 8",
+    "name": "Route 8 (Johto)",
     "spawns": [
       {
         "pokemonId": 79,
@@ -1275,7 +1275,7 @@ export const johtoRoutes = [
     ]
   },
   {
-    "name": "Route 12",
+    "name": "Route 12 (Johto)",
     "spawns": [
       {
         "pokemonId": 88,
@@ -1381,7 +1381,7 @@ export const johtoRoutes = [
     ]
   },
   {
-    "name": "Cycling Road",
+    "name": "Cycling Road (Johto)",
     "spawns": [
       {
         "pokemonId": 84,
@@ -1416,7 +1416,7 @@ export const johtoRoutes = [
     ]
   },
   {
-    "name": "Sea Routes",
+    "name": "Sea Routes (Johto)",
     "spawns": [
       {
         "pokemonId": 86,
@@ -1467,7 +1467,7 @@ export const johtoRoutes = [
 ]
   },
   {
-    "name": "Pokemon Mansion",
+    "name": "Pokemon Mansion (Johto)",
     "spawns": [
       {
         "pokemonId": 109,
@@ -1852,7 +1852,7 @@ export const johtoRoutes = [
     ]
   },
   {
-    "name": "Kanto Safari Zone",
+    "name": "Kanto Safari Zone (Johto)",
     "spawns": [
       { "pokemonId": 186, "minLevel": 83, "maxLevel": 86, "chance": 0.125 },
       { "pokemonId": 57, "minLevel": 84, "maxLevel": 87, "chance": 0.125 },
@@ -1865,7 +1865,7 @@ export const johtoRoutes = [
     ]
   },
   {
-    "name": "Victory Road",
+    "name": "Victory Road (Johto)",
     "spawns": [
       { "pokemonId": 26, "minLevel": 95, "maxLevel": 99, "chance": 0.1 },
       { "pokemonId": 31, "minLevel": 96, "maxLevel": 100, "chance": 0.1 },
@@ -2460,7 +2460,7 @@ export const johtoUnlocks = [
     "challengeName": "Challenge 35",
     "areaId": "Pokemon League",
     "unlocks": [
-      "Viridian Forest"
+      "Viridian Forest (Johto)"
     ],
     "requirements": {
       "defeatEliteFourAndChampion": true
@@ -2474,7 +2474,7 @@ export const johtoUnlocks = [
   },
   {
     "challengeName": "Challenge 36",
-    "areaId": "Viridian Forest",
+    "areaId": "Viridian Forest (Johto)",
     "unlocks": [
       "Pewter Gym"
     ],
@@ -2491,7 +2491,7 @@ export const johtoUnlocks = [
     "challengeName": "Challenge 37",
     "areaId": "Pewter Gym",
     "unlocks": [
-      "Mount Moon",
+      "Mount Moon (Johto)",
       "Fossil Revival Lab"
     ],
     "requirements": {
@@ -2504,10 +2504,10 @@ export const johtoUnlocks = [
   },
   {
     "challengeName": "Challenge 38",
-    "areaId": "Mount Moon",
+    "areaId": "Mount Moon (Johto)",
     "unlocks": [
       "Cerulean Gym",
-      "Rock Tunnel"
+      "Rock Tunnel (Johto)"
     ],
     "requirements": {
       "catchSpecies": [
@@ -2536,7 +2536,7 @@ export const johtoUnlocks = [
     "challengeName": "Challenge 40",
     "areaId": "Vermilion Gym",
     "unlocks": [
-      "Route 8",
+      "Route 8 (Johto)",
       "Diglett Cave"
     ],
     "requirements": {
@@ -2549,7 +2549,7 @@ export const johtoUnlocks = [
   },
   {
     "challengeName": "Challenge 41",
-    "areaId": "Route 8",
+    "areaId": "Route 8 (Johto)",
     "unlocks": [
       "Celadon Gym",
       "Celadon Casino",
@@ -2580,7 +2580,7 @@ export const johtoUnlocks = [
     "challengeName": "Challenge 43",
     "areaId": "Saffron Gym",
     "unlocks": [
-      "Route 12"
+      "Route 12 (Johto)"
     ],
     "requirements": {
       "earnBadge": {
@@ -2592,10 +2592,10 @@ export const johtoUnlocks = [
   },
   {
     "challengeName": "Challenge 44",
-    "areaId": "Route 12",
+    "areaId": "Route 12 (Johto)",
     "unlocks": [
       "Fuchsia Gym",
-      "Kanto Safari Zone"
+      "Kanto Safari Zone (Johto)"
     ],
     "requirements": {
       "catchSpecies": [
@@ -2610,8 +2610,8 @@ export const johtoUnlocks = [
     "challengeName": "Challenge 45",
     "areaId": "Fuchsia Gym",
     "unlocks": [
-      "Cycling Road",
-      "Sea Routes"
+      "Cycling Road (Johto)",
+      "Sea Routes (Johto)"
     ],
     "requirements": {
       "earnBadge": {
@@ -2623,14 +2623,14 @@ export const johtoUnlocks = [
   },
   {
     "challengeName": "Challenge 46",
-    "areaId": "Sea Routes",
+    "areaId": "Sea Routes (Johto)",
     "unlocks": [
       "Cinnabar Gym",
-      "Pokemon Mansion"
+      "Pokemon Mansion (Johto)"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "route": "Sea Routes",
+        "route": "Sea Routes (Johto)",
         "count": 100
       }
     }
@@ -2655,7 +2655,7 @@ export const johtoUnlocks = [
     "challengeName": "Challenge 48",
     "areaId": "Viridian Gym",
     "unlocks": [
-      "Victory Road"
+      "Victory Road (Johto)"
     ],
     "requirements": {
       "earnBadge": {
@@ -2673,7 +2673,7 @@ export const johtoUnlocks = [
   },
   {
     "challengeName": "Challenge 49",
-    "areaId": "Victory Road",
+    "areaId": "Victory Road (Johto)",
     "unlocks": [
       "Red"
     ],
