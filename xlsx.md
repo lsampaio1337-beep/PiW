@@ -76,10 +76,13 @@ This sheet outlines all the tasks players must complete to progress.
 
 This sheet lists all Pokémon native to the region (according to the regional Pokédex) that do not spawn on any route or in any Gym.
 
-*   **Pokemon Name:** The name of the missing Pokémon.
 *   **Can Obtain?:** Explains if and how the player can acquire this Pokémon despite it not spawning in the wild.
     *   `No`: Impossible to obtain in the region.
     *   `Evolve`: Can be obtained by evolving a wild-caught Pokémon once.
     *   `#xEvolution`: Requires evolving a caught Pokémon multiple times (e.g., `2xEvolution`).
     *   `Breed`: Can be obtained by breeding a wild-caught Pokémon once to get its pre-evolution.
     *   `#xBreed`: Requires chain-breeding multiple times to reach this pre-evolution (e.g., `2xBreed`).
+*   **Pokemon Name:** The name of the missing Pokémon.
+*   **Type 1:** The primary elemental type of the Pokémon.
+*   **Type 2:** The secondary elemental type of the Pokémon. If the Pokémon only has one type, it is duplicated in this column.
+*   **BST:** The Base Stat Total of the missing Pokémon.

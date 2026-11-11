@@ -806,8 +806,11 @@ const missingData = [];
             }
 
             missingData.push({
+                "Can Obtain?": obtainStr,
                 "Pokemon Name": pk.name,
-                "Can Obtain?": obtainStr
+                "Type 1": pk.types && pk.types.length > 0 ? pk.types[0] : "",
+                "Type 2": pk.types && pk.types.length > 1 ? pk.types[1] : (pk.types && pk.types.length > 0 ? pk.types[0] : ""),
+                "BST": getBST(pk)
             });
         }
     });
