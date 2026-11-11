@@ -24,8 +24,18 @@ class BattleSystem {
         this.combatLoop = null;
         this.isSearching = false;
         this.isFainting = false;
+        this.leaderCooldown = 0;
+        this.enemyCooldown = 0;
 
         this.consecutiveHeals = 0;
+        this.leaderCooldown = 0;
+        this.enemyCooldown = 0;
+        this.leaderCooldown = 0;
+        this.enemyCooldown = 0;
+        this.leaderCooldown = 0;
+        this.enemyCooldown = 0;
+        this.leaderCooldown = 0;
+        this.enemyCooldown = 0;
 
 
         this.multiplayerState = {
@@ -449,6 +459,8 @@ class BattleSystem {
 
         this.isSearching = false;
         this.isFainting = false;
+        this.leaderCooldown = 0;
+        this.enemyCooldown = 0;
         this.isSliding = true;
         this.slideDuration = slideDelay;
 
@@ -460,12 +472,39 @@ class BattleSystem {
             const enemyPokemon = this.activeEncounter;
 
             // In Multiplayer, the host calculates everything, but we still need turn order based on speed
-            if (playerPokemon.currentStats.spe >= enemyPokemon.currentStats.spe) {
-                this.executeMultiplayerTurn(playerPokemon, enemyPokemon);
-            } else {
-                this.executeMultiplayerTurn(enemyPokemon, playerPokemon);
-            }
+            this.scheduleMultiplayerTurn();
         }, slideDelay);
+    }
+
+    scheduleMultiplayerTurn() {
+        if (!this.multiplayerState.isHost) return;
+        if (this.isFainting) return;
+        if (!this.activeEncounter || this.activeEncounter.currentHp <= 0) return;
+
+        const leader = this.state.party[0];
+        if (leader.currentHp <= 0) return;
+
+        if (this.leaderCooldown <= 0) {
+            let delay = this.state.config.balance.baseAttackDelay * 1000 * (100 / (100 + leader.currentStats.spe));
+            this.leaderCooldown = Math.max(250, delay) / this.state.settings.gameSpeed;
+        }
+
+        if (this.enemyCooldown <= 0) {
+            let delay = this.state.config.balance.baseAttackDelay * 1000 * (100 / (100 + this.activeEncounter.currentStats.spe));
+            this.enemyCooldown = Math.max(250, delay) / this.state.settings.gameSpeed;
+        }
+
+        const isLeaderNext = this.leaderCooldown <= this.enemyCooldown;
+        const nextDelay = isLeaderNext ? this.leaderCooldown : this.enemyCooldown;
+
+        const firstActor = isLeaderNext ? leader : this.activeEncounter;
+        const secondActor = isLeaderNext ? this.activeEncounter : leader;
+
+        this.combatLoop = setTimeout(() => {
+            this.leaderCooldown -= nextDelay;
+            this.enemyCooldown -= nextDelay;
+            this.executeMultiplayerTurn(firstActor, secondActor);
+        }, nextDelay);
     }
 
     handleMultiplayerEvent(event) {
@@ -568,10 +607,7 @@ class BattleSystem {
                 if (fainted) {
                     this.handleMultiplayerDefeat(defender);
                 } else {
-                    const delay = Math.max(200, 1000 / this.state.settings.gameSpeed);
-                    this.combatLoop = setTimeout(() => {
-                        this.executeMultiplayerTurn(defender, attacker);
-                    }, delay);
+                    this.scheduleMultiplayerTurn();
                 }
             }, animDuration);
         });
@@ -590,6 +626,8 @@ class BattleSystem {
 
              setTimeout(() => {
                  this.isFainting = false;
+        this.leaderCooldown = 0;
+        this.enemyCooldown = 0;
                  if (this.multiplayerState.currentPokemonIndex >= this.multiplayerState.opponentParty.length) {
                      this.stopMultiplayerBattle();
                      setTimeout(() => {
@@ -617,6 +655,8 @@ class BattleSystem {
 
                  if (this.state.party.length === 0) {
                      this.isFainting = false;
+        this.leaderCooldown = 0;
+        this.enemyCooldown = 0;
                      this.stopMultiplayerBattle();
                      setTimeout(() => {
                          if (typeof window.showGameAlert === 'function') {
@@ -627,15 +667,11 @@ class BattleSystem {
                      }, 100);
                  } else {
                      this.isFainting = false;
+        this.leaderCooldown = 0;
+        this.enemyCooldown = 0;
                      const playerPokemon = this.state.party[0];
                      const enemyPokemon = this.activeEncounter;
-                     const delay = Math.max(200, 1000 / this.state.settings.gameSpeed);
-
-                     if (playerPokemon.currentStats.spe >= enemyPokemon.currentStats.spe) {
-                         this.combatLoop = setTimeout(() => this.executeMultiplayerTurn(playerPokemon, enemyPokemon), delay);
-                     } else {
-                         this.combatLoop = setTimeout(() => this.executeMultiplayerTurn(enemyPokemon, playerPokemon), delay);
-                     }
+                     this.scheduleMultiplayerTurn();
                  }
              }, 1000);
         }
@@ -901,7 +937,11 @@ class BattleSystem {
             }
         }
 
-        this.consecutiveHeals = 0; // Reset for new battle
+        this.consecutiveHeals = 0;
+        this.leaderCooldown = 0;
+        this.enemyCooldown = 0;
+        this.leaderCooldown = 0;
+        this.enemyCooldown = 0; // Reset for new battle
 
         if (this.state.currentRoute && (this.state.currentRoute.startsWith("Celadon Casino ") || this.state.currentRoute === "Goldenrod Babies Corner" || this.state.currentRoute === "Goldenrod Lucky Spot Corner")) {
             const baseCostStandard = this.state.config.balance.casinoPrices?.standard || 10;
@@ -1250,23 +1290,27 @@ class BattleSystem {
             return;
         }
 
-        // Leader attack delay
-        let leaderDelay = this.state.config.balance.baseAttackDelay * 1000 * (100 / (100 + leader.currentStats.spe));
-        leaderDelay = Math.max(250, leaderDelay) / this.state.settings.gameSpeed;
+        if (this.leaderCooldown <= 0) {
+            let delay = this.state.config.balance.baseAttackDelay * 1000 * (100 / (100 + leader.currentStats.spe));
+            this.leaderCooldown = Math.max(250, delay) / this.state.settings.gameSpeed;
+        }
 
-        // Enemy attack delay
-        let enemyDelay = this.state.config.balance.baseAttackDelay * 1000 * (100 / (100 + this.activeEncounter.currentStats.spe));
-        enemyDelay = Math.max(250, enemyDelay) / this.state.settings.gameSpeed;
+        if (this.enemyCooldown <= 0) {
+            let delay = this.state.config.balance.baseAttackDelay * 1000 * (100 / (100 + this.activeEncounter.currentStats.spe));
+            this.enemyCooldown = Math.max(250, delay) / this.state.settings.gameSpeed;
+        }
 
-        // Which goes first
-        const isLeaderFaster = leaderDelay <= enemyDelay;
-        const firstActor = isLeaderFaster ? leader : this.activeEncounter;
-        const secondActor = isLeaderFaster ? this.activeEncounter : leader;
-        const firstDelay = Math.min(leaderDelay, enemyDelay);
+        const isLeaderNext = this.leaderCooldown <= this.enemyCooldown;
+        const nextDelay = isLeaderNext ? this.leaderCooldown : this.enemyCooldown;
+
+        const firstActor = isLeaderNext ? leader : this.activeEncounter;
+        const secondActor = isLeaderNext ? this.activeEncounter : leader;
 
         this.combatLoop = setTimeout(() => {
+            this.leaderCooldown -= nextDelay;
+            this.enemyCooldown -= nextDelay;
             this.executeTurn(firstActor, secondActor);
-        }, firstDelay);
+        }, nextDelay);
     }
 
     executeTurn(attacker, defender) {
@@ -1286,6 +1330,10 @@ class BattleSystem {
                 if (this.consecutiveHeals >= 3) {
                     // Skip heal to attack, reset consecutive heals
                     this.consecutiveHeals = 0;
+        this.leaderCooldown = 0;
+        this.enemyCooldown = 0;
+        this.leaderCooldown = 0;
+        this.enemyCooldown = 0;
                 } else {
                     if (this.tryUsePotion(attacker)) {
                         this.consecutiveHeals++;
@@ -1297,6 +1345,10 @@ class BattleSystem {
             } else {
                 // If we attack instead of healing because hp > threshold, reset heals
                 this.consecutiveHeals = 0;
+        this.leaderCooldown = 0;
+        this.enemyCooldown = 0;
+        this.leaderCooldown = 0;
+        this.enemyCooldown = 0;
             }
         }
 
@@ -1391,24 +1443,8 @@ class BattleSystem {
     }
 
     scheduleNextStrike(attacker, defender) {
-        if (this.isFainting) return;
-
-        if (!this.activeEncounter) return;
-
-        const leader = this.state.party[0];
-        let delay;
-        if (attacker === leader) {
-            // Next is enemy
-            delay = this.state.config.balance.baseAttackDelay * 1000 * (100 / (100 + this.activeEncounter.currentStats.spe));
-        } else {
-            delay = this.state.config.balance.baseAttackDelay * 1000 * (100 / (100 + leader.currentStats.spe));
-        }
-
-        delay = Math.max(250, delay) / this.state.settings.gameSpeed;
-
-        this.combatLoop = setTimeout(() => {
-            this.executeTurn(defender, attacker); // Swap roles
-        }, delay);
+        // Time based cooldown logic is handled by scheduleTurn now
+        this.scheduleTurn();
     }
 
     tryUsePotion(pokemon) {
@@ -2142,6 +2178,8 @@ class BattleSystem {
             this.state.party.push(fainted);
 
             this.isFainting = false;
+        this.leaderCooldown = 0;
+        this.enemyCooldown = 0;
 
             if (this.state.party.every(p => p.currentHp <= 0)) {
                 this.handleWipeout();
@@ -2422,15 +2460,8 @@ class BattleSystem {
             let combatTime = 0;
             let leaderConsecutiveHeals = 0;
 
-            // Leader and Enemy attack delays
-            let leaderDelay = this.state.config.balance.baseAttackDelay * 1000 * (100 / (100 + leaderSpe));
-            leaderDelay = Math.max(250, leaderDelay);
-            let enemyDelay = this.state.config.balance.baseAttackDelay * 1000 * (100 / (100 + enemySpe));
-            enemyDelay = Math.max(250, enemyDelay);
-
-            // Which goes first
-            let isLeaderFaster = leaderDelay <= enemyDelay;
-            let firstDelay = Math.min(leaderDelay, enemyDelay);
+            let simLeaderCooldown = 0;
+            let simEnemyCooldown = 0;
 
             const executeSimulatedTurn = (attacker, defender, isLeader) => {
                 if (isLeader && this.state.settings.autoPotion) {
@@ -2476,21 +2507,27 @@ class BattleSystem {
             };
 
             while (leader.currentHp > 0 && this.activeEncounter.currentHp > 0) {
-                let firstActor = isLeaderFaster ? leader : this.activeEncounter;
-                let secondActor = isLeaderFaster ? this.activeEncounter : leader;
+                if (simLeaderCooldown <= 0) {
+                    let delay = this.state.config.balance.baseAttackDelay * 1000 * (100 / (100 + leaderSpe));
+                    simLeaderCooldown = Math.max(250, delay);
+                }
 
-                combatTime += firstDelay;
+                if (simEnemyCooldown <= 0) {
+                    let delay = this.state.config.balance.baseAttackDelay * 1000 * (100 / (100 + enemySpe));
+                    simEnemyCooldown = Math.max(250, delay);
+                }
 
-                // First turn
-                executeSimulatedTurn(firstActor, secondActor, isLeaderFaster);
+                let isLeaderNext = simLeaderCooldown <= simEnemyCooldown;
+                let nextDelay = isLeaderNext ? simLeaderCooldown : simEnemyCooldown;
 
-                if (secondActor.currentHp <= 0) break;
+                simLeaderCooldown -= nextDelay;
+                simEnemyCooldown -= nextDelay;
+                combatTime += nextDelay;
 
-                // Second turn (delay before second actor strikes)
-                let secondDelay = isLeaderFaster ? enemyDelay : leaderDelay;
-                combatTime += secondDelay;
+                let attacker = isLeaderNext ? leader : this.activeEncounter;
+                let defender = isLeaderNext ? this.activeEncounter : leader;
 
-                executeSimulatedTurn(secondActor, firstActor, !isLeaderFaster);
+                executeSimulatedTurn(attacker, defender, isLeaderNext);
             }
 
             // Add UI defeat/faint fade-out delay mimicking natural play
