@@ -200,7 +200,7 @@ const hoennMapCoordinates = {
     "y": 34.99
   },
   "victory_road": {
-    "name": "Victory Road",
+    "name": "Victory Road (Hoenn)",
     "x": 94.16,
     "y": 47.55
   },

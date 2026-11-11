@@ -1301,7 +1301,7 @@ export const hoennRoutes = [
     ]
   },
   {
-    "name": "Victory Road",
+    "name": "Victory Road (Hoenn)",
     "spawns": [
       {
         "pokemonId": 42,
@@ -2447,7 +2447,7 @@ export const hoennUnlocks = [
     "challengeName": "Challenge 40",
     "areaId": "Sky Pillar",
     "unlocks": [
-      "Victory Road"
+      "Victory Road (Hoenn)"
     ],
     "requirements": {
       "catchSpecies": [
@@ -2464,13 +2464,13 @@ export const hoennUnlocks = [
   },
   {
     "challengeName": "Challenge 41",
-    "areaId": "Victory Road",
+    "areaId": "Victory Road (Hoenn)",
     "unlocks": [
       "Hoenn Pokemon League"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "route": "Victory Road",
+        "route": "Victory Road (Hoenn)",
         "count": 200
       }
     }

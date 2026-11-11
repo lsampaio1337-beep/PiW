@@ -1200,7 +1200,7 @@ export const sinnohRoutes = [
     ]
   },
   {
-    name: "Victory Road",
+    name: "Victory Road (Sinnoh)",
     spawns: [
       {
         pokemonId: 111,
@@ -2932,7 +2932,7 @@ export const sinnohUnlocks = [
     challengeName: "Challenge 33",
     areaId: "Route 223",
     unlocks: [
-      "Victory Road"
+      "Victory Road (Sinnoh)"
     ],
     requirements: {
       catchSpecies: [
@@ -2945,7 +2945,7 @@ export const sinnohUnlocks = [
   },
   {
     challengeName: "Challenge 33",
-    areaId: "Victory Road",
+    areaId: "Victory Road (Sinnoh)",
     unlocks: [
       "Sinnoh Pokemon League"
     ],

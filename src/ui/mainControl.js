@@ -370,7 +370,8 @@ function formatRequirements(progressList) {
     let textParts = [];
     for (let p of progressList) {
         if (p.type === 'defeatCountRoute') {
-            let routeText = p.route === "Route 1" ? " on Route 1" : ` on ${p.route}`;
+            let displayRoute = (p.route || "").replace(/\s*\([^)]+\)$/, "");
+            let routeText = displayRoute === "Route 1" ? " on Route 1" : ` on ${displayRoute}`;
             textParts.push(`Defeat ${p.required} Pokémon${routeText} ${countDisplay(p.current, p.required)}${getStatusHtml(p.isMet)}`);
         } else if (p.type === 'catchSpecies') {
             textParts.push(`Catch ${p.required} ${formatSpecies(p.species)} ${countDisplay(p.current, p.required)}${getStatusHtml(p.isMet)}`);

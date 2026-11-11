@@ -158,7 +158,8 @@ function generateMarkerHtml(locationId, locationName, coords, isUnlocked, hasNew
     }
 
     let markerClass = hasNewNotification ? 'map-marker pulse-marker' : 'map-marker';
-    let safeLocationName = locationName.replace(/'/g, "&#39;");
+    let displayLocationName = locationName.replace(/\s*\([^)]+\)$/, '');
+    let safeLocationName = displayLocationName.replace(/'/g, "&#39;");
     let jsLocationName = locationName.replace(/'/g, "\\'");
 
     return `
@@ -977,7 +978,8 @@ export function showMapTooltip(e, locationName) {
     tooltip.style.padding = padding + 'px';
     tooltip.style.borderRadius = borderRadius + 'px';
 
-    let info = `<strong>${locationName}</strong><br>`;
+    let displayLocationName = locationName.replace(/\s*\([^)]+\)$/, '');
+    let info = `<strong>${displayLocationName}</strong><br>`;
 
     // Fetch info to show on tooltip
     if (locationName.includes("Gym") || locationName.includes("Pokemon League")) {
@@ -990,13 +992,9 @@ export function showMapTooltip(e, locationName) {
                 info += `Trainers: ${gym.trainers.length}<br>`;
             }
         }
-    } else if (window.getCurrentRoutes()) {
+    } else if (typeof window.getRoutesForRegion === 'function' && window.getRoutesForRegion(window.currentMapRegion)) {
         let route = null;
-        if (globals.battleSystem && typeof globals.battleSystem.getRoute === 'function') {
-            route = globals.battleSystem.getRoute(locationName);
-        } else {
-            route = window.getCurrentRoutes().find(r => r.name === locationName);
-        }
+        route = window.getRoutesForRegion(window.currentMapRegion).find(r => r.name === locationName);
 
         if (route) {
             // Find overall min and max level for the route

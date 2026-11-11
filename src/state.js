@@ -29,7 +29,7 @@ export const REGION_TEMPLATE = {
         faints: 0,
         tokensEarned: 0,
         completedChallenges: 0,
-        activeChallenges: ["Route 1"],
+        activeChallenges: ["Route 1 (Kanto)"],
         completedChallengeIds: [],
         qTaskTier: 0,
         cTaskTier: 0,
@@ -83,7 +83,7 @@ export const REGION_TEMPLATE = {
             daycare: false
         }
     },
-    currentRoute: "Route 1",
+    currentRoute: "Route 1 (Kanto)",
     currentRegionName: "Kanto",
     isZzZMode: false,
     zzzTimestamp: null
@@ -196,6 +196,22 @@ export function swapRegion(newRegionName) {
 
     state.currentRegionName = newRegionName;
 }
+
+
+window.getRoutesForRegion = function(regionName) {
+    if (!state.config) return [];
+    if (regionName === 'Kanto' && state.config.routes) return state.config.routes;
+    if (regionName === 'Johto' && state.config.johtoRoutes) return state.config.johtoRoutes;
+    if (regionName === 'Hoenn' && state.config.hoennRoutes) return state.config.hoennRoutes;
+    if (regionName === 'Sinnoh' && state.config.sinnohRoutes) return state.config.sinnohRoutes;
+    if (regionName === 'Unova' && state.config.unovaRoutes) return state.config.unovaRoutes;
+    if (regionName === 'Kalos' && state.config.kalosRoutes) return state.config.kalosRoutes;
+    if (regionName === 'Alola' && state.config.alolaRoutes) return state.config.alolaRoutes;
+    if (regionName === 'Galar' && state.config.galarRoutes) return state.config.galarRoutes;
+    if (regionName === 'Hisui' && state.config.hisuiRoutes) return state.config.hisuiRoutes;
+    if (regionName === 'Paldea' && state.config.paldeaRoutes) return state.config.paldeaRoutes;
+    return [];
+};
 
 window.getCurrentRoutes = function() {
     if (!state.config) return [];

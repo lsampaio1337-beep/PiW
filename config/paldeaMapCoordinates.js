@@ -287,7 +287,7 @@ export const paldeaMapCoordinates = {
     "x": 80,
     "y": 10
   },
-  "Pokémon League": {
+  "Pokémon League (Paldea)": {
     "x": 90,
     "y": 10
   },

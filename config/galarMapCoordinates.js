@@ -9,8 +9,8 @@ const galarMapCoordinates = {
     "x": 30,
     "y": 10
   },
-  "Route 1": {
-    "name": "Route 1",
+  "Route 1 (Galar)": {
+    "name": "Route 1 (Galar)",
     "x": 50,
     "y": 10
   },
@@ -19,8 +19,8 @@ const galarMapCoordinates = {
     "x": 70,
     "y": 10
   },
-  "Route 2": {
-    "name": "Route 2",
+  "Route 2 (Galar)": {
+    "name": "Route 2 (Galar)",
     "x": 90,
     "y": 10
   },
@@ -79,8 +79,8 @@ const galarMapCoordinates = {
     "x": 310,
     "y": 10
   },
-  "Route 3": {
-    "name": "Route 3",
+  "Route 3 (Galar)": {
+    "name": "Route 3 (Galar)",
     "x": 330,
     "y": 10
   },
@@ -89,8 +89,8 @@ const galarMapCoordinates = {
     "x": 350,
     "y": 10
   },
-  "Route 4": {
-    "name": "Route 4",
+  "Route 4 (Galar)": {
+    "name": "Route 4 (Galar)",
     "x": 370,
     "y": 10
   },
@@ -99,8 +99,8 @@ const galarMapCoordinates = {
     "x": 390,
     "y": 10
   },
-  "Route 5": {
-    "name": "Route 5",
+  "Route 5 (Galar)": {
+    "name": "Route 5 (Galar)",
     "x": 410,
     "y": 10
   },
@@ -174,8 +174,8 @@ const galarMapCoordinates = {
     "x": 690,
     "y": 10
   },
-  "Route 6": {
-    "name": "Route 6",
+  "Route 6 (Galar)": {
+    "name": "Route 6 (Galar)",
     "x": 710,
     "y": 10
   },
@@ -194,8 +194,8 @@ const galarMapCoordinates = {
     "x": 770,
     "y": 10
   },
-  "Route 7": {
-    "name": "Route 7",
+  "Route 7 (Galar)": {
+    "name": "Route 7 (Galar)",
     "x": 790,
     "y": 10
   },
@@ -239,8 +239,8 @@ const galarMapCoordinates = {
     "x": 50,
     "y": 30
   },
-  "Route 10": {
-    "name": "Route 10",
+  "Route 10 (Galar)": {
+    "name": "Route 10 (Galar)",
     "x": 70,
     "y": 30
   },

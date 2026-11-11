@@ -75,7 +75,7 @@ export const galarRoutes = [
     ]
   },
   {
-    "name": "Route 1",
+    "name": "Route 1 (Galar)",
     "spawns": [
       {
         "pokemonId": 824,
@@ -132,7 +132,7 @@ export const galarRoutes = [
     "spawns": []
   },
   {
-    "name": "Route 2",
+    "name": "Route 2 (Galar)",
     "spawns": [
       {
         "pokemonId": 824,
@@ -2231,7 +2231,7 @@ export const galarRoutes = [
     ]
   },
   {
-    "name": "Route 3",
+    "name": "Route 3 (Galar)",
     "spawns": [
       {
         "pokemonId": 420,
@@ -2379,7 +2379,7 @@ export const galarRoutes = [
     ]
   },
   {
-    "name": "Route 4",
+    "name": "Route 4 (Galar)",
     "spawns": [
       {
         "pokemonId": 406,
@@ -2479,7 +2479,7 @@ export const galarRoutes = [
     ]
   },
   {
-    "name": "Route 5",
+    "name": "Route 5 (Galar)",
     "spawns": [
       {
         "pokemonId": 840,
@@ -5515,7 +5515,7 @@ export const galarRoutes = [
     "spawns": []
   },
   {
-    "name": "Route 6",
+    "name": "Route 6 (Galar)",
     "spawns": [
       {
         "pokemonId": 610,
@@ -5677,7 +5677,7 @@ export const galarRoutes = [
     "spawns": []
   },
   {
-    "name": "Route 7",
+    "name": "Route 7 (Galar)",
     "spawns": [
       {
         "pokemonId": 823,
@@ -6967,7 +6967,7 @@ export const galarRoutes = [
     "spawns": []
   },
   {
-    "name": "Route 10",
+    "name": "Route 10 (Galar)",
     "spawns": [
       {
         "pokemonId": 460,
@@ -12113,13 +12113,13 @@ export const galarUnlocks = [
   {
     "areaId": "Slumbering Weald",
     "unlocks": [
-      "Route 1"
+      "Route 1 (Galar)"
     ],
     "requirements": {},
     "challengeName": "Challenge Base 2"
   },
   {
-    "areaId": "Route 1",
+    "areaId": "Route 1 (Galar)",
     "unlocks": [
       "Wedgehurst (including Wedgehurst Station)"
     ],
@@ -12129,13 +12129,13 @@ export const galarUnlocks = [
   {
     "areaId": "Wedgehurst (including Wedgehurst Station)",
     "unlocks": [
-      "Route 2"
+      "Route 2 (Galar)"
     ],
     "requirements": {},
     "challengeName": "Challenge Base 4"
   },
   {
-    "areaId": "Route 2",
+    "areaId": "Route 2 (Galar)",
     "unlocks": [
       "Meetup Spot (Wild Area)"
     ],
@@ -12225,13 +12225,13 @@ export const galarUnlocks = [
   {
     "areaId": "Motostoke",
     "unlocks": [
-      "Route 3"
+      "Route 3 (Galar)"
     ],
     "requirements": {},
     "challengeName": "Challenge Base 16"
   },
   {
-    "areaId": "Route 3",
+    "areaId": "Route 3 (Galar)",
     "unlocks": [
       "Galar Mine"
     ],
@@ -12241,13 +12241,13 @@ export const galarUnlocks = [
   {
     "areaId": "Galar Mine",
     "unlocks": [
-      "Route 4"
+      "Route 4 (Galar)"
     ],
     "requirements": {},
     "challengeName": "Challenge Base 18"
   },
   {
-    "areaId": "Route 4",
+    "areaId": "Route 4 (Galar)",
     "unlocks": [
       "Turffield & Turffield Stadium (Gym 1 \u2014 Grass)"
     ],
@@ -12257,7 +12257,7 @@ export const galarUnlocks = [
   {
     "areaId": "Turffield & Turffield Stadium (Gym 1 \u2014 Grass)",
     "unlocks": [
-      "Route 5"
+      "Route 5 (Galar)"
     ],
     "requirements": {
       "earnBadge": {
@@ -12268,7 +12268,7 @@ export const galarUnlocks = [
     "challengeName": "Challenge Base 20"
   },
   {
-    "areaId": "Route 5",
+    "areaId": "Route 5 (Galar)",
     "unlocks": [
       "Hulbury & Hulbury Stadium (Gym 2 \u2014 Water)"
     ],
@@ -12392,13 +12392,13 @@ export const galarUnlocks = [
   {
     "areaId": "Hammerlocke",
     "unlocks": [
-      "Route 6"
+      "Route 6 (Galar)"
     ],
     "requirements": {},
     "challengeName": "Challenge Base 35"
   },
   {
-    "areaId": "Route 6",
+    "areaId": "Route 6 (Galar)",
     "unlocks": [
       "Stow-on-Side & Stow-on-Side Stadium (Gym 4 \u2014 Fighting/Ghost)"
     ],
@@ -12429,7 +12429,7 @@ export const galarUnlocks = [
   {
     "areaId": "Ballonlea & Ballonlea Stadium (Gym 5 \u2014 Fairy)",
     "unlocks": [
-      "Route 7"
+      "Route 7 (Galar)"
     ],
     "requirements": {
       "earnBadge": {
@@ -12440,7 +12440,7 @@ export const galarUnlocks = [
     "challengeName": "Challenge Base 39"
   },
   {
-    "areaId": "Route 7",
+    "areaId": "Route 7 (Galar)",
     "unlocks": [
       "Route 8 (including Steamdrift Way)"
     ],
@@ -12516,7 +12516,7 @@ export const galarUnlocks = [
   {
     "areaId": "Hammerlocke Stadium (Gym 8 \u2014 Dragon)",
     "unlocks": [
-      "Route 10"
+      "Route 10 (Galar)"
     ],
     "requirements": {
       "earnBadge": {
@@ -12527,7 +12527,7 @@ export const galarUnlocks = [
     "challengeName": "Challenge Base 48"
   },
   {
-    "areaId": "Route 10",
+    "areaId": "Route 10 (Galar)",
     "unlocks": [
       "Wyndon & Wyndon Stadium"
     ],

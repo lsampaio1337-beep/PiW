@@ -1,6 +1,6 @@
 export const alolaRoutes = [
   {
-    "name": "Route 1",
+    "name": "Route 1 (Alola)",
     "spawns": [
       {
         "pokemonId": 437,
@@ -171,7 +171,7 @@ export const alolaRoutes = [
     ]
   },
   {
-    "name": "Route 2",
+    "name": "Route 2 (Alola)",
     "spawns": [
       {
         "pokemonId": 675,
@@ -252,7 +252,7 @@ export const alolaRoutes = [
     "spawns": []
   },
   {
-    "name": "Route 3",
+    "name": "Route 3 (Alola)",
     "spawns": [
       {
         "pokemonId": 370,
@@ -488,7 +488,7 @@ export const alolaRoutes = [
     "spawns": []
   },
   {
-    "name": "Route 4",
+    "name": "Route 4 (Alola)",
     "spawns": [
       {
         "pokemonId": 132,
@@ -542,7 +542,7 @@ export const alolaRoutes = [
     ]
   },
   {
-    "name": "Route 5",
+    "name": "Route 5 (Alola)",
     "spawns": [
       {
         "pokemonId": 49,
@@ -618,7 +618,7 @@ export const alolaRoutes = [
     ]
   },
   {
-    "name": "Route 6",
+    "name": "Route 6 (Alola)",
     "spawns": [
       {
         "pokemonId": 132,
@@ -645,7 +645,7 @@ export const alolaRoutes = [
     "spawns": []
   },
   {
-    "name": "Route 7",
+    "name": "Route 7 (Alola)",
     "spawns": [
       {
         "pokemonId": 49,
@@ -688,7 +688,7 @@ export const alolaRoutes = [
     ]
   },
   {
-    "name": "Route 8",
+    "name": "Route 8 (Alola)",
     "spawns": [
       {
         "pokemonId": 766,
@@ -803,7 +803,7 @@ export const alolaRoutes = [
     ]
   },
   {
-    "name": "Route 9",
+    "name": "Route 9 (Alola)",
     "spawns": []
   },
   {
@@ -948,7 +948,7 @@ export const alolaRoutes = [
     "spawns": []
   },
   {
-    "name": "Route 10",
+    "name": "Route 10 (Alola)",
     "spawns": [
       {
         "pokemonId": 167,
@@ -1022,7 +1022,7 @@ export const alolaRoutes = [
     "spawns": []
   },
   {
-    "name": "Route 11",
+    "name": "Route 11 (Alola)",
     "spawns": [
       {
         "pokemonId": 167,
@@ -1063,7 +1063,7 @@ export const alolaRoutes = [
     ]
   },
   {
-    "name": "Route 12",
+    "name": "Route 12 (Alola)",
     "spawns": [
       {
         "pokemonId": 112,
@@ -1162,7 +1162,7 @@ export const alolaRoutes = [
     ]
   },
   {
-    "name": "Route 13",
+    "name": "Route 13 (Alola)",
     "spawns": []
   },
   {
@@ -1187,7 +1187,7 @@ export const alolaRoutes = [
     "spawns": []
   },
   {
-    "name": "Route 14",
+    "name": "Route 14 (Alola)",
     "spawns": []
   },
   {
@@ -1278,7 +1278,7 @@ export const alolaRoutes = [
     ]
   },
   {
-    "name": "Route 15",
+    "name": "Route 15 (Alola)",
     "spawns": [
       {
         "pokemonId": 778,
@@ -1366,7 +1366,7 @@ export const alolaRoutes = [
     ]
   },
   {
-    "name": "Route 16",
+    "name": "Route 16 (Alola)",
     "spawns": [
       {
         "pokemonId": 19,
@@ -1739,7 +1739,7 @@ export const alolaRoutes = [
     ]
   },
   {
-    "name": "Pokémon League",
+    "name": "Pokémon League (Alola)",
     "spawns": []
   },
   {
@@ -4413,13 +4413,13 @@ export const alolaRoutes = [
 export const alolaUnlocks = [
   {
     "challengeName": "Challenge 01",
-    "areaId": "Route 1",
+    "areaId": "Route 1 (Alola)",
     "unlocks": [
       "Iki Town"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "route": "Route 1",
+        "route": "Route 1 (Alola)",
         "count": 10
       }
     }
@@ -4465,7 +4465,7 @@ export const alolaUnlocks = [
     "challengeName": "Challenge 06",
     "areaId": "Hau'oli City (Water)",
     "unlocks": [
-      "Route 2"
+      "Route 2 (Alola)"
     ],
     "requirements": {
       "defeatCountRoute": {
@@ -4476,13 +4476,13 @@ export const alolaUnlocks = [
   },
   {
     "challengeName": "Challenge 07",
-    "areaId": "Route 2",
+    "areaId": "Route 2 (Alola)",
     "unlocks": [
       "Hau'oli Cemetery"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "route": "Route 2",
+        "route": "Route 2 (Alola)",
         "count": 10
       }
     }
@@ -4533,19 +4533,19 @@ export const alolaUnlocks = [
     "challengeName": "Challenge 12",
     "areaId": "Verdant Cavern",
     "unlocks": [
-      "Route 3"
+      "Route 3 (Alola)"
     ],
     "requirements": {}
   },
   {
     "challengeName": "Challenge 13",
-    "areaId": "Route 3",
+    "areaId": "Route 3 (Alola)",
     "unlocks": [
       "Melemele Meadow"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "route": "Route 3",
+        "route": "Route 3 (Alola)",
         "count": 10
       }
     }
@@ -4627,19 +4627,19 @@ export const alolaUnlocks = [
     "challengeName": "Challenge 20",
     "areaId": "Heahea City",
     "unlocks": [
-      "Route 4"
+      "Route 4 (Alola)"
     ],
     "requirements": {}
   },
   {
     "challengeName": "Challenge 21",
-    "areaId": "Route 4",
+    "areaId": "Route 4 (Alola)",
     "unlocks": [
       "Pikachu Valley"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "route": "Route 4",
+        "route": "Route 4 (Alola)",
         "count": 10
       }
     }
@@ -4664,7 +4664,7 @@ export const alolaUnlocks = [
     "challengeName": "Challenge 24",
     "areaId": "Paniola Ranch",
     "unlocks": [
-      "Route 5"
+      "Route 5 (Alola)"
     ],
     "requirements": {
       "defeatCountRoute": {
@@ -4675,13 +4675,13 @@ export const alolaUnlocks = [
   },
   {
     "challengeName": "Challenge 25",
-    "areaId": "Route 5",
+    "areaId": "Route 5 (Alola)",
     "unlocks": [
       "Brooklet Hill"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "route": "Route 5",
+        "route": "Route 5 (Alola)",
         "count": 10
       }
     }
@@ -4690,7 +4690,7 @@ export const alolaUnlocks = [
     "challengeName": "Challenge 26",
     "areaId": "Brooklet Hill",
     "unlocks": [
-      "Route 6"
+      "Route 6 (Alola)"
     ],
     "requirements": {
       "defeatCountRoute": {
@@ -4701,13 +4701,13 @@ export const alolaUnlocks = [
   },
   {
     "challengeName": "Challenge 27",
-    "areaId": "Route 6",
+    "areaId": "Route 6 (Alola)",
     "unlocks": [
       "Royal Avenue"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "route": "Route 6",
+        "route": "Route 6 (Alola)",
         "count": 10
       }
     }
@@ -4716,19 +4716,19 @@ export const alolaUnlocks = [
     "challengeName": "Challenge 28",
     "areaId": "Royal Avenue",
     "unlocks": [
-      "Route 7"
+      "Route 7 (Alola)"
     ],
     "requirements": {}
   },
   {
     "challengeName": "Challenge 29",
-    "areaId": "Route 7",
+    "areaId": "Route 7 (Alola)",
     "unlocks": [
       "Route 7 (Water)"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "route": "Route 7",
+        "route": "Route 7 (Alola)",
         "count": 10
       }
     }
@@ -4758,7 +4758,7 @@ export const alolaUnlocks = [
     "challengeName": "Challenge 32",
     "areaId": "Dividing Peak Tunnel",
     "unlocks": [
-      "Route 8"
+      "Route 8 (Alola)"
     ],
     "requirements": {
       "defeatCountRoute": {
@@ -4769,13 +4769,13 @@ export const alolaUnlocks = [
   },
   {
     "challengeName": "Challenge 33",
-    "areaId": "Route 8",
+    "areaId": "Route 8 (Alola)",
     "unlocks": [
       "Lush Jungle"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "route": "Route 8",
+        "route": "Route 8 (Alola)",
         "count": 10
       }
     }
@@ -4805,7 +4805,7 @@ export const alolaUnlocks = [
     "challengeName": "Challenge 36",
     "areaId": "Diglett's Tunnel",
     "unlocks": [
-      "Route 9"
+      "Route 9 (Alola)"
     ],
     "requirements": {
       "defeatCountRoute": {
@@ -4816,7 +4816,7 @@ export const alolaUnlocks = [
   },
   {
     "challengeName": "Challenge 37",
-    "areaId": "Route 9",
+    "areaId": "Route 9 (Alola)",
     "unlocks": [
       "Konikoni City"
     ],
@@ -4947,19 +4947,19 @@ export const alolaUnlocks = [
     "challengeName": "Challenge 50",
     "areaId": "Outer Cape",
     "unlocks": [
-      "Route 10"
+      "Route 10 (Alola)"
     ],
     "requirements": {}
   },
   {
     "challengeName": "Challenge 51",
-    "areaId": "Route 10",
+    "areaId": "Route 10 (Alola)",
     "unlocks": [
       "Mount Hokulani"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "route": "Route 10",
+        "route": "Route 10 (Alola)",
         "count": 10
       }
     }
@@ -4981,32 +4981,32 @@ export const alolaUnlocks = [
     "challengeName": "Challenge 53",
     "areaId": "Hokulani Observatory",
     "unlocks": [
-      "Route 11"
+      "Route 11 (Alola)"
     ],
     "requirements": {}
   },
   {
     "challengeName": "Challenge 54",
-    "areaId": "Route 11",
+    "areaId": "Route 11 (Alola)",
     "unlocks": [
-      "Route 12"
+      "Route 12 (Alola)"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "route": "Route 11",
+        "route": "Route 11 (Alola)",
         "count": 10
       }
     }
   },
   {
     "challengeName": "Challenge 55",
-    "areaId": "Route 12",
+    "areaId": "Route 12 (Alola)",
     "unlocks": [
       "Blush Mountain"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "route": "Route 12",
+        "route": "Route 12 (Alola)",
         "count": 10
       }
     }
@@ -5028,7 +5028,7 @@ export const alolaUnlocks = [
     "challengeName": "Challenge 57",
     "areaId": "Secluded Shore",
     "unlocks": [
-      "Route 13"
+      "Route 13 (Alola)"
     ],
     "requirements": {
       "defeatCountRoute": {
@@ -5039,7 +5039,7 @@ export const alolaUnlocks = [
   },
   {
     "challengeName": "Challenge 58",
-    "areaId": "Route 13",
+    "areaId": "Route 13 (Alola)",
     "unlocks": [
       "Tapu Village"
     ],
@@ -5062,13 +5062,13 @@ export const alolaUnlocks = [
     "challengeName": "Challenge 60",
     "areaId": "Aether House",
     "unlocks": [
-      "Route 14"
+      "Route 14 (Alola)"
     ],
     "requirements": {}
   },
   {
     "challengeName": "Challenge 61",
-    "areaId": "Route 14",
+    "areaId": "Route 14 (Alola)",
     "unlocks": [
       "Route 14 (Water)"
     ],
@@ -5104,7 +5104,7 @@ export const alolaUnlocks = [
     "challengeName": "Challenge 64",
     "areaId": "Haina Desert",
     "unlocks": [
-      "Route 15"
+      "Route 15 (Alola)"
     ],
     "requirements": {
       "defeatCountRoute": {
@@ -5115,13 +5115,13 @@ export const alolaUnlocks = [
   },
   {
     "challengeName": "Challenge 65",
-    "areaId": "Route 15",
+    "areaId": "Route 15 (Alola)",
     "unlocks": [
       "Route 15 (Water)"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "route": "Route 15",
+        "route": "Route 15 (Alola)",
         "count": 10
       }
     }
@@ -5130,7 +5130,7 @@ export const alolaUnlocks = [
     "challengeName": "Challenge 66",
     "areaId": "Route 15 (Water)",
     "unlocks": [
-      "Route 16"
+      "Route 16 (Alola)"
     ],
     "requirements": {
       "defeatCountRoute": {
@@ -5141,13 +5141,13 @@ export const alolaUnlocks = [
   },
   {
     "challengeName": "Challenge 67",
-    "areaId": "Route 16",
+    "areaId": "Route 16 (Alola)",
     "unlocks": [
       "Route 16 (Water)"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "route": "Route 16",
+        "route": "Route 16 (Alola)",
         "count": 10
       }
     }
@@ -5345,7 +5345,7 @@ export const alolaUnlocks = [
     "challengeName": "Challenge 86",
     "areaId": "Mount Lanakila",
     "unlocks": [
-      "Pokémon League"
+      "Pokémon League (Alola)"
     ],
     "requirements": {
       "defeatCountRoute": {
@@ -5356,7 +5356,7 @@ export const alolaUnlocks = [
   },
   {
     "challengeName": "Challenge 87",
-    "areaId": "Pokémon League",
+    "areaId": "Pokémon League (Alola)",
     "unlocks": [
       "Ruins of Conflict"
     ],
@@ -5642,13 +5642,13 @@ export const alolaUnlocks = [
   },
   {
     "challengeName": "Extra Challenge A 01",
-    "areaId": "Route 3",
+    "areaId": "Route 3 (Alola)",
     "unlocks": [
       "Extra Challenge A 02"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "route": "Route 3",
+        "route": "Route 3 (Alola)",
         "count": 10
       }
     }
@@ -5772,13 +5772,13 @@ export const alolaUnlocks = [
   },
   {
     "challengeName": "Extra Challenge C 01",
-    "areaId": "Route 10",
+    "areaId": "Route 10 (Alola)",
     "unlocks": [
       "Extra Challenge C 02"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "route": "Route 10",
+        "route": "Route 10 (Alola)",
         "count": 10
       }
     }
@@ -5902,13 +5902,13 @@ export const alolaUnlocks = [
   },
   {
     "challengeName": "Extra Challenge E 01",
-    "areaId": "Route 9",
+    "areaId": "Route 9 (Alola)",
     "unlocks": [
       "Extra Challenge E 02"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "route": "Route 9",
+        "route": "Route 9 (Alola)",
         "count": 10
       }
     }

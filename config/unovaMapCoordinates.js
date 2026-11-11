@@ -1,76 +1,76 @@
 const unovaMapCoordinates = {
   "1": {
-    "name": "Route 1",
+    "name": "Route 1 (Unova)",
     "x": 89.6,
     "y": 78.48
   },
   "2": {
-    "name": "Route 2",
+    "name": "Route 2 (Unova)",
     "x": 90.09,
     "y": 67.27
   },
   "3": {
-    "name": "Route 3",
+    "name": "Route 3 (Unova)",
     "x": 82.22,
     "y": 57.49
   },
   "4": {
-    "name": "Route 4",
+    "name": "Route 4 (Unova)",
     "x": 51.25,
     "y": 68.23
   },
   "6": {
-    "name": "Route 6",
+    "name": "Route 6 (Unova)",
     "x": 20.21,
     "y": 50.19
   },
   "7": {
-    "name": "Route 7",
+    "name": "Route 7 (Unova)",
     "x": 13.74,
     "y": 33.87
   },
   "8": {
-    "name": "Route 8",
+    "name": "Route 8 (Unova)",
     "x": 31.2,
     "y": 21.85
   },
   "9": {
-    "name": "Route 9",
+    "name": "Route 9 (Unova)",
     "x": 40.74,
     "y": 25.46
   },
   "10": {
-    "name": "Route 10",
+    "name": "Route 10 (Unova)",
     "x": 51.41,
     "y": 18.41
   },
   "11": {
-    "name": "Route 11",
+    "name": "Route 11 (Unova)",
     "x": 53.42,
     "y": 25.1
   },
   "12": {
-    "name": "Route 12",
+    "name": "Route 12 (Unova)",
     "x": 67.34,
     "y": 25.71
   },
   "13": {
-    "name": "Route 13",
+    "name": "Route 13 (Unova)",
     "x": 80.19,
     "y": 27.93
   },
   "14": {
-    "name": "Route 14",
+    "name": "Route 14 (Unova)",
     "x": 83.05,
     "y": 46.63
   },
   "15": {
-    "name": "Route 15",
+    "name": "Route 15 (Unova)",
     "x": 66.05,
     "y": 53.89
   },
   "16": {
-    "name": "Route 16",
+    "name": "Route 16 (Unova)",
     "x": 58.53,
     "y": 54.88
   },
@@ -100,12 +100,12 @@ const unovaMapCoordinates = {
     "y": 29.04
   },
   "22": {
-    "name": "Route 22",
+    "name": "Route 22 (Unova)",
     "x": 90.04,
     "y": 22.42
   },
   "23": {
-    "name": "Route 23",
+    "name": "Route 23 (Unova)",
     "x": 74.45,
     "y": 13.59
   },
@@ -235,7 +235,7 @@ const unovaMapCoordinates = {
     "y": 12.18
   },
   "victory_road": {
-    "name": "Victory Road",
+    "name": "Victory Road (Unova)",
     "x": 69.69,
     "y": 10.75
   },

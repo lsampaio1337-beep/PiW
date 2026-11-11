@@ -1,6 +1,6 @@
 const mapCoordinates = {
   "route_1": {
-    "name": "Route 1",
+    "name": "Route 1 (Kanto)",
     "x": 24.29,
     "y": 54.66
   },
@@ -15,7 +15,7 @@ const mapCoordinates = {
     "y": 48.43
   },
   "victory_road": {
-    "name": "Victory Road",
+    "name": "Victory Road (Kanto)",
     "x": 12.62,
     "y": 14.34
   },
@@ -25,12 +25,12 @@ const mapCoordinates = {
     "y": 5.46
   },
   "viridian_forest": {
-    "name": "Viridian Forest",
+    "name": "Viridian Forest (Kanto)",
     "x": 23.4,
     "y": 31.24
   },
   "route_2": {
-    "name": "Route 2",
+    "name": "Route 2 (Kanto)",
     "x": 15.98,
     "y": 46.12
   },
@@ -40,17 +40,17 @@ const mapCoordinates = {
     "y": 21.11
   },
   "route_3": {
-    "name": "Route 3",
+    "name": "Route 3 (Kanto)",
     "x": 35.95,
     "y": 21.03
   },
   "mount_moon": {
-    "name": "Mount Moon",
+    "name": "Mount Moon (Kanto)",
     "x": 42.73,
     "y": 15.8
   },
   "route_4": {
-    "name": "Route 4",
+    "name": "Route 4 (Kanto)",
     "x": 51.42,
     "y": 17.89
   },
@@ -70,7 +70,7 @@ const mapCoordinates = {
     "y": 4.99
   },
   "route_5": {
-    "name": "Route 5",
+    "name": "Route 5 (Kanto)",
     "x": 68.35,
     "y": 24.97
   },
@@ -80,7 +80,7 @@ const mapCoordinates = {
     "y": 55.53
   },
   "route_11": {
-    "name": "Route 11",
+    "name": "Route 11 (Kanto)",
     "x": 80.32,
     "y": 55.19
   },
@@ -90,27 +90,27 @@ const mapCoordinates = {
     "y": 51.7
   },
   "route_9": {
-    "name": "Route 9",
+    "name": "Route 9 (Kanto)",
     "x": 75.88,
     "y": 16.58
   },
   "route_10": {
-    "name": "Route 10",
+    "name": "Route 10 (Kanto)",
     "x": 85.62,
     "y": 16.23
   },
   "rock_tunnel": {
-    "name": "Rock Tunnel",
+    "name": "Rock Tunnel (Kanto)",
     "x": 83.21,
     "y": 27.3
   },
   "route_8": {
-    "name": "Route 8",
+    "name": "Route 8 (Kanto)",
     "x": 57.15,
     "y": 35.32
   },
   "route_7": {
-    "name": "Route 7",
+    "name": "Route 7 (Kanto)",
     "x": 77.98,
     "y": 35.14
   },
@@ -120,27 +120,27 @@ const mapCoordinates = {
     "y": 34.36
   },
   "route_12": {
-    "name": "Route 12",
+    "name": "Route 12 (Kanto)",
     "x": 87.1,
     "y": 55.19
   },
   "route_13": {
-    "name": "Route 13",
+    "name": "Route 13 (Kanto)",
     "x": 79.82,
     "y": 68.95
   },
   "route_14": {
-    "name": "Route 14",
+    "name": "Route 14 (Kanto)",
     "x": 69.47,
     "y": 74.1
   },
   "route_15": {
-    "name": "Route 15",
+    "name": "Route 15 (Kanto)",
     "x": 61.89,
     "y": 77.58
   },
   "cycling_road": {
-    "name": "Cycling Road",
+    "name": "Cycling Road (Kanto)",
     "x": 35.4,
     "y": 53.62
   },
@@ -165,12 +165,12 @@ const mapCoordinates = {
     "y": 31.48
   },
   "safari_zone": {
-    "name": "Kanto Safari Zone",
+    "name": "Kanto Safari Zone (Kanto)",
     "x": 50.43,
     "y": 62.51
   },
   "sea_routes": {
-    "name": "Sea Routes",
+    "name": "Sea Routes (Kanto)",
     "x": 48.27,
     "y": 91.18
   },
@@ -180,7 +180,7 @@ const mapCoordinates = {
     "y": 93.01
   },
   "pokemon_mansion": {
-    "name": "Pokemon Mansion",
+    "name": "Pokemon Mansion (Kanto)",
     "x": 22.08,
     "y": 90.92
   },
@@ -195,12 +195,12 @@ const mapCoordinates = {
     "y": 23.38
   },
   "route_22": {
-    "name": "Route 22",
+    "name": "Route 22 (Kanto)",
     "x": 12.38,
     "y": 37.59
   },
   "route_23": {
-    "name": "Route 23",
+    "name": "Route 23 (Kanto)",
     "x": 12.44,
     "y": 25.05
   },
@@ -215,7 +215,7 @@ const mapCoordinates = {
     "y": 74.69
   },
   "route_6": {
-    "name": "Route 6",
+    "name": "Route 6 (Kanto)",
     "x": 64.59,
     "y": 45.86
   },

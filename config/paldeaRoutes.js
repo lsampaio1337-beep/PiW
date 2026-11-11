@@ -2932,7 +2932,7 @@ export const paldeaRoutes = [
     "spawns": []
   },
   {
-    "name": "Pokémon League",
+    "name": "Pokémon League (Paldea)",
     "spawns": []
   },
   {
@@ -7140,7 +7140,7 @@ export const paldeaUnlocks = [
     "challengeName": "Challenge 89",
     "areaId": "Glaseado Gym",
     "unlocks": [
-      "Pokémon League"
+      "Pokémon League (Paldea)"
     ],
     "requirements": {
       "completeChallenges": [
@@ -7162,7 +7162,7 @@ export const paldeaUnlocks = [
   },
   {
     "challengeName": "Challenge 90",
-    "areaId": "Pokémon League",
+    "areaId": "Pokémon League (Paldea)",
     "unlocks": [
       "Apple Hills"
     ],

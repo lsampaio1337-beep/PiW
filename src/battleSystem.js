@@ -1170,7 +1170,7 @@ class BattleSystem {
             ivs = mathEngine.generateIVs(this.state.stats, q.name === "Shiny");
 
             // Route 1 Level Cap
-            if (this.state.currentRoute === "Route 1") {
+            if (this.state.currentRoute === "Route 1 (Kanto)") {
                 const playerLevel = this.state.party[0] ? this.state.party[0].level : 1;
                 level = Math.min(level, playerLevel);
             }
@@ -2351,7 +2351,7 @@ class BattleSystem {
             pokemonBase = this.getPokemonBase(selectedSpawn.pokemonId);
             level = Math.floor(Math.random() * (selectedSpawn.maxLevel - selectedSpawn.minLevel + 1)) + selectedSpawn.minLevel;
 
-            if (this.state.currentRoute === "Route 1") {
+            if (this.state.currentRoute === "Route 1 (Kanto)") {
                 const playerLevel = leader.level || 1;
                 level = Math.min(level, playerLevel);
             }
