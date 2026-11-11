@@ -1621,30 +1621,34 @@ function _enableNavButtons() {
     }
 }
 
-function selectStarter(id) {
+function _ensureProfileExists() {
     if (!storage.currentProfileId) {
         storage.createNewProfile();
     }
-    const pData = state.config.pokemonData.find(p => p.id === id);
+}
 
+function _assignStarterToParty(pData) {
     const starter = _createStarterPokemon(pData);
-
     state.party.push(starter);
     state.stats.hasPickedStarter = true;
     returnToLab();
+}
 
-    _forcePartyWindowRefresh(pData);
-
-    _initializeInitialRoutes(id);
-
+function _finalizeStarterSelection() {
     storage.save(state);
-
     _enableNavButtons();
-
     startGame();
-
     // Refresh generic lab after assigning to display Assignments UI
     renderProfessorLab();
+}
+
+function selectStarter(id) {
+    _ensureProfileExists();
+    const pData = state.config.pokemonData.find(p => p.id === id);
+    _assignStarterToParty(pData);
+    _forcePartyWindowRefresh(pData);
+    _initializeInitialRoutes(id);
+    _finalizeStarterSelection();
 }
 
 let gameClockTimeout = null;
