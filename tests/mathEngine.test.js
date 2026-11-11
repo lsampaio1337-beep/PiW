@@ -1,4 +1,4 @@
-import { calculateDamage, calculateReqXP, calculateStat, calculateCatchChance } from '../src/mathEngine.js';
+import { calculateDamage, calculateReqXP, calculateStat, calculateCatchChance, generateQuality } from '../src/mathEngine.js';
 
 describe('calculateReqXP', () => {
     test('should calculate required XP correctly for level 1', () => {
@@ -375,5 +375,143 @@ describe('calculateCatchChance', () => {
 
         // 5 candies = 2.0x multiplier
         expect(calculateCatchChance(bst, level, quality, totalIV, ballMultiplier, { blackYellowCandies: 5 })).toBeCloseTo(100, 2);
+    });
+});
+
+
+describe('generateQuality', () => {
+    let mathRandomSpy;
+
+    beforeEach(() => {
+        mathRandomSpy = jest.spyOn(Math, 'random');
+    });
+
+    afterEach(() => {
+        mathRandomSpy.mockRestore();
+    });
+
+    test('should return Weak tier on lowest roll without qTaskTier', () => {
+        // Roll 1 for maxTableRoll (11999 + 1)
+        // roll = floor(0 * 12000) + 1 = 1
+        mathRandomSpy.mockReturnValueOnce(0.0);
+        // Original Q roll
+        mathRandomSpy.mockReturnValueOnce(0.0);
+
+        const result = generateQuality({}, false);
+        expect(result.name).toBe('Weak');
+        expect(result.q).toBe(0.80);
+    });
+
+    test('should return Regular tier', () => {
+        // roll = floor(0.2 * 12000) + 1 = 2401, which is > 1474 and <= 6586
+        mathRandomSpy.mockReturnValueOnce(0.2);
+        // Original Q roll (0.5 within range)
+        mathRandomSpy.mockReturnValueOnce(0.5);
+
+        const result = generateQuality({}, false);
+        expect(result.name).toBe('Regular');
+        // base 1.00 + 0.5 * (1.19 - 1.00) = 1.095, floored to 1.09
+        expect(result.q).toBe(1.09);
+    });
+
+    test('should return Uncommon tier', () => {
+        // roll = floor(0.6 * 12000) + 1 = 7201, which is > 6586 and <= 9593
+        mathRandomSpy.mockReturnValueOnce(0.6);
+        mathRandomSpy.mockReturnValueOnce(0.5);
+
+        const result = generateQuality({}, false);
+        expect(result.name).toBe('Uncommon');
+        // base 1.20 + 0.5 * 0.19 = 1.295 -> 1.29
+        expect(result.q).toBe(1.29);
+    });
+
+    test('should return Rare tier', () => {
+        // roll = floor(0.85 * 12000) + 1 = 10201, which is > 9593 and <= 11097
+        mathRandomSpy.mockReturnValueOnce(0.85);
+        mathRandomSpy.mockReturnValueOnce(0.5);
+
+        const result = generateQuality({}, false);
+        expect(result.name).toBe('Rare');
+        // base 1.40 + 0.5 * 0.19 = 1.495 -> 1.49
+        expect(result.q).toBe(1.49);
+    });
+
+    test('should return Epic tier', () => {
+        // roll = floor(0.95 * 12000) + 1 = 11401, which is > 11097 and <= 11999
+        mathRandomSpy.mockReturnValueOnce(0.95);
+        mathRandomSpy.mockReturnValueOnce(0.5);
+
+        const result = generateQuality({}, false);
+        expect(result.name).toBe('Epic');
+        // base 1.60 + 0.5 * 0.20 = 1.70
+        expect(result.q).toBe(1.70);
+    });
+
+    test('should return Shiny tier on high roll', () => {
+        // roll = floor(0.99999 * 12000) + 1 = 12000, which is > 11999
+        mathRandomSpy.mockReturnValueOnce(0.99999);
+        // Shiny Q roll
+        mathRandomSpy.mockReturnValueOnce(0.5);
+
+        const result = generateQuality({}, false);
+        expect(result.name).toBe('Shiny');
+        // 2.00 + 0.5 * 0.51 = 2.255 -> 2.25
+        expect(result.q).toBe(2.25);
+    });
+
+    test('should modify roll thresholds and apply bonus with qTaskTier 5', () => {
+        // With qTaskTier 5: weakMaxRoll = 120, regularMaxRoll = 3720, uncommonMaxRoll = 6120, rareMaxRoll = 8970
+        // roll = floor(0.011 * 12000) + 1 = 133, which is > 120 (Weak) and <= 3720 (Regular)
+        mathRandomSpy.mockReturnValueOnce(0.011);
+        // Original Q roll (0.5)
+        mathRandomSpy.mockReturnValueOnce(0.5);
+
+        const stats = { qTaskTier: 5 };
+        const result = generateQuality(stats, false);
+        expect(result.name).toBe('Regular');
+        // For Regular: base 1.00, max 1.19
+        // originalQ = 1.00 + 0.5 * 0.19 = 1.095
+        // newQ = (1 + 1.00) * (1.095 - 1.00) + 1.00 = 2 * 0.095 + 1.00 = 1.19
+        expect(result.q).toBe(1.19);
+    });
+
+    test('should respect maxQ even with large qTaskTier bonus', () => {
+        // roll = floor(0.0 * 12000) + 1 = 1 (Weak tier)
+        mathRandomSpy.mockReturnValueOnce(0.0);
+        // High Q roll to push to bounds
+        mathRandomSpy.mockReturnValueOnce(0.9);
+
+        const stats = { qTaskTier: 5 };
+        const result = generateQuality(stats, false);
+        expect(result.name).toBe('Weak');
+        // base 0.80, max 0.99
+        // originalQ = 0.80 + 0.9 * 0.19 = 0.971
+        // newQ = (1 + 1.00) * (0.971 - 0.80) + 0.80 = 2 * 0.171 + 0.80 = 1.142
+        // Since 1.142 > 0.99 (maxQ for Weak), it should cap at 0.99
+        expect(result.q).toBe(0.99);
+    });
+
+    test('should increase shinyRolls with stats and flags', () => {
+        // Base maxTableRoll is 11999 + shinyRolls
+        // shinyRolls = 1 + rainbowCandies (2) = 3
+        // shinySeenTaskTier >= 2 -> +2 rolls = 5
+        // isDoubleShiny -> * 2 = 10
+        // finalTaskTier >= 1 -> * 12 = 120
+        // Total maxTableRoll = 11999 + 120 = 12119
+
+        // roll = floor(0.999 * 12119) + 1 = 12107 > 11999, so it hits Shiny
+        mathRandomSpy.mockReturnValueOnce(0.999);
+        // Shiny Q roll
+        mathRandomSpy.mockReturnValueOnce(0.0);
+
+        const stats = {
+            rainbowCandies: 2,
+            shinySeenTaskTier: 2,
+            finalTaskTier: 1
+        };
+        const result = generateQuality(stats, true);
+
+        expect(result.name).toBe('Shiny');
+        expect(result.q).toBe(2.00);
     });
 });
