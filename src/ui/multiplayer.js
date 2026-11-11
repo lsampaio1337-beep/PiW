@@ -134,6 +134,24 @@ export async function completeConnection(encodedAnswer) {
     }
 }
 
+export function disconnectAndResetUI() {
+    if (peerConnection) {
+        peerConnection.close();
+    }
+    initMultiplayer();
+
+    const connBtn = document.getElementById('btn-mp-connection-status');
+    if (connBtn) {
+        connBtn.style.background = '#e74c3c';
+        connBtn.innerText = 'Not Connected';
+        connBtn.disabled = true;
+        connBtn.style.cursor = 'default';
+        connBtn.onmouseenter = null;
+        connBtn.onmouseleave = null;
+    }
+    updateBattleButtonUI();
+}
+
 function updateBattleButtonUI() {
     const btn = document.getElementById('btn-mp-battle');
     if (!btn) return;
@@ -166,19 +184,7 @@ function handleDataChannelOpen(channel) {
         connBtn.style.cursor = 'pointer';
 
         // Allow disconnection by clicking
-        connBtn.onclick = () => {
-            if (peerConnection) {
-                peerConnection.close();
-            }
-            initMultiplayer();
-            connBtn.style.background = '#e74c3c';
-            connBtn.innerText = 'Not Connected';
-            connBtn.disabled = true;
-            connBtn.style.cursor = 'default';
-            connBtn.onmouseenter = null;
-            connBtn.onmouseleave = null;
-            updateBattleButtonUI();
-        };
+        connBtn.onclick = disconnectAndResetUI;
 
         // Hover effect
         connBtn.onmouseenter = () => {
@@ -216,6 +222,12 @@ function setupDataChannel(channel) {
     channel.onclose = handleDataChannelClose;
 }
 
+const messageHandlers = {
+    party: handlePartyMessage,
+    ready: handleReadyMessage,
+    combatEvent: handleCombatEventMessage
+};
+
 function handleMessage(event) {
     let data;
     try {
@@ -230,12 +242,11 @@ function handleMessage(event) {
         return;
     }
 
-    if (data.type === 'party') {
-        handlePartyMessage(data);
-    } else if (data.type === 'ready') {
-        handleReadyMessage(data);
-    } else if (data.type === 'combatEvent') {
-        handleCombatEventMessage(data);
+    const handler = messageHandlers[data.type];
+    if (handler) {
+        handler(data);
+    } else {
+        console.warn("Unhandled multiplayer message type:", data.type);
     }
 }
 
@@ -246,21 +257,7 @@ function handlePartyMessage(data) {
     }
     if (data.region !== state.currentRegionName) {
         alert("Cannot connect! You must be in the same region as your opponent.");
-        if (peerConnection) {
-            peerConnection.close();
-        }
-        initMultiplayer();
-
-        const connBtn = document.getElementById('btn-mp-connection-status');
-        if (connBtn) {
-            connBtn.style.background = '#e74c3c';
-            connBtn.innerText = 'Not Connected';
-            connBtn.disabled = true;
-            connBtn.style.cursor = 'default';
-            connBtn.onmouseenter = null;
-            connBtn.onmouseleave = null;
-        }
-        updateBattleButtonUI();
+        disconnectAndResetUI();
         return;
     }
     opponentParty = data.party;
@@ -347,6 +344,60 @@ window.switchMultiplayerTab = function(tab) {
     }
 };
 
+function copyToClipboard(inputEl, btnEl) {
+    if (!inputEl || !inputEl.value) return;
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(inputEl.value).then(() => {
+            btnEl.innerText = 'Copied!';
+            setTimeout(() => btnEl.innerText = 'Copy', 2000);
+        }).catch(err => {
+            console.error('Clipboard write failed:', err);
+            fallbackCopy(inputEl, btnEl);
+        });
+    } else {
+        fallbackCopy(inputEl, btnEl);
+    }
+}
+
+function fallbackCopy(inputEl, btnEl) {
+    try {
+        inputEl.select();
+        inputEl.setSelectionRange(0, 99999);
+        document.execCommand('copy');
+        window.getSelection().removeAllRanges();
+        btnEl.innerText = 'Copied!';
+        setTimeout(() => btnEl.innerText = 'Copy', 2000);
+    } catch (err) {
+        console.error('Fallback copy failed:', err);
+        alert("Copy failed. Please manually copy the code.");
+    }
+}
+
+async function pasteFromClipboard(inputEl, btnEl) {
+    if (!inputEl) return;
+    try {
+        if (navigator.clipboard && navigator.clipboard.readText) {
+            const text = await navigator.clipboard.readText();
+            inputEl.value = text;
+            btnEl.innerText = 'Pasted!';
+            setTimeout(() => btnEl.innerText = 'Paste', 2000);
+        } else {
+            inputEl.focus();
+            if (document.execCommand('paste')) {
+                 btnEl.innerText = 'Pasted!';
+                 setTimeout(() => btnEl.innerText = 'Paste', 2000);
+            } else {
+                 alert("Please use Ctrl+V or Right-Click -> Paste.");
+            }
+        }
+    } catch (err) {
+        console.error('Paste failed:', err);
+        inputEl.focus();
+        alert("Please use Ctrl+V or Right-Click -> Paste.");
+    }
+}
+
 window.initMultiplayerView = function() {
     window.switchMultiplayerTab('host');
 
@@ -369,36 +420,6 @@ window.initMultiplayerView = function() {
         };
     }
 
-    function copyToClipboard(inputEl, btnEl) {
-        if (!inputEl || !inputEl.value) return;
-
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(inputEl.value).then(() => {
-                btnEl.innerText = 'Copied!';
-                setTimeout(() => btnEl.innerText = 'Copy', 2000);
-            }).catch(err => {
-                console.error('Clipboard write failed:', err);
-                fallbackCopy(inputEl, btnEl);
-            });
-        } else {
-            fallbackCopy(inputEl, btnEl);
-        }
-    }
-
-    function fallbackCopy(inputEl, btnEl) {
-        try {
-            inputEl.select();
-            inputEl.setSelectionRange(0, 99999);
-            document.execCommand('copy');
-            window.getSelection().removeAllRanges();
-            btnEl.innerText = 'Copied!';
-            setTimeout(() => btnEl.innerText = 'Copy', 2000);
-        } catch (err) {
-            console.error('Fallback copy failed:', err);
-            alert("Copy failed. Please manually copy the code.");
-        }
-    }
-
     const btnCopyHost = document.getElementById('btn-copy-host');
     if (btnCopyHost) {
         btnCopyHost.onclick = () => {
@@ -411,30 +432,6 @@ window.initMultiplayerView = function() {
         btnCopyClient.onclick = () => {
             copyToClipboard(document.getElementById('multiplayer-client-id'), btnCopyClient);
         };
-    }
-
-    async function pasteFromClipboard(inputEl, btnEl) {
-        if (!inputEl) return;
-        try {
-            if (navigator.clipboard && navigator.clipboard.readText) {
-                const text = await navigator.clipboard.readText();
-                inputEl.value = text;
-                btnEl.innerText = 'Pasted!';
-                setTimeout(() => btnEl.innerText = 'Paste', 2000);
-            } else {
-                inputEl.focus();
-                if (document.execCommand('paste')) {
-                     btnEl.innerText = 'Pasted!';
-                     setTimeout(() => btnEl.innerText = 'Paste', 2000);
-                } else {
-                     alert("Please use Ctrl+V or Right-Click -> Paste.");
-                }
-            }
-        } catch (err) {
-            console.error('Paste failed:', err);
-            inputEl.focus();
-            alert("Please use Ctrl+V or Right-Click -> Paste.");
-        }
     }
 
     const btnPasteHost = document.getElementById('btn-paste-host');
