@@ -139,34 +139,38 @@ class DayCare {
         // until the player moves it manually.
     }
 
+    _gainTrainingIVs(pkmn) {
+        let ivsToGain = 1;
+        if (this.state.stats?.upgrades?.daycareTier >= 4) {
+            const chance = typeof crypto !== 'undefined' ? (crypto.getRandomValues(new Uint32Array(1))[0] / (0xFFFFFFFF + 1)) : Math.random();
+            if (chance < 0.20) {
+                ivsToGain = 2;
+            }
+        }
+
+        for (let i = 0; i < ivsToGain; i++) {
+            const currentTotalIV = this._getTotalIV(pkmn);
+            if (currentTotalIV >= 600) break;
+
+            const sub100Stats = [];
+            for (const stat in pkmn.ivs) {
+                if (pkmn.ivs[stat] < 100) sub100Stats.push(stat);
+            }
+
+            if (sub100Stats.length > 0) {
+                const randomVal = typeof crypto !== 'undefined' ? (crypto.getRandomValues(new Uint32Array(1))[0] / (0xFFFFFFFF + 1)) : Math.random();
+                const randStat = sub100Stats[Math.floor(randomVal * sub100Stats.length)];
+                pkmn.ivs[randStat]++;
+            }
+        }
+    }
+
     completeTrainingCycle() {
         const pkmn = this.slot2.pokemon;
         const totalIV = this._getTotalIV(pkmn);
 
         if (totalIV < 600) {
-            let ivsToGain = 1;
-            if (this.state.stats?.upgrades?.daycareTier >= 4) {
-                const chance = typeof crypto !== 'undefined' ? (crypto.getRandomValues(new Uint32Array(1))[0] / (0xFFFFFFFF + 1)) : Math.random();
-                if (chance < 0.20) {
-                    ivsToGain = 2;
-                }
-            }
-
-            for (let i = 0; i < ivsToGain; i++) {
-                const currentTotalIV = this._getTotalIV(pkmn);
-                if (currentTotalIV >= 600) break;
-
-                const sub100Stats = [];
-                for (const stat in pkmn.ivs) {
-                    if (pkmn.ivs[stat] < 100) sub100Stats.push(stat);
-                }
-
-                if (sub100Stats.length > 0) {
-                    const randomVal = typeof crypto !== 'undefined' ? (crypto.getRandomValues(new Uint32Array(1))[0] / (0xFFFFFFFF + 1)) : Math.random();
-                    const randStat = sub100Stats[Math.floor(randomVal * sub100Stats.length)];
-                    pkmn.ivs[randStat]++;
-                }
-            }
+            this._gainTrainingIVs(pkmn);
         }
 
         // Track how many times this pokemon has completed a training cycle
