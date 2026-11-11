@@ -275,7 +275,7 @@ export function cheatAction(action) {
                     state.stats.caughtSpeciesCount = state.stats.caughtSpeciesCount || 0;
                     let targetCount = unlock.requirements.catchSpeciesUniqueCount;
                     if (state.stats.caughtSpeciesCount < targetCount) {
-                        for (let i = 0; i < state.config.pokemonData.length; i++) {
+                        for (let i = 1; i < state.config.pokemonData.length; i++) {
                             if (state.stats.caughtSpeciesCount >= targetCount) break;
                             let p = state.config.pokemonData[i];
                             if (!state.stats.caughtSpecies[p.name]) {

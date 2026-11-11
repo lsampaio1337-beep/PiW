@@ -223,7 +223,7 @@ export function forceNextCapture() {
     const qValue = parseFloat(document.getElementById('force-enc-q').value);
     const sumIV = parseInt(document.getElementById('force-enc-sumiv').value);
 
-    const pokemonBase = state.config.pokemonData[id - 1] || state.config.pokemonData[0];
+    const pokemonBase = state.config.pokemonData[id] || state.config.pokemonData[1];
 
     let qName = "Custom";
     if (qValue >= 2.0) qName = "Shiny";

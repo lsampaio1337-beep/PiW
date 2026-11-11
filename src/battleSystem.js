@@ -185,7 +185,7 @@ class BattleSystem {
             const len = pokemonData.length;
 
             // First pass: Build the reverse lookup map
-            for (let i = 0; i < len; i++) {
+            for (let i = 1; i < len; i++) {
                 const p = pokemonData[i];
                 if (p.evolutions) {
                     const evos = p.evolutions;
@@ -198,7 +198,7 @@ class BattleSystem {
             this.evolutionStageMap = {};
 
             // Second pass: Calculate stages iteratively using an array for path to avoid recursion
-            for (let i = 0; i < len; i++) {
+            for (let i = 1; i < len; i++) {
                 let id = pokemonData[i].id;
 
                 if (this.evolutionStageMap[id]) continue;
@@ -1059,7 +1059,7 @@ class BattleSystem {
 
         if (this.state.nextForcedEncounter) {
             const forced = this.state.nextForcedEncounter;
-            pokemonBase = this.getPokemonBase(forced.id) || this.state.config.pokemonData[0];
+            pokemonBase = this.getPokemonBase(forced.id) || this.state.config.pokemonData[1];
             level = forced.level;
 
             const qName = forced.qValue >= 2.0 ? "Shiny" : "Custom";
