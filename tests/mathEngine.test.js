@@ -1,4 +1,4 @@
-import { calculateDamage, calculateReqXP, calculateStat, calculateCatchChance } from '../src/mathEngine.js';
+import { calculateDamage, calculateReqXP, calculateStat, calculateCatchChance, generateIVs } from '../src/mathEngine.js';
 
 describe('calculateReqXP', () => {
     test('should calculate required XP correctly for level 1', () => {
@@ -375,5 +375,105 @@ describe('calculateCatchChance', () => {
 
         // 5 candies = 2.0x multiplier
         expect(calculateCatchChance(bst, level, quality, totalIV, ballMultiplier, { blackYellowCandies: 5 })).toBeCloseTo(100, 2);
+    });
+});
+
+describe('generateIVs', () => {
+    let randomMock;
+
+    beforeEach(() => {
+        randomMock = jest.spyOn(Math, 'random');
+    });
+
+    afterEach(() => {
+        jest.restoreAllMocks();
+    });
+
+    test('should generate minimum stats when random roll is 0 and no bonuses', () => {
+        randomMock.mockImplementationOnce(() => 0);
+
+        const stats = generateIVs();
+
+        expect(stats.hp + stats.atk + stats.def + stats.spa + stats.spd + stats.spe).toBe(6);
+        expect(stats.hp).toBe(1);
+        expect(stats.atk).toBe(1);
+        expect(stats.def).toBe(1);
+        expect(stats.spa).toBe(1);
+        expect(stats.spd).toBe(1);
+        expect(stats.spe).toBe(1);
+    });
+
+    test('should generate maximum stats when random roll is close to 1 and capped', () => {
+        randomMock.mockImplementationOnce(() => 0.99999);
+        const stats = generateIVs();
+
+        expect(stats.hp + stats.atk + stats.def + stats.spa + stats.spd + stats.spe).toBe(600);
+        expect(stats.hp).toBe(100);
+        expect(stats.atk).toBe(100);
+        expect(stats.def).toBe(100);
+        expect(stats.spa).toBe(100);
+        expect(stats.spd).toBe(100);
+        expect(stats.spe).toBe(100);
+    });
+
+    test('should distribute stats correctly and sum up exactly to rolled SumIV', () => {
+        const stats = generateIVs();
+        const sum = stats.hp + stats.atk + stats.def + stats.spa + stats.spd + stats.spe;
+
+        expect(sum).toBeGreaterThanOrEqual(6);
+        expect(sum).toBeLessThanOrEqual(600);
+
+        const statValues = Object.values(stats);
+        statValues.forEach(val => {
+            expect(val).toBeGreaterThanOrEqual(1);
+            expect(val).toBeLessThanOrEqual(100);
+        });
+    });
+
+    test('should apply masteryBoost correctly based on ivTaskTier', () => {
+        randomMock.mockImplementationOnce(() => 94/595);
+
+        let stats = generateIVs({ ivTaskTier: 5 });
+        let sum = stats.hp + stats.atk + stats.def + stats.spa + stats.spd + stats.spe;
+        expect(sum).toBe(125);
+
+        randomMock.mockClear();
+        randomMock.mockImplementationOnce(() => 94/595);
+
+        stats = generateIVs({ ivTaskTier: 1 });
+        sum = stats.hp + stats.atk + stats.def + stats.spa + stats.spd + stats.spe;
+        expect(sum).toBe(105);
+    });
+
+    test('should apply shinyBoost correctly when isShiny is true and shinyCaughtTaskTier >= 1', () => {
+        randomMock.mockImplementationOnce(() => 94/595);
+
+        let stats = generateIVs({ shinyCaughtTaskTier: 1 }, true);
+        let sum = stats.hp + stats.atk + stats.def + stats.spa + stats.spd + stats.spe;
+        expect(sum).toBe(125);
+
+        randomMock.mockClear();
+        randomMock.mockImplementationOnce(() => 94/595);
+
+        stats = generateIVs({ shinyCaughtTaskTier: 1 }, false);
+        sum = stats.hp + stats.atk + stats.def + stats.spa + stats.spd + stats.spe;
+        expect(sum).toBe(100);
+    });
+
+    test('should apply both masteryBoost and shinyBoost multiplicatively', () => {
+        randomMock.mockImplementationOnce(() => 94/595);
+
+        let stats = generateIVs({ ivTaskTier: 5, shinyCaughtTaskTier: 1 }, true);
+        let sum = stats.hp + stats.atk + stats.def + stats.spa + stats.spd + stats.spe;
+        expect(sum).toBe(156);
+    });
+
+    test('should strictly cap the final SumIV at 600 with high rolls and boosts', () => {
+        randomMock.mockImplementationOnce(() => 0.99999);
+
+        let stats = generateIVs({ ivTaskTier: 5, shinyCaughtTaskTier: 1 }, true);
+        let sum = stats.hp + stats.atk + stats.def + stats.spa + stats.spd + stats.spe;
+
+        expect(sum).toBe(600);
     });
 });
