@@ -145,55 +145,56 @@ function generateGiftHTML(gift, isPending, index = -1) {
     return '';
 }
 
+function generatePendingGiftsHTML(pending) {
+    if (!pending || pending.length === 0) return '';
+
+    let html = `<h3 style="margin-top: 0; margin-bottom: 10px;">Pending Gifts</h3>`;
+    html += `<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 20px;">`;
+
+    pending.forEach((gift, index) => {
+        html += generateGiftHTML(gift, true, index);
+    });
+
+    html += `</div>`;
+    return html;
+}
+
+function generateClaimedGiftsHTML(claimed, hasPending) {
+    if (!claimed || claimed.length === 0) return '';
+
+    let html = '';
+    if (hasPending) {
+        html += `<hr style="border: 1px solid #444; margin: 20px 0;">`;
+    }
+
+    html += `<h3 style="margin-top: 0; margin-bottom: 10px;">Collected Gifts</h3>`;
+    html += `<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;">`;
+
+    claimed.forEach((gift) => {
+        html += generateGiftHTML(gift, false);
+    });
+
+    html += `</div>`;
+    return html;
+}
+
 export function showGiftModal() {
     let html = `<div style="text-align: center; padding: 2%; box-sizing: border-box;">`;
 
-    // Check pending gifts
     const pending = state.stats.pendingGifts || [];
-    if (pending.length > 0) {
-        html += `<h3 style="margin-top: 0; margin-bottom: 10px;">Pending Gifts</h3>`;
-        html += `<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 20px;">`;
+    html += generatePendingGiftsHTML(pending);
 
-        pending.forEach((gift, index) => {
-            html += generateGiftHTML(gift, true, index);
-        });
-
-        html += `</div>`;
-    }
-
-    // Backwards compatibility for collected gifts
     if (!state.stats.claimedGifts && state.trainer.badges > 0) {
-        state.stats.claimedGifts = [];
-        for (let i = 0; i < state.trainer.badges; i++) {
-            let gymIndex = i;
-            if (state.currentRegionName === 'Johto') {
-                gymIndex = (i < 8) ? i + 9 : i - 8;
-            }
-            state.stats.claimedGifts.push({ type: 'badge', gymIndex: gymIndex });
-        }
+        ensureClaimedGiftsHistory('badge');
     }
 
-    // Check collected gifts (items and badges)
     const claimed = state.stats.claimedGifts || [];
-    if (claimed.length > 0) {
-        if (pending.length > 0) {
-            html += `<hr style="border: 1px solid #444; margin: 20px 0;">`;
-        }
-        html += `<h3 style="margin-top: 0; margin-bottom: 10px;">Collected Gifts</h3>`;
-        html += `<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;">`;
-
-        claimed.forEach((gift) => {
-            html += generateGiftHTML(gift, false);
-        });
-
-        html += `</div>`;
-    }
+    html += generateClaimedGiftsHTML(claimed, pending.length > 0);
 
     html += `</div>`;
 
     showModal("Gifts", html, "window-gifts");
 
-    // Automatically adjust height to fit new items
     const win = document.getElementById("window-gifts");
     if (win && win.adjustHeightForNewContent) {
         setTimeout(() => {
