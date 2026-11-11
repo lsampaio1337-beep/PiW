@@ -1675,66 +1675,61 @@ function _updateBattleTimer() {
     }
 }
 
+function _getRegionalStats(region) {
+    if (region === 'Kanto' && state.currentRegionName === 'Kanto') return state.stats;
+    if (region === 'Kanto' && state.regions && state.regions['Kanto']) return state.regions['Kanto'].stats;
+    if (state.regions && state.regions[region]) return state.regions[region].stats;
+    if (state.currentRegionName === region) return state.stats;
+    return null;
+}
+
+function _getRegionPokemonCounts(region, regionalStats) {
+    let caughtCount = 0;
+    let shinyCount = 0;
+    let totalInRegion = 0;
+
+    if (state.config && state.config.pokemonData) {
+        const regionKey = region.toLowerCase() + '_id';
+        state.config.pokemonData.forEach(p => {
+            if (p[regionKey]) {
+                totalInRegion++;
+                if (regionalStats) {
+                    if (regionalStats.caughtSpecies && regionalStats.caughtSpecies[p.name]) caughtCount++;
+                    if (regionalStats.caughtShiniesSpecies && regionalStats.caughtShiniesSpecies[p.name]) shinyCount++;
+                }
+            }
+        });
+    }
+    return { caughtCount, shinyCount, totalInRegion };
+}
+
+function _recordRegionMedal(region, tier) {
+    if (!state.globalStats.medals[region]) {
+        state.globalStats.medals[region] = {};
+    }
+    if (!state.globalStats.medals[region][tier]) {
+        state.globalStats.medals[region][tier] = {
+            date: Date.now(),
+            playtime: state.globalStats.playtime
+        };
+    }
+}
+
 window.evaluateMedals = function() {
     if (!state.globalStats.medals) state.globalStats.medals = {};
     const regions = ['Kanto', 'Johto', 'Hoenn', 'Sinnoh', 'Unova', 'Kalos', 'Alola', 'Galar', 'Hisui', 'Paldea'];
 
     regions.forEach(region => {
-        let caughtCount = 0;
-        let shinyCount = 0;
-        let totalInRegion = 0;
-
-        let regionalStats;
-        if (region === 'Kanto' && state.currentRegionName === 'Kanto') {
-            regionalStats = state.stats;
-        } else if (region === 'Kanto' && state.regions && state.regions['Kanto']) {
-            regionalStats = state.regions['Kanto'].stats;
-        } else {
-            regionalStats = state.regions && state.regions[region] ? state.regions[region].stats : null;
-        }
-
-        if (!regionalStats && state.currentRegionName === region) {
-            regionalStats = state.stats;
-        }
-
-        if (state.config && state.config.pokemonData) {
-            const regionKey = region.toLowerCase() + '_id';
-
-            state.config.pokemonData.forEach(p => {
-                if (p[regionKey]) {
-                    totalInRegion++;
-                    if (regionalStats) {
-                        if (regionalStats.caughtSpecies && regionalStats.caughtSpecies[p.name]) {
-                            caughtCount++;
-                        }
-                        if (regionalStats.caughtShiniesSpecies && regionalStats.caughtShiniesSpecies[p.name]) {
-                            shinyCount++;
-                        }
-                    }
-                }
-            });
-        }
+        const regionalStats = _getRegionalStats(region);
+        const { caughtCount, shinyCount, totalInRegion } = _getRegionPokemonCounts(region, regionalStats);
 
         const hasFirst = caughtCount > 0;
         const hasSecond = totalInRegion > 0 && caughtCount >= totalInRegion;
         const hasThird = totalInRegion > 0 && shinyCount >= totalInRegion;
 
-        if (!state.globalStats.medals[region]) {
-            state.globalStats.medals[region] = {};
-        }
-
-        const recordMedal = (tier) => {
-            if (!state.globalStats.medals[region][tier]) {
-                state.globalStats.medals[region][tier] = {
-                    date: Date.now(),
-                    playtime: state.globalStats.playtime
-                };
-            }
-        };
-
-        if (hasFirst) recordMedal('First');
-        if (hasSecond) recordMedal('Second');
-        if (hasThird) recordMedal('Third');
+        if (hasFirst) _recordRegionMedal(region, 'First');
+        if (hasSecond) _recordRegionMedal(region, 'Second');
+        if (hasThird) _recordRegionMedal(region, 'Third');
     });
 };
 
