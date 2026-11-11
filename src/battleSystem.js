@@ -659,6 +659,11 @@ class BattleSystem {
 
         // Update gym UI specifically to show current trainer
         this.updateGymUI();
+
+        // Immediately start the next battle upon entering
+        if (window.battleEngine && window.battleEngine.startNextGymBattle) {
+            window.battleEngine.startNextGymBattle();
+        }
     }
 
 
@@ -717,18 +722,16 @@ class BattleSystem {
 
                 dynamicBg.replaceChildren();
 
-                if (!this.gymState.isActive) {
-                    const img = document.createElement('img');
-                    img.src = `./Assets/Gym/GymLeaders/${assetConfig.sprite}`;
-                    img.style.position = 'absolute';
-                    img.style.left = `${assetConfig.position.rel_x * 100}%`;
-                    img.style.top = `${assetConfig.position.rel_y * 100}%`;
-                    img.style.width = `${(assetConfig.size.px_width / 1800) * 100}%`;
-                    img.style.transform = `rotate(${assetConfig.tilt.angle_deg}deg)`;
-                    img.style.transformOrigin = assetConfig.tilt.origin;
-                    img.style.pointerEvents = 'none';
-                    dynamicBg.appendChild(img);
-                }
+                const img = document.createElement('img');
+                img.src = `./Assets/Gym/GymLeaders/${assetConfig.sprite}`;
+                img.style.position = 'absolute';
+                img.style.left = `${assetConfig.position.rel_x * 100}%`;
+                img.style.top = `${assetConfig.position.rel_y * 100}%`;
+                img.style.width = `${(assetConfig.size.px_width / 1800) * 100}%`;
+                img.style.transform = `rotate(${assetConfig.tilt.angle_deg}deg)`;
+                img.style.transformOrigin = assetConfig.tilt.origin;
+                img.style.pointerEvents = 'none';
+                dynamicBg.appendChild(img);
 
                 vGym.style.backgroundImage = 'none';
                 vGym.style.position = 'relative'; // Ensure relative positioning
