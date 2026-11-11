@@ -643,11 +643,55 @@ export function navigateToLocation(locationName) {
             battleSystem.stop();
         }
         window.currentSafariZone = locationName;
-        switchView("SAFARI_HUB");
-        const msg = document.getElementById("safari-welcome-msg");
-        if (msg) {
-            const safariCost = state.config.balance.safariZonePrice || 500;
-            msg.innerText = `Welcome to ${locationName}! Here we charge a fee per battle you have and you can use our SafariBalls at will. Do you wanna enter ${locationName}?`;
+
+        const vGym = document.getElementById("map-inner-modal-content");
+        const vGymTitle = document.getElementById("map-inner-modal-title");
+        if (vGymTitle) vGymTitle.innerText = locationName;
+        if (vGym) {
+            vGym.replaceChildren();
+            vGym.style.position = "relative";
+            vGym.style.height = "100%";
+            vGym.style.backgroundImage = "url('./Assets/BG/SafariZone.png')";
+            vGym.style.backgroundSize = "cover";
+            vGym.style.backgroundPosition = "center";
+
+            let html = `
+                <div style="position: absolute; top: 30%; left: 50%; transform: translateX(-50%); text-align: center; color: white; background: rgba(0,0,0,0.8); padding: 20px; border-radius: 10px; font-size: 20px; width: 60%; font-family: monospace;">
+                  <p id="safari-welcome-msg">Welcome to ${locationName}! Here we charge a fee per battle you have and you can use our SafariBalls at will.<br><br>Do you wanna enter ${locationName}?</p>
+                  <button id="btn-enter-safari" style="margin-top: 20px; padding: 10px 20px; font-size: 18px; cursor: pointer; background: #ffcc00; border: none; border-radius: 5px; color: black; font-weight: bold;">Enter ($${state.config.balance.safariZonePrice || 500})</button>
+                </div>
+            `;
+            vGym.innerHTML = html;
+
+            const btn = document.getElementById('btn-enter-safari');
+            if (btn) {
+                btn.onclick = () => { if (window.enterSafariZone) window.enterSafariZone(); };
+            }
+        }
+
+        const overlay = document.getElementById('map-inner-modal-overlay');
+        const modal = document.getElementById('map-inner-modal');
+        if (overlay && modal) {
+            overlay.style.display = 'flex';
+
+            const mapWin = document.getElementById('interactive-map');
+            if (mapWin) {
+                const applyPaddingAndAspect = (aspectRatio) => {
+                    const mapW = mapWin.offsetWidth;
+                    const mapH = mapWin.offsetHeight;
+                    const maxDim = Math.max(mapW, mapH);
+                    const padding = maxDim * 0.02;
+                    overlay.style.padding = `${padding}px`;
+
+                    modal.style.aspectRatio = aspectRatio ? aspectRatio.toString() : 'auto';
+                    modal.style.maxHeight = '100%';
+                    modal.style.maxWidth = '100%';
+                };
+
+                const img = new Image();
+                img.onload = () => applyPaddingAndAspect(img.naturalWidth / img.naturalHeight);
+                img.src = './Assets/BG/SafariZone.png';
+            }
         }
     } else if (locationName === "Celadon Casino" || locationName === "Goldenrod Game Corner") {
         window.currentCasinoHub = locationName;
@@ -657,22 +701,35 @@ export function navigateToLocation(locationName) {
              battleSystem.isSearching = false;
              if (battleSystem.gymState) battleSystem.gymState.isActive = false;
         }
-        switchView("CASINO_HUB");
 
-        // Reset Casino background to default lobby if it was changed
-        const viewCasino = document.getElementById("view-casino");
-        viewCasino.style.backgroundImage = "url('./Assets/BG/Casino.png')";
-        const casinoContent = document.getElementById("casino-content");
-        if(casinoContent) casinoContent.style.display = 'block';
+        const vGym = document.getElementById("map-inner-modal-content");
+        const vGymTitle = document.getElementById("map-inner-modal-title");
+        if (vGymTitle) vGymTitle.innerText = locationName;
 
-        // Clear any overlay buttons
-        const oldOverlays = viewCasino.querySelectorAll('.casino-overlay-btn');
-        oldOverlays.forEach(el => el.remove());
+        if (vGym) {
+            vGym.replaceChildren();
+            vGym.style.position = "relative";
+            vGym.style.height = "100%";
+            vGym.style.backgroundImage = "url('./Assets/BG/Casino.png')";
+            vGym.style.backgroundSize = "cover";
+            vGym.style.backgroundPosition = "center";
 
-        const btnContainer = document.getElementById("casino-buttons-container");
-        if (btnContainer) {
+            const casinoContent = document.createElement("div");
+            casinoContent.id = "casino-content-inner";
+            casinoContent.style.width = '100%';
+            casinoContent.style.height = '100%';
+            casinoContent.style.display = 'flex';
+            casinoContent.style.alignItems = 'center';
+            casinoContent.style.justifyContent = 'center';
+
+            const btnContainer = document.createElement("div");
+            btnContainer.style.display = 'flex';
+            btnContainer.style.flexDirection = 'row';
+            btnContainer.style.gap = '10px';
             btnContainer.style.width = '100%';
             btnContainer.style.height = '100%';
+            casinoContent.appendChild(btnContainer);
+            vGym.appendChild(casinoContent);
 
             const completedChallenges = state.stats.completedChallengeIds || [];
             const isUnlockedByAreaId = (areaId) => completedChallenges.some(id => parseAreaNames(id).includes(areaId));
@@ -732,6 +789,31 @@ export function navigateToLocation(locationName) {
             machinesHtml += `</div>`;
             btnContainer.innerHTML = machinesHtml;
         }
+
+        const overlay = document.getElementById('map-inner-modal-overlay');
+        const modal = document.getElementById('map-inner-modal');
+        if (overlay && modal) {
+            overlay.style.display = 'flex';
+
+            const mapWin = document.getElementById('interactive-map');
+            if (mapWin) {
+                const applyPaddingAndAspect = (aspectRatio) => {
+                    const mapW = mapWin.offsetWidth;
+                    const mapH = mapWin.offsetHeight;
+                    const maxDim = Math.max(mapW, mapH);
+                    const padding = maxDim * 0.02;
+                    overlay.style.padding = `${padding}px`;
+
+                    modal.style.aspectRatio = aspectRatio ? aspectRatio.toString() : 'auto';
+                    modal.style.maxHeight = '100%';
+                    modal.style.maxWidth = '100%';
+                };
+
+                const img = new Image();
+                img.onload = () => applyPaddingAndAspect(img.naturalWidth / img.naturalHeight);
+                img.src = './Assets/BG/Casino.png';
+            }
+        }
     } else if (locationName.startsWith("Celadon Casino ") || locationName === "Celadon Casino Starter Troupe" || locationName === "Celadon Casino Babies" || locationName === "Celadon Casino Special Spot" || locationName === "Celadon Casino Eeveelutions" || locationName === "Celadon Casino Late Troupe" || locationName === "Goldenrod Babies Corner" || locationName === "Goldenrod Lucky Spot Corner") {
         if (!window.currentCasinoHub) window.currentCasinoHub = "Celadon Casino";
         if (battleSystem) {
@@ -740,10 +822,6 @@ export function navigateToLocation(locationName) {
              battleSystem.isSearching = false;
              if (battleSystem.gymState) battleSystem.gymState.isActive = false;
         }
-        switchView("CASINO_HUB");
-
-        const casinoContent = document.getElementById("casino-content");
-        if(casinoContent) casinoContent.style.display = 'none';
 
         let bgImg = '';
         const isGoldenrod = window.currentCasinoHub === "Goldenrod Game Corner";
@@ -764,35 +842,61 @@ export function navigateToLocation(locationName) {
             bgImg = window.currentMapRegion === 'Johto' ? (isGoldenrod ? '' : 'Region2 Kanto Special Spot.png') : 'Region1 Special Spot.png';
         }
 
-        const viewCasino = document.getElementById("view-casino");
-        viewCasino.style.backgroundImage = `url('./Assets/Extra/Casino/${bgImg}')`;
-        viewCasino.style.backgroundPosition = 'center';
-        viewCasino.style.backgroundRepeat = 'no-repeat';
-        viewCasino.style.backgroundSize = 'contain';
+        const vGym = document.getElementById("map-inner-modal-content");
+        const vGymTitle = document.getElementById("map-inner-modal-title");
+        if (vGymTitle) vGymTitle.innerText = locationName;
 
-        // Remove old buttons if any
-        const oldOverlays = viewCasino.querySelectorAll('.casino-overlay-btn');
-        oldOverlays.forEach(el => el.remove());
+        if (vGym) {
+            vGym.replaceChildren();
+            vGym.style.position = "relative";
+            vGym.style.height = "100%";
+            vGym.style.backgroundImage = `url('./Assets/Extra/Casino/${bgImg}')`;
+            vGym.style.backgroundPosition = 'center';
+            vGym.style.backgroundRepeat = 'no-repeat';
+            vGym.style.backgroundSize = 'contain';
 
-        // We use relative positioning for click areas
-        let html = '';
-        const stdLeft = 16.3;
-        const stdTop = 34.16;
-        const stdWidth = 76.7 - 16.3;
-        const stdHeight = 61.06 - 34.16;
+            let html = '';
+            const stdLeft = 16.3;
+            const stdTop = 34.16;
+            const stdWidth = 76.7 - 16.3;
+            const stdHeight = 61.06 - 34.16;
 
-        const shinyLeft = 19.24;
-        const shinyTop = 85.96;
-        const shinyWidth = 73.94 - 19.24;
-        const shinyHeight = 94.72 - 85.96;
+            const shinyLeft = 19.24;
+            const shinyTop = 85.96;
+            const shinyWidth = 73.94 - 19.24;
+            const shinyHeight = 94.72 - 85.96;
 
-        // Overlay transparent divs
-        html += `<div class="casino-overlay-btn" onclick="window.startCasinoEncounter(false, '${locationName}')" style="position: absolute; left: ${stdLeft}%; top: ${stdTop}%; width: ${stdWidth}%; height: ${stdHeight}%; cursor: pointer;" title="Standard Encounter ($${state.config.balance.casinoPrices?.standard || 75})"></div>`;
-        html += `<div class="casino-overlay-btn" onclick="window.startCasinoEncounter(true, '${locationName}')" style="position: absolute; left: ${shinyLeft}%; top: ${shinyTop}%; width: ${shinyWidth}%; height: ${shinyHeight}%; cursor: pointer;" title="2x Shiny ($${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>`;
-        html += `<button class="casino-overlay-btn" onclick="window.navigateToLocation('Celadon Casino')" style="position: absolute; top: 10px; left: 10px; padding: 10px; cursor: pointer; z-index: 100;">Back to Lobby</button>`;
+            html += `<div class="casino-overlay-btn" onclick="window.startCasinoEncounter(false, '${locationName}')" style="position: absolute; left: ${stdLeft}%; top: ${stdTop}%; width: ${stdWidth}%; height: ${stdHeight}%; cursor: pointer;" title="Standard Encounter (${state.config.balance.casinoPrices?.standard || 75})"></div>`;
+            html += `<div class="casino-overlay-btn" onclick="window.startCasinoEncounter(true, '${locationName}')" style="position: absolute; left: ${shinyLeft}%; top: ${shinyTop}%; width: ${shinyWidth}%; height: ${shinyHeight}%; cursor: pointer;" title="2x Shiny (${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>`;
+            html += `<button class="casino-overlay-btn" onclick="window.navigateToLocation(window.currentCasinoHub)" style="position: absolute; top: 10px; left: 10px; padding: 10px; cursor: pointer; z-index: 100;">Back to Lobby</button>`;
 
-        // Append to the viewCasino container
-        viewCasino.insertAdjacentHTML('beforeend', html);
+            vGym.innerHTML = html;
+        }
+
+        const overlay = document.getElementById('map-inner-modal-overlay');
+        const modal = document.getElementById('map-inner-modal');
+        if (overlay && modal) {
+            overlay.style.display = 'flex';
+
+            const mapWin = document.getElementById('interactive-map');
+            if (mapWin) {
+                const applyPaddingAndAspect = (aspectRatio) => {
+                    const mapW = mapWin.offsetWidth;
+                    const mapH = mapWin.offsetHeight;
+                    const maxDim = Math.max(mapW, mapH);
+                    const padding = maxDim * 0.02;
+                    overlay.style.padding = `${padding}px`;
+
+                    modal.style.aspectRatio = aspectRatio ? aspectRatio.toString() : 'auto';
+                    modal.style.maxHeight = '100%';
+                    modal.style.maxWidth = '100%';
+                };
+
+                const img = new Image();
+                img.onload = () => applyPaddingAndAspect(img.naturalWidth / img.naturalHeight);
+                img.src = `./Assets/Extra/Casino/${bgImg}`;
+            }
+        }
     } else if (locationName === "Daycare") {
         if (!state.stats.hasSeenDaycare) {
             document.getElementById('daycare-first-time-overlay').style.display = 'flex';

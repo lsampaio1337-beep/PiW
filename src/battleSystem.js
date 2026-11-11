@@ -918,8 +918,8 @@ class BattleSystem {
             const safariCost = this.state.config.balance.safariZonePrice || 500;
             if (this.state.trainer.money < safariCost) {
                 this.stop();
-                if (typeof window.switchView === 'function') {
-                    window.switchView("SAFARI_HUB");
+                if (typeof window.navigateToLocation === 'function') {
+                    window.navigateToLocation(this.state.currentRoute);
                 }
                 let msg = document.getElementById("safari-welcome-msg");
                 if (msg) msg.innerText = "I am sorry, but you are all out of money. Try to sell some pokemons and come check us latter.";

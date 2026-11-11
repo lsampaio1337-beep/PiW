@@ -1339,8 +1339,6 @@ export function switchView(viewName) {
             showProfTutorialIfNeeded();
         }
         renderProfessorLab();
-    } else if (viewName === 'SAFARI_HUB') {
-        document.getElementById('view-safari-hub').style.display = 'flex';
     } else if (viewName === 'BATTLE_ARENA') {
         document.getElementById('view-battle-arena').style.display = 'flex';
         document.getElementById('view-battle-arena').style.flexDirection = 'column';
@@ -1349,8 +1347,6 @@ export function switchView(viewName) {
         setupMarket(document.getElementById('view-center-market'));
     } else if (viewName === 'GYM') {
         document.getElementById('view-gym').style.display = 'block';
-    } else if (viewName === 'CASINO_HUB') {
-        document.getElementById('view-casino').style.display = 'block';
     } else if (viewName === 'BATTLE_STADIUM') {
         document.getElementById('view-battle-stadium').style.display = 'flex';
         // Initialize multiplayer when entering the view if it's not already set up
@@ -3561,7 +3557,7 @@ window.simulateSleepFarm = function() {
             window.navigateToLocation("PokeCenter & PokeMarket");
         } else if (results.outOfMoney) {
             if (["Johto Safari Zone", "Kanto Safari Zone"].includes(state.currentRoute)) {
-                switchView("SAFARI_HUB");
+                window.navigateToLocation(state.currentRoute);
             } else if (state.currentRoute && state.currentRoute.startsWith("Celadon Casino ")) {
                 state.currentRoute = "Celadon Casino";
                 window.navigateToLocation("Celadon Casino");
