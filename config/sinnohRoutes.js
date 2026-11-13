@@ -782,7 +782,7 @@ export const sinnohRoutes = [
     spawns: []
   },
   {
-    name: "Great Marsh",
+    name: "Great Marsh Safari",
     spawns: [
       {
         pokemonId: 298,

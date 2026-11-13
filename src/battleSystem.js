@@ -2,7 +2,6 @@ import { VITAMINS, WHITE_CANDY_DEFEAT_REQUIREMENT } from "./constants.js";
 // src/battleSystem.js
 import * as mathEngine from './mathEngine.js';
 import { escapeHTML } from './utils/stringUtils.js';
-import { normalizeSpawnChances } from './utils/chanceUtils.js';
 
 class BattleSystem {
 
@@ -25,18 +24,8 @@ class BattleSystem {
         this.combatLoop = null;
         this.isSearching = false;
         this.isFainting = false;
-        this.leaderCooldown = 0;
-        this.enemyCooldown = 0;
 
         this.consecutiveHeals = 0;
-        this.leaderCooldown = 0;
-        this.enemyCooldown = 0;
-        this.leaderCooldown = 0;
-        this.enemyCooldown = 0;
-        this.leaderCooldown = 0;
-        this.enemyCooldown = 0;
-        this.leaderCooldown = 0;
-        this.enemyCooldown = 0;
 
 
         this.multiplayerState = {
@@ -146,19 +135,13 @@ class BattleSystem {
             return route.spawns[0];
         }
 
-        // Cache the CDF on the route object after auto-normalizing chances
+        // Cache the CDF on the route object
         if (!route._cumulativeChances) {
-            normalizeSpawnChances(route.spawns);
             route._cumulativeChances = new Float64Array(route.spawns.length);
             let acc = 0;
             for (let i = 0; i < route.spawns.length; i++) {
-                acc += (route.spawns[i].chance || 0);
+                acc += route.spawns[i].chance;
                 route._cumulativeChances[i] = acc;
-            }
-            if (acc > 0 && Math.abs(acc - 1.0) > 0.000001) {
-                for (let i = 0; i < route.spawns.length; i++) {
-                    route._cumulativeChances[i] /= acc;
-                }
             }
         }
 
@@ -202,7 +185,7 @@ class BattleSystem {
             const len = pokemonData.length;
 
             // First pass: Build the reverse lookup map
-            for (let i = 1; i < len; i++) {
+            for (let i = 0; i < len; i++) {
                 const p = pokemonData[i];
                 if (p.evolutions) {
                     const evos = p.evolutions;
@@ -215,7 +198,7 @@ class BattleSystem {
             this.evolutionStageMap = {};
 
             // Second pass: Calculate stages iteratively using an array for path to avoid recursion
-            for (let i = 1; i < len; i++) {
+            for (let i = 0; i < len; i++) {
                 let id = pokemonData[i].id;
 
                 if (this.evolutionStageMap[id]) continue;
@@ -466,8 +449,6 @@ class BattleSystem {
 
         this.isSearching = false;
         this.isFainting = false;
-        this.leaderCooldown = 0;
-        this.enemyCooldown = 0;
         this.isSliding = true;
         this.slideDuration = slideDelay;
 
@@ -479,39 +460,12 @@ class BattleSystem {
             const enemyPokemon = this.activeEncounter;
 
             // In Multiplayer, the host calculates everything, but we still need turn order based on speed
-            this.scheduleMultiplayerTurn();
+            if (playerPokemon.currentStats.spe >= enemyPokemon.currentStats.spe) {
+                this.executeMultiplayerTurn(playerPokemon, enemyPokemon);
+            } else {
+                this.executeMultiplayerTurn(enemyPokemon, playerPokemon);
+            }
         }, slideDelay);
-    }
-
-    scheduleMultiplayerTurn() {
-        if (!this.multiplayerState.isHost) return;
-        if (this.isFainting) return;
-        if (!this.activeEncounter || this.activeEncounter.currentHp <= 0) return;
-
-        const leader = this.state.party[0];
-        if (leader.currentHp <= 0) return;
-
-        if (this.leaderCooldown <= 0) {
-            let delay = (this.state.config.balance.baseAttackDelay * 1000 / 2.5) * Math.min(2.5, 2.8151565322136807 / Math.pow(Math.max(0.001, leader.currentStats.spe), 0.37851162325372983));
-            this.leaderCooldown = Math.max(250, delay) / this.state.settings.gameSpeed;
-        }
-
-        if (this.enemyCooldown <= 0) {
-            let delay = (this.state.config.balance.baseAttackDelay * 1000 / 2.5) * Math.min(2.5, 2.8151565322136807 / Math.pow(Math.max(0.001, this.activeEncounter.currentStats.spe), 0.37851162325372983));
-            this.enemyCooldown = Math.max(250, delay) / this.state.settings.gameSpeed;
-        }
-
-        const isLeaderNext = this.leaderCooldown <= this.enemyCooldown;
-        const nextDelay = isLeaderNext ? this.leaderCooldown : this.enemyCooldown;
-
-        const firstActor = isLeaderNext ? leader : this.activeEncounter;
-        const secondActor = isLeaderNext ? this.activeEncounter : leader;
-
-        this.combatLoop = setTimeout(() => {
-            this.leaderCooldown -= nextDelay;
-            this.enemyCooldown -= nextDelay;
-            this.executeMultiplayerTurn(firstActor, secondActor);
-        }, nextDelay);
     }
 
     handleMultiplayerEvent(event) {
@@ -614,7 +568,10 @@ class BattleSystem {
                 if (fainted) {
                     this.handleMultiplayerDefeat(defender);
                 } else {
-                    this.scheduleMultiplayerTurn();
+                    const delay = Math.max(200, 1000 / this.state.settings.gameSpeed);
+                    this.combatLoop = setTimeout(() => {
+                        this.executeMultiplayerTurn(defender, attacker);
+                    }, delay);
                 }
             }, animDuration);
         });
@@ -633,8 +590,6 @@ class BattleSystem {
 
              setTimeout(() => {
                  this.isFainting = false;
-        this.leaderCooldown = 0;
-        this.enemyCooldown = 0;
                  if (this.multiplayerState.currentPokemonIndex >= this.multiplayerState.opponentParty.length) {
                      this.stopMultiplayerBattle();
                      setTimeout(() => {
@@ -662,8 +617,6 @@ class BattleSystem {
 
                  if (this.state.party.length === 0) {
                      this.isFainting = false;
-        this.leaderCooldown = 0;
-        this.enemyCooldown = 0;
                      this.stopMultiplayerBattle();
                      setTimeout(() => {
                          if (typeof window.showGameAlert === 'function') {
@@ -674,11 +627,15 @@ class BattleSystem {
                      }, 100);
                  } else {
                      this.isFainting = false;
-        this.leaderCooldown = 0;
-        this.enemyCooldown = 0;
                      const playerPokemon = this.state.party[0];
                      const enemyPokemon = this.activeEncounter;
-                     this.scheduleMultiplayerTurn();
+                     const delay = Math.max(200, 1000 / this.state.settings.gameSpeed);
+
+                     if (playerPokemon.currentStats.spe >= enemyPokemon.currentStats.spe) {
+                         this.combatLoop = setTimeout(() => this.executeMultiplayerTurn(playerPokemon, enemyPokemon), delay);
+                     } else {
+                         this.combatLoop = setTimeout(() => this.executeMultiplayerTurn(enemyPokemon, playerPokemon), delay);
+                     }
                  }
              }, 1000);
         }
@@ -703,34 +660,9 @@ class BattleSystem {
         // Update gym UI specifically to show current trainer
         this.updateGymUI();
 
-        // Switch main view to BATTLE_ARENA right away but don't start combat yet
-        if (typeof window.switchView === 'function') {
-            window.switchView("BATTLE_ARENA");
-        }
-
-        // Apply gym background to the main battle arena view
-        const arenaView = document.getElementById("view-battle-arena");
-        if (arenaView && this.state.config && this.state.config.gymAssets && this.state.config.gymAssets[gym.leader]) {
-            const assetConfig = this.state.config.gymAssets[gym.leader];
-            const bgPath = `./Assets/Gym/BG/${assetConfig.background}`;
-            arenaView.style.backgroundImage = `url('${bgPath}')`;
-            arenaView.style.backgroundSize = "100% 100%";
-            arenaView.style.backgroundPosition = "center";
-            arenaView.style.backgroundRepeat = "no-repeat";
-        } else if (arenaView) {
-            const gymBGs = [
-                'BG-Gym-1-Pewter-Rock.png', 'BG-Gym-2-Cerulean-Water.png', 'BG-Gym-3-Vermilion-Electric.png',
-                'BG-Gym-4-Celadon-Grass.png', 'BG-Gym-5-Fuchsia-Poison.png', 'BG-Gym-6-Saffron-Psychic.png',
-                'BG-Gym-7-Cinnabar-Fire.png', 'BG-Gym-8-Viridian-Ground.png', 'IndigoPlateau.png',
-                '../Gym/BG/BG_Gym_Flying.png', '../Gym/BG/BG_Gym_Bug.png', '../Gym/BG/BG_Gym_Normal.png',
-                '../Gym/BG/BG_Gym_Ghost.png', '../Gym/BG/BG_Gym_Fighting.png', '../Gym/BG/BG_Gym_Steel.png',
-                '../Gym/BG/BG_Gym_Ice.png', '../Gym/BG/BG_Gym_Dragon.png'
-            ];
-            const bgImage = gymBGs[this.gymState.gymIndex] || 'BattleMode/Test.png';
-            arenaView.style.backgroundImage = `url('./Assets/BG/${bgImage}')`;
-            arenaView.style.backgroundSize = "cover";
-            arenaView.style.backgroundPosition = "center";
-            arenaView.style.backgroundRepeat = "no-repeat";
+        // Immediately start the next battle upon entering
+        if (window.battleEngine && window.battleEngine.startNextGymBattle) {
+            window.battleEngine.startNextGymBattle();
         }
     }
 
@@ -950,8 +882,8 @@ class BattleSystem {
             const safariCost = this.state.config.balance.safariZonePrice || 500;
             if (this.state.trainer.money < safariCost) {
                 this.stop();
-                if (typeof window.navigateToLocation === 'function') {
-                    window.navigateToLocation(this.state.currentRoute);
+                if (typeof window.switchView === 'function') {
+                    window.switchView("SAFARI_HUB");
                 }
                 let msg = document.getElementById("safari-welcome-msg");
                 if (msg) msg.innerText = "I am sorry, but you are all out of money. Try to sell some pokemons and come check us latter.";
@@ -969,11 +901,7 @@ class BattleSystem {
             }
         }
 
-        this.consecutiveHeals = 0;
-        this.leaderCooldown = 0;
-        this.enemyCooldown = 0;
-        this.leaderCooldown = 0;
-        this.enemyCooldown = 0; // Reset for new battle
+        this.consecutiveHeals = 0; // Reset for new battle
 
         if (this.state.currentRoute && (this.state.currentRoute.startsWith("Celadon Casino ") || this.state.currentRoute === "Goldenrod Babies Corner" || this.state.currentRoute === "Goldenrod Lucky Spot Corner")) {
             const baseCostStandard = this.state.config.balance.casinoPrices?.standard || 10;
@@ -1131,7 +1059,7 @@ class BattleSystem {
 
         if (this.state.nextForcedEncounter) {
             const forced = this.state.nextForcedEncounter;
-            pokemonBase = this.getPokemonBase(forced.id) || this.state.config.pokemonData[1];
+            pokemonBase = this.getPokemonBase(forced.id) || this.state.config.pokemonData[0];
             level = forced.level;
 
             const qName = forced.qValue >= 2.0 ? "Shiny" : "Custom";
@@ -1173,15 +1101,23 @@ class BattleSystem {
 
             // Check if Roaming challenge is active for the 1% beast spawn
             // Must not be in an active gym/league battle
-            if (!this.gymState?.isActive && this.state.stats.activeChallenges && (this.state.stats.activeChallenges.includes("Extra Challenge (Roaming)") || this.state.stats.activeChallenges.includes("Roaming Hoenn Skies"))) {
-                const randomVal = typeof crypto !== 'undefined' ? (crypto.getRandomValues(new Uint32Array(1))[0] / (0xFFFFFFFF + 1)) : Math.random();
-                if (randomVal < 0.01) {
-                    isRoamingEncounter = true;
+            let activeRoamingChallenge = null;
+            if (!this.gymState?.isActive && this.state.stats.activeChallenges) {
+                if (this.state.stats.activeChallenges.includes("Extra Challenge (Roaming)")) activeRoamingChallenge = "Extra Challenge (Roaming)";
+                else if (this.state.stats.activeChallenges.includes("Roaming Hoenn Skies")) activeRoamingChallenge = "Roaming Hoenn Skies";
+                else if (this.state.stats.activeChallenges.includes("Extra Challenge F (Roaming)") && ["Path to Sea Spirit Den", "Sea Spirit Den Outer Depths", "Sea Spirit Den Entrance", "Sea Spirit Den Tunnels"].includes(this.state.currentRoute)) activeRoamingChallenge = "Extra Challenge F (Roaming)";
+                else if (this.state.stats.activeChallenges.includes("Extra Challenge G (Roaming)") && ["Path to Secret Chambers", "Chambers of Emptiness", "Underground Chambers"].includes(this.state.currentRoute)) activeRoamingChallenge = "Extra Challenge G (Roaming)";
+
+                if (activeRoamingChallenge) {
+                    const randomVal = typeof crypto !== 'undefined' ? (crypto.getRandomValues(new Uint32Array(1))[0] / (0xFFFFFFFF + 1)) : Math.random();
+                    if (randomVal < 0.01) {
+                        isRoamingEncounter = true;
+                    }
                 }
             }
 
             if (isRoamingEncounter) {
-                if (this.state.currentRegionName === 'Hoenn') {
+                if (activeRoamingChallenge === 'Roaming Hoenn Skies' || (this.state.currentRegionName === 'Hoenn' && activeRoamingChallenge === 'Extra Challenge (Roaming)')) {
                     // Randomly select Latias (380) or Latios (381) for Hoenn
                     const beasts = [380, 381];
                     const selectedBeastId = beasts[Math.floor(Math.random() * beasts.length)];
@@ -1189,6 +1125,18 @@ class BattleSystem {
                     pokemonBase = actualPokemonBase;
 
                     // Flat level 110 for Hoenn roaming encounters
+                    level = 110;
+                } else if (activeRoamingChallenge === 'Extra Challenge F (Roaming)') {
+                    const beasts = [144, 145, 146]; // Articuno, Zapdos, Moltres
+                    const selectedBeastId = beasts[Math.floor(Math.random() * beasts.length)];
+                    actualPokemonBase = this.getPokemonBase(selectedBeastId);
+                    pokemonBase = actualPokemonBase;
+                    level = 110;
+                } else if (activeRoamingChallenge === 'Extra Challenge G (Roaming)') {
+                    const beasts = [721, 719, 720]; // Volcanion, Diancie, Hoopa
+                    const selectedBeastId = beasts[Math.floor(Math.random() * beasts.length)];
+                    actualPokemonBase = this.getPokemonBase(selectedBeastId);
+                    pokemonBase = actualPokemonBase;
                     level = 110;
                 } else {
                     // Default/Johto: Randomly select Raikou (243), Entei (244), or Suicune (245)
@@ -1242,7 +1190,7 @@ class BattleSystem {
             ivs = mathEngine.generateIVs(this.state.stats, q.name === "Shiny");
 
             // Route 1 Level Cap
-            if (this.state.currentRoute === "Route 1 (Kanto)") {
+            if (this.state.currentRoute === "Route 1") {
                 const playerLevel = this.state.party[0] ? this.state.party[0].level : 1;
                 level = Math.min(level, playerLevel);
             }
@@ -1322,27 +1270,23 @@ class BattleSystem {
             return;
         }
 
-        if (this.leaderCooldown <= 0) {
-            let delay = (this.state.config.balance.baseAttackDelay * 1000 / 2.5) * Math.min(2.5, 2.8151565322136807 / Math.pow(Math.max(0.001, leader.currentStats.spe), 0.37851162325372983));
-            this.leaderCooldown = Math.max(250, delay) / this.state.settings.gameSpeed;
-        }
+        // Leader attack delay
+        let leaderDelay = this.state.config.balance.baseAttackDelay * 1000 * (100 / (100 + leader.currentStats.spe));
+        leaderDelay = Math.max(250, leaderDelay) / this.state.settings.gameSpeed;
 
-        if (this.enemyCooldown <= 0) {
-            let delay = (this.state.config.balance.baseAttackDelay * 1000 / 2.5) * Math.min(2.5, 2.8151565322136807 / Math.pow(Math.max(0.001, this.activeEncounter.currentStats.spe), 0.37851162325372983));
-            this.enemyCooldown = Math.max(250, delay) / this.state.settings.gameSpeed;
-        }
+        // Enemy attack delay
+        let enemyDelay = this.state.config.balance.baseAttackDelay * 1000 * (100 / (100 + this.activeEncounter.currentStats.spe));
+        enemyDelay = Math.max(250, enemyDelay) / this.state.settings.gameSpeed;
 
-        const isLeaderNext = this.leaderCooldown <= this.enemyCooldown;
-        const nextDelay = isLeaderNext ? this.leaderCooldown : this.enemyCooldown;
-
-        const firstActor = isLeaderNext ? leader : this.activeEncounter;
-        const secondActor = isLeaderNext ? this.activeEncounter : leader;
+        // Which goes first
+        const isLeaderFaster = leaderDelay <= enemyDelay;
+        const firstActor = isLeaderFaster ? leader : this.activeEncounter;
+        const secondActor = isLeaderFaster ? this.activeEncounter : leader;
+        const firstDelay = Math.min(leaderDelay, enemyDelay);
 
         this.combatLoop = setTimeout(() => {
-            this.leaderCooldown -= nextDelay;
-            this.enemyCooldown -= nextDelay;
             this.executeTurn(firstActor, secondActor);
-        }, nextDelay);
+        }, firstDelay);
     }
 
     executeTurn(attacker, defender) {
@@ -1362,10 +1306,6 @@ class BattleSystem {
                 if (this.consecutiveHeals >= 3) {
                     // Skip heal to attack, reset consecutive heals
                     this.consecutiveHeals = 0;
-        this.leaderCooldown = 0;
-        this.enemyCooldown = 0;
-        this.leaderCooldown = 0;
-        this.enemyCooldown = 0;
                 } else {
                     if (this.tryUsePotion(attacker)) {
                         this.consecutiveHeals++;
@@ -1377,10 +1317,6 @@ class BattleSystem {
             } else {
                 // If we attack instead of healing because hp > threshold, reset heals
                 this.consecutiveHeals = 0;
-        this.leaderCooldown = 0;
-        this.enemyCooldown = 0;
-        this.leaderCooldown = 0;
-        this.enemyCooldown = 0;
             }
         }
 
@@ -1475,8 +1411,24 @@ class BattleSystem {
     }
 
     scheduleNextStrike(attacker, defender) {
-        // Time based cooldown logic is handled by scheduleTurn now
-        this.scheduleTurn();
+        if (this.isFainting) return;
+
+        if (!this.activeEncounter) return;
+
+        const leader = this.state.party[0];
+        let delay;
+        if (attacker === leader) {
+            // Next is enemy
+            delay = this.state.config.balance.baseAttackDelay * 1000 * (100 / (100 + this.activeEncounter.currentStats.spe));
+        } else {
+            delay = this.state.config.balance.baseAttackDelay * 1000 * (100 / (100 + leader.currentStats.spe));
+        }
+
+        delay = Math.max(250, delay) / this.state.settings.gameSpeed;
+
+        this.combatLoop = setTimeout(() => {
+            this.executeTurn(defender, attacker); // Swap roles
+        }, delay);
     }
 
     tryUsePotion(pokemon) {
@@ -2210,8 +2162,6 @@ class BattleSystem {
             this.state.party.push(fainted);
 
             this.isFainting = false;
-        this.leaderCooldown = 0;
-        this.enemyCooldown = 0;
 
             if (this.state.party.every(p => p.currentHp <= 0)) {
                 this.handleWipeout();
@@ -2421,7 +2371,7 @@ class BattleSystem {
             pokemonBase = this.getPokemonBase(selectedSpawn.pokemonId);
             level = Math.floor(Math.random() * (selectedSpawn.maxLevel - selectedSpawn.minLevel + 1)) + selectedSpawn.minLevel;
 
-            if (this.state.currentRoute === "Route 1 (Kanto)") {
+            if (this.state.currentRoute === "Route 1") {
                 const playerLevel = leader.level || 1;
                 level = Math.min(level, playerLevel);
             }
@@ -2492,8 +2442,15 @@ class BattleSystem {
             let combatTime = 0;
             let leaderConsecutiveHeals = 0;
 
-            let simLeaderCooldown = 0;
-            let simEnemyCooldown = 0;
+            // Leader and Enemy attack delays
+            let leaderDelay = this.state.config.balance.baseAttackDelay * 1000 * (100 / (100 + leaderSpe));
+            leaderDelay = Math.max(250, leaderDelay);
+            let enemyDelay = this.state.config.balance.baseAttackDelay * 1000 * (100 / (100 + enemySpe));
+            enemyDelay = Math.max(250, enemyDelay);
+
+            // Which goes first
+            let isLeaderFaster = leaderDelay <= enemyDelay;
+            let firstDelay = Math.min(leaderDelay, enemyDelay);
 
             const executeSimulatedTurn = (attacker, defender, isLeader) => {
                 if (isLeader && this.state.settings.autoPotion) {
@@ -2539,27 +2496,21 @@ class BattleSystem {
             };
 
             while (leader.currentHp > 0 && this.activeEncounter.currentHp > 0) {
-                if (simLeaderCooldown <= 0) {
-                    let delay = (this.state.config.balance.baseAttackDelay * 1000 / 2.5) * Math.min(2.5, 2.8151565322136807 / Math.pow(Math.max(0.001, leaderSpe), 0.37851162325372983));
-                    simLeaderCooldown = Math.max(250, delay);
-                }
+                let firstActor = isLeaderFaster ? leader : this.activeEncounter;
+                let secondActor = isLeaderFaster ? this.activeEncounter : leader;
 
-                if (simEnemyCooldown <= 0) {
-                    let delay = (this.state.config.balance.baseAttackDelay * 1000 / 2.5) * Math.min(2.5, 2.8151565322136807 / Math.pow(Math.max(0.001, enemySpe), 0.37851162325372983));
-                    simEnemyCooldown = Math.max(250, delay);
-                }
+                combatTime += firstDelay;
 
-                let isLeaderNext = simLeaderCooldown <= simEnemyCooldown;
-                let nextDelay = isLeaderNext ? simLeaderCooldown : simEnemyCooldown;
+                // First turn
+                executeSimulatedTurn(firstActor, secondActor, isLeaderFaster);
 
-                simLeaderCooldown -= nextDelay;
-                simEnemyCooldown -= nextDelay;
-                combatTime += nextDelay;
+                if (secondActor.currentHp <= 0) break;
 
-                let attacker = isLeaderNext ? leader : this.activeEncounter;
-                let defender = isLeaderNext ? this.activeEncounter : leader;
+                // Second turn (delay before second actor strikes)
+                let secondDelay = isLeaderFaster ? enemyDelay : leaderDelay;
+                combatTime += secondDelay;
 
-                executeSimulatedTurn(attacker, defender, isLeaderNext);
+                executeSimulatedTurn(secondActor, firstActor, !isLeaderFaster);
             }
 
             // Add UI defeat/faint fade-out delay mimicking natural play
