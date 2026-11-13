@@ -1,6 +1,6 @@
 # Regional Excel Data Documentation
 
-This document explains the structure and logic behind the auto-generated regional `.xlsx` files (`#_$_Data.xlsx` (e.g., `1_Kanto_Data.xlsx`) where `#` is the region number and `$` is the region name). These files provide a comprehensive overview of regional progression, route balance, challenges, and missing Pokémon.
+This document explains the structure and logic behind the auto-generated regional `.xlsx` files (`$Number_$RegionName_$Counter.xlsx`, e.g., `1_Kanto_1.xlsx`, where `$Number` is the region number, `$RegionName` is the region name, and `$Counter` is `1` if no file matching this style exists, or `max(Counter) + 1` if any file with this style already exists—e.g., if `1_Kanto.xlsx` exists, create `1_Kanto_1.xlsx`; if `1_Kanto_33.xlsx` exists, create `1_Kanto_34.xlsx`). These files provide a comprehensive overview of regional progression, route balance, challenges, and missing Pokémon.
 
 All generated `.xlsx` files based on these instructions should be stored in the `xdata/` folder at the root of the project.
 
