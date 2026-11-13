@@ -545,6 +545,16 @@ export class WindowManager {
         };
 
         const initDims = () => {
+            // Map window scales fluidly via aspect ratio; locking the scaler to fixed px breaks it
+            if (winElement.id === 'window-map') {
+                if (scalerElement) {
+                    scalerElement.style.position = '';
+                    scalerElement.style.width = '100%';
+                    scalerElement.style.height = '100%';
+                    scalerElement.style.transform = 'none';
+                }
+                return;
+            }
             if (!winElement._originalWidth) {
                 const headerH = headerElement ? headerElement.offsetHeight : 0;
 
