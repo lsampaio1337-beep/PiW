@@ -696,7 +696,6 @@ class BattleSystem {
             arenaView.style.backgroundSize = "100% 100%";
             arenaView.style.backgroundPosition = "center";
             arenaView.style.backgroundRepeat = "no-repeat";
->>>>>>> gym_modal
         }
     }
 
