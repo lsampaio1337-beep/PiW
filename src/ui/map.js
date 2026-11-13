@@ -486,9 +486,13 @@ function setupMapWindowDimensions(currentRegionObj, targetWidth) {
             if (contentPanel) { contentPanel.style.padding = '0'; }
             const header = winEl.querySelector('.window-header');
             const headerH = header ? header.offsetHeight : 30;
-            const widthVal = parseFloat(targetWidth);
+            const savedWidth = state.settings?.windowSettings?.['window-map']?.width;
+            const widthVal = parseFloat(savedWidth || winEl.style.width || targetWidth);
             const aspectRatio = currentRegionObj.width / currentRegionObj.height;
             const targetHeight = (widthVal / aspectRatio) + headerH;
+            if (!savedWidth) {
+                winEl.style.width = widthVal + 'px';
+            }
             winEl.style.height = targetHeight + 'px';
             winEl._mapAspectRatio = aspectRatio;
             const scaler = winEl.querySelector('.window-content-scaler');
