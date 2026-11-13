@@ -950,7 +950,21 @@ const missingData = [];
     const wsMissing = xlsx.utils.json_to_sheet(missingData);
     xlsx.utils.book_append_sheet(wb, wsMissing, "Missing PK");
 
-    const outFile = path.join(__dirname, '..', 'xdata', `${region.num}_${region.name}_Data.xlsx`);
+    const xdataDir = path.join(__dirname, '..', 'xdata');
+    const prefix = `${region.num}_${region.name}_Data_`;
+    const counterRegex = new RegExp(`^${prefix.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(\\d+)\\.xlsx$`);
+    let maxCounter = 0;
+    if (fs.existsSync(xdataDir)) {
+        for (const file of fs.readdirSync(xdataDir)) {
+            const match = file.match(counterRegex);
+            if (match) {
+                const num = parseInt(match[1], 10);
+                if (num > maxCounter) maxCounter = num;
+            }
+        }
+    }
+    const nextCounter = maxCounter + 1;
+    const outFile = path.join(xdataDir, `${prefix}${nextCounter}.xlsx`);
 
     // Formatting cols
     const colsRoutes = ["% Appearance", "% Appearance Ok?"];
