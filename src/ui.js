@@ -96,6 +96,7 @@ import { showSettings, exportLog, showAddPokemonModal, forceNextEncounter, force
 import { setupMarket, buyItem, openPokeMarketBuy, renderPokeMarketTab, updateBuyItemPrice, buySetMax } from './ui/market.js';
 import { showBackpack, renderBackpackTab, setActiveItem, setAutoPotionThreshold } from './ui/backpack/index.js';
 import { dragStart, dragOver, handleDrop } from './ui/backpack/pokemon.js';
+import { normalizeRoutesData } from './utils/chanceUtils.js';
 
 const storage = new Storage();
 window.storageRef = storage;
@@ -1434,7 +1435,7 @@ async function loadConfigs() {
     for (const pd of pokemonData) {
         state.config.pokemonMap.set(pd.id, pd);
     }
-    state.config.routes = routes;
+    state.config.routes = normalizeRoutesData(routes);
     const unlocksModule = await import('../config/routes.js');
     state.config.unlocks = unlocksModule.unlocks;
 
@@ -1443,7 +1444,7 @@ async function loadConfigs() {
         const prefix = region.toLowerCase();
         try {
             const module = await import(`../config/${prefix}Routes.js`);
-            state.config[`${prefix}Routes`] = module[`${prefix}Routes`];
+            state.config[`${prefix}Routes`] = normalizeRoutesData(module[`${prefix}Routes`]);
             state.config[`${prefix}Unlocks`] = module[`${prefix}Unlocks`] || [];
         } catch (e) {
             // It's expected that some regions might not have route files yet

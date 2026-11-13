@@ -2,6 +2,7 @@ import { VITAMINS, WHITE_CANDY_DEFEAT_REQUIREMENT } from "./constants.js";
 // src/battleSystem.js
 import * as mathEngine from './mathEngine.js';
 import { escapeHTML } from './utils/stringUtils.js';
+import { normalizeSpawnChances } from './utils/chanceUtils.js';
 
 class BattleSystem {
 
@@ -145,13 +146,19 @@ class BattleSystem {
             return route.spawns[0];
         }
 
-        // Cache the CDF on the route object
+        // Cache the CDF on the route object after auto-normalizing chances
         if (!route._cumulativeChances) {
+            normalizeSpawnChances(route.spawns);
             route._cumulativeChances = new Float64Array(route.spawns.length);
             let acc = 0;
             for (let i = 0; i < route.spawns.length; i++) {
-                acc += route.spawns[i].chance;
+                acc += (route.spawns[i].chance || 0);
                 route._cumulativeChances[i] = acc;
+            }
+            if (acc > 0 && Math.abs(acc - 1.0) > 0.000001) {
+                for (let i = 0; i < route.spawns.length; i++) {
+                    route._cumulativeChances[i] /= acc;
+                }
             }
         }
 
