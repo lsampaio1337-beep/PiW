@@ -671,8 +671,10 @@ class BattleSystem {
     }
 
     _applyGymArenaBackground(gym, gymIndex) {
-        const arenaView = document.getElementById("view-battle-arena");
+        const arenaView = document.getElementById("combat-arena") || document.getElementById("view-battle-arena");
         if (!arenaView) return;
+        const existingDynamic = document.getElementById("dynamic-gym-bg-arena");
+        if (existingDynamic) existingDynamic.remove();
         if (this.state.config && this.state.config.gymAssets && this.state.config.gymAssets[gym.leader]) {
             const assetConfig = this.state.config.gymAssets[gym.leader];
             const bgPath = `./Assets/Gym/BG/${assetConfig.background}`;
