@@ -687,6 +687,66 @@ input[type="number"] {
     pointer-events: auto;
 }
 
+/* Gym UI scales via --gym-fs (set by ResizeObserver in map.js from the inner modal's width AND height) */
+.gym-ui-container {
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: var(--gym-fs, 14px);
+    padding: 1.2em;
+    border-radius: 0.6em;
+    position: absolute;
+    left: 15%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18em;
+    max-width: 45%;
+    max-height: 85%;
+    box-sizing: border-box;
+    overflow-y: auto;
+    z-index: 1;
+}
+
+.gym-ui-container #gym-title-header {
+    margin-top: 0;
+    margin-bottom: 0.6em;
+    color: white;
+    font-size: 1.6em;
+    text-align: center;
+}
+
+.gym-ui-container #gym-content-area {
+    position: relative;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6em;
+    align-items: center;
+    z-index: 2;
+}
+
+.gym-ui-container #gym-rest-area {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    width: 100%;
+}
+
+.gym-ui-container #gym-rest-area p {
+    font-size: 1em;
+    margin-top: 0;
+    margin-bottom: 0.4em;
+}
+
+.gym-ui-container .action-btn {
+    padding: 0.7em 1.4em;
+    font-size: 1em;
+    border-radius: 0.4em;
+    margin-top: 0 !important;
+}
+
 /* --- Action Buttons --- */
 .action-btn {
     padding: 10px 20px;

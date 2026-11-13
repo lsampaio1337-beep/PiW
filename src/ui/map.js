@@ -545,14 +545,14 @@ export function showMap() {
 
     // Inner modal for gym overlays natively locked to the map
     html += `
-            <div id="map-inner-modal-overlay" onmousedown="if(event.target === this) { window.closeMapInnerModal(); }" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 1000; align-items: center; justify-content: center; box-sizing: border-box; padding: 2%; /* Fallback padding */">
-                <div id="map-inner-modal" class="floating-window" onclick="event.stopPropagation()" style="box-sizing: border-box; display: flex; flex-direction: column; overflow: hidden; /* Dynamic sizing will be applied via JS */ max-width: 100%; max-height: 100%;">
+            <div id="map-inner-modal-overlay" onclick="window.handleMapInnerModalBackdropClick(event)" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 1000; align-items: center; justify-content: center; box-sizing: border-box; padding: 2%; /* Fallback padding */">
+                <div id="map-inner-modal" class="floating-window" onclick="event.stopPropagation()" onmousedown="event.stopPropagation()" style="box-sizing: border-box; display: flex; flex-direction: column; overflow: hidden; /* Dynamic sizing will be applied via JS */ max-width: 100%; max-height: 100%;">
                     <div class="window-header" style="position: relative; cursor: default;">
                         <span id="map-inner-modal-title">Gym</span>
                         <span id="btn-close-map-inner-modal" onclick="window.closeMapInnerModal()" style="position: absolute; top: 5px; right: 5px; font-size: 12px; font-weight: bold; line-height: 1; padding: 0; cursor: pointer; color: white;">X</span>
                     </div>
-                    <div class="window-content-container" style="flex: 1; display: flex;">
-                        <div id="map-inner-modal-content" class="content-panel" style="width: 100%; height: auto; overflow-y: auto; position: relative;">
+                    <div class="window-content-container" style="flex: 1; display: flex; height: 100%; min-height: 0;">
+                        <div id="map-inner-modal-content" class="content-panel" style="width: 100%; height: 100%; overflow-y: auto; position: relative;">
                             <!-- Content injected via JS -->
                         </div>
                     </div>
@@ -582,6 +582,33 @@ export function showMap() {
         setupMapWindowDimensions(currentRegionObj, targetWidth);
     }
 }
+
+window.handleMapInnerModalBackdropClick = function(event) {
+    const overlay = document.getElementById('map-inner-modal-overlay');
+    const modal = document.getElementById('map-inner-modal');
+    if (!overlay || overlay.style.display === 'none') return;
+
+    // Only close if clicked directly on the overlay backdrop outside the inner modal
+    if (event && event.target !== overlay) {
+        return;
+    }
+
+    const gymContentArea = document.getElementById('gym-content-area');
+    if (gymContentArea && (gymContentArea.isConnected ?? true)) {
+        // Gym modal: only close in first phase (when enter button is displayed)
+        const isGymActive = globals.battleSystem?.gymState?.isActive;
+        const enterBtn = gymContentArea.querySelector('#btn-enter-gym') ||
+            Array.from(gymContentArea.querySelectorAll('button')).find(b => b.textContent.trim().toLowerCase() === 'enter');
+
+        if (!isGymActive && enterBtn && enterBtn.style.display !== 'none') {
+            window.closeMapInnerModal();
+        }
+        return;
+    }
+
+    // For other map inner modals (Safari Zone, Casino), clicking backdrop closes it
+    window.closeMapInnerModal();
+};
 
 window.closeMapInnerModal = function() {
     const overlay = document.getElementById('map-inner-modal-overlay');
@@ -625,17 +652,27 @@ export function navigateToLocation(locationName) {
 
     const battleSystem = globals.battleSystem;
 
+    const isGymLocation = locationName.includes("Gym") || locationName.includes("Pokemon League");
+
     // Do not set currentRoute to Gym, Pokemon League, or Safari to keep player fighting on current route until explicitly entering
-    if (!locationName.includes("Gym") && !locationName.includes("Pokemon League") && !isSafariLocation(locationName)) {
+    if (!isGymLocation && !isSafariLocation(locationName)) {
         state.currentRoute = locationName;
     }
 
-    if (window.closeModal) window.closeModal();
+    if (!isGymLocation) {
+        if (window.closeModal) window.closeModal();
 
-    // Ensure main view and party windows are open when navigating, especially to places like Professor Lab
-    if (window.windowManager) {
-        window.windowManager.toggleWindow('main-view-window', true);
-        window.windowManager.toggleWindow('party-window', true);
+        // Ensure main view and party windows are open when navigating, especially to places like Professor Lab
+        if (window.windowManager) {
+            window.windowManager.toggleWindow('main-view-window', true);
+            window.windowManager.toggleWindow('party-window', true);
+        }
+    } else {
+        // Keep focus on map window when opening a gym so main-view is not brought to top
+        if (window.windowManager) {
+            const mapWin = document.getElementById('window-map');
+            if (mapWin) window.windowManager.focusWindow(mapWin);
+        }
     }
 
     if (locationName === "Battle Stadium") {
@@ -1007,43 +1044,37 @@ export function navigateToLocation(locationName) {
         }
 
         const uiContainer = document.createElement('div');
-        uiContainer.style.backgroundColor = 'rgba(0,0,0,0.8)';
-        uiContainer.style.display = 'flex';
-        uiContainer.style.flexDirection = 'column';
-        uiContainer.style.alignItems = 'center';
-        uiContainer.style.padding = '20px';
-        uiContainer.style.borderRadius = '8px';
-        uiContainer.style.position = 'absolute';
-        uiContainer.style.left = '15%';
-        uiContainer.style.top = '50%';
-        uiContainer.style.transform = 'translateY(-50%)';
-        uiContainer.style.minWidth = '300px';
-        uiContainer.style.zIndex = '1';
+        uiContainer.id = 'gym-ui-container';
+        uiContainer.className = 'gym-ui-container';
 
         const headerEl = document.createElement('h2');
         headerEl.id = 'gym-title-header';
-        headerEl.style.marginTop = '0';
-        headerEl.style.color = 'white';
         headerEl.textContent = locationName;
 
         const contentArea = document.createElement('div');
         contentArea.id = 'gym-content-area';
-        contentArea.style.position = 'relative';
-        contentArea.style.width = '100%';
-        contentArea.style.textAlign = 'center';
-        contentArea.style.display = 'flex';
-        contentArea.style.flexDirection = 'column';
-        contentArea.style.gap = '10px';
-        contentArea.style.alignItems = 'center';
-        contentArea.style.zIndex = '2';
 
         uiContainer.appendChild(headerEl);
         uiContainer.appendChild(contentArea);
         vGym.appendChild(uiContainer);
 
+        // Scale gym UI from inner modal's width AND height so it shrinks/grows in both axes
+        const updateGymFontSize = () => {
+            const w = vGym.clientWidth, h = vGym.clientHeight;
+            if (!w || !h) return;
+            const fs = Math.max(7, Math.min(22, Math.min(w / 45, h / 30)));
+            vGym.style.setProperty('--gym-fs', `${fs.toFixed(2)}px`);
+        };
+        if (!vGym._gymResizeObserver && typeof ResizeObserver !== 'undefined') {
+            vGym._gymResizeObserver = new ResizeObserver(updateGymFontSize);
+            vGym._gymResizeObserver.observe(vGym);
+        }
+        requestAnimationFrame ? requestAnimationFrame(updateGymFontSize) : updateGymFontSize();
+
         if (gymConfig && contentArea) {
             let buttonText = "Enter";
             const btn = document.createElement('button');
+            btn.id = "btn-enter-gym";
             btn.className = "action-btn action-btn-primary";
             btn.style.marginTop = "10px";
             btn.textContent = buttonText;
@@ -1055,7 +1086,7 @@ export function navigateToLocation(locationName) {
         vGym.style.height = "100%";
         if (bgImg) {
             vGym.style.backgroundImage = `url('./Assets/BG/${bgImg}')`;
-            vGym.style.backgroundSize = "cover";
+            vGym.style.backgroundSize = "100% 100%";
         } else {
             vGym.style.backgroundImage = "none";
         }
@@ -1108,7 +1139,9 @@ export function navigateToLocation(locationName) {
              battleSystem.searchNext(); // Restart search if we moved
         }
     }
-    updateUI();
+    if (!isGymLocation) {
+        updateUI();
+    }
 }
 
 export function showMapTooltip(e, locationName) {

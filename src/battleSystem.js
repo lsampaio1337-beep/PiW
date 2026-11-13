@@ -660,9 +660,43 @@ class BattleSystem {
         // Update gym UI specifically to show current trainer
         this.updateGymUI();
 
-        // Immediately start the next battle upon entering
-        if (window.battleEngine && window.battleEngine.startNextGymBattle) {
-            window.battleEngine.startNextGymBattle();
+        // Show player's lead Pokemon in mainview with static gym background without starting fight
+        if (typeof window.switchView === 'function') {
+            window.switchView("BATTLE_ARENA");
+        }
+        if (typeof window.updateUI === 'function') {
+            window.updateUI();
+        }
+        this._applyGymArenaBackground(gym, gymIndex);
+    }
+
+    _applyGymArenaBackground(gym, gymIndex) {
+        const arenaView = document.getElementById("combat-arena") || document.getElementById("view-battle-arena");
+        if (!arenaView) return;
+        const existingDynamic = document.getElementById("dynamic-gym-bg-arena");
+        if (existingDynamic) existingDynamic.remove();
+        if (this.state.config && this.state.config.gymAssets && this.state.config.gymAssets[gym.leader]) {
+            const assetConfig = this.state.config.gymAssets[gym.leader];
+            const bgPath = `./Assets/Gym/BG/${assetConfig.background}`;
+            arenaView.style.backgroundImage = `url('${bgPath}')`;
+            arenaView.style.backgroundSize = "100% 100%";
+            arenaView.style.backgroundPosition = "center";
+            arenaView.style.backgroundRepeat = "no-repeat";
+        } else {
+            const gymBGs = [
+                'BG-Gym-1-Pewter-Rock.png', 'BG-Gym-2-Cerulean-Water.png', 'BG-Gym-3-Vermilion-Electric.png',
+                'BG-Gym-4-Celadon-Grass.png', 'BG-Gym-5-Fuchsia-Poison.png', 'BG-Gym-6-Saffron-Psychic.png',
+                'BG-Gym-7-Cinnabar-Fire.png', 'BG-Gym-8-Viridian-Ground.png', 'IndigoPlateau.png',
+                '../Gym/BG/BG_Gym_Flying.png', '../Gym/BG/BG_Gym_Bug.png', '../Gym/BG/BG_Gym_Normal.png',
+                '../Gym/BG/BG_Gym_Ghost.png', '../Gym/BG/BG_Gym_Fighting.png', '../Gym/BG/BG_Gym_Steel.png',
+                '../Gym/BG/BG_Gym_Ice.png', '../Gym/BG/BG_Gym_Dragon.png'
+            ];
+            const bgImage = gymBGs[gymIndex] || 'BattleMode/Test.png';
+            arenaView.style.backgroundImage = `url('./Assets/BG/${bgImage}')`;
+            arenaView.style.backgroundSize = "100% 100%";
+            arenaView.style.backgroundPosition = "center";
+            arenaView.style.backgroundRepeat = "no-repeat";
+>>>>>>> gym_modal
         }
     }
 
@@ -701,7 +735,7 @@ class BattleSystem {
             }
             const bgImage = trainerBGs[trainerIndex] || 'BattleMode/Test.png';
             vGym.style.backgroundImage = `url('./Assets/BG/${bgImage}')`;
-            vGym.style.backgroundSize = "cover";
+            vGym.style.backgroundSize = "100% 100%";
         } else {
             // Check for dynamic background config
             if (this.state.config && this.state.config.gymAssets && this.state.config.gymAssets[gym.leader]) {
@@ -759,7 +793,7 @@ class BattleSystem {
                 ];
                 const bgImage = gymBGs[gymIndex] || 'BattleMode/Test.png';
                 vGym.style.backgroundImage = `url('./Assets/BG/${bgImage}')`;
-                vGym.style.backgroundSize = "cover";
+                vGym.style.backgroundSize = "100% 100%";
             }
         }
 
@@ -786,46 +820,40 @@ class BattleSystem {
 
             // Rest phase UI
             contentArea.innerHTML = `
-                <div id="gym-rest-area" style="display: flex; flex-direction: column; gap: 10px; width: 100%;">
-                    <p style="font-size: 14px; margin-bottom: 10px;">You may organize your party.</p>
+                <div id="gym-rest-area">
+                    <p>You may organize your party.</p>
                     ${trainerButtonsHtml}
-                    <button class="action-btn action-btn-danger" onclick="window.battleEngine.stopGymBattle()" style="margin-top: 10px; width: 100%;">Flee Gym</button>
+                    <button class="action-btn action-btn-danger" onclick="window.battleEngine.stopGymBattle()" style="width: 100%;">Flee Gym</button>
                 </div>
             `;
+            const closeBtn = document.getElementById('btn-close-map-inner-modal');
+            if (closeBtn) {
+                closeBtn.style.pointerEvents = '';
+                closeBtn.style.opacity = '';
+            }
             // Temporary expose for the button
             window.battleEngine = this;
 
             // Re-bind to use our special gym start func that toggles visibility
             window.battleEngine.startNextGymBattle = () => {
                 this.gymState.inCombat = true;
+                // Disable every possible button in the gym modal while in fight
+                contentArea.querySelectorAll('button').forEach(b => {
+                    b.disabled = true;
+                    b.style.opacity = '0.5';
+                });
+                const modalCloseBtn = document.getElementById('btn-close-map-inner-modal');
+                if (modalCloseBtn) {
+                    modalCloseBtn.style.pointerEvents = 'none';
+                    modalCloseBtn.style.opacity = '0.5';
+                }
+
                 if (typeof window.switchView === 'function') {
                     window.switchView("BATTLE_ARENA");
                 }
 
                 // Apply gym background to the main battle arena view
-                const arenaView = document.getElementById("view-battle-arena");
-                if (arenaView && this.state.config && this.state.config.gymAssets && this.state.config.gymAssets[gym.leader]) {
-                    const assetConfig = this.state.config.gymAssets[gym.leader];
-                    const bgPath = `./Assets/Gym/BG/${assetConfig.background}`;
-                    arenaView.style.backgroundImage = `url('${bgPath}')`;
-                    arenaView.style.backgroundSize = "100% 100%";
-                    arenaView.style.backgroundPosition = "center";
-                    arenaView.style.backgroundRepeat = "no-repeat";
-                } else if (arenaView) {
-                    const gymBGs = [
-                        'BG-Gym-1-Pewter-Rock.png', 'BG-Gym-2-Cerulean-Water.png', 'BG-Gym-3-Vermilion-Electric.png',
-                        'BG-Gym-4-Celadon-Grass.png', 'BG-Gym-5-Fuchsia-Poison.png', 'BG-Gym-6-Saffron-Psychic.png',
-                        'BG-Gym-7-Cinnabar-Fire.png', 'BG-Gym-8-Viridian-Ground.png', 'IndigoPlateau.png',
-                        '../Gym/BG/BG_Gym_Flying.png', '../Gym/BG/BG_Gym_Bug.png', '../Gym/BG/BG_Gym_Normal.png',
-                        '../Gym/BG/BG_Gym_Ghost.png', '../Gym/BG/BG_Gym_Fighting.png', '../Gym/BG/BG_Gym_Steel.png',
-                        '../Gym/BG/BG_Gym_Ice.png', '../Gym/BG/BG_Gym_Dragon.png'
-                    ];
-                    const bgImage = gymBGs[this.gymState.gymIndex] || 'BattleMode/Test.png';
-                    arenaView.style.backgroundImage = `url('./Assets/BG/${bgImage}')`;
-                    arenaView.style.backgroundSize = "cover";
-                    arenaView.style.backgroundPosition = "center";
-                    arenaView.style.backgroundRepeat = "no-repeat";
-                }
+                this._applyGymArenaBackground(gym, this.gymState.gymIndex);
 
                 const leaderSpeed = this.state.party[0].currentStats.spe;
                 const speedMult = this.getSpeedMultiplier();
@@ -850,20 +878,38 @@ class BattleSystem {
         }
     }
 
-    stopGymBattle() {
+    stopGymBattle(keepStaticInGym = false) {
+        const lastGym = this.gymState.gym;
+        const lastGymIndex = this.gymState.gymIndex;
         this.gymState.isActive = false;
+        this.gymState.inCombat = false;
         this.gymState.gym = null;
         this.gymState.gymIndex = 0;
         this.stop();
+        this.activeEncounter = null;
+        this.isSearching = false;
+
+        // Re-enable map region tab buttons
+        document.querySelectorAll('.map-region-tab-btn').forEach(btn => {
+            btn.disabled = false;
+            btn.style.opacity = '';
+            btn.style.pointerEvents = '';
+        });
 
         if (typeof window.closeMapInnerModal === 'function') {
              window.closeMapInnerModal();
         }
 
-        // Return to normal map or idle
-        if (typeof window.navigateToLocation === 'function') {
-             // Reset UI back to just the gym entry
+        // When leaving after winning, keep player's Pokemon static in gym main view until another spot is clicked
+        if (!keepStaticInGym && typeof window.navigateToLocation === 'function') {
              window.navigateToLocation(this.state.currentRoute);
+        } else if (keepStaticInGym) {
+             if (typeof window.updateUI === 'function') {
+                 window.updateUI();
+             }
+             if (lastGym) {
+                 this._applyGymArenaBackground(lastGym, lastGymIndex);
+             }
         }
     }
 
