@@ -906,8 +906,7 @@ const missingData = [];
     const wsMissing = xlsx.utils.json_to_sheet(missingData);
     xlsx.utils.book_append_sheet(wb, wsMissing, "Missing PK");
 
-const rnd = Math.floor(Math.random() * 999) + 1;
-    const outFile = path.join(__dirname, '..', 'xdata', `${region.num}_${region.name}_Data_${rnd}.xlsx`);
+    const outFile = path.join(__dirname, '..', 'xdata', `${region.num}_${region.name}_Data.xlsx`);
 
     // Formatting cols
     const colsRoutes = ["% Appearance", "% Appearance Ok?"];
