@@ -33,16 +33,6 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Crevasse Passage (Alabaster Icelands)": {
-    "pokes": [
-      {
-        "id": 712,
-        "minLevel": 33,
-        "maxLevel": 36,
-        "probability": 1
-      }
-    ]
-  },
   "Bonechill Wastes (Alabaster Icelands)": {
     "pokes": [
       {
@@ -149,64 +139,6 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Avalugg's Legacy (Alabaster Icelands)": {
-    "pokes": [
-      {
-        "id": 220,
-        "minLevel": 29,
-        "maxLevel": 32,
-        "probability": 0.2425
-      },
-      {
-        "id": 221,
-        "minLevel": 45,
-        "maxLevel": 48,
-        "probability": 0.0707
-      },
-      {
-        "id": 362,
-        "minLevel": 45,
-        "maxLevel": 48,
-        "probability": 0.0606
-      },
-      {
-        "id": 400,
-        "minLevel": 45,
-        "maxLevel": 48,
-        "probability": 0.0707
-      },
-      {
-        "id": 425,
-        "minLevel": 24,
-        "maxLevel": 27,
-        "probability": 0.1717
-      },
-      {
-        "id": 426,
-        "minLevel": 45,
-        "maxLevel": 48,
-        "probability": 0.0606
-      },
-      {
-        "id": 478,
-        "minLevel": 45,
-        "maxLevel": 48,
-        "probability": 0.0606
-      },
-      {
-        "id": 712,
-        "minLevel": 33,
-        "maxLevel": 36,
-        "probability": 0.202
-      },
-      {
-        "id": 713,
-        "minLevel": 45,
-        "maxLevel": 48,
-        "probability": 0.0606
-      }
-    ]
-  },
   "Glacier Terrace (Alabaster Icelands)": {
     "pokes": [
       {
@@ -277,64 +209,6 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Lake Acuity (Alabaster Icelands)": {
-    "pokes": [
-      {
-        "id": 63,
-        "minLevel": 12,
-        "maxLevel": 15,
-        "probability": 0.15
-      },
-      {
-        "id": 64,
-        "minLevel": 49,
-        "maxLevel": 52,
-        "probability": 0.06
-      },
-      {
-        "id": 358,
-        "minLevel": 49,
-        "maxLevel": 52,
-        "probability": 0.05
-      },
-      {
-        "id": 412,
-        "minLevel": 16,
-        "maxLevel": 19,
-        "probability": 0.2
-      },
-      {
-        "id": 413,
-        "minLevel": 49,
-        "maxLevel": 52,
-        "probability": 0.05
-      },
-      {
-        "id": 433,
-        "minLevel": 49,
-        "maxLevel": 52,
-        "probability": 0.16
-      },
-      {
-        "id": 436,
-        "minLevel": 29,
-        "maxLevel": 32,
-        "probability": 0.15
-      },
-      {
-        "id": 437,
-        "minLevel": 49,
-        "maxLevel": 52,
-        "probability": 0.05
-      },
-      {
-        "id": 627,
-        "minLevel": 49,
-        "maxLevel": 58,
-        "probability": 0.13
-      }
-    ]
-  },
   "Snowpoint Temple (Alabaster Icelands)": {
     "pokes": [
       {
@@ -390,70 +264,6 @@ export const hisuiRoutes = {
         "minLevel": 53,
         "maxLevel": 56,
         "probability": 0.05
-      }
-    ]
-  },
-  "Icebound Falls (Alabaster Icelands)": {
-    "pokes": [
-      {
-        "id": 66,
-        "minLevel": 33,
-        "maxLevel": 36,
-        "probability": 0.1415
-      },
-      {
-        "id": 67,
-        "minLevel": 47,
-        "maxLevel": 50,
-        "probability": 0.0505
-      },
-      {
-        "id": 125,
-        "minLevel": 47,
-        "maxLevel": 50,
-        "probability": 0.0404
-      },
-      {
-        "id": 239,
-        "minLevel": 26,
-        "maxLevel": 29,
-        "probability": 0.1212
-      },
-      {
-        "id": 361,
-        "minLevel": 39,
-        "maxLevel": 41,
-        "probability": 0.1515
-      },
-      {
-        "id": 362,
-        "minLevel": 55,
-        "maxLevel": 58,
-        "probability": 0.0505
-      },
-      {
-        "id": 412,
-        "minLevel": 16,
-        "maxLevel": 19,
-        "probability": 0.202
-      },
-      {
-        "id": 413,
-        "minLevel": 47,
-        "maxLevel": 50,
-        "probability": 0.0505
-      },
-      {
-        "id": 447,
-        "minLevel": 47,
-        "maxLevel": 50,
-        "probability": 0.1515
-      },
-      {
-        "id": 448,
-        "minLevel": 47,
-        "maxLevel": 50,
-        "probability": 0.0404
       }
     ]
   },
@@ -779,22 +589,6 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Ice Column Chamber (Alabaster Icelands)": {
-    "pokes": [
-      {
-        "id": 200,
-        "minLevel": 59,
-        "maxLevel": 62,
-        "probability": 0.5
-      },
-      {
-        "id": 712,
-        "minLevel": 33,
-        "maxLevel": 36,
-        "probability": 0.5
-      }
-    ]
-  },
   "Icepeak Cavern (Alabaster Icelands)": {
     "pokes": [
       {
@@ -830,70 +624,6 @@ export const hisuiRoutes = {
         "minLevel": 33,
         "maxLevel": 36,
         "probability": 1
-      }
-    ]
-  },
-  "Snowfall Hot Spring (Alabaster Icelands)": {
-    "pokes": [
-      {
-        "id": 66,
-        "minLevel": 24,
-        "maxLevel": 27,
-        "probability": 0.15
-      },
-      {
-        "id": 67,
-        "minLevel": 47,
-        "maxLevel": 50,
-        "probability": 0.06
-      },
-      {
-        "id": 108,
-        "minLevel": 47,
-        "maxLevel": 50,
-        "probability": 0.12
-      },
-      {
-        "id": 143,
-        "minLevel": 47,
-        "maxLevel": 50,
-        "probability": 0.04
-      },
-      {
-        "id": 190,
-        "minLevel": 47,
-        "maxLevel": 50,
-        "probability": 0.13
-      },
-      {
-        "id": 427,
-        "minLevel": 47,
-        "maxLevel": 50,
-        "probability": 0.13
-      },
-      {
-        "id": 428,
-        "minLevel": 47,
-        "maxLevel": 50,
-        "probability": 0.05
-      },
-      {
-        "id": 446,
-        "minLevel": 47,
-        "maxLevel": 50,
-        "probability": 0.12
-      },
-      {
-        "id": 447,
-        "minLevel": 47,
-        "maxLevel": 50,
-        "probability": 0.16
-      },
-      {
-        "id": 448,
-        "minLevel": 47,
-        "maxLevel": 50,
-        "probability": 0.04
       }
     ]
   },
@@ -1095,64 +825,6 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Hideaway Bay (Cobalt Coastlands)": {
-    "pokes": [
-      {
-        "id": 75,
-        "minLevel": 41,
-        "maxLevel": 44,
-        "probability": 0.0607
-      },
-      {
-        "id": 113,
-        "minLevel": 41,
-        "maxLevel": 44,
-        "probability": 0.0505
-      },
-      {
-        "id": 190,
-        "minLevel": 41,
-        "maxLevel": 44,
-        "probability": 0.1212
-      },
-      {
-        "id": 198,
-        "minLevel": 41,
-        "maxLevel": 44,
-        "probability": 0.1111
-      },
-      {
-        "id": 363,
-        "minLevel": 28,
-        "maxLevel": 31,
-        "probability": 0.1515
-      },
-      {
-        "id": 364,
-        "minLevel": 40,
-        "maxLevel": 43,
-        "probability": 0.0505
-      },
-      {
-        "id": 412,
-        "minLevel": 16,
-        "maxLevel": 19,
-        "probability": 0.202
-      },
-      {
-        "id": 413,
-        "minLevel": 41,
-        "maxLevel": 44,
-        "probability": 0.0505
-      },
-      {
-        "id": 440,
-        "minLevel": 41,
-        "maxLevel": 44,
-        "probability": 0.202
-      }
-    ]
-  },
   "Bathers' Lagoon (Cobalt Coastlands)": {
     "pokes": [
       {
@@ -1250,28 +922,6 @@ export const hisuiRoutes = {
         "minLevel": 29,
         "maxLevel": 32,
         "probability": 0.0303
-      }
-    ]
-  },
-  "Tombolo Walk (Cobalt Coastlands)": {
-    "pokes": [
-      {
-        "id": 75,
-        "minLevel": 33,
-        "maxLevel": 36,
-        "probability": 0.19
-      },
-      {
-        "id": 412,
-        "minLevel": 16,
-        "maxLevel": 19,
-        "probability": 0.64
-      },
-      {
-        "id": 413,
-        "minLevel": 33,
-        "maxLevel": 36,
-        "probability": 0.17
       }
     ]
   },
@@ -1435,22 +1085,6 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Lunker's Lair (Cobalt Coastlands)": {
-    "pokes": [
-      {
-        "id": 412,
-        "minLevel": 16,
-        "maxLevel": 19,
-        "probability": 0.5
-      },
-      {
-        "id": 413,
-        "minLevel": 31,
-        "maxLevel": 34,
-        "probability": 0.5
-      }
-    ]
-  },
   "Islespy Shore (Cobalt Coastlands)": {
     "pokes": [
       {
@@ -1470,162 +1104,6 @@ export const hisuiRoutes = {
         "minLevel": 44,
         "maxLevel": 47,
         "probability": 0.15
-      }
-    ]
-  },
-  "Windbreak Stand (Cobalt Coastlands)": {
-    "pokes": [
-      {
-        "id": 47,
-        "minLevel": 41,
-        "maxLevel": 44,
-        "probability": 0.1387
-      },
-      {
-        "id": 58,
-        "minLevel": 41,
-        "maxLevel": 44,
-        "probability": 0.3267
-      },
-      {
-        "id": 75,
-        "minLevel": 41,
-        "maxLevel": 44,
-        "probability": 0.1485
-      },
-      {
-        "id": 234,
-        "minLevel": 41,
-        "maxLevel": 44,
-        "probability": 0.2475
-      },
-      {
-        "id": 413,
-        "minLevel": 41,
-        "maxLevel": 44,
-        "probability": 0.1386
-      }
-    ]
-  },
-  "Sand's Reach (Cobalt Coastlands)": {
-    "pokes": [
-      {
-        "id": 74,
-        "minLevel": 21,
-        "maxLevel": 24,
-        "probability": 0.1684
-      },
-      {
-        "id": 75,
-        "minLevel": 29,
-        "maxLevel": 32,
-        "probability": 0.0693
-      },
-      {
-        "id": 396,
-        "minLevel": 10,
-        "maxLevel": 13,
-        "probability": 0.2079
-      },
-      {
-        "id": 397,
-        "minLevel": 29,
-        "maxLevel": 32,
-        "probability": 0.0693
-      },
-      {
-        "id": 412,
-        "minLevel": 16,
-        "maxLevel": 19,
-        "probability": 0.2277
-      },
-      {
-        "id": 413,
-        "minLevel": 28,
-        "maxLevel": 32,
-        "probability": 0.0594
-      },
-      {
-        "id": 425,
-        "minLevel": 24,
-        "maxLevel": 27,
-        "probability": 0.1485
-      },
-      {
-        "id": 426,
-        "minLevel": 29,
-        "maxLevel": 32,
-        "probability": 0.0495
-      }
-    ]
-  },
-  "Aipom Hill (Cobalt Coastlands)": {
-    "pokes": [
-      {
-        "id": 74,
-        "minLevel": 21,
-        "maxLevel": 24,
-        "probability": 0.1276
-      },
-      {
-        "id": 75,
-        "minLevel": 29,
-        "maxLevel": 36,
-        "probability": 0.049
-      },
-      {
-        "id": 190,
-        "minLevel": 29,
-        "maxLevel": 36,
-        "probability": 0.1078
-      },
-      {
-        "id": 198,
-        "minLevel": 33,
-        "maxLevel": 36,
-        "probability": 0.098
-      },
-      {
-        "id": 412,
-        "minLevel": 16,
-        "maxLevel": 19,
-        "probability": 0.1667
-      },
-      {
-        "id": 413,
-        "minLevel": 33,
-        "maxLevel": 36,
-        "probability": 0.049
-      },
-      {
-        "id": 414,
-        "minLevel": 29,
-        "maxLevel": 32,
-        "probability": 0.049
-      },
-      {
-        "id": 415,
-        "minLevel": 17,
-        "maxLevel": 20,
-        "probability": 0.1569
-      },
-      {
-        "id": 418,
-        "minLevel": 22,
-        "maxLevel": 25,
-        "probability": 0.1176
-      },
-      {
-        "id": 419,
-        "minLevel": 29,
-        "maxLevel": 32,
-        "probability": 0.0392
-      },
-      {
-        "id": 424,
-        "minLevel": 37,
-        "maxLevel": 40,
-        "probability": 0.0392
       }
     ]
   },
@@ -1754,156 +1232,6 @@ export const hisuiRoutes = {
         "minLevel": 31,
         "maxLevel": 34,
         "probability": 0.0303
-      }
-    ]
-  },
-  "Heavenward Lookout (Coronet Highlands)": {
-    "pokes": [
-      {
-        "id": 41,
-        "minLevel": 18,
-        "maxLevel": 21,
-        "probability": 0.18
-      },
-      {
-        "id": 42,
-        "minLevel": 35,
-        "maxLevel": 38,
-        "probability": 0.05
-      },
-      {
-        "id": 46,
-        "minLevel": 20,
-        "maxLevel": 23,
-        "probability": 0.16
-      },
-      {
-        "id": 47,
-        "minLevel": 35,
-        "maxLevel": 38,
-        "probability": 0.06
-      },
-      {
-        "id": 75,
-        "minLevel": 35,
-        "maxLevel": 38,
-        "probability": 0.06
-      },
-      {
-        "id": 193,
-        "minLevel": 35,
-        "maxLevel": 38,
-        "probability": 0.11
-      },
-      {
-        "id": 404,
-        "minLevel": 26,
-        "maxLevel": 29,
-        "probability": 0.06
-      },
-      {
-        "id": 405,
-        "minLevel": 35,
-        "maxLevel": 38,
-        "probability": 0.03
-      },
-      {
-        "id": 412,
-        "minLevel": 16,
-        "maxLevel": 19,
-        "probability": 0.2
-      },
-      {
-        "id": 413,
-        "minLevel": 35,
-        "maxLevel": 38,
-        "probability": 0.05
-      },
-      {
-        "id": 469,
-        "minLevel": 35,
-        "maxLevel": 38,
-        "probability": 0.04
-      }
-    ]
-  },
-  "Wayward Wood (Coronet Highlands)": {
-    "pokes": [
-      {
-        "id": 41,
-        "minLevel": 18,
-        "maxLevel": 21,
-        "probability": 0.1819
-      },
-      {
-        "id": 42,
-        "minLevel": 35,
-        "maxLevel": 38,
-        "probability": 0.0505
-      },
-      {
-        "id": 46,
-        "minLevel": 20,
-        "maxLevel": 23,
-        "probability": 0.1515
-      },
-      {
-        "id": 47,
-        "minLevel": 35,
-        "maxLevel": 38,
-        "probability": 0.0505
-      },
-      {
-        "id": 54,
-        "minLevel": 29,
-        "maxLevel": 32,
-        "probability": 0.1414
-      },
-      {
-        "id": 55,
-        "minLevel": 35,
-        "maxLevel": 38,
-        "probability": 0.0404
-      },
-      {
-        "id": 214,
-        "minLevel": 35,
-        "maxLevel": 38,
-        "probability": 0.0909
-      },
-      {
-        "id": 234,
-        "minLevel": 35,
-        "maxLevel": 38,
-        "probability": 0.0909
-      },
-      {
-        "id": 414,
-        "minLevel": 35,
-        "maxLevel": 38,
-        "probability": 0.0505
-      },
-      {
-        "id": 436,
-        "minLevel": 29,
-        "maxLevel": 32,
-        "probability": 0.1515
-      }
-    ]
-  },
-  "Ancient Quarry (Coronet Highlands)": {
-    "pokes": [
-      {
-        "id": 436,
-        "minLevel": 29,
-        "maxLevel": 32,
-        "probability": 0.77
-      },
-      {
-        "id": 437,
-        "minLevel": 37,
-        "maxLevel": 40,
-        "probability": 0.23
       }
     ]
   },
@@ -2036,58 +1364,6 @@ export const hisuiRoutes = {
         "minLevel": 43,
         "maxLevel": 46,
         "probability": 0.0693
-      }
-    ]
-  },
-  "Bolderoll Ravine (Coronet Highlands)": {
-    "pokes": [
-      {
-        "id": 66,
-        "minLevel": 24,
-        "maxLevel": 27,
-        "probability": 0.1617
-      },
-      {
-        "id": 67,
-        "minLevel": 43,
-        "maxLevel": 46,
-        "probability": 0.0606
-      },
-      {
-        "id": 74,
-        "minLevel": 21,
-        "maxLevel": 24,
-        "probability": 0.1616
-      },
-      {
-        "id": 75,
-        "minLevel": 43,
-        "maxLevel": 56,
-        "probability": 0.1212
-      },
-      {
-        "id": 92,
-        "minLevel": 21,
-        "maxLevel": 24,
-        "probability": 0.1515
-      },
-      {
-        "id": 93,
-        "minLevel": 43,
-        "maxLevel": 56,
-        "probability": 0.1212
-      },
-      {
-        "id": 420,
-        "minLevel": 21,
-        "maxLevel": 24,
-        "probability": 0.1717
-      },
-      {
-        "id": 421,
-        "minLevel": 43,
-        "maxLevel": 46,
-        "probability": 0.0505
       }
     ]
   },
@@ -2278,52 +1554,6 @@ export const hisuiRoutes = {
         "minLevel": 39,
         "maxLevel": 42,
         "probability": 0.1287
-      }
-    ]
-  },
-  "Cloudcap Pass (Coronet Highlands)": {
-    "pokes": [
-      {
-        "id": 125,
-        "minLevel": 53,
-        "maxLevel": 56,
-        "probability": 0.0694
-      },
-      {
-        "id": 239,
-        "minLevel": 53,
-        "maxLevel": 56,
-        "probability": 0.198
-      },
-      {
-        "id": 299,
-        "minLevel": 39,
-        "maxLevel": 42,
-        "probability": 0.1881
-      },
-      {
-        "id": 404,
-        "minLevel": 26,
-        "maxLevel": 29,
-        "probability": 0.099
-      },
-      {
-        "id": 405,
-        "minLevel": 53,
-        "maxLevel": 56,
-        "probability": 0.0495
-      },
-      {
-        "id": 412,
-        "minLevel": 16,
-        "maxLevel": 19,
-        "probability": 0.3168
-      },
-      {
-        "id": 413,
-        "minLevel": 39,
-        "maxLevel": 42,
-        "probability": 0.0792
       }
     ]
   },
@@ -2583,16 +1813,6 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Solaceon Ruins (Crimson Mirelands)": {
-    "pokes": [
-      {
-        "id": 201,
-        "minLevel": 25,
-        "maxLevel": 25,
-        "probability": 1
-      }
-    ]
-  },
   "Gapejaw Bog (Crimson Mirelands)": {
     "pokes": [
       {
@@ -2810,16 +2030,6 @@ export const hisuiRoutes = {
         "minLevel": 16,
         "maxLevel": 19,
         "probability": 0.2626
-      }
-    ]
-  },
-  "Lake Valor (Crimson Mirelands)": {
-    "pokes": [
-      {
-        "id": 75,
-        "minLevel": 25,
-        "maxLevel": 28,
-        "probability": 1
       }
     ]
   },
@@ -3130,116 +2340,6 @@ export const hisuiRoutes = {
         "minLevel": 33,
         "maxLevel": 36,
         "probability": 0.0808
-      }
-    ]
-  },
-  "Cottonsedge Prairie (Crimson Mirelands)": {
-    "pokes": [
-      {
-        "id": 74,
-        "minLevel": 21,
-        "maxLevel": 24,
-        "probability": 0.14
-      },
-      {
-        "id": 75,
-        "minLevel": 33,
-        "maxLevel": 36,
-        "probability": 0.05
-      },
-      {
-        "id": 92,
-        "minLevel": 21,
-        "maxLevel": 24,
-        "probability": 0.13
-      },
-      {
-        "id": 93,
-        "minLevel": 33,
-        "maxLevel": 36,
-        "probability": 0.05
-      },
-      {
-        "id": 175,
-        "minLevel": 33,
-        "maxLevel": 36,
-        "probability": 0.17
-      },
-      {
-        "id": 415,
-        "minLevel": 17,
-        "maxLevel": 20,
-        "probability": 0.17
-      },
-      {
-        "id": 416,
-        "minLevel": 33,
-        "maxLevel": 36,
-        "probability": 0.04
-      },
-      {
-        "id": 417,
-        "minLevel": 33,
-        "maxLevel": 36,
-        "probability": 0.1
-      },
-      {
-        "id": 548,
-        "minLevel": 33,
-        "maxLevel": 36,
-        "probability": 0.15
-      }
-    ]
-  },
-  "Diamond Heath (Crimson Mirelands)": {
-    "pokes": [
-      {
-        "id": 41,
-        "minLevel": 18,
-        "maxLevel": 21,
-        "probability": 0.1981
-      },
-      {
-        "id": 42,
-        "minLevel": 23,
-        "maxLevel": 26,
-        "probability": 0.0495
-      },
-      {
-        "id": 46,
-        "minLevel": 20,
-        "maxLevel": 23,
-        "probability": 0.1683
-      },
-      {
-        "id": 47,
-        "minLevel": 24,
-        "maxLevel": 27,
-        "probability": 0.0594
-      },
-      {
-        "id": 74,
-        "minLevel": 21,
-        "maxLevel": 24,
-        "probability": 0.1584
-      },
-      {
-        "id": 75,
-        "minLevel": 25,
-        "maxLevel": 28,
-        "probability": 0.0594
-      },
-      {
-        "id": 111,
-        "minLevel": 23,
-        "maxLevel": 26,
-        "probability": 0.1386
-      },
-      {
-        "id": 438,
-        "minLevel": 20,
-        "maxLevel": 22,
-        "probability": 0.1683
       }
     ]
   },
@@ -3715,34 +2815,6 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Lake Verity (Obsidian Fieldlands)": {
-    "pokes": [
-      {
-        "id": 404,
-        "minLevel": 15,
-        "maxLevel": 18,
-        "probability": 0.24
-      },
-      {
-        "id": 405,
-        "minLevel": 30,
-        "maxLevel": 44,
-        "probability": 0.22
-      },
-      {
-        "id": 413,
-        "minLevel": 20,
-        "maxLevel": 23,
-        "probability": 0.2
-      },
-      {
-        "id": 426,
-        "minLevel": 28,
-        "maxLevel": 44,
-        "probability": 0.34
-      }
-    ]
-  },
   "Sandgem Flats (Obsidian Fieldlands)": {
     "pokes": [
       {
@@ -3819,122 +2891,6 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Tidewater Dam (Obsidian Fieldlands)": {
-    "pokes": [
-      {
-        "id": 41,
-        "minLevel": 9,
-        "maxLevel": 16,
-        "probability": 0.1387
-      },
-      {
-        "id": 42,
-        "minLevel": 22,
-        "maxLevel": 25,
-        "probability": 0.0396
-      },
-      {
-        "id": 74,
-        "minLevel": 13,
-        "maxLevel": 16,
-        "probability": 0.1089
-      },
-      {
-        "id": 396,
-        "minLevel": 9,
-        "maxLevel": 13,
-        "probability": 0.1386
-      },
-      {
-        "id": 397,
-        "minLevel": 14,
-        "maxLevel": 17,
-        "probability": 0.0495
-      },
-      {
-        "id": 399,
-        "minLevel": 11,
-        "maxLevel": 14,
-        "probability": 0.1287
-      },
-      {
-        "id": 400,
-        "minLevel": 15,
-        "maxLevel": 18,
-        "probability": 0.0396
-      },
-      {
-        "id": 401,
-        "minLevel": 6,
-        "maxLevel": 9,
-        "probability": 0.1683
-      },
-      {
-        "id": 402,
-        "minLevel": 10,
-        "maxLevel": 13,
-        "probability": 0.0396
-      },
-      {
-        "id": 412,
-        "minLevel": 9,
-        "maxLevel": 12,
-        "probability": 0.1485
-      }
-    ]
-  },
-  "Floaro Gardens (Obsidian Fieldlands)": {
-    "pokes": [
-      {
-        "id": 172,
-        "minLevel": 3,
-        "maxLevel": 6,
-        "probability": 0.2122
-      },
-      {
-        "id": 265,
-        "minLevel": 2,
-        "maxLevel": 6,
-        "probability": 0.2222
-      },
-      {
-        "id": 266,
-        "minLevel": 5,
-        "maxLevel": 7,
-        "probability": 0.101
-      },
-      {
-        "id": 267,
-        "minLevel": 18,
-        "maxLevel": 22,
-        "probability": 0.0404
-      },
-      {
-        "id": 268,
-        "minLevel": 3,
-        "maxLevel": 5,
-        "probability": 0.101
-      },
-      {
-        "id": 269,
-        "minLevel": 18,
-        "maxLevel": 22,
-        "probability": 0.0404
-      },
-      {
-        "id": 403,
-        "minLevel": 3,
-        "maxLevel": 6,
-        "probability": 0.1616
-      },
-      {
-        "id": 425,
-        "minLevel": 3,
-        "maxLevel": 8,
-        "probability": 0.1212
-      }
-    ]
-  },
   "Ramanas Island (Obsidian Fieldlands)": {
     "pokes": [
       {
@@ -4005,76 +2961,6 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Windswept Run (Obsidian Fieldlands)": {
-    "pokes": [
-      {
-        "id": 41,
-        "minLevel": 9,
-        "maxLevel": 14,
-        "probability": 0.091
-      },
-      {
-        "id": 42,
-        "minLevel": 22,
-        "maxLevel": 25,
-        "probability": 0.0909
-      },
-      {
-        "id": 63,
-        "minLevel": 9,
-        "maxLevel": 12,
-        "probability": 0.0909
-      },
-      {
-        "id": 74,
-        "minLevel": 9,
-        "maxLevel": 12,
-        "probability": 0.0909
-      },
-      {
-        "id": 396,
-        "minLevel": 9,
-        "maxLevel": 12,
-        "probability": 0.0909
-      },
-      {
-        "id": 397,
-        "minLevel": 14,
-        "maxLevel": 17,
-        "probability": 0.0909
-      },
-      {
-        "id": 401,
-        "minLevel": 6,
-        "maxLevel": 9,
-        "probability": 0.0909
-      },
-      {
-        "id": 402,
-        "minLevel": 11,
-        "maxLevel": 14,
-        "probability": 0.0909
-      },
-      {
-        "id": 412,
-        "minLevel": 9,
-        "maxLevel": 12,
-        "probability": 0.0909
-      },
-      {
-        "id": 418,
-        "minLevel": 9,
-        "maxLevel": 12,
-        "probability": 0.0909
-      },
-      {
-        "id": 425,
-        "minLevel": 9,
-        "maxLevel": 12,
-        "probability": 0.0909
-      }
-    ]
-  },
   "Worn Bridge (Obsidian Fieldlands)": {
     "pokes": [
       {
@@ -4108,46 +2994,6 @@ export const hisuiRoutes = {
     },
     "pokes": []
   },
-  "Obsidian Fieldlands Fishing Spot": {
-    "pokes": [
-      {
-        "id": 76,
-        "minLevel": 10,
-        "maxLevel": 12,
-        "probability": 0.07
-      },
-      {
-        "id": 114,
-        "minLevel": 10,
-        "maxLevel": 12,
-        "probability": 0.24
-      },
-      {
-        "id": 269,
-        "minLevel": 10,
-        "maxLevel": 12,
-        "probability": 0.09
-      },
-      {
-        "id": 389,
-        "minLevel": 10,
-        "maxLevel": 12,
-        "probability": 0.07
-      },
-      {
-        "id": 451,
-        "minLevel": 10,
-        "maxLevel": 12,
-        "probability": 0.31
-      },
-      {
-        "id": 550,
-        "minLevel": 10,
-        "maxLevel": 12,
-        "probability": 0.22
-      }
-    ]
-  },
   "Gym - Lilligant": {
     "type": "gym",
     "name": "Gym - Lilligant",
@@ -4158,68 +3004,6 @@ export const hisuiRoutes = {
       }
     },
     "pokes": []
-  },
-  "Crimson Mirelands Fishing Spot": {
-    "pokes": [
-      {
-        "id": 265,
-        "minLevel": 38,
-        "maxLevel": 40,
-        "probability": 0.5
-      },
-      {
-        "id": 400,
-        "minLevel": 38,
-        "maxLevel": 40,
-        "probability": 0.12
-      },
-      {
-        "id": 405,
-        "minLevel": 38,
-        "maxLevel": 40,
-        "probability": 0.06
-      },
-      {
-        "id": 501,
-        "minLevel": 38,
-        "maxLevel": 40,
-        "probability": 0.32
-      }
-    ]
-  },
-  "Cobalt Coastlands Fishing Spot": {
-    "pokes": [
-      {
-        "id": 37,
-        "minLevel": 50,
-        "maxLevel": 52,
-        "probability": 0.3435
-      },
-      {
-        "id": 66,
-        "minLevel": 50,
-        "maxLevel": 52,
-        "probability": 0.3333
-      },
-      {
-        "id": 157,
-        "minLevel": 50,
-        "maxLevel": 52,
-        "probability": 0.0606
-      },
-      {
-        "id": 400,
-        "minLevel": 50,
-        "maxLevel": 52,
-        "probability": 0.1212
-      },
-      {
-        "id": 404,
-        "minLevel": 50,
-        "maxLevel": 52,
-        "probability": 0.1414
-      }
-    ]
   },
   "Gym - Arcanine": {
     "type": "gym",
@@ -4235,22 +3019,10 @@ export const hisuiRoutes = {
   "Coronet Highlands": {
     "pokes": [
       {
-        "id": 413,
-        "minLevel": 65,
-        "maxLevel": 67,
-        "probability": 0.22
-      },
-      {
-        "id": 423,
-        "minLevel": 65,
-        "maxLevel": 67,
-        "probability": 0.2
-      },
-      {
-        "id": 570,
-        "minLevel": 65,
-        "maxLevel": 67,
-        "probability": 0.58
+        "id": 101.1,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 1
       }
     ]
   },
@@ -4276,52 +3048,6 @@ export const hisuiRoutes = {
     },
     "pokes": []
   },
-  "Coronet Highlands Fishing Spot": {
-    "pokes": [
-      {
-        "id": 156,
-        "minLevel": 79,
-        "maxLevel": 81,
-        "probability": 0.0809
-      },
-      {
-        "id": 266,
-        "minLevel": 79,
-        "maxLevel": 81,
-        "probability": 0.1616
-      },
-      {
-        "id": 396,
-        "minLevel": 79,
-        "maxLevel": 81,
-        "probability": 0.2828
-      },
-      {
-        "id": 400,
-        "minLevel": 79,
-        "maxLevel": 81,
-        "probability": 0.0808
-      },
-      {
-        "id": 403,
-        "minLevel": 79,
-        "maxLevel": 81,
-        "probability": 0.2626
-      },
-      {
-        "id": 404,
-        "minLevel": 79,
-        "maxLevel": 81,
-        "probability": 0.0909
-      },
-      {
-        "id": 503,
-        "minLevel": 79,
-        "maxLevel": 81,
-        "probability": 0.0404
-      }
-    ]
-  },
   "Gym - Avalugg": {
     "type": "gym",
     "name": "Gym - Avalugg",
@@ -4332,28 +3058,6 @@ export const hisuiRoutes = {
       }
     },
     "pokes": []
-  },
-  "Alabaster Icelands Fishing Spot": {
-    "pokes": [
-      {
-        "id": 397,
-        "minLevel": 80,
-        "maxLevel": 82,
-        "probability": 0.24
-      },
-      {
-        "id": 398,
-        "minLevel": 80,
-        "maxLevel": 82,
-        "probability": 0.11
-      },
-      {
-        "id": 399,
-        "minLevel": 80,
-        "maxLevel": 82,
-        "probability": 0.65
-      }
-    ]
   },
   "Etertime Storm": {
     "pokes": [
@@ -4389,16 +3093,56 @@ export const hisuiRoutes = {
       }
     ]
   },
-    "Etertime Citadel": {
+  "Etertime Citadel": {
     "pokes": [
-      { "id": 493, "minLevel": 110, "maxLevel": 110, "probability": 0.125 },
-      { "id": 483, "minLevel": 110, "maxLevel": 110, "probability": 0.125 },
-      { "id": 483.1, "minLevel": 110, "maxLevel": 110, "probability": 0.125 },
-      { "id": 484, "minLevel": 110, "maxLevel": 110, "probability": 0.125 },
-      { "id": 484.1, "minLevel": 110, "maxLevel": 110, "probability": 0.125 },
-      { "id": 487, "minLevel": 110, "maxLevel": 110, "probability": 0.125 },
-      { "id": 487.1, "minLevel": 110, "maxLevel": 110, "probability": 0.125 },
-      { "id": 487.2, "minLevel": 110, "maxLevel": 110, "probability": 0.125 }
+      {
+        "id": 493,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 0.125
+      },
+      {
+        "id": 483,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 0.125
+      },
+      {
+        "id": 483.1,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 0.125
+      },
+      {
+        "id": 484,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 0.125
+      },
+      {
+        "id": 484.1,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 0.125
+      },
+      {
+        "id": 487,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 0.125
+      },
+      {
+        "id": 487.1,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 0.125
+      },
+      {
+        "id": 487.2,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 0.125
+      }
     ]
   },
   "Gym of Etertime": {
@@ -4409,272 +3153,92 @@ export const hisuiRoutes = {
     },
     "pokes": []
   },
-  "Space-Time Distortion": {
+  "Special Route": {
     "pokes": [
       {
-        "id": 59,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0197
+        "id": 641,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 0.0714
       },
       {
-        "id": 63,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0481
+        "id": 641.1,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 0.0714
       },
       {
-        "id": 65,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0096
+        "id": 641.2,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 0.0714
       },
       {
-        "id": 81,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0481
+        "id": 642,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 0.0714
       },
       {
-        "id": 82,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0192
+        "id": 642.1,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 0.0714
       },
       {
-        "id": 92,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0481
+        "id": 642.2,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 0.0714
       },
       {
-        "id": 93,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0192
+        "id": 645,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 0.0714
       },
       {
-        "id": 94,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0096
+        "id": 645.1,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 0.0714
       },
       {
-        "id": 101,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0192
+        "id": 645.2,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 0.0714
       },
       {
-        "id": 133,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0481
+        "id": 905,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 0.0714
       },
       {
-        "id": 134,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0192
+        "id": 905.1,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 0.0714
       },
       {
-        "id": 135,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0192
+        "id": 905.2,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 0.0714
       },
       {
-        "id": 136,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0192
+        "id": 706.1,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 0.0714
       },
       {
-        "id": 137,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0385
-      },
-      {
-        "id": 155,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0481
-      },
-      {
-        "id": 156,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0192
-      },
-      {
-        "id": 157,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0096
-      },
-      {
-        "id": 196,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0192
-      },
-      {
-        "id": 197,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0192
-      },
-      {
-        "id": 212,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0192
-      },
-      {
-        "id": 215,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0385
-      },
-      {
-        "id": 233,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0192
-      },
-      {
-        "id": 408,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0481
-      },
-      {
-        "id": 409,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0192
-      },
-      {
-        "id": 410,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0481
-      },
-      {
-        "id": 411,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0192
-      },
-      {
-        "id": 461,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0192
-      },
-      {
-        "id": 462,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0096
-      },
-      {
-        "id": 470,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0192
-      },
-      {
-        "id": 471,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0192
-      },
-      {
-        "id": 474,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0096
-      },
-      {
-        "id": 501,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0481
-      },
-      {
-        "id": 502,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0192
-      },
-      {
-        "id": 503,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0096
-      },
-      {
-        "id": 549,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0192
-      },
-      {
-        "id": 700,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0192
-      },
-      {
-        "id": 713,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0192
-      },
-      {
-        "id": 722,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0481
-      },
-      {
-        "id": 723,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0192
-      },
-      {
-        "id": 724,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "probability": 0.0096
+        "id": 445,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 0.0718
       }
-    ]
-  },
-  "Lake of Trials": {
-    "pokes": []
-  },
-  "Incarnate Fields": {
-    "pokes": []
-  },
-    "Special Route": {
-    "pokes": [
-      { "id": 641, "minLevel": 110, "maxLevel": 110, "probability": 0.0714 },
-      { "id": 641.1, "minLevel": 110, "maxLevel": 110, "probability": 0.0714 },
-      { "id": 641.2, "minLevel": 110, "maxLevel": 110, "probability": 0.0714 },
-      { "id": 642, "minLevel": 110, "maxLevel": 110, "probability": 0.0714 },
-      { "id": 642.1, "minLevel": 110, "maxLevel": 110, "probability": 0.0714 },
-      { "id": 642.2, "minLevel": 110, "maxLevel": 110, "probability": 0.0714 },
-      { "id": 645, "minLevel": 110, "maxLevel": 110, "probability": 0.0714 },
-      { "id": 645.1, "minLevel": 110, "maxLevel": 110, "probability": 0.0714 },
-      { "id": 645.2, "minLevel": 110, "maxLevel": 110, "probability": 0.0714 },
-      { "id": 905, "minLevel": 110, "maxLevel": 110, "probability": 0.0714 },
-      { "id": 905.1, "minLevel": 110, "maxLevel": 110, "probability": 0.0714 },
-      { "id": 905.2, "minLevel": 110, "maxLevel": 110, "probability": 0.0714 },
-      { "id": 706.1, "minLevel": 110, "maxLevel": 110, "probability": 0.0714 },
-      { "id": 445, "minLevel": 110, "maxLevel": 110, "probability": 0.0718 }
     ]
   },
   "Bonechill Wastes (Space-time Distortion)": {
@@ -5921,22 +4485,180 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Moonview Arena (Coronet Highlands)": {
-    "pokes": []
+  "Lake Acuity": {
+    "pokes": [
+      {
+        "id": 480,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 1
+      }
+    ]
   },
-  "Lake Acuity": { "pokes": [{ "id": 480, "minLevel": 110, "maxLevel": 110, "probability": 1.0 }] },
-  "Verity Cavern": { "pokes": [{ "id": 481, "minLevel": 110, "maxLevel": 110, "probability": 1.0 }] },
-  "Valor Cavern": { "pokes": [{ "id": 482, "minLevel": 110, "maxLevel": 110, "probability": 1.0 }] },
-  "Snowpoint Temple": { "pokes": [{ "id": 486, "minLevel": 110, "maxLevel": 110, "probability": 1.0 }] },
-  "Firespit Island": { "pokes": [{ "id": 485, "minLevel": 110, "maxLevel": 110, "probability": 1.0 }] },
-  "??????": { "pokes": [{ "id": 488, "minLevel": 110, "maxLevel": 110, "probability": 1.0 }] },
-  "Mythical Spot": { "pokes": [{ "id": 490, "minLevel": 110, "maxLevel": 110, "probability": 0.1667 }, { "id": 489, "minLevel": 110, "maxLevel": 110, "probability": 0.1667 }, { "id": 491, "minLevel": 110, "maxLevel": 110, "probability": 0.1667 }, { "id": 492, "minLevel": 110, "maxLevel": 110, "probability": 0.1667 }, { "id": 492.1, "minLevel": 110, "maxLevel": 110, "probability": 0.1666 }, { "id": 492.2, "minLevel": 110, "maxLevel": 110, "probability": 0.1666 }] },
-  "Obsidian Fieldlands": { "pokes": [{ "id": 900, "minLevel": 110, "maxLevel": 110, "probability": 1.0 }] },
-  "Crimson Mirelands": { "pokes": [{ "id": 549.1, "minLevel": 110, "maxLevel": 110, "probability": 1.0 }] },
-  "Cobalt Coastlands": { "pokes": [{ "id": 59.1, "minLevel": 110, "maxLevel": 110, "probability": 1.0 }] },
-  "Coronet Highlands": { "pokes": [{ "id": 101.1, "minLevel": 110, "maxLevel": 110, "probability": 1.0 }] },
-  "Alabaster Icelands": { "pokes": [{ "id": 713.1, "minLevel": 110, "maxLevel": 110, "probability": 1.0 }] },
-  "Before Arceus": { "pokes": [{ "id": 899, "minLevel": 110, "maxLevel": 110, "probability": 0.2 }, { "id": 901, "minLevel": 110, "maxLevel": 110, "probability": 0.2 }, { "id": 902, "minLevel": 110, "maxLevel": 110, "probability": 0.2 }, { "id": 903, "minLevel": 110, "maxLevel": 110, "probability": 0.2 }, { "id": 628.1, "minLevel": 110, "maxLevel": 110, "probability": 0.2 }] }
+  "Verity Cavern": {
+    "pokes": [
+      {
+        "id": 481,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 1
+      }
+    ]
+  },
+  "Valor Cavern": {
+    "pokes": [
+      {
+        "id": 482,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 1
+      }
+    ]
+  },
+  "Snowpoint Temple": {
+    "pokes": [
+      {
+        "id": 486,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 1
+      }
+    ]
+  },
+  "Firespit Island": {
+    "pokes": [
+      {
+        "id": 485,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 1
+      }
+    ]
+  },
+  "??????": {
+    "pokes": [
+      {
+        "id": 488,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 1
+      }
+    ]
+  },
+  "Mythical Spot": {
+    "pokes": [
+      {
+        "id": 490,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 0.1667
+      },
+      {
+        "id": 489,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 0.1667
+      },
+      {
+        "id": 491,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 0.1667
+      },
+      {
+        "id": 492,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 0.1667
+      },
+      {
+        "id": 492.1,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 0.1666
+      },
+      {
+        "id": 492.2,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 0.1666
+      }
+    ]
+  },
+  "Obsidian Fieldlands": {
+    "pokes": [
+      {
+        "id": 900,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 1
+      }
+    ]
+  },
+  "Crimson Mirelands": {
+    "pokes": [
+      {
+        "id": 549.1,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 1
+      }
+    ]
+  },
+  "Cobalt Coastlands": {
+    "pokes": [
+      {
+        "id": 59.1,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 1
+      }
+    ]
+  },
+  "Alabaster Icelands": {
+    "pokes": [
+      {
+        "id": 713.1,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 1
+      }
+    ]
+  },
+  "Before Arceus": {
+    "pokes": [
+      {
+        "id": 899,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 0.2
+      },
+      {
+        "id": 901,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 0.2
+      },
+      {
+        "id": 902,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 0.2
+      },
+      {
+        "id": 903,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 0.2
+      },
+      {
+        "id": 628.1,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 0.2
+      }
+    ]
+  }
 };
 
 export const hisuiUnlocks = [
@@ -6009,7 +4731,7 @@ export const hisuiUnlocks = [
     "challengeName": "Challenge 06",
     "areaId": "Gym - Kleavor",
     "unlocks": [
-      "Obsidian Fieldlands Fishing Spot"
+      "Obsidian Falls (Obsidian Fieldlands)"
     ],
     "requirements": {
       "earnBadge": {
@@ -6020,19 +4742,6 @@ export const hisuiUnlocks = [
   },
   {
     "challengeName": "Challenge 07",
-    "areaId": "Obsidian Fieldlands Fishing Spot",
-    "unlocks": [
-      "Obsidian Falls (Obsidian Fieldlands)"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "routeName": "Obsidian Fieldlands Fishing Spot",
-        "count": 10
-      }
-    }
-  },
-  {
-    "challengeName": "Challenge 08",
     "areaId": "Obsidian Falls (Obsidian Fieldlands)",
     "unlocks": [
       "Heartwood (Obsidian Fieldlands)"
@@ -6045,7 +4754,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 09",
+    "challengeName": "Challenge 08",
     "areaId": "Heartwood (Obsidian Fieldlands)",
     "unlocks": [
       "Heartwood (Obsidian Fieldlands)"
@@ -6058,7 +4767,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 10",
+    "challengeName": "Challenge 09",
     "areaId": "Heartwood (Obsidian Fieldlands)",
     "unlocks": [
       "Oreburrow Tunnel (Obsidian Fieldlands)"
@@ -6071,7 +4780,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 11",
+    "challengeName": "Challenge 10",
     "areaId": "Oreburrow Tunnel (Obsidian Fieldlands)",
     "unlocks": [
       "Worn Bridge (Obsidian Fieldlands)"
@@ -6084,7 +4793,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 12",
+    "challengeName": "Challenge 11",
     "areaId": "Worn Bridge (Obsidian Fieldlands)",
     "unlocks": [
       "Sandgem Flats (Obsidian Fieldlands)"
@@ -6097,7 +4806,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 13",
+    "challengeName": "Challenge 12",
     "areaId": "Sandgem Flats (Obsidian Fieldlands)",
     "unlocks": [
       "Sandgem Flats (Obsidian Fieldlands)"
@@ -6110,7 +4819,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 14",
+    "challengeName": "Challenge 13",
     "areaId": "Sandgem Flats (Obsidian Fieldlands)",
     "unlocks": [
       "Ramanas Island (Obsidian Fieldlands)"
@@ -6123,7 +4832,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 15",
+    "challengeName": "Challenge 14",
     "areaId": "Ramanas Island (Obsidian Fieldlands)",
     "unlocks": [
       "Gapejaw Bog (Crimson Mirelands)"
@@ -6136,7 +4845,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 16",
+    "challengeName": "Challenge 15",
     "areaId": "Gapejaw Bog (Crimson Mirelands)",
     "unlocks": [
       "Gapejaw Bog (Crimson Mirelands)"
@@ -6149,7 +4858,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 17",
+    "challengeName": "Challenge 16",
     "areaId": "Gapejaw Bog (Crimson Mirelands)",
     "unlocks": [
       "Sludge Mound (Crimson Mirelands)"
@@ -6162,7 +4871,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 18",
+    "challengeName": "Challenge 17",
     "areaId": "Sludge Mound (Crimson Mirelands)",
     "unlocks": [
       "Scarlet Bog (Crimson Mirelands)"
@@ -6175,7 +4884,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 19",
+    "challengeName": "Challenge 18",
     "areaId": "Scarlet Bog (Crimson Mirelands)",
     "unlocks": [
       "Golden Lowlands (Crimson Mirelands)"
@@ -6188,7 +4897,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 20",
+    "challengeName": "Challenge 19",
     "areaId": "Golden Lowlands (Crimson Mirelands)",
     "unlocks": [
       "Golden Lowlands (Crimson Mirelands)"
@@ -6201,7 +4910,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 21",
+    "challengeName": "Challenge 20",
     "areaId": "Golden Lowlands (Crimson Mirelands)",
     "unlocks": [
       "Bolderoll Slope (Crimson Mirelands)"
@@ -6214,7 +4923,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 22",
+    "challengeName": "Challenge 21",
     "areaId": "Bolderoll Slope (Crimson Mirelands)",
     "unlocks": [
       "Gym - Lilligant"
@@ -6227,7 +4936,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 23",
+    "challengeName": "Challenge 22",
     "areaId": "Gym - Lilligant",
     "unlocks": [
       "Holm of Trials (Crimson Mirelands)"
@@ -6240,7 +4949,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 24",
+    "challengeName": "Challenge 23",
     "areaId": "Holm of Trials (Crimson Mirelands)",
     "unlocks": [
       "Ursa's Ring (Crimson Mirelands)"
@@ -6253,10 +4962,10 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 25",
+    "challengeName": "Challenge 24",
     "areaId": "Ursa's Ring (Crimson Mirelands)",
     "unlocks": [
-      "Crimson Mirelands Fishing Spot"
+      "Ginkgo Landing (Cobalt Coastlands)"
     ],
     "requirements": {
       "defeatCountRoute": {
@@ -6266,20 +4975,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 26",
-    "areaId": "Crimson Mirelands Fishing Spot",
-    "unlocks": [
-      "Ginkgo Landing (Cobalt Coastlands)"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "routeName": "Crimson Mirelands Fishing Spot",
-        "count": 10
-      }
-    }
-  },
-  {
-    "challengeName": "Challenge 27",
+    "challengeName": "Challenge 25",
     "areaId": "Ginkgo Landing (Cobalt Coastlands)",
     "unlocks": [
       "Shrouded Ruins (Crimson Mirelands)"
@@ -6292,7 +4988,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 28",
+    "challengeName": "Challenge 26",
     "areaId": "Shrouded Ruins (Crimson Mirelands)",
     "unlocks": [
       "Droning Meadow (Crimson Mirelands)"
@@ -6305,7 +5001,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 29",
+    "challengeName": "Challenge 27",
     "areaId": "Droning Meadow (Crimson Mirelands)",
     "unlocks": [
       "Grueling Grove (Obsidian Fieldlands)"
@@ -6318,7 +5014,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 30",
+    "challengeName": "Challenge 28",
     "areaId": "Grueling Grove (Obsidian Fieldlands)",
     "unlocks": [
       "Bathers' Lagoon (Cobalt Coastlands)"
@@ -6331,7 +5027,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 31",
+    "challengeName": "Challenge 29",
     "areaId": "Bathers' Lagoon (Cobalt Coastlands)",
     "unlocks": [
       "Castaway Shore (Cobalt Coastlands)"
@@ -6344,7 +5040,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 32",
+    "challengeName": "Challenge 30",
     "areaId": "Castaway Shore (Cobalt Coastlands)",
     "unlocks": [
       "Deadwood Haunt (Cobalt Coastlands)"
@@ -6357,10 +5053,10 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 33",
+    "challengeName": "Challenge 31",
     "areaId": "Deadwood Haunt (Cobalt Coastlands)",
     "unlocks": [
-      "Cobalt Coastlands Fishing Spot"
+      "Crossing Slope (Cobalt Coastlands)"
     ],
     "requirements": {
       "defeatCountRoute": {
@@ -6370,20 +5066,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 34",
-    "areaId": "Cobalt Coastlands Fishing Spot",
-    "unlocks": [
-      "Crossing Slope (Cobalt Coastlands)"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "routeName": "Cobalt Coastlands Fishing Spot",
-        "count": 10
-      }
-    }
-  },
-  {
-    "challengeName": "Challenge 35",
+    "challengeName": "Challenge 32",
     "areaId": "Crossing Slope (Cobalt Coastlands)",
     "unlocks": [
       "Veilstone Cape (Cobalt Coastlands)"
@@ -6396,7 +5079,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 36",
+    "challengeName": "Challenge 33",
     "areaId": "Veilstone Cape (Cobalt Coastlands)",
     "unlocks": [
       "Tranquility Cove (Cobalt Coastlands)"
@@ -6409,7 +5092,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 37",
+    "challengeName": "Challenge 34",
     "areaId": "Tranquility Cove (Cobalt Coastlands)",
     "unlocks": [
       "Islespy Shore (Cobalt Coastlands)"
@@ -6422,7 +5105,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 38",
+    "challengeName": "Challenge 35",
     "areaId": "Islespy Shore (Cobalt Coastlands)",
     "unlocks": [
       "Spring Path (Cobalt Coastlands)"
@@ -6435,7 +5118,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 39",
+    "challengeName": "Challenge 36",
     "areaId": "Spring Path (Cobalt Coastlands)",
     "unlocks": [
       "Firespit Island (Cobalt Coastlands)"
@@ -6448,7 +5131,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 40",
+    "challengeName": "Challenge 37",
     "areaId": "Firespit Island (Cobalt Coastlands)",
     "unlocks": [
       "Gym - Arcanine"
@@ -6461,7 +5144,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 41",
+    "challengeName": "Challenge 38",
     "areaId": "Gym - Arcanine",
     "unlocks": [
       "Seagrass Haven (Cobalt Coastlands)"
@@ -6474,7 +5157,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 42",
+    "challengeName": "Challenge 39",
     "areaId": "Seagrass Haven (Cobalt Coastlands)",
     "unlocks": [
       "Wayward Cave (Coronet Highlands)"
@@ -6487,7 +5170,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 43",
+    "challengeName": "Challenge 40",
     "areaId": "Wayward Cave (Coronet Highlands)",
     "unlocks": [
       "Coronet Highlands"
@@ -6500,7 +5183,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 44",
+    "challengeName": "Challenge 41",
     "areaId": "Coronet Highlands",
     "unlocks": [
       "Clamberclaw Cliffs (Coronet Highlands)"
@@ -6513,7 +5196,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 45",
+    "challengeName": "Challenge 42",
     "areaId": "Clamberclaw Cliffs (Coronet Highlands)",
     "unlocks": [
       "Celestica Trail (Coronet Highlands)"
@@ -6526,7 +5209,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 46",
+    "challengeName": "Challenge 43",
     "areaId": "Celestica Trail (Coronet Highlands)",
     "unlocks": [
       "Gym - Warden Ingo"
@@ -6539,7 +5222,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 47",
+    "challengeName": "Challenge 44",
     "areaId": "Gym - Warden Ingo",
     "unlocks": [
       "Celestica Ruins (Coronet Highlands)"
@@ -6552,7 +5235,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 48",
+    "challengeName": "Challenge 45",
     "areaId": "Celestica Ruins (Coronet Highlands)",
     "unlocks": [
       "Sacred Plaza (Coronet Highlands)"
@@ -6565,7 +5248,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 49",
+    "challengeName": "Challenge 46",
     "areaId": "Sacred Plaza (Coronet Highlands)",
     "unlocks": [
       "Stonetooth Rows (Coronet Highlands)"
@@ -6578,7 +5261,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 50",
+    "challengeName": "Challenge 47",
     "areaId": "Stonetooth Rows (Coronet Highlands)",
     "unlocks": [
       "Primeval Grotto (Coronet Highlands)"
@@ -6591,7 +5274,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 51",
+    "challengeName": "Challenge 48",
     "areaId": "Primeval Grotto (Coronet Highlands)",
     "unlocks": [
       "Gym - Electrode"
@@ -6604,10 +5287,10 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 52",
+    "challengeName": "Challenge 49",
     "areaId": "Gym - Electrode",
     "unlocks": [
-      "Coronet Highlands Fishing Spot"
+      "Cloudpool Ridge (Crimson Mirelands)"
     ],
     "requirements": {
       "earnBadge": {
@@ -6617,20 +5300,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 53",
-    "areaId": "Coronet Highlands Fishing Spot",
-    "unlocks": [
-      "Cloudpool Ridge (Crimson Mirelands)"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "routeName": "Coronet Highlands Fishing Spot",
-        "count": 10
-      }
-    }
-  },
-  {
-    "challengeName": "Challenge 54",
+    "challengeName": "Challenge 50",
     "areaId": "Cloudpool Ridge (Crimson Mirelands)",
     "unlocks": [
       "Cloudpool Ridge (Crimson Mirelands)"
@@ -6643,7 +5313,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 55",
+    "challengeName": "Challenge 51",
     "areaId": "Cloudpool Ridge (Crimson Mirelands)",
     "unlocks": [
       "Fabled Spring (Coronet Highlands)"
@@ -6656,7 +5326,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 56",
+    "challengeName": "Challenge 52",
     "areaId": "Fabled Spring (Coronet Highlands)",
     "unlocks": [
       "Bonechill Wastes (Alabaster Icelands)"
@@ -6669,7 +5339,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 57",
+    "challengeName": "Challenge 53",
     "areaId": "Bonechill Wastes (Alabaster Icelands)",
     "unlocks": [
       "Bonechill Wastes (Alabaster Icelands)"
@@ -6682,7 +5352,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 58",
+    "challengeName": "Challenge 54",
     "areaId": "Bonechill Wastes (Alabaster Icelands)",
     "unlocks": [
       "Glacier Terrace (Alabaster Icelands)"
@@ -6695,7 +5365,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 59",
+    "challengeName": "Challenge 55",
     "areaId": "Glacier Terrace (Alabaster Icelands)",
     "unlocks": [
       "Heart's Crag (Alabaster Icelands)"
@@ -6708,7 +5378,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 60",
+    "challengeName": "Challenge 56",
     "areaId": "Heart's Crag (Alabaster Icelands)",
     "unlocks": [
       "Snowpoint Temple (Alabaster Icelands)"
@@ -6721,7 +5391,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 61",
+    "challengeName": "Challenge 57",
     "areaId": "Snowpoint Temple (Alabaster Icelands)",
     "unlocks": [
       "Arena's Approach (Alabaster Icelands)"
@@ -6734,7 +5404,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 62",
+    "challengeName": "Challenge 58",
     "areaId": "Arena's Approach (Alabaster Icelands)",
     "unlocks": [
       "Gym - Avalugg"
@@ -6747,10 +5417,10 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 63",
+    "challengeName": "Challenge 59",
     "areaId": "Gym - Avalugg",
     "unlocks": [
-      "Alabaster Icelands Fishing Spot"
+      "Whiteout Valley (Alabaster Icelands)"
     ],
     "requirements": {
       "earnBadge": {
@@ -6760,20 +5430,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 64",
-    "areaId": "Alabaster Icelands Fishing Spot",
-    "unlocks": [
-      "Whiteout Valley (Alabaster Icelands)"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "routeName": "Alabaster Icelands Fishing Spot",
-        "count": 10
-      }
-    }
-  },
-  {
-    "challengeName": "Challenge 65",
+    "challengeName": "Challenge 60",
     "areaId": "Whiteout Valley (Alabaster Icelands)",
     "unlocks": [
       "Etertime Storm"
@@ -6786,7 +5443,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 66",
+    "challengeName": "Challenge 61",
     "areaId": "Etertime Storm",
     "unlocks": [
       "Etertime Citadel",
