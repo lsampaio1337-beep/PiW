@@ -175,7 +175,7 @@ const sinnohMapCoordinates = {
     "y": 57.8
   },
   "great_marsh": {
-    "name": "Great Marsh",
+    "name": "Great Marsh Safari",
     "x": 64.16,
     "y": 73.13
   },

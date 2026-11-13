@@ -3242,7 +3242,8 @@ window.enterSafariZone = () => {
         window.globals.battleSystem.activeEncounter = null;
         window.globals.battleSystem.isSearching = false;
         if (window.globals.battleSystem.gymState) window.globals.battleSystem.gymState.isActive = false;
-        window.globals.battleSystem.state.currentRoute = window.currentSafariZone || "Johto Safari Zone";
+        const targetRoute = window.currentSafariZone || (window.globals.battleSystem.state.currentRoute && window.globals.battleSystem.state.currentRoute.toLowerCase().includes('safari') ? window.globals.battleSystem.state.currentRoute : "Johto Safari Zone");
+        window.globals.battleSystem.state.currentRoute = targetRoute;
         window.globals.battleSystem.searchNext();
 
     }
@@ -3557,7 +3558,7 @@ window.simulateSleepFarm = function() {
             state.currentRoute = "PokeCenter & PokeMarket";
             window.navigateToLocation("PokeCenter & PokeMarket");
         } else if (results.outOfMoney) {
-            if (["Johto Safari Zone", "Kanto Safari Zone"].includes(state.currentRoute)) {
+            if (state.currentRoute && state.currentRoute.toLowerCase().includes('safari')) {
                 window.navigateToLocation(state.currentRoute);
             } else if (state.currentRoute && state.currentRoute.startsWith("Celadon Casino ")) {
                 state.currentRoute = "Celadon Casino";

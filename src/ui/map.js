@@ -49,6 +49,11 @@ window.switchMapRegion = function(region) {
 
 const LARGE_SPOT_LOCATIONS = new Set(['professor_lab', 'johto_professor_lab', 'professor_lab', 'indigo_plateu', 'safari_zone', 'kanto_safari_zone', 'casino', 'goldenrod_game_corner', 'daycare', 'trade_with_friends_hub', 'battle_stadium']);
 
+export function isSafariLocation(locationName) {
+    if (!locationName || typeof locationName !== 'string') return false;
+    return locationName.toLowerCase().includes('safari');
+}
+
 function generateMarkerHtml(locationId, locationName, coords, isUnlocked, hasNewNotification, showCheckmark) {
     if (!isUnlocked) return '';
 
@@ -59,7 +64,7 @@ function generateMarkerHtml(locationId, locationName, coords, isUnlocked, hasNew
         markerImg = './Assets/Map/Spots/Spot_Lab.png';
     } else if (locationId === 'pokemon_center___market' || locationId === 'pokecenter_pokemarket') {
         markerImg = './Assets/Map/Spots/Spot_PCPM.png';
-    } else if (locationId === 'safari_zone' || locationId === 'kanto_safari_zone') {
+    } else if (locationId === 'safari_zone' || locationId === 'kanto_safari_zone' || locationId.includes('safari') || isSafariLocation(locationName)) {
         markerImg = './Assets/Map/Spots/Spot_Safariball.png';
     } else if (locationId === 'casino' || locationId === 'goldenrod_game_corner') {
         markerImg = './Assets/Map/Spots/Spot_Casino.png';
@@ -157,7 +162,7 @@ function generateMarkerHtml(locationId, locationName, coords, isUnlocked, hasNew
     if (locationId === 'pokemon_center___market' || locationId === 'pokecenter_pokemarket') {
         markerWidth = "32px";
         markerHeight = "32px";
-    } else if (['professor_oak_lab', 'johto_oak_lab', 'professor_lab', 'indigo_plateu', 'safari_zone', 'kanto_safari_zone', 'casino', 'goldenrod_game_corner', 'daycare', 'battle_stadium', 'trade_with_friends_hub'].includes(locationId)) {
+    } else if (['professor_oak_lab', 'johto_oak_lab', 'professor_lab', 'indigo_plateu', 'safari_zone', 'kanto_safari_zone', 'casino', 'goldenrod_game_corner', 'daycare', 'battle_stadium', 'trade_with_friends_hub'].includes(locationId) || locationId.includes('safari') || isSafariLocation(locationName)) {
         markerWidth = "28px";
         markerHeight = "28px";
     }
@@ -616,8 +621,8 @@ export function navigateToLocation(locationName) {
 
     const battleSystem = globals.battleSystem;
 
-    // Do not set currentRoute to Gym or Pokemon League to keep player fighting on current route
-    if (!locationName.includes("Gym") && !locationName.includes("Pokemon League")) {
+    // Do not set currentRoute to Gym, Pokemon League, or Safari to keep player fighting on current route until explicitly entering
+    if (!locationName.includes("Gym") && !locationName.includes("Pokemon League") && !isSafariLocation(locationName)) {
         state.currentRoute = locationName;
     }
 
@@ -651,7 +656,7 @@ export function navigateToLocation(locationName) {
         } else {
             switchView("PROFESSOR_LAB");
         }
-    } else if (["Johto Safari Zone", "Kanto Safari Zone"].includes(locationName)) {
+    } else if (isSafariLocation(locationName)) {
         if (battleSystem) {
             battleSystem.stop();
         }
