@@ -318,7 +318,7 @@ const mainSeenSets = [];
 
             areaNames.forEach(areaName => {
                 const r = routes.find(ro => ro.name === areaName) || {};
-                const spawns = r.spawns || [];
+                const spawns = (c.spawns && Array.isArray(c.spawns)) ? c.spawns : (r.spawns || []);
 
                 const req = c.requirements || {};
                 let unlockStr = (c.unlocks || []).join(', ');
