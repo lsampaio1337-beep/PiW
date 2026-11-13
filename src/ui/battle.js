@@ -342,7 +342,7 @@ function getRouteBackgroundImage(route) {
     if (!route) return 'url(\'./Assets/BG/BattleMode/Test.png\')';
     route = route.replace(/\s*\([^)]+\)$/, '');
 
-    if (["Johto Safari Zone", "Kanto Safari Zone"].includes(route)) {
+    if (route.toLowerCase().includes('safari')) {
         return `url('./Assets/BG/SafariZone.png')`;
     }
     if (route.startsWith('Celadon Casino')) {

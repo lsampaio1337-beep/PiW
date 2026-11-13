@@ -946,7 +946,7 @@ class BattleSystem {
             return;
         }
 
-        if (["Johto Safari Zone", "Kanto Safari Zone"].includes(this.state.currentRoute)) {
+        if (this.state.currentRoute && this.state.currentRoute.toLowerCase().includes('safari')) {
             const safariCost = this.state.config.balance.safariZonePrice || 500;
             if (this.state.trainer.money < safariCost) {
                 this.stop();
@@ -1527,7 +1527,7 @@ class BattleSystem {
             }
         }
 
-        let isSafariZone = ["Johto Safari Zone", "Kanto Safari Zone"].includes(this.state.currentRoute);
+        let isSafariZone = !!(this.state.currentRoute && this.state.currentRoute.toLowerCase().includes('safari'));
         let ballName;
         let multiplier;
 
@@ -1721,7 +1721,7 @@ class BattleSystem {
                             window.trackDailyChallenge('catch_species', { species: caughtPokemon.name });
                             window.trackDailyChallenge('catch_type', { types: caughtPokemon.types });
                             window.trackDailyChallenge('catch_ball_tier', { ball: this.activeEncounter.caughtBall });
-                            if (["Johto Safari Zone", "Kanto Safari Zone"].includes(this.state.currentRoute)) window.trackDailyChallenge('safari_catch');
+                            if (this.state.currentRoute && this.state.currentRoute.toLowerCase().includes('safari')) window.trackDailyChallenge('safari_catch');
                             if (this.state.currentRoute === 'Celadon Casino') window.trackDailyChallenge('casino_catch'); // Would need species tracking logic inside trackDailyChallenge if we fully implement it
                         }
                         if (sumIV < 300) this.state.stats.caughtIVUnder300 = (this.state.stats.caughtIVUnder300 || 0) + 1;
@@ -2377,7 +2377,7 @@ class BattleSystem {
 
         let encounterCost = 0;
         let requiresPayment = false;
-        if (["Johto Safari Zone", "Kanto Safari Zone"].includes(this.state.currentRoute)) {
+        if (this.state.currentRoute && this.state.currentRoute.toLowerCase().includes('safari')) {
             encounterCost = this.state.config.balance.safariZonePrice || 500;
             requiresPayment = true;
         } else if (this.state.currentRoute && (this.state.currentRoute.startsWith("Celadon Casino ") || this.state.currentRoute === "Goldenrod Babies Corner" || this.state.currentRoute === "Goldenrod Lucky Spot Corner")) {
