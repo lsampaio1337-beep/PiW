@@ -532,13 +532,13 @@ const routes = [
         "pokemonId": 58,
         "minLevel": 34,
         "maxLevel": 39,
-        "chance": 0.175
+        "chance": 0.18
       },
       {
         "pokemonId": 37,
         "minLevel": 34,
         "maxLevel": 39,
-        "chance": 0.175
+        "chance": 0.18
       },
       {
         "pokemonId": 64,
@@ -555,19 +555,19 @@ const routes = [
         "pokemonId": 1,
         "minLevel": 35,
         "maxLevel": 42,
-        "chance": 0.333
+        "chance": 0.33
       },
       {
         "pokemonId": 4,
         "minLevel": 35,
         "maxLevel": 42,
-        "chance": 0.333
+        "chance": 0.33
       },
       {
         "pokemonId": 7,
         "minLevel": 35,
         "maxLevel": 42,
-        "chance": 0.334
+        "chance": 0.33
       }
     ]
   },
@@ -578,19 +578,19 @@ const routes = [
         "pokemonId": 2,
         "minLevel": 41,
         "maxLevel": 48,
-        "chance": 0.333
+        "chance": 0.33
       },
       {
         "pokemonId": 5,
         "minLevel": 41,
         "maxLevel": 48,
-        "chance": 0.333
+        "chance": 0.33
       },
       {
         "pokemonId": 8,
         "minLevel": 41,
         "maxLevel": 48,
-        "chance": 0.334
+        "chance": 0.33
       }
     ]
   },
@@ -601,19 +601,19 @@ const routes = [
         "pokemonId": 3,
         "minLevel": 59,
         "maxLevel": 66,
-        "chance": 0.333
+        "chance": 0.33
       },
       {
         "pokemonId": 6,
         "minLevel": 59,
         "maxLevel": 66,
-        "chance": 0.333
+        "chance": 0.33
       },
       {
         "pokemonId": 9,
         "minLevel": 59,
         "maxLevel": 66,
-        "chance": 0.334
+        "chance": 0.33
       }
     ]
   },
@@ -1023,7 +1023,7 @@ const routes = [
         "pokemonId": 91,
         "minLevel": 71,
         "maxLevel": 78,
-        "chance": 0.025
+        "chance": 0.03
       },
       {
         "pokemonId": 120,
@@ -1035,7 +1035,7 @@ const routes = [
         "pokemonId": 121,
         "minLevel": 71,
         "maxLevel": 78,
-        "chance": 0.025
+        "chance": 0.03
       }
     ]
   },
@@ -1234,13 +1234,13 @@ const routes = [
         "pokemonId": 24,
         "minLevel": 83,
         "maxLevel": 91,
-        "chance": 0.125
+        "chance": 0.13
       },
       {
         "pokemonId": 28,
         "minLevel": 83,
         "maxLevel": 91,
-        "chance": 0.125
+        "chance": 0.13
       },
       {
         "pokemonId": 57,
