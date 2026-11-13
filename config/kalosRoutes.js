@@ -210,93 +210,9 @@ export const kalosRoutes = [
     ]
   },
   {
-    "name": "Route 22 (North)",
-    "challengeName": "Challenge 35.5",
-    "spawns": [
-      {
-        "pokemonId": 299,
-        "minLevel": 70,
-        "maxLevel": 72,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 23,
-        "minLevel": 70,
-        "maxLevel": 72,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 167,
-        "minLevel": 70,
-        "maxLevel": 72,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 21,
-        "minLevel": 70,
-        "maxLevel": 72,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 438,
-        "minLevel": 70,
-        "maxLevel": 72,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 543,
-        "minLevel": 70,
-        "maxLevel": 72,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 187,
-        "minLevel": 70,
-        "maxLevel": 72,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 179,
-        "minLevel": 70,
-        "maxLevel": 72,
-        "chance": 0.125
-      }
-    ]
-  },
-  {
     "name": "Santalune City Gym",
     "challengeName": "Challenge 5",
     "spawns": []
-  },
-  {
-    "name": "Route 22 (Water)",
-    "challengeName": "Challenge 7.5",
-    "spawns": [
-      {
-        "pokemonId": 184,
-        "minLevel": 29,
-        "maxLevel": 31,
-        "chance": 0.25
-      },
-      {
-        "pokemonId": 400,
-        "minLevel": 29,
-        "maxLevel": 31,
-        "chance": 0.25
-      },
-      {
-        "pokemonId": 318,
-        "minLevel": 29,
-        "maxLevel": 31,
-        "chance": 0.25
-      },
-      {
-        "pokemonId": 319,
-        "minLevel": 29,
-        "maxLevel": 31,
-        "chance": 0.25
-      }
-    ]
   },
   {
     "name": "Route 4 (Parterre Way)",
@@ -401,8 +317,38 @@ export const kalosRoutes = [
     ]
   },
   {
-    "name": "Route 7",
+    "name": "Route 22 (Water)",
     "challengeName": "Challenge 8",
+    "spawns": [
+      {
+        "pokemonId": 184,
+        "minLevel": 29,
+        "maxLevel": 31,
+        "chance": 0.25
+      },
+      {
+        "pokemonId": 400,
+        "minLevel": 29,
+        "maxLevel": 31,
+        "chance": 0.25
+      },
+      {
+        "pokemonId": 318,
+        "minLevel": 29,
+        "maxLevel": 31,
+        "chance": 0.25
+      },
+      {
+        "pokemonId": 319,
+        "minLevel": 29,
+        "maxLevel": 31,
+        "chance": 0.25
+      }
+    ]
+  },
+  {
+    "name": "Route 7",
+    "challengeName": "Challenge 9",
     "spawns": [
       {
         "pokemonId": 143,
@@ -462,7 +408,7 @@ export const kalosRoutes = [
   },
   {
     "name": "Route 6 (Palais Lane)",
-    "challengeName": "Challenge 9",
+    "challengeName": "Challenge 10",
     "spawns": [
       {
         "pokemonId": 43,
@@ -504,7 +450,7 @@ export const kalosRoutes = [
   },
   {
     "name": "Connecting Cave (Zubat Roost)",
-    "challengeName": "Challenge 10",
+    "challengeName": "Challenge 11",
     "spawns": [
       {
         "pokemonId": 41,
@@ -534,7 +480,7 @@ export const kalosRoutes = [
   },
   {
     "name": "Route 8 (Muraille Coast — Upper Cliffs)",
-    "challengeName": "Challenge 10",
+    "challengeName": "Challenge 11",
     "spawns": [
       {
         "pokemonId": 325,
@@ -600,7 +546,7 @@ export const kalosRoutes = [
   },
   {
     "name": "Route 8 (Water)",
-    "challengeName": "Challenge 11",
+    "challengeName": "Challenge 12",
     "spawns": [
       {
         "pokemonId": 90,
@@ -648,7 +594,7 @@ export const kalosRoutes = [
   },
   {
     "name": "Route 9 (Spikes Passage)",
-    "challengeName": "Challenge 12",
+    "challengeName": "Challenge 13",
     "spawns": [
       {
         "pokemonId": 449,
@@ -672,7 +618,7 @@ export const kalosRoutes = [
   },
   {
     "name": "Glittering Cave",
-    "challengeName": "Challenge 13",
+    "challengeName": "Challenge 14",
     "spawns": [
       {
         "pokemonId": 66,
@@ -744,7 +690,7 @@ export const kalosRoutes = [
   },
   {
     "name": "Cyllage City (Water)",
-    "challengeName": "Challenge 14",
+    "challengeName": "Challenge 15",
     "spawns": [
       {
         "pokemonId": 72,
@@ -798,12 +744,12 @@ export const kalosRoutes = [
   },
   {
     "name": "Cyllage Gym",
-    "challengeName": "Challenge 14.5",
+    "challengeName": "Challenge 16",
     "spawns": []
   },
   {
     "name": "Route 10 (Menhir Trail)",
-    "challengeName": "Challenge 15",
+    "challengeName": "Challenge 17",
     "spawns": [
       {
         "pokemonId": 133,
@@ -857,7 +803,7 @@ export const kalosRoutes = [
   },
   {
     "name": "Route 11 (Miroir Way)",
-    "challengeName": "Challenge 16",
+    "challengeName": "Challenge 18",
     "spawns": [
       {
         "pokemonId": 30,
@@ -917,7 +863,7 @@ export const kalosRoutes = [
   },
   {
     "name": "Reflection Cave",
-    "challengeName": "Challenge 17",
+    "challengeName": "Challenge 19",
     "spawns": [
       {
         "pokemonId": 122,
@@ -965,12 +911,12 @@ export const kalosRoutes = [
   },
   {
     "name": "Shalour City Gym",
-    "challengeName": "Challenge 19",
+    "challengeName": "Challenge 21",
     "spawns": []
   },
   {
     "name": "Route 12 (Fourrage Road)",
-    "challengeName": "Challenge 20",
+    "challengeName": "Challenge 22",
     "spawns": [
       {
         "pokemonId": 79,
@@ -1024,7 +970,7 @@ export const kalosRoutes = [
   },
   {
     "name": "Route 12 (Water)",
-    "challengeName": "Challenge 20",
+    "challengeName": "Challenge 22",
     "spawns": [
       {
         "pokemonId": 91,
@@ -1084,7 +1030,7 @@ export const kalosRoutes = [
   },
   {
     "name": "Azure Bay (Water)",
-    "challengeName": "Challenge 20",
+    "challengeName": "Challenge 22",
     "spawns": [
       {
         "pokemonId": 131,
@@ -1138,12 +1084,12 @@ export const kalosRoutes = [
   },
   {
     "name": "Coumarine City Gym",
-    "challengeName": "Challenge 21",
+    "challengeName": "Challenge 23",
     "spawns": []
   },
   {
     "name": "Route 13 (Lumiose Badlands)",
-    "challengeName": "Challenge 22",
+    "challengeName": "Challenge 24",
     "spawns": [
       {
         "pokemonId": 51,
@@ -1179,12 +1125,12 @@ export const kalosRoutes = [
   },
   {
     "name": "Lumiose City Gym",
-    "challengeName": "Challenge 23",
+    "challengeName": "Challenge 25",
     "spawns": []
   },
   {
     "name": "Route 14 (Laverre Nature Trail)",
-    "challengeName": "Challenge 24",
+    "challengeName": "Challenge 26",
     "spawns": [
       {
         "pokemonId": 70,
@@ -1244,12 +1190,12 @@ export const kalosRoutes = [
   },
   {
     "name": "Laverre City Gym",
-    "challengeName": "Challenge 25",
+    "challengeName": "Challenge 27",
     "spawns": []
   },
   {
     "name": "Route 15 (Brun Way)",
-    "challengeName": "Challenge 26",
+    "challengeName": "Challenge 28",
     "spawns": [
       {
         "pokemonId": 262,
@@ -1297,7 +1243,7 @@ export const kalosRoutes = [
   },
   {
     "name": "Lost Hotel",
-    "challengeName": "Challenge 26",
+    "challengeName": "Challenge 28",
     "spawns": [
       {
         "pokemonId": 82,
@@ -1333,7 +1279,7 @@ export const kalosRoutes = [
   },
   {
     "name": "Route 16 (Mélancolie Path)",
-    "challengeName": "Challenge 26",
+    "challengeName": "Challenge 28",
     "spawns": [
       {
         "pokemonId": 70,
@@ -1381,7 +1327,7 @@ export const kalosRoutes = [
   },
   {
     "name": "Frost Cavern",
-    "challengeName": "Challenge 27",
+    "challengeName": "Challenge 29",
     "spawns": [
       {
         "pokemonId": 93,
@@ -1423,7 +1369,7 @@ export const kalosRoutes = [
   },
   {
     "name": "Route 17 (Mamoswine Road)",
-    "challengeName": "Challenge 28",
+    "challengeName": "Challenge 30",
     "spawns": [
       {
         "pokemonId": 215,
@@ -1453,17 +1399,17 @@ export const kalosRoutes = [
   },
   {
     "name": "Anistar City Gym",
-    "challengeName": "Challenge 29",
+    "challengeName": "Challenge 31",
     "spawns": []
   },
   {
     "name": "Team Flare Secret HQ (Geosenge Town)",
-    "challengeName": "Challenge 30",
+    "challengeName": "Challenge 32",
     "spawns": []
   },
   {
     "name": "Route 18 (Vallée Étroite Way)",
-    "challengeName": "Challenge 31",
+    "challengeName": "Challenge 33",
     "spawns": [
       {
         "pokemonId": 28,
@@ -1523,7 +1469,7 @@ export const kalosRoutes = [
   },
   {
     "name": "Route 19 (Water)",
-    "challengeName": "Challenge 31",
+    "challengeName": "Challenge 33",
     "spawns": [
       {
         "pokemonId": 61,
@@ -1565,7 +1511,7 @@ export const kalosRoutes = [
   },
   {
     "name": "Route 20 (Winding Woods)",
-    "challengeName": "Challenge 32",
+    "challengeName": "Challenge 34",
     "spawns": [
       {
         "pokemonId": 39,
@@ -1607,12 +1553,12 @@ export const kalosRoutes = [
   },
   {
     "name": "Snowbelle City Gym",
-    "challengeName": "Challenge 33",
+    "challengeName": "Challenge 35",
     "spawns": []
   },
   {
     "name": "Route 21 (Dernière Way)",
-    "challengeName": "Challenge 34",
+    "challengeName": "Challenge 36",
     "spawns": [
       {
         "pokemonId": 123,
@@ -1648,7 +1594,7 @@ export const kalosRoutes = [
   },
   {
     "name": "Route 21 (Water)",
-    "challengeName": "Challenge 35",
+    "challengeName": "Challenge 37",
     "spawns": [
       {
         "pokemonId": 60,
@@ -1701,8 +1647,62 @@ export const kalosRoutes = [
     ]
   },
   {
+    "name": "Route 22 (North)",
+    "challengeName": "Challenge 38",
+    "spawns": [
+      {
+        "pokemonId": 299,
+        "minLevel": 70,
+        "maxLevel": 72,
+        "chance": 0.125
+      },
+      {
+        "pokemonId": 23,
+        "minLevel": 70,
+        "maxLevel": 72,
+        "chance": 0.125
+      },
+      {
+        "pokemonId": 167,
+        "minLevel": 70,
+        "maxLevel": 72,
+        "chance": 0.125
+      },
+      {
+        "pokemonId": 21,
+        "minLevel": 70,
+        "maxLevel": 72,
+        "chance": 0.125
+      },
+      {
+        "pokemonId": 438,
+        "minLevel": 70,
+        "maxLevel": 72,
+        "chance": 0.125
+      },
+      {
+        "pokemonId": 543,
+        "minLevel": 70,
+        "maxLevel": 72,
+        "chance": 0.125
+      },
+      {
+        "pokemonId": 187,
+        "minLevel": 70,
+        "maxLevel": 72,
+        "chance": 0.125
+      },
+      {
+        "pokemonId": 179,
+        "minLevel": 70,
+        "maxLevel": 72,
+        "chance": 0.125
+      }
+    ]
+  },
+  {
     "name": "Victory Road",
-    "challengeName": "Challenge 36",
+    "challengeName": "Challenge 39",
     "spawns": [
       {
         "pokemonId": 62,
@@ -1756,7 +1756,7 @@ export const kalosRoutes = [
   },
   {
     "name": "Pokémon League",
-    "challengeName": "Challenge 37",
+    "challengeName": "Challenge 40",
     "spawns": []
   },
   {
@@ -2896,7 +2896,7 @@ export const kalosRoutes = [
   },
   {
     "name": "Sanctum of Order",
-    "challengeName": "Sanctum of Order Challenge",
+    "challengeName": "Extra Challenge Sanctum of Order",
     "spawns": [
       {
         "pokemonId": 716,
@@ -2928,6 +2928,7 @@ export const kalosRoutes = [
 
 export const kalosUnlocks = [
   {
+    "challengeName": "Challenge 1",
     "areaId": "Route 2 (Avance Trail)",
     "unlocks": [
       "Santalune Forest"
@@ -2940,6 +2941,7 @@ export const kalosUnlocks = [
     }
   },
   {
+    "challengeName": "Challenge 2",
     "areaId": "Santalune Forest",
     "unlocks": [
       "Route 3 (Ouvert Way)"
@@ -2952,6 +2954,7 @@ export const kalosUnlocks = [
     }
   },
   {
+    "challengeName": "Challenge 3",
     "areaId": "Route 3 (Ouvert Way)",
     "unlocks": [
       "Route 22 (South)"
@@ -2964,6 +2967,7 @@ export const kalosUnlocks = [
     }
   },
   {
+    "challengeName": "Challenge 4",
     "areaId": "Route 22 (South)",
     "unlocks": [
       "Santalune City Gym"
@@ -2976,18 +2980,7 @@ export const kalosUnlocks = [
     }
   },
   {
-    "areaId": "Route 22 (North)",
-    "unlocks": [
-      "Victory Road"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Route 22 (North)",
-        "count": 10
-      }
-    }
-  },
-  {
+    "challengeName": "Challenge 5",
     "areaId": "Santalune City Gym",
     "unlocks": [
       "Route 4 (Parterre Way)"
@@ -3001,18 +2994,7 @@ export const kalosUnlocks = [
     }
   },
   {
-    "areaId": "Route 22 (Water)",
-    "unlocks": [
-      "Route 7"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Route 22 (Water)",
-        "count": 10
-      }
-    }
-  },
-  {
+    "challengeName": "Challenge 6",
     "areaId": "Route 4 (Parterre Way)",
     "unlocks": [
       "Route 5 (Versant Road)"
@@ -3025,6 +3007,7 @@ export const kalosUnlocks = [
     }
   },
   {
+    "challengeName": "Challenge 7",
     "areaId": "Route 5 (Versant Road)",
     "unlocks": [
       "Route 22 (Water)"
@@ -3037,6 +3020,20 @@ export const kalosUnlocks = [
     }
   },
   {
+    "challengeName": "Challenge 8",
+    "areaId": "Route 22 (Water)",
+    "unlocks": [
+      "Route 7"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Route 22 (Water)",
+        "count": 10
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 9",
     "areaId": "Route 7",
     "unlocks": [
       "Route 6 (Palais Lane)"
@@ -3049,6 +3046,7 @@ export const kalosUnlocks = [
     }
   },
   {
+    "challengeName": "Challenge 10",
     "areaId": "Route 6 (Palais Lane)",
     "unlocks": [
       "Connecting Cave (Zubat Roost)"
@@ -3061,6 +3059,7 @@ export const kalosUnlocks = [
     }
   },
   {
+    "challengeName": "Challenge 11",
     "areaId": "Connecting Cave (Zubat Roost)",
     "unlocks": [
       "Route 8 (Muraille Coast — Upper Cliffs)"
@@ -3073,6 +3072,7 @@ export const kalosUnlocks = [
     }
   },
   {
+    "challengeName": "Challenge 11",
     "areaId": "Route 8 (Muraille Coast — Upper Cliffs)",
     "unlocks": [
       "Route 8 (Water)"
@@ -3085,6 +3085,7 @@ export const kalosUnlocks = [
     }
   },
   {
+    "challengeName": "Challenge 12",
     "areaId": "Route 8 (Water)",
     "unlocks": [
       "Route 9 (Spikes Passage)"
@@ -3097,6 +3098,7 @@ export const kalosUnlocks = [
     }
   },
   {
+    "challengeName": "Challenge 13",
     "areaId": "Route 9 (Spikes Passage)",
     "unlocks": [
       "Glittering Cave"
@@ -3109,6 +3111,7 @@ export const kalosUnlocks = [
     }
   },
   {
+    "challengeName": "Challenge 14",
     "areaId": "Glittering Cave",
     "unlocks": [
       "Cyllage City (Water)"
@@ -3121,6 +3124,7 @@ export const kalosUnlocks = [
     }
   },
   {
+    "challengeName": "Challenge 15",
     "areaId": "Cyllage City (Water)",
     "unlocks": [
       "Cyllage Gym"
@@ -3133,6 +3137,7 @@ export const kalosUnlocks = [
     }
   },
   {
+    "challengeName": "Challenge 16",
     "areaId": "Cyllage Gym",
     "unlocks": [
       "Route 10 (Menhir Trail)"
@@ -3140,6 +3145,7 @@ export const kalosUnlocks = [
     "requirements": {}
   },
   {
+    "challengeName": "Challenge 17",
     "areaId": "Route 10 (Menhir Trail)",
     "unlocks": [
       "Route 11 (Miroir Way)"
@@ -3152,6 +3158,7 @@ export const kalosUnlocks = [
     }
   },
   {
+    "challengeName": "Challenge 18",
     "areaId": "Route 11 (Miroir Way)",
     "unlocks": [
       "Reflection Cave"
@@ -3164,6 +3171,7 @@ export const kalosUnlocks = [
     }
   },
   {
+    "challengeName": "Challenge 19",
     "areaId": "Reflection Cave",
     "unlocks": [
       "Shalour City Gym"
@@ -3176,6 +3184,7 @@ export const kalosUnlocks = [
     }
   },
   {
+    "challengeName": "Challenge 21",
     "areaId": "Shalour City Gym",
     "unlocks": [
       "Route 12 (Fourrage Road)"
@@ -3189,6 +3198,7 @@ export const kalosUnlocks = [
     }
   },
   {
+    "challengeName": "Challenge 22",
     "areaId": "Route 12 (Fourrage Road)",
     "unlocks": [
       "Route 12 (Water)"
@@ -3201,6 +3211,7 @@ export const kalosUnlocks = [
     }
   },
   {
+    "challengeName": "Challenge 22",
     "areaId": "Route 12 (Water)",
     "unlocks": [
       "Azure Bay (Water)"
@@ -3213,6 +3224,7 @@ export const kalosUnlocks = [
     }
   },
   {
+    "challengeName": "Challenge 22",
     "areaId": "Azure Bay (Water)",
     "unlocks": [
       "Coumarine City Gym"
@@ -3225,6 +3237,7 @@ export const kalosUnlocks = [
     }
   },
   {
+    "challengeName": "Challenge 23",
     "areaId": "Coumarine City Gym",
     "unlocks": [
       "Route 13 (Lumiose Badlands)"
@@ -3238,6 +3251,7 @@ export const kalosUnlocks = [
     }
   },
   {
+    "challengeName": "Challenge 24",
     "areaId": "Route 13 (Lumiose Badlands)",
     "unlocks": [
       "Lumiose City Gym"
@@ -3250,6 +3264,7 @@ export const kalosUnlocks = [
     }
   },
   {
+    "challengeName": "Challenge 25",
     "areaId": "Lumiose City Gym",
     "unlocks": [
       "Route 14 (Laverre Nature Trail)"
@@ -3263,6 +3278,7 @@ export const kalosUnlocks = [
     }
   },
   {
+    "challengeName": "Challenge 26",
     "areaId": "Route 14 (Laverre Nature Trail)",
     "unlocks": [
       "Laverre City Gym"
@@ -3275,6 +3291,7 @@ export const kalosUnlocks = [
     }
   },
   {
+    "challengeName": "Challenge 27",
     "areaId": "Laverre City Gym",
     "unlocks": [
       "Route 15 (Brun Way)"
@@ -3288,6 +3305,7 @@ export const kalosUnlocks = [
     }
   },
   {
+    "challengeName": "Challenge 28",
     "areaId": "Route 15 (Brun Way)",
     "unlocks": [
       "Lost Hotel"
@@ -3300,6 +3318,7 @@ export const kalosUnlocks = [
     }
   },
   {
+    "challengeName": "Challenge 28",
     "areaId": "Lost Hotel",
     "unlocks": [
       "Route 16 (Mélancolie Path)"
@@ -3312,6 +3331,7 @@ export const kalosUnlocks = [
     }
   },
   {
+    "challengeName": "Challenge 28",
     "areaId": "Route 16 (Mélancolie Path)",
     "unlocks": [
       "Frost Cavern"
@@ -3324,6 +3344,7 @@ export const kalosUnlocks = [
     }
   },
   {
+    "challengeName": "Challenge 29",
     "areaId": "Frost Cavern",
     "unlocks": [
       "Route 17 (Mamoswine Road)"
@@ -3336,6 +3357,7 @@ export const kalosUnlocks = [
     }
   },
   {
+    "challengeName": "Challenge 30",
     "areaId": "Route 17 (Mamoswine Road)",
     "unlocks": [
       "Anistar City Gym"
@@ -3348,6 +3370,7 @@ export const kalosUnlocks = [
     }
   },
   {
+    "challengeName": "Challenge 31",
     "areaId": "Anistar City Gym",
     "unlocks": [
       "Team Flare Secret HQ (Geosenge Town)"
@@ -3361,6 +3384,7 @@ export const kalosUnlocks = [
     }
   },
   {
+    "challengeName": "Challenge 32",
     "areaId": "Team Flare Secret HQ (Geosenge Town)",
     "unlocks": [
       "Route 18 (Vallée Étroite Way)"
@@ -3368,6 +3392,7 @@ export const kalosUnlocks = [
     "requirements": {}
   },
   {
+    "challengeName": "Challenge 33",
     "areaId": "Route 18 (Vallée Étroite Way)",
     "unlocks": [
       "Route 19 (Water)"
@@ -3380,6 +3405,7 @@ export const kalosUnlocks = [
     }
   },
   {
+    "challengeName": "Challenge 33",
     "areaId": "Route 19 (Water)",
     "unlocks": [
       "Route 20 (Winding Woods)"
@@ -3392,6 +3418,7 @@ export const kalosUnlocks = [
     }
   },
   {
+    "challengeName": "Challenge 34",
     "areaId": "Route 20 (Winding Woods)",
     "unlocks": [
       "Snowbelle City Gym"
@@ -3404,6 +3431,7 @@ export const kalosUnlocks = [
     }
   },
   {
+    "challengeName": "Challenge 35",
     "areaId": "Snowbelle City Gym",
     "unlocks": [
       "Route 21 (Dernière Way)"
@@ -3417,6 +3445,7 @@ export const kalosUnlocks = [
     }
   },
   {
+    "challengeName": "Challenge 36",
     "areaId": "Route 21 (Dernière Way)",
     "unlocks": [
       "Route 21 (Water)"
@@ -3429,6 +3458,7 @@ export const kalosUnlocks = [
     }
   },
   {
+    "challengeName": "Challenge 37",
     "areaId": "Route 21 (Water)",
     "unlocks": [
       "Route 22 (North)"
@@ -3441,6 +3471,20 @@ export const kalosUnlocks = [
     }
   },
   {
+    "challengeName": "Challenge 38",
+    "areaId": "Route 22 (North)",
+    "unlocks": [
+      "Victory Road"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Route 22 (North)",
+        "count": 10
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 39",
     "areaId": "Victory Road",
     "unlocks": [
       "Pokémon League"
@@ -3453,6 +3497,7 @@ export const kalosUnlocks = [
     }
   },
   {
+    "challengeName": "Challenge 40",
     "areaId": "Pokémon League",
     "unlocks": [
       "Farm Road",
@@ -3468,6 +3513,7 @@ export const kalosUnlocks = [
     "requirements": {}
   },
   {
+    "challengeName": "Extra Challenge A 1",
     "areaId": "Farm Road",
     "unlocks": [
       "Mist Shore"
@@ -3480,6 +3526,7 @@ export const kalosUnlocks = [
     }
   },
   {
+    "challengeName": "Extra Challenge A 2",
     "areaId": "Mist Shore",
     "unlocks": [
       "Quiet Marsh"
@@ -3492,6 +3539,7 @@ export const kalosUnlocks = [
     }
   },
   {
+    "challengeName": "Extra Challenge A 3",
     "areaId": "Quiet Marsh",
     "unlocks": [],
     "requirements": {
@@ -3502,6 +3550,7 @@ export const kalosUnlocks = [
     }
   },
   {
+    "challengeName": "Extra Challenge B 1",
     "areaId": "Starter Depot",
     "unlocks": [
       "Lone Mountain"
@@ -3514,6 +3563,7 @@ export const kalosUnlocks = [
     }
   },
   {
+    "challengeName": "Extra Challenge B 2",
     "areaId": "Lone Mountain",
     "unlocks": [
       "Fierce Riverhead"
@@ -3526,6 +3576,7 @@ export const kalosUnlocks = [
     }
   },
   {
+    "challengeName": "Extra Challenge B 3",
     "areaId": "Fierce Riverhead",
     "unlocks": [
       "Starter Evolved Depot"
@@ -3538,6 +3589,7 @@ export const kalosUnlocks = [
     }
   },
   {
+    "challengeName": "Extra Challenge B 4",
     "areaId": "Starter Evolved Depot",
     "unlocks": [],
     "requirements": {
@@ -3548,6 +3600,7 @@ export const kalosUnlocks = [
     }
   },
   {
+    "challengeName": "Extra Challenge D 1",
     "areaId": "Friend Safari Near Entrance",
     "unlocks": [
       "Friend Safari Surroundings"
@@ -3560,6 +3613,7 @@ export const kalosUnlocks = [
     }
   },
   {
+    "challengeName": "Extra Challenge D 2",
     "areaId": "Friend Safari Surroundings",
     "unlocks": [
       "Friend Safari Deep Inside"
@@ -3572,6 +3626,7 @@ export const kalosUnlocks = [
     }
   },
   {
+    "challengeName": "Extra Challenge D 3",
     "areaId": "Friend Safari Deep Inside",
     "unlocks": [],
     "requirements": {
@@ -3582,6 +3637,7 @@ export const kalosUnlocks = [
     }
   },
   {
+    "challengeName": "Extra Challenge E 1",
     "areaId": "Path to Dragon Territory",
     "unlocks": [
       "Narrow river"
@@ -3594,6 +3650,7 @@ export const kalosUnlocks = [
     }
   },
   {
+    "challengeName": "Extra Challenge E 2",
     "areaId": "Narrow river",
     "unlocks": [
       "Abandoned Excavation Site"
@@ -3606,6 +3663,7 @@ export const kalosUnlocks = [
     }
   },
   {
+    "challengeName": "Extra Challenge E 3",
     "areaId": "Abandoned Excavation Site",
     "unlocks": [
       "Forsaken Dragon Territory"
@@ -3618,6 +3676,7 @@ export const kalosUnlocks = [
     }
   },
   {
+    "challengeName": "Extra Challenge E 4",
     "areaId": "Forsaken Dragon Territory",
     "unlocks": [],
     "requirements": {
@@ -3628,6 +3687,7 @@ export const kalosUnlocks = [
     }
   },
   {
+    "challengeName": "Extra Challenge C 1",
     "areaId": "Path to Team Flare Secret HQ",
     "unlocks": [
       "Team Flare Secret HQ Gate"
@@ -3640,6 +3700,7 @@ export const kalosUnlocks = [
     }
   },
   {
+    "challengeName": "Extra Challenge C 2",
     "areaId": "Team Flare Secret HQ Gate",
     "unlocks": [
       "Team Flare Secret HQ Entrance"
@@ -3652,6 +3713,7 @@ export const kalosUnlocks = [
     }
   },
   {
+    "challengeName": "Extra Challenge C 3",
     "areaId": "Team Flare Secret HQ Entrance",
     "unlocks": [
       "Team Flare Secret HQ Hall"
@@ -3664,6 +3726,7 @@ export const kalosUnlocks = [
     }
   },
   {
+    "challengeName": "Extra Challenge C 4",
     "areaId": "Team Flare Secret HQ Hall",
     "unlocks": [
       "Team Flare Battle (4 mix fighters)"
@@ -3676,11 +3739,13 @@ export const kalosUnlocks = [
     }
   },
   {
+    "challengeName": "Extra Challenge C 5",
     "areaId": "Team Flare Battle (4 mix fighters)",
     "unlocks": [],
     "requirements": {}
   },
   {
+    "challengeName": "Extra Challenge F (Roaming)",
     "areaId": "Extra Challenge F (Roaming)",
     "unlocks": [],
     "requirements": {
@@ -3701,6 +3766,7 @@ export const kalosUnlocks = [
     }
   },
   {
+    "challengeName": "Extra Challenge F 1",
     "areaId": "Path to Sea Spirit Den",
     "unlocks": [
       "Sea Spirit Den Outer Depths"
@@ -3713,6 +3779,7 @@ export const kalosUnlocks = [
     }
   },
   {
+    "challengeName": "Extra Challenge F 2",
     "areaId": "Sea Spirit Den Outer Depths",
     "unlocks": [
       "Sea Spirit Den Entrance"
@@ -3725,6 +3792,7 @@ export const kalosUnlocks = [
     }
   },
   {
+    "challengeName": "Extra Challenge F 3",
     "areaId": "Sea Spirit Den Entrance",
     "unlocks": [
       "Sea Spirit Den Tunnels"
@@ -3737,6 +3805,7 @@ export const kalosUnlocks = [
     }
   },
   {
+    "challengeName": "Extra Challenge F 4",
     "areaId": "Sea Spirit Den Tunnels",
     "unlocks": [],
     "requirements": {
@@ -3747,6 +3816,7 @@ export const kalosUnlocks = [
     }
   },
   {
+    "challengeName": "Extra Challenge F 5",
     "areaId": "Sea Spirit Den Hall",
     "unlocks": [],
     "requirements": {
@@ -3757,6 +3827,7 @@ export const kalosUnlocks = [
     }
   },
   {
+    "challengeName": "Extra Challenge G (Roaming)",
     "areaId": "Extra Challenge G (Roaming)",
     "unlocks": [],
     "requirements": {
@@ -3777,6 +3848,7 @@ export const kalosUnlocks = [
     }
   },
   {
+    "challengeName": "Extra Challenge G 1",
     "areaId": "Path to Secret Chambers",
     "unlocks": [
       "Chambers of Emptiness"
@@ -3789,6 +3861,7 @@ export const kalosUnlocks = [
     }
   },
   {
+    "challengeName": "Extra Challenge G 2",
     "areaId": "Chambers of Emptiness",
     "unlocks": [
       "Underground Chambers"
@@ -3801,6 +3874,7 @@ export const kalosUnlocks = [
     }
   },
   {
+    "challengeName": "Extra Challenge G 3",
     "areaId": "Underground Chambers",
     "unlocks": [],
     "requirements": {
@@ -3811,6 +3885,7 @@ export const kalosUnlocks = [
     }
   },
   {
+    "challengeName": "Extra Challenge G 4",
     "areaId": "Ultimate Chamber",
     "unlocks": [],
     "requirements": {
@@ -3821,6 +3896,7 @@ export const kalosUnlocks = [
     }
   },
   {
+    "challengeName": "Extra Challenge Sanctum of Order",
     "areaId": "Sanctum of Order",
     "unlocks": [],
     "requirements": {

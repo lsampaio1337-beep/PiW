@@ -897,8 +897,11 @@ export function showModal(title, htmlContent, windowId = 'dynamic-modal', width 
         if (windowId === 'window-map') {
             const winEl = document.getElementById(windowId);
             if (winEl) {
-                winEl.style.width = width;
-                winEl.style.height = 'auto'; // allow height to match content wrapper
+                const hasSavedWidth = Boolean(state.settings?.windowSettings?.['window-map']?.width);
+                if (!hasSavedWidth) {
+                    winEl.style.width = width;
+                    winEl.style.height = 'auto'; // allow height to match content wrapper
+                }
 
                 // Remove internal padding from map content panel
                 const contentPanel = winEl.querySelector('.content-panel');
