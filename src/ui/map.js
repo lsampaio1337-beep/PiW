@@ -492,6 +492,31 @@ function setupMapWindowDimensions(currentRegionObj, targetWidth) {
                 scaler.style.width = '100%';
                 scaler.style.transform = 'none';
             }
+
+            const overlay = winEl.querySelector('#map-inner-modal-overlay');
+            if (overlay && !overlay._backdropClickBound) {
+                overlay._backdropClickBound = true;
+                overlay.addEventListener('click', (e) => {
+                    if (typeof window.handleMapInnerModalBackdropClick === 'function') {
+                        window.handleMapInnerModalBackdropClick(e);
+                    }
+                });
+            }
+
+            if (!winEl._mapBackdropClickBound) {
+                winEl._mapBackdropClickBound = true;
+                winEl.addEventListener('click', (e) => {
+                    const header = winEl.querySelector('.window-header');
+                    if (header && header.contains(e.target)) return;
+
+                    const innerModal = winEl.querySelector('#map-inner-modal');
+                    if (innerModal && !innerModal.contains(e.target)) {
+                        if (typeof window.handleMapInnerModalBackdropClick === 'function') {
+                            window.handleMapInnerModalBackdropClick(e);
+                        }
+                    }
+                });
+            }
         }
     }
 }
@@ -536,8 +561,8 @@ export function showMap() {
 
     // Inner modal for gym overlays natively locked to the map
     html += `
-            <div id="map-inner-modal-overlay" onmousedown="if(event.target === this) { window.closeMapInnerModal(); }" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 1000; align-items: center; justify-content: center; box-sizing: border-box; padding: 2%; /* Fallback padding */">
-                <div id="map-inner-modal" class="floating-window" onclick="event.stopPropagation()" style="box-sizing: border-box; display: flex; flex-direction: column; overflow: hidden; /* Dynamic sizing will be applied via JS */ max-width: 100%; max-height: 100%;">
+            <div id="map-inner-modal-overlay" onclick="window.handleMapInnerModalBackdropClick(event)" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 1000; align-items: center; justify-content: center; box-sizing: border-box; padding: 2%; /* Fallback padding */">
+                <div id="map-inner-modal" class="floating-window" onclick="event.stopPropagation()" onmousedown="event.stopPropagation()" style="box-sizing: border-box; display: flex; flex-direction: column; overflow: hidden; /* Dynamic sizing will be applied via JS */ max-width: 100%; max-height: 100%;">
                     <div class="window-header" style="position: relative; cursor: default;">
                         <span id="map-inner-modal-title">Gym</span>
                         <span id="btn-close-map-inner-modal" onclick="window.closeMapInnerModal()" style="position: absolute; top: 5px; right: 5px; font-size: 12px; font-weight: bold; line-height: 1; padding: 0; cursor: pointer; color: white;">X</span>
@@ -573,6 +598,32 @@ export function showMap() {
         setupMapWindowDimensions(currentRegionObj, targetWidth);
     }
 }
+
+window.handleMapInnerModalBackdropClick = function(event) {
+    const overlay = document.getElementById('map-inner-modal-overlay');
+    const modal = document.getElementById('map-inner-modal');
+    if (!overlay || overlay.style.display === 'none') return;
+
+    if (event && modal && modal.contains(event.target)) {
+        return;
+    }
+
+    const gymContentArea = document.getElementById('gym-content-area');
+    if (gymContentArea && (gymContentArea.isConnected ?? true)) {
+        // Gym modal: only close in first phase (when enter button is displayed)
+        const isGymActive = globals.battleSystem?.gymState?.isActive;
+        const enterBtn = gymContentArea.querySelector('#btn-enter-gym') ||
+            Array.from(gymContentArea.querySelectorAll('button')).find(b => b.textContent.trim().toLowerCase() === 'enter');
+
+        if (!isGymActive && enterBtn && enterBtn.style.display !== 'none') {
+            window.closeMapInnerModal();
+        }
+        return;
+    }
+
+    // For other map inner modals (Safari Zone, Casino), clicking backdrop closes it
+    window.closeMapInnerModal();
+};
 
 window.closeMapInnerModal = function() {
     const overlay = document.getElementById('map-inner-modal-overlay');
@@ -1035,6 +1086,7 @@ export function navigateToLocation(locationName) {
         if (gymConfig && contentArea) {
             let buttonText = "Enter";
             const btn = document.createElement('button');
+            btn.id = "btn-enter-gym";
             btn.className = "action-btn action-btn-primary";
             btn.style.marginTop = "10px";
             btn.textContent = buttonText;
