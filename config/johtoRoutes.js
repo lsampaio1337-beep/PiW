@@ -2281,7 +2281,8 @@ export const johtoUnlocks = [
     "areaId": "Route 34",
     "unlocks": [
       "Goldenrod Gym",
-      "Goldenrod Game Corner"
+      "Goldenrod Game Corner",
+      "Daycare"
     ],
     "requirements": {
       "catchSpecies": [
@@ -2674,7 +2675,7 @@ export const johtoUnlocks = [
     "challengeName": "Challenge 34",
     "areaId": "Route 46",
     "unlocks": [
-      "Pokemon League"
+      "Johto Pokemon League"
     ],
     "requirements": {
       "defeatSpecific": {
@@ -2691,7 +2692,7 @@ export const johtoUnlocks = [
   },
   {
     "challengeName": "Challenge 35",
-    "areaId": "Pokemon League",
+    "areaId": "Johto Pokemon League",
     "unlocks": [
       "Viridian Forest (Johto)"
     ],
