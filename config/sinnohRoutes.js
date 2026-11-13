@@ -782,7 +782,7 @@ export const sinnohRoutes = [
     spawns: []
   },
   {
-    name: "Great Marsh",
+    name: "Great Marsh Safari",
     spawns: [
       {
         pokemonId: 298,
@@ -2767,7 +2767,7 @@ export const sinnohUnlocks = [
     challengeName: "Challenge 22",
     areaId: "Pastoria Gym",
     unlocks: [
-      "Great Marsh"
+      "Great Marsh Safari"
     ],
     requirements: {
       earnBadge: {
@@ -2779,7 +2779,7 @@ export const sinnohUnlocks = [
   },
   {
     challengeName: "Challenge 23",
-    areaId: "Great Marsh",
+    areaId: "Great Marsh Safari",
     unlocks: [
       "Route 212"
     ],
