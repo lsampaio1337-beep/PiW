@@ -65,3 +65,24 @@ When verifying Pokedex numbers, use these authoritative bases:
 - **Paldea:** Pokémon Scarlet & Violet including Kitakami & Blueberry DLCs (664)
 
 *Note: Totals strictly represent natively capturable Pokémon and Mythicals numbered in the regional dexes. Transfer-only Pokémon (e.g. Mewtwo in Galar, Alolan starters in Paldea) are EXCLUDED.*
+
+## User Chat Shortcuts & Branch Safety Rules
+All agents MUST follow these mandatory rules and recognize the following chat shortcuts immediately:
+
+* **Branch Safety Rule:**
+  * When working on ANY branch, all requested code changes and edits MUST be performed ONLY on that branch.
+  * **NEVER** merge any branch into `main` unless the user explicitly commands `/mm` or gives direct explicit instructions to merge.
+  * Whenever making changes on a feature branch, commit them cleanly to that branch so uncommitted changes do not bleed into `main` when switching.
+
+* **Chat Shortcuts:**
+  * `/nb <name>` (or `/nb $$`):
+    * Create and switch to a **N**ew **B**ranch named `<name>`.
+    * Spaces in `<name>` must automatically be converted to underscores `_` (e.g. `/nb fix stats` becomes `fix_stats`).
+    * Ensure the branch is checked out and its `.bat` launcher is ready.
+  * `/rb`:
+    * **R**emove active **B**ranch: Switch back to `main`, then force delete the previously open feature branch and clean up its `.bat` launcher.
+  * `/mm`:
+    * **M**erge to **M**ain: Explicit permission to merge the current branch into `main`. Verify tests pass, switch to `main`, and merge the branch cleanly.
+  * `/exc`:
+    * Generate the regional `.xlsx` file based strictly on the rules in `xlsx.md` and export a copy directly to `C:\Users\lsamp\OneDrive\Desktop\PiW`.
+
