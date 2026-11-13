@@ -251,10 +251,13 @@ if (!Array.isArray(routes)) {
 
     const mainChallenges = [];
     const extraChallenges = {};
+    const hChallenges = [];
 
     for (const u of unlocks) {
         if (!u.challengeName) continue;
-        if (u.challengeName.startsWith('Challenge ') || (!u.challengeName.startsWith('Extra') && !u.challengeName.startsWith('Key') && !u.challengeName.includes('League'))) {
+        if (u.challengeName.endsWith(' H')) {
+            hChallenges.push(u);
+        } else if (u.challengeName.startsWith('Challenge ') || (!u.challengeName.startsWith('Extra') && !u.challengeName.startsWith('Key') && !u.challengeName.includes('League'))) {
              mainChallenges.push(u);
         } else if (u.challengeName.startsWith('Extra Challenge ')) {
             const parts = u.challengeName.split(' ');
@@ -268,6 +271,12 @@ if (!Array.isArray(routes)) {
             }
         }
     }
+
+    hChallenges.sort((a, b) => {
+        const numA = parseInt((a.challengeName.match(/(\d+)\s+H$/) || [])[1]) || 0;
+        const numB = parseInt((b.challengeName.match(/(\d+)\s+H$/) || [])[1]) || 0;
+        return numA - numB;
+    });
 
     for (const key in extraChallenges) {
         extraChallenges[key].sort((a,b) => {

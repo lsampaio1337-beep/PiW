@@ -12108,7 +12108,7 @@ export const galarUnlocks = [
       "Slumbering Weald"
     ],
     "requirements": {},
-    "challengeName": "Challenge Base 1"
+    "challengeName": "Challenge Base 01"
   },
   {
     "areaId": "Slumbering Weald",
@@ -12116,7 +12116,7 @@ export const galarUnlocks = [
       "Route 1 (Galar)"
     ],
     "requirements": {},
-    "challengeName": "Challenge Base 2"
+    "challengeName": "Challenge Base 02"
   },
   {
     "areaId": "Route 1 (Galar)",
@@ -12124,7 +12124,7 @@ export const galarUnlocks = [
       "Wedgehurst (including Wedgehurst Station)"
     ],
     "requirements": {},
-    "challengeName": "Challenge Base 3"
+    "challengeName": "Challenge Base 03"
   },
   {
     "areaId": "Wedgehurst (including Wedgehurst Station)",
@@ -12132,7 +12132,7 @@ export const galarUnlocks = [
       "Route 2 (Galar)"
     ],
     "requirements": {},
-    "challengeName": "Challenge Base 4"
+    "challengeName": "Challenge Base 04"
   },
   {
     "areaId": "Route 2 (Galar)",
@@ -12140,7 +12140,7 @@ export const galarUnlocks = [
       "Meetup Spot (Wild Area)"
     ],
     "requirements": {},
-    "challengeName": "Challenge Base 5"
+    "challengeName": "Challenge Base 05"
   },
   {
     "areaId": "Meetup Spot (Wild Area)",
@@ -12148,7 +12148,7 @@ export const galarUnlocks = [
       "Rolling Fields (Wild Area)"
     ],
     "requirements": {},
-    "challengeName": "Challenge Base 6"
+    "challengeName": "Challenge Base 06"
   },
   {
     "areaId": "Rolling Fields (Wild Area)",
@@ -12156,7 +12156,7 @@ export const galarUnlocks = [
       "Dappled Grove (Wild Area)"
     ],
     "requirements": {},
-    "challengeName": "Challenge Base 7"
+    "challengeName": "Challenge Base 07"
   },
   {
     "areaId": "Dappled Grove (Wild Area)",
@@ -12164,7 +12164,7 @@ export const galarUnlocks = [
       "West Lake Axewell (Wild Area)"
     ],
     "requirements": {},
-    "challengeName": "Challenge Base 8"
+    "challengeName": "Challenge Base 08"
   },
   {
     "areaId": "West Lake Axewell (Wild Area)",
@@ -12172,7 +12172,7 @@ export const galarUnlocks = [
       "West Lake Axewell (Wild Area) (Water)"
     ],
     "requirements": {},
-    "challengeName": "Challenge Base 9"
+    "challengeName": "Challenge Base 09"
   },
   {
     "areaId": "West Lake Axewell (Wild Area) (Water)",
@@ -12249,13 +12249,13 @@ export const galarUnlocks = [
   {
     "areaId": "Route 4 (Galar)",
     "unlocks": [
-      "Turffield & Turffield Stadium (Gym 1 \u2014 Grass)"
+      "Turffield & Turffield Stadium (Gym 1 — Grass)"
     ],
     "requirements": {},
     "challengeName": "Challenge Base 19"
   },
   {
-    "areaId": "Turffield & Turffield Stadium (Gym 1 \u2014 Grass)",
+    "areaId": "Turffield & Turffield Stadium (Gym 1 — Grass)",
     "unlocks": [
       "Route 5 (Galar)"
     ],
@@ -12270,13 +12270,13 @@ export const galarUnlocks = [
   {
     "areaId": "Route 5 (Galar)",
     "unlocks": [
-      "Hulbury & Hulbury Stadium (Gym 2 \u2014 Water)"
+      "Hulbury & Hulbury Stadium (Gym 2 — Water)"
     ],
     "requirements": {},
     "challengeName": "Challenge Base 21"
   },
   {
-    "areaId": "Hulbury & Hulbury Stadium (Gym 2 \u2014 Water)",
+    "areaId": "Hulbury & Hulbury Stadium (Gym 2 — Water)",
     "unlocks": [
       "Galar Mine No. 2"
     ],
@@ -12299,13 +12299,13 @@ export const galarUnlocks = [
   {
     "areaId": "Motostoke Outskirts",
     "unlocks": [
-      "Motostoke Stadium (Gym 3 \u2014 Fire)"
+      "Motostoke Stadium (Gym 3 — Fire)"
     ],
     "requirements": {},
     "challengeName": "Challenge Base 24"
   },
   {
-    "areaId": "Motostoke Stadium (Gym 3 \u2014 Fire)",
+    "areaId": "Motostoke Stadium (Gym 3 — Fire)",
     "unlocks": [
       "Motostoke Riverbank (Wild Area)"
     ],
@@ -12400,13 +12400,13 @@ export const galarUnlocks = [
   {
     "areaId": "Route 6 (Galar)",
     "unlocks": [
-      "Stow-on-Side & Stow-on-Side Stadium (Gym 4 \u2014 Fighting/Ghost)"
+      "Stow-on-Side & Stow-on-Side Stadium (Gym 4 — Fighting/Ghost)"
     ],
     "requirements": {},
     "challengeName": "Challenge Base 36"
   },
   {
-    "areaId": "Stow-on-Side & Stow-on-Side Stadium (Gym 4 \u2014 Fighting/Ghost)",
+    "areaId": "Stow-on-Side & Stow-on-Side Stadium (Gym 4 — Fighting/Ghost)",
     "unlocks": [
       "Glimwood Tangle"
     ],
@@ -12421,13 +12421,13 @@ export const galarUnlocks = [
   {
     "areaId": "Glimwood Tangle",
     "unlocks": [
-      "Ballonlea & Ballonlea Stadium (Gym 5 \u2014 Fairy)"
+      "Ballonlea & Ballonlea Stadium (Gym 5 — Fairy)"
     ],
     "requirements": {},
     "challengeName": "Challenge Base 38"
   },
   {
-    "areaId": "Ballonlea & Ballonlea Stadium (Gym 5 \u2014 Fairy)",
+    "areaId": "Ballonlea & Ballonlea Stadium (Gym 5 — Fairy)",
     "unlocks": [
       "Route 7 (Galar)"
     ],
@@ -12450,13 +12450,13 @@ export const galarUnlocks = [
   {
     "areaId": "Route 8 (including Steamdrift Way)",
     "unlocks": [
-      "Circhester & Circhester Stadium (Gym 6 \u2014 Rock/Ice)"
+      "Circhester & Circhester Stadium (Gym 6 — Rock/Ice)"
     ],
     "requirements": {},
     "challengeName": "Challenge Base 41"
   },
   {
-    "areaId": "Circhester & Circhester Stadium (Gym 6 \u2014 Rock/Ice)",
+    "areaId": "Circhester & Circhester Stadium (Gym 6 — Rock/Ice)",
     "unlocks": [
       "Route 9 (Circhester Bay)"
     ],
@@ -12471,21 +12471,21 @@ export const galarUnlocks = [
   {
     "areaId": "Route 9 (Circhester Bay)",
     "unlocks": [
-      "Axew's Eye (Wild Area \u2014 Water Bike)"
+      "Axew's Eye (Wild Area — Water Bike)"
     ],
     "requirements": {},
     "challengeName": "Challenge Base 43"
   },
   {
-    "areaId": "Axew's Eye (Wild Area \u2014 Water Bike)",
+    "areaId": "Axew's Eye (Wild Area — Water Bike)",
     "unlocks": [
-      "Lake of Outrage (Wild Area \u2014 Water Bike)"
+      "Lake of Outrage (Wild Area — Water Bike)"
     ],
     "requirements": {},
     "challengeName": "Challenge Base 44"
   },
   {
-    "areaId": "Lake of Outrage (Wild Area \u2014 Water Bike)",
+    "areaId": "Lake of Outrage (Wild Area — Water Bike)",
     "unlocks": [
       "Route 9 (Outer Spikemuth)"
     ],
@@ -12495,15 +12495,15 @@ export const galarUnlocks = [
   {
     "areaId": "Route 9 (Outer Spikemuth)",
     "unlocks": [
-      "Spikemuth & Spikemuth Gym (Gym 7 \u2014 Dark)"
+      "Spikemuth & Spikemuth Gym (Gym 7 — Dark)"
     ],
     "requirements": {},
     "challengeName": "Challenge Base 46"
   },
   {
-    "areaId": "Spikemuth & Spikemuth Gym (Gym 7 \u2014 Dark)",
+    "areaId": "Spikemuth & Spikemuth Gym (Gym 7 — Dark)",
     "unlocks": [
-      "Hammerlocke Stadium (Gym 8 \u2014 Dragon)"
+      "Hammerlocke Stadium (Gym 8 — Dragon)"
     ],
     "requirements": {
       "earnBadge": {
@@ -12514,7 +12514,7 @@ export const galarUnlocks = [
     "challengeName": "Challenge Base 47"
   },
   {
-    "areaId": "Hammerlocke Stadium (Gym 8 \u2014 Dragon)",
+    "areaId": "Hammerlocke Stadium (Gym 8 — Dragon)",
     "unlocks": [
       "Route 10 (Galar)"
     ],
@@ -12561,8 +12561,7 @@ export const galarUnlocks = [
   {
     "areaId": "Battle Tower (Wyndon)",
     "unlocks": [
-      "Fields of Honor",
-      "Slippery Slope"
+      "Fields of Honor"
     ],
     "requirements": {},
     "challengeName": "Challenge Base 53"
@@ -12573,7 +12572,7 @@ export const galarUnlocks = [
       "Master Dojo"
     ],
     "requirements": {},
-    "challengeName": "Extra Challenge EArmor 1"
+    "challengeName": "Extra Challenge EArmor 01"
   },
   {
     "areaId": "Master Dojo",
@@ -12581,7 +12580,7 @@ export const galarUnlocks = [
       "Soothing Wetlands"
     ],
     "requirements": {},
-    "challengeName": "Extra Challenge EArmor 2"
+    "challengeName": "Extra Challenge EArmor 02"
   },
   {
     "areaId": "Soothing Wetlands",
@@ -12589,7 +12588,7 @@ export const galarUnlocks = [
       "Forest of Focus"
     ],
     "requirements": {},
-    "challengeName": "Extra Challenge EArmor 3"
+    "challengeName": "Extra Challenge EArmor 03"
   },
   {
     "areaId": "Forest of Focus",
@@ -12597,7 +12596,7 @@ export const galarUnlocks = [
       "Challenge Beach"
     ],
     "requirements": {},
-    "challengeName": "Extra Challenge EArmor 4"
+    "challengeName": "Extra Challenge EArmor 04"
   },
   {
     "areaId": "Challenge Beach",
@@ -12605,7 +12604,7 @@ export const galarUnlocks = [
       "Challenge Beach (Water)"
     ],
     "requirements": {},
-    "challengeName": "Extra Challenge EArmor 5"
+    "challengeName": "Extra Challenge EArmor 05"
   },
   {
     "areaId": "Challenge Beach (Water)",
@@ -12613,7 +12612,7 @@ export const galarUnlocks = [
       "Tower of Waters"
     ],
     "requirements": {},
-    "challengeName": "Extra Challenge EArmor 6"
+    "challengeName": "Extra Challenge EArmor 06"
   },
   {
     "areaId": "Tower of Waters",
@@ -12621,7 +12620,7 @@ export const galarUnlocks = [
       "Brawlers' Cave"
     ],
     "requirements": {},
-    "challengeName": "Extra Challenge EArmor 7"
+    "challengeName": "Extra Challenge EArmor 07"
   },
   {
     "areaId": "Brawlers' Cave",
@@ -12629,7 +12628,7 @@ export const galarUnlocks = [
       "Challenge Road"
     ],
     "requirements": {},
-    "challengeName": "Extra Challenge EArmor 8"
+    "challengeName": "Extra Challenge EArmor 08"
   },
   {
     "areaId": "Challenge Road",
@@ -12637,7 +12636,7 @@ export const galarUnlocks = [
       "Tower of Darkness"
     ],
     "requirements": {},
-    "challengeName": "Extra Challenge EArmor 9"
+    "challengeName": "Extra Challenge EArmor 09"
   },
   {
     "areaId": "Tower of Darkness",
@@ -12729,7 +12728,9 @@ export const galarUnlocks = [
   },
   {
     "areaId": "Honeycalm Island",
-    "unlocks": [],
+    "unlocks": [
+      "Slippery Slope"
+    ],
     "requirements": {},
     "challengeName": "Extra Challenge EArmor 21"
   },
@@ -12739,7 +12740,7 @@ export const galarUnlocks = [
       "Max Lair"
     ],
     "requirements": {},
-    "challengeName": "Extra Challenge ECrown 1"
+    "challengeName": "Extra Challenge ECrown 01"
   },
   {
     "areaId": "Max Lair",
@@ -12747,7 +12748,7 @@ export const galarUnlocks = [
       "Freezington"
     ],
     "requirements": {},
-    "challengeName": "Extra Challenge ECrown 2"
+    "challengeName": "Extra Challenge ECrown 02"
   },
   {
     "areaId": "Freezington",
@@ -12755,7 +12756,7 @@ export const galarUnlocks = [
       "Frostpoint Field"
     ],
     "requirements": {},
-    "challengeName": "Extra Challenge ECrown 3"
+    "challengeName": "Extra Challenge ECrown 03"
   },
   {
     "areaId": "Frostpoint Field",
@@ -12763,7 +12764,7 @@ export const galarUnlocks = [
       "Giant's Bed"
     ],
     "requirements": {},
-    "challengeName": "Extra Challenge ECrown 4"
+    "challengeName": "Extra Challenge ECrown 04"
   },
   {
     "areaId": "Giant's Bed",
@@ -12771,7 +12772,7 @@ export const galarUnlocks = [
       "Giant's Bed (Water)"
     ],
     "requirements": {},
-    "challengeName": "Extra Challenge ECrown 5"
+    "challengeName": "Extra Challenge ECrown 05"
   },
   {
     "areaId": "Giant's Bed (Water)",
@@ -12779,7 +12780,7 @@ export const galarUnlocks = [
       "Old Cemetery"
     ],
     "requirements": {},
-    "challengeName": "Extra Challenge ECrown 6"
+    "challengeName": "Extra Challenge ECrown 06"
   },
   {
     "areaId": "Old Cemetery",
@@ -12787,7 +12788,7 @@ export const galarUnlocks = [
       "Rock Peak Ruins"
     ],
     "requirements": {},
-    "challengeName": "Extra Challenge ECrown 7"
+    "challengeName": "Extra Challenge ECrown 07"
   },
   {
     "areaId": "Rock Peak Ruins",
@@ -12795,7 +12796,7 @@ export const galarUnlocks = [
       "Iron Ruins"
     ],
     "requirements": {},
-    "challengeName": "Extra Challenge ECrown 8"
+    "challengeName": "Extra Challenge ECrown 08"
   },
   {
     "areaId": "Iron Ruins",
@@ -12803,7 +12804,7 @@ export const galarUnlocks = [
       "Snowslide Slope"
     ],
     "requirements": {},
-    "challengeName": "Extra Challenge ECrown 9"
+    "challengeName": "Extra Challenge ECrown 09"
   },
   {
     "areaId": "Snowslide Slope",
@@ -12919,8 +12920,128 @@ export const galarUnlocks = [
   },
   {
     "areaId": "Dyna Tree Hill",
-    "unlocks": [],
+    "unlocks": [
+      "Slumbering Weald"
+    ],
     "requirements": {},
     "challengeName": "Extra Challenge ECrown 24"
+  },
+  {
+    "areaId": "Slumbering Weald",
+    "unlocks": [
+      "Route 2 (Galar)"
+    ],
+    "requirements": {},
+    "challengeName": "Challenge Base 02 H"
+  },
+  {
+    "areaId": "Route 2 (Galar)",
+    "unlocks": [
+      "West Lake Axewell (Wild Area) (Water)"
+    ],
+    "requirements": {},
+    "challengeName": "Challenge Base 05 H"
+  },
+  {
+    "areaId": "West Lake Axewell (Wild Area) (Water)",
+    "unlocks": [
+      "Watchtower Ruins (Wild Area)"
+    ],
+    "requirements": {},
+    "challengeName": "Challenge Base 10 H"
+  },
+  {
+    "areaId": "Watchtower Ruins (Wild Area)",
+    "unlocks": [
+      "East Lake Axewell (Wild Area)"
+    ],
+    "requirements": {},
+    "challengeName": "Challenge Base 11 H"
+  },
+  {
+    "areaId": "East Lake Axewell (Wild Area)",
+    "unlocks": [
+      "South Lake Miloch (Wild Area)"
+    ],
+    "requirements": {},
+    "challengeName": "Challenge Base 12 H"
+  },
+  {
+    "areaId": "South Lake Miloch (Wild Area)",
+    "unlocks": [
+      "Giant's Seat (Wild Area)"
+    ],
+    "requirements": {},
+    "challengeName": "Challenge Base 13 H"
+  },
+  {
+    "areaId": "Giant's Seat (Wild Area)",
+    "unlocks": [
+      "North Lake Miloch (Wild Area)"
+    ],
+    "requirements": {},
+    "challengeName": "Challenge Base 14 H"
+  },
+  {
+    "areaId": "North Lake Miloch (Wild Area)",
+    "unlocks": [
+      "Motostoke Riverbank (Wild Area)"
+    ],
+    "requirements": {},
+    "challengeName": "Challenge Base 15 H"
+  },
+  {
+    "areaId": "Motostoke Riverbank (Wild Area)",
+    "unlocks": [
+      "Bridge Field (Wild Area)"
+    ],
+    "requirements": {},
+    "challengeName": "Challenge Base 26 H"
+  },
+  {
+    "areaId": "Bridge Field (Wild Area)",
+    "unlocks": [
+      "Stony Wilderness (Wild Area)"
+    ],
+    "requirements": {},
+    "challengeName": "Challenge Base 27 H"
+  },
+  {
+    "areaId": "Stony Wilderness (Wild Area)",
+    "unlocks": [
+      "Giant's Mirror (Wild Area)"
+    ],
+    "requirements": {},
+    "challengeName": "Challenge Base 28 H"
+  },
+  {
+    "areaId": "Giant's Mirror (Wild Area)",
+    "unlocks": [
+      "Dusty Bowl (Wild Area)"
+    ],
+    "requirements": {},
+    "challengeName": "Challenge Base 29 H"
+  },
+  {
+    "areaId": "Dusty Bowl (Wild Area)",
+    "unlocks": [
+      "Giant's Cap (Wild Area)"
+    ],
+    "requirements": {},
+    "challengeName": "Challenge Base 31 H"
+  },
+  {
+    "areaId": "Giant's Cap (Wild Area)",
+    "unlocks": [
+      "Hammerlocke Hills (Wild Area)"
+    ],
+    "requirements": {},
+    "challengeName": "Challenge Base 33 H"
+  },
+  {
+    "areaId": "Hammerlocke Hills (Wild Area)",
+    "unlocks": [],
+    "requirements": {},
+    "challengeName": "Challenge Base 34 H"
   }
 ];
