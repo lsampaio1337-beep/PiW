@@ -492,31 +492,6 @@ function setupMapWindowDimensions(currentRegionObj, targetWidth) {
                 scaler.style.width = '100%';
                 scaler.style.transform = 'none';
             }
-
-            const overlay = winEl.querySelector('#map-inner-modal-overlay');
-            if (overlay && !overlay._backdropClickBound) {
-                overlay._backdropClickBound = true;
-                overlay.addEventListener('click', (e) => {
-                    if (typeof window.handleMapInnerModalBackdropClick === 'function') {
-                        window.handleMapInnerModalBackdropClick(e);
-                    }
-                });
-            }
-
-            if (!winEl._mapBackdropClickBound) {
-                winEl._mapBackdropClickBound = true;
-                winEl.addEventListener('click', (e) => {
-                    const header = winEl.querySelector('.window-header');
-                    if (header && header.contains(e.target)) return;
-
-                    const innerModal = winEl.querySelector('#map-inner-modal');
-                    if (innerModal && !innerModal.contains(e.target)) {
-                        if (typeof window.handleMapInnerModalBackdropClick === 'function') {
-                            window.handleMapInnerModalBackdropClick(e);
-                        }
-                    }
-                });
-            }
         }
     }
 }
@@ -604,7 +579,8 @@ window.handleMapInnerModalBackdropClick = function(event) {
     const modal = document.getElementById('map-inner-modal');
     if (!overlay || overlay.style.display === 'none') return;
 
-    if (event && modal && modal.contains(event.target)) {
+    // Only close if clicked directly on the overlay backdrop outside the inner modal
+    if (event && event.target !== overlay) {
         return;
     }
 

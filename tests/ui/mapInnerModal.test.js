@@ -1,7 +1,11 @@
 import { jest } from '@jest/globals';
 
 global.state = {
-    config: { gyms: [] },
+    config: {
+        gyms: [
+            { name: 'Pewter Gym', leader: 'Brock', trainers: [] }
+        ]
+    },
     globalStats: {},
     stats: {}
 };
@@ -11,7 +15,7 @@ const mockBattleSystem = {
     gymState: {
         isActive: false
     },
-    stopGymBattle: jest.fn()
+    stopGymBattle: jest.fn(), stop: jest.fn()
 };
 
 global.globals = {
@@ -42,11 +46,13 @@ describe('Map Inner Modal Outside Click Behavior', () => {
     let contentArea;
     let enterBtn;
     let WindowManager;
+    let navigateToLocation;
 
     beforeAll(async () => {
         const wmMod = await import('../../src/windowManager.js');
         WindowManager = wmMod.WindowManager;
-        await import('../../src/ui/map.js');
+        const mapMod = await import('../../src/ui/map.js');
+        navigateToLocation = mapMod.navigateToLocation;
     });
 
     beforeEach(() => {
@@ -59,6 +65,7 @@ describe('Map Inner Modal Outside Click Behavior', () => {
                     <div class="window-content-scaler">
                         <div class="content-panel">
                             <div id="interactive-map">
+                                <div id="map-marker-pewter-gym" class="map-marker"></div>
                                 <div id="map-inner-modal-overlay" style="display: flex;">
                                     <div id="map-inner-modal" class="floating-window">
                                         <div class="window-header">
@@ -92,7 +99,7 @@ describe('Map Inner Modal Outside Click Behavior', () => {
         };
     });
 
-    test('Closes inner modal when clicking outside inner window during first phase (Enter button displayed)', () => {
+    test('Closes inner modal when clicking outside inner window (on overlay backdrop) during first phase', () => {
         expect(overlay.style.display).toBe('flex');
 
         window.handleMapInnerModalBackdropClick({ target: overlay });
@@ -120,6 +127,22 @@ describe('Map Inner Modal Outside Click Behavior', () => {
         enterBtn.remove();
 
         window.handleMapInnerModalBackdropClick({ target: overlay });
+
+        expect(overlay.style.display).toBe('flex');
+    });
+
+    test('Clicking a map spot / marker opens gym modal and does NOT close it via bubbling', () => {
+        overlay.style.display = 'none';
+
+        // Simulate navigating to location as happens on marker click
+        navigateToLocation('Pewter Gym');
+
+        // Modal should now be open
+        expect(overlay.style.display).toBe('flex');
+
+        // Clicking the marker itself should NOT trigger handleMapInnerModalBackdropClick to close
+        const marker = document.getElementById('map-marker-pewter-gym');
+        window.handleMapInnerModalBackdropClick({ target: marker });
 
         expect(overlay.style.display).toBe('flex');
     });
