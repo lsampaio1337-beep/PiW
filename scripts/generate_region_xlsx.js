@@ -638,6 +638,10 @@ const mainSeenSets = [];
         processUnlocks(extraChallenges[k], false, mainChallenges.length, splitSeenSet);
     });
 
+    if (typeof hChallenges !== 'undefined' && hChallenges.length > 0) {
+        processUnlocks(hChallenges, false, mainChallenges.length, new Set(mainSeenSet));
+    }
+
     // Add remaining maps that haven't been added yet
     const generatedRoutes = new Set(routesData.map(r => r["Route"]));
     const allMapNames = Object.values(mapCoords).map(m => m.name);
@@ -893,13 +897,44 @@ const missingData = [];
         }
     });
 
-    const routeSecondaryEmpty = routesData.every(r => !r["Route (Secondary)"]);
+    const mergedRoutesData = [];
+    const seenRoutePoke = new Map();
+    for (const row of routesData) {
+        const route = row["Route"];
+        const pkName = row["Pokemon Name"];
+        if (route && pkName) {
+            const key = `${route}|||${pkName}`;
+            if (seenRoutePoke.has(key)) {
+                const existing = seenRoutePoke.get(key);
+                if (typeof existing["LvlMin"] === 'number' && typeof row["LvlMin"] === 'number') {
+                    existing["LvlMin"] = Math.min(existing["LvlMin"], row["LvlMin"]);
+                }
+                if (typeof existing["LvlMax"] === 'number' && typeof row["LvlMax"] === 'number') {
+                    existing["LvlMax"] = Math.max(existing["LvlMax"], row["LvlMax"]);
+                }
+                if (typeof existing["Sugest LvlMin"] === 'number' && typeof row["Sugest LvlMin"] === 'number') {
+                    existing["Sugest LvlMin"] = Math.min(existing["Sugest LvlMin"], row["Sugest LvlMin"]);
+                }
+                if (typeof existing["Sugest LvlMax"] === 'number' && typeof row["Sugest LvlMax"] === 'number') {
+                    existing["Sugest LvlMax"] = Math.max(existing["Sugest LvlMax"], row["Sugest LvlMax"]);
+                }
+                if (existing["Challenge"] === row["Challenge"] && typeof existing["% Appearance"] === 'number' && typeof row["% Appearance"] === 'number') {
+                    existing["% Appearance"] += row["% Appearance"];
+                }
+                continue;
+            }
+            seenRoutePoke.set(key, row);
+        }
+        mergedRoutesData.push(row);
+    }
+
+    const routeSecondaryEmpty = mergedRoutesData.every(r => !r["Route (Secondary)"]);
     if (routeSecondaryEmpty) {
-        routesData.forEach(r => delete r["Route (Secondary)"]);
+        mergedRoutesData.forEach(r => delete r["Route (Secondary)"]);
     }
 
     const wb = xlsx.utils.book_new();
-    const wsRoutes = xlsx.utils.json_to_sheet(routesData);
+    const wsRoutes = xlsx.utils.json_to_sheet(mergedRoutesData);
     xlsx.utils.book_append_sheet(wb, wsRoutes, "Routes");
     const wsChallenges = xlsx.utils.json_to_sheet(challengesData);
     xlsx.utils.book_append_sheet(wb, wsChallenges, "Challenges");
