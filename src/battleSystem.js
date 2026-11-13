@@ -664,10 +664,10 @@ class BattleSystem {
         if (typeof window.switchView === 'function') {
             window.switchView("BATTLE_ARENA");
         }
-        this._applyGymArenaBackground(gym, gymIndex);
         if (typeof window.updateUI === 'function') {
             window.updateUI();
         }
+        this._applyGymArenaBackground(gym, gymIndex);
     }
 
     _applyGymArenaBackground(gym, gymIndex) {
@@ -875,20 +875,38 @@ class BattleSystem {
         }
     }
 
-    stopGymBattle() {
+    stopGymBattle(keepStaticInGym = false) {
+        const lastGym = this.gymState.gym;
+        const lastGymIndex = this.gymState.gymIndex;
         this.gymState.isActive = false;
+        this.gymState.inCombat = false;
         this.gymState.gym = null;
         this.gymState.gymIndex = 0;
         this.stop();
+        this.activeEncounter = null;
+        this.isSearching = false;
+
+        // Re-enable map region tab buttons
+        document.querySelectorAll('.map-region-tab-btn').forEach(btn => {
+            btn.disabled = false;
+            btn.style.opacity = '';
+            btn.style.pointerEvents = '';
+        });
 
         if (typeof window.closeMapInnerModal === 'function') {
              window.closeMapInnerModal();
         }
 
-        // Return to normal map or idle
-        if (typeof window.navigateToLocation === 'function') {
-             // Reset UI back to just the gym entry
+        // When leaving after winning, keep player's Pokemon static in gym main view until another spot is clicked
+        if (!keepStaticInGym && typeof window.navigateToLocation === 'function') {
              window.navigateToLocation(this.state.currentRoute);
+        } else if (keepStaticInGym) {
+             if (typeof window.updateUI === 'function') {
+                 window.updateUI();
+             }
+             if (lastGym) {
+                 this._applyGymArenaBackground(lastGym, lastGymIndex);
+             }
         }
     }
 
