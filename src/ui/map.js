@@ -643,17 +643,27 @@ export function navigateToLocation(locationName) {
 
     const battleSystem = globals.battleSystem;
 
+    const isGymLocation = locationName.includes("Gym") || locationName.includes("Pokemon League");
+
     // Do not set currentRoute to Gym or Pokemon League to keep player fighting on current route
-    if (!locationName.includes("Gym") && !locationName.includes("Pokemon League")) {
+    if (!isGymLocation) {
         state.currentRoute = locationName;
     }
 
-    if (window.closeModal) window.closeModal();
+    if (!isGymLocation) {
+        if (window.closeModal) window.closeModal();
 
-    // Ensure main view and party windows are open when navigating, especially to places like Professor Lab
-    if (window.windowManager) {
-        window.windowManager.toggleWindow('main-view-window', true);
-        window.windowManager.toggleWindow('party-window', true);
+        // Ensure main view and party windows are open when navigating, especially to places like Professor Lab
+        if (window.windowManager) {
+            window.windowManager.toggleWindow('main-view-window', true);
+            window.windowManager.toggleWindow('party-window', true);
+        }
+    } else {
+        // Keep focus on map window when opening a gym so main-view is not brought to top
+        if (window.windowManager) {
+            const mapWin = document.getElementById('window-map');
+            if (mapWin) window.windowManager.focusWindow(mapWin);
+        }
     }
 
     if (locationName === "Battle Stadium") {
@@ -1025,35 +1035,15 @@ export function navigateToLocation(locationName) {
         }
 
         const uiContainer = document.createElement('div');
-        uiContainer.style.backgroundColor = 'rgba(0,0,0,0.8)';
-        uiContainer.style.display = 'flex';
-        uiContainer.style.flexDirection = 'column';
-        uiContainer.style.alignItems = 'center';
-        uiContainer.style.padding = '20px';
-        uiContainer.style.borderRadius = '8px';
-        uiContainer.style.position = 'absolute';
-        uiContainer.style.left = '15%';
-        uiContainer.style.top = '50%';
-        uiContainer.style.transform = 'translateY(-50%)';
-        uiContainer.style.minWidth = '300px';
-        uiContainer.style.zIndex = '1';
+        uiContainer.id = 'gym-ui-container';
+        uiContainer.className = 'gym-ui-container';
 
         const headerEl = document.createElement('h2');
         headerEl.id = 'gym-title-header';
-        headerEl.style.marginTop = '0';
-        headerEl.style.color = 'white';
         headerEl.textContent = locationName;
 
         const contentArea = document.createElement('div');
         contentArea.id = 'gym-content-area';
-        contentArea.style.position = 'relative';
-        contentArea.style.width = '100%';
-        contentArea.style.textAlign = 'center';
-        contentArea.style.display = 'flex';
-        contentArea.style.flexDirection = 'column';
-        contentArea.style.gap = '10px';
-        contentArea.style.alignItems = 'center';
-        contentArea.style.zIndex = '2';
 
         uiContainer.appendChild(headerEl);
         uiContainer.appendChild(contentArea);
@@ -1127,7 +1117,9 @@ export function navigateToLocation(locationName) {
              battleSystem.searchNext(); // Restart search if we moved
         }
     }
-    updateUI();
+    if (!isGymLocation) {
+        updateUI();
+    }
 }
 
 export function showMapTooltip(e, locationName) {

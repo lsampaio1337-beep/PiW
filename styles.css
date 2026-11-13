@@ -687,6 +687,67 @@ input[type="number"] {
     pointer-events: auto;
 }
 
+#map-inner-modal .window-content-container,
+#map-inner-modal-content {
+    container-type: inline-size;
+}
+
+.gym-ui-container {
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: clamp(8px, 3cqw, 20px);
+    border-radius: clamp(4px, 1.5cqw, 10px);
+    position: absolute;
+    left: 15%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: clamp(180px, 38cqw, 420px);
+    max-height: 85%;
+    box-sizing: border-box;
+    overflow-y: auto;
+    z-index: 1;
+}
+
+.gym-ui-container #gym-title-header {
+    margin-top: 0;
+    margin-bottom: clamp(6px, 1.5cqw, 12px);
+    color: white;
+    font-size: clamp(14px, 3.2cqw, 24px);
+    text-align: center;
+}
+
+.gym-ui-container #gym-content-area {
+    position: relative;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(6px, 1.5cqw, 12px);
+    align-items: center;
+    z-index: 2;
+}
+
+.gym-ui-container #gym-rest-area {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(6px, 1.5cqw, 10px);
+    width: 100%;
+}
+
+.gym-ui-container #gym-rest-area p {
+    font-size: clamp(10px, 2.2cqw, 14px);
+    margin-top: 0;
+    margin-bottom: clamp(4px, 1cqw, 8px);
+}
+
+.gym-ui-container .action-btn {
+    padding: clamp(6px, 1.8cqw, 10px) clamp(10px, 3cqw, 20px);
+    font-size: clamp(11px, 2.3cqw, 15px);
+    border-radius: clamp(3px, 1cqw, 6px);
+}
+
 /* --- Action Buttons --- */
 .action-btn {
     padding: 10px 20px;

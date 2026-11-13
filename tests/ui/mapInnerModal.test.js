@@ -160,4 +160,34 @@ describe('Map Inner Modal Outside Click Behavior', () => {
         expect(spy).toHaveBeenCalledWith(dummyEvent);
         spy.mockRestore();
     });
+
+    test('Navigating to a gym does NOT toggle main-view-window, does NOT call updateUI, and keeps focus on map', () => {
+        const toggleSpy = jest.fn();
+        const focusSpy = jest.fn();
+        window.windowManager = {
+            toggleWindow: toggleSpy,
+            focusWindow: focusSpy
+        };
+
+        const uiMod = require('../../src/ui.js');
+        uiMod.updateUI.mockClear();
+
+        navigateToLocation('Pewter Gym');
+
+        // main-view-window must NOT be toggled
+        expect(toggleSpy).not.toHaveBeenCalledWith('main-view-window', true);
+        // updateUI must NOT be called for gym navigation
+        expect(uiMod.updateUI).not.toHaveBeenCalled();
+        // focusWindow should be called with the map window
+        const mapWin = document.getElementById('window-map');
+        expect(focusSpy).toHaveBeenCalledWith(mapWin);
+    });
+
+    test('Gym modal UI container has responsive gym-ui-container class', () => {
+        navigateToLocation('Pewter Gym');
+
+        const uiContainer = document.getElementById('gym-ui-container');
+        expect(uiContainer).not.toBeNull();
+        expect(uiContainer.classList.contains('gym-ui-container')).toBe(true);
+    });
 });
