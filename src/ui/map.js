@@ -19,7 +19,17 @@ const parseAreaNames = (id) => {
     } else {
         result.push(id.replace(/\s*\(.*?\)/, "").trim());
     }
-    return result;
+
+    // Also include regional suffix variations so they match mapCoordinates names
+    let expanded = [];
+    result.forEach(area => {
+        expanded.push(area);
+        if (window.currentMapRegion) {
+            expanded.push(`${area} (${window.currentMapRegion})`);
+        }
+    });
+
+    return expanded;
 };
 
 window.currentMapRegion = 'Kanto';
@@ -238,6 +248,9 @@ function getUnlockedAreas() {
 
     unlockedAreas.add("PokeCenter & PokeMarket");
 
+    if (window.currentMapRegion === "Kanto") {
+        unlockedAreas.add("Route 1 (Kanto)");
+    }
     if (window.currentMapRegion === "Johto") {
         unlockedAreas.add("Route 29");
     }
