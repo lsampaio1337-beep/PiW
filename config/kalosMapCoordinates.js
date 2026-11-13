@@ -334,6 +334,11 @@ export const kalosMapCoordinates = {
     "x": 0,
     "y": 0
   },
+  "Friend Safari Nursery": {
+    "name": "Friend Safari Nursery",
+    "x": 0,
+    "y": 0
+  },
   "Friend Safari Near Entrance": {
     "name": "Friend Safari Near Entrance",
     "x": 0,

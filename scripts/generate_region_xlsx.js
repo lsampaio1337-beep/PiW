@@ -951,11 +951,13 @@ const missingData = [];
     xlsx.utils.book_append_sheet(wb, wsMissing, "Missing PK");
 
     const xdataDir = path.join(__dirname, '..', 'xdata');
+    const exportDir = 'C:\\Users\\lsamp\\OneDrive\\Desktop\\PiW';
+    const scanDir = fs.existsSync(exportDir) ? exportDir : xdataDir;
     const prefix = `${region.num}_${region.name}_Data_`;
     const counterRegex = new RegExp(`^${prefix.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(\\d+)\\.xlsx$`);
     let maxCounter = 0;
-    if (fs.existsSync(xdataDir)) {
-        for (const file of fs.readdirSync(xdataDir)) {
+    if (fs.existsSync(scanDir)) {
+        for (const file of fs.readdirSync(scanDir)) {
             const match = file.match(counterRegex);
             if (match) {
                 const num = parseInt(match[1], 10);

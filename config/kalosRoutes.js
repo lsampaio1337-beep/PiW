@@ -4,18 +4,6 @@ export const kalosRoutes = [
     "challengeName": "Challenge 1",
     "spawns": [
       {
-        "pokemonId": 10,
-        "minLevel": 3,
-        "maxLevel": 5,
-        "chance": 0.1429
-      },
-      {
-        "pokemonId": 13,
-        "minLevel": 3,
-        "maxLevel": 5,
-        "chance": 0.1429
-      },
-      {
         "pokemonId": 16,
         "minLevel": 3,
         "maxLevel": 5,
@@ -41,6 +29,18 @@ export const kalosRoutes = [
       },
       {
         "pokemonId": 664,
+        "minLevel": 3,
+        "maxLevel": 5,
+        "chance": 0.1429
+      },
+      {
+        "pokemonId": 261,
+        "minLevel": 3,
+        "maxLevel": 5,
+        "chance": 0.1429
+      },
+      {
+        "pokemonId": 163,
         "minLevel": 3,
         "maxLevel": 5,
         "chance": 0.1426
@@ -130,12 +130,6 @@ export const kalosRoutes = [
         "chance": 0.125
       },
       {
-        "pokemonId": 206,
-        "minLevel": 4,
-        "maxLevel": 6,
-        "chance": 0.125
-      },
-      {
         "pokemonId": 298,
         "minLevel": 4,
         "maxLevel": 6,
@@ -160,7 +154,13 @@ export const kalosRoutes = [
         "chance": 0.125
       },
       {
-        "pokemonId": 661,
+        "pokemonId": 544,
+        "minLevel": 4,
+        "maxLevel": 6,
+        "chance": 0.125
+      },
+      {
+        "pokemonId": 296,
         "minLevel": 4,
         "maxLevel": 6,
         "chance": 0.125
@@ -759,13 +759,13 @@ export const kalosRoutes = [
         "chance": 0.125
       },
       {
-        "pokemonId": 692,
+        "pokemonId": 693,
         "minLevel": 28,
         "maxLevel": 30,
         "chance": 0.125
       },
       {
-        "pokemonId": 693,
+        "pokemonId": 79,
         "minLevel": 28,
         "maxLevel": 30,
         "chance": 0.125
@@ -979,12 +979,6 @@ export const kalosRoutes = [
     "challengeName": "Challenge 22",
     "spawns": [
       {
-        "pokemonId": 79,
-        "minLevel": 24,
-        "maxLevel": 26,
-        "chance": 0.1111
-      },
-      {
         "pokemonId": 102,
         "minLevel": 24,
         "maxLevel": 26,
@@ -1030,6 +1024,12 @@ export const kalosRoutes = [
         "pokemonId": 103,
         "minLevel": 24,
         "maxLevel": 26,
+        "chance": 0.1111
+      },
+      {
+        "pokemonId": 317,
+        "minLevel": 24,
+        "maxLevel": 26,
         "chance": 0.1112
       }
     ]
@@ -1040,12 +1040,6 @@ export const kalosRoutes = [
     "spawns": [
       {
         "pokemonId": 91,
-        "minLevel": 28,
-        "maxLevel": 30,
-        "chance": 0.0909
-      },
-      {
-        "pokemonId": 131,
         "minLevel": 28,
         "maxLevel": 30,
         "chance": 0.0909
@@ -1102,6 +1096,12 @@ export const kalosRoutes = [
         "pokemonId": 226,
         "minLevel": 28,
         "maxLevel": 30,
+        "chance": 0.0909
+      },
+      {
+        "pokemonId": 195,
+        "minLevel": 28,
+        "maxLevel": 30,
         "chance": 0.091
       }
     ]
@@ -1114,67 +1114,73 @@ export const kalosRoutes = [
         "pokemonId": 131,
         "minLevel": 28,
         "maxLevel": 30,
-        "chance": 0.0909
+        "chance": 0.0833
       },
       {
         "pokemonId": 170,
         "minLevel": 28,
         "maxLevel": 30,
-        "chance": 0.0909
+        "chance": 0.0833
       },
       {
         "pokemonId": 171,
         "minLevel": 28,
         "maxLevel": 30,
-        "chance": 0.0909
+        "chance": 0.0833
       },
       {
         "pokemonId": 121,
         "minLevel": 28,
         "maxLevel": 30,
-        "chance": 0.0909
-      },
-      {
-        "pokemonId": 224,
-        "minLevel": 28,
-        "maxLevel": 30,
-        "chance": 0.0909
+        "chance": 0.0833
       },
       {
         "pokemonId": 458,
         "minLevel": 28,
         "maxLevel": 30,
-        "chance": 0.0909
+        "chance": 0.0833
       },
       {
         "pokemonId": 594,
         "minLevel": 28,
         "maxLevel": 30,
-        "chance": 0.0909
+        "chance": 0.0833
       },
       {
         "pokemonId": 704,
         "minLevel": 28,
         "maxLevel": 30,
-        "chance": 0.0909
+        "chance": 0.0833
       },
       {
         "pokemonId": 279,
         "minLevel": 28,
         "maxLevel": 30,
-        "chance": 0.0909
+        "chance": 0.0833
       },
       {
         "pokemonId": 119,
         "minLevel": 28,
         "maxLevel": 30,
-        "chance": 0.0909
+        "chance": 0.0833
       },
       {
         "pokemonId": 55,
         "minLevel": 28,
         "maxLevel": 30,
-        "chance": 0.091
+        "chance": 0.0833
+      },
+      {
+        "pokemonId": 516,
+        "minLevel": 28,
+        "maxLevel": 30,
+        "chance": 0.0833
+      },
+      {
+        "pokemonId": 689,
+        "minLevel": 28,
+        "maxLevel": 30,
+        "chance": 0.0837
       }
     ]
   },
@@ -1247,12 +1253,6 @@ export const kalosRoutes = [
         "chance": 0.1
       },
       {
-        "pokemonId": 195,
-        "minLevel": 30,
-        "maxLevel": 32,
-        "chance": 0.1
-      },
-      {
         "pokemonId": 451,
         "minLevel": 30,
         "maxLevel": 32,
@@ -1290,6 +1290,12 @@ export const kalosRoutes = [
       },
       {
         "pokemonId": 69,
+        "minLevel": 30,
+        "maxLevel": 32,
+        "chance": 0.1
+      },
+      {
+        "pokemonId": 678,
         "minLevel": 30,
         "maxLevel": 32,
         "chance": 0.1
@@ -1363,37 +1369,43 @@ export const kalosRoutes = [
         "pokemonId": 82,
         "minLevel": 37,
         "maxLevel": 39,
-        "chance": 0.1667
+        "chance": 0.1429
       },
       {
         "pokemonId": 101,
         "minLevel": 37,
         "maxLevel": 39,
-        "chance": 0.1667
+        "chance": 0.1429
       },
       {
         "pokemonId": 607,
         "minLevel": 37,
         "maxLevel": 39,
-        "chance": 0.1667
-      },
-      {
-        "pokemonId": 624,
-        "minLevel": 37,
-        "maxLevel": 39,
-        "chance": 0.1667
-      },
-      {
-        "pokemonId": 707,
-        "minLevel": 37,
-        "maxLevel": 39,
-        "chance": 0.1667
+        "chance": 0.1429
       },
       {
         "pokemonId": 568,
         "minLevel": 37,
         "maxLevel": 39,
-        "chance": 0.1665
+        "chance": 0.1429
+      },
+      {
+        "pokemonId": 680,
+        "minLevel": 37,
+        "maxLevel": 39,
+        "chance": 0.1429
+      },
+      {
+        "pokemonId": 24,
+        "minLevel": 37,
+        "maxLevel": 39,
+        "chance": 0.1429
+      },
+      {
+        "pokemonId": 625,
+        "minLevel": 37,
+        "maxLevel": 39,
+        "chance": 0.1426
       }
     ]
   },
@@ -1402,31 +1414,13 @@ export const kalosRoutes = [
     "challengeName": "Challenge 28",
     "spawns": [
       {
-        "pokemonId": 70,
-        "minLevel": 34,
-        "maxLevel": 36,
-        "chance": 0.1429
-      },
-      {
         "pokemonId": 419,
         "minLevel": 34,
         "maxLevel": 36,
         "chance": 0.1429
       },
       {
-        "pokemonId": 451,
-        "minLevel": 34,
-        "maxLevel": 36,
-        "chance": 0.1429
-      },
-      {
         "pokemonId": 590,
-        "minLevel": 34,
-        "maxLevel": 36,
-        "chance": 0.1429
-      },
-      {
-        "pokemonId": 707,
         "minLevel": 34,
         "maxLevel": 36,
         "chance": 0.1429
@@ -1439,6 +1433,24 @@ export const kalosRoutes = [
       },
       {
         "pokemonId": 710,
+        "minLevel": 34,
+        "maxLevel": 36,
+        "chance": 0.1429
+      },
+      {
+        "pokemonId": 188,
+        "minLevel": 34,
+        "maxLevel": 36,
+        "chance": 0.1429
+      },
+      {
+        "pokemonId": 301,
+        "minLevel": 34,
+        "maxLevel": 36,
+        "chance": 0.1429
+      },
+      {
+        "pokemonId": 670,
         "minLevel": 34,
         "maxLevel": 36,
         "chance": 0.1426
@@ -1622,12 +1634,6 @@ export const kalosRoutes = [
         "chance": 0.1429
       },
       {
-        "pokemonId": 195,
-        "minLevel": 45,
-        "maxLevel": 47,
-        "chance": 0.1429
-      },
-      {
         "pokemonId": 339,
         "minLevel": 45,
         "maxLevel": 47,
@@ -1647,6 +1653,12 @@ export const kalosRoutes = [
       },
       {
         "pokemonId": 207,
+        "minLevel": 45,
+        "maxLevel": 47,
+        "chance": 0.1429
+      },
+      {
+        "pokemonId": 8,
         "minLevel": 45,
         "maxLevel": 47,
         "chance": 0.1426
@@ -1897,18 +1909,6 @@ export const kalosRoutes = [
         "chance": 0.0909
       },
       {
-        "pokemonId": 213,
-        "minLevel": 58,
-        "maxLevel": 60,
-        "chance": 0.0909
-      },
-      {
-        "pokemonId": 533,
-        "minLevel": 58,
-        "maxLevel": 60,
-        "chance": 0.0909
-      },
-      {
         "pokemonId": 621,
         "minLevel": 58,
         "maxLevel": 60,
@@ -1936,6 +1936,18 @@ export const kalosRoutes = [
         "pokemonId": 22,
         "minLevel": 58,
         "maxLevel": 60,
+        "chance": 0.0909
+      },
+      {
+        "pokemonId": 31,
+        "minLevel": 58,
+        "maxLevel": 60,
+        "chance": 0.0909
+      },
+      {
+        "pokemonId": 34,
+        "minLevel": 58,
+        "maxLevel": 60,
         "chance": 0.091
       }
     ]
@@ -1956,12 +1968,6 @@ export const kalosRoutes = [
         "chance": 0.25
       },
       {
-        "pokemonId": 165,
-        "minLevel": 70,
-        "maxLevel": 75,
-        "chance": 0.25
-      },
-      {
         "pokemonId": 290,
         "minLevel": 70,
         "maxLevel": 75,
@@ -1972,6 +1978,12 @@ export const kalosRoutes = [
         "minLevel": 70,
         "maxLevel": 75,
         "chance": 0.25
+      },
+      {
+        "pokemonId": 504,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.25
       }
     ]
   },
@@ -1979,12 +1991,6 @@ export const kalosRoutes = [
     "name": "Mist Shore",
     "challengeName": "Extra Challenge A 2",
     "spawns": [
-      {
-        "pokemonId": 692,
-        "minLevel": 70,
-        "maxLevel": 75,
-        "chance": 0.2
-      },
       {
         "pokemonId": 418,
         "minLevel": 70,
@@ -2008,6 +2014,12 @@ export const kalosRoutes = [
         "minLevel": 70,
         "maxLevel": 75,
         "chance": 0.2
+      },
+      {
+        "pokemonId": 509,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.2
       }
     ]
   },
@@ -2028,25 +2040,25 @@ export const kalosRoutes = [
         "chance": 0.1667
       },
       {
-        "pokemonId": 108,
-        "minLevel": 70,
-        "maxLevel": 75,
-        "chance": 0.1667
-      },
-      {
         "pokemonId": 193,
         "minLevel": 70,
         "maxLevel": 75,
         "chance": 0.1667
       },
       {
-        "pokemonId": 708,
+        "pokemonId": 63,
         "minLevel": 70,
         "maxLevel": 75,
         "chance": 0.1667
       },
       {
-        "pokemonId": 63,
+        "pokemonId": 532,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 92,
         "minLevel": 70,
         "maxLevel": 75,
         "chance": 0.1665
@@ -2124,18 +2136,6 @@ export const kalosRoutes = [
         "chance": 0.1667
       },
       {
-        "pokemonId": 122,
-        "minLevel": 70,
-        "maxLevel": 75,
-        "chance": 0.1667
-      },
-      {
-        "pokemonId": 209,
-        "minLevel": 70,
-        "maxLevel": 75,
-        "chance": 0.1667
-      },
-      {
         "pokemonId": 27,
         "minLevel": 70,
         "maxLevel": 75,
@@ -2149,6 +2149,18 @@ export const kalosRoutes = [
       },
       {
         "pokemonId": 246,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 608,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 446,
         "minLevel": 70,
         "maxLevel": 75,
         "chance": 0.1665
@@ -2184,13 +2196,13 @@ export const kalosRoutes = [
         "chance": 0.1667
       },
       {
-        "pokemonId": 319,
+        "pokemonId": 17,
         "minLevel": 70,
         "maxLevel": 75,
         "chance": 0.1667
       },
       {
-        "pokemonId": 550,
+        "pokemonId": 15,
         "minLevel": 70,
         "maxLevel": 75,
         "chance": 0.1665
@@ -2244,58 +2256,142 @@ export const kalosRoutes = [
     "challengeName": "Extra Challenge D 1",
     "spawns": [
       {
-        "pokemonId": 538,
+        "pokemonId": 264,
         "minLevel": 70,
         "maxLevel": 75,
-        "chance": 0.1111
+        "chance": 0.0909
       },
       {
-        "pokemonId": 82,
+        "pokemonId": 162,
         "minLevel": 70,
         "maxLevel": 75,
-        "chance": 0.1111
+        "chance": 0.0909
       },
       {
         "pokemonId": 227,
         "minLevel": 70,
         "maxLevel": 75,
-        "chance": 0.1111
+        "chance": 0.0909
       },
       {
-        "pokemonId": 539,
+        "pokemonId": 414,
         "minLevel": 70,
         "maxLevel": 75,
-        "chance": 0.1111
+        "chance": 0.0909
       },
       {
-        "pokemonId": 359,
+        "pokemonId": 528,
         "minLevel": 70,
         "maxLevel": 75,
-        "chance": 0.1111
+        "chance": 0.0909
       },
       {
         "pokemonId": 189,
         "minLevel": 70,
         "maxLevel": 75,
-        "chance": 0.1111
+        "chance": 0.0909
       },
       {
         "pokemonId": 569,
         "minLevel": 70,
         "maxLevel": 75,
-        "chance": 0.1111
+        "chance": 0.0909
       },
       {
-        "pokemonId": 702,
+        "pokemonId": 413,
         "minLevel": 70,
         "maxLevel": 75,
-        "chance": 0.1111
+        "chance": 0.0909
       },
       {
         "pokemonId": 651,
         "minLevel": 70,
         "maxLevel": 75,
-        "chance": 0.1112
+        "chance": 0.0909
+      },
+      {
+        "pokemonId": 666,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.0909
+      },
+      {
+        "pokemonId": 18,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.091
+      }
+    ]
+  },
+  {
+    "name": "Friend Safari Nursery",
+    "challengeName": "Extra Challenge D 1b",
+    "spawns": [
+      {
+        "pokemonId": 216,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.0909
+      },
+      {
+        "pokemonId": 172,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.0909
+      },
+      {
+        "pokemonId": 194,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.0909
+      },
+      {
+        "pokemonId": 174,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.0909
+      },
+      {
+        "pokemonId": 220,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.0909
+      },
+      {
+        "pokemonId": 360,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.0909
+      },
+      {
+        "pokemonId": 574,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.0909
+      },
+      {
+        "pokemonId": 353,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.0909
+      },
+      {
+        "pokemonId": 633,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.0909
+      },
+      {
+        "pokemonId": 665,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.0909
+      },
+      {
+        "pokemonId": 270,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.091
       }
     ]
   },
@@ -2610,12 +2706,6 @@ export const kalosRoutes = [
         "chance": 0.2
       },
       {
-        "pokemonId": 316,
-        "minLevel": 70,
-        "maxLevel": 75,
-        "chance": 0.2
-      },
-      {
         "pokemonId": 623,
         "minLevel": 70,
         "maxLevel": 75,
@@ -2629,6 +2719,12 @@ export const kalosRoutes = [
       },
       {
         "pokemonId": 452,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 552,
         "minLevel": 70,
         "maxLevel": 75,
         "chance": 0.2
@@ -2652,12 +2748,6 @@ export const kalosRoutes = [
         "chance": 0.2
       },
       {
-        "pokemonId": 131,
-        "minLevel": 70,
-        "maxLevel": 75,
-        "chance": 0.2
-      },
-      {
         "pokemonId": 715,
         "minLevel": 70,
         "maxLevel": 75,
@@ -2665,6 +2755,12 @@ export const kalosRoutes = [
       },
       {
         "pokemonId": 612,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 681,
         "minLevel": 70,
         "maxLevel": 75,
         "chance": 0.2
@@ -2694,12 +2790,6 @@ export const kalosRoutes = [
         "chance": 0.1667
       },
       {
-        "pokemonId": 615,
-        "minLevel": 70,
-        "maxLevel": 75,
-        "chance": 0.1667
-      },
-      {
         "pokemonId": 282,
         "minLevel": 70,
         "maxLevel": 75,
@@ -2707,6 +2797,12 @@ export const kalosRoutes = [
       },
       {
         "pokemonId": 671,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 461,
         "minLevel": 70,
         "maxLevel": 75,
         "chance": 0.1665
@@ -2862,12 +2958,6 @@ export const kalosRoutes = [
         "chance": 0.2
       },
       {
-        "pokemonId": 91,
-        "minLevel": 70,
-        "maxLevel": 75,
-        "chance": 0.2
-      },
-      {
         "pokemonId": 134,
         "minLevel": 70,
         "maxLevel": 75,
@@ -2881,6 +2971,12 @@ export const kalosRoutes = [
       },
       {
         "pokemonId": 473,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 230,
         "minLevel": 70,
         "maxLevel": 75,
         "chance": 0.2
@@ -3031,19 +3127,19 @@ export const kalosRoutes = [
         "chance": 0.2
       },
       {
-        "pokemonId": 300,
-        "minLevel": 70,
-        "maxLevel": 75,
-        "chance": 0.2
-      },
-      {
         "pokemonId": 42,
         "minLevel": 70,
         "maxLevel": 75,
         "chance": 0.2
       },
       {
-        "pokemonId": 708,
+        "pokemonId": 196,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 700,
         "minLevel": 70,
         "maxLevel": 75,
         "chance": 0.2
@@ -3789,7 +3885,8 @@ export const kalosUnlocks = [
     "challengeName": "Extra Challenge D 1",
     "areaId": "Friend Safari Near Entrance",
     "unlocks": [
-      "Friend Safari Surroundings"
+      "Friend Safari Surroundings",
+      "Friend Safari Nursery"
     ],
     "requirements": {
       "defeatCountRoute": {
