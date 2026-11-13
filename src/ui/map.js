@@ -1049,6 +1049,19 @@ export function navigateToLocation(locationName) {
         uiContainer.appendChild(contentArea);
         vGym.appendChild(uiContainer);
 
+        // Scale gym UI from inner modal's width AND height so it shrinks/grows in both axes
+        const updateGymFontSize = () => {
+            const w = vGym.clientWidth, h = vGym.clientHeight;
+            if (!w || !h) return;
+            const fs = Math.max(7, Math.min(22, Math.min(w / 45, h / 30)));
+            vGym.style.setProperty('--gym-fs', `${fs.toFixed(2)}px`);
+        };
+        if (!vGym._gymResizeObserver && typeof ResizeObserver !== 'undefined') {
+            vGym._gymResizeObserver = new ResizeObserver(updateGymFontSize);
+            vGym._gymResizeObserver.observe(vGym);
+        }
+        requestAnimationFrame ? requestAnimationFrame(updateGymFontSize) : updateGymFontSize();
+
         if (gymConfig && contentArea) {
             let buttonText = "Enter";
             const btn = document.createElement('button');
@@ -1064,7 +1077,7 @@ export function navigateToLocation(locationName) {
         vGym.style.height = "100%";
         if (bgImg) {
             vGym.style.backgroundImage = `url('./Assets/BG/${bgImg}')`;
-            vGym.style.backgroundSize = "cover";
+            vGym.style.backgroundSize = "100% 100%";
         } else {
             vGym.style.backgroundImage = "none";
         }
