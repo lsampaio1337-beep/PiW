@@ -25,7 +25,7 @@ describe('isSafariLocation', () => {
         expect(isSafariLocation('Safari Zone West')).toBe(true);
         expect(isSafariLocation('Safari Zone North')).toBe(true);
         expect(isSafariLocation('Safari Zone East')).toBe(true);
-        expect(isSafariLocation('Friend Safari Near Entrance')).toBe(true);
+        expect(isSafariLocation('Friend Safari Surroundings')).toBe(true);
         expect(isSafariLocation('safari')).toBe(true);
     });
 

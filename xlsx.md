@@ -86,3 +86,14 @@ This sheet lists all Pokémon native to the region (according to the regional Po
 *   **Type 1:** The primary elemental type of the Pokémon.
 *   **Type 2:** The secondary elemental type of the Pokémon. If the Pokémon only has one type, it is duplicated in this column.
 *   **BST:** The Base Stat Total of the missing Pokémon.
+
+---
+
+## Level Progression Rules
+
+*   **Route Level Interval:** The minimum level interval (`maxLevel - minLevel`) inside each route is **2** until `minLevel` reaches **15**, after which the minimum interval is **3**.
+*   **Main & Pre-League Extra Challenges:**
+    *   Unlocked main storyline routes follow a linear progression.
+    *   Unlocked extra challenges before the Pokémon League (e.g. unlocked by a Gym alongside a main route) start at the level of that next main route and progress linearly from there (e.g., if Route 4 is level 10, `Farm Road` starts at level 10 and subsequent routes in its chain increment linearly).
+    *   Post-League extra challenges (unlocked by the Pokémon League) start at `minLevel: 78` and reach `maxLevel: 100` on the penultimate route.
+

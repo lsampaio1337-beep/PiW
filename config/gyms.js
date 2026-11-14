@@ -5372,7 +5372,7 @@ const gyms = [
 ,
   {
     "id": "santalunecitygym",
-    "name": "Santalune City Gym",
+    "name": "Santalune Gym",
     "leader": "Viola",
     "levelRequirement": 0,
     "trainers": [
@@ -5440,7 +5440,7 @@ const gyms = [
   },
   {
     "id": "shalourcitygym",
-    "name": "Shalour City Gym",
+    "name": "Shalour Gym",
     "leader": "Korrina",
     "levelRequirement": 0,
     "trainers": [
@@ -5474,7 +5474,7 @@ const gyms = [
   },
   {
     "id": "coumarinecitygym",
-    "name": "Coumarine City Gym",
+    "name": "Coumarine Gym",
     "leader": "Ramos",
     "levelRequirement": 0,
     "trainers": [
@@ -5508,7 +5508,7 @@ const gyms = [
   },
   {
     "id": "lumiosecitygym",
-    "name": "Lumiose City Gym",
+    "name": "Lumiose Gym",
     "leader": "Clemont",
     "levelRequirement": 0,
     "trainers": [
@@ -5542,7 +5542,7 @@ const gyms = [
   },
   {
     "id": "laverrecitygym",
-    "name": "Laverre City Gym",
+    "name": "Laverre Gym",
     "leader": "Valerie",
     "levelRequirement": 0,
     "trainers": [
@@ -5576,7 +5576,7 @@ const gyms = [
   },
   {
     "id": "anistarcitygym",
-    "name": "Anistar City Gym",
+    "name": "Anistar Gym",
     "leader": "Olympia",
     "levelRequirement": 0,
     "trainers": [
@@ -5610,7 +5610,7 @@ const gyms = [
   },
   {
     "id": "snowbellecitygym",
-    "name": "Snowbelle City Gym",
+    "name": "Snowbelle Gym",
     "leader": "Wulfric",
     "levelRequirement": 0,
     "trainers": [

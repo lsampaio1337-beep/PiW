@@ -1,6 +1,6 @@
 export const kalosMapCoordinates = {
   "route2avancetrail": {
-    "name": "Route 2 (Avance Trail)",
+    "name": "Route 2",
     "x": 40,
     "y": 10
   },
@@ -10,7 +10,7 @@ export const kalosMapCoordinates = {
     "y": 10
   },
   "route3ouvertway": {
-    "name": "Route 3 (Ouvert Way)",
+    "name": "Route 3",
     "x": 60,
     "y": 10
   },
@@ -20,32 +20,32 @@ export const kalosMapCoordinates = {
     "y": 20
   },
   "santalunecitygym": {
-    "name": "Santalune City Gym",
+    "name": "Santalune Gym",
     "x": 20,
     "y": 20
   },
   "route4parterreway": {
-    "name": "Route 4 (Parterre Way)",
+    "name": "Route 4",
     "x": 30,
     "y": 20
   },
   "route5versantroad": {
-    "name": "Route 5 (Versant Road)",
+    "name": "Route 5",
     "x": 50,
     "y": 20
   },
   "route6palaislane": {
-    "name": "Route 6 (Palais Lane)",
+    "name": "Route 6",
     "x": 80,
     "y": 20
   },
   "connectingcavezubatroost": {
-    "name": "Connecting Cave (Zubat Roost)",
+    "name": "Connecting Cave",
     "x": 20,
     "y": 30
   },
   "route8muraillecoastuppercliffs": {
-    "name": "Route 8 (Muraille Coast — Upper Cliffs)",
+    "name": "Route 8",
     "x": 30,
     "y": 30
   },
@@ -55,7 +55,7 @@ export const kalosMapCoordinates = {
     "y": 30
   },
   "route9spikespassage": {
-    "name": "Route 9 (Spikes Passage)",
+    "name": "Route 9",
     "x": 60,
     "y": 30
   },
@@ -70,12 +70,12 @@ export const kalosMapCoordinates = {
     "y": 40
   },
   "route10menhirtrail": {
-    "name": "Route 10 (Menhir Trail)",
+    "name": "Route 10",
     "x": 30,
     "y": 40
   },
   "route11miroirway": {
-    "name": "Route 11 (Miroir Way)",
+    "name": "Route 11",
     "x": 50,
     "y": 40
   },
@@ -85,12 +85,12 @@ export const kalosMapCoordinates = {
     "y": 40
   },
   "shalourcitygym": {
-    "name": "Shalour City Gym",
+    "name": "Shalour Gym",
     "x": 90,
     "y": 40
   },
   "route12fourrageroad": {
-    "name": "Route 12 (Fourrage Road)",
+    "name": "Route 12",
     "x": 20,
     "y": 50
   },
@@ -105,32 +105,32 @@ export const kalosMapCoordinates = {
     "y": 50
   },
   "coumarinecitygym": {
-    "name": "Coumarine City Gym",
+    "name": "Coumarine Gym",
     "x": 80,
     "y": 50
   },
   "route13lumiosebadlands": {
-    "name": "Route 13 (Lumiose Badlands)",
+    "name": "Route 13",
     "x": 90,
     "y": 50
   },
   "lumiosecitygym": {
-    "name": "Lumiose City Gym",
+    "name": "Lumiose Gym",
     "x": 30,
     "y": 60
   },
   "route14laverrenaturetrail": {
-    "name": "Route 14 (Laverre Nature Trail)",
+    "name": "Route 14",
     "x": 40,
     "y": 60
   },
   "laverrecitygym": {
-    "name": "Laverre City Gym",
+    "name": "Laverre Gym",
     "x": 60,
     "y": 60
   },
   "route15brunway": {
-    "name": "Route 15 (Brun Way)",
+    "name": "Route 15",
     "x": 80,
     "y": 60
   },
@@ -140,7 +140,7 @@ export const kalosMapCoordinates = {
     "y": 60
   },
   "route16mlancoliepath": {
-    "name": "Route 16 (Mélancolie Path)",
+    "name": "Route 16",
     "x": 10,
     "y": 70
   },
@@ -150,22 +150,22 @@ export const kalosMapCoordinates = {
     "y": 70
   },
   "route17mamoswineroad": {
-    "name": "Route 17 (Mamoswine Road)",
+    "name": "Route 17",
     "x": 40,
     "y": 70
   },
   "anistarcitygym": {
-    "name": "Anistar City Gym",
+    "name": "Anistar Gym",
     "x": 60,
     "y": 70
   },
   "teamflaresecrethqgeosengetown": {
-    "name": "Team Flare Secret HQ (Geosenge Town)",
+    "name": "Team Flare Secret HQ",
     "x": 80,
     "y": 70
   },
   "route18valletroiteway": {
-    "name": "Route 18 (Vallée Étroite Way)",
+    "name": "Route 18",
     "x": 90,
     "y": 70
   },
@@ -175,17 +175,17 @@ export const kalosMapCoordinates = {
     "y": 80
   },
   "route20windingwoods": {
-    "name": "Route 20 (Winding Woods)",
+    "name": "Route 20",
     "x": 60,
     "y": 80
   },
   "snowbellecitygym": {
-    "name": "Snowbelle City Gym",
+    "name": "Snowbelle Gym",
     "x": 80,
     "y": 80
   },
   "route21dernireway": {
-    "name": "Route 21 (Dernière Way)",
+    "name": "Route 21",
     "x": 90,
     "y": 80
   },
@@ -203,11 +203,6 @@ export const kalosMapCoordinates = {
     "name": "Pokémon League",
     "x": 40,
     "y": 90
-  },
-  "Team Flare Secret HQ Gate": {
-    "name": "Team Flare Secret HQ Gate",
-    "x": 0,
-    "y": 0
   },
   "Route 7": {
     "name": "Route 7",
@@ -239,11 +234,6 @@ export const kalosMapCoordinates = {
     "x": 0,
     "y": 0
   },
-  "Team Flare Battle (4 mix fighters)": {
-    "name": "Team Flare Battle (4 mix fighters)",
-    "x": 0,
-    "y": 0
-  },
   "Extra Challenge F (Roaming)": {
     "name": "Extra Challenge F (Roaming)",
     "x": 0,
@@ -251,11 +241,6 @@ export const kalosMapCoordinates = {
   },
   "Narrow river": {
     "name": "Narrow river",
-    "x": 0,
-    "y": 0
-  },
-  "Team Flare Secret HQ Hall": {
-    "name": "Team Flare Secret HQ Hall",
     "x": 0,
     "y": 0
   },
@@ -274,8 +259,8 @@ export const kalosMapCoordinates = {
     "x": 0,
     "y": 0
   },
-  "Route 22 (North)": {
-    "name": "Route 22 (North)",
+  "Route 22": {
+    "name": "Route 22",
     "x": 0,
     "y": 0
   },
@@ -286,11 +271,6 @@ export const kalosMapCoordinates = {
   },
   "Quiet Marsh": {
     "name": "Quiet Marsh",
-    "x": 0,
-    "y": 0
-  },
-  "Path to Team Flare Secret HQ": {
-    "name": "Path to Team Flare Secret HQ",
     "x": 0,
     "y": 0
   },
@@ -309,11 +289,6 @@ export const kalosMapCoordinates = {
     "x": 0,
     "y": 0
   },
-  "Team Flare Secret HQ Entrance": {
-    "name": "Team Flare Secret HQ Entrance",
-    "x": 0,
-    "y": 0
-  },
   "Cyllage Gym": {
     "name": "Cyllage Gym",
     "x": 0,
@@ -329,8 +304,8 @@ export const kalosMapCoordinates = {
     "x": 0,
     "y": 0
   },
-  "Friend Safari Surroundings": {
-    "name": "Friend Safari Surroundings",
+  "Friend Safari Main Field": {
+    "name": "Friend Safari Main Field",
     "x": 0,
     "y": 0
   },
@@ -339,8 +314,8 @@ export const kalosMapCoordinates = {
     "x": 0,
     "y": 0
   },
-  "Friend Safari Near Entrance": {
-    "name": "Friend Safari Near Entrance",
+  "Friend Safari Surroundings": {
+    "name": "Friend Safari Surroundings",
     "x": 0,
     "y": 0
   },
@@ -351,11 +326,6 @@ export const kalosMapCoordinates = {
   },
   "Underground Chambers": {
     "name": "Underground Chambers",
-    "x": 0,
-    "y": 0
-  },
-  "Route 22 (South)": {
-    "name": "Route 22 (South)",
     "x": 0,
     "y": 0
   },
@@ -381,6 +351,31 @@ export const kalosMapCoordinates = {
   },
   "Lone Mountain": {
     "name": "Lone Mountain",
+    "x": 0,
+    "y": 0
+  },
+  "Path to Team Flare Secret HQ": {
+    "name": "Path to Team Flare Secret HQ",
+    "x": 0,
+    "y": 0
+  },
+  "Team Flare Secret HQ Gate": {
+    "name": "Team Flare Secret HQ Gate",
+    "x": 0,
+    "y": 0
+  },
+  "Team Flare Secret HQ Entrance": {
+    "name": "Team Flare Secret HQ Entrance",
+    "x": 0,
+    "y": 0
+  },
+  "Team Flare Secret HQ Hall": {
+    "name": "Team Flare Secret HQ Hall",
+    "x": 0,
+    "y": 0
+  },
+  "Team Flare Battle (4 mix fighters)": {
+    "name": "Team Flare Battle (4 mix fighters)",
     "x": 0,
     "y": 0
   }

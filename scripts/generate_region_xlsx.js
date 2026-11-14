@@ -34,7 +34,7 @@ function normalizeSpawnChances(spawns) {
     for (let i = 0; i < n; i++) {
         sum += (Number(spawns[i][prop]) || 0);
     }
-    if (sum <= 0) return spawns;
+    if (sum <= 0 || Math.abs(sum - 1.0) <= 0.005) return spawns;
 
     const values = spawns.map(s => Number(s[prop]) || 0);
     const minVal = Math.min(...values);
