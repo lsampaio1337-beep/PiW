@@ -1,5 +1,4 @@
 import { state } from '../state.js';
-import { updateMainControl } from './mainControl.js';
 import { showCalendar } from './calendar.js';
 
 // Setup default state if missing
@@ -17,30 +16,107 @@ function initDailyChallengesState() {
     }
 }
 
-function getLocalDateString() {
-    const now = new Date();
-    return now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0') + '-' + String(now.getDate()).padStart(2, '0');
-}
-
-
 function parseAreaNames(id) {
-    let result = [];
+    if (!id) return [];
+    const region = state.currentRegionName || 'Kanto';
+    const rawNames = [];
     if (id.includes(",")) {
-        let parts = id.split(",");
-        let baseRoute = parts[0].replace(/[0-9]+$/, "").trim();
-        result.push(parts[0].replace(/\s*\(.*?\)/, "").trim());
+        const parts = id.split(",");
+        const baseRoute = parts[0].replace(/\s*\(.*?\)/, "").replace(/[0-9]+$/, "").trim();
+        rawNames.push(parts[0].trim());
         for (let i = 1; i < parts.length; i++) {
-            let num = parts[i].trim();
-            if (!isNaN(num)) {
-                result.push((baseRoute + " " + num).replace(/\s*\(.*?\)/, "").trim());
-            } else {
-                result.push(num.replace(/\s*\(.*?\)/, "").trim());
+            const num = parts[i].trim();
+            if (num && !isNaN(num)) {
+                rawNames.push(`${baseRoute} ${num}`.trim());
+            } else if (num) {
+                rawNames.push(num);
             }
         }
     } else {
-        result.push(id.replace(/\s*\(.*?\)/, "").trim());
+        rawNames.push(id.trim());
+    }
+
+    const result = [];
+    for (const raw of rawNames) {
+        if (!raw) continue;
+        result.push(raw);
+        const stripped = raw.replace(/\s*\(.*?\)/, "").trim();
+        if (stripped && stripped !== raw) {
+            result.push(stripped);
+        }
+        if (stripped) {
+            result.push(`${stripped} (${region})`);
+        }
     }
     return result;
+}
+
+function lookupPokemon(pid) {
+    if (state.config?.pokemonMap) {
+        return state.config.pokemonMap.get(Number(pid)) || state.config.pokemonMap.get(pid);
+    }
+    return state.config?.pokemonData?.find(p => p && (p.id === pid || p.id === Number(pid)));
+}
+
+function getUnlockedRoutes() {
+    const routes = window.getCurrentRoutes ? window.getCurrentRoutes() : [];
+    if (!state.config || !routes) {
+        return [];
+    }
+
+    const region = state.currentRegionName || 'Kanto';
+    const unlockedAreas = new Set();
+
+    if (Array.isArray(state.stats.completedChallengeIds)) {
+        state.stats.completedChallengeIds.forEach(id => {
+            parseAreaNames(id).forEach(area => unlockedAreas.add(area));
+        });
+    }
+
+    if (Array.isArray(state.stats.activeChallenges)) {
+        state.stats.activeChallenges.forEach(id => {
+            parseAreaNames(id).forEach(area => unlockedAreas.add(area));
+        });
+    }
+
+    const unlocks = window.getCurrentUnlocks ? window.getCurrentUnlocks() : null;
+    if (unlocks && Array.isArray(state.stats.completedChallengeIds)) {
+        for (const unlock of unlocks) {
+            if (state.stats.completedChallengeIds.includes(unlock.areaId) && Array.isArray(unlock.unlocks)) {
+                unlock.unlocks.forEach(u => parseAreaNames(u).forEach(a => unlockedAreas.add(a)));
+            }
+        }
+    }
+
+    unlockedAreas.add('Route 1');
+    unlockedAreas.add(`Route 1 (${region})`);
+
+    const routeMap = new Map();
+    for (const r of routes) routeMap.set(r.name, r);
+
+    const matchedRoutes = [];
+    for (const area of unlockedAreas) {
+        const route = routeMap.get(area);
+        if (route && route.spawns) {
+            matchedRoutes.push(route);
+        }
+    }
+    return matchedRoutes;
+}
+
+function getAvailableTypesFromUnlockedRoutes() {
+    const availableTypes = new Set();
+    for (const route of getUnlockedRoutes()) {
+        for (const s of route.spawns) {
+            const pData = lookupPokemon(s.pokemonId);
+            if (pData && pData.types) {
+                pData.types.forEach(t => availableTypes.add(t));
+            }
+        }
+    }
+    const typeArr = Array.from(availableTypes);
+    if (typeArr.length === 0) return 'Normal';
+    return typeArr[Math.floor(Math.random() * typeArr.length)];
 }
 
 
@@ -49,79 +125,18 @@ function parseAreaNames(id) {
 const CHALLENGE_DEFS = {
     combat: [
         { id: 1, text: "The Rival: Defeat $ Pokémon with the same (or higher) level as your Pokémon.", getTarget: () => 10, type: 'defeat_level' },
-        { id: 2, text: "Type Master: Defeat $ {extra} Pokémon.", getTarget: () => 10 + ((state.stats.completedChallengeIds ? state.stats.completedChallengeIds.length : 0) * 2), type: 'defeat_type', getExtra: () => {
-            let availableTypes = new Set();
-            if (state.config && window.getCurrentRoutes() && state.stats.completedChallengeIds) {
-
-                let unlockedAreas = new Set();
-                state.stats.completedChallengeIds.forEach(id => {
-                    parseAreaNames(id).forEach(area => unlockedAreas.add(area));
-                });
-
-                if (window.getCurrentUnlocks()) {
-                    for (let unlock of window.getCurrentUnlocks()) {
-                        if (state.stats.completedChallengeIds.includes(unlock.areaId)) {
-                            unlock.unlocks.forEach(u => parseAreaNames(u).forEach(a => unlockedAreas.add(a)));
-                        }
-                    }
-                }
-
-                unlockedAreas.add('Route 1');
-
-                let routeMap = new Map();
-                for (let r of window.getCurrentRoutes()) routeMap.set(r.name, r);
-
-                let pokemonMap = new Map();
-                for (let p of state.config.pokemonData) pokemonMap.set(p.id, p);
-
-                for (let area of unlockedAreas) {
-                    let route = routeMap.get(area);
-                    if (route && route.spawns) {
-                        for (let s of route.spawns) {
-                            let pData = pokemonMap.get(s.pokemonId);
-                            if (pData && pData.types) pData.types.forEach(t => availableTypes.add(t));
-                        }
-                    }
-                }
-            }
-            let typeArr = Array.from(availableTypes);
-            if (typeArr.length === 0) return 'Normal';
-            return typeArr[Math.floor(Math.random() * typeArr.length)];
-        } },
+        { id: 2, text: "Type Master: Defeat $ {extra} Pokémon.", getTarget: () => 10 + ((state.stats.completedChallengeIds ? state.stats.completedChallengeIds.length : 0) * 2), type: 'defeat_type', getExtra: () => getAvailableTypesFromUnlockedRoutes() },
         { id: 31, text: "Species Master: Defeat $ {extra}.", getTarget: () => 10 + ((state.stats.completedChallengeIds ? state.stats.completedChallengeIds.length : 0) * 2), type: 'defeat_species', getExtra: () => {
-            let availableSpecies = new Set();
-            if (state.config && window.getCurrentRoutes() && state.stats.completedChallengeIds) {
-                let unlockedAreas = new Set();
-                state.stats.completedChallengeIds.forEach(id => {
-                    parseAreaNames(id).forEach(area => unlockedAreas.add(area));
-                });
-
-                if (window.getCurrentUnlocks()) {
-                    for (let unlock of window.getCurrentUnlocks()) {
-                        if (state.stats.completedChallengeIds.includes(unlock.areaId)) {
-                            unlock.unlocks.forEach(u => parseAreaNames(u).forEach(a => unlockedAreas.add(a)));
-                        }
-                    }
-                }
-
-                unlockedAreas.add('Route 1');
-
-                let routeMap = new Map();
-                for (let r of window.getCurrentRoutes()) routeMap.set(r.name, r);
-
-                for (let area of unlockedAreas) {
-                    let route = routeMap.get(area);
-                    if (route && route.spawns) {
-                        for (let s of route.spawns) {
-                            availableSpecies.add(s.pokemonId);
-                        }
-                    }
+            const availableSpecies = new Set();
+            for (const route of getUnlockedRoutes()) {
+                for (const s of route.spawns) {
+                    availableSpecies.add(s.pokemonId);
                 }
             }
-            let speciesArr = Array.from(availableSpecies);
+            const speciesArr = Array.from(availableSpecies);
             if (speciesArr.length === 0) return 'Pidgey';
-            let pid = speciesArr[Math.floor(Math.random() * speciesArr.length)];
-            let pData = state.config.pokemonData.find(p => p.id === pid);
+            const pid = speciesArr[Math.floor(Math.random() * speciesArr.length)];
+            const pData = lookupPokemon(pid);
             return pData ? pData.name : pid;
         } },
         { id: 3, text: "Endurance: Defeat $ Pokémon without fainting, healing, or swaping.", getTarget: () => 10 + (state.trainer.badges * 5), type: 'defeat_endurance' },
@@ -151,45 +166,7 @@ const CHALLENGE_DEFS = {
             if (caught.length === 0) return 'Pidgey';
             return caught[Math.floor(Math.random() * caught.length)];
         } },
-        { id: 14, text: "Type Enthusiast: Catch $ {extra} Pokémon.", getTarget: () => 5 + (state.trainer.badges * 2), type: 'catch_type', getExtra: () => {
-            let availableTypes = new Set();
-            if (state.config && window.getCurrentRoutes() && state.stats.completedChallengeIds) {
-
-                let unlockedAreas = new Set();
-                state.stats.completedChallengeIds.forEach(id => {
-                    parseAreaNames(id).forEach(area => unlockedAreas.add(area));
-                });
-
-                if (window.getCurrentUnlocks()) {
-                    for (let unlock of window.getCurrentUnlocks()) {
-                        if (state.stats.completedChallengeIds.includes(unlock.areaId)) {
-                            unlock.unlocks.forEach(u => parseAreaNames(u).forEach(a => unlockedAreas.add(a)));
-                        }
-                    }
-                }
-
-                unlockedAreas.add('Route 1');
-
-                let routeMap = new Map();
-                for (let r of window.getCurrentRoutes()) routeMap.set(r.name, r);
-
-                let pokemonMap = new Map();
-                for (let p of state.config.pokemonData) pokemonMap.set(p.id, p);
-
-                for (let area of unlockedAreas) {
-                    let route = routeMap.get(area);
-                    if (route && route.spawns) {
-                        for (let s of route.spawns) {
-                            let pData = pokemonMap.get(s.pokemonId);
-                            if (pData && pData.types) pData.types.forEach(t => availableTypes.add(t));
-                        }
-                    }
-                }
-            }
-            let typeArr = Array.from(availableTypes);
-            if (typeArr.length === 0) return 'Normal';
-            return typeArr[Math.floor(Math.random() * typeArr.length)];
-        } },
+        { id: 14, text: "Type Enthusiast: Catch $ {extra} Pokémon.", getTarget: () => 5 + (state.trainer.badges * 2), type: 'catch_type', getExtra: () => getAvailableTypesFromUnlockedRoutes() },
         { id: 15, text: "Level Grinder: Catch $ Pokémon above level {extra}.", getTarget: () => 5, getExtra: () => Math.floor((state.stats.highestLevelCaptured || 1) * 0.9), type: 'catch_level' }
     ],
     economy: [
@@ -342,14 +319,22 @@ export function getDailyChallengesHtml() {
     return html;
 }
 
+function refreshCalendarActivitiesIfOpen() {
+    const calWin = document.getElementById('window-calendar');
+    if (typeof showCalendar === 'function' && calWin && calWin.offsetParent !== null && window.currentCalendarTab !== 'shop') {
+        showCalendar('activities');
+    }
+}
+
 window.cheatCompleteDailyChallenge = function(index) {
     let active = state.stats.dailyChallenges.active;
     if (active && active[index] && !active[index].completed) {
         active[index].progress = active[index].target;
         active[index].completed = true;
-        state.stats.dailyChallenges.hasSeenNotification = !!(document.getElementById('window-calendar') && document.getElementById('window-calendar').offsetParent !== null);
+        const calWin = document.getElementById('window-calendar');
+        state.stats.dailyChallenges.hasSeenNotification = !!(calWin && calWin.offsetParent !== null);
         if (typeof window.updateMainControl === 'function') window.updateMainControl();
-        if (typeof showCalendar === 'function' && document.getElementById('window-calendar') && document.getElementById('window-calendar').offsetParent !== null) showCalendar(); // Refresh UI
+        refreshCalendarActivitiesIfOpen();
     }
 };
 
@@ -363,7 +348,7 @@ window.claimDailyChallengeToken = function(index) {
         state.stats.tokensEarned += 1;
         state.stats.dailyChallenges.totalCompleted++;
         if (typeof window.updateMainControl === 'function') window.updateMainControl();
-        if (typeof showCalendar === 'function' && document.getElementById('window-calendar') && document.getElementById('window-calendar').offsetParent !== null) showCalendar(); // Refresh UI
+        refreshCalendarActivitiesIfOpen();
     }
 };
 
@@ -443,7 +428,7 @@ window.rerollIndividualDailyChallenge = function(index) {
 
     state.stats.dailyChallenges.hasRerolled = true;
 
-    if (typeof showCalendar === 'function' && document.getElementById('window-calendar') && document.getElementById('window-calendar').offsetParent !== null) showCalendar();
+    refreshCalendarActivitiesIfOpen();
 };
 
 // Tracking Hook function for integration in other modules
@@ -557,8 +542,9 @@ window.trackDailyChallenge = function(type, data = {}) {
         }
     }
     if (updated) {
-        if (document.getElementById('window-calendar')) {
-            if (typeof showCalendar === 'function' && document.getElementById('window-calendar') && document.getElementById('window-calendar').offsetParent !== null) showCalendar();
+        const calWin = document.getElementById('window-calendar');
+        if (typeof showCalendar === 'function' && calWin && calWin.offsetParent !== null && window.currentCalendarTab !== 'shop') {
+            showCalendar('activities');
         }
     }
 };

@@ -49,28 +49,32 @@ function createWindow() {
     win.once('ready-to-show', () => {
         // Create a signal file to let the launcher know the game is ready
         if (process.platform === 'win32') {
-            fs.writeFileSync('game_ready.txt', 'ready');
+            try {
+                fs.writeFileSync('game_ready.txt', 'ready');
+            } catch (err) {
+                console.error('Failed to write game_ready.txt:', err);
+            }
         }
         win.show();
     });
-
-    // Handle click-through messages from the renderer process
-    ipcMain.on('minimize-game', (event) => {
-        const webContents = event.sender;
-        const currentWindow = BrowserWindow.fromWebContents(webContents);
-        if (currentWindow) {
-            currentWindow.minimize();
-        }
-    });
-
-    ipcMain.on('set-ignore-mouse-events', (event, ignore, options) => {
-        const webContents = event.sender;
-        const currentWindow = BrowserWindow.fromWebContents(webContents);
-        if (currentWindow) {
-            currentWindow.setIgnoreMouseEvents(ignore, options);
-        }
-    });
 }
+
+// Handle click-through messages from the renderer process
+ipcMain.on('minimize-game', (event) => {
+    const webContents = event.sender;
+    const currentWindow = BrowserWindow.fromWebContents(webContents);
+    if (currentWindow) {
+        currentWindow.minimize();
+    }
+});
+
+ipcMain.on('set-ignore-mouse-events', (event, ignore, options) => {
+    const webContents = event.sender;
+    const currentWindow = BrowserWindow.fromWebContents(webContents);
+    if (currentWindow) {
+        currentWindow.setIgnoreMouseEvents(ignore, options);
+    }
+});
 
 app.whenReady().then(() => {
     // Delay window creation on Linux to allow the compositor to initialize correctly

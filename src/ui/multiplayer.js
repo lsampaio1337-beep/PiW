@@ -6,10 +6,23 @@ export let isHost = false;
 export let opponentParty = null;
 export let isMultiplayerReady = { local: false, remote: false };
 export let originalParty = [];
+let startBattleTimeout = null;
 
 export function initMultiplayer() {
+    if (startBattleTimeout) {
+        clearTimeout(startBattleTimeout);
+        startBattleTimeout = null;
+    }
     isMultiplayerReady = { local: false, remote: false };
+    if (dataChannel) {
+        dataChannel.onopen = null;
+        dataChannel.onmessage = null;
+        dataChannel.onclose = null;
+        dataChannel.onerror = null;
+    }
     if (peerConnection) {
+        peerConnection.onicecandidate = null;
+        peerConnection.ondatachannel = null;
         peerConnection.close();
     }
     peerConnection = null;
@@ -22,6 +35,10 @@ export function initMultiplayer() {
 window.getMultiplayerIsHost = () => isHost;
 
 export function resetMultiplayerReady() {
+    if (startBattleTimeout) {
+        clearTimeout(startBattleTimeout);
+        startBattleTimeout = null;
+    }
     isMultiplayerReady.local = false;
     isMultiplayerReady.remote = false;
 }
@@ -70,23 +87,29 @@ export async function hostGame() {
     isHost = true;
     originalParty = [...state.party];
 
-    peerConnection = new window.RTCPeerConnection(rtcConfig);
-    dataChannel = peerConnection.createDataChannel('gameData');
+    try {
+        peerConnection = new window.RTCPeerConnection(rtcConfig);
+        dataChannel = peerConnection.createDataChannel('gameData');
 
-    setupDataChannel(dataChannel);
+        setupDataChannel(dataChannel);
 
-    peerConnection.onicecandidate = (event) => {
-        if (event.candidate === null) {
-            // Trickle ICE finished, now SDP contains all ICE candidates.
+        peerConnection.onicecandidate = (event) => {
+            if (event.candidate === null && peerConnection && peerConnection.localDescription) {
+                // Trickle ICE finished, now SDP contains all ICE candidates.
 
-            const encodedOffer = safeEncode(peerConnection.localDescription);
-            const el = document.getElementById('multiplayer-host-id');
-            if(el) el.value = encodedOffer;
-        }
-    };
+                const encodedOffer = safeEncode(peerConnection.localDescription);
+                const el = document.getElementById('multiplayer-host-id');
+                if (el) el.value = encodedOffer;
+            }
+        };
 
-    const offer = await peerConnection.createOffer();
-    await peerConnection.setLocalDescription(offer);
+        const offer = await peerConnection.createOffer();
+        await peerConnection.setLocalDescription(offer);
+    } catch (e) {
+        console.error('Failed to host multiplayer game:', e);
+        alert("Failed to host multiplayer game.");
+        disconnectAndResetUI();
+    }
 }
 
 export async function joinGame(encodedOffer) {
@@ -135,9 +158,6 @@ export async function completeConnection(encodedAnswer) {
 }
 
 export function disconnectAndResetUI() {
-    if (peerConnection) {
-        peerConnection.close();
-    }
     initMultiplayer();
 
     const connBtn = document.getElementById('btn-mp-connection-status');
@@ -146,6 +166,7 @@ export function disconnectAndResetUI() {
         connBtn.innerText = 'Not Connected';
         connBtn.disabled = true;
         connBtn.style.cursor = 'default';
+        connBtn.onclick = null;
         connBtn.onmouseenter = null;
         connBtn.onmouseleave = null;
     }
@@ -207,7 +228,7 @@ function handleDataChannelClose() {
     if (globals.battleSystem && globals.battleSystem.multiplayerState?.isActive) {
          globals.battleSystem.stopMultiplayerBattle();
     }
-    initMultiplayer();
+    disconnectAndResetUI();
 }
 
 function setupDataChannel(channel) {
@@ -220,6 +241,9 @@ function setupDataChannel(channel) {
 
     channel.onmessage = handleMessage;
     channel.onclose = handleDataChannelClose;
+    channel.onerror = (err) => {
+        console.error("Multiplayer data channel error:", err);
+    };
 }
 
 const messageHandlers = {
@@ -297,17 +321,23 @@ function checkReadyState() {
             btn.innerText = 'Starting Battle...';
             btn.disabled = true;
         }
-        setTimeout(() => {
-             if (window.closeModal) window.closeModal();
-             // Host needs to initiate the start locally as well
-             if (globals.battleSystem) {
-                 globals.battleSystem.startMultiplayerBattle(opponentParty, isHost);
-             } else if (window.globals && window.globals.battleSystem) {
-                 window.globals.battleSystem.startMultiplayerBattle(opponentParty, isHost);
-             } else {
-                 console.error("Globals.battleSystem is not available");
-             }
-        }, 1000);
+        if (!startBattleTimeout) {
+            startBattleTimeout = setTimeout(() => {
+                 startBattleTimeout = null;
+                 if (window.closeModal) window.closeModal();
+                 // Host needs to initiate the start locally as well
+                 if (globals.battleSystem) {
+                     globals.battleSystem.startMultiplayerBattle(opponentParty, isHost);
+                 } else if (window.globals && window.globals.battleSystem) {
+                     window.globals.battleSystem.startMultiplayerBattle(opponentParty, isHost);
+                 } else {
+                     console.error("Globals.battleSystem is not available");
+                 }
+            }, 1000);
+        }
+    } else if (startBattleTimeout) {
+        clearTimeout(startBattleTimeout);
+        startBattleTimeout = null;
     }
 }
 
@@ -318,6 +348,7 @@ window.switchMultiplayerTab = function(tab) {
     const joinContainer = document.getElementById('mp-join-container');
     const hostBtn = document.getElementById('btn-tab-host');
     const joinBtn = document.getElementById('btn-tab-join');
+    if (!hostContainer || !joinContainer || !hostBtn || !joinBtn) return;
 
     if (tab === 'host') {
         hostContainer.style.display = 'block';
@@ -407,7 +438,8 @@ window.initMultiplayerView = function() {
     const btnJoin = document.getElementById('btn-mp-join');
     if (btnJoin) {
         btnJoin.onclick = () => {
-            const hostId = document.getElementById('mp-join-input').value.trim();
+            const joinInput = document.getElementById('mp-join-input');
+            const hostId = joinInput ? joinInput.value.trim() : '';
             if (hostId) joinGame(hostId);
         };
     }
@@ -415,7 +447,8 @@ window.initMultiplayerView = function() {
     const btnComplete = document.getElementById('btn-mp-complete');
     if (btnComplete) {
         btnComplete.onclick = () => {
-            const answerId = document.getElementById('mp-host-answer-input').value.trim();
+            const answerInput = document.getElementById('mp-host-answer-input');
+            const answerId = answerInput ? answerInput.value.trim() : '';
             if (answerId) completeConnection(answerId);
         };
     }

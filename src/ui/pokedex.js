@@ -14,8 +14,29 @@ export function formatTypes(obj) {
 }
 
 
+function getPokemonById(id, state) {
+    if (!state?.config) return undefined;
+    if (state.config.pokemonMap) {
+        return state.config.pokemonMap.get(Number(id)) || state.config.pokemonMap.get(id);
+    }
+    return state.config.pokemonData?.find(p => p.id === id);
+}
+
+function getOwnedSpeciesIds(state) {
+    const ownedIds = new Set();
+    const lists = [state.party, state.storage, state.safe, state.breeding, state.training];
+    for (const list of lists) {
+        if (list) {
+            for (const p of list) {
+                ownedIds.add(p.id);
+            }
+        }
+    }
+    return ownedIds;
+}
+
 export function hasEncounteredSpecies(id, state) {
-    const pData = state.config.pokemonData.find(p => p.id === id);
+    const pData = getPokemonById(id, state);
     if (!pData) return false;
     return (state.stats.seenSpecies && state.stats.seenSpecies[pData.name]) ||
            (state.stats.caughtSpecies && state.stats.caughtSpecies[pData.name]) ||
@@ -28,13 +49,13 @@ export function hasEncounteredSpecies(id, state) {
 }
 
 export function hasSeenSpecies(id, state) {
-    const pData = state.config.pokemonData.find(p => p.id === id);
+    const pData = getPokemonById(id, state);
     if (!pData) return false;
     return (state.stats.seenSpecies && state.stats.seenSpecies[pData.name]);
 }
 
 export function hasCaughtSpecies(id, state) {
-    const pData = state.config.pokemonData.find(p => p.id === id);
+    const pData = getPokemonById(id, state);
     if (!pData) return false;
     return (state.stats.caughtSpecies && state.stats.caughtSpecies[pData.name]) ||
            state.party.some(p => p.id === id) ||
@@ -48,22 +69,19 @@ export function hasCaughtSpecies(id, state) {
 export function showPokedex() {
     let html = `<div style="display:flex; flex-wrap:wrap; justify-content:center; max-height:400px; overflow-y:auto; gap:10px; padding: 2%; box-sizing: border-box;">`;
 
+    const regionName = state.currentRegionName || 'Kanto';
     if (!state.config.pokemonData) {
         html += "<p>Loading Pokedex data...</p>";
     } else {
-        const regionName = state.currentRegionName || 'Kanto';
-        let regionIdField = 'kanto_id';
-        if (regionName === 'Johto') regionIdField = 'johto_id';
-        else if (regionName === 'Hoenn') regionIdField = 'hoenn_id';
-        else if (regionName === 'Sinnoh') regionIdField = 'sinnoh_id';
-        else if (regionName === 'Unova') regionIdField = 'unova_id';
+        const regionIdField = regionName.toLowerCase() + '_id';
 
         const regionalDex = state.config.pokemonData.filter(p => p[regionIdField] !== undefined);
         regionalDex.sort((a, b) => a[regionIdField] - b[regionIdField]);
+        const ownedIds = getOwnedSpeciesIds(state);
 
         for(const pData of regionalDex) {
-            const isSeen = hasSeenSpecies(pData.id, state);
-            const isCaught = hasCaughtSpecies(pData.id, state);
+            const isSeen = Boolean(state.stats.seenSpecies && state.stats.seenSpecies[pData.name]);
+            const isCaught = Boolean((state.stats.caughtSpecies && state.stats.caughtSpecies[pData.name]) || ownedIds.has(pData.id));
             const hasSeenShiny = state.stats.seenShiniesSpecies && state.stats.seenShiniesSpecies[pData.name];
             const hasCaughtShiny = state.stats.caughtShiniesSpecies && state.stats.caughtShiniesSpecies[pData.name];
 
@@ -97,12 +115,11 @@ export function showPokedex() {
     }
 
     html += `</div>`;
-    const regionName = state.currentRegionName || 'Kanto';
     showModal(`${regionName} Pokedex`, html, "window-pokedex");
 }
 
 export function showDexEntry(id) {
-    const pData = state.config.pokemonData.find(p => p.id === id);
+    const pData = getPokemonById(id, state);
     if (!pData) return;
 
     const hasSeenShiny = state.stats.seenShiniesSpecies && state.stats.seenShiniesSpecies[pData.name];
@@ -128,6 +145,22 @@ export function showDexEntry(id) {
     `;
 
     showModal(`Pokedex Entry - ${pData.name}`, html, `window-pokedex-entry-${pData.id}`);
+
+    const entryWin = document.getElementById(`window-pokedex-entry-${pData.id}`);
+    if (entryWin && typeof entryWin.querySelectorAll === 'function') {
+        const spriteEl = entryWin.querySelector(`#dex-sprite-${pData.id}`);
+        entryWin.querySelectorAll('button').forEach(btn => {
+            if (btn.textContent === 'Shiny') {
+                btn.onclick = () => {
+                    if (spriteEl) spriteEl.src = window.getSpriteUrl(pData.id, true);
+                };
+            } else if (btn.textContent === 'Normal') {
+                btn.onclick = () => {
+                    if (spriteEl) spriteEl.src = window.getSpriteUrl(pData.id, false);
+                };
+            }
+        });
+    }
 }
 
 export function buildEvolutionLineHtml(pData, state) {
@@ -137,7 +170,7 @@ export function buildEvolutionLineHtml(pData, state) {
     }
 
     function buildTree(currentId) {
-        const pd = state.config.pokemonData.find(p => p.id === currentId);
+        const pd = getPokemonById(currentId, state);
         if (!pd) return "";
 
         const hasEncountered = hasEncounteredSpecies(currentId, state);
@@ -368,18 +401,15 @@ export function showSmartCaptureMode() {
             html += "<p>Loading Pokedex data...</p>";
         } else {
             const regionName = state.currentRegionName || 'Kanto';
-            let regionIdField = 'kanto_id';
-            if (regionName === 'Johto') regionIdField = 'johto_id';
-            else if (regionName === 'Hoenn') regionIdField = 'hoenn_id';
-            else if (regionName === 'Sinnoh') regionIdField = 'sinnoh_id';
-            else if (regionName === 'Unova') regionIdField = 'unova_id';
+            const regionIdField = regionName.toLowerCase() + '_id';
 
             const regionalDex = state.config.pokemonData.filter(p => p[regionIdField] !== undefined);
             regionalDex.sort((a, b) => a[regionIdField] - b[regionIdField]);
+            const ownedIds = getOwnedSpeciesIds(state);
 
             for(const pData of regionalDex) {
-                const isSeen = hasSeenSpecies(pData.id, state);
-                const isCaught = hasCaughtSpecies(pData.id, state);
+                const isSeen = Boolean(state.stats.seenSpecies && state.stats.seenSpecies[pData.name]);
+                const isCaught = Boolean((state.stats.caughtSpecies && state.stats.caughtSpecies[pData.name]) || ownedIds.has(pData.id));
                 const hasSeenShiny = state.stats.seenShiniesSpecies && state.stats.seenShiniesSpecies[pData.name];
                 const hasCaughtShiny = state.stats.caughtShiniesSpecies && state.stats.caughtShiniesSpecies[pData.name];
 
@@ -445,6 +475,15 @@ export function showSmartCaptureMode() {
 
     showModal(titleHtml, html, "window-smart-capture");
 
+    const innerOverlay = document.getElementById('smart-capture-inner-modal-overlay');
+    if (innerOverlay) {
+        innerOverlay.onclick = (event) => {
+            if (event.target === innerOverlay) {
+                innerOverlay.style.display = 'none';
+            }
+        };
+    }
+
     // Restore scroll position
     setTimeout(() => {
         const grid = document.getElementById('smart-capture-grid');
@@ -466,7 +505,7 @@ window.setSmartCaptureGlobalMode = function() {
 };
 
 export function showSmartCaptureBallSelection(id) {
-    const pData = state.config.pokemonData.find(p => p.id === id);
+    const pData = getPokemonById(id, state);
     if (!pData) return;
 
     let html = `<div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">`;
@@ -517,8 +556,16 @@ export function showSmartCaptureBallSelection(id) {
     const content = document.getElementById('smart-capture-inner-modal-content');
 
     if (overlay && title && content) {
-        title.innerHTML = titleHtml;
-        content.innerHTML = html;
+        if (window.windowManager && typeof window.windowManager._parseAndSanitizeToElement === 'function') {
+            window.windowManager._parseAndSanitizeToElement(titleHtml, title);
+            window.windowManager._parseAndSanitizeToElement(html, content);
+        } else {
+            const parser = new DOMParser();
+            const titleDoc = parser.parseFromString(titleHtml, 'text/html');
+            if (typeof title.replaceChildren === 'function') title.replaceChildren(...titleDoc.body.childNodes);
+            const contentDoc = parser.parseFromString(html, 'text/html');
+            if (typeof content.replaceChildren === 'function') content.replaceChildren(...contentDoc.body.childNodes);
+        }
         overlay.style.display = 'flex';
     } else {
         // Fallback just in case

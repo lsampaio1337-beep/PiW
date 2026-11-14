@@ -29,5 +29,6 @@ export function renderPokeballsTab(area) {
         </div>
     `;
 
-    area.innerHTML = content;
+    const doc = new DOMParser().parseFromString(content, 'text/html');
+    area.replaceChildren(...doc.body.childNodes);
 }

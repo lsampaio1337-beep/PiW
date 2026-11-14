@@ -2029,10 +2029,6 @@ export const johtoRoutes = [
     "spawns": []
   },
   {
-    "name": "Johto Pokemon League",
-    "spawns": []
-  },
-  {
     "name": "Battle Stadium",
     "spawns": []
   },
@@ -2069,7 +2065,7 @@ export const johtoRoutes = [
     "spawns": []
   },
   {
-    "name": "Pokemon League",
+    "name": "Johto Pokemon League",
     "spawns": []
   },
   {
@@ -2697,7 +2693,7 @@ export const johtoUnlocks = [
       "Viridian Forest (Johto)"
     ],
     "requirements": {
-      "defeatEliteFourAndChampion": true
+      "defeatJohtoChampion": true
     },
     "gifts": [
       {

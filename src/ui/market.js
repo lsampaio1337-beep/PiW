@@ -1,5 +1,8 @@
 import { VITAMINS } from "../constants.js";
-
+import { calculatePP, getCapacity, getCurrentCount } from "../mathEngine.js";
+import { state } from '../state.js';
+import { updateUI, showModal } from '../ui.js';
+import { escapeHTML } from '../utils/stringUtils.js';
 
 export function getMarketAlertTarget() {
     const innerModal = document.getElementById('main-view-inner-modal');
@@ -9,23 +12,28 @@ export function getMarketAlertTarget() {
     return 'window-market';
 }
 
-import { calculatePP, getCapacity, getCurrentCount } from "../mathEngine.js";
-import { state } from '../state.js';
-
 // Helper to get a map of Pokemon Data for O(1) lookups
 let _cachedPokemonDataMap = null;
 function getPokemonDataMap() {
-    if (!_cachedPokemonDataMap && state.config && state.config.pokemonData) {
+    if (state.config?.pokemonMap) {
+        return state.config.pokemonMap;
+    }
+    if (!_cachedPokemonDataMap && state.config?.pokemonData) {
         _cachedPokemonDataMap = new Map();
-        for (let i = 1; i < state.config.pokemonData.length; i++) {
-            _cachedPokemonDataMap.set(state.config.pokemonData[i].id, state.config.pokemonData[i]);
+        for (let i = 0; i < state.config.pokemonData.length; i++) {
+            const pd = state.config.pokemonData[i];
+            if (pd) {
+                _cachedPokemonDataMap.set(pd.id, pd);
+            }
         }
     }
     return _cachedPokemonDataMap;
 }
 
-import { updateUI, showModal } from '../ui.js';
-import { escapeHTML } from '../utils/stringUtils.js';
+function lookupPokemonInMap(map, id) {
+    if (!map || id == null) return undefined;
+    return map.get(Number(id)) || map.get(id);
+}
 
 function escapeJS(str) {
     if (typeof str !== 'string') return str;
@@ -38,15 +46,11 @@ function escapeJS(str) {
 
 function safeSetHTML(element, htmlContent) {
     if (window.windowManager && typeof window.windowManager._parseAndSanitizeToElement === 'function') {
-        element.innerHTML = '';
         window.windowManager._parseAndSanitizeToElement(htmlContent, element);
     } else {
         const parser = new DOMParser();
         const doc = parser.parseFromString(htmlContent, 'text/html');
-        element.innerHTML = '';
-        while (doc.body.firstChild) {
-            element.appendChild(doc.body.firstChild);
-        }
+        element.replaceChildren(...doc.body.childNodes);
     }
 }
 
@@ -90,18 +94,22 @@ export function setupMarket(vCenter) {
     container.appendChild(rightPanel);
     vCenter.appendChild(container);
 
+    const origHealText = btnHealAll.textContent;
+    let healResetTimer = null;
     btnHealAll.addEventListener('click', () => {
         state.party.forEach(p => p.currentHp = p.maxHp);
         if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') window.trackDailyChallenge('heal_center');
         state.storage.forEach(p => p.currentHp = p.maxHp);
         updateUI();
-        const btn = document.getElementById('btn-heal-all');
-        const origText = btn.textContent;
-        btn.textContent = 'Healed!';
-        setTimeout(() => btn.textContent = origText, 1000);
+        if (healResetTimer) clearTimeout(healResetTimer);
+        btnHealAll.textContent = 'Healed!';
+        healResetTimer = setTimeout(() => {
+            btnHealAll.textContent = origHealText;
+            healResetTimer = null;
+        }, 1000);
     });
 
-    document.getElementById('btn-market-market').addEventListener('click', () => {
+    btnMarket.addEventListener('click', () => {
         window.openPokeMarketBuy();
     });
 }
@@ -147,7 +155,7 @@ export function openPokeMarketBuy() {
     const content = document.getElementById('main-view-inner-modal-content');
     const moneyDisplay = document.getElementById('inner-modal-money-display');
     if (moneyDisplay) {
-        moneyDisplay.textContent = `$ ${state.trainer.money.toLocaleString()}`;
+        moneyDisplay.textContent = `$ ${state.trainer.money.toLocaleString('en-US')}`;
         moneyDisplay.style.display = 'block';
     }
 
@@ -188,7 +196,7 @@ export function parseMarketQuantity(valStr) {
 }
 
 export function formatMarketNumber(num) {
-    return num.toLocaleString();
+    return num.toLocaleString('en-US');
 }
 
 
@@ -243,9 +251,7 @@ function getMarketItems(category) {
         items = state.config.balance.items.potions
             .filter(p => p.name !== 'Max Potion')
             .map(p => {
-                let invName = p.name;
-                if (p.name === 'Regular Potion') invName = 'Regular Potion';
-                if (p.name === 'Big') invName = 'Big Potion';
+                const invName = p.name === 'Big' ? 'Big Potion' : p.name;
                 return {
                     name: invName,
                     price: p.price,
@@ -293,10 +299,6 @@ function getMarketItems(category) {
 
 
 function generateMarketItemCard(item, category, stock) {
-    let displayName = item.displayName || item.name;
-    if (category === 'potions') displayName = displayName.replace(' Potion', '<br>Potion');
-    if (category === 'stones') displayName = displayName.replace(' Stone', '<br>Stone');
-
     const safeId = escapeHTML(item.name.replace(/\s+/g, ''));
     const safeItemNameAttr = escapeHTML(item.name);
     const safeItemNameJS = escapeHTML(escapeJS(item.name));
@@ -403,7 +405,7 @@ export function buyItem(itemId, baseCost, category, upgradeType = null, displayN
 
 
 export function formatMarketNumberDown(num) {
-    return num.toLocaleString();
+    return num.toLocaleString('en-US');
 }
 
 export function updateBuyItemPrice(itemId, category, basePrice) {
@@ -415,7 +417,7 @@ export function updateBuyItemPrice(itemId, category, basePrice) {
     let qty = parseMarketQuantity(input.value);
 
     // Limit qty based on available capacity if applicable
-    if (category === 'pokeballs' || category === 'potions') {
+    if ((category === 'pokeballs' && itemId !== 'Masterball') || category === 'potions') {
         const type = category === 'pokeballs' ? 'balls' : 'potions';
         const currentCount = getCurrentCount(state, type);
         const capacity = getCapacity(state, type);
@@ -430,7 +432,7 @@ export function updateBuyItemPrice(itemId, category, basePrice) {
     // Fallback limit for items without capacity to avoid extreme numbers
     if (qty > 1000000) {
         qty = 1000000;
-        input.value = (1000000).toLocaleString();
+        input.value = (1000000).toLocaleString('en-US');
     }
 
     let totalVal = qty * basePrice;
@@ -442,7 +444,7 @@ export function buySetMax(itemId, category, basePrice) {
     const input = document.getElementById(`buy-qty-${safeId}`);
     if (!input) return;
 
-    if (category === 'pokeballs' || category === 'potions') {
+    if ((category === 'pokeballs' && itemId !== 'Masterball') || category === 'potions') {
         const type = category === 'pokeballs' ? 'balls' : 'potions';
         const currentCount = getCurrentCount(state, type);
         const capacity = getCapacity(state, type);
@@ -450,7 +452,7 @@ export function buySetMax(itemId, category, basePrice) {
 
         input.value = formatMarketNumberDown(spaceLeft);
     } else {
-        input.value = (1000000).toLocaleString();
+        input.value = (1000000).toLocaleString('en-US');
     }
 
     updateBuyItemPrice(itemId, category, basePrice);
@@ -466,7 +468,7 @@ export function newBuyItem(itemId, baseCost, category, upgradeType = null, displ
     }
 
     if (qty <= 0) {
-        if(window.showGameAlert) window.showGameAlert("Please enter a valid quantity to buy.", getMarketAlertTarget());
+        if (window.showGameAlert) window.showGameAlert("Please enter a valid quantity to buy.", getMarketAlertTarget());
         return;
     }
 
@@ -474,11 +476,10 @@ export function newBuyItem(itemId, baseCost, category, upgradeType = null, displ
         const type = category === 'pokeballs' ? 'balls' : 'potions';
         const currentCount = getCurrentCount(state, type);
         const capacity = getCapacity(state, type);
-        let spaceLeft = capacity - currentCount;
+        let spaceLeft = Math.max(0, capacity - currentCount);
         if (itemId === 'Masterball') spaceLeft = Infinity;
         if (qty > spaceLeft) {
-            const nameToDisplay = category === 'pokeballs' ? 'Ball' : 'Potion';
-            window.showGameAlert(`Not enough space! You can only buy ${spaceLeft} more ${category}`, "market-buy-wrapper");
+            if (window.showGameAlert) window.showGameAlert(`Not enough space! You can only buy ${spaceLeft} more ${category}`, "market-buy-wrapper");
             return;
         }
     }
@@ -508,12 +509,12 @@ export function newBuyItem(itemId, baseCost, category, upgradeType = null, displ
         updateUI();
         const moneyDisplay = document.getElementById('inner-modal-money-display');
         if (moneyDisplay) {
-            moneyDisplay.textContent = `$ ${state.trainer.money.toLocaleString()}`;
+            moneyDisplay.textContent = `$ ${state.trainer.money.toLocaleString('en-US')}`;
         }
-        window.showGameAlert(`Bought ${qty.toLocaleString()}x ${(displayName || itemId).replace(/&lt;br&gt;/gi, ' ').replace(/<br>/gi, ' ')} for ${totalCost.toLocaleString()}!`, getMarketAlertTarget());
+        if (window.showGameAlert) window.showGameAlert(`Bought ${qty.toLocaleString('en-US')}x ${(displayName || itemId).replace(/&lt;br&gt;/gi, ' ').replace(/<br>/gi, ' ')} for ${totalCost.toLocaleString('en-US')}!`, getMarketAlertTarget());
         renderPokeMarketTab(category);
     } else {
-        window.showGameAlert(`Not enough money! You need ${totalCost.toLocaleString()} but only have ${state.trainer.money.toLocaleString()}.`, getMarketAlertTarget());
+        if (window.showGameAlert) window.showGameAlert(`Not enough money! You need ${totalCost.toLocaleString('en-US')} but only have ${state.trainer.money.toLocaleString('en-US')}.`, getMarketAlertTarget());
     }
 }
 
@@ -592,7 +593,7 @@ export function openPokeMarketSell() {
     const content = document.getElementById('main-view-inner-modal-content');
     const moneyDisplay = document.getElementById('inner-modal-money-display');
     if (moneyDisplay) {
-        moneyDisplay.textContent = `$ ${state.trainer.money.toLocaleString()}`;
+        moneyDisplay.textContent = `$ ${state.trainer.money.toLocaleString('en-US')}`;
         moneyDisplay.style.display = 'block';
     }
 
@@ -671,9 +672,7 @@ function getMarketSellItems(category) {
         return state.config.balance.items.potions
             .filter(p => p.name !== 'Max Potion')
             .map(p => {
-                let invName = p.name;
-                if (p.name === 'Regular Potion') invName = 'Regular Potion';
-                if (p.name === 'Big') invName = 'Big Potion';
+                const invName = p.name === 'Big' ? 'Big Potion' : p.name;
                 return {
                     name: invName,
                     buyPrice: p.price,
@@ -725,16 +724,9 @@ function renderMarketSellItemsList(content, category, items) {
         let escapedDisplayName = escapeHTML(item.displayName || item.name).replace(/&lt;br&gt;/gi, '<br>');
         if (category === 'potions') escapedDisplayName = escapedDisplayName.replace(' Potion', '<br>Potion');
         if (category === 'stones') escapedDisplayName = escapedDisplayName.replace(' Stone', '<br>Stone');
-        if (category === 'upgrades' && item.upgradeType === 'daycare') {
-            const parts = escapedDisplayName.split(' ');
-            if (parts.length >= 2) {
-                escapedDisplayName = parts.slice(0, -1).join(' ') + '<br>' + parts[parts.length - 1];
-            }
-        }
 
         const baseSellPrice = item.sellPrice !== undefined ? item.sellPrice : Math.floor(item.buyPrice * 0.5);
         let stock = 0;
-        let maxCapStr = "";
         const targetCategory = category === 'vitamins' ? 'stones' : category;
         if (state.backpack[targetCategory] && state.backpack[targetCategory][item.name]) {
             stock = state.backpack[targetCategory][item.name];
@@ -781,28 +773,21 @@ function renderMarketSellPokemonList(content) {
     const filterSumIVMin = parseFloat(document.getElementById('market-filter-sumiv-min')?.value);
     const filterSumIVMax = parseFloat(document.getElementById('market-filter-sumiv-max')?.value);
 
+    const map = getPokemonDataMap();
+
     state.storage.forEach(p => {
-    if (!p.uuid) p.uuid = crypto.randomUUID();
+        if (!p.uuid) p.uuid = crypto.randomUUID();
         let sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
 
-        if (p.bst === undefined) {
-            if (typeof p.id === 'number') {
-                const map = getPokemonDataMap();
-                if (map) {
-                    const pd = map.get(p.id);
-                    if (pd) p.bst = pd.hp + pd.atk + pd.def + pd.spa + pd.spd + pd.spe;
-                }
-            }
+        const pd = lookupPokemonInMap(map, p.id);
+        if (p.bst === undefined && pd) {
+            p.bst = pd.hp + pd.atk + pd.def + pd.spa + pd.spd + pd.spe;
         }
         let pEv = calculatePP(p.bst || 300, p.level, p.quality, sumIV); // Fallback to 300 if bst still missing
 
         let pName = p.name || p.id;
-        if (typeof p.id === 'number') {
-            const map = getPokemonDataMap();
-            if (map) {
-                const pd = map.get(p.id);
-                if (pd) pName = p.name || pd.name;
-            }
+        if (pd) {
+            pName = p.name || pd.name;
         }
         if (filterName && !(pName && pName.toString().toLowerCase().includes(filterName)) && !(p.id && p.id.toString().toLowerCase().includes(filterName))) return;
         if (!isNaN(filterLevelMin) && p.level < filterLevelMin) return;
@@ -828,9 +813,9 @@ function renderMarketSellPokemonList(content) {
         html += `
             <div onclick="if(window.toggleMarketPokemonSaleSelection) window.toggleMarketPokemonSaleSelection('${p.uuid}')"
                 style="width: calc(16.666% - calc(var(--m-width) * 0.018 * 5 / 6)); box-sizing: border-box; ${selectionStyle} border-radius: 10px; padding: calc(var(--m-width) * 0.012); text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; position: relative;">
-                <div style="font-size: calc(var(--m-width) * 0.017); font-weight: bold; margin-bottom: calc(var(--m-width) * 0.006); line-height: 1.1; color: white;">${pName}</div>
+                <div style="font-size: calc(var(--m-width) * 0.017); font-weight: bold; margin-bottom: calc(var(--m-width) * 0.006); line-height: 1.1; color: white;">${escapeHTML(String(pName))}</div>
                 <div style="flex: 1; width: 100%; display: flex; align-items: center; justify-content: center; position: relative; height: calc(var(--m-width) * 0.072); margin-bottom: calc(var(--m-width) * 0.006);">
-                    <img src="${imgSrc}" class="${glowClass}" style="max-height: 100%; max-width: 100%; object-fit: contain; z-index: 1;" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='">
+                    <img src="${escapeHTML(imgSrc)}" class="${glowClass}" style="max-height: 100%; max-width: 100%; object-fit: contain; z-index: 1;" onerror="this.style.display='none'">
                 </div>
                 <div style="font-size: calc(var(--m-width) * 0.014); color: #bdc3c7; line-height: 1.1;">Lv. ${p.level}</div>
                 <div style="font-size: calc(var(--m-width) * 0.014); color: #f1c40f; line-height: 1.1;">Q: ${p.quality.toFixed(2)}</div>
@@ -884,7 +869,7 @@ export function updateSellItemPrice(itemId, category) {
     }
     if (qty > 1000000) {
         qty = 1000000;
-        input.value = (1000000).toLocaleString();
+        input.value = (1000000).toLocaleString('en-US');
     }
 
     let totalVal = qty * baseSellPrice;
@@ -902,7 +887,7 @@ export function sellSetMax(itemId, category) {
     let stock = parseInt(card.dataset.stock) || 0;
 
     if (stock > 1000000) {
-        input.value = (1000000).toLocaleString();
+        input.value = (1000000).toLocaleString('en-US');
     } else {
         input.value = formatMarketNumberDown(stock);
     }
@@ -942,7 +927,7 @@ export function sellMarketItem(itemId, baseSellPrice, category) {
         if (window.updateUI) window.updateUI();
         const moneyDisplay = document.getElementById('inner-modal-money-display');
         if (moneyDisplay) {
-            moneyDisplay.textContent = `$ ${state.trainer.money.toLocaleString()}`;
+            moneyDisplay.textContent = `$ ${state.trainer.money.toLocaleString('en-US')}`;
         }
 
         if(window.showGameAlert) window.showGameAlert(`Sold ${formatMarketNumber(qty)}x ${itemId} for ${formatMarketNumber(totalValue)}!`, getMarketAlertTarget());
@@ -1000,18 +985,17 @@ window.marketSelectAllPokemonForSale = function() {
     const filterSumIVMin = parseFloat(document.getElementById('market-filter-sumiv-min')?.value);
     const filterSumIVMax = parseFloat(document.getElementById('market-filter-sumiv-max')?.value);
 
+    const map = getPokemonDataMap();
+
     state.storage.forEach(p => {
         if (!p.uuid) p.uuid = crypto.randomUUID();
         let sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
 
         let pName = p.name || p.id;
-        if (typeof p.id === 'number') {
-                const map = getPokemonDataMap();
-                if (map) {
-                    const pd = map.get(p.id);
-                    if (pd) pName = p.name || pd.name;
-                }
-            }
+        const pd = lookupPokemonInMap(map, p.id);
+        if (pd) {
+            pName = p.name || pd.name;
+        }
         if (filterName && !(pName && pName.toString().toLowerCase().includes(filterName)) && !(p.id && p.id.toString().toLowerCase().includes(filterName))) return;
         if (!isNaN(filterLevelMin) && p.level < filterLevelMin) return;
         if (!isNaN(filterLevelMax) && p.level > filterLevelMax) return;
@@ -1034,18 +1018,14 @@ function updateMarketPokemonSellCount() {
         let count = window.marketSelectedPokemonForSale.size;
 
         let totalGain = 0;
+        const map = getPokemonDataMap();
         state.storage.forEach(p => {
-        if (!p.uuid) p.uuid = crypto.randomUUID();
+            if (!p.uuid) p.uuid = crypto.randomUUID();
             if (window.marketSelectedPokemonForSale.has(p.uuid)) {
                 let sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
                 if (p.bst === undefined) {
-                    if (typeof p.id === 'number') {
-                    const map = getPokemonDataMap();
-                    if (map) {
-                        const pd = map.get(p.id);
-                        if (pd) p.bst = pd.hp + pd.atk + pd.def + pd.spa + pd.spd + pd.spe;
-                    }
-                }
+                    const pd = lookupPokemonInMap(map, p.id);
+                    if (pd) p.bst = pd.hp + pd.atk + pd.def + pd.spa + pd.spd + pd.spe;
                 }
                 let pEv = calculatePP(p.bst || 300, p.level, p.quality, sumIV);
                 totalGain += pEv;
@@ -1060,36 +1040,27 @@ function updateMarketPokemonSellCount() {
 window.marketSellSelectedPokemon = function() {
     if (!window.marketSelectedPokemonForSale || window.marketSelectedPokemonForSale.size === 0) return;
 
-    let numSold = window.marketSelectedPokemonForSale.size;
+    let numSold = 0;
     let totalGain = 0;
+    const map = getPokemonDataMap();
 
     state.storage = state.storage.filter(p => {
         if (window.marketSelectedPokemonForSale.has(p.uuid)) {
             let sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
             if (p.bst === undefined) {
-                if (typeof p.id === 'number') {
-                    const map = getPokemonDataMap();
-                    if (map) {
-                        const pd = map.get(p.id);
-                        if (pd) p.bst = pd.hp + pd.atk + pd.def + pd.spa + pd.spd + pd.spe;
-                    }
-                }
+                const pd = lookupPokemonInMap(map, p.id);
+                if (pd) p.bst = pd.hp + pd.atk + pd.def + pd.spa + pd.spd + pd.spe;
             }
             let pEv = calculatePP(p.bst || 300, p.level, p.quality, sumIV);
             totalGain += pEv;
+            numSold++;
             return false;
         }
         return true;
     });
 
     state.trainer.money += totalGain;
-            if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') {
-                window.trackDailyChallenge('sell_pokemon', { count: numSold });
-                window.trackDailyChallenge('earn_money', { amount: totalGain });
-            }
-
-    // Track Daily Challenges
-    if (typeof window.trackDailyChallenge === 'function') {
+    if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') {
         window.trackDailyChallenge('sell_pokemon', { count: numSold });
         window.trackDailyChallenge('earn_money', { amount: totalGain });
     }
@@ -1100,7 +1071,7 @@ window.marketSellSelectedPokemon = function() {
 
     const moneyDisplay = document.getElementById('inner-modal-money-display');
     if (moneyDisplay) {
-        moneyDisplay.textContent = `$ ${state.trainer.money.toLocaleString()}`;
+        moneyDisplay.textContent = `$ ${state.trainer.money.toLocaleString('en-US')}`;
     }
 
     updateMarketPokemonSellCount();

@@ -52,7 +52,20 @@ export function showCheatControlModal() {
 }
 
 
+function getLearnedMoves(learnset, level) {
+    const learned = [];
+    if (learnset) {
+        for (const ls of learnset) {
+            if (level >= ls.level && state.config.moves[ls.move]) {
+                learned.push({ ...state.config.moves[ls.move], name: ls.move });
+            }
+        }
+    }
+    return learned.slice(-4);
+}
+
 export function cheatAction(action) {
+    let alertMessage = "";
     if (action === 'GodMode') {
         state.trainer.money += 100000000;
 
@@ -74,12 +87,15 @@ export function cheatAction(action) {
         if (!state.backpack.potions) state.backpack.potions = {};
         if (state.config.balance && state.config.balance.items && state.config.balance.items.potions) {
             state.config.balance.items.potions.forEach(potion => {
-                state.backpack.potions[potion.name] = (state.backpack.potions[potion.name] || 0) + 1000;
+                const invName = potion.name === 'Big' ? 'Big Potion' : potion.name;
+                state.backpack.potions[invName] = (state.backpack.potions[invName] || 0) + 1000;
             });
         }
 
         // Mewtwo Q=2 SumIv=600 Lvl=200 in party as leader
-        const mewtwoData = state.config.pokemonData.find(pd => pd.id === 150); // Mewtwo is ID 150, so index 149
+        const mewtwoData = state.config?.pokemonMap
+            ? (state.config.pokemonMap.get(150) || state.config.pokemonMap.get('150'))
+            : state.config?.pokemonData?.find(pd => pd && pd.id === 150);
         if (mewtwoData) {
             const level = 200;
             const qVal = 2.0;
@@ -96,23 +112,13 @@ export function cheatAction(action) {
                 spe: mathEngine.calculateStat(mewtwoData.spe, ivs.spe, level, qVal)
             };
 
-            let learned = [];
-            if (mewtwoData.learnset) {
-                for (const ls of mewtwoData.learnset) {
-                    if (level >= ls.level && state.config.moves[ls.move]) {
-                        const moveData = JSON.parse(JSON.stringify(state.config.moves[ls.move]));
-                        moveData.name = ls.move;
-                        learned.push(moveData);
-                    }
-                }
-            }
-            const moves = learned.slice(-4);
+            const moves = getLearnedMoves(mewtwoData.learnset, level);
             const xp = mathEngine.calculateTotalXP(level);
 
             const godMewtwo = {
                 id: mewtwoData.id,
                 name: mewtwoData.name,
-                types: mewtwoData.types,
+                types: [...mewtwoData.types],
                 level: level,
                 xp: xp,
                 qualityName: "Shiny",
@@ -125,7 +131,7 @@ export function cheatAction(action) {
                 evm: mathEngine.calculateEVM(bst, level, qVal, totalIV),
                 pp: mathEngine.calculatePP(bst, level, qVal, totalIV),
                 bst: bst,
-                moves: JSON.parse(JSON.stringify(moves)),
+                moves: moves.map(m => ({ ...m })),
                 uuid: crypto.randomUUID()
             };
 
@@ -165,7 +171,9 @@ export function cheatAction(action) {
             p.xp = mathEngine.calculateTotalXP(p.level);
 
             // Recalculate stats based on new level
-            const data = state.config.pokemonData.find(pd => pd.id === p.id);
+            const data = state.config?.pokemonMap
+                ? (state.config.pokemonMap.get(Number(p.id)) || state.config.pokemonMap.get(p.id))
+                : state.config?.pokemonData?.find(pd => pd && pd.id === p.id);
             if (data) {
                 const oldMaxHp = p.maxHp;
                 const v = p.vitamins || {};
@@ -247,13 +255,6 @@ export function cheatAction(action) {
             });
         }
 
-        // Unlock from sinnohMapCoordinates
-        if (state.config.sinnohMapCoordinates) {
-            Object.values(state.config.sinnohMapCoordinates).forEach(coord => {
-                if (coord.name) unlockArea(coord.name);
-            });
-        }
-
         // Unlock all unlocks from config
         if (window.getCurrentUnlocks()) {
             window.getCurrentUnlocks().forEach(unlock => {
@@ -278,7 +279,7 @@ export function cheatAction(action) {
                         for (let i = 1; i < state.config.pokemonData.length; i++) {
                             if (state.stats.caughtSpeciesCount >= targetCount) break;
                             let p = state.config.pokemonData[i];
-                            if (!state.stats.caughtSpecies[p.name]) {
+                            if (p && !state.stats.caughtSpecies[p.name]) {
                                 state.stats.caughtSpeciesCount++;
                                 state.stats.caughtSpecies[p.name] = 1;
                             }
@@ -292,32 +293,25 @@ export function cheatAction(action) {
             });
         }
 
-        // Unlock from mapCoordinates
-        if (state.config.mapCoordinates) {
-            Object.values(state.config.mapCoordinates).forEach(coord => {
-                if (coord.name) unlockArea(coord.name);
-            });
-        }
-
-        // Unlock from johtoMapCoordinates
-        if (state.config.johtoMapCoordinates) {
-            Object.values(state.config.johtoMapCoordinates).forEach(coord => {
-                if (coord.name) unlockArea(coord.name);
-            });
-        }
-
-        // Unlock from hoennMapCoordinates
-        if (state.config.hoennMapCoordinates) {
-            Object.values(state.config.hoennMapCoordinates).forEach(coord => {
-                if (coord.name) unlockArea(coord.name);
-            });
-        }
-
-        // Unlock from unovaMapCoordinates
-        if (state.config.unovaMapCoordinates) {
-            Object.values(state.config.unovaMapCoordinates).forEach(coord => {
-                if (coord.name) unlockArea(coord.name);
-            });
+        // Unlock from regional mapCoordinates across all 10 regions
+        const mapCoordKeys = [
+            'mapCoordinates',
+            'johtoMapCoordinates',
+            'hoennMapCoordinates',
+            'sinnohMapCoordinates',
+            'unovaMapCoordinates',
+            'kalosMapCoordinates',
+            'alolaMapCoordinates',
+            'galarMapCoordinates',
+            'hisuiMapCoordinates',
+            'paldeaMapCoordinates'
+        ];
+        for (const key of mapCoordKeys) {
+            if (state.config?.[key]) {
+                Object.values(state.config[key]).forEach(coord => {
+                    if (coord && coord.name) unlockArea(coord.name);
+                });
+            }
         }
 
         // Ensure Casino spots and machines are unlocked
@@ -407,6 +401,19 @@ export function cheatAction(action) {
     }
 }
 
+const REGION_ID_FIELDS = {
+    Kanto: 'kanto_id',
+    Johto: 'johto_id',
+    Hoenn: 'hoenn_id',
+    Sinnoh: 'sinnoh_id',
+    Unova: 'unova_id',
+    Kalos: 'kalos_id',
+    Alola: 'alola_id',
+    Galar: 'galar_id',
+    Hisui: 'hisui_id',
+    Paldea: 'paldea_id'
+};
+
 function generatePokedex(isShiny) {
     if (!state.storage) state.storage = [];
     if (!state.stats.caughtSpecies) state.stats.caughtSpecies = {};
@@ -414,11 +421,7 @@ function generatePokedex(isShiny) {
     if (!state.stats.caughtShiniesSpecies) state.stats.caughtShiniesSpecies = {};
 
     const regionName = state.currentRegionName || 'Kanto';
-    let regionIdField = 'kanto_id';
-    if (regionName === 'Johto') regionIdField = 'johto_id';
-    else if (regionName === 'Hoenn') regionIdField = 'hoenn_id';
-    else if (regionName === 'Sinnoh') regionIdField = 'sinnoh_id';
-    else if (regionName === 'Unova') regionIdField = 'unova_id';
+    const regionIdField = REGION_ID_FIELDS[regionName] || 'kanto_id';
 
     const regionalDex = state.config.pokemonData.filter(p => p && p[regionIdField] !== undefined);
     regionalDex.sort((a, b) => a[regionIdField] - b[regionIdField]);
@@ -447,25 +450,13 @@ function generatePokedex(isShiny) {
         const bst = data.hp + data.atk + data.def + data.spa + data.spd + data.spe;
         const totalIV = ivs.hp + ivs.atk + ivs.def + ivs.spa + ivs.spd + ivs.spe;
 
-        let learned = [];
-        if (data.learnset) {
-            for (const ls of data.learnset) {
-                if (level >= ls.level) {
-                    if (state.config.moves[ls.move]) {
-                        const moveData = JSON.parse(JSON.stringify(state.config.moves[ls.move]));
-                        moveData.name = ls.move;
-                        learned.push(moveData);
-                    }
-                }
-            }
-        }
-        const moves = learned.slice(-4);
+        const moves = getLearnedMoves(data.learnset, level);
         const xp = mathEngine.calculateTotalXP(level);
 
         const newMon = {
             id: data.id,
             name: data.name,
-            types: data.types,
+            types: [...data.types],
             level: level,
             xp: xp,
             qualityName: qName,
@@ -478,7 +469,7 @@ function generatePokedex(isShiny) {
             evm: mathEngine.calculateEVM(bst, level, qVal, totalIV),
             pp: mathEngine.calculatePP(bst, level, qVal, totalIV),
             bst: bst,
-            moves: JSON.parse(JSON.stringify(moves)),
+            moves: moves.map(m => ({ ...m })),
             uuid: crypto.randomUUID()
         };
 

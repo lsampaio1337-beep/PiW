@@ -1,4 +1,5 @@
 // src/dayCare.js
+import { calculateHP, calculateStat, calculateEVXP, calculateEVM, calculatePP } from './mathEngine.js';
 
 class DayCare {
     constructor(gameState) {
@@ -94,6 +95,35 @@ class DayCare {
         return "Weak";
     }
 
+    _recalculatePokemonStats(p) {
+        if (!p || !p.currentStats || !p.ivs || !this.state?.config?.pokemonData) return;
+
+        const baseData = this.state.config.pokemonMap
+            ? (this.state.config.pokemonMap.get(Number(p.id)) || this.state.config.pokemonMap.get(p.id))
+            : this.state.config.pokemonData.find(pd => pd.id === p.id);
+        if (!baseData) return;
+
+        const vitamins = p.vitamins || {};
+        const newMaxHp = calculateHP(baseData.hp, p.ivs.hp, p.level, p.quality, vitamins.hp || 0);
+        p.maxHp = newMaxHp;
+        if (typeof p.currentHp === 'number') {
+            p.currentHp = Math.min(p.currentHp, newMaxHp);
+        }
+
+        p.currentStats.hp = newMaxHp;
+        p.currentStats.atk = calculateStat(baseData.atk, p.ivs.atk, p.level, p.quality, vitamins.atk || 0);
+        p.currentStats.def = calculateStat(baseData.def, p.ivs.def, p.level, p.quality, vitamins.def || 0);
+        p.currentStats.spa = calculateStat(baseData.spa, p.ivs.spa, p.level, p.quality, vitamins.spa || 0);
+        p.currentStats.spd = calculateStat(baseData.spd, p.ivs.spd, p.level, p.quality, vitamins.spd || 0);
+        p.currentStats.spe = calculateStat(baseData.spe, p.ivs.spe, p.level, p.quality, vitamins.spe || 0);
+
+        const bst = p.bst || (baseData.hp + baseData.atk + baseData.def + baseData.spa + baseData.spd + baseData.spe);
+        const totalIV = this._getTotalIV(p);
+        p.evxp = calculateEVXP(bst, p.level, p.quality, totalIV);
+        p.evm = calculateEVM(bst, p.level, p.quality, totalIV);
+        p.pp = calculatePP(bst, p.level, p.quality, totalIV);
+    }
+
     completeBreeding() {
         const p = this.slot1.pokemon;
         if (!p) return;
@@ -127,8 +157,12 @@ class DayCare {
 
         p.lastQBonus = Number((p.quality - oldQuality).toFixed(2));
 
-        // Map Quality Tier if Q >= 1.5, 1.25, etc.
-        p.qualityName = this.getQualityName(p.quality);
+        // Map Quality Tier if Q >= 1.5, 1.25, etc., preserving Shiny status
+        const newQName = this.getQualityName(p.quality);
+        if (p.qualityName !== 'Shiny') {
+            p.qualityName = newQName;
+        }
+        this._recalculatePokemonStats(p);
 
         // Let UI know it's finished
         this.slot1.isFinished = true;
@@ -167,10 +201,12 @@ class DayCare {
 
     completeTrainingCycle() {
         const pkmn = this.slot2.pokemon;
+        if (!pkmn) return;
         const totalIV = this._getTotalIV(pkmn);
 
         if (totalIV < 600) {
             this._gainTrainingIVs(pkmn);
+            this._recalculatePokemonStats(pkmn);
         }
 
         // Track how many times this pokemon has completed a training cycle

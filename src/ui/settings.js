@@ -2,6 +2,7 @@ import { VITAMINS } from "../constants.js";
 import { state, globals } from '../state.js';
 import { showModal } from '../ui.js';
 import * as mathEngine from '../mathEngine.js';
+import { showCheatControlModal } from './cheatControl.js';
 
 export function showSettings() {
     const battleSystem = globals.battleSystem;
@@ -99,12 +100,14 @@ window.showTimeLapseResults = function(results) {
             let pokeballObj = state.config.balance.items.pokeballs.find(b => b.name === itemName);
             let potionObj = !pokeballObj ? state.config.balance.items.potions.find(p => p.name === itemName || (p.name === 'Big' && itemName === 'Big Potion')) : null;
 
+            let displayItemName = itemName;
             if (pokeballObj) {
                 imgFolder = "Balls";
                 basePrice = pokeballObj.price;
             } else if (potionObj) {
                 imgFolder = "Potions";
                 basePrice = potionObj.price;
+                displayItemName = itemName === 'Big' ? 'Big Potion' : itemName;
             } else if (VITAMINS.includes(itemName)) {
                 imgFolder = "Vitamins";
                 const badges = state.trainer.badges || 0;
@@ -124,7 +127,7 @@ window.showTimeLapseResults = function(results) {
                 basePrice = Math.max(2500, 2500 * badges);
             }
 
-            itemsLootedHtml += `${count}x <img src="Assets/Items/${imgFolder}/${itemName}.png" style="width: 20px; height: 20px; vertical-align: middle;" title="${itemName}"> / `;
+            itemsLootedHtml += `${count}x <img src="Assets/Items/${imgFolder}/${displayItemName}.png" style="width: 20px; height: 20px; vertical-align: middle;" title="${displayItemName}"> / `;
 
             valItemsLootedBuy += basePrice * count;
             valItemsLootedSold += (imgFolder === "Stones" || imgFolder === "Vitamins") ? Math.floor(basePrice * 0.1) * count : Math.floor(basePrice * 0.5) * count;
@@ -138,40 +141,45 @@ window.showTimeLapseResults = function(results) {
     let valItemsUsedBuy = 0;
 
     if (results.ballsUsed > 0 && state.settings.activeBallTier >= 0) {
-        const ballName = state.config.balance.items.pokeballs[state.settings.activeBallTier].name;
-        const ballPrice = state.config.balance.items.pokeballs[state.settings.activeBallTier].price;
-        itemsUsedHtml += `${results.ballsUsed}x <img src="Assets/Items/Balls/${ballName}.png" style="width: 20px; height: 20px; vertical-align: middle;" title="${ballName}"> / `;
-        valItemsUsedBuy += ballPrice * results.ballsUsed;
+        const activeBall = state.config?.balance?.items?.pokeballs?.[state.settings.activeBallTier];
+        if (activeBall) {
+            const ballName = activeBall.name;
+            const ballPrice = activeBall.price;
+            itemsUsedHtml += `${results.ballsUsed}x <img src="Assets/Items/Balls/${ballName}.png" style="width: 20px; height: 20px; vertical-align: middle;" title="${ballName}"> / `;
+            valItemsUsedBuy += ballPrice * results.ballsUsed;
+        }
     }
     if (results.potionsUsed > 0 && state.settings.activePotionTier >= 0) {
-        let potionName = state.config.balance.items.potions[state.settings.activePotionTier].name;
-        const potionPrice = state.config.balance.items.potions[state.settings.activePotionTier].price;
-        if (potionName === 'Big') potionName = 'Big Potion';
-        itemsUsedHtml += `${results.potionsUsed}x <img src="Assets/Items/Potions/${potionName}.png" style="width: 20px; height: 20px; vertical-align: middle;" title="${potionName}"> / `;
-        valItemsUsedBuy += potionPrice * results.potionsUsed;
+        const activePotion = state.config?.balance?.items?.potions?.[state.settings.activePotionTier];
+        if (activePotion) {
+            const potionName = activePotion.name === 'Big' ? 'Big Potion' : activePotion.name;
+            const potionPrice = activePotion.price;
+            itemsUsedHtml += `${results.potionsUsed}x <img src="Assets/Items/Potions/${potionName}.png" style="width: 20px; height: 20px; vertical-align: middle;" title="${potionName}"> / `;
+            valItemsUsedBuy += potionPrice * results.potionsUsed;
+        }
     }
     if (itemsUsedHtml.endsWith(" / ")) itemsUsedHtml = itemsUsedHtml.slice(0, -3);
     if (!itemsUsedHtml) itemsUsedHtml = "None";
 
     // Profit Calculations
-    let profitSell = results.money + valItemsLootedSold + valPokemonsSold - valItemsUsedBuy;
-    let profitBuy = results.money + valItemsLootedBuy + valPokemonsSold - valItemsUsedBuy;
+    let profitSell = results.money + valItemsLootedSold + valPokemonsSold + valShiniesSold - valItemsUsedBuy;
+    let profitBuy = results.money + valItemsLootedBuy + valPokemonsSold + valShiniesSold - valItemsUsedBuy;
 
     const html = `
         <div style="text-align: left; padding: 10px; line-height: 1.6;">
             <div><b>Time on hunt:</b> ${timeStr}</div>
             <div><b>Battles:</b> ${results.encounters}</div>
-            <div><b>XP earned:</b> ${Math.floor(results.xpEarned).toLocaleString()}</div>
-            <div><b>Money earned:</b> $${Math.floor(results.money).toLocaleString()}</div>
+            <div><b>XP earned:</b> ${Math.floor(results.xpEarned).toLocaleString('en-US')}</div>
+            <div><b>Money earned:</b> $${Math.floor(results.money).toLocaleString('en-US')}</div>
             <div><b>Items used:</b> ${itemsUsedHtml}</div>
             <div><b>Pokemons caught:</b> ${results.caught}</div>
-            <div><b>Value of Pokemons caught if sold:</b> $${Math.floor(valPokemonsSold).toLocaleString()}</div>
+            <div><b>Value of Pokemons caught if sold:</b> $${Math.floor(valPokemonsSold).toLocaleString('en-US')}</div>
             <div><b>Shiny caught:</b> ${results.shinies}</div>
-            <div><b>Value of Shiny Pokemons caught if sold:</b> $${Math.floor(valShiniesSold).toLocaleString()}</div>
+            <div><b>Value of Shiny Pokemons caught if sold:</b> $${Math.floor(valShiniesSold).toLocaleString('en-US')}</div>
             <div><b>Items collected:</b> ${itemsLootedHtml}</div>
             <hr style="border: 1px solid #555; margin: 15px 0;">
-            <div><b>Hunt Profit Sell:</b> <span style="color: ${profitSell >= 0 ? '#2ecc71' : '#e74c3c'};">$${Math.floor(profitSell).toLocaleString()}</span></div>
-            <div><b>Hunt Profit Buy:</b> <span style="color: ${profitBuy >= 0 ? '#2ecc71' : '#e74c3c'};">$${Math.floor(profitBuy).toLocaleString()}</span></div>
+            <div><b>Hunt Profit Sell:</b> <span style="color: ${profitSell >= 0 ? '#2ecc71' : '#e74c3c'};">$${Math.floor(profitSell).toLocaleString('en-US')}</span></div>
+            <div><b>Hunt Profit Buy:</b> <span style="color: ${profitBuy >= 0 ? '#2ecc71' : '#e74c3c'};">$${Math.floor(profitBuy).toLocaleString('en-US')}</span></div>
         </div>
     `;
     showModal("TimeLapse Results", html, "window-timelapse-results", "600px");
@@ -203,11 +211,18 @@ export function showAddPokemonModal() {
     showModal("Fight / Capture Pokemon", html, "window-force-encounter");
 }
 
+function getForceEncounterInputs() {
+    const id = Math.max(1, parseInt(document.getElementById('force-enc-id')?.value, 10) || 1);
+    const level = Math.max(1, parseInt(document.getElementById('force-enc-level')?.value, 10) || 1);
+    const parsedQ = parseFloat(document.getElementById('force-enc-q')?.value);
+    const qValue = isNaN(parsedQ) ? 1.0 : Math.max(0.1, parsedQ);
+    const parsedSumIV = parseInt(document.getElementById('force-enc-sumiv')?.value, 10);
+    const sumIV = isNaN(parsedSumIV) ? 300 : Math.min(600, Math.max(0, parsedSumIV));
+    return { id, level, qValue, sumIV };
+}
+
 export function forceNextEncounter() {
-    const id = parseInt(document.getElementById('force-enc-id').value);
-    const level = parseInt(document.getElementById('force-enc-level').value);
-    const qValue = parseFloat(document.getElementById('force-enc-q').value);
-    const sumIV = parseInt(document.getElementById('force-enc-sumiv').value);
+    const { id, level, qValue, sumIV } = getForceEncounterInputs();
 
     state.nextForcedEncounter = {
         id,
@@ -218,12 +233,13 @@ export function forceNextEncounter() {
 }
 
 export function forceNextCapture() {
-    const id = parseInt(document.getElementById('force-enc-id').value);
-    const level = parseInt(document.getElementById('force-enc-level').value);
-    const qValue = parseFloat(document.getElementById('force-enc-q').value);
-    const sumIV = parseInt(document.getElementById('force-enc-sumiv').value);
+    const { id, level, qValue, sumIV } = getForceEncounterInputs();
 
-    const pokemonBase = state.config.pokemonData[id] || state.config.pokemonData[1];
+    const pokemonBase = state.config?.pokemonMap
+        ? (state.config.pokemonMap.get(Number(id)) || state.config.pokemonMap.get(id))
+        : state.config?.pokemonData?.find(p => p && p.id === id);
+    const resolvedBase = pokemonBase || state.config?.pokemonData?.[1];
+    if (!resolvedBase) return;
 
     let qName = "Custom";
     if (qValue >= 2.0) qName = "Shiny";
@@ -250,25 +266,23 @@ export function forceNextCapture() {
     }
 
     const currentStats = {
-        hp: mathEngine.calculateHP(pokemonBase.hp, ivs.hp, level, q.q),
-        atk: mathEngine.calculateStat(pokemonBase.atk, ivs.atk, level, q.q),
-        def: mathEngine.calculateStat(pokemonBase.def, ivs.def, level, q.q),
-        spa: mathEngine.calculateStat(pokemonBase.spa, ivs.spa, level, q.q),
-        spd: mathEngine.calculateStat(pokemonBase.spd, ivs.spd, level, q.q),
-        spe: mathEngine.calculateStat(pokemonBase.spe, ivs.spe, level, q.q),
+        hp: mathEngine.calculateHP(resolvedBase.hp, ivs.hp, level, q.q),
+        atk: mathEngine.calculateStat(resolvedBase.atk, ivs.atk, level, q.q),
+        def: mathEngine.calculateStat(resolvedBase.def, ivs.def, level, q.q),
+        spa: mathEngine.calculateStat(resolvedBase.spa, ivs.spa, level, q.q),
+        spd: mathEngine.calculateStat(resolvedBase.spd, ivs.spd, level, q.q),
+        spe: mathEngine.calculateStat(resolvedBase.spe, ivs.spe, level, q.q),
     };
 
-    const bst = pokemonBase.hp + pokemonBase.atk + pokemonBase.def + pokemonBase.spa + pokemonBase.spd + pokemonBase.spe;
+    const bst = resolvedBase.hp + resolvedBase.atk + resolvedBase.def + resolvedBase.spa + resolvedBase.spd + resolvedBase.spe;
     const totalIV = ivs.hp + ivs.atk + ivs.def + ivs.spa + ivs.spd + ivs.spe;
 
     let learned = [];
-    if (pokemonBase.learnset) {
-        for (const ls of pokemonBase.learnset) {
+    if (resolvedBase.learnset) {
+        for (const ls of resolvedBase.learnset) {
             if (level >= ls.level) {
                 if (state.config.moves[ls.move]) {
-                    const moveData = JSON.parse(JSON.stringify(state.config.moves[ls.move]));
-                    moveData.name = ls.move;
-                    learned.push(moveData);
+                    learned.push({ ...state.config.moves[ls.move], name: ls.move });
                 }
             }
         }
@@ -276,9 +290,9 @@ export function forceNextCapture() {
     const moves = learned.slice(-4);
 
     let caughtPokemon = {
-        id: pokemonBase.id,
-        name: pokemonBase.name,
-        types: pokemonBase.types,
+        id: resolvedBase.id,
+        name: resolvedBase.name,
+        types: [...resolvedBase.types],
         level: level,
         qualityName: qName,
         quality: q.q,
@@ -297,25 +311,30 @@ export function forceNextCapture() {
 
     // Tracking
     if (!state.stats.caughtSpecies) state.stats.caughtSpecies = {};
-    if (!state.stats.caughtSpecies[pokemonBase.name]) {
+    if (!state.stats.caughtSpecies[resolvedBase.name]) {
         state.stats.caughtSpeciesCount = (state.stats.caughtSpeciesCount || 0) + 1;
     }
-    state.stats.caughtSpecies[pokemonBase.name] = (state.stats.caughtSpecies[pokemonBase.name] || 0) + 1;
+    state.stats.caughtSpecies[resolvedBase.name] = (state.stats.caughtSpecies[resolvedBase.name] || 0) + 1;
 
     if (!state.stats.seenSpecies) state.stats.seenSpecies = {};
-    state.stats.seenSpecies[pokemonBase.name] = true;
+    state.stats.seenSpecies[resolvedBase.name] = true;
+
+    if (!state.stats.challengeCaughtSpecific) state.stats.challengeCaughtSpecific = {};
+    state.stats.challengeCaughtSpecific[resolvedBase.name] = (state.stats.challengeCaughtSpecific[resolvedBase.name] || 0) + 1;
+    state.stats.challengeCaughtSpecific[`${resolvedBase.name}_${qName}`] = (state.stats.challengeCaughtSpecific[`${resolvedBase.name}_${qName}`] || 0) + 1;
 
     if (qName === "Shiny") {
         state.stats.shiniesCaught = (state.stats.shiniesCaught || 0) + 1;
         state.stats.shiniesSeen = (state.stats.shiniesSeen || 0) + 1;
         if (!state.stats.caughtShiniesSpecies) state.stats.caughtShiniesSpecies = {};
         if (!state.stats.seenShiniesSpecies) state.stats.seenShiniesSpecies = {};
-        state.stats.caughtShiniesSpecies[pokemonBase.name] = true;
-        state.stats.seenShiniesSpecies[pokemonBase.name] = true;
+        state.stats.caughtShiniesSpecies[resolvedBase.name] = true;
+        state.stats.seenShiniesSpecies[resolvedBase.name] = true;
     }
 
+    if (!state.storage) state.storage = [];
     state.storage.push(caughtPokemon);
-    state.stats.caught++;
+    state.stats.caught = (state.stats.caught || 0) + 1;
 
     // Track Professor Tasks
     let qN = qName || "Regular";
@@ -342,11 +361,11 @@ export function forceNextCapture() {
     if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') {
         window.trackDailyChallenge('catch_sum_iv', { sumIv: totalIV });
         window.trackDailyChallenge('catch_level', { level: level });
-        window.trackDailyChallenge('catch_different_species', { species: pokemonBase.name });
+        window.trackDailyChallenge('catch_different_species', { species: resolvedBase.name });
         window.trackDailyChallenge('catch_rare', { quality: qName });
         window.trackDailyChallenge('catch_weak', { quality: qName });
-        window.trackDailyChallenge('catch_species', { species: pokemonBase.name });
-        window.trackDailyChallenge('catch_type', { types: pokemonBase.types });
+        window.trackDailyChallenge('catch_species', { species: resolvedBase.name });
+        window.trackDailyChallenge('catch_type', { types: resolvedBase.types });
     }
 
     if (window.updateUI) window.updateUI();
@@ -357,8 +376,6 @@ export function exportLog() {
         state.storageRef.exportLog(state);
     }
 }
-
-import { showCheatControlModal } from './cheatControl.js';
 
 export function activateCheat() {
     showCheatControlModal();

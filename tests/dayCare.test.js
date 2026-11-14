@@ -36,7 +36,7 @@ describe('DayCare', () => {
 
     afterEach(() => {
         jest.restoreAllMocks();
-        delete global.window;
+        delete global.window.trackDailyChallenge;
         delete global.crypto;
     });
 

@@ -1,7 +1,6 @@
 import { VITAMINS } from "../constants.js";
 import { state } from '../state.js';
-import { updateUI } from '../ui.js';
-import { showModal } from '../ui.js';
+import { updateUI, showModal } from '../ui.js';
 import { getCapacity, getCurrentCount } from '../mathEngine.js';
 
 function claimItemGift(gift) {
@@ -9,7 +8,7 @@ function claimItemGift(gift) {
     let qty = gift.count || 1;
 
     let isBall = gift.item.includes('ball') || gift.item.includes('Ball');
-    let isPotion = gift.item.includes('Potion');
+    let isPotion = gift.item.includes('Potion') || gift.item === 'Big';
 
     if (isBall && gift.item !== 'Masterball') {
         let currentBalls = getCurrentCount(state, 'balls');
@@ -29,8 +28,24 @@ function claimItemGift(gift) {
         }
     }
 
-    if (!state.backpack[gift.item]) state.backpack[gift.item] = 0;
-    state.backpack[gift.item] += qty;
+    if (isBall) {
+        if (!state.backpack.pokeballs) state.backpack.pokeballs = {};
+        if (!state.backpack.pokeballs[gift.item]) state.backpack.pokeballs[gift.item] = 0;
+        state.backpack.pokeballs[gift.item] += qty;
+    } else if (isPotion) {
+        const potName = gift.item === 'Big' ? 'Big Potion' : gift.item;
+        if (!state.backpack.potions) state.backpack.potions = {};
+        if (!state.backpack.potions[potName]) state.backpack.potions[potName] = 0;
+        state.backpack.potions[potName] += qty;
+    } else if (gift.item.includes('Stone') || VITAMINS.includes(gift.item)) {
+        if (!state.backpack.stones) state.backpack.stones = {};
+        if (!state.backpack.stones[gift.item]) state.backpack.stones[gift.item] = 0;
+        state.backpack.stones[gift.item] += qty;
+    } else {
+        if (!state.backpack.stones) state.backpack.stones = {};
+        if (!state.backpack.stones[gift.item]) state.backpack.stones[gift.item] = 0;
+        state.backpack.stones[gift.item] += qty;
+    }
     return true;
 }
 
@@ -81,7 +96,13 @@ window.claimPendingGift = function(index) {
 function generateBadgeGiftHTML(gift, isPending, index) {
     let badgeRegion = state.currentRegionName || 'Kanto';
     let badgeNum = gift.gymIndex + 1;
-    if (state.currentRegionName === 'Johto') {
+    if (typeof window.getGlobalBadgeInfo === 'function') {
+        const info = window.getGlobalBadgeInfo(gift.gymIndex);
+        if (info) {
+            badgeRegion = info.region || info.badgeRegion || badgeRegion;
+            badgeNum = info.number ?? info.badgeNum ?? info.badgeNumber ?? badgeNum;
+        }
+    } else if (state.currentRegionName === 'Johto') {
         if (gift.gymIndex > 8) {
             badgeRegion = 'Johto';
             badgeNum = gift.gymIndex - 8;
@@ -91,8 +112,7 @@ function generateBadgeGiftHTML(gift, isPending, index) {
         }
     }
 
-    let title = gift.gymName ? gift.gymName + ' Badge' : 'Badge';
-    if (isPending) title = gift.gymName + ' Badge'; // Existing code uses this directly for pending
+    const title = gift.gymName ? gift.gymName + ' Badge' : 'Badge';
 
     let wrapperStyle = isPending
         ? `cursor: pointer; padding: 10px; border: 1px solid #ccc; border-radius: 5px; background: rgba(0,0,0,0.5); transition: background 0.2s;`
@@ -202,3 +222,5 @@ export function showGiftModal() {
         }, 50);
     }
 }
+
+window.showGiftModal = showGiftModal;

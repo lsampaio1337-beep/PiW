@@ -9,17 +9,28 @@ import DayCare from "./dayCare.js";
 import Storage from "./storage.js";
 
 // Import State and modules
-import { state, setBattleSystem, globals, checkFinalChallengeCompleted } from './state.js';
+import { state, setBattleSystem, globals } from './state.js';
 import { trackDailyChallenge, checkAndResetDailyChallenges } from './ui/dailyChallenges.js';
 import { showHelp } from './ui/help.js';
 
 window.globals = globals;
 
-import { profTutorialMessages, showProfTutorialIfNeeded, skipProfTutorial, proceedProfTutorial, concludeProfTutorial } from './ui/tutorials/profTutorial.js';
+import { showProfTutorialIfNeeded, skipProfTutorial, proceedProfTutorial, concludeProfTutorial } from './ui/tutorials/profTutorial.js';
 window.skipProfTutorial = skipProfTutorial;
 window.proceedProfTutorial = proceedProfTutorial;
 window.concludeProfTutorial = concludeProfTutorial;
 export { showProfTutorialIfNeeded };
+
+let autosaveInterval = null;
+let hasUnloadAutosaveListener = false;
+let hasDragAndDropScrollListeners = false;
+
+/** Safely replace an element's contents using DOMParser. */
+function setSafeHTML(element, html) {
+    if (!element || typeof element.replaceChildren !== 'function') return;
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    element.replaceChildren(...doc.body.childNodes);
+}
 
 window.dismissDaycareMessage = function() {
     state.stats.hasSeenDaycare = true;
@@ -231,7 +242,7 @@ window.completeChallenge = function(targetAreaId) {
     // However, to be perfectly safe, since the requirements are distinct, we can leave the tracked progress.
     // Wait, if we never clear it, a future challenge that asks for "Catch 2 Mankey" might auto-complete.
     // Let's clear ONLY the specific progress tied to the completed challenge.
-    if (unlock.requirements) {
+    if (unlock && unlock.requirements) {
         if (unlock.requirements.defeatCountRoute) {
             state.stats.challengeRouteDefeats = 0;
         }
@@ -489,28 +500,6 @@ if (req.catchSpeciesByQuality) {
                  // Do not auto-increment badges, the gift claim will do it
             }
         }
-        if (req.defeatCountRoute) {
-            state.stats.challengeRouteDefeats = req.defeatCountRoute.count;
-        }
-        if (req.catchRouteQuality) {
-            if (!state.stats.challengeCaughtSpecific) state.stats.challengeCaughtSpecific = {};
-            const rqKey = `Route_${req.catchRouteQuality.route}_${req.catchRouteQuality.quality}`;
-            state.stats.challengeCaughtSpecific[rqKey] = req.catchRouteQuality.count;
-        }
-        if (req.defeatSpecific) {
-            if (req.defeatSpecific.name === '__proto__' || req.defeatSpecific.name === 'constructor' || req.defeatSpecific.name === 'prototype') return;
-            if (!state.stats.challengeSpecificDefeats) state.stats.challengeSpecificDefeats = {};
-            state.stats.challengeSpecificDefeats[req.defeatSpecific.name] = req.defeatSpecific.count;
-        }
-
-        if (req.defeatMultipleSpecific) {
-            if (!state.stats.challengeSpecificDefeats) state.stats.challengeSpecificDefeats = {};
-            for (let ds of req.defeatMultipleSpecific) {
-                let key = ds.name || ds.pokemonId;
-                if (key === '__proto__' || key === 'constructor' || key === 'prototype') continue;
-                state.stats.challengeSpecificDefeats[key] = Math.max(state.stats.challengeSpecificDefeats[key] || 0, ds.count);
-            }
-        }
         if (req.defeatEliteFourAndChampion) {
             if (!state.stats.defeatedBosses) state.stats.defeatedBosses = {};
             state.stats.defeatedBosses["Pokemon League Lorelei"] = true;
@@ -596,7 +585,7 @@ if (req.catchSpeciesByQuality) {
             if (completeBtns.length > 0) {
                 // Find the specific complete button for this area
                 const safeAreaId = targetAreaId.replace(/'/g, "\\'");
-                const specificBtn = completeBtns.find(btn => btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(safeAreaId));
+                const specificBtn = completeBtns.find(btn => btn.dataset?.areaId === targetAreaId || (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(safeAreaId)));
                 if (specificBtn) specificBtn.click();
                 else completeBtns[0].click();
             }
@@ -612,10 +601,6 @@ window.showChallengesModal = function() {
 
     // Active Challenges Sector
     let activeChallengesCount = state.stats.activeChallenges ? state.stats.activeChallenges.length : 0;
-    let completedChallengesCount = state.stats.completedChallengeIds ?
-        (window.getCurrentUnlocks() ? state.stats.completedChallengeIds.filter(id => window.getCurrentUnlocks().some(u => u.areaId === id)).length : state.stats.completedChallengeIds.length)
-        : 0;
-    let totalChallengesCount = activeChallengesCount + completedChallengesCount;
 
     html += `<div style="border: 1px solid #555; padding: 10px; border-radius: 5px; background-color: rgba(0,0,0,0.5);">
                 <h3 style="margin-top: 0; margin-bottom: 10px; border-bottom: 1px solid #444; padding-bottom: 5px; font-size: 16px;">${activeChallengesCount > 1 ? 'Active Challenges' : 'Active Challenge'}</h3>
@@ -667,12 +652,13 @@ window.showChallengesModal = function() {
                      <div style="margin-top: 10px; color: #4CAF50;"><b>Rewards:</b> ${rewardsStr}</div>`;
 
             let safeAreaId = unlock.areaId.replace(/'/g, "\\'");
+            const attrAreaId = unlock.areaId.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 
             html += `<div style="text-align: center; margin-top: 15px; display: flex; justify-content: center; gap: 10px;">
                          <button onclick="window.cheatProgressChallenge('${safeAreaId}')" style="padding: 10px 20px; font-size: 16px; font-weight: bold; background-color: orange; color: white; border: none; border-radius: 5px; cursor: pointer;">Cheat Progress</button>`;
 
             if (cData.isMet) {
-                 html += `<button onclick="window.completeChallenge('${safeAreaId}')" style="padding: 10px 20px; font-size: 16px; font-weight: bold; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;">Complete ✔️</button>`;
+                 html += `<button data-area-id="${attrAreaId}" onclick="window.completeChallenge('${safeAreaId}')" style="padding: 10px 20px; font-size: 16px; font-weight: bold; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;">Complete ✔️</button>`;
             }
             html += `</div></div>`;
         }
@@ -1087,6 +1073,7 @@ window.cheatCompleteProfTask = function(type) {
                 if (caught[name] === undefined) caught[name] = 1;
             }
         }
+        state.stats.caughtSpeciesCount = Object.keys(caught).length;
     }
     window.showProfLabModal();
 };
@@ -1288,7 +1275,7 @@ window.showProfLabModal = function() {
         if (window.windowManager) {
             window.windowManager._parseAndSanitizeToElement(html, content);
         } else {
-            content.innerHTML = html;
+            setSafeHTML(content, html);
         }
 
         // Dynamically style the inner modal for Professor Lab to 70% width and proportional scale
@@ -1299,13 +1286,15 @@ window.showProfLabModal = function() {
 
         // Ensure cleanup when the modal is closed
         const cleanUp = () => {
-            if (innerModal) {
+            if (innerModal && innerModal.classList) {
                 innerModal.classList.remove('prof-lab-inner-modal');
             }
             overlay.style.display = 'none';
+            const moneyDisplay = document.getElementById('inner-modal-money-display');
+            if (moneyDisplay) moneyDisplay.style.display = 'none';
         };
 
-        const closeBtn = overlay.querySelector('.window-header span');
+        const closeBtn = document.getElementById('btn-close-inner-modal');
         if (closeBtn) {
             closeBtn.onclick = cleanUp;
         }
@@ -1341,6 +1330,8 @@ export function switchView(viewName) {
     const overlay = document.getElementById('main-view-inner-modal-overlay');
     if (overlay) {
         overlay.style.display = 'none';
+        const innerModal = document.getElementById('main-view-inner-modal');
+        if (innerModal && innerModal.classList) innerModal.classList.remove('prof-lab-inner-modal');
         const moneyDisplay = document.getElementById('inner-modal-money-display');
         if (moneyDisplay) moneyDisplay.style.display = 'none';
     }
@@ -1374,13 +1365,9 @@ export function switchView(viewName) {
     } else if (viewName === 'DAYCARE_HUB') {
         document.getElementById('view-daycare').style.display = 'block';
 
-        // Populate dynamic texts based on required battles
-        const breedBattles = state.dayCareRef ? state.dayCareRef.slot1.requiredBattles : 200;
-        const trainBattles = state.dayCareRef ? state.dayCareRef.slot2.requiredBattles : 100;
-
         const introText = document.getElementById('daycare-intro-text');
         if (introText) {
-            introText.innerHTML = '';
+            if (typeof introText.replaceChildren === 'function') introText.replaceChildren();
 
             const p1 = document.createElement('p');
             p1.textContent = 'Now you are able to use Daycare!';
@@ -1389,10 +1376,10 @@ export function switchView(viewName) {
             p2.textContent = 'You can adjust Pokemon on daycare here or directly in your backpack.';
 
             const p3 = document.createElement('p');
-            p3.innerHTML = `<b>Breeding</b> requires <b>two Pokémon of the same species</b> with a <b>QValue difference of 0.05 or less</b>. You can drag them manually to the Breeding Spot or <b>click the spot to auto-filter</b> eligible candidates. Once started, the process <b>cannot be interrupted</b> and takes <b>100 fights</b> to complete (<b>200 for Shinnies</b>). The resulting egg hatches into the same species (provided it has no pre-evolution) at <b>90% of the highest parent's level</b>. The newborn inherits the higher parent's SumIVs and gains a <b>random QValue increase up to 0.03</b>, capped at a maximum of <b>1.80</b>.`;
+            setSafeHTML(p3, `<b>Breeding</b> requires <b>two Pokémon of the same species</b> with a <b>QValue difference of 0.05 or less</b>. You can drag them manually to the Breeding Spot or <b>click the spot to auto-filter</b> eligible candidates. Once started, the process <b>cannot be interrupted</b> and takes <b>100 fights</b> to complete (<b>200 for Shinnies</b>). The resulting egg hatches into the same species (provided it has no pre-evolution) at <b>90% of the highest parent's level</b>. The newborn inherits the higher parent's SumIVs and gains a <b>random QValue increase up to 0.03</b>, capped at a maximum of <b>1.80</b>.`);
 
             const p4 = document.createElement('p');
-            p4.innerHTML = `For <b>Training</b>, simply place any Pokémon in the Training Spot to <b>continuously improve its SumIV</b>, granting <b>+1 point to a random IV</b> every specified number of fights. This interval is equal to the Pokémon's <b>current SumIV (double for Shinnies)</b>.`;
+            setSafeHTML(p4, `For <b>Training</b>, simply place any Pokémon in the Training Spot to <b>continuously improve its SumIV</b>, granting <b>+1 point to a random IV</b> every specified number of fights. This interval is equal to the Pokémon's <b>current SumIV (double for Shinnies)</b>.`);
 
             introText.appendChild(p1);
             introText.appendChild(p2);
@@ -1469,7 +1456,7 @@ async function loadConfigs() {
 
         try {
             const mapModule = await import(`../config/${prefix}MapCoordinates.js`);
-            state.config[`${prefix}MapCoordinates`] = mapModule.default;
+            state.config[`${prefix}MapCoordinates`] = mapModule.default || mapModule[`${prefix}MapCoordinates`];
         } catch (e) {
             // Expected for regions that don't have map coords
         }
@@ -1499,6 +1486,9 @@ async function loadConfigs() {
 
 
 function returnToLab() {
+    if (globals.battleSystem) {
+        globals.battleSystem.stop();
+    }
     window.currentMapRegion = state.currentRegionName || 'Kanto';
 
     let labRoute = window.currentMapRegion + " Professor Lab";
@@ -1666,7 +1656,6 @@ function selectStarter(id) {
 }
 
 let gameClockTimeout = null;
-let lastTickTime = null;
 
 window.restartGameClock = function() {
     if (gameClockTimeout) {
@@ -1805,6 +1794,9 @@ function gameClockTick() {
 
 
 function startGame() {
+    if (globals.battleSystem) {
+        globals.battleSystem.stop();
+    }
     let bs = new BattleSystem(state, updateUI);
     setBattleSystem(bs);
     updateUI();
@@ -1820,18 +1812,26 @@ function startGame() {
 }
 
 function setupAutosave() {
+    if (autosaveInterval) {
+        clearInterval(autosaveInterval);
+    }
     // Autosave loop
-    setInterval(() => {
+    autosaveInterval = setInterval(() => {
         storage.save(state);
     }, 60000);
 
     // Save on beforeunload
-    window.addEventListener('beforeunload', () => {
-        storage.save(state);
-    });
+    if (!hasUnloadAutosaveListener) {
+        hasUnloadAutosaveListener = true;
+        window.addEventListener('beforeunload', () => {
+            storage.save(state);
+        });
+    }
 }
 
 function setupDragAndDropScrolling() {
+    if (hasDragAndDropScrollListeners) return;
+    hasDragAndDropScrollListeners = true;
     // Handle scrolling during drag-and-drop (Wheel + Auto-scroll at edges)
     window.isDraggingPokemon = false;
     let dragScrollTarget = null;
@@ -2012,13 +2012,13 @@ async function init() {
             const h2 = document.getElementById('save-action-title');
             if (h2) {
                 if (profileAction === 'rename') {
-                    h2.innerHTML = "Select a game to <span style='color: #3498db;'>rename.</span>";
+                    setSafeHTML(h2, "Select a game to <span style='color: #3498db;'>rename.</span>");
                     h2.style.display = 'block';
                 } else if (profileAction === 'delete') {
-                    h2.innerHTML = "Select a game to <span style='color: #f44336;'>delete.</span>";
+                    setSafeHTML(h2, "Select a game to <span style='color: #f44336;'>delete.</span>");
                     h2.style.display = 'block';
                 } else {
-                    h2.innerHTML = "";
+                    if (typeof h2.replaceChildren === 'function') h2.replaceChildren();
                     h2.style.display = 'none';
                 }
             }
@@ -2064,24 +2064,6 @@ async function init() {
 
             // Get profile name
             const profileName = pData.profileName || `Profile ${index + 1}`;
-
-            // Get last route unlocked
-            let lastRoute = "None";
-            if (pData.stats && pData.stats.completedChallenges !== undefined && window.getCurrentUnlocks()) {
-                const unlocksLength = window.getCurrentUnlocks().length;
-                let cIndex = pData.stats.completedChallenges;
-                // Cap to max
-                if (cIndex > unlocksLength) cIndex = unlocksLength;
-
-                // Get the reward from the LAST completed challenge
-                if (cIndex > 0) {
-                    let pUnlock = window.getCurrentUnlocks()[cIndex - 1];
-                    lastRoute = pUnlock.unlocks ? pUnlock.unlocks.map(r => r.replace(/\s*\([^)]+\)$/, "")).join(" + ") : "Next Area";
-                }
-            }
-
-            let displayZzZRoute = (pData.currentRoute || "Unknown Route").replace(/\s*\([^)]+\)$/, "");
-            let zzzText = pData.isZzZMode ? ` - ZzZ: ${displayZzZRoute}` : '';
 
             const btn = document.createElement('button');
             btn.style.padding = "10px";
@@ -2309,7 +2291,9 @@ async function init() {
                         // We will do this right after loadConfigs
                     }
 
-                    await loadConfigs();
+                    if (!state.config.pokemonData || state.config.pokemonData.length === 0) {
+                        await loadConfigs();
+                    }
 
                     // Complete challenge arrays mapping for older saves
                     if (state.stats.completedChallenges > 0 && state.stats.completedChallengeIds && state.stats.completedChallengeIds.length === 0) {
@@ -2364,8 +2348,6 @@ async function init() {
             profilesContainer.appendChild(btn);
         });
 
-        document.getElementById('btn-new-profile').onclick = startNewGame;
-
         document.getElementById('btn-rename-profile').onclick = () => {
             profileAction = profileAction === 'rename' ? 'load' : 'rename';
             updateHeader();
@@ -2379,8 +2361,6 @@ async function init() {
     } else {
         if (splashScreen) splashScreen.style.display = 'flex';
         if (saveManagerModal) saveManagerModal.style.display = 'flex';
-
-        document.getElementById('btn-new-profile').onclick = startNewGame;
     }
 
     // Bind buttons (they might be missing if bypass Professor Lab)
@@ -2802,49 +2782,49 @@ async function init() {
             <div style="text-align: left;">
                 <div style="display: flex; gap: 40px; justify-content: space-between;">
                     <div style="flex: 1;">
-                        <p><b>Time played:</b> \${playtimeStr}</p>
-                        <p><b>$</b> \${state.trainer.money.toLocaleString()}</p>
+                        <p><b>Time played:</b> ${playtimeStr}</p>
+                        <p><b>$</b> ${state.trainer.money.toLocaleString()}</p>
                     </div>
                     <div style="flex: 1;">
-                        <p><b>Battles Won:</b> \${(state.stats.battlesWon || 0).toLocaleString()}</p>
-                        <p><b>Faints:</b> \${(state.stats.faints || 0).toLocaleString()}</p>
-                    </div>
-                </div>
-                <hr style="margin: 10px 0;">
-                <div style="display: flex; gap: 40px; justify-content: space-between;">
-                    <div style="flex: 1;">
-                        <p><b>Total Pokémon Captured:</b> \${(state.stats.caught || 0).toLocaleString()}</p>
-                        <p><b>Species Caught:</b> \${uniqueSpeciesCaught} / \${state.config.pokemonData.filter(p => Number.isInteger(p.id) && p[(state.currentRegionName || 'Kanto').toLowerCase() + '_id'] !== undefined).length}</p>
-                    </div>
-                    <div style="flex: 1;">
-                        <p><b>Shinies Caught:</b> \${(state.stats.shiniesCaught || 0).toLocaleString()}</p>
-                        <p><b>Shiny Species Caught:</b> \${uniqueShinySpeciesCaught} / \${state.config.pokemonData.filter(p => Number.isInteger(p.id) && p[(state.currentRegionName || 'Kanto').toLowerCase() + '_id'] !== undefined).length}</p>
+                        <p><b>Battles Won:</b> ${(state.stats.battlesWon || 0).toLocaleString()}</p>
+                        <p><b>Faints:</b> ${(state.stats.faints || 0).toLocaleString()}</p>
                     </div>
                 </div>
                 <hr style="margin: 10px 0;">
                 <div style="display: flex; gap: 40px; justify-content: space-between;">
                     <div style="flex: 1;">
-                        <p><b>Jigglypuff Grains Used:</b> \${(state.stats.jigglypuffGrainsUsed || 0).toLocaleString()}</p>
-                        <p><b>Daily Rewards Collected:</b> \${(state.stats.dailyRewards ? state.stats.dailyRewards.daysClaimed : 0).toLocaleString()}</p>
-                        <p><b>Professor Lab Assignments Completed:</b> \${assignmentsCompleted}/\${maxAssignments}</p>
+                        <p><b>Total Pokémon Captured:</b> ${(state.stats.caught || 0).toLocaleString()}</p>
+                        <p><b>Species Caught:</b> ${uniqueSpeciesCaught} / ${state.config.pokemonData.filter(p => Number.isInteger(p.id) && p[(state.currentRegionName || 'Kanto').toLowerCase() + '_id'] !== undefined).length}</p>
                     </div>
                     <div style="flex: 1;">
-                        <p><b>White Candies Claimed:</b> \${(whiteCandiesClaimed || 0).toLocaleString()}</p>
-                        <p><b>Daily Tokens Earned:</b> \${(state.stats.tokensEarned || 0).toLocaleString()}</p>
-                        <p><b>Progress Challenge Completed:</b> \${challengesCompleted}/\${maxChallenges}</p>
+                        <p><b>Shinies Caught:</b> ${(state.stats.shiniesCaught || 0).toLocaleString()}</p>
+                        <p><b>Shiny Species Caught:</b> ${uniqueShinySpeciesCaught} / ${state.config.pokemonData.filter(p => Number.isInteger(p.id) && p[(state.currentRegionName || 'Kanto').toLowerCase() + '_id'] !== undefined).length}</p>
                     </div>
                 </div>
                 <hr style="margin: 10px 0;">
                 <div style="display: flex; gap: 40px; justify-content: space-between;">
                     <div style="flex: 1;">
-                        <p><b>Highest Level on Backpack:</b> \${highestLevel}</p>
-                        <p><b>Highest Quality on Backpack:</b> \${highestQuality}</p>
-                        <p><b>Highest IV Sum on Backpack:</b> \${highestSumIV}</p>
+                        <p><b>Jigglypuff Grains Used:</b> ${(state.stats.jigglypuffGrainsUsed || 0).toLocaleString()}</p>
+                        <p><b>Daily Rewards Collected:</b> ${(state.stats.dailyRewards ? state.stats.dailyRewards.daysClaimed : 0).toLocaleString()}</p>
+                        <p><b>Professor Lab Assignments Completed:</b> ${assignmentsCompleted}/${maxAssignments}</p>
                     </div>
                     <div style="flex: 1;">
-                        <p><b>Highest Level Captured:</b> \${state.stats.highestLevelCaptured || 0}</p>
-                        <p><b>Highest Quality Captured:</b> \${state.stats.highestQualityCaptured || 0}</p>
-                        <p><b>Highest IV Sum Captured:</b> \${state.stats.highestSumIVCaptured || 0}</p>
+                        <p><b>White Candies Claimed:</b> ${(whiteCandiesClaimed || 0).toLocaleString()}</p>
+                        <p><b>Daily Tokens Earned:</b> ${(state.stats.tokensEarned || 0).toLocaleString()}</p>
+                        <p><b>Progress Challenge Completed:</b> ${challengesCompleted}/${maxChallenges}</p>
+                    </div>
+                </div>
+                <hr style="margin: 10px 0;">
+                <div style="display: flex; gap: 40px; justify-content: space-between;">
+                    <div style="flex: 1;">
+                        <p><b>Highest Level on Backpack:</b> ${highestLevel}</p>
+                        <p><b>Highest Quality on Backpack:</b> ${highestQuality}</p>
+                        <p><b>Highest IV Sum on Backpack:</b> ${highestSumIV}</p>
+                    </div>
+                    <div style="flex: 1;">
+                        <p><b>Highest Level Captured:</b> ${state.stats.highestLevelCaptured || 0}</p>
+                        <p><b>Highest Quality Captured:</b> ${state.stats.highestQualityCaptured || 0}</p>
+                        <p><b>Highest IV Sum Captured:</b> ${state.stats.highestSumIVCaptured || 0}</p>
                     </div>
                 </div>
             </div>
@@ -2854,33 +2834,18 @@ async function init() {
 function generateTrainerBadgesHtml() {
     let badgesHtml = '<div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; justify-items: center; align-items: center; margin: 0 auto;">';
 
-    // To be consistent with gift mapping, we dynamically map badge icons according to sequential gym unlocks
+    // To be consistent with gift mapping, we map badge icons based on the current region and sequential badge number
+    const badgeRegion = state.currentRegionName || 'Kanto';
     for (let i = 0; i < state.trainer.badges; i++) {
-        let badgeRegion = 'Kanto';
-        let badgeNum = i + 1;
-
-        if (state.config && state.config.gyms) {
-            let gymIndex = i;
-            // For backwards compatibility and correct ordering in Johto
-            if (state.currentRegionName === 'Johto') {
-                if (i < 8) gymIndex = i + 8;
-                else if (i < 16) gymIndex = i - 8;
-            }
-
-            let regionIndex = Math.floor(gymIndex / 8);
-            const regions = ['Kanto', 'Johto', 'Hoenn', 'Sinnoh', 'Unova2', 'Kalos', 'Alola', 'Galar', 'Hisui', 'Paldea'];
-            badgeRegion = regions[regionIndex] || 'Kanto';
-            badgeNum = (gymIndex % 8) + 1;
-        }
-
+        const badgeNum = i + 1;
         const badgeFile = window.getBadgeFileName(badgeRegion, badgeNum);
-        badgesHtml += `<div style="background: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px; padding: 15px; display: flex; justify-content: center; align-items: center; box-sizing: border-box;"><img src="./Assets/Gym/Badges/\${badgeFile}" style="width: 100px; height: 100px; object-fit: contain;" title="Badge \${i + 1}"></div>`;
+        badgesHtml += `<div style="background: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px; padding: 15px; display: flex; justify-content: center; align-items: center; box-sizing: border-box;"><img src="./Assets/Gym/Badges/${badgeFile}" style="width: 100px; height: 100px; object-fit: contain;" title="Badge ${i + 1}"></div>`;
     }
     badgesHtml += '</div>';
 
     return `
         <div style="text-align: center; padding: 2%; box-sizing: border-box;">
-            \${badgesHtml}
+            ${badgesHtml}
         </div>
     `;
 }
@@ -2935,18 +2900,18 @@ function generateTrainerMedalsHtml() {
         medalsHtml += `
             <div
                 class="medal-item"
-                data-region="\${region}" data-caught="\${caughtCount}" data-shiny="\${shinyCount}" data-total="\${totalInRegion}"
-                onclick="if(window.showMedalDetails) window.showMedalDetails('\${region}', \${caughtCount}, \${shinyCount}, \${totalInRegion})"
+                data-region="${region}" data-caught="${caughtCount}" data-shiny="${shinyCount}" data-total="${totalInRegion}"
+                onclick="if(window.showMedalDetails) window.showMedalDetails('${region}', ${caughtCount}, ${shinyCount}, ${totalInRegion})"
                 style="background: rgba(0, 0, 0, 0.2); border-radius: 10px; padding: 10px 15px; border: 1px solid rgba(255, 255, 255, 0.1); display: flex; justify-content: space-around; align-items: center; box-sizing: border-box; transition: all 0.2s ease-in-out; min-height: 0; cursor: pointer;"
             >
-                <div style="text-align: center; \${!hasFirst ? 'filter: grayscale(100%) opacity(0.5);' : 'filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.5));'}">
-                    <img src="Assets/Extra/Medals/\${region} First.png" alt="\${region} First" style="width: 100%; max-width: 64px; max-height: 100%; object-fit: contain; image-rendering: pixelated;" onerror="this.src='Assets/Extra/Medals/Kanto First.png'">
+                <div style="text-align: center; ${!hasFirst ? 'filter: grayscale(100%) opacity(0.5);' : 'filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.5));'}">
+                    <img src="Assets/Extra/Medals/${region} First.png" alt="${region} First" style="width: 100%; max-width: 64px; max-height: 100%; object-fit: contain; image-rendering: pixelated;" onerror="this.src='Assets/Extra/Medals/Kanto First.png'">
                 </div>
-                <div style="text-align: center; \${!hasSecond ? 'filter: grayscale(100%) opacity(0.5);' : 'filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.8));'}">
-                    <img src="Assets/Extra/Medals/\${region} Second.png" alt="\${region} Second" style="width: 100%; max-width: 64px; max-height: 100%; object-fit: contain; image-rendering: pixelated;" onerror="this.src='Assets/Extra/Medals/Kanto Second.png'">
+                <div style="text-align: center; ${!hasSecond ? 'filter: grayscale(100%) opacity(0.5);' : 'filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.8));'}">
+                    <img src="Assets/Extra/Medals/${region} Second.png" alt="${region} Second" style="width: 100%; max-width: 64px; max-height: 100%; object-fit: contain; image-rendering: pixelated;" onerror="this.src='Assets/Extra/Medals/Kanto Second.png'">
                 </div>
-                <div style="text-align: center; \${!hasThird ? 'filter: grayscale(100%) opacity(0.5);' : 'filter: drop-shadow(0 0 10px rgba(255, 215, 0, 1));'}">
-                    <img src="Assets/Extra/Medals/\${region} Third.png" alt="\${region} Third" style="width: 100%; max-width: 64px; max-height: 100%; object-fit: contain; image-rendering: pixelated;" onerror="this.src='Assets/Extra/Medals/Kanto Third.png'">
+                <div style="text-align: center; ${!hasThird ? 'filter: grayscale(100%) opacity(0.5);' : 'filter: drop-shadow(0 0 10px rgba(255, 215, 0, 1));'}">
+                    <img src="Assets/Extra/Medals/${region} Third.png" alt="${region} Third" style="width: 100%; max-width: 64px; max-height: 100%; object-fit: contain; image-rendering: pixelated;" onerror="this.src='Assets/Extra/Medals/Kanto Third.png'">
                 </div>
             </div>
         `;
@@ -2967,17 +2932,17 @@ function generateTrainerMedalsHtml() {
     return medalsHtml;
 }
 function generateTrainerDetailsHtml(tab, options) {
-    const headerTitle = tab === 'medal-details' ? `\${options.region} Medals` : `\${options.title} Upgrades`;
+    const headerTitle = tab === 'medal-details' ? `${options.region} Medals` : `${options.title} Upgrades`;
     const backTab = tab === 'medal-details' ? 'medals' : 'upgrades';
     return `
         <div class="floating-window" style="position: relative; width: 100%; height: 100%; display: flex; flex-direction: column; overflow: hidden;">
             <div class="window-header" style="position: relative; cursor: default;">
-                <span>\${headerTitle}</span>
-                <span onclick="window.showTrainerStats('\${backTab}')" style="position: absolute; top: 5px; right: 5px; font-size: 12px; font-weight: bold; line-height: 1; padding: 0; cursor: pointer; color: white;">X</span>
+                <span>${headerTitle}</span>
+                <span onclick="window.showTrainerStats('${backTab}')" style="position: absolute; top: 5px; right: 5px; font-size: 12px; font-weight: bold; line-height: 1; padding: 0; cursor: pointer; color: white;">X</span>
             </div>
             <div class="window-content-container" style="flex: 1; overflow-y: auto; overflow-x: hidden;">
                 <div style="padding: 15px; box-sizing: border-box; width: 100%; height: 100%;">
-                    \${options.html}
+                    ${options.html}
                 </div>
             </div>
         </div>
@@ -2985,6 +2950,7 @@ function generateTrainerDetailsHtml(tab, options) {
 }
 function generateTrainerUpgradesHtml() {
     let contentHtml = '<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; padding: 2%; box-sizing: border-box;">';
+    let hasAnyUpgrade = false;
 
     if (state.stats.upgrades) {
         const upgradeTypes = [
@@ -3002,8 +2968,9 @@ function generateTrainerUpgradesHtml() {
             const tier = state.stats.upgrades[type.key] || 0;
             if (tier > 0) {
                 // Show the currently purchased tier (index tier - 1)
-                const configItem = state.config.balance.expansions[type.configKey][tier - 1];
+                const configItem = state.config?.balance?.expansions?.[type.configKey]?.[tier - 1];
                 if (configItem) {
+                    hasAnyUpgrade = true;
                     let displayName = configItem.displayName || configItem.name;
                     if (type.configKey === 'daycare') {
                         const parts = displayName.split(' ');
@@ -3013,11 +2980,11 @@ function generateTrainerUpgradesHtml() {
                     }
                     let description = configItem.description || '';
                     if (type.configKey === 'ballPocket') {
-                        description = `Ball capacity: \${getCapacity(state, 'balls').toLocaleString('pt-BR')}`;
+                        description = `Ball capacity: ${getCapacity(state, 'balls').toLocaleString('pt-BR')}`;
                     } else if (type.configKey === 'potionSatchel') {
-                        description = `Potion capacity: \${getCapacity(state, 'potions').toLocaleString('pt-BR')}`;
+                        description = `Potion capacity: ${getCapacity(state, 'potions').toLocaleString('pt-BR')}`;
                     } else if (type.configKey === 'pokemonBox') {
-                        description = `Storage capacity: \${getCapacity(state, 'box').toLocaleString('pt-BR')}`;
+                        description = `Storage capacity: ${getCapacity(state, 'box').toLocaleString('pt-BR')}`;
                     } else if (type.configKey === 'speed') {
                         if (tier === 1) description = "Encounter time decreased by 10%";
                         else if (tier === 2) description = "Encounter time decreased by 20%";
@@ -3042,10 +3009,10 @@ function generateTrainerUpgradesHtml() {
                     }
 
                     contentHtml += `
-                        <div class="upgrade-item" data-type="\${type.configKey}" data-tier="\${tier}" onclick="if(window.showUpgradeDetails) window.showUpgradeDetails('\${type.configKey}', \${tier})" style="background: #2c3e50; border: 2px solid #3498db; border-radius: 10px; padding: 15px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 10px; transition: all 0.2s ease-in-out; cursor: pointer;">
-                            <div style="font-size: 14px; font-weight: bold; color: white;">\${displayName}</div>
-                            <img src="./Assets/Items/Upgrades/\${configItem.name}.png" style="width: 50px; height: 50px; object-fit: contain;" alt="\${displayName}">
-                            <div style="font-size: 12px; color: #cbd5e1; line-height: 1.3;">\${description}</div>
+                        <div class="upgrade-item" data-type="${type.configKey}" data-tier="${tier}" onclick="if(window.showUpgradeDetails) window.showUpgradeDetails('${type.configKey}', ${tier})" style="background: #2c3e50; border: 2px solid #3498db; border-radius: 10px; padding: 15px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 10px; transition: all 0.2s ease-in-out; cursor: pointer;">
+                            <div style="font-size: 14px; font-weight: bold; color: white;">${displayName}</div>
+                            <img src="./Assets/Items/Upgrades/${configItem.name}.png" style="width: 50px; height: 50px; object-fit: contain;" alt="${displayName}">
+                            <div style="font-size: 12px; color: #cbd5e1; line-height: 1.3;">${description}</div>
                         </div>
                     `;
                 }
@@ -3065,7 +3032,7 @@ function generateTrainerUpgradesHtml() {
         </style>
     `;
 
-    if (contentHtml.includes('<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px;"></div>')) {
+    if (!hasAnyUpgrade) {
         contentHtml = '<div style="text-align: center; font-style: italic; color: #ccc;">No upgrades purchased yet.</div>';
     }
 
@@ -3276,8 +3243,6 @@ window.startGame = startGame;
 
 
 
-
-import { escapeHTML } from './utils/stringUtils.js';
 
 function renderProfessorSprite(currentRegion) {
     const labConfigs = {
@@ -3491,7 +3456,8 @@ window.simulateSleepFarm = function() {
     let potionUsedStr = "No Potion Used";
     let potionIconStr = `<div style="font-size: 18px; color: #64748b; margin-bottom: 5px;">-</div>`;
     if (state.settings.activePotionTier >= 0) {
-        const potionName = state.config.balance.items.potions[state.settings.activePotionTier].name;
+        const rawPotionName = state.config.balance.items.potions[state.settings.activePotionTier].name;
+        const potionName = rawPotionName === 'Big' ? 'Big Potion' : rawPotionName;
         potionUsedStr = `${results.potionsUsed} ${potionName}s`;
         potionIconStr = `<img src="Assets/Items/Potions/${potionName}.png" style="width: 30px; height: 30px; margin-bottom: 5px;" alt="${potionName}">`;
     }
@@ -3614,23 +3580,16 @@ window.promptWakeUpRegion = function(regionName) {
         if (state.currentRegionName !== regionName) {
             window.currentMapRegion = regionName;
             if (typeof globals.swapRegion === 'function') globals.swapRegion(regionName);
-            // Force a swap to the region being woken up. We use navigateToLocation with the region's current route.
-            let targetRoute = state.regions[regionName]?.currentRoute || (regionName + ' Professor Lab');
-            window.navigateToLocation(targetRoute);
         }
 
-        // Restart the game components naturally when waking up
-        if (state.currentRoute.endsWith('Professor Lab') || state.currentRoute === 'PokeCenter & PokeMarket') {
-             // In these areas it's safe to just let it sit
-             if (window.windowManager) window.windowManager.toggleWindow('main-view-window', true);
-        } else {
-             if (globals.battleSystem && state.currentRoute !== undefined) {
-                  window.navigateToLocation(state.currentRoute);
-             }
+        if (globals.battleSystem) {
+            globals.battleSystem.stop();
         }
 
         window.simulateSleepFarm();
         window.updateZzZModeUI();
+
+        if (window.windowManager) window.windowManager.toggleWindow('main-view-window', true);
     };
 };
 

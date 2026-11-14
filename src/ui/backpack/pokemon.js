@@ -1,27 +1,89 @@
 import { state } from '../../state.js';
 import { updateUI } from '../../ui.js';
-import { renderBackpackTab } from './index.js';
+import { renderBackpackTab, showBackpack } from './index.js';
 import { escapeHTML } from '../../utils/stringUtils.js';
+import { calculateHP, calculateStat, calculatePP, calculateEVXP, calculateEVM, calculateTotalXP } from '../../mathEngine.js';
 
 window.sellModeActive = false;
 window.selectedForSale = new Set();
-import { calculatePP, calculateEVXP, calculateEVM, calculateTotalXP } from '../../mathEngine.js';
+
+function getPokemonConfig(id) {
+    return state.config?.pokemonMap
+        ? (state.config.pokemonMap.get(Number(id)) || state.config.pokemonMap.get(id))
+        : state.config?.pokemonData?.find(d => d.id === id);
+}
+
+function getLearnsetMoves(pokemonBase, level) {
+    if (!pokemonBase?.learnset) return [];
+    const learned = [];
+    const learnedSet = new Set();
+    for (const ls of pokemonBase.learnset) {
+        if (level >= ls.level) {
+            const moveName = ls.move;
+            if (state.config?.moves?.[moveName] && !learnedSet.has(moveName)) {
+                learnedSet.add(moveName);
+                const moveData = { ...state.config.moves[moveName] };
+                moveData.name = moveName;
+                learned.push(moveData);
+            }
+        }
+    }
+    return learned.slice(-4);
+}
+
+function assignTrainingSlot(pkmn) {
+    if (!state.dayCareRef) return;
+    state.dayCareRef.slot2.pokemon = pkmn;
+
+    const totalIV = pkmn.ivs.hp + pkmn.ivs.atk + pkmn.ivs.def + pkmn.ivs.spa + pkmn.ivs.spd + pkmn.ivs.spe;
+    state.dayCareRef.slot2.requiredBattles = (pkmn.quality >= 2.0) ? totalIV * 2 : totalIV;
+    if (state.dayCareRef.slot2.requiredBattles === 0) state.dayCareRef.slot2.requiredBattles = 1;
+
+    if (totalIV >= 600) {
+        state.dayCareRef.slot2.battles = state.dayCareRef.slot2.requiredBattles;
+    } else {
+        state.dayCareRef.slot2.battles = 0;
+    }
+}
+
+function applyDittoBaseStats(p, baseData) {
+    p.types = [...(baseData.types || [])];
+    p.bst = baseData.hp + baseData.atk + baseData.def + baseData.spa + baseData.spd + baseData.spe;
+
+    const v = p.vitamins || {};
+    p.maxHp = calculateHP(baseData.hp, p.ivs.hp, p.level, p.quality, v.hp || 0);
+    p.currentStats.hp = p.maxHp;
+    p.currentStats.atk = calculateStat(baseData.atk, p.ivs.atk, p.level, p.quality, v.atk || 0);
+    p.currentStats.def = calculateStat(baseData.def, p.ivs.def, p.level, p.quality, v.def || 0);
+    p.currentStats.spa = calculateStat(baseData.spa, p.ivs.spa, p.level, p.quality, v.spa || 0);
+    p.currentStats.spd = calculateStat(baseData.spd, p.ivs.spd, p.level, p.quality, v.spd || 0);
+    p.currentStats.spe = calculateStat(baseData.spe, p.ivs.spe, p.level, p.quality, v.spe || 0);
+
+    p.currentHp = Math.min(p.currentHp, p.maxHp);
+
+    const totalIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
+    p.evxp = calculateEVXP(p.bst, p.level, p.quality, totalIV);
+    p.evm = calculateEVM(p.bst, p.level, p.quality, totalIV);
+    p.pp = calculatePP(p.bst, p.level, p.quality, totalIV);
+
+    p.moves = getLearnsetMoves(baseData, p.level);
+}
 
 // Helper to render a consistent Pokemon slot UI
 function renderSlotUI(p, listName, origIndex, isDraggable) {
     if (!p.uuid) p.uuid = crypto.randomUUID();
-    let imgSrc = window.getSpriteUrl(p.id, p.qualityName === 'Shiny');
+    const safeUuid = escapeHTML(p.uuid);
     let sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
-    let dragAttr = isDraggable ? `draggable="true" ondragstart="window.dragStart(event, '${listName}', '${p.uuid}')"` : '';
+    let dragAttr = isDraggable ? `draggable="true" ondragstart="window.dragStart(event, '${listName}', '${safeUuid}')"` : '';
     let cursorStyle = isDraggable ? 'cursor: move;' : 'cursor: default;';
     let slotClass = '';
     let dataAttr = '';
     if (listName.toLowerCase() === 'storage') {
         slotClass = 'pokemon-storage-slot';
-        dataAttr = `data-uuid="${p.uuid}"`;
+        dataAttr = `data-uuid="${safeUuid}"`;
     } else if (listName.toLowerCase() === 'safe') {
         slotClass = 'pokemon-safe-slot';
-        dataAttr = `data-uuid="${p.uuid}"`;
+        dataAttr = `data-uuid="${safeUuid}"`;
     }
 
     let selectionStyle = '';
@@ -29,7 +91,7 @@ function renderSlotUI(p, listName, origIndex, isDraggable) {
     if (window.sellModeActive && listName.toLowerCase() === 'storage') {
         dragAttr = ''; // Disable drag in sell mode
         cursorStyle = 'cursor: pointer;';
-        clickHandler = `onclick="window.toggleSaleSelection('${p.uuid}')"`;
+        clickHandler = `onclick="window.toggleSaleSelection('${safeUuid}')"`;
         if (window.selectedForSale.has(p.uuid)) {
             selectionStyle = 'outline: 3px solid #00ff00; outline-offset: -3px; background: rgba(0,255,0,0.2);';
         }
@@ -45,7 +107,7 @@ function renderSlotUI(p, listName, origIndex, isDraggable) {
 
     let transformBtn = '';
     if (p.name === 'Ditto') {
-        transformBtn = `<div onclick="event.stopPropagation(); window.openDittoTransformModal('${p.uuid}')" style="position: absolute; bottom: 2cqw; right: 2cqw; cursor: pointer; background: #9b59b6; color: white; border-radius: 50%; width: 20cqw; height: 20cqw; text-align: center; display: flex; align-items: center; justify-content: center; font-size: 14cqw; font-weight: bold; z-index: 3;" title="Transform">T</div>`;
+        transformBtn = `<div onclick="event.stopPropagation(); window.openDittoTransformModal('${safeUuid}')" style="position: absolute; bottom: 2cqw; right: 2cqw; cursor: pointer; background: #9b59b6; color: white; border-radius: 50%; width: 20cqw; height: 20cqw; text-align: center; display: flex; align-items: center; justify-content: center; font-size: 14cqw; font-weight: bold; z-index: 3;" title="Transform">T</div>`;
     }
 
     let finalId = p.transformedIntoId || p.id;
@@ -54,7 +116,7 @@ function renderSlotUI(p, listName, origIndex, isDraggable) {
 
     return `
         <div class="${slotClass}" ${dataAttr} style="background: #2c3e50; border: 2px solid #3498db; border-radius: 10px; aspect-ratio: 1 / 1.5; display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 4%; box-sizing: border-box; position: relative; container-type: inline-size; overflow: hidden; ${cursorStyle}; width: 100%; ${selectionStyle}" title="Q=${p.quality.toFixed(2)} & ∑IV=${sumIV}" ${dragAttr} ${clickHandler}>
-            <div onclick="event.stopPropagation(); window.showPokemonStatsByUuid('${escapeHTML(p.uuid)}')" style="position: absolute; top: 2cqw; right: 2cqw; cursor: pointer; background: #34495e; color: white; border-radius: 50%; width: 20cqw; height: 20cqw; text-align: center; display: flex; align-items: center; justify-content: center; font-size: 14cqw; font-weight: bold; z-index: 3;" title="View Info">i</div>
+            <div onclick="event.stopPropagation(); window.showPokemonStatsByUuid('${safeUuid}')" style="position: absolute; top: 2cqw; right: 2cqw; cursor: pointer; background: #34495e; color: white; border-radius: 50%; width: 20cqw; height: 20cqw; text-align: center; display: flex; align-items: center; justify-content: center; font-size: 14cqw; font-weight: bold; z-index: 3;" title="View Info">i</div>
 
             <div style="font-size: 16cqw; font-weight: bold; margin-top: 10cqw; margin-bottom: 1cqw; display: flex; align-items: center; justify-content: center; text-align: center; line-height: 1.1; z-index: 1; color: white;">${escapeHTML(p.name)}</div>
 
@@ -117,13 +179,13 @@ export function renderPokemonTab(area) {
             <button onclick="document.getElementById('pokemon-filters').style.display = document.getElementById('pokemon-filters').style.display === 'none' ? 'block' : 'none';" style="background: none; border: 1px solid #777; color: white; cursor: pointer; border-radius: 4px; padding: 2px 5px;">🔍 Toggle Filters</button>
         </div>
         <div id="pokemon-filters" style="display: none; background: rgba(0,0,0,0.7); padding: 5px; border-radius: 5px; margin-bottom: 10px; font-size: 12px; text-align: center;">
-            <input type="text" id="pfilter-name" placeholder="Name" value="${filters.name}" oninput="window.updatePokemonFilter('name', this.value)" style="width: 80px; margin: 2px;">
-            <input type="number" id="pfilter-minLvl" placeholder="Min Lv" value="${filters.minLvl}" oninput="window.updatePokemonFilter('minLvl', this.value)" style="width: 50px; margin: 2px; -moz-appearance: textfield;">
-            <input type="number" id="pfilter-maxLvl" placeholder="Max Lv" value="${filters.maxLvl}" oninput="window.updatePokemonFilter('maxLvl', this.value)" style="width: 50px; margin: 2px; -moz-appearance: textfield;">
-            <input type="number" id="pfilter-minQ" placeholder="Min Q" value="${filters.minQ}" oninput="window.updatePokemonFilter('minQ', this.value)" style="width: 50px; margin: 2px; -moz-appearance: textfield;">
-            <input type="number" id="pfilter-maxQ" placeholder="Max Q" value="${filters.maxQ}" oninput="window.updatePokemonFilter('maxQ', this.value)" style="width: 50px; margin: 2px; -moz-appearance: textfield;">
-            <input type="number" id="pfilter-minIV" placeholder="Min ∑IV" value="${filters.minIV}" oninput="window.updatePokemonFilter('minIV', this.value)" style="width: 60px; margin: 2px; -moz-appearance: textfield;">
-            <input type="number" id="pfilter-maxIV" placeholder="Max ∑IV" value="${filters.maxIV}" oninput="window.updatePokemonFilter('maxIV', this.value)" style="width: 60px; margin: 2px; -moz-appearance: textfield;">
+            <input type="text" id="pfilter-name" placeholder="Name" value="${escapeHTML(filters.name)}" oninput="window.updatePokemonFilter('name', this.value)" style="width: 80px; margin: 2px;">
+            <input type="number" id="pfilter-minLvl" placeholder="Min Lv" value="${escapeHTML(filters.minLvl)}" oninput="window.updatePokemonFilter('minLvl', this.value)" style="width: 50px; margin: 2px; -moz-appearance: textfield;">
+            <input type="number" id="pfilter-maxLvl" placeholder="Max Lv" value="${escapeHTML(filters.maxLvl)}" oninput="window.updatePokemonFilter('maxLvl', this.value)" style="width: 50px; margin: 2px; -moz-appearance: textfield;">
+            <input type="number" id="pfilter-minQ" placeholder="Min Q" value="${escapeHTML(filters.minQ)}" oninput="window.updatePokemonFilter('minQ', this.value)" style="width: 50px; margin: 2px; -moz-appearance: textfield;">
+            <input type="number" id="pfilter-maxQ" placeholder="Max Q" value="${escapeHTML(filters.maxQ)}" oninput="window.updatePokemonFilter('maxQ', this.value)" style="width: 50px; margin: 2px; -moz-appearance: textfield;">
+            <input type="number" id="pfilter-minIV" placeholder="Min ∑IV" value="${escapeHTML(filters.minIV)}" oninput="window.updatePokemonFilter('minIV', this.value)" style="width: 60px; margin: 2px; -moz-appearance: textfield;">
+            <input type="number" id="pfilter-maxIV" placeholder="Max ∑IV" value="${escapeHTML(filters.maxIV)}" oninput="window.updatePokemonFilter('maxIV', this.value)" style="width: 60px; margin: 2px; -moz-appearance: textfield;">
             <style>#pokemon-filters input::-webkit-outer-spin-button, #pokemon-filters input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }</style>
         </div>
         ${sellControlsHtml}
@@ -138,14 +200,12 @@ export function renderPokemonTab(area) {
 
     for (let i = 0; i < 8; i++) {
         let p = null;
-        let tag = '';
         let listName = '';
         let origIndex = 0;
 
         if (i < 6) {
             if (i < state.party.length) {
                 p = state.party[i];
-                tag = 'Party';
                 listName = 'party';
                 origIndex = i;
             }
@@ -153,7 +213,6 @@ export function renderPokemonTab(area) {
             if (!state.stats.hasSeenDaycare) continue; // Hide if Daycare hasn't been opened
             if (state.breeding.length > 0) {
                 p = state.breeding[0];
-                tag = 'To Breed';
                 listName = 'breeding';
                 origIndex = 0;
             }
@@ -161,7 +220,6 @@ export function renderPokemonTab(area) {
             if (!state.stats.hasSeenDaycare) continue; // Hide if Daycare hasn't been opened
             if (state.training.length > 0) {
                 p = state.training[0];
-                tag = 'To Train';
                 listName = 'training';
                 origIndex = 0;
             }
@@ -244,7 +302,8 @@ export function renderPokemonTab(area) {
     if (oldStorage) prevStorageScroll = oldStorage.scrollTop;
     if (oldSafe) prevSafeScroll = oldSafe.scrollTop;
 
-    area.innerHTML = content;
+    const doc = new DOMParser().parseFromString(content, 'text/html');
+    area.replaceChildren(...doc.body.childNodes);
 
     // Restore focus state
     if (activeElementId) {
@@ -279,52 +338,69 @@ window.updatePokemonFilter = function(key, val) {
 window.applyPokemonFilters = function() {
     const filters = window.pokemonFilters;
 
-    // Compute breedable map if needed
-    let breedableMap = null;
+    // Compute breedable set if needed
+    let breedableSet = null;
     if (filters.breedableOnly) {
-        breedableMap = new Map();
-        const allMons = [...state.storage, ...state.safe]; // Only check storage/safe? Wait, all pokemon? Let's check all arrays just in case, or just storage/safe since they are the only ones filtered visually here.
-        allMons.forEach(p => {
+        breedableSet = new Set();
+        const bySpecies = new Map();
+        const allMons = [...state.storage, ...state.safe];
+        for (const p of allMons) {
             if (p.quality < 1.99) {
-                const key = p.id + '_' + p.quality.toFixed(2); // ID and exact quality must match? The user said "samem Q and it is same species".
-                // In game mechanics, same species, but wait, do they need same exact Q or just Q < 1.99?
-                // The rules of breeding: quality < 1.99. Then, if they have exactly same ID and Math.abs(currentP.quality - p.quality) <= 0.001 they merge.
-                // So yes, same ID and same Q.
-                if (breedableMap.has(key)) {
-                    breedableMap.set(key, breedableMap.get(key) + 1);
-                } else {
-                    breedableMap.set(key, 1);
+                let list = bySpecies.get(p.id);
+                if (!list) {
+                    list = [];
+                    bySpecies.set(p.id, list);
+                }
+                list.push(p);
+            }
+        }
+        for (const list of bySpecies.values()) {
+            if (list.length < 2) continue;
+            list.sort((a, b) => a.quality - b.quality);
+            for (let i = 0; i < list.length; i++) {
+                const prevMatches = i > 0 && Math.round(Math.abs(list[i].quality - list[i - 1].quality) * 100) <= 5;
+                const nextMatches = i < list.length - 1 && Math.round(Math.abs(list[i + 1].quality - list[i].quality) * 100) <= 5;
+                if (prevMatches || nextMatches) {
+                    breedableSet.add(list[i]);
                 }
             }
-        });
+        }
     }
 
+    const nameFilter = filters.name ? filters.name.toLowerCase() : '';
+    const minLvl = filters.minLvl !== '' && filters.minLvl !== undefined && filters.minLvl !== null ? parseInt(filters.minLvl, 10) : null;
+    const maxLvl = filters.maxLvl !== '' && filters.maxLvl !== undefined && filters.maxLvl !== null ? parseInt(filters.maxLvl, 10) : null;
+    const minQ = filters.minQ !== '' && filters.minQ !== undefined && filters.minQ !== null ? parseFloat(filters.minQ) : null;
+    const maxQ = filters.maxQ !== '' && filters.maxQ !== undefined && filters.maxQ !== null ? parseFloat(filters.maxQ) : null;
+    const minIV = filters.minIV !== '' && filters.minIV !== undefined && filters.minIV !== null ? parseInt(filters.minIV, 10) : null;
+    const maxIV = filters.maxIV !== '' && filters.maxIV !== undefined && filters.maxIV !== null ? parseInt(filters.maxIV, 10) : null;
+
     const filterFn = (p) => {
-        if (filters.name && !p.name.toLowerCase().includes(filters.name.toLowerCase())) return false;
-        if (filters.minLvl !== '' && p.level < parseInt(filters.minLvl)) return false;
-        if (filters.maxLvl !== '' && p.level > parseInt(filters.maxLvl)) return false;
-        if (filters.minQ !== '' && p.quality < parseFloat(filters.minQ)) return false;
-        if (filters.maxQ !== '' && p.quality > parseFloat(filters.maxQ)) return false;
+        if (nameFilter && !p.name.toLowerCase().includes(nameFilter)) return false;
+        if (minLvl !== null && !isNaN(minLvl) && p.level < minLvl) return false;
+        if (maxLvl !== null && !isNaN(maxLvl) && p.level > maxLvl) return false;
+        if (minQ !== null && !isNaN(minQ) && p.quality < minQ) return false;
+        if (maxQ !== null && !isNaN(maxQ) && p.quality > maxQ) return false;
         let sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
-        if (filters.minIV !== '' && sumIV < parseInt(filters.minIV)) return false;
-        if (filters.maxIV !== '' && sumIV > parseInt(filters.maxIV)) return false;
+        if (minIV !== null && !isNaN(minIV) && sumIV < minIV) return false;
+        if (maxIV !== null && !isNaN(maxIV) && sumIV > maxIV) return false;
 
         if (filters.breedableOnly) {
-            if (p.quality >= 1.99) return false;
-            const key = p.id + '_' + p.quality.toFixed(2);
-            if (!breedableMap || breedableMap.get(key) < 2) return false;
+            if (p.quality >= 1.99 || !breedableSet || !breedableSet.has(p)) return false;
         }
 
         return true;
     };
 
     const displayedBreedableKeys = new Set();
+    const storageMap = new Map(state.storage.map(x => [x.uuid, x]));
+    const safeMap = new Map(state.safe.map(x => [x.uuid, x]));
 
     // Filter Storage
     const storageSlots = document.querySelectorAll('.pokemon-storage-slot');
     storageSlots.forEach(slot => {
         const uuid = slot.getAttribute('data-uuid');
-        const p = state.storage.find(x => x.uuid === uuid);
+        const p = storageMap.get(uuid);
         if (p) {
             let show = filterFn(p);
             if (show && filters.breedableOnly) {
@@ -340,7 +416,7 @@ window.applyPokemonFilters = function() {
     const safeSlots = document.querySelectorAll('.pokemon-safe-slot');
     safeSlots.forEach(slot => {
         const uuid = slot.getAttribute('data-uuid');
-        const p = state.safe.find(x => x.uuid === uuid);
+        const p = safeMap.get(uuid);
         if (p) {
             let show = filterFn(p);
             if (show && filters.breedableOnly) {
@@ -458,17 +534,7 @@ export function handleDrop(event, targetCol) {
             state.training.push(p);
         }
         if (state.dayCareRef) {
-            state.dayCareRef.slot2.pokemon = p;
-
-            const totalIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
-            state.dayCareRef.slot2.requiredBattles = (p.quality >= 2.0) ? totalIV * 2 : totalIV;
-            if (state.dayCareRef.slot2.requiredBattles === 0) state.dayCareRef.slot2.requiredBattles = 1;
-
-            if (totalIV >= 600) {
-                state.dayCareRef.slot2.battles = state.dayCareRef.slot2.requiredBattles;
-            } else {
-                state.dayCareRef.slot2.battles = 0;
-            }
+            assignTrainingSlot(p);
         }
     }
     else if (tCol === 'breeding') {
@@ -495,27 +561,36 @@ export function handleDrop(event, targetCol) {
                 const sumIV_currentP = currentP.ivs.hp + currentP.ivs.atk + currentP.ivs.def + currentP.ivs.spa + currentP.ivs.spd + currentP.ivs.spe;
                 const parentWithBestIVs = (sumIV_p > sumIV_currentP) ? p : currentP;
 
-                // Reconstruct official baby by deep cloning to preserve core properties, then overwriting stats
-                const newPokemon = JSON.parse(JSON.stringify(parentWithBestIVs));
-                newPokemon.uuid = crypto.randomUUID();
-                newPokemon.vitamins = { hp: 0, atk: 0, def: 0, spa: 0, spd: 0, spe: 0 };
-                newPokemon.lastQBonus = 0;
-                newPokemon.trainingCyclesCompleted = 0;
+                // Reconstruct official baby by shallow cloning + nested spreads per AGENTS.md
+                const newPokemon = {
+                    ...parentWithBestIVs,
+                    types: [...(parentWithBestIVs.types || [])],
+                    ivs: { ...parentWithBestIVs.ivs },
+                    ...(parentWithBestIVs.evs ? { evs: { ...parentWithBestIVs.evs } } : {}),
+                    currentStats: parentWithBestIVs.currentStats ? { ...parentWithBestIVs.currentStats } : {},
+                    vitamins: { hp: 0, atk: 0, def: 0, spa: 0, spd: 0, spe: 0 },
+                    moves: (parentWithBestIVs.moves || []).map(m => ({ ...m })),
+                    uuid: crypto.randomUUID(),
+                    lastQBonus: 0,
+                    trainingCyclesCompleted: 0
+                };
 
-                // Check for pre-evolution based on current region
-                if (state.config.evolutionParents && state.config.evolutionParents[newPokemon.id] !== undefined) {
+                // Check for pre-evolution based on current region, stepping back to base stage
+                const regionName = state.currentRegionName || 'Kanto';
+                const regionIdField = regionName.toLowerCase() + '_id';
+                const visitedEvoIds = new Set([newPokemon.id]);
+                while (state.config.evolutionParents && state.config.evolutionParents[newPokemon.id] !== undefined) {
                     const parentId = state.config.evolutionParents[newPokemon.id];
-                    const parentBaseData = state.config.pokemonData.find(pd => pd.id === parentId);
+                    if (visitedEvoIds.has(parentId)) break;
+                    visitedEvoIds.add(parentId);
+                    const parentBaseData = getPokemonConfig(parentId);
 
-                    if (parentBaseData) {
-                        const regionName = state.currentRegionName || 'Kanto';
-                        let regionIdField = regionName.toLowerCase() + '_id';
-
-                        if (parentBaseData[regionIdField] !== undefined) {
-                            newPokemon.id = parentBaseData.id;
-                            newPokemon.name = parentBaseData.name;
-                            newPokemon.types = parentBaseData.types;
-                        }
+                    if (parentBaseData && parentBaseData[regionIdField] !== undefined) {
+                        newPokemon.id = parentBaseData.id;
+                        newPokemon.name = parentBaseData.name;
+                        newPokemon.types = [...(parentBaseData.types || [])];
+                    } else {
+                        break;
                     }
                 }
 
@@ -544,40 +619,23 @@ export function handleDrop(event, targetCol) {
                 if (newPokemon.level < 1) newPokemon.level = 1;
 
                 // Fetch pokemon base to reconstruct stats
-                const pBase = state.config.pokemonData.find(pd => pd.id === newPokemon.id);
+                const pBase = getPokemonConfig(newPokemon.id);
                 if (pBase) {
                     newPokemon.bst = pBase.hp + pBase.atk + pBase.def + pBase.spa + pBase.spd + pBase.spe;
 
                     // Stats
-                    newPokemon.maxHp = Math.floor((((2 * pBase.hp + newPokemon.ivs.hp) * newPokemon.level / 100) + newPokemon.level + 10) * newPokemon.quality);
+                    newPokemon.maxHp = calculateHP(pBase.hp, newPokemon.ivs.hp, newPokemon.level, newPokemon.quality, 0);
                     newPokemon.currentStats = {
                         hp: newPokemon.maxHp,
-                        atk: Math.floor((((2 * pBase.atk + newPokemon.ivs.atk) * newPokemon.level / 100) + 5) * newPokemon.quality),
-                        def: Math.floor((((2 * pBase.def + newPokemon.ivs.def) * newPokemon.level / 100) + 5) * newPokemon.quality),
-                        spa: Math.floor((((2 * pBase.spa + newPokemon.ivs.spa) * newPokemon.level / 100) + 5) * newPokemon.quality),
-                        spd: Math.floor((((2 * pBase.spd + newPokemon.ivs.spd) * newPokemon.level / 100) + 5) * newPokemon.quality),
-                        spe: Math.floor((((2 * pBase.spe + newPokemon.ivs.spe) * newPokemon.level / 100) + 5) * newPokemon.quality)
+                        atk: calculateStat(pBase.atk, newPokemon.ivs.atk, newPokemon.level, newPokemon.quality, 0),
+                        def: calculateStat(pBase.def, newPokemon.ivs.def, newPokemon.level, newPokemon.quality, 0),
+                        spa: calculateStat(pBase.spa, newPokemon.ivs.spa, newPokemon.level, newPokemon.quality, 0),
+                        spd: calculateStat(pBase.spd, newPokemon.ivs.spd, newPokemon.level, newPokemon.quality, 0),
+                        spe: calculateStat(pBase.spe, newPokemon.ivs.spe, newPokemon.level, newPokemon.quality, 0)
                     };
                     newPokemon.currentHp = newPokemon.maxHp;
 
                     // Moves
-                    let getLearnsetMoves = function(pokemonBase, level) {
-                        if (!pokemonBase.learnset) return [];
-                        let learned = [];
-                        let learnedSet = new Set();
-                        for (const ls of pokemonBase.learnset) {
-                            if (level >= ls.level) {
-                                const moveName = ls.move;
-                                if (state.config.moves[moveName] && !learnedSet.has(moveName)) {
-                                    learnedSet.add(moveName);
-                                    const moveData = { ...state.config.moves[moveName] };
-                                    moveData.name = moveName;
-                                    learned.push(moveData);
-                                }
-                            }
-                        }
-                        return learned.slice(-4);
-                    };
                     newPokemon.moves = getLearnsetMoves(pBase, newPokemon.level);
                 }
 
@@ -630,8 +688,7 @@ export function handleDrop(event, targetCol) {
         } else if (sCol === 'training') {
             state.training.push(displacedPokemon);
             if (state.dayCareRef) {
-                state.dayCareRef.slot2.pokemon = displacedPokemon;
-                state.dayCareRef.slot2.battles = 0;
+                assignTrainingSlot(displacedPokemon);
             }
         } else if (sCol === 'breeding') {
             state.breeding.push(displacedPokemon);
@@ -657,43 +714,58 @@ window.startSellMode = function() {
 
     // Open backpack directly to pokemon tab
     state.backpack.activePocket = 'pokemon';
-    document.getElementById('backpack-modal').style.display = 'block';
-    renderBackpackTab('pokemon');
+    if (typeof window.showBackpackAndFocus === 'function') {
+        window.showBackpackAndFocus('pokemon');
+    } else {
+        const backpackWin = document.getElementById('window-backpack') || document.getElementById('backpack-modal');
+        if (backpackWin) {
+            backpackWin.style.display = backpackWin.id === 'window-backpack' ? 'flex' : 'block';
+        } else {
+            showBackpack();
+        }
+        renderBackpackTab('pokemon');
+    }
 };
 
 window.cancelSellMode = function() {
     window.sellModeActive = false;
     window.selectedForSale.clear();
-    document.getElementById('backpack-modal').style.display = 'none';
+    if (typeof window.closeBackpackModal === 'function') {
+        window.closeBackpackModal();
+    } else {
+        if (typeof window.closeModal === 'function') window.closeModal('window-backpack');
+        const backpackWin = document.getElementById('window-backpack') || document.getElementById('backpack-modal');
+        if (backpackWin) backpackWin.style.display = 'none';
+    }
 
     // Return to Market UI
-    const pcButton = document.querySelector('img[src="Assets/UI/Menu/TopBar/Icon_Map.png"]');
-    if (pcButton) {
-        window.changeLocation("PokeCenter & PokeMarket");
+    if (typeof window.navigateToLocation === 'function') {
+        window.navigateToLocation("PokeCenter & PokeMarket");
     }
 };
 
 window.selectAllForSale = function() {
-    const storageMons = state.backpack.storage;
+    const storageMons = state.storage || [];
     const filters = window.pokemonFilters || {};
-    let minLvl = filters.minLvl !== '' ? parseFloat(filters.minLvl) : null;
-    let maxLvl = filters.maxLvl !== '' ? parseFloat(filters.maxLvl) : null;
-    let minQ = filters.minQ !== '' ? parseFloat(filters.minQ) : null;
-    let maxQ = filters.maxQ !== '' ? parseFloat(filters.maxQ) : null;
-    let minIV = filters.minIV !== '' ? parseFloat(filters.minIV) : null;
-    let maxIV = filters.maxIV !== '' ? parseFloat(filters.maxIV) : null;
+    const nameFilter = filters.name ? filters.name.toLowerCase() : '';
+    let minLvl = filters.minLvl !== '' && filters.minLvl !== undefined ? parseFloat(filters.minLvl) : null;
+    let maxLvl = filters.maxLvl !== '' && filters.maxLvl !== undefined ? parseFloat(filters.maxLvl) : null;
+    let minQ = filters.minQ !== '' && filters.minQ !== undefined ? parseFloat(filters.minQ) : null;
+    let maxQ = filters.maxQ !== '' && filters.maxQ !== undefined ? parseFloat(filters.maxQ) : null;
+    let minIV = filters.minIV !== '' && filters.minIV !== undefined ? parseFloat(filters.minIV) : null;
+    let maxIV = filters.maxIV !== '' && filters.maxIV !== undefined ? parseFloat(filters.maxIV) : null;
 
     storageMons.forEach(p => {
         let sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
         let isVisible = true;
 
-        if (filters.name && !p.id.toLowerCase().includes(filters.name.toLowerCase())) isVisible = false;
-        if (minLvl !== null && p.level < minLvl) isVisible = false;
-        if (maxLvl !== null && p.level > maxLvl) isVisible = false;
-        if (minQ !== null && p.quality < minQ) isVisible = false;
-        if (maxQ !== null && p.quality > maxQ) isVisible = false;
-        if (minIV !== null && sumIV < minIV) isVisible = false;
-        if (maxIV !== null && sumIV > maxIV) isVisible = false;
+        if (nameFilter && !(p.name || String(p.id)).toLowerCase().includes(nameFilter)) isVisible = false;
+        if (minLvl !== null && !isNaN(minLvl) && p.level < minLvl) isVisible = false;
+        if (maxLvl !== null && !isNaN(maxLvl) && p.level > maxLvl) isVisible = false;
+        if (minQ !== null && !isNaN(minQ) && p.quality < minQ) isVisible = false;
+        if (maxQ !== null && !isNaN(maxQ) && p.quality > maxQ) isVisible = false;
+        if (minIV !== null && !isNaN(minIV) && sumIV < minIV) isVisible = false;
+        if (maxIV !== null && !isNaN(maxIV) && sumIV > maxIV) isVisible = false;
 
         if (isVisible && !window.selectedForSale.has(p.uuid)) {
             window.selectedForSale.add(p.uuid);
@@ -709,7 +781,7 @@ window.sellSelectedPokemon = function() {
     let totalGain = 0;
     let numSold = 0;
 
-    state.backpack.storage = state.backpack.storage.filter(p => {
+    state.storage = (state.storage || []).filter(p => {
         if (window.selectedForSale.has(p.uuid)) {
             let val = Math.floor(calculatePP(p.bst, p.level, p.quality, p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe));
             totalGain += val;
@@ -720,6 +792,7 @@ window.sellSelectedPokemon = function() {
     });
 
     state.trainer.money += totalGain;
+    updateUI();
     alert(`Sold ${numSold} Pokemon for $${totalGain}!`);
 
     window.cancelSellMode();
@@ -790,18 +863,20 @@ window.openDittoTransformModal = function(uuid) {
     const sortedIds = Array.from(uniqueIds).sort((a, b) => a - b);
 
     sortedIds.forEach(id => {
-        const pd = state.config.pokemonData.find(d => d.id === id);
+        const pd = getPokemonConfig(id);
         if(!pd) return;
 
         let imgSrc = window.getSpriteUrl(id, p.qualityName === 'Shiny');
+        const safeId = escapeHTML(id);
         allPokemonHtml += `
-            <div id="ditto-transform-option-${id}" class="ditto-transform-option" onclick="window.selectDittoTransformTarget('${id}')" style="cursor: pointer; background: #2c3e50; border: 2px solid #3498db; border-radius: 10px; padding: 10px; text-align: center; transition: all 0.1s;">
+            <div id="ditto-transform-option-${safeId}" class="ditto-transform-option" onclick="window.selectDittoTransformTarget('${safeId}')" style="cursor: pointer; background: #2c3e50; border: 2px solid #3498db; border-radius: 10px; padding: 10px; text-align: center; transition: all 0.1s;">
                 <img src="${imgSrc}" style="width: 50px; height: 50px; object-fit: contain;">
-                <div style="color: white; font-size: 12px; margin-top: 5px;">${pd.name}</div>
+                <div style="color: white; font-size: 12px; margin-top: 5px;">${escapeHTML(pd.name)}</div>
             </div>
         `;
     });
 
+    const safeDittoUuid = escapeHTML(uuid);
     const html = `
         <div style="text-align: center; color: white;">
             <h3>Select a Pokemon to Transform into</h3>
@@ -809,9 +884,9 @@ window.openDittoTransformModal = function(uuid) {
                 ${allPokemonHtml}
             </div>
             <div style="margin-top: 20px; display: flex; justify-content: center; gap: 10px;">
-                <button onclick="window.transformDitto('${uuid}')" style="padding: 10px 20px; background: #2ecc71; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">Choose</button>
+                <button onclick="window.transformDitto('${safeDittoUuid}')" style="padding: 10px 20px; background: #2ecc71; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">Choose</button>
                 <button onclick="if(window.windowManager) window.windowManager.closeDynamicWindow('window-ditto-transform')" style="padding: 10px 20px; background: #e74c3c; color: white; border: none; border-radius: 4px; cursor: pointer;">Cancel</button>
-                <button onclick="window.transformDitto('${uuid}', 132)" style="padding: 10px 20px; background: #f39c12; color: white; border: none; border-radius: 4px; cursor: pointer;">Restore</button>
+                <button onclick="window.transformDitto('${safeDittoUuid}', 132)" style="padding: 10px 20px; background: #f39c12; color: white; border: none; border-radius: 4px; cursor: pointer;">Restore</button>
             </div>
         </div>
     `;
@@ -843,7 +918,7 @@ window.transformDitto = function(dittoUuid, targetIdOverride) {
 
     if (!p) return;
 
-    if (targetId === 132) {
+    if (Number(targetId) === 132) {
         // Revert transformation
         if (p.isTransformed) {
             p.isTransformed = false;
@@ -852,86 +927,21 @@ window.transformDitto = function(dittoUuid, targetIdOverride) {
             p.id = 132;
             p.name = 'Ditto';
 
-            const newBase = state.config.pokemonData.find(pd => pd.id === 132);
+            const newBase = getPokemonConfig(132);
             if (newBase) {
-                p.types = newBase.types;
-                p.bst = newBase.hp + newBase.atk + newBase.def + newBase.spa + newBase.spd + newBase.spe;
-
-                // Recalculate stats
-                p.maxHp = Math.floor((((2 * newBase.hp + p.ivs.hp) * p.level / 100) + p.level + 10) * p.quality);
-                p.currentStats.atk = Math.floor((((2 * newBase.atk + p.ivs.atk) * p.level / 100) + 5) * p.quality);
-                p.currentStats.def = Math.floor((((2 * newBase.def + p.ivs.def) * p.level / 100) + 5) * p.quality);
-                p.currentStats.spa = Math.floor((((2 * newBase.spa + p.ivs.spa) * p.level / 100) + 5) * p.quality);
-                p.currentStats.spd = Math.floor((((2 * newBase.spd + p.ivs.spd) * p.level / 100) + 5) * p.quality);
-                p.currentStats.spe = Math.floor((((2 * newBase.spe + p.ivs.spe) * p.level / 100) + 5) * p.quality);
-
-                // Heal by diff
-                p.currentHp = Math.min(p.currentHp, p.maxHp);
-
-                // Moves
-                let getLearnsetMoves = function(pokemonBase, level) {
-                    if (!pokemonBase.learnset) return [];
-                    let learned = [];
-                    let learnedSet = new Set();
-                    for (const ls of pokemonBase.learnset) {
-                        if (level >= ls.level) {
-                            const moveName = ls.move;
-                            if (state.config.moves[moveName] && !learnedSet.has(moveName)) {
-                                learnedSet.add(moveName);
-                                const moveData = { ...state.config.moves[moveName] };
-                                moveData.name = moveName;
-                                learned.push(moveData);
-                            }
-                        }
-                    }
-                    return learned.slice(-4);
-                };
-                p.moves = getLearnsetMoves(newBase, p.level);
+                applyDittoBaseStats(p, newBase);
             }
         }
     } else {
         // Transform
-        const targetBase = state.config.pokemonData.find(pd => pd.id === targetId);
-        if(!targetBase) return;
+        const targetBase = getPokemonConfig(targetId);
+        if (!targetBase) return;
 
         p.isTransformed = true;
-        p.transformedIntoId = targetId;
+        p.transformedIntoId = targetBase.id;
         p.transformedIntoName = targetBase.name;
 
-        if (targetBase) {
-            p.types = targetBase.types;
-            p.bst = targetBase.hp + targetBase.atk + targetBase.def + targetBase.spa + targetBase.spd + targetBase.spe;
-
-            // Recalculate stats
-            p.maxHp = Math.floor((((2 * targetBase.hp + p.ivs.hp) * p.level / 100) + p.level + 10) * p.quality);
-            p.currentStats.atk = Math.floor((((2 * targetBase.atk + p.ivs.atk) * p.level / 100) + 5) * p.quality);
-            p.currentStats.def = Math.floor((((2 * targetBase.def + p.ivs.def) * p.level / 100) + 5) * p.quality);
-            p.currentStats.spa = Math.floor((((2 * targetBase.spa + p.ivs.spa) * p.level / 100) + 5) * p.quality);
-            p.currentStats.spd = Math.floor((((2 * targetBase.spd + p.ivs.spd) * p.level / 100) + 5) * p.quality);
-            p.currentStats.spe = Math.floor((((2 * targetBase.spe + p.ivs.spe) * p.level / 100) + 5) * p.quality);
-
-            p.currentHp = Math.min(p.currentHp, p.maxHp);
-
-            // Replicate the moveset logic
-            let getLearnsetMoves = function(pokemonBase, level) {
-                if (!pokemonBase.learnset) return [];
-                let learned = [];
-                let learnedSet = new Set();
-                for (const ls of pokemonBase.learnset) {
-                    if (level >= ls.level) {
-                        const moveName = ls.move;
-                        if (state.config.moves[moveName] && !learnedSet.has(moveName)) {
-                            learnedSet.add(moveName);
-                            const moveData = { ...state.config.moves[moveName] };
-                            moveData.name = moveName;
-                            learned.push(moveData);
-                        }
-                    }
-                }
-                return learned.slice(-4);
-            };
-            p.moves = getLearnsetMoves(targetBase, p.level);
-        }
+        applyDittoBaseStats(p, targetBase);
     }
 
     // Attempt to manually save
@@ -941,10 +951,6 @@ window.transformDitto = function(dittoUuid, targetIdOverride) {
         }
     } catch(e) {}
 
-    import('../../ui.js').then(module => {
-        module.updateUI();
-    });
-    import('./index.js').then(module => {
-        module.renderBackpackTab('pokemon');
-    });
+    updateUI();
+    renderBackpackTab('pokemon');
 };

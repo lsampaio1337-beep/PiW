@@ -1,10 +1,11 @@
 const { contextBridge, ipcRenderer } = require('electron');
 
+// Whitelist channels to prevent arbitrary IPC messages
+const VALID_CHANNELS = ['minimize-game', 'set-ignore-mouse-events'];
+
 contextBridge.exposeInMainWorld('electronAPI', {
     send: (channel, ...args) => {
-        // Whitelist channels to prevent arbitrary IPC messages
-        const validChannels = ['minimize-game', 'set-ignore-mouse-events'];
-        if (validChannels.includes(channel)) {
+        if (VALID_CHANNELS.includes(channel)) {
             ipcRenderer.send(channel, ...args);
         }
     }

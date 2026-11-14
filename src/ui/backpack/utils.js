@@ -1,4 +1,5 @@
 export function formatQuantity(q) {
+    if (q === null || q === undefined) return '0';
     if (q >= 1000000000) return (q / 1000000000).toFixed(1) + 'b';
     if (q >= 1000000) return (q / 1000000).toFixed(1) + 'm';
     if (q >= 1000) return (q / 1000).toFixed(1) + 'k';

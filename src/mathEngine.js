@@ -10,12 +10,31 @@ function calculateStat(baseStat, ivStat, level, quality, vitamins = 0) {
     return Math.floor((Math.floor(((2 * baseStat + ivStat + Math.floor(vitamins / 4)) * level) / 100) + 5) * quality);
 }
 
+const REQ_XP_TABLE = new Int32Array(201);
+const TOTAL_XP_TABLE = new Int32Array(201);
+
+{
+    let runningTotal = 0;
+    for (let lvl = 1; lvl <= 200; lvl++) {
+        const req = Math.floor((4 + 496 * Math.pow((lvl - 1) / 98, 1.60)) * (5 + 8 * lvl));
+        REQ_XP_TABLE[lvl] = req;
+        TOTAL_XP_TABLE[lvl] = runningTotal;
+        runningTotal += req;
+    }
+}
+
 function calculateReqXP(level) {
+    if (Number.isInteger(level) && level >= 1 && level <= 200) {
+        return REQ_XP_TABLE[level];
+    }
     // ReqXP(L) = floor((4 + 496 * ((L - 1) / 98)^1.60) * (5 + 8 * L))
     return Math.floor((4 + 496 * Math.pow((level - 1) / 98, 1.60)) * (5 + 8 * level));
 }
 
 function calculateTotalXP(level) {
+    if (Number.isInteger(level) && level >= 1 && level <= 200) {
+        return TOTAL_XP_TABLE[level];
+    }
     let total = 0;
     for (let i = 1; i < level; i++) {
         total += calculateReqXP(i);
@@ -236,8 +255,9 @@ function calculateDamage(level, power, attackStat, defenseStat, typeEffectivenes
     const randomMult = 0.85 + Math.random() * 0.15; // Uniform float in [0.85, 1.00]
 
     const modifier = typeEffectiveness * criticalMult * randomMult;
+    const safeDefense = defenseStat > 0 ? defenseStat : 1;
 
-    let baseDamage = Math.floor(((level + 5) / 125) * ((power * attackStat) / defenseStat) + 2);
+    let baseDamage = Math.floor(((level + 5) / 125) * ((power * attackStat) / safeDefense) + 2);
     let damage = Math.floor(baseDamage * modifier);
 
     return {
@@ -276,16 +296,23 @@ function getCapacity(state, type) {
 }
 
 function getCurrentCount(state, type) {
+    if (!state) return 0;
     let count = 0;
     if (type === 'balls' || type === 'pokeballs') {
-        for (const [key, value] of Object.entries(state.backpack.pokeballs)) {
-            if (key !== 'Masterball') {
-                count += value;
+        if (!state.backpack || !state.backpack.pokeballs) return 0;
+        const pokeballs = state.backpack.pokeballs;
+        for (const key in pokeballs) {
+            if (Object.prototype.hasOwnProperty.call(pokeballs, key) && key !== 'Masterball') {
+                count += pokeballs[key];
             }
         }
     } else if (type === 'potions') {
-        for (const [key, value] of Object.entries(state.backpack.potions)) {
-            count += value;
+        if (!state.backpack || !state.backpack.potions) return 0;
+        const potions = state.backpack.potions;
+        for (const key in potions) {
+            if (Object.prototype.hasOwnProperty.call(potions, key)) {
+                count += potions[key];
+            }
         }
     } else if (type === 'box') {
         const partyLength = state.party ? state.party.length : 0;

@@ -209,6 +209,27 @@ const gymAssets = {
       "origin": "center center"
     }
   },
+  "Piers": {
+    "_description": "Position (rel_x, rel_y) is relative to the background boundaries (0.0 to 1.0). Size (scale_x, scale_y) is a multiplier relative to the sprite's original size. Tilt is rotation around the center of the sprite.",
+    "background": "BG_Gym_Dark.png",
+    "sprite": "GymLeader_Galar_7_Marnie_Dark.png",
+    "position": {
+      "rel_x": 0.5844,
+      "rel_y": -0.003,
+      "px_x": 1052,
+      "px_y": -3
+    },
+    "size": {
+      "scale_x": 1,
+      "scale_y": 1,
+      "px_width": 698,
+      "px_height": 1800
+    },
+    "tilt": {
+      "angle_deg": 0,
+      "origin": "center center"
+    }
+  },
   "GymLeader_Galar_7_Marnie_Dark.png": {
     "_description": "Position (rel_x, rel_y) is relative to the background boundaries (0.0 to 1.0). Size (scale_x, scale_y) is a multiplier relative to the sprite's original size. Tilt is rotation around the center of the sprite.",
     "background": "BG_Gym_Dark.png",
@@ -1448,6 +1469,27 @@ const gymAssets = {
       "origin": "center center"
     }
   },
+  "Ryme": {
+    "_description": "Position (rel_x, rel_y) is relative to the background boundaries (0.0 to 1.0). Size (scale_x, scale_y) is a multiplier relative to the sprite's original size. Tilt is rotation around the center of the sprite.",
+    "background": "BG_Gym_Ghost.png",
+    "sprite": "GymLeader_Paldea_6_Rymey_Ghost.png",
+    "position": {
+      "rel_x": 0.5367,
+      "rel_y": 0.016,
+      "px_x": 966,
+      "px_y": 16
+    },
+    "size": {
+      "scale_x": 0.7904,
+      "scale_y": 0.7904,
+      "px_width": 724,
+      "px_height": 1423
+    },
+    "tilt": {
+      "angle_deg": 0,
+      "origin": "center center"
+    }
+  },
   "GymLeader_Paldea_6_Rymey_Ghost.png": {
     "_description": "Position (rel_x, rel_y) is relative to the background boundaries (0.0 to 1.0). Size (scale_x, scale_y) is a multiplier relative to the sprite's original size. Tilt is rotation around the center of the sprite.",
     "background": "BG_Gym_Ghost.png",
@@ -2603,6 +2645,27 @@ const gymAssets = {
       "origin": "center center"
     }
   },
+  "Tate and Liza": {
+    "_description": "Position (rel_x, rel_y) is relative to the background boundaries (0.0 to 1.0). Size (scale_x, scale_y) is a multiplier relative to the sprite's original size. Tilt is rotation around the center of the sprite.",
+    "background": "BG_Gym_Psychic.png",
+    "sprite": "GymLeader_Hoenn_7_TateandLiza_Psychic.png",
+    "position": {
+      "rel_x": 0.5875,
+      "rel_y": 0.077,
+      "px_x": 1058,
+      "px_y": 77
+    },
+    "size": {
+      "scale_x": 1.2388,
+      "scale_y": 1.2388,
+      "px_width": 638,
+      "px_height": 897
+    },
+    "tilt": {
+      "angle_deg": 0,
+      "origin": "center center"
+    }
+  },
   "GymLeader_Hoenn_7_TateandLiza_Psychic.png": {
     "_description": "Position (rel_x, rel_y) is relative to the background boundaries (0.0 to 1.0). Size (scale_x, scale_y) is a multiplier relative to the sprite's original size. Tilt is rotation around the center of the sprite.",
     "background": "BG_Gym_Psychic.png",
@@ -3251,6 +3314,27 @@ const gymAssets = {
     },
     "tilt": {
       "angle_deg": 54,
+      "origin": "center center"
+    }
+  },
+  "Marlon": {
+    "_description": "Position (rel_x, rel_y) is relative to the background boundaries (0.0 to 1.0). Size (scale_x, scale_y) is a multiplier relative to the sprite's original size. Tilt is rotation around the center of the sprite.",
+    "background": "BG_Gym_Water.png",
+    "sprite": "GymLeader_Unova2_8_Marlon_Water.png",
+    "position": {
+      "rel_x": 0.48,
+      "rel_y": 0.02,
+      "px_x": 864,
+      "px_y": 20
+    },
+    "size": {
+      "scale_x": 1,
+      "scale_y": 1,
+      "px_width": 934,
+      "px_height": 1800
+    },
+    "tilt": {
+      "angle_deg": 0,
       "origin": "center center"
     }
   }

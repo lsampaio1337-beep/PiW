@@ -75,8 +75,62 @@ describe('WindowManager', () => {
         const rawArgs2 = windowManager._parseArgs("'catch-rate', { showShiny: true }", null);
         expect(rawArgs2).toEqual(['catch-rate', { showShiny: true }]);
     });
-});
+
     test('_parseArgs successfully evaluates nested structures', () => {
         const rawArgs = windowManager._parseArgs("'catch-rate', { showShiny: { nested: true } }", null);
         expect(rawArgs).toEqual(['catch-rate', { showShiny: { nested: true } }]);
     });
+
+    test('_parseArgs handles this keyword as element reference', () => {
+        const input = document.createElement('input');
+        input.value = '42';
+        const rawArgs = windowManager._parseArgs("'filter', this, this.value", input.value, null, input);
+        expect(rawArgs).toEqual(['filter', input, '42']);
+    });
+
+    test('_executeInlineEvent executes multi-statement inline handlers and passes this', () => {
+        const div = document.createElement('div');
+        window.sanitizeMarketNumberInput = jest.fn();
+        window.renderPokeMarketSellTab = jest.fn();
+        window.showSmartCaptureMode = jest.fn();
+
+        const popup = document.createElement('div');
+        popup.id = 'test-multi-popup';
+        popup.style.display = 'block';
+        document.body.appendChild(popup);
+
+        try {
+            windowManager._parseAndSanitizeToElement(
+                `<input type="text" value="10" oninput="if(window.sanitizeMarketNumberInput) window.sanitizeMarketNumberInput(this); if(window.renderPokeMarketSellTab) window.renderPokeMarketSellTab('pokemon')" />` +
+                `<button onclick="window.showSmartCaptureMode(); document.getElementById('test-multi-popup').style.display = 'none';">Go</button>`,
+                div
+            );
+
+            const input = div.querySelector('input');
+            input.dispatchEvent(new Event('input'));
+            expect(window.sanitizeMarketNumberInput).toHaveBeenCalledWith(input);
+            expect(window.renderPokeMarketSellTab).toHaveBeenCalledWith('pokemon');
+
+            const btn = div.querySelector('button');
+            btn.click();
+            expect(window.showSmartCaptureMode).toHaveBeenCalledTimes(1);
+            expect(popup.style.display).toBe('none');
+        } finally {
+            popup.remove();
+        }
+    });
+
+    test('_parseArgs and _executeInlineEvent support Unicode string arguments', () => {
+        const rawArgs = windowManager._parseArgs("'Flabébé — Pokémon League'", null);
+        expect(rawArgs).toEqual(['Flabébé — Pokémon League']);
+
+        const div = document.createElement('div');
+        window.changeLocation = jest.fn();
+        windowManager._parseAndSanitizeToElement(
+            `<button onclick="window.changeLocation('Pokémon League — Mina’s Trial')"></button>`,
+            div
+        );
+        div.querySelector('button').click();
+        expect(window.changeLocation).toHaveBeenCalledWith('Pokémon League — Mina’s Trial');
+    });
+});

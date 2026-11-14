@@ -15,7 +15,7 @@ export class WindowManager {
         });
     }
 
-    _parseArgs(argStr, contextValue, eventObj) {
+    _parseArgs(argStr, contextValue, eventObj, el) {
         const rawArgs = [];
         let currentArg = '';
         let inQuotes = false;
@@ -26,6 +26,12 @@ export class WindowManager {
         for (let i = 0; i < argStr.length; i++) {
             const char = argStr[i];
 
+            if (inQuotes && char === '\\' && i + 1 < argStr.length) {
+                currentArg += char + argStr[i + 1];
+                i++;
+                continue;
+            }
+
             if (!inQuotes && char === '{') objectDepth++;
             if (!inQuotes && char === '}') objectDepth--;
             if (!inQuotes && char === '[') arrayDepth++;
@@ -34,13 +40,14 @@ export class WindowManager {
             if (!inQuotes && (char === "'" || char === '"')) {
                 inQuotes = true;
                 quoteChar = char;
+                currentArg += char;
             } else if (inQuotes && char === quoteChar) {
                 inQuotes = false;
                 quoteChar = '';
+                currentArg += char;
             } else if (!inQuotes && objectDepth === 0 && arrayDepth === 0 && char === ',') {
                 rawArgs.push(currentArg.trim());
                 currentArg = '';
-                continue;
             } else {
                 currentArg += char;
             }
@@ -56,6 +63,7 @@ export class WindowManager {
             if (s === 'undefined') return undefined;
             if (!isNaN(s) && s !== '') return Number(s);
             if (s === 'this.value') return contextValue;
+            if (s === 'this') return el;
             if (s === 'event') return eventObj;
 
             if (s.startsWith('{') && s.endsWith('}')) {
@@ -68,28 +76,179 @@ export class WindowManager {
                 }
             }
 
-            // Strip matching surrounding quotes
+            // Strip matching surrounding quotes and unescape escaped quotes/backslashes
             if ((s.startsWith("'") && s.endsWith("'")) || (s.startsWith('"') && s.endsWith('"'))) {
-                return s.slice(1, -1);
+                return s.slice(1, -1).replace(/\\(['"\\])/g, '$1');
             }
 
             return s;
         });
     }
 
-    _executeInlineEvent(rawCode, event, el) {
-        let codeToExecute = rawCode.trim();
+    _splitTopLevelStatements(code) {
+        const statements = [];
+        let current = '';
+        let inQuotes = false;
+        let quoteChar = '';
+        let parenDepth = 0;
+        let braceDepth = 0;
+        let bracketDepth = 0;
 
-        // Check for stopPropagation prefix
+        for (let i = 0; i < code.length; i++) {
+            const char = code[i];
+
+            if (inQuotes && char === '\\' && i + 1 < code.length) {
+                current += char + code[i + 1];
+                i++;
+                continue;
+            }
+
+            if (!inQuotes && (char === "'" || char === '"')) {
+                inQuotes = true;
+                quoteChar = char;
+            } else if (inQuotes && char === quoteChar) {
+                inQuotes = false;
+                quoteChar = '';
+            } else if (!inQuotes) {
+                if (char === '(') parenDepth++;
+                else if (char === ')') parenDepth = Math.max(0, parenDepth - 1);
+                else if (char === '{') braceDepth++;
+                else if (char === '}') braceDepth = Math.max(0, braceDepth - 1);
+                else if (char === '[') bracketDepth++;
+                else if (char === ']') bracketDepth = Math.max(0, bracketDepth - 1);
+                else if (char === ';' && parenDepth === 0 && braceDepth === 0 && bracketDepth === 0) {
+                    if (current.trim() !== '') statements.push(current.trim());
+                    current = '';
+                    continue;
+                }
+            }
+            current += char;
+        }
+        if (current.trim() !== '') statements.push(current.trim());
+        return statements;
+    }
+
+    _hasBalancedParens(str) {
+        let depth = 0;
+        let inQuotes = false;
+        let quoteChar = '';
+
+        for (let i = 0; i < str.length; i++) {
+            const char = str[i];
+            if (inQuotes && char === '\\' && i + 1 < str.length) {
+                i++;
+                continue;
+            }
+            if (!inQuotes && (char === "'" || char === '"')) {
+                inQuotes = true;
+                quoteChar = char;
+            } else if (inQuotes && char === quoteChar) {
+                inQuotes = false;
+                quoteChar = '';
+            } else if (!inQuotes) {
+                if (char === '(') depth++;
+                else if (char === ')') {
+                    depth--;
+                    if (depth < 0) return false;
+                }
+            }
+        }
+        return !inQuotes && depth === 0;
+    }
+
+    _evaluateGuardCondition(cond, event, el) {
+        const trimmed = cond.trim();
+        if (trimmed === 'event.target === this' || trimmed === 'event.target===this') {
+            return Boolean(event && event.target === el);
+        }
+        if (trimmed === 'event.target !== this' || trimmed === 'event.target!==this') {
+            return Boolean(event && event.target !== el);
+        }
+        const classMatch = /^(!)?\s*this\.classList\.contains\(\s*(['"])([a-zA-Z0-9_\-]+)\2\s*\)$/.exec(trimmed);
+        if (classMatch) {
+            const hasClass = Boolean(el && el.classList && el.classList.contains(classMatch[3]));
+            return classMatch[1] ? !hasClass : hasClass;
+        }
+        const windowGuardMatch = /^(!)?\s*window\.([a-zA-Z0-9_]+)$/.exec(trimmed);
+        if (windowGuardMatch) {
+            const truthy = Boolean(window[windowGuardMatch[2]]);
+            return windowGuardMatch[1] ? !truthy : truthy;
+        }
+        return false;
+    }
+
+    _executeInlineEvent(rawCode, event, el) {
+        const statements = this._splitTopLevelStatements(rawCode.trim());
+        for (const stmt of statements) {
+            this._executeSingleStatement(stmt, event, el);
+        }
+    }
+
+    _executeSingleStatement(rawStmt, event, el) {
+        let codeToExecute = rawStmt.trim();
+        if (!codeToExecute) return;
+
+        // Handle top-level if (...) guard
+        if (/^if\s*\(/.test(codeToExecute)) {
+            const openIdx = codeToExecute.indexOf('(');
+            let depth = 0;
+            let inQuotes = false;
+            let quoteChar = '';
+            let closeIdx = -1;
+
+            for (let i = openIdx; i < codeToExecute.length; i++) {
+                const ch = codeToExecute[i];
+                if (inQuotes && ch === '\\' && i + 1 < codeToExecute.length) {
+                    i++;
+                    continue;
+                }
+                if (!inQuotes && (ch === "'" || ch === '"')) {
+                    inQuotes = true;
+                    quoteChar = ch;
+                } else if (inQuotes && ch === quoteChar) {
+                    inQuotes = false;
+                    quoteChar = '';
+                } else if (!inQuotes) {
+                    if (ch === '(') depth++;
+                    else if (ch === ')') {
+                        depth--;
+                        if (depth === 0) {
+                            closeIdx = i;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            if (closeIdx === -1) return;
+            const cond = codeToExecute.slice(openIdx + 1, closeIdx);
+            if (!this._evaluateGuardCondition(cond, event, el)) return;
+
+            let body = codeToExecute.slice(closeIdx + 1).trim();
+            if (body.startsWith('{') && body.endsWith('}')) {
+                body = body.slice(1, -1).trim();
+            }
+            const innerStmts = this._splitTopLevelStatements(body);
+            for (const innerStmt of innerStmts) {
+                this._executeSingleStatement(innerStmt, event, el);
+            }
+            return;
+        }
+
+        // Check for standalone or prefixed stopPropagation
+        if (/^event\.stopPropagation\(\)\s*;?$/.test(codeToExecute)) {
+            if (event && typeof event.stopPropagation === 'function') event.stopPropagation();
+            return;
+        }
         const propagationPrefixMatch = /^event\.stopPropagation\(\)\s*;?\s*/.exec(codeToExecute);
         if (propagationPrefixMatch) {
-            event.stopPropagation();
+            if (event && typeof event.stopPropagation === 'function') event.stopPropagation();
             codeToExecute = codeToExecute.substring(propagationPrefixMatch[0].length).trim();
             if (codeToExecute === '') return;
         }
 
-        // 1. Check for basic exact parameterless invocations (e.g. \`window.showTrainerStats()\`)
-        const basicCallMatch = /^(?:if\s*\([^)]*\)\s*)?window\.([a-zA-Z0-9_]+)\s*\(\s*\)\s*;?$/.exec(codeToExecute);
+        // 1. Check for basic exact parameterless invocations (e.g. `window.showTrainerStats()`)
+        const basicCallMatch = /^window\.([a-zA-Z0-9_]+)\s*\(\s*\)\s*;?$/.exec(codeToExecute);
         if (basicCallMatch) {
             const funcName = basicCallMatch[1];
             if (typeof window[funcName] === 'function') {
@@ -130,45 +289,67 @@ export class WindowManager {
             'updateUI', 'useVitamin', 'showCatchRateModal'
         ];
 
-        // We explicitly match the arguments pattern carefully.
-        const argCallMatch = /^(?:if\s*\([^)]*\)\s*)?window\.([a-zA-Z0-9_]+)\s*\(\s*(['"]?[a-zA-Z0-9_\/$!*#@&\s.{}\[\]:()\\'<>\-]+['"]?(?:\s*,\s*['"]?[a-zA-Z0-9_\/$!*#@&\s.{}\[\]:()\\'<>\-]+['"]?)*)\s*\)\s*;?$/.exec(codeToExecute);
+        // Match balanced arguments (supports Unicode, punctuation, nested parens/objects).
+        const argCallMatch = /^window\.([a-zA-Z0-9_]+)\s*\(([\s\S]+)\)\s*;?$/.exec(codeToExecute);
 
-        // Nested properties matching (e.g. \`window.windowManager.closeDynamicWindow\`)
-        const nestedCallMatch = /^(?:if\s*\([^)]*\)\s*)?window\.([a-zA-Z0-9_]+)\.([a-zA-Z0-9_]+)\s*\(\s*(['"]?[a-zA-Z0-9_\/$!*#@&\s.{}\[\]:()\\'<>\-]+['"]?(?:\s*,\s*['"]?[a-zA-Z0-9_\/$!*#@&\s.{}\[\]:()\\'<>\-]+['"]?)*)\s*\)\s*;?$/.exec(codeToExecute);
+        // Nested properties matching (e.g. `window.windowManager.closeDynamicWindow`)
+        const nestedCallMatch = /^window\.([a-zA-Z0-9_]+)\.([a-zA-Z0-9_]+)\s*\(([\s\S]+)\)\s*;?$/.exec(codeToExecute);
 
-        if (argCallMatch) {
+        if (argCallMatch && this._hasBalancedParens(argCallMatch[2])) {
             const funcName = argCallMatch[1];
             if (allowedFuncs.includes(funcName) && typeof window[funcName] === 'function') {
-                const processedArgs = this._parseArgs(argCallMatch[2].trim(), el.value, event);
+                const processedArgs = this._parseArgs(argCallMatch[2].trim(), el?.value, event, el);
                 window[funcName](...processedArgs);
             }
             return;
         }
 
-        if (nestedCallMatch) {
+        if (nestedCallMatch && this._hasBalancedParens(nestedCallMatch[3])) {
             const objName = nestedCallMatch[1];
             const funcName = nestedCallMatch[2];
             // We explicitly only allow globals.battleSystem and windowManager methods.
             if ((objName === 'windowManager' || (objName === 'globals' && funcName === 'battleSystem')) && window[objName] && typeof window[objName][funcName] === 'function') {
-                const processedArgs = this._parseArgs(nestedCallMatch[3].trim(), el.value, event);
+                const processedArgs = this._parseArgs(nestedCallMatch[3].trim(), el?.value, event, el);
                 window[objName][funcName](...processedArgs);
             }
             return;
         }
 
         // Explicit style setters that the app uses for some modals
-        const styleSetMatch = /^(?:document\.getElementById\(['"]([a-zA-Z0-9_\-]+)['"]\)|this)\.style\.([a-zA-Z0-9_]+)\s*=\s*(['"][a-zA-Z0-9_\-\s.]+['"]|true|false|null|'none'|'block'|'inline'|'flex'|'transparent')\s*;?$/.exec(codeToExecute);
+        const styleSetMatch = /^(?:document\.getElementById\(['"]([a-zA-Z0-9_\-]+)['"]\)|this)\.style\.([a-zA-Z0-9_]+)\s*=\s*(['"][a-zA-Z0-9_\-\s.#(),%]+['"]|true|false|null)\s*;?$/.exec(codeToExecute);
         if (styleSetMatch) {
             const targetId = styleSetMatch[1];
             const styleProp = styleSetMatch[2];
             let styleVal = styleSetMatch[3].trim();
             if (styleVal.startsWith("'") || styleVal.startsWith('"')) styleVal = styleVal.slice(1, -1);
 
-            if (codeToExecute.includes('this.style')) {
-                el.style[styleProp] = styleVal;
+            if (codeToExecute.startsWith('this.style')) {
+                if (el && el.style) el.style[styleProp] = styleVal;
             } else if (targetId) {
                 const targetEl = document.getElementById(targetId);
-                if (targetEl) targetEl.style[styleProp] = styleVal;
+                if (targetEl && targetEl.style) targetEl.style[styleProp] = styleVal;
+            }
+            return;
+        }
+
+        // Safe .src assignment on `this` or `document.getElementById('...')` (e.g., onerror fallback sprites)
+        const srcSetMatch = /^(?:document\.getElementById\(['"]([a-zA-Z0-9_\-]+)['"]\)|this)\.src\s*=\s*(?:'([^']+)'|"([^"]+)")\s*;?$/.exec(codeToExecute);
+        if (srcSetMatch) {
+            const targetId = srcSetMatch[1];
+            const srcVal = (srcSetMatch[2] ?? srcSetMatch[3]).trim();
+            const normalizedSrc = srcVal.replace(/[\s\u0000-\u001F]/g, '').toLowerCase();
+            if (
+                normalizedSrc.startsWith('javascript:') ||
+                normalizedSrc.startsWith('vbscript:') ||
+                normalizedSrc.startsWith('data:text/html')
+            ) {
+                return;
+            }
+            if (codeToExecute.startsWith('this.src')) {
+                if (el) el.src = srcVal;
+            } else if (targetId) {
+                const targetEl = document.getElementById(targetId);
+                if (targetEl) targetEl.src = srcVal;
             }
             return;
         }
@@ -246,6 +427,7 @@ export class WindowManager {
         winElement.style.top = initialTop;
         winElement.style.zIndex = this.zIndexCounter++;
 
+        this.windows = this.windows.filter(w => w.id !== windowId && w !== winElement);
         this.windows.push(winElement);
 
         // Focus on mousedown
@@ -434,6 +616,8 @@ export class WindowManager {
         let isResizing = false;
         let startX, startY;
         let startWidth, startHeight;
+        let observer = null;
+        let initDimsTimeout = null;
 
 
         winElement.adjustHeightForNewContent = () => {
@@ -590,6 +774,9 @@ export class WindowManager {
                     }
                 }
             }
+            if (winElement._originalWidth && observer) {
+                observer.disconnect();
+            }
         };
 
         handleElement.addEventListener('mousedown', (e) => {
@@ -663,14 +850,19 @@ export class WindowManager {
             }
         });
 
-        const observer = new MutationObserver((mutations) => {
-            mutations.forEach((mutation) => {
-                if (mutation.attributeName === 'style' && winElement.style.display !== 'none' && !winElement._originalWidth) {
-                    setTimeout(initDims, 50);
+        if (winElement.id !== 'window-map') {
+            observer = new MutationObserver((mutations) => {
+                for (let i = 0; i < mutations.length; i++) {
+                    const mutation = mutations[i];
+                    if (mutation.attributeName === 'style' && winElement.style.display !== 'none' && !winElement._originalWidth) {
+                        clearTimeout(initDimsTimeout);
+                        initDimsTimeout = setTimeout(initDims, 50);
+                        break;
+                    }
                 }
             });
-        });
-        observer.observe(winElement, { attributes: true });
+            observer.observe(winElement, { attributes: true });
+        }
 
         // Let the auto adjust handle its initial dimensions properly on startup
         // to avoid locking in to an empty state and being permanently restricted

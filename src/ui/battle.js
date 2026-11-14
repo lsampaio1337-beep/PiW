@@ -14,15 +14,18 @@ function updateActiveItemsUI() {
     const potionCard = document.getElementById('smartwatch-potion-card');
 
     const popup = document.getElementById('smartwatch-item-selection-popup');
-    const openType = (popup && popup.style.display === 'flex') ? popup.dataset.type : null;
 
     if (potionImg && potionCount && potionCard) {
         potionCard.style.display = smartwatchTier >= 2 ? 'flex' : 'none';
-        if (state.settings.activePotionTier >= 0) {
+        const potionCfg = (state.settings?.activePotionTier >= 0)
+            ? state.config?.balance?.items?.potions?.[state.settings.activePotionTier]
+            : null;
+        if (potionCfg) {
             potionCard.style.border = '2px solid #2ecc71'; // Green
-            const potionName = state.config.balance.items.potions[state.settings.activePotionTier].name;
+            const rawName = potionCfg.name;
+            const potionName = rawName === 'Big' ? 'Big Potion' : rawName;
             potionImg.src = `./Assets/Items/Potions/${potionName}.png`;
-            potionCount.textContent = formatActiveItemQuantity(state.backpack.potions[potionName] || 0);
+            potionCount.textContent = formatActiveItemQuantity(state.backpack?.potions?.[potionName] || 0);
             potionImg.style.display = 'block';
             potionCount.style.display = 'block';
         } else {
@@ -72,11 +75,14 @@ function updateActiveItemsUI() {
 
     if (ballImg && ballCount && ballCard) {
         ballCard.style.display = smartwatchTier >= 1 ? 'flex' : 'none';
-        if (state.settings.activeBallTier >= 0) {
+        const ballCfg = (state.settings?.activeBallTier >= 0)
+            ? state.config?.balance?.items?.pokeballs?.[state.settings.activeBallTier]
+            : null;
+        if (ballCfg) {
             ballCard.style.border = '2px solid #2ecc71'; // Green
-            const ballName = state.config.balance.items.pokeballs[state.settings.activeBallTier].name;
+            const ballName = ballCfg.name;
             ballImg.src = `./Assets/Items/Balls/${ballName}.png`;
-            ballCount.textContent = formatActiveItemQuantity(state.backpack.pokeballs[ballName] || 0);
+            ballCount.textContent = formatActiveItemQuantity(state.backpack?.pokeballs?.[ballName] || 0);
             ballImg.style.display = 'block';
             ballCount.style.display = 'block';
         } else {
@@ -205,7 +211,7 @@ window.showActiveItemSelection = function(type) {
         `;
     }
 
-    popup.innerHTML = html;
+    setSafeHTML(popup, html);
     popup.style.display = 'flex';
     popup.dataset.type = type;
     updateActiveItemsUI();
@@ -252,9 +258,25 @@ document.addEventListener('click', (e) => {
     }
 });
 
-const PLAINS_ROUTES = ["Route 1","Route 2","Route 3","Route 4","Route 24","Route 25","Route 9","Route 10","Power Plant","Route 5","Fighting Dojo","Route 7","Route 6","Route 8","Route 11","Route 12","Cycling Road","Route 13","Route 14","Route 15","Pokémon Mansion","Trade With Friends Hub","Route 22","Route 23","Victory Road"];
+/** Look up Pokemon config using O(1) pokemonMap when available, falling back to pokemonData. */
+function findPokemonConfig(id) {
+    if (!state.config) return null;
+    if (state.config.pokemonMap) {
+        return state.config.pokemonMap.get(Number(id)) || state.config.pokemonMap.get(id);
+    }
+    return state.config.pokemonData ? state.config.pokemonData.find(p => p.id === id) : null;
+}
+
+/** Safely replace an element's contents using DOMParser. */
+function setSafeHTML(element, html) {
+    if (!element || typeof element.replaceChildren !== 'function') return;
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    element.replaceChildren(...doc.body.childNodes);
+}
+
+const PLAINS_ROUTES = ["Route 1","Route 2","Route 3","Route 4","Route 24","Route 25","Route 9","Route 10","Power Plant","Route 5","Fighting Dojo","Route 7","Route 6","Route 8","Route 11","Route 12","Cycling Road","Route 13","Route 14","Route 15","Pokémon Mansion","Pokemon Mansion","Trade With Friends Hub","Route 22","Route 23","Victory Road"];
 const WATER_ROUTES = ["Small Fishing Spot","Sea Routes","Seafoam Islands","Big Fishing Spot"];
-const CAVE_ROUTES = ["Mount Moon","Cerulean Cave","Pokémon Tower","Rock Tunnel","Fossil Revival Lab","Temporal Sanctuary Spot","Mount Silver Apex"];
+const CAVE_ROUTES = ["Mount Moon","Cerulean Cave","Pokémon Tower","Pokemon Tower","Digglett Cave","Rock Tunnel","Fossil Revival Lab","Temporal Sanctuary Spot","Mount Silver Apex"];
 const SCROLLING_ROUTES = ["Viridian Forest"].concat(PLAINS_ROUTES, WATER_ROUTES, CAVE_ROUTES);
 
 
@@ -403,7 +425,7 @@ function updateBackgroundSliding(combatArena, state, battleSystem, inGymCombat) 
                     // Ensure the slideDelay used here matches what the battle system would use for slideDuration
                     // It uses exactly 1000 / gameSpeed
                     const slideDelay = battleSystem.searchDuration || (1000 / gameSpeed);
-                    const moveDistance = 4.0625; // Original distance
+                    const moveDistance = 65;
                     const ticksPerSlide = slideDelay / 33;
                     const pctPerTick = moveDistance / ticksPerSlide;
                     pos += pctPerTick;
@@ -424,7 +446,7 @@ function updateBackgroundSliding(combatArena, state, battleSystem, inGymCombat) 
                 void combatArena.offsetWidth;
                 requestAnimationFrame(() => {
                     requestAnimationFrame(() => {
-                        combatArena.style.backgroundPositionX = `${pos + 4.0625}%`;
+                        combatArena.style.backgroundPositionX = `${pos + 65}%`;
                     });
                 });
             }
@@ -474,8 +496,11 @@ function updatePokemonSpriteUI(spriteWrapper, pokemonSprite, pokemon, battleSyst
     let pokemonId = pokemon.isDisguisedDitto ? 132 : pokemon.id;
     let spriteSuffix = pokemon.qualityName === 'Shiny' ? '_shiny_clean.png' : '_clean.png';
     let paddedId = String(pokemonId).padStart(4, '0');
-    let pokemonName = state.config.pokemonData.find(p => p.id === pokemonId)?.name || 'Unknown';
-    pokemonSprite.src = `Assets/Pokemon Sprites/Clean/Gen5/${paddedId}_${pokemonName}${spriteSuffix}`;
+    let pokemonName = findPokemonConfig(pokemonId)?.name || 'Unknown';
+    const newSrc = `Assets/Pokemon Sprites/Clean/Gen5/${paddedId}_${pokemonName}${spriteSuffix}`;
+    if (pokemonSprite.getAttribute('src') !== newSrc) {
+        pokemonSprite.src = newSrc;
+    }
 
     const isFlying = pokemon.types && (pokemon.types.includes('Flying') || pokemon.types.includes('Wind'));
     spriteWrapper.style.justifyContent = isFlying ? 'flex-start' : 'flex-end';
@@ -685,6 +710,12 @@ function prepareCloneWrapper(originalSpriteWrapper, elEnemySide) {
     if (clonedHpContainer) {
         clonedHpContainer.remove();
     }
+    const clonedModals = cloneWrapper.querySelector('#enemy-data-modals');
+    if (clonedModals) {
+        clonedModals.classList.add('cloned-enemy-data-modals');
+    }
+    cloneWrapper.removeAttribute('id');
+    cloneWrapper.querySelectorAll('[id]').forEach(el => el.removeAttribute('id'));
 
     cloneWrapper.style.position = 'absolute';
     cloneWrapper.style.top = '0';
@@ -820,7 +851,7 @@ function animatePokemonSprite(cloneWrapper) {
 }
 
 function animateModals(cloneWrapper) {
-    const clonedModals = cloneWrapper.querySelector('#enemy-data-modals');
+    const clonedModals = cloneWrapper.querySelector('.cloned-enemy-data-modals');
     if (clonedModals) {
         clonedModals.style.transition = 'all 2000ms linear';
         clonedModals.style.transformOrigin = 'center center';
@@ -1064,7 +1095,7 @@ function getAttackerTypes(attackerId, isGym, battleSystem, state) {
              const pIdx = battleSystem.gymState.currentPokemonIndex;
              if (gym.trainers[tIdx] && gym.trainers[tIdx].team && gym.trainers[tIdx].team[pIdx]) {
                  let tId = gym.trainers[tIdx].team[pIdx].id;
-                 let pd = state.config.pokemonData.find(p => p.id === tId);
+                 let pd = findPokemonConfig(tId);
                  if (pd) atkTypes = pd.types || [];
              }
         } else if (battleSystem.activeEncounter) {
@@ -1310,7 +1341,6 @@ export function showLoot(lootItems) {
     let html = '';
     for (let i = 0; i < keys.length; i++) {
         let itemName = keys[i];
-        const count = lootItems[itemName];
         const isMissed = itemName.endsWith('_missed');
         if (isMissed) {
             itemName = itemName.replace('_missed', '');
@@ -1334,7 +1364,7 @@ export function showLoot(lootItems) {
     row.style.gap = '5px';
     row.style.transition = 'opacity 0.5s ease-in-out';
     row.style.opacity = '1';
-    row.innerHTML = html;
+    setSafeHTML(row, html);
 
     container.prepend(row);
     container.style.display = 'flex';

@@ -1,8 +1,10 @@
 import { state } from '../state.js';
 import { showModal } from '../ui.js';
 import { updateMainControl } from './mainControl.js';
-import { getDailyChallengesHtml } from './dailyChallenges.js';
+import { getDailyChallengesHtml, checkAnyDailyChallengeCompleted } from './dailyChallenges.js';
 import { getCapacity, getCurrentCount } from '../mathEngine.js';
+
+export { checkAnyDailyChallengeCompleted };
 
 
 export function getRewardForDay(daysClaimed) {
@@ -65,15 +67,6 @@ export function checkDailyRewardAvailable() {
     }
     const today = getLocalDateString();
     return state.stats.dailyRewards.lastClaimDate !== today;
-}
-
-export function checkAnyDailyChallengeCompleted() {
-    if (!state.stats.dailyChallenges || !state.stats.dailyChallenges.active) return false;
-    if (state.stats.dailyChallenges.hasSeenNotification) return false;
-    for (let c of state.stats.dailyChallenges.active) {
-        if (c.completed && !c.claimed) return true;
-    }
-    return false;
 }
 
 export function claimDailyReward(dayIndex) {
@@ -164,6 +157,7 @@ window.giveFreeTokens = function() {
 
 window.showCalendar = showCalendar;
 export function showCalendar(tab = 'activities') {
+    window.currentCalendarTab = tab;
     if (state.stats.dailyChallenges) {
         state.stats.dailyChallenges.hasSeenNotification = true;
     }
@@ -218,13 +212,11 @@ export function showCalendar(tab = 'activities') {
             align-items: center;
             justify-content: space-between;
         `;
-        let overlayHtml = '';
         let onClickHtml = '';
 
         if (i < dayOfWeek) {
             // Already claimed
             cardStyle += ` opacity: 0.5; border-color: #333; filter: grayscale(100%);`;
-            overlayHtml = '';
         } else if (i === dayOfWeek) {
             if (isAvailable) {
                 // Claimable today
@@ -233,11 +225,7 @@ export function showCalendar(tab = 'activities') {
             } else {
                 // Already claimed today, show this slot as collected
                 cardStyle += ` opacity: 0.5; border-color: #333; filter: grayscale(100%);`;
-                overlayHtml = '';
             }
-        } else {
-            // Future days
-            overlayHtml = '';
         }
 
         let itemsHtml = '';
@@ -261,7 +249,10 @@ export function showCalendar(tab = 'activities') {
         }
 
         if (reward.tokens) {
-            cardStyle += ' border-color: #3498db; color: white;';
+            if (i > dayOfWeek) {
+                cardStyle += ' border-color: #3498db;';
+            }
+            cardStyle += ' color: white;';
             itemsHtml += `
                 <div style="display: flex; align-items: center; gap: 5px; margin-top: 5px; justify-content: center;">
                     <img src="Assets/Extra/Token.png" style="width: 24px; height: 24px;" title="Token">
@@ -276,7 +267,6 @@ export function showCalendar(tab = 'activities') {
                 <div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center;">
                     ${itemsHtml}
                 </div>
-                ${overlayHtml}
             </div>
         `;
     }
@@ -294,9 +284,6 @@ export function showCalendar(tab = 'activities') {
     html += `</div></div>`;
 
     showModal(titleHtml, html, "window-calendar", "800px", "auto");
-
-    // Bind to window for tab switching
-    window.showCalendar = showCalendar;
 
     // Auto adjust height when switching tabs
     setTimeout(() => {

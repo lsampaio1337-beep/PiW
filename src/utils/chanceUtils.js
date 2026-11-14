@@ -37,15 +37,17 @@ export function normalizeSpawnChances(spawns) {
     const prop = isProbabilityProp ? 'probability' : 'chance';
 
     let sum = 0;
+    let minVal = Infinity;
+    let maxVal = -Infinity;
     for (let i = 0; i < n; i++) {
-        sum += (Number(spawns[i][prop]) || 0);
+        const val = Number(spawns[i][prop]) || 0;
+        sum += val;
+        if (val < minVal) minVal = val;
+        if (val > maxVal) maxVal = val;
     }
     if (sum <= 0) return spawns;
 
     // Check if entire route is an equal-split pattern with minor rounding differences (e.g. [33%, 33%, 34%] or [17%, 17%, 17%, 17%, 17%, 17%])
-    const values = spawns.map(s => Number(s[prop]) || 0);
-    const minVal = Math.min(...values);
-    const maxVal = Math.max(...values);
     const expectedEqual = 1.0 / n;
 
     if (maxVal - minVal <= 0.02 && Math.abs(minVal - expectedEqual) <= 0.02) {

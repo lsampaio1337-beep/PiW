@@ -12,12 +12,7 @@ export function renderPotionsTab(area) {
                 </label>
                 <div style="position: relative; width: 100%;">
                     <input type="range" min="1" max="100" value="${state.settings.autoPotionThreshold}" id="potion-threshold-slider"
-                        oninput="
-                            let val = parseInt(this.value);
-                            if (val > 90) { val = 90; this.value = 90; }
-                            document.getElementById('potion-threshold-val').innerText = val + '%';
-                            window.setAutoPotionThreshold(val);
-                        "
+                        oninput="window.setAutoPotionThreshold(this.value)"
                         style="width: 100%; cursor: pointer; position: relative; z-index: 2; background: transparent; accent-color: #2ecc71;"
                     >
                     <!-- Background bar to show locked zone -->
@@ -37,13 +32,12 @@ export function renderPotionsTab(area) {
     for (let idx = 0; idx < potions.length; idx++) {
         let p = potions[idx];
         if (p.name === 'Max Potion') continue;
-        let inventoryName = p.name;
-        if (p.name === 'Regular Potion') inventoryName = 'Regular Potion';
-        if (p.name === 'Big') inventoryName = 'Big Potion';
+        const rawName = p.name;
+        const potName = rawName === 'Big' ? 'Big Potion' : rawName;
 
-        let displayName = inventoryName.replace(' Potion', '<br>Potion');
+        let displayName = potName.replace(' Potion', '<br>Potion');
 
-        const qty = state.backpack.potions[inventoryName] || 0;
+        const qty = state.backpack.potions[potName] || 0;
         const isActive = state.settings.activePotionTier === idx;
         const borderColor = isActive ? '#2ecc71' : '#3498db';
         const healAmt = p.heal;
@@ -53,7 +47,7 @@ export function renderPotionsTab(area) {
             <div onclick="window.setActiveItem('potion', ${idx})"
                 style="background: #2c3e50; border: 2px solid ${borderColor}; border-radius: 10px; padding: 1cqi; text-align: center; cursor: pointer; transition: transform 0.2s; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 14.5cqi; box-sizing: border-box;">
                 <div style="font-size: 1.6cqi; font-weight: bold; margin-bottom: 0.5cqi; height: 3.5cqi; display: flex; align-items: center; justify-content: center; text-align: center; line-height: 1.1;">${displayName}</div>
-                <img src="./Assets/Items/Potions/${inventoryName}.png" style="width: 7cqi; height: 7cqi; object-fit: contain; margin-bottom: 0.5cqi;" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='">
+                <img src="./Assets/Items/Potions/${potName}.png" style="width: 7cqi; height: 7cqi; object-fit: contain; margin-bottom: 0.5cqi;" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='">
                 <div style="font-size: 1.4cqi; color: #f1c40f; margin-bottom: 0.5cqi; line-height: 1.1;">${attrLabel}</div>
                 <div style="font-size: 1.6cqi; font-weight: bold; color: #bdc3c7; line-height: 1.1;">Stock: ${formatQuantity(qty)}</div>
             </div>
@@ -65,5 +59,6 @@ export function renderPotionsTab(area) {
         </div>
     `;
 
-    area.innerHTML = content;
+    const doc = new DOMParser().parseFromString(content, 'text/html');
+    area.replaceChildren(...doc.body.childNodes);
 }

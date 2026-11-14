@@ -120,7 +120,8 @@ export const state = {
 
 // Global reference for battle system
 export let globals = {
-    battleSystem: null
+    battleSystem: null,
+    swapRegion
 };
 
 export function setBattleSystem(system) {
@@ -146,6 +147,14 @@ export function checkFinalChallengeCompleted(regionName = 'Kanto') {
         routes = state.config.sinnohRoutes;
     } else if (regionName === 'Unova' && state.config && state.config.unovaRoutes) {
         routes = state.config.unovaRoutes;
+    } else if (regionName === 'Kalos' && state.config && state.config.kalosRoutes) {
+        routes = state.config.kalosRoutes;
+    } else if (regionName === 'Alola' && state.config && state.config.alolaRoutes) {
+        routes = state.config.alolaRoutes;
+    } else if (regionName === 'Galar' && state.config && state.config.galarRoutes) {
+        routes = state.config.galarRoutes;
+    } else if (regionName === 'Paldea' && state.config && state.config.paldeaRoutes) {
+        routes = state.config.paldeaRoutes;
     }
 
     let finalChallenge = routes.find(r => r.challengeName === "Challenge 36" || r.challengeName === "Final Challenge" || r.challengeName === "Challenge 49" || r.challengeName === "Johto Final Challenge" || r.challengeName === "Hoenn Final Challenge" || r.challengeName === "Sinnoh Final Challenge" || r.challengeName === "Unova Final Challenge");
@@ -186,6 +195,18 @@ export function swapRegion(newRegionName) {
         } else if (newRegionName === 'Unova') {
             state.regions[newRegionName].currentRoute = 'Route 19';
             state.regions[newRegionName].stats.activeChallenges = ['Route 19'];
+        } else if (newRegionName === 'Kalos') {
+            state.regions[newRegionName].currentRoute = 'Route 2';
+            state.regions[newRegionName].stats.activeChallenges = ['Route 2'];
+        } else if (newRegionName === 'Alola') {
+            state.regions[newRegionName].currentRoute = 'Route 1 (Alola)';
+            state.regions[newRegionName].stats.activeChallenges = ['Route 1 (Alola)'];
+        } else if (newRegionName === 'Galar') {
+            state.regions[newRegionName].currentRoute = 'Postwick';
+            state.regions[newRegionName].stats.activeChallenges = ['Postwick'];
+        } else if (newRegionName === 'Paldea') {
+            state.regions[newRegionName].currentRoute = 'Poco Path - Main';
+            state.regions[newRegionName].stats.activeChallenges = ['Poco Path - Main'];
         }
     }
 

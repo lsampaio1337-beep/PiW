@@ -203,13 +203,33 @@ describe('Pokedex UI Logic', () => {
             expect(hasEncounteredSpecies(7, state)).toBe(true);
         });
 
+        test('returns true if pokemon is in storage, safe, breeding, or training', () => {
+            state.storage.push({ id: 1 });
+            expect(hasEncounteredSpecies(1, state)).toBe(true);
+
+            state.safe.push({ id: 2 });
+            expect(hasEncounteredSpecies(2, state)).toBe(true);
+
+            state.breeding.push({ id: 3 });
+            expect(hasEncounteredSpecies(3, state)).toBe(true);
+
+            state.training.push({ id: 4 });
+            expect(hasEncounteredSpecies(4, state)).toBe(true);
+        });
+
+        test('handles gracefully when seenSpecies or caughtSpecies is undefined', () => {
+            state.stats.seenSpecies = undefined;
+            state.stats.caughtSpecies = undefined;
+            state.party.push({ id: 1, name: 'Bulbasaur' });
+
+            expect(hasEncounteredSpecies(1, state)).toBe(true);
+            expect(hasEncounteredSpecies(2, state)).toBe(false);
+        });
+
         test('returns false if pokemon is neither seen, caught, nor in any storage', () => {
             expect(hasEncounteredSpecies(1, state)).toBe(false);
         });
     });
-
-    // Add remaining tests here in a second step...
-});
 describe('showPokedex', () => {
     test('shows loading message if pokemonData is missing', () => {
         const { showPokedex } = require('../../src/ui/pokedex.js');
@@ -279,6 +299,43 @@ describe('showPokedex', () => {
 
         // Unseen Pokemon
         expect(html).toContain('???');
+    });
+
+    test('filters pokedex entries by kalos_id and paldea_id for Kalos and Paldea regions', () => {
+        const { showPokedex } = require('../../src/ui/pokedex.js');
+        const { showModal } = require('../../src/ui.js');
+
+        state.config.pokemonData.push(
+            { id: 650, kalos_id: 1, name: 'Chespin', types: ['Grass'], hp: 56, atk: 61, def: 65, spa: 48, spd: 45, spe: 38 },
+            { id: 653, kalos_id: 4, name: 'Fennekin', types: ['Fire'], hp: 40, atk: 45, def: 40, spa: 62, spd: 60, spe: 60 },
+            { id: 906, paldea_id: 1, name: 'Sprigatito', types: ['Grass'], hp: 40, atk: 61, def: 54, spa: 45, spd: 45, spe: 65 }
+        );
+        state.stats.caughtSpecies['Bulbasaur'] = true;
+        state.stats.caughtSpecies['Chespin'] = true;
+        state.stats.caughtSpecies['Fennekin'] = true;
+        state.stats.caughtSpecies['Sprigatito'] = true;
+
+        showModal.mockClear();
+        state.currentRegionName = 'Kalos';
+        showPokedex();
+        expect(showModal).toHaveBeenCalledWith('Kalos Pokedex', expect.any(String), 'window-pokedex');
+        const kalosHtml = showModal.mock.calls[0][1];
+        expect(kalosHtml).toContain('Chespin');
+        expect(kalosHtml).toContain('#1');
+        expect(kalosHtml).toContain('Fennekin');
+        expect(kalosHtml).toContain('#4');
+        expect(kalosHtml).not.toContain('Bulbasaur');
+        expect(kalosHtml).not.toContain('Sprigatito');
+
+        showModal.mockClear();
+        state.currentRegionName = 'Paldea';
+        showPokedex();
+        expect(showModal).toHaveBeenCalledWith('Paldea Pokedex', expect.any(String), 'window-pokedex');
+        const paldeaHtml = showModal.mock.calls[0][1];
+        expect(paldeaHtml).toContain('Sprigatito');
+        expect(paldeaHtml).toContain('#1');
+        expect(paldeaHtml).not.toContain('Bulbasaur');
+        expect(paldeaHtml).not.toContain('Chespin');
     });
 });
 
@@ -477,4 +534,5 @@ describe('Smart Capture Mode', () => {
         selectGlobalSmartCaptureBall(false, -1);
         expect(document.getElementById('smartwatch-ball-img').src).toContain('Assets/Extra/No.png');
     });
+});
 });

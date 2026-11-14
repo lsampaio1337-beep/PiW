@@ -1,5 +1,4 @@
 import { state } from '../../state.js';
-import { updateUI } from '../../ui.js';
 
 const profTutorialMessages = [
     "<p>Hello, Trainer!</p><p>Here I will give you some tips for introduce you to game.</p><p>Do you want a tutorial guide to help you understand better the game or do you want to skip and start the game?</p>",
@@ -14,7 +13,15 @@ const profTutorialMessages = [
 ];
 let currentProfTutorialIndex = 0;
 
+function setTutorialText(html) {
+    const textEl = document.getElementById('prof-tutorial-text');
+    if (!textEl) return;
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    textEl.replaceChildren(...doc.body.childNodes);
+}
+
 export function skipProfTutorial() {
+    if (!state.globalStats) state.globalStats = {};
     state.globalStats.hasSeenProfTutorial = true;
     const overlay = document.getElementById('prof-tutorial-overlay');
     if (overlay) overlay.style.display = 'none';
@@ -23,17 +30,21 @@ export function skipProfTutorial() {
 
 export function proceedProfTutorial() {
     currentProfTutorialIndex++;
+    const skipBtn = document.getElementById('btn-prof-tutorial-skip');
+    const proceedBtn = document.getElementById('btn-prof-tutorial-proceed');
+    const concludeBtn = document.getElementById('btn-prof-tutorial-conclude');
+
     if (currentProfTutorialIndex >= profTutorialMessages.length - 1) {
         // Switch to the conclude button on the last message
-        document.getElementById('btn-prof-tutorial-skip').style.display = 'none';
-        document.getElementById('btn-prof-tutorial-proceed').style.display = 'none';
-        document.getElementById('btn-prof-tutorial-conclude').style.display = 'inline-block';
-    } else {
-        document.getElementById('btn-prof-tutorial-proceed').innerText = `Proceed ${currentProfTutorialIndex + 1}/${profTutorialMessages.length - 1}`;
+        if (skipBtn) skipBtn.style.display = 'none';
+        if (proceedBtn) proceedBtn.style.display = 'none';
+        if (concludeBtn) concludeBtn.style.display = 'inline-block';
+    } else if (proceedBtn) {
+        proceedBtn.innerText = `Proceed ${currentProfTutorialIndex + 1}/${profTutorialMessages.length - 1}`;
     }
 
     if (currentProfTutorialIndex < profTutorialMessages.length) {
-        document.getElementById('prof-tutorial-text').innerHTML = profTutorialMessages[currentProfTutorialIndex];
+        setTutorialText(profTutorialMessages[currentProfTutorialIndex]);
     }
 };
 
@@ -42,24 +53,32 @@ export function concludeProfTutorial() {
 };
 
 export function showProfTutorialIfNeeded() {
-    if (!state.globalStats.hasSeenProfTutorial) {
+    if (!state.globalStats?.hasSeenProfTutorial) {
         const overlay = document.getElementById('prof-tutorial-overlay');
         if (overlay) {
             currentProfTutorialIndex = 0;
-            document.getElementById('prof-tutorial-text').innerHTML = profTutorialMessages[currentProfTutorialIndex];
+            setTutorialText(profTutorialMessages[currentProfTutorialIndex]);
 
             // Reset buttons visibility
-            document.getElementById('btn-prof-tutorial-skip').style.display = 'inline-block';
+            const skipBtn = document.getElementById('btn-prof-tutorial-skip');
+            if (skipBtn) skipBtn.style.display = 'inline-block';
 
             const proceedBtn = document.getElementById('btn-prof-tutorial-proceed');
-            proceedBtn.innerText = `Proceed 1/${profTutorialMessages.length - 1}`;
-            proceedBtn.style.display = 'inline-block';
+            if (proceedBtn) {
+                proceedBtn.innerText = `Proceed 1/${profTutorialMessages.length - 1}`;
+                proceedBtn.style.display = 'inline-block';
+            }
 
-            document.getElementById('btn-prof-tutorial-conclude').style.display = 'none';
+            const concludeBtn = document.getElementById('btn-prof-tutorial-conclude');
+            if (concludeBtn) concludeBtn.style.display = 'none';
 
             overlay.style.display = 'flex';
         }
     }
 }
+
+window.skipProfTutorial = skipProfTutorial;
+window.proceedProfTutorial = proceedProfTutorial;
+window.concludeProfTutorial = concludeProfTutorial;
 
 export { profTutorialMessages };

@@ -5,6 +5,53 @@ import { updateUI, showModal } from '../ui.js';
 import { escapeHTML } from '../utils/stringUtils.js';
 
 
+function getPokemonConfig(id, state) {
+    if (!state?.config) return undefined;
+    if (state.config.pokemonMap) {
+        return state.config.pokemonMap.get(Number(id)) || state.config.pokemonMap.get(id);
+    }
+    return state.config.pokemonData?.find(d => Number(d.id) === Number(id) || d.id === id);
+}
+
+function applyEvolvedBaseStats(mon, baseData) {
+    mon.id = baseData.id;
+    mon.name = baseData.name;
+    mon.types = [...(baseData.types || [])];
+    mon.bst = baseData.hp + baseData.atk + baseData.def + baseData.spa + baseData.spd + baseData.spe;
+
+    const v = mon.vitamins || {};
+    mon.maxHp = mathEngine.calculateHP(baseData.hp, mon.ivs.hp, mon.level, mon.quality, v.hp || 0);
+    mon.currentStats.hp = mon.maxHp;
+    mon.currentStats.atk = mathEngine.calculateStat(baseData.atk, mon.ivs.atk, mon.level, mon.quality, v.atk || 0);
+    mon.currentStats.def = mathEngine.calculateStat(baseData.def, mon.ivs.def, mon.level, mon.quality, v.def || 0);
+    mon.currentStats.spa = mathEngine.calculateStat(baseData.spa, mon.ivs.spa, mon.level, mon.quality, v.spa || 0);
+    mon.currentStats.spd = mathEngine.calculateStat(baseData.spd, mon.ivs.spd, mon.level, mon.quality, v.spd || 0);
+    mon.currentStats.spe = mathEngine.calculateStat(baseData.spe, mon.ivs.spe, mon.level, mon.quality, v.spe || 0);
+    mon.currentHp = mon.maxHp;
+
+    const totalIV = mon.ivs.hp + mon.ivs.atk + mon.ivs.def + mon.ivs.spa + mon.ivs.spd + mon.ivs.spe;
+    mon.evxp = mathEngine.calculateEVXP(mon.bst, mon.level, mon.quality, totalIV);
+    mon.evm = mathEngine.calculateEVM(mon.bst, mon.level, mon.quality, totalIV);
+    mon.pp = mathEngine.calculatePP(mon.bst, mon.level, mon.quality, totalIV);
+}
+
+function markEvolvedSpeciesCaught(speciesName, isShiny) {
+    if (!state.stats.caughtSpecies) state.stats.caughtSpecies = {};
+    if (!state.stats.caughtSpecies[speciesName]) {
+        state.stats.caughtSpeciesCount = (state.stats.caughtSpeciesCount || 0) + 1;
+        state.stats.caughtSpecies[speciesName] = true;
+        state.stats.caught++;
+    }
+
+    if (isShiny) {
+        if (!state.stats.caughtShiniesSpecies) state.stats.caughtShiniesSpecies = {};
+        if (!state.stats.caughtShiniesSpecies[speciesName]) {
+            state.stats.caughtShiniesSpeciesCount = (state.stats.caughtShiniesSpeciesCount || 0) + 1;
+            state.stats.caughtShiniesSpecies[speciesName] = true;
+        }
+    }
+}
+
 function getEvolveRequirements(p, evo, state) {
     const requiredLevel = evo.level;
     const baseStones = Math.ceil(p.level * 0.2);
@@ -15,8 +62,7 @@ function getEvolveRequirements(p, evo, state) {
 
     for (const type of p.types) {
         const stoneName = type + " Stone";
-        state.backpack.stones[stoneName] = state.backpack.stones[stoneName] || 0; // safe fallback
-        const hasCount = state.backpack.stones[stoneName];
+        const hasCount = state.backpack?.stones?.[stoneName] || 0;
         if (hasCount < stonesReq) {
             hasStones = false;
         }
@@ -166,7 +212,7 @@ export function showPokemonStats(idx, location) {
     const p = list[idx];
 
     const sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
-    const pData = state.config.pokemonMap.get(p.id);
+    const pData = getPokemonConfig(p.id, state);
     if (!pData) return;
 
     const actionsHtml = getActionsHtml(p, pData, location, idx);
@@ -189,12 +235,12 @@ export function evolvePokemon(location, idx, toId) {
     if (!list || !list[idx]) return;
 
     let p = list[idx];
-    const newBase = state.config.pokemonMap.get(toId);
+    const newBase = getPokemonConfig(toId, state);
     if (!newBase) return;
 
     // Re-verify requirements and consume stones
-    const oldPData = state.config.pokemonMap.get(p.id);
-    const evoObj = oldPData ? oldPData.evolutions.find(e => e.to === toId) : null;
+    const oldPData = getPokemonConfig(p.id, state);
+    const evoObj = oldPData ? oldPData.evolutions?.find(e => Number(e.to) === Number(toId)) : null;
     if (evoObj) {
         const req = getEvolveRequirements(p, evoObj, state);
         if (!req.canEvolve) {
@@ -202,8 +248,8 @@ export function evolvePokemon(location, idx, toId) {
             return;
         }
 
-        // Nincada evolution edge case: Nincada (0290) -> Ninjask (0291)
-        if (p.id === '0290' && toId === '0291') {
+        // Nincada evolution edge case: Nincada (290) -> Ninjask (291)
+        if (Number(p.id) === 290 && Number(toId) === 291) {
             let hasFreeSlot = false;
             if (location === 'party') {
                 hasFreeSlot = list.length < 6;
@@ -227,89 +273,61 @@ export function evolvePokemon(location, idx, toId) {
         // Deduct stones
         for (const type of p.types) {
             const stoneName = type + " Stone";
-            state.backpack.stones[stoneName] -= req.stonesReq;
+            if (!state.backpack.stones) state.backpack.stones = {};
+            state.backpack.stones[stoneName] = (state.backpack.stones[stoneName] || 0) - req.stonesReq;
         }
     }
 
-
-    p.id = newBase.id;
-    p.name = newBase.name;
-    p.types = newBase.types;
-    p.bst = newBase.hp + newBase.atk + newBase.def + newBase.spa + newBase.spd + newBase.spe;
-
-    // Recalculate stats with new base
-    const v = p.vitamins || {};
-    p.maxHp = mathEngine.calculateHP(newBase.hp, p.ivs.hp, p.level, p.quality, v.hp || 0);
-    p.currentStats.atk = mathEngine.calculateStat(newBase.atk, p.ivs.atk, p.level, p.quality, v.atk || 0);
-    p.currentStats.def = mathEngine.calculateStat(newBase.def, p.ivs.def, p.level, p.quality, v.def || 0);
-    p.currentStats.spa = mathEngine.calculateStat(newBase.spa, p.ivs.spa, p.level, p.quality, v.spa || 0);
-    p.currentStats.spd = mathEngine.calculateStat(newBase.spd, p.ivs.spd, p.level, p.quality, v.spd || 0);
-    p.currentStats.spe = mathEngine.calculateStat(newBase.spe, p.ivs.spe, p.level, p.quality, v.spe || 0);
-
-    // Heal to max hp when evolving
-    p.currentHp = p.maxHp;
+    const oldName = p.name;
+    applyEvolvedBaseStats(p, newBase);
 
     // Evolving counts as catching for the pokedex
-    if (!state.stats.caughtSpecies) state.stats.caughtSpecies = {};
-    if (!state.stats.caughtSpecies[newBase.name]) {
-        state.stats.caughtSpeciesCount = (state.stats.caughtSpeciesCount || 0) + 1;
-        state.stats.caughtSpecies[newBase.name] = true;
-        state.stats.caught++;
-    }
+    markEvolvedSpeciesCaught(newBase.name, p.quality >= 2);
 
-    if (p.quality >= 2) {
-        if (!state.stats.caughtShiniesSpecies) state.stats.caughtShiniesSpecies = {};
-        if (!state.stats.caughtShiniesSpecies[newBase.name]) {
-            state.stats.caughtShiniesSpeciesCount = (state.stats.caughtShiniesSpeciesCount || 0) + 1;
-            state.stats.caughtShiniesSpecies[newBase.name] = true;
-        }
-    }
+    alert(`${oldName} evolved into ${newBase.name}!`);
 
-
-    alert(`${p.name} evolved into ${newBase.name}!`);
-
-    // Nincada evolution edge case: create Shedinja (0292)
-    if (oldPData && oldPData.id === '0290' && newBase.id === '0291') {
-        const shedinjaBase = state.config.pokemonMap.get('0292');
+    // Nincada evolution edge case: create Shedinja (292)
+    if (oldPData && Number(oldPData.id) === 290 && Number(newBase.id) === 291) {
+        const shedinjaBase = state.config.pokemonMap?.get(292) || state.config.pokemonMap?.get('0292') || state.config.pokemonData?.find(d => Number(d.id) === 292);
         if (shedinjaBase) {
-            let shedinja = JSON.parse(JSON.stringify(p));
-            shedinja.uuid = crypto.randomUUID();
-            shedinja.id = shedinjaBase.id;
-            shedinja.name = shedinjaBase.name;
-            shedinja.types = shedinjaBase.types;
-            shedinja.bst = shedinjaBase.hp + shedinjaBase.atk + shedinjaBase.def + shedinjaBase.spa + shedinjaBase.spd + shedinjaBase.spe;
-
-            const sv = shedinja.vitamins || {};
-            shedinja.maxHp = mathEngine.calculateHP(shedinjaBase.hp, shedinja.ivs.hp, shedinja.level, shedinja.quality, sv.hp || 0);
-            shedinja.currentStats.atk = mathEngine.calculateStat(shedinjaBase.atk, shedinja.ivs.atk, shedinja.level, shedinja.quality, sv.atk || 0);
-            shedinja.currentStats.def = mathEngine.calculateStat(shedinjaBase.def, shedinja.ivs.def, shedinja.level, shedinja.quality, sv.def || 0);
-            shedinja.currentStats.spa = mathEngine.calculateStat(shedinjaBase.spa, shedinja.ivs.spa, shedinja.level, shedinja.quality, sv.spa || 0);
-            shedinja.currentStats.spd = mathEngine.calculateStat(shedinjaBase.spd, shedinja.ivs.spd, shedinja.level, shedinja.quality, sv.spd || 0);
-            shedinja.currentStats.spe = mathEngine.calculateStat(shedinjaBase.spe, shedinja.ivs.spe, shedinja.level, shedinja.quality, sv.spe || 0);
-
-            shedinja.currentHp = shedinja.maxHp;
-
-            if (!state.stats.caughtSpecies) state.stats.caughtSpecies = {};
-            if (!state.stats.caughtSpecies[shedinjaBase.name]) {
-                state.stats.caughtSpeciesCount = (state.stats.caughtSpeciesCount || 0) + 1;
-                state.stats.caughtSpecies[shedinjaBase.name] = true;
-                state.stats.caught++;
-            }
-
-            if (shedinja.quality >= 2) {
-                if (!state.stats.caughtShiniesSpecies) state.stats.caughtShiniesSpecies = {};
-                if (!state.stats.caughtShiniesSpecies[shedinjaBase.name]) {
-                    state.stats.caughtShiniesSpeciesCount = (state.stats.caughtShiniesSpeciesCount || 0) + 1;
-                    state.stats.caughtShiniesSpecies[shedinjaBase.name] = true;
-                }
-            }
+            const shedinja = {
+                ...p,
+                uuid: crypto.randomUUID(),
+                types: [...(shedinjaBase.types || [])],
+                ivs: { ...p.ivs },
+                ...(p.evs ? { evs: { ...p.evs } } : {}),
+                currentStats: { ...p.currentStats },
+                vitamins: p.vitamins ? { ...p.vitamins } : {},
+                moves: (p.moves || []).map(m => ({ ...m }))
+            };
+            applyEvolvedBaseStats(shedinja, shedinjaBase);
+            markEvolvedSpeciesCaught(shedinjaBase.name, shedinja.quality >= 2);
 
             list.push(shedinja);
         }
     }
-    document.getElementById('modal-overlay').style.display = 'none'; // Close modal
+
+    if (window.closeModal) {
+        window.closeModal('window-pokemon-stats');
+    } else {
+        const overlay = document.getElementById('modal-overlay');
+        if (overlay) overlay.style.display = 'none';
+    }
 
     updateUI();
+
+    const bpWin = document.getElementById('window-backpack');
+    const bpArea = document.getElementById('backpack-content-area');
+    const bpTitle = document.getElementById('backpack-pocket-title');
+    if (
+        bpWin && bpWin.style.display !== 'none' &&
+        bpArea && bpArea.style.display !== 'none' &&
+        (bpTitle?.textContent?.trim() === 'Pokémon' || document.getElementById('storage-scroll-container')) &&
+        typeof window.renderBackpackTab === 'function'
+    ) {
+        window.renderBackpackTab('pokemon');
+    }
+
     if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') window.trackDailyChallenge('evolve_pokemon');
 }
 
@@ -380,7 +398,7 @@ window.useVitamin = function(location, idx, vitaminName, statKey) {
     p.vitamins[statKey] = (p.vitamins[statKey] || 0) + 1;
 
     // Recalculate stats
-    const pBase = state.config.pokemonMap.get(p.id);
+    const pBase = getPokemonConfig(p.id, state);
     if (pBase) {
         if (statKey === 'hp') {
             const oldMax = p.maxHp;

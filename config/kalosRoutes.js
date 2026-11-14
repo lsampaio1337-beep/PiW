@@ -4568,9 +4568,9 @@ export const kalosUnlocks = [
       "completeChallenges": [
         "Extra Challenge C 05",
         "Extra Challenge D 04",
-        "Extra Challenge E 04",
-        "Extra Challenge F 05",
-        "Extra Challenge G 04",
+        "Extra Challenge E 4",
+        "Extra Challenge F 5",
+        "Extra Challenge G 4",
         "Extra Challenge F (Roaming)",
         "Extra Challenge G (Roaming)"
       ]

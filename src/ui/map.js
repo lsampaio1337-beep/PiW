@@ -1,6 +1,22 @@
-import { state, globals, swapRegion, checkFinalChallengeCompleted } from '../state.js';
+import { state, globals, swapRegion } from '../state.js';
 import { updateUI, switchView } from '../ui.js';
 import { setupMarket } from './market.js';
+import { getBadgeFileName as fallbackGetBadgeFileName } from '../utils/badges.js';
+
+/** Resolve badge filename via window override when present, falling back to module helper. */
+function resolveBadgeFileName(region, number) {
+    const fn = (typeof window !== 'undefined' && typeof window.getBadgeFileName === 'function')
+        ? window.getBadgeFileName
+        : fallbackGetBadgeFileName;
+    return fn(region, number);
+}
+
+/** Safely replace an element's contents using DOMParser. */
+function setSafeHTML(element, html) {
+    if (!element || typeof element.replaceChildren !== 'function') return;
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    element.replaceChildren(...doc.body.childNodes);
+}
 
 const parseAreaNames = (id) => {
     let result = [];
@@ -47,7 +63,27 @@ window.switchMapRegion = function(region) {
 
 
 
-const LARGE_SPOT_LOCATIONS = new Set(['professor_lab', 'johto_professor_lab', 'professor_lab', 'indigo_plateu', 'safari_zone', 'kanto_safari_zone', 'casino', 'goldenrod_game_corner', 'daycare', 'trade_with_friends_hub', 'battle_stadium']);
+const GYM_BADGE_MAP = {
+    // Johto
+    violet_gym: ['Johto', 1], azalea_gym: ['Johto', 2], goldenrod_gym: ['Johto', 3], ecruteak_gym: ['Johto', 4],
+    cianwood_gym: ['Johto', 5], olivine_gym: ['Johto', 6], mahogany_gym: ['Johto', 7], blackthorn_gym: ['Johto', 8],
+    // Hoenn
+    rustboro_gym: ['Hoenn', 1], dewford_gym: ['Hoenn', 2], mauville_gym: ['Hoenn', 3], lavaridge_gym: ['Hoenn', 4],
+    petalburg_gym: ['Hoenn', 5], fortree_gym: ['Hoenn', 6], mossdeep_gym: ['Hoenn', 7], sootopolis_gym: ['Hoenn', 8],
+    // Kanto
+    pewter_gym: ['Kanto', 1], cerulean_gym: ['Kanto', 2], vermilion_gym: ['Kanto', 3], celadon_gym: ['Kanto', 4],
+    saffron_gym: ['Kanto', 5], fuchsia_gym: ['Kanto', 6], cinnabar_gym: ['Kanto', 7], viridian_gym: ['Kanto', 8],
+    // Sinnoh
+    oreburgh_gym: ['Sinnoh', 1], eterna_gym: ['Sinnoh', 2], hearthome_gym: ['Sinnoh', 3], veilstone_gym: ['Sinnoh', 4],
+    pastoria_gym: ['Sinnoh', 5], canalave_gym: ['Sinnoh', 6], snowpoint_gym: ['Sinnoh', 7], sunyshore_gym: ['Sinnoh', 8],
+    // Unova2
+    aspertia_gym: ['Unova2', 1], virbank_gym: ['Unova2', 2], castelia_gym: ['Unova2', 3], nimbasa_gym: ['Unova2', 4],
+    driftveil_gym: ['Unova2', 5], mistralton_gym: ['Unova2', 6], opelucid_gym: ['Unova2', 7], humilau_gym: ['Unova2', 8],
+    // Kalos
+    santalunecitygym: ['Kalos', 1], cyllagecitygym: ['Kalos', 2], 'Cyllage Gym': ['Kalos', 2],
+    shalourcitygym: ['Kalos', 3], coumarinecitygym: ['Kalos', 4], lumiosecitygym: ['Kalos', 5],
+    laverrecitygym: ['Kalos', 6], anistarcitygym: ['Kalos', 7], snowbellecitygym: ['Kalos', 8]
+};
 
 export function isSafariLocation(locationName) {
     if (!locationName || typeof locationName !== 'string') return false;
@@ -60,7 +96,7 @@ function generateMarkerHtml(locationId, locationName, coords, isUnlocked, hasNew
     let markerImg = './Assets/Map/Spots/Spot.png';
     let isClickable = true;
 
-    if (locationId === 'professor_lab' || locationId === 'johto_professor_lab' || locationId === 'professor_lab') {
+    if (locationId === 'professor_lab' || locationId === 'johto_professor_lab') {
         markerImg = './Assets/Map/Spots/Spot_Lab.png';
     } else if (locationId === 'pokemon_center___market' || locationId === 'pokecenter_pokemarket') {
         markerImg = './Assets/Map/Spots/Spot_PCPM.png';
@@ -72,86 +108,9 @@ function generateMarkerHtml(locationId, locationName, coords, isUnlocked, hasNew
         markerImg = './Assets/Map/Spots/Spot_Daycare.png';
     } else if (locationId === 'battle_stadium') {
         markerImg = './Assets/Map/Spots/Spot_BattleStadium.png';
-    } else if (locationId === 'violet_gym') {
-        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Johto', 1)}`;
-    } else if (locationId === 'azalea_gym') {
-        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Johto', 2)}`;
-    } else if (locationId === 'goldenrod_gym') {
-        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Johto', 3)}`;
-    } else if (locationId === 'ecruteak_gym') {
-        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Johto', 4)}`;
-    } else if (locationId === 'cianwood_gym') {
-        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Johto', 5)}`;
-    } else if (locationId === 'olivine_gym') {
-        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Johto', 6)}`;
-    } else if (locationId === 'mahogany_gym') {
-        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Johto', 7)}`;
-    } else if (locationId === 'blackthorn_gym') {
-        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Johto', 8)}`;
-    } else if (locationId === 'rustboro_gym') {
-        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Hoenn', 1)}`;
-    } else if (locationId === 'dewford_gym') {
-        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Hoenn', 2)}`;
-    } else if (locationId === 'mauville_gym') {
-        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Hoenn', 3)}`;
-    } else if (locationId === 'lavaridge_gym') {
-        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Hoenn', 4)}`;
-    } else if (locationId === 'petalburg_gym') {
-        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Hoenn', 5)}`;
-    } else if (locationId === 'fortree_gym') {
-        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Hoenn', 6)}`;
-    } else if (locationId === 'mossdeep_gym') {
-        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Hoenn', 7)}`;
-    } else if (locationId === 'sootopolis_gym') {
-        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Hoenn', 8)}`;
-    } else if (locationId === 'pewter_gym') {
-        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Kanto', 1)}`;
-    } else if (locationId === 'cerulean_gym') {
-        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Kanto', 2)}`;
-    } else if (locationId === 'vermilion_gym') {
-        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Kanto', 3)}`;
-    } else if (locationId === 'celadon_gym') {
-        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Kanto', 4)}`;
-    } else if (locationId === 'fuchsia_gym') {
-        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Kanto', 6)}`;
-    } else if (locationId === 'saffron_gym') {
-        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Kanto', 5)}`;
-    } else if (locationId === 'cinnabar_gym') {
-        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Kanto', 7)}`;
-    } else if (locationId === 'viridian_gym') {
-        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Kanto', 8)}`;
-    } else if (locationId === 'oreburgh_gym') {
-        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Sinnoh', 1)}`;
-    } else if (locationId === 'eterna_gym') {
-        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Sinnoh', 2)}`;
-    } else if (locationId === 'hearthome_gym') {
-        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Sinnoh', 3)}`;
-    } else if (locationId === 'veilstone_gym') {
-        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Sinnoh', 4)}`;
-    } else if (locationId === 'pastoria_gym') {
-        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Sinnoh', 5)}`;
-    } else if (locationId === 'canalave_gym') {
-        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Sinnoh', 6)}`;
-    } else if (locationId === 'snowpoint_gym') {
-        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Sinnoh', 7)}`;
-    } else if (locationId === 'sunyshore_gym') {
-        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Sinnoh', 8)}`;
-    } else if (locationId === 'aspertia_gym') {
-        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Unova2', 1)}`;
-    } else if (locationId === 'virbank_gym') {
-        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Unova2', 2)}`;
-    } else if (locationId === 'castelia_gym') {
-        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Unova2', 3)}`;
-    } else if (locationId === 'nimbasa_gym') {
-        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Unova2', 4)}`;
-    } else if (locationId === 'driftveil_gym') {
-        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Unova2', 5)}`;
-    } else if (locationId === 'mistralton_gym') {
-        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Unova2', 6)}`;
-    } else if (locationId === 'opelucid_gym') {
-        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Unova2', 7)}`;
-    } else if (locationId === 'humilau_gym') {
-        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Unova2', 8)}`;
+    } else if (GYM_BADGE_MAP[locationId]) {
+        const [badgeRegion, badgeNum] = GYM_BADGE_MAP[locationId];
+        markerImg = `./Assets/Gym/Badges/${resolveBadgeFileName(badgeRegion, badgeNum)}`;
     }
 
     // Standardize spot sizes
@@ -220,6 +179,58 @@ function getRegionStats(regionName) {
     return null;
 }
 
+function getRegionTrainer(regionName) {
+    if (regionName === state.currentRegionName) {
+        return state.trainer;
+    }
+    if (state.regions && state.regions[regionName] && state.regions[regionName].trainer) {
+        return state.regions[regionName].trainer;
+    }
+    return null;
+}
+
+const REGION_GYM_BADGE_REQUIREMENTS = {
+    Kanto: {
+        pewter_gym: 1, cerulean_gym: 2, vermilion_gym: 3, celadon_gym: 4,
+        fuchsia_gym: 5, saffron_gym: 6, cinnabar_gym: 7, viridian_gym: 8
+    },
+    Sinnoh: {
+        oreburgh_gym: 1, eterna_gym: 2, hearthome_gym: 3, veilstone_gym: 4,
+        pastoria_gym: 5, canalave_gym: 6, snowpoint_gym: 7, sunyshore_gym: 8
+    },
+    Johto: {
+        violet_gym: 1, azalea_gym: 2, goldenrod_gym: 3, ecruteak_gym: 4,
+        cianwood_gym: 5, olivine_gym: 6, mahogany_gym: 7, blackthorn_gym: 8,
+        pewter_gym: 9, cerulean_gym: 10, vermilion_gym: 11, celadon_gym: 12,
+        saffron_gym: 13, fuchsia_gym: 14, cinnabar_gym: 15, viridian_gym: 16
+    },
+    Hoenn: {
+        rustboro_gym: 1, dewford_gym: 2, mauville_gym: 3, lavaridge_gym: 4,
+        petalburg_gym: 5, fortree_gym: 6, mossdeep_gym: 7, sootopolis_gym: 8
+    },
+    Kalos: {
+        santalunecitygym: 1, cyllagecitygym: 2, 'Cyllage Gym': 2, shalourcitygym: 3,
+        coumarinecitygym: 4, lumiosecitygym: 5, laverrecitygym: 6, anistarcitygym: 7, snowbellecitygym: 8
+    },
+    Unova: {
+        aspertia_gym: 1, virbank_gym: 2, castelia_gym: 3, nimbasa_gym: 4,
+        driftveil_gym: 5, mistralton_gym: 6, opelucid_gym: 7, humilau_gym: 8
+    }
+};
+
+function getRegionCoordinatesMap(region) {
+    const configKeyByRegion = {
+        Kanto: 'mapCoordinates',
+        Sinnoh: 'sinnohMapCoordinates',
+        Johto: 'johtoMapCoordinates',
+        Hoenn: 'hoennMapCoordinates',
+        Kalos: 'kalosMapCoordinates',
+        Unova: 'unovaMapCoordinates'
+    };
+    const key = configKeyByRegion[region];
+    return key ? (state.config?.[key] || {}) : null;
+}
+
 function getUnlockedAreas() {
     let unlockedAreas = new Set();
     unlockedAreas.add("Kanto Professor Lab");
@@ -227,6 +238,7 @@ function getUnlockedAreas() {
     unlockedAreas.add("Hoenn Professor Lab");
     unlockedAreas.add("Sinnoh Professor Lab");
     unlockedAreas.add("Unova Professor Lab");
+    unlockedAreas.add("Kalos Professor Lab");
 
     let targetStats = getRegionStats(window.currentMapRegion);
 
@@ -267,6 +279,9 @@ function getUnlockedAreas() {
     }
     if (window.currentMapRegion === "Unova") {
         unlockedAreas.add("Route 19");
+    }
+    if (window.currentMapRegion === "Kalos") {
+        unlockedAreas.add("Route 2");
     }
 
     if (targetStats.completed150Challenge || (targetStats.completedChallengeIds && targetStats.completedChallengeIds.includes("Extra Challenge B"))) {
@@ -310,170 +325,42 @@ function generateMarkersForRegion(region, unlockedAreas) {
     }
 
     let html = '';
-    if (region === 'Kanto') {
-        for (const [locationId, locationData] of Object.entries(state.config.mapCoordinates)) {
-            const locationName = locationData.name;
-            const coords = locationData;
-            let isUnlocked = unlockedAreas.has(locationName);
-            if (!isUnlocked) continue;
-
-            let hasNewNotification = false;
-            let showCheckmark = false;
-
-            if (state.stats.newRoutes && state.stats.newRoutes.some(r => parseAreaNames(r).includes(locationName))) {
-                hasNewNotification = true;
-            }
-            if (locationId === 'professor_lab' && state.stats.showProfMarkerPulse) {
-                hasNewNotification = true;
-            }
-
-            // Checkmarks for gyms
-            if (locationId === 'pewter_gym' && state.trainer.badges >= 1) showCheckmark = true;
-            if (locationId === 'cerulean_gym' && state.trainer.badges >= 2) showCheckmark = true;
-            if (locationId === 'vermilion_gym' && state.trainer.badges >= 3) showCheckmark = true;
-            if (locationId === 'celadon_gym' && state.trainer.badges >= 4) showCheckmark = true;
-            if (locationId === 'fuchsia_gym' && state.trainer.badges >= 5) showCheckmark = true;
-            if (locationId === 'saffron_gym' && state.trainer.badges >= 6) showCheckmark = true;
-            if (locationId === 'cinnabar_gym' && state.trainer.badges >= 7) showCheckmark = true;
-            if (locationId === 'viridian_gym' && state.trainer.badges >= 8) showCheckmark = true;
-            if (locationId === 'oreburgh_gym' && state.trainer.badges >= 1) showCheckmark = true;
-            if (locationId === 'eterna_gym' && state.trainer.badges >= 2) showCheckmark = true;
-            if (locationId === 'hearthome_gym' && state.trainer.badges >= 3) showCheckmark = true;
-            if (locationId === 'veilstone_gym' && state.trainer.badges >= 4) showCheckmark = true;
-            if (locationId === 'pastoria_gym' && state.trainer.badges >= 5) showCheckmark = true;
-            if (locationId === 'canalave_gym' && state.trainer.badges >= 6) showCheckmark = true;
-            if (locationId === 'snowpoint_gym' && state.trainer.badges >= 7) showCheckmark = true;
-            if (locationId === 'sunyshore_gym' && state.trainer.badges >= 8) showCheckmark = true;
-
-            html += generateMarkerHtml(locationId, locationName, coords, true, hasNewNotification, showCheckmark);
-        }
-    } else if (region === 'Sinnoh') {
-        for (const [locationId, locationData] of Object.entries(state.config.sinnohMapCoordinates || {})) {
-            const locationName = locationData.name;
-            const coords = locationData;
-            let isUnlocked = unlockedAreas.has(locationName);
-            if (!isUnlocked) continue;
-
-            let hasNewNotification = false;
-            let showCheckmark = false;
-
-            if (state.stats.newRoutes && state.stats.newRoutes.some(r => parseAreaNames(r).includes(locationName))) {
-                hasNewNotification = true;
-            }
-
-            html += generateMarkerHtml(locationId, locationName, coords, true, hasNewNotification, showCheckmark);
-        }
-    } else if (region === 'Johto') {
-        for (const [locationId, locationData] of Object.entries(state.config.johtoMapCoordinates || {})) {
-            const locationName = locationData.name;
-            const coords = locationData;
-            let isUnlocked = unlockedAreas.has(locationName);
-            if (!isUnlocked) continue;
-
-            let hasNewNotification = false;
-            let showCheckmark = false;
-
-            if (state.stats.newRoutes && state.stats.newRoutes.some(r => parseAreaNames(r).includes(locationName))) {
-                hasNewNotification = true;
-            }
-
-            if (locationId === 'violet_gym' && state.trainer.badges >= 1) showCheckmark = true;
-            if (locationId === 'azalea_gym' && state.trainer.badges >= 2) showCheckmark = true;
-            if (locationId === 'goldenrood_gym' && state.trainer.badges >= 3) showCheckmark = true;
-            if (locationId === 'ecruteak_gym' && state.trainer.badges >= 4) showCheckmark = true;
-            if (locationId === 'cianwood_gym' && state.trainer.badges >= 5) showCheckmark = true;
-            if (locationId === 'olivine_gym' && state.trainer.badges >= 6) showCheckmark = true;
-            if (locationId === 'mahogany_gym' && state.trainer.badges >= 7) showCheckmark = true;
-            if (locationId === 'blackthorn_gym' && state.trainer.badges >= 8) showCheckmark = true;
-            if (locationId === "pewter_gym" && state.trainer.badges >= 9) showCheckmark = true;
-            if (locationId === "cerulean_gym" && state.trainer.badges >= 10) showCheckmark = true;
-            if (locationId === "vermilion_gym" && state.trainer.badges >= 11) showCheckmark = true;
-            if (locationId === "celadon_gym" && state.trainer.badges >= 12) showCheckmark = true;
-            if (locationId === "fuchsia_gym" && state.trainer.badges >= 14) showCheckmark = true;
-            if (locationId === "saffron_gym" && state.trainer.badges >= 13) showCheckmark = true;
-            if (locationId === "cinnabar_gym" && state.trainer.badges >= 15) showCheckmark = true;
-            if (locationId === "viridian_gym" && state.trainer.badges >= 16) showCheckmark = true;
-
-            html += generateMarkerHtml(locationId, locationName, coords, true, hasNewNotification, showCheckmark);
-        }
-    } else if (region === 'Hoenn') {
-        for (const [locationId, locationData] of Object.entries(state.config.hoennMapCoordinates || {})) {
-            const locationName = locationData.name;
-            const coords = locationData;
-            let isUnlocked = unlockedAreas.has(locationName);
-            if (!isUnlocked) continue;
-
-            let hasNewNotification = false;
-            let showCheckmark = false;
-
-            if (state.stats.newRoutes && state.stats.newRoutes.some(r => parseAreaNames(r).includes(locationName))) {
-                hasNewNotification = true;
-            }
-
-            if (locationId === 'rustboro_gym' && state.trainer.badges >= 1) showCheckmark = true;
-            if (locationId === 'dewford_gym' && state.trainer.badges >= 2) showCheckmark = true;
-            if (locationId === 'mauville_gym' && state.trainer.badges >= 3) showCheckmark = true;
-            if (locationId === 'lavaridge_gym' && state.trainer.badges >= 4) showCheckmark = true;
-            if (locationId === 'petalburg_gym' && state.trainer.badges >= 5) showCheckmark = true;
-            if (locationId === 'fortree_gym' && state.trainer.badges >= 6) showCheckmark = true;
-            if (locationId === 'mossdeep_gym' && state.trainer.badges >= 7) showCheckmark = true;
-            if (locationId === 'sootopolis_gym' && state.trainer.badges >= 8) showCheckmark = true;
-
-            html += generateMarkerHtml(locationId, locationName, coords, true, hasNewNotification, showCheckmark);
-        }
-    } else if (region === 'Kalos') {
-        for (const [locationId, locationData] of Object.entries(state.config.kalosMapCoordinates || {})) {
-            const locationName = locationData.name;
-            const coords = locationData;
-
-            let hasNewNotification = false;
-            let showCheckmark = false;
-
-            if (state.stats.newRoutes && state.stats.newRoutes.some(r => parseAreaNames(r).includes(locationName))) {
-                hasNewNotification = true;
-            }
-
-            if (locationId === 'santalunecitygym' && state.trainer.badges >= 1) showCheckmark = true;
-            if (locationId === 'cyllagecitygym' && state.trainer.badges >= 2) showCheckmark = true;
-            if (locationId === 'shalourcitygym' && state.trainer.badges >= 3) showCheckmark = true;
-            if (locationId === 'coumarinecitygym' && state.trainer.badges >= 4) showCheckmark = true;
-            if (locationId === 'lumiosecitygym' && state.trainer.badges >= 5) showCheckmark = true;
-            if (locationId === 'laverrecitygym' && state.trainer.badges >= 6) showCheckmark = true;
-            if (locationId === 'anistarcitygym' && state.trainer.badges >= 7) showCheckmark = true;
-            if (locationId === 'snowbellecitygym' && state.trainer.badges >= 8) showCheckmark = true;
-
-            html += generateMarkerHtml(locationId, locationName, coords, true, hasNewNotification, showCheckmark);
-        }
-    } else if (region === 'Unova') {
-        for (const [locationId, locationData] of Object.entries(state.config.unovaMapCoordinates || {})) {
-            const locationName = locationData.name;
-            const coords = locationData;
-            let isUnlocked = unlockedAreas.has(locationName);
-            if (!isUnlocked) continue;
-
-            let hasNewNotification = false;
-            let showCheckmark = false;
-
-            if (state.stats.newRoutes && state.stats.newRoutes.some(r => parseAreaNames(r).includes(locationName))) {
-                hasNewNotification = true;
-            }
-
-            if (locationId === 'aspertia_gym' && state.trainer.badges >= 1) showCheckmark = true;
-            if (locationId === 'virbank_gym' && state.trainer.badges >= 2) showCheckmark = true;
-            if (locationId === 'castelia_gym' && state.trainer.badges >= 3) showCheckmark = true;
-            if (locationId === 'nimbasa_gym' && state.trainer.badges >= 4) showCheckmark = true;
-            if (locationId === 'driftveil_gym' && state.trainer.badges >= 5) showCheckmark = true;
-            if (locationId === 'mistralton_gym' && state.trainer.badges >= 6) showCheckmark = true;
-            if (locationId === 'opelucid_gym' && state.trainer.badges >= 7) showCheckmark = true;
-            if (locationId === 'humilau_gym' && state.trainer.badges >= 8) showCheckmark = true;
-
-            html += generateMarkerHtml(locationId, locationName, coords, true, hasNewNotification, showCheckmark);
-        }
-    } else {
+    const coordsMap = getRegionCoordinatesMap(region);
+    if (!coordsMap) {
         // Fallback for new regions
         let coords = { x: 50, y: 50 };
         let locationName = "Professor Lab";
         html += generateMarkerHtml("professor_lab", locationName, coords, true, false, false);
+        return html;
+    }
+
+    const fallbackToActive = !state.currentRegionName;
+    const targetStats = getRegionStats(region) || (fallbackToActive ? state.stats : null) || {};
+    const targetTrainer = getRegionTrainer(region) || (fallbackToActive ? state.trainer : null) || { badges: 0 };
+    const badgeCount = targetTrainer.badges || 0;
+    const gymBadgeReqs = REGION_GYM_BADGE_REQUIREMENTS[region] || {};
+
+    for (const [locationId, locationData] of Object.entries(coordsMap)) {
+        const locationName = locationData.name;
+        const coords = locationData;
+        if (!unlockedAreas.has(locationName)) continue;
+
+        let hasNewNotification = false;
+        let showCheckmark = false;
+
+        if (targetStats.newRoutes && targetStats.newRoutes.some(r => parseAreaNames(r).includes(locationName))) {
+            hasNewNotification = true;
+        }
+        if (region === 'Kanto' && locationId === 'professor_lab' && targetStats.showProfMarkerPulse) {
+            hasNewNotification = true;
+        }
+
+        const requiredBadges = gymBadgeReqs[locationId];
+        if (requiredBadges !== undefined && badgeCount >= requiredBadges) {
+            showCheckmark = true;
+        }
+
+        html += generateMarkerHtml(locationId, locationName, coords, true, hasNewNotification, showCheckmark);
     }
     return html;
 }
@@ -615,7 +502,7 @@ window.closeMapInnerModal = function() {
     if (overlay) {
         overlay.style.display = 'none';
         const content = document.getElementById('map-inner-modal-content');
-        if (content) content.innerHTML = '';
+        if (content && typeof content.replaceChildren === 'function') content.replaceChildren();
     }
 
     if (globals.battleSystem && globals.battleSystem.gymState && globals.battleSystem.gymState.isActive) {
@@ -720,7 +607,7 @@ export function navigateToLocation(locationName) {
                   <button id="btn-enter-safari" style="margin-top: 20px; padding: 10px 20px; font-size: 18px; cursor: pointer; background: #ffcc00; border: none; border-radius: 5px; color: black; font-weight: bold;">Enter ($${state.config.balance.safariZonePrice || 500})</button>
                 </div>
             `;
-            vGym.innerHTML = html;
+            setSafeHTML(vGym, html);
 
             const btn = document.getElementById('btn-enter-safari');
             if (btn) {
@@ -846,7 +733,7 @@ export function navigateToLocation(locationName) {
             }
 
             machinesHtml += `</div>`;
-            btnContainer.innerHTML = machinesHtml;
+            setSafeHTML(btnContainer, machinesHtml);
         }
 
         const overlay = document.getElementById('map-inner-modal-overlay');
@@ -929,7 +816,7 @@ export function navigateToLocation(locationName) {
             html += `<div class="casino-overlay-btn" onclick="window.startCasinoEncounter(true, '${locationName}')" style="position: absolute; left: ${shinyLeft}%; top: ${shinyTop}%; width: ${shinyWidth}%; height: ${shinyHeight}%; cursor: pointer;" title="2x Shiny (${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>`;
             html += `<button class="casino-overlay-btn" onclick="window.navigateToLocation(window.currentCasinoHub)" style="position: absolute; top: 10px; left: 10px; padding: 10px; cursor: pointer; z-index: 100;">Back to Lobby</button>`;
 
-            vGym.innerHTML = html;
+            setSafeHTML(vGym, html);
         }
 
         const overlay = document.getElementById('map-inner-modal-overlay');
@@ -1001,94 +888,98 @@ export function navigateToLocation(locationName) {
 
         const vGym = document.getElementById("map-inner-modal-content");
         const vGymTitle = document.getElementById("map-inner-modal-title");
-        const gymConfig = state.config.gyms.find(g => g.name === lookupName);
+        const gymConfig = state.config.gyms ? state.config.gyms.find(g => g.name === lookupName) : null;
 
         if (vGymTitle) {
             vGymTitle.innerText = locationName;
         }
 
-        vGym.replaceChildren();
+        if (vGym && typeof vGym.appendChild === 'function') {
+            if (typeof vGym.replaceChildren === 'function') {
+                vGym.replaceChildren();
+            }
 
-        if (gymConfig && state.config.gymAssets && state.config.gymAssets[gymConfig.leader]) {
-            const assetConfig = state.config.gymAssets[gymConfig.leader];
-            const spritePath = `./Assets/Gym/GymLeaders/${assetConfig.sprite}`;
-            const bgPath = `./Assets/Gym/BG/${assetConfig.background}`;
+            if (gymConfig && state.config.gymAssets && state.config.gymAssets[gymConfig.leader]) {
+                const assetConfig = state.config.gymAssets[gymConfig.leader];
+                const spritePath = `./Assets/Gym/GymLeaders/${assetConfig.sprite}`;
+                const bgPath = `./Assets/Gym/BG/${assetConfig.background}`;
 
-            // Remove the static bgImg so it doesn't override the dynamic one
-            bgImg = "";
+                // Remove the static bgImg so it doesn't override the dynamic one
+                bgImg = "";
 
-            const dynamicGymBgUi = document.createElement('div');
-            dynamicGymBgUi.id = 'dynamic-gym-bg-ui';
-            dynamicGymBgUi.style.position = 'absolute';
-            dynamicGymBgUi.style.top = '0';
-            dynamicGymBgUi.style.left = '0';
-            dynamicGymBgUi.style.width = '100%';
-            dynamicGymBgUi.style.height = '100%';
-            dynamicGymBgUi.style.zIndex = '0';
-            dynamicGymBgUi.style.backgroundImage = `url('${bgPath}')`;
-            dynamicGymBgUi.style.backgroundSize = '100% 100%';
-            dynamicGymBgUi.style.overflow = 'hidden';
+                const dynamicGymBgUi = document.createElement('div');
+                dynamicGymBgUi.id = 'dynamic-gym-bg-ui';
+                dynamicGymBgUi.style.position = 'absolute';
+                dynamicGymBgUi.style.top = '0';
+                dynamicGymBgUi.style.left = '0';
+                dynamicGymBgUi.style.width = '100%';
+                dynamicGymBgUi.style.height = '100%';
+                dynamicGymBgUi.style.zIndex = '0';
+                dynamicGymBgUi.style.backgroundImage = `url('${bgPath}')`;
+                dynamicGymBgUi.style.backgroundSize = '100% 100%';
+                dynamicGymBgUi.style.overflow = 'hidden';
 
-            const gymLeaderImg = document.createElement('img');
-            gymLeaderImg.src = spritePath;
-            gymLeaderImg.style.position = 'absolute';
-            gymLeaderImg.style.left = `${assetConfig.position.rel_x * 100}%`;
-            gymLeaderImg.style.top = `${assetConfig.position.rel_y * 100}%`;
-            gymLeaderImg.style.width = `${(assetConfig.size.px_width / 1800) * 100}%`;
-            gymLeaderImg.style.transform = `rotate(${assetConfig.tilt.angle_deg}deg)`;
-            gymLeaderImg.style.transformOrigin = assetConfig.tilt.origin;
-            gymLeaderImg.style.pointerEvents = 'none';
+                const gymLeaderImg = document.createElement('img');
+                gymLeaderImg.src = spritePath;
+                gymLeaderImg.style.position = 'absolute';
+                gymLeaderImg.style.left = `${assetConfig.position.rel_x * 100}%`;
+                gymLeaderImg.style.top = `${assetConfig.position.rel_y * 100}%`;
+                gymLeaderImg.style.width = `${(assetConfig.size.px_width / 1800) * 100}%`;
+                gymLeaderImg.style.transform = `rotate(${assetConfig.tilt.angle_deg}deg)`;
+                gymLeaderImg.style.transformOrigin = assetConfig.tilt.origin;
+                gymLeaderImg.style.pointerEvents = 'none';
 
-            dynamicGymBgUi.appendChild(gymLeaderImg);
-            vGym.appendChild(dynamicGymBgUi);
-        }
+                dynamicGymBgUi.appendChild(gymLeaderImg);
+                vGym.appendChild(dynamicGymBgUi);
+            }
 
-        const uiContainer = document.createElement('div');
-        uiContainer.id = 'gym-ui-container';
-        uiContainer.className = 'gym-ui-container';
+            const uiContainer = document.createElement('div');
+            uiContainer.id = 'gym-ui-container';
+            uiContainer.className = 'gym-ui-container';
 
-        const headerEl = document.createElement('h2');
-        headerEl.id = 'gym-title-header';
-        headerEl.textContent = locationName;
+            const headerEl = document.createElement('h2');
+            headerEl.id = 'gym-title-header';
+            headerEl.textContent = locationName;
 
-        const contentArea = document.createElement('div');
-        contentArea.id = 'gym-content-area';
+            const contentArea = document.createElement('div');
+            contentArea.id = 'gym-content-area';
 
-        uiContainer.appendChild(headerEl);
-        uiContainer.appendChild(contentArea);
-        vGym.appendChild(uiContainer);
+            uiContainer.appendChild(headerEl);
+            uiContainer.appendChild(contentArea);
+            vGym.appendChild(uiContainer);
 
-        // Scale gym UI from inner modal's width AND height so it shrinks/grows in both axes
-        const updateGymFontSize = () => {
-            const w = vGym.clientWidth, h = vGym.clientHeight;
-            if (!w || !h) return;
-            const fs = Math.max(7, Math.min(22, Math.min(w / 45, h / 30)));
-            vGym.style.setProperty('--gym-fs', `${fs.toFixed(2)}px`);
-        };
-        if (!vGym._gymResizeObserver && typeof ResizeObserver !== 'undefined') {
-            vGym._gymResizeObserver = new ResizeObserver(updateGymFontSize);
-            vGym._gymResizeObserver.observe(vGym);
-        }
-        requestAnimationFrame ? requestAnimationFrame(updateGymFontSize) : updateGymFontSize();
+            // Scale gym UI from inner modal's width AND height so it shrinks/grows in both axes
+            const updateGymFontSize = () => {
+                const w = vGym.clientWidth, h = vGym.clientHeight;
+                if (!w || !h) return;
+                const fs = Math.max(7, Math.min(22, Math.min(w / 45, h / 30)));
+                vGym.style.setProperty('--gym-fs', `${fs.toFixed(2)}px`);
+            };
+            if (!vGym._gymResizeObserver && typeof ResizeObserver !== 'undefined') {
+                vGym._gymResizeObserver = new ResizeObserver(updateGymFontSize);
+                vGym._gymResizeObserver.observe(vGym);
+            }
+            requestAnimationFrame ? requestAnimationFrame(updateGymFontSize) : updateGymFontSize();
 
-        if (gymConfig && contentArea) {
-            let buttonText = "Enter";
-            const btn = document.createElement('button');
-            btn.id = "btn-enter-gym";
-            btn.className = "action-btn action-btn-primary";
-            btn.style.marginTop = "10px";
-            btn.textContent = buttonText;
-            btn.onclick = () => { window.startGymBattle(lookupName); };
-            contentArea.appendChild(btn);
-        }
+            if (gymConfig && contentArea) {
+                let buttonText = "Enter";
+                const btn = document.createElement('button');
+                btn.id = "btn-enter-gym";
+                btn.className = "action-btn action-btn-primary";
+                btn.style.marginTop = "10px";
+                btn.textContent = buttonText;
+                btn.onclick = () => { window.startGymBattle(lookupName); };
+                contentArea.appendChild(btn);
+            }
 
-        vGym.style.position = "relative";
-        vGym.style.height = "100%";
-        if (bgImg) {
-            vGym.style.backgroundImage = `url('./Assets/BG/${bgImg}')`;
-            vGym.style.backgroundSize = "100% 100%";
-        } else {
-            vGym.style.backgroundImage = "none";
+            vGym.style.position = "relative";
+            vGym.style.height = "100%";
+            if (bgImg) {
+                vGym.style.backgroundImage = `url('./Assets/BG/${bgImg}')`;
+                vGym.style.backgroundSize = "100% 100%";
+            } else {
+                vGym.style.backgroundImage = "none";
+            }
         }
 
         // Show the inner modal overlay instead of closing the map modal
@@ -1118,7 +1009,8 @@ export function navigateToLocation(locationName) {
                     modal.style.maxWidth = '100%';
                 };
 
-                const imgToLoad = bgImg ? `./Assets/BG/${bgImg}` : (gymConfig ? `./Assets/Gym/BG/${state.config.gymAssets[gymConfig.leader].background}` : null);
+                const gymAsset = gymConfig && state.config.gymAssets ? state.config.gymAssets[gymConfig.leader] : null;
+                const imgToLoad = bgImg ? `./Assets/BG/${bgImg}` : (gymAsset ? `./Assets/Gym/BG/${gymAsset.background}` : null);
                 if (imgToLoad) {
                     const img = new Image();
                     img.onload = () => applyPaddingAndAspect(img.naturalWidth / img.naturalHeight);
@@ -1171,52 +1063,59 @@ export function showMapTooltip(e, locationName) {
     tooltip.style.padding = padding + 'px';
     tooltip.style.borderRadius = borderRadius + 'px';
 
-    let displayLocationName = locationName.replace(/\s*\([^)]+\)$/, '');
-    let info = `<strong>${displayLocationName}</strong><br>`;
+    const activeRegion = window.currentMapRegion || '';
+    if (tooltip.dataset.locationName !== locationName || tooltip.dataset.region !== activeRegion) {
+        let displayLocationName = locationName.replace(/\s*\([^)]+\)$/, '');
+        let info = `<strong>${displayLocationName}</strong><br>`;
 
-    // Fetch info to show on tooltip
-    if (locationName.includes("Gym") || locationName.includes("Pokemon League")) {
-        let lookupName = locationName;
+        // Fetch info to show on tooltip
+        if (locationName.includes("Gym") || locationName.includes("Pokemon League")) {
+            let lookupName = locationName;
 
-        if (state.config.gyms) {
-            const gym = state.config.gyms.find(g => g.name === lookupName);
-            if (gym) {
-                info += `Leader: ${gym.leader}<br>`;
-                info += `Trainers: ${gym.trainers.length}<br>`;
+            if (state.config.gyms) {
+                const gym = state.config.gyms.find(g => g.name === lookupName);
+                if (gym) {
+                    info += `Leader: ${gym.leader}<br>`;
+                    info += `Trainers: ${gym.trainers.length}<br>`;
+                }
+            }
+        } else if (typeof window.getRoutesForRegion === 'function' && window.getRoutesForRegion(window.currentMapRegion)) {
+            let route = null;
+            route = window.getRoutesForRegion(window.currentMapRegion).find(r => r.name === locationName);
+
+            if (route) {
+                // Find overall min and max level for the route
+                let minLvl = 100;
+                let maxLvl = 1;
+                route.spawns.forEach(s => {
+                    if (s.minLevel < minLvl) minLvl = s.minLevel;
+                    if (s.maxLevel > maxLvl) maxLvl = s.maxLevel;
+                });
+                info += `Levels: ${minLvl}-${maxLvl}<br>`;
+                info += `Spawns: ${route.spawns.length}<br>`;
+
+                // Show all spawns
+                route.spawns.forEach(s => {
+                    let pName = "Unknown";
+                    if (state.config.pokemonMap || state.config.pokemonData) {
+                        const pd = state.config.pokemonMap
+                            ? (state.config.pokemonMap.get(Number(s.pokemonId)) || state.config.pokemonMap.get(s.pokemonId))
+                            : state.config.pokemonData.find(pd => pd.id === s.pokemonId);
+                        if (pd) {
+                            pName = s.forceShiny && pd.name === "Gyarados" ? "Red Gyarados" : pd.name;
+                        }
+                    }
+                    info += `- ${pName} (Lvl: ${s.minLevel}-${s.maxLevel}, ${Math.round(s.chance * 100)}%)<br>`;
+                });
+            } else {
+                info += `Hub Area<br>`;
             }
         }
-    } else if (typeof window.getRoutesForRegion === 'function' && window.getRoutesForRegion(window.currentMapRegion)) {
-        let route = null;
-        route = window.getRoutesForRegion(window.currentMapRegion).find(r => r.name === locationName);
 
-        if (route) {
-            // Find overall min and max level for the route
-            let minLvl = 100;
-            let maxLvl = 1;
-            route.spawns.forEach(s => {
-                if (s.minLevel < minLvl) minLvl = s.minLevel;
-                if (s.maxLevel > maxLvl) maxLvl = s.maxLevel;
-            });
-            info += `Levels: ${minLvl}-${maxLvl}<br>`;
-            info += `Spawns: ${route.spawns.length}<br>`;
-
-            // Show all spawns
-            route.spawns.forEach(s => {
-                let pName = "Unknown";
-                if (state.config.pokemonData) {
-                    const pd = state.config.pokemonData.find(pd => pd.id === s.pokemonId); // Use O(1) lookup
-                    if (pd) {
-                        pName = s.forceShiny && pd.name === "Gyarados" ? "Red Gyarados" : pd.name;
-                    }
-                }
-                info += `- ${pName} (Lvl: ${s.minLevel}-${s.maxLevel}, ${Math.round(s.chance * 100)}%)<br>`;
-            });
-        } else {
-            info += `Hub Area<br>`;
-        }
+        setSafeHTML(tooltip, info);
+        tooltip.dataset.locationName = locationName;
+        tooltip.dataset.region = activeRegion;
     }
-
-    tooltip.innerHTML = info;
     tooltip.style.display = 'block';
 
     // Get tooltip dimensions
@@ -1260,5 +1159,9 @@ export function showMapTooltip(e, locationName) {
 }
 export function hideMapTooltip() {
     const tooltip = document.getElementById('map-tooltip');
-    if (tooltip) tooltip.style.display = 'none';
+    if (tooltip) {
+        tooltip.style.display = 'none';
+        delete tooltip.dataset.locationName;
+        delete tooltip.dataset.region;
+    }
 }

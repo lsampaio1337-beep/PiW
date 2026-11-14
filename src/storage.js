@@ -84,18 +84,16 @@ export default class Storage {
             return;
         }
         try {
+            // Inject a last played timestamp for UI
+            state.lastPlayed = Date.now();
+
             // Simple replacer to avoid the specific dayCareRef circular issue and config without breaking legitimate duplicate objects
             const jsonString = JSON.stringify(state, (key, value) => {
-                if (key === 'config') return undefined;
-                if (key === 'dayCareRef') return undefined;
+                if (key === 'config' || key === 'dayCareRef') return undefined;
                 return value;
             });
-            const safeState = JSON.parse(jsonString);
 
-            // Inject a last played timestamp for UI
-            safeState.lastPlayed = Date.now();
-
-            window.localStorage.setItem(this.currentProfileId, JSON.stringify(safeState));
+            window.localStorage.setItem(this.currentProfileId, jsonString);
         } catch(e) {
             console.error("Save failed:", e);
         }
@@ -129,12 +127,14 @@ ${state.party.map((p, i) => `${i+1}. ${p.name} Lv.${p.level}`).join('\n')}
             `;
             // Browser-based download
             const blob = new Blob([logContent], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
-            a.href = URL.createObjectURL(blob);
+            a.href = url;
             a.download = 'export_log.txt';
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
+            URL.revokeObjectURL(url);
         } catch(e) {
             console.error("Log export failed:", e);
         }
@@ -147,7 +147,7 @@ ${state.party.map((p, i) => `${i+1}. ${p.name} Lv.${p.level}`).join('\n')}
 
         if (cmd.startsWith("GS") && cmd.length > 2) {
             const speed = parseFloat(cmd.substring(2));
-            if (!isNaN(speed)) {
+            if (!isNaN(speed) && speed > 0) {
                 state.settings.gameSpeed = speed;
             }
         } else if (cmd.startsWith("M") && cmd.length > 1) {

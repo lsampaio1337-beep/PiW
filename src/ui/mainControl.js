@@ -20,17 +20,24 @@ function formatSpecies(name) {
 
 function getChallengeAreaId(target) {
     let match = null;
-    if (typeof window !== 'undefined' && window.getCurrentUnlocks) {
-        match = window.getCurrentUnlocks().find(u => u.challengeName === target || u.areaId === target);
+    if (typeof window !== 'undefined' && typeof window.getCurrentUnlocks === 'function') {
+        const currentUnlocks = window.getCurrentUnlocks();
+        if (currentUnlocks) {
+            match = currentUnlocks.find(u => u.challengeName === target || u.areaId === target);
+        }
     }
     if (!match && state.config) {
-        let allUnlocks = [];
-        if (state.config.unlocks) allUnlocks = allUnlocks.concat(state.config.unlocks);
-        if (state.config.johtoUnlocks) allUnlocks = allUnlocks.concat(state.config.johtoUnlocks);
-        if (state.config.hoennUnlocks) allUnlocks = allUnlocks.concat(state.config.hoennUnlocks);
-        if (state.config.sinnohUnlocks) allUnlocks = allUnlocks.concat(state.config.sinnohUnlocks);
-        if (state.config.unovaUnlocks) allUnlocks = allUnlocks.concat(state.config.unovaUnlocks);
-        match = allUnlocks.find(u => u && (u.challengeName === target || u.areaId === target));
+        const unlockKeys = [
+            'unlocks', 'johtoUnlocks', 'hoennUnlocks', 'sinnohUnlocks', 'unovaUnlocks',
+            'kalosUnlocks', 'alolaUnlocks', 'galarUnlocks', 'hisuiUnlocks', 'paldeaUnlocks'
+        ];
+        for (const key of unlockKeys) {
+            const list = state.config[key];
+            if (list) {
+                match = list.find(u => u && (u.challengeName === target || u.areaId === target));
+                if (match) break;
+            }
+        }
     }
     return match ? match.areaId : target;
 }
@@ -333,6 +340,10 @@ if (req.catchSpeciesByQuality) {
         let beaten = state.stats.defeatedBosses && state.stats.defeatedBosses["Galar Champion"];
         progress.push({ type: 'defeatLeague', region: 'Galar', isMet: beaten });
     }
+    if (req.defeatPaldeaChampion) {
+        let beaten = state.stats.defeatedBosses?.["Paldea Champion"];
+        progress.push({ type: 'defeatLeague', region: 'Paldea', isMet: beaten });
+    }
     if (req.defeatRed) {
         let beatenRed = state.stats.defeatedBosses && state.stats.defeatedBosses["Red"];
         progress.push({ type: 'defeatRed', isMet: beatenRed });
@@ -394,6 +405,9 @@ function formatRequirements(progressList) {
             textParts.push(`Catch ${p.required} ${p.quality} Pokémon on ${displayRoute} ${countDisplay(p.current, p.required)}${getStatusHtml(p.isMet)}`);
         } else if (p.type === 'catchSpecies') {
             textParts.push(`Catch ${p.required} ${formatSpecies(p.species)} ${countDisplay(p.current, p.required)}${getStatusHtml(p.isMet)}`);
+        } else if (p.type === 'catchSpeciesOr') {
+            let speciesText = p.species.split(' or ').map(s => formatSpecies(s)).join(' or ');
+            textParts.push(`Catch ${p.required} ${speciesText} ${countDisplay(p.current, p.required)}${getStatusHtml(p.isMet)}`);
 } else if (p.type === 'catchSpeciesByQuality') {
             textParts.push(`Catch ${p.required} ${p.quality} ${formatSpecies(p.species)} ${countDisplay(p.current, p.required)}${getStatusHtml(p.isMet)}`);
         } else if (p.type === 'catchSpeciesByQualityOrHigher') {
@@ -487,7 +501,7 @@ function updateTimers() {
 
 function updateChallengeTextUI() {
     const elChallengeText = document.getElementById('current-challenge-text');
-    if (elChallengeText) elChallengeText.innerHTML = getChallengeText();
+    if (elChallengeText) elChallengeText.textContent = getChallengeText();
 }
 
 function updateBonusCandy() {
@@ -574,9 +588,10 @@ function updateChallengesNotification() {
     const challengesNotification = document.getElementById('challenges-notification');
     if (challengesNotification) {
         let anyMet = false;
-        if (state.config && window.getCurrentUnlocks() && state.stats.activeChallenges) {
+        const currentUnlocks = typeof window.getCurrentUnlocks === 'function' ? window.getCurrentUnlocks() : null;
+        if (state.config && currentUnlocks && state.stats.activeChallenges) {
             for (let activeId of state.stats.activeChallenges) {
-                let unlock = window.getCurrentUnlocks().find(u => u.areaId === activeId);
+                let unlock = currentUnlocks.find(u => u.areaId === activeId);
                 if (unlock) {
                     let cData = getChallengeData(unlock);
                     if (cData.isMet) {
@@ -649,12 +664,15 @@ export function getChallengeText() {
 
     // If only one, provide basic info
     if (activeCount === 1) {
-        let activeId = state.stats.activeChallenges[0];
-        let unlock = window.getCurrentUnlocks().find(u => u.areaId === activeId);
-        if (unlock) {
-            let unlocks = unlock.unlocks ? "Unlocks: " + unlock.unlocks.join(" + ") : "";
-            let displayName = unlock.challengeName || activeId;
-            return `Next Challenge: ${displayName}` + (unlocks ? ` - ${unlocks}` : ``);
+        const currentUnlocks = typeof window.getCurrentUnlocks === 'function' ? window.getCurrentUnlocks() : null;
+        if (currentUnlocks) {
+            let activeId = state.stats.activeChallenges[0];
+            let unlock = currentUnlocks.find(u => u.areaId === activeId);
+            if (unlock) {
+                let unlocks = unlock.unlocks ? "Unlocks: " + unlock.unlocks.join(" + ") : "";
+                let displayName = unlock.challengeName || activeId;
+                return `Next Challenge: ${displayName}` + (unlocks ? ` - ${unlocks}` : ``);
+            }
         }
     }
 

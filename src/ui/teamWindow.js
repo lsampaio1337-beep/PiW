@@ -10,10 +10,19 @@ import { escapeHTML } from '../utils/stringUtils.js';
 
 let lastTeamCount = -1;
 
+function renderSanitizedHtml(html, targetElement) {
+    if (window.windowManager && typeof window.windowManager._parseAndSanitizeToElement === 'function') {
+        window.windowManager._parseAndSanitizeToElement(html, targetElement);
+    } else {
+        const doc = new DOMParser().parseFromString(html, 'text/html');
+        targetElement.replaceChildren(...doc.body.childNodes);
+    }
+}
+
 export function updateTeamWindow() {
     const partyDiv = document.getElementById('party-list');
     if (!partyDiv) return;
-    partyDiv.innerHTML = '';
+    partyDiv.replaceChildren();
     state.party.forEach((p, idx) => {
         const d = document.createElement('div');
         d.className = 'party-slot';
@@ -27,8 +36,6 @@ export function updateTeamWindow() {
         const xpRequired = nextLevelXp - currentLevelXp;
 
         const crownColor = idx === 0 ? '#f1c40f' : '#7f8c8d'; // Yellow for leader, Grey for others
-        const sumIV = p.ivs ? p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe : 0;
-        const qVal = p.quality ? p.quality.toFixed(2) : '1.00';
 
         const hpPct = Math.min(100, (p.currentHp / p.maxHp) * 100);
         let hpColor = '#3498db'; // Blue for 100%
@@ -60,13 +67,13 @@ export function updateTeamWindow() {
         else if (p.qualityName === "Uncommon") glowClass = "glow-uncommon";
         else if (p.qualityName === "Regular") glowClass = "glow-regular";
 
-        window.windowManager._parseAndSanitizeToElement(`
+        renderSanitizedHtml(`
             <div style="display: flex; width: 100%; align-items: stretch; height: 100%; min-height: 55px;">
                 <!-- Left Column: Sprite -->
                 <div style="flex: 0 0 50px; display: flex; align-items: center; justify-content: center; position: relative;">
                     ${p.isTransformed && p.transformedIntoId ?
                         `<img src="${window.getSpriteUrl(132, p.qualityName === 'Shiny')}" class="${glowClass}" style="position: absolute; top: 0; left: 0; max-width: 100%; max-height: 100%; object-fit: contain; pointer-events: none; opacity: 0.5; transform: scale(1.5); z-index: 1;">
-                         <img src="${window.getSpriteUrl(p.id, p.qualityName === 'Shiny')}" onload="this.style.display='inline'" onerror="this.style.display='none'" class="${glowClass}" style="max-width: 100%; max-height: 100%; object-fit: contain; pointer-events: none; opacity: 0.85; transform: scale(1.5); z-index: 2; position: relative;">`
+                         <img src="${window.getSpriteUrl(p.transformedIntoId, p.qualityName === 'Shiny')}" onload="this.style.display='inline'" onerror="this.style.display='none'" class="${glowClass}" style="max-width: 100%; max-height: 100%; object-fit: contain; pointer-events: none; opacity: 0.85; transform: scale(1.5); z-index: 2; position: relative;">`
                         :
                         `<img src="${window.getSpriteUrl(p.id, p.qualityName === 'Shiny')}" onload="this.style.display='inline'" onerror="this.style.display='none'" class="${glowClass}" style="max-width: 100%; max-height: 100%; object-fit: contain; pointer-events: none; opacity: 0.85; transform: scale(1.5); z-index: 2;">`
                     }
@@ -146,11 +153,12 @@ export function updateTeamWindow() {
 function renderDayCareSlot(container, p, battles, maxBattles, type) {
     if (!container) return;
     if (!p) {
-        container.innerHTML = ``;
+        container.replaceChildren();
         container.style.display = 'none';
         return;
     }
 
+    if (!p.uuid) p.uuid = crypto.randomUUID();
     container.style.display = 'block';
 
     const currentLevelXp = mathEngine.calculateTotalXP(p.level);
@@ -202,7 +210,7 @@ function renderDayCareSlot(container, p, battles, maxBattles, type) {
         rightText = `${initialIV}+${cycles}`;
     }
 
-    window.windowManager._parseAndSanitizeToElement(`
+    renderSanitizedHtml(`
         <div class="party-slot" style="position: relative; border: 2px solid #3498db;">
             <div style="display: flex; width: 100%; align-items: stretch; height: 100%; min-height: 55px;">
             <!-- Left Column: Sprite -->

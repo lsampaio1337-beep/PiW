@@ -360,7 +360,7 @@ export function showHelp() {
                 const targetId = `help_content_${majorTopic.replace(/[^a-zA-Z0-9]/g, '_')}_${subCategory.replace(/[^a-zA-Z0-9]/g, '_')}_${groupName.replace(/[^a-zA-Z0-9]/g, '_')}`;
 
                 const btnBg = isFirst ? '#3498db' : 'transparent';
-                sidebarHTML += `<div class="help-nav-btn" data-target="${targetId}" style="cursor: pointer; padding: 4px; margin-left: 20px; color: white; background-color: ${btnBg}; border-radius: 3px; font-size: 13px; margin-bottom: 2px;" onmouseover="this.style.backgroundColor='#2980b9'" onmouseout="if(!this.classList.contains('active-help-btn')) this.style.backgroundColor='transparent'">${groupName}</div>`;
+                sidebarHTML += `<div class="help-nav-btn" data-target="${targetId}" style="cursor: pointer; padding: 4px; margin-left: 20px; color: white; background-color: ${btnBg}; border-radius: 3px; font-size: 13px; margin-bottom: 2px;">${groupName}</div>`;
                 isFirst = false;
             }
         }
@@ -408,6 +408,16 @@ export function showHelp() {
         if(btns.length > 0) btns[0].classList.add('active-help-btn');
 
         btns.forEach(btn => {
+            btn.addEventListener('mouseenter', function() {
+                if (!this.classList.contains('active-help-btn')) {
+                    this.style.backgroundColor = '#2980b9';
+                }
+            });
+            btn.addEventListener('mouseleave', function() {
+                if (!this.classList.contains('active-help-btn')) {
+                    this.style.backgroundColor = 'transparent';
+                }
+            });
             btn.addEventListener('click', function() {
                 // Reset all buttons
                 btns.forEach(b => {

@@ -3,9 +3,11 @@ import { renderPokeballsTab } from './pokeballs.js';
 import { renderPotionsTab } from './potions.js';
 import { renderStonesTab } from './stones.js';
 import { renderPokemonTab } from './pokemon.js';
+import { renderVitaminsTab } from './vitamins.js';
 
 window.closeBackpackPocket = function() {
-    document.getElementById('backpack-content-area').style.display='none';
+    const area = document.getElementById('backpack-content-area');
+    if (area) area.style.display = 'none';
     if (window.clearPokemonFilter) window.clearPokemonFilter();
 };
 
@@ -53,7 +55,7 @@ export function showBackpack() {
                         </svg>
                     </div>
 
-                    <div id="backpack-content-area" onclick="event.stopPropagation()" class="floating-window" style="position: absolute; bottom: 5%; left: 0%; width: 100%; height: auto; max-height: 90%; display: flex; flex-direction: column; z-index: 5; display: none; overflow: hidden;">
+                    <div id="backpack-content-area" onclick="event.stopPropagation()" class="floating-window" style="position: absolute; bottom: 5%; left: 0%; width: 100%; height: auto; max-height: 90%; flex-direction: column; z-index: 5; display: none; overflow: hidden;">
                         <div class="window-header" style="position: relative; cursor: default;">
                             <span id="backpack-pocket-title">Pocket</span>
                             <span onclick="window.closeBackpackPocket()" style="position: absolute; top: 5px; right: 5px; font-size: 12px; font-weight: bold; line-height: 1; padding: 0; cursor: pointer; color: white;">X</span>
@@ -96,8 +98,6 @@ export function showBackpack() {
     }
 }
 
-import { renderVitaminsTab } from './vitamins.js';
-
 export function renderBackpackTab(tab) {
     const area = document.getElementById('backpack-content-area');
     const innerContent = document.getElementById('backpack-inner-content');
@@ -139,7 +139,8 @@ export function renderBackpackTab(tab) {
         }
     }
 
-    titleSpan.innerHTML = pocketTitleHtml;
+    const titleDoc = new DOMParser().parseFromString(pocketTitleHtml, 'text/html');
+    titleSpan.replaceChildren(...titleDoc.body.childNodes);
 
     // Update main nav buttons active state
     const navButtons = ['pokemon', 'pokeballs', 'potions', 'stones', 'vitamins'];
@@ -161,11 +162,25 @@ export function setActiveItem(type, tierIdx) {
     } else if (type === 'potion') {
         state.settings.activePotionTier = tierIdx;
     }
-    renderBackpackTab(type === 'ball' ? 'pokeballs' : 'potions');
+    try {
+        window.storageRef?.save(state);
+    } catch (e) {}
+    const area = document.getElementById('backpack-content-area');
+    if (area && area.style.display !== 'none') {
+        renderBackpackTab(type === 'ball' ? 'pokeballs' : 'potions');
+    }
 }
 
 export function setAutoPotionThreshold(val) {
-    state.settings.autoPotionThreshold = val;
+    let clamped = parseInt(val, 10);
+    if (isNaN(clamped)) clamped = 1;
+    clamped = Math.max(1, Math.min(90, clamped));
+    state.settings.autoPotionThreshold = clamped;
+
+    const slider = document.getElementById('potion-threshold-slider');
+    if (slider) slider.value = clamped;
+    const valEl = document.getElementById('potion-threshold-val');
+    if (valEl) valEl.textContent = clamped + '%';
 
     // Attempt to manually save to ensure the threshold is preserved
     // since clicking outside the bag dismisses it without explicit save events

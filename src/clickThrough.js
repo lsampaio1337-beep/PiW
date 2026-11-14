@@ -3,11 +3,8 @@ function setupClickThrough() {
 
     // Listen to mouse movements globally
     window.addEventListener('mousemove', (event) => {
-        const x = event.clientX;
-        const y = event.clientY;
-
         // Find the element directly under the mouse
-        const elementUnderMouse = document.elementFromPoint(x, y);
+        const elementUnderMouse = event.target || document.elementFromPoint(event.clientX, event.clientY);
 
         // Let's determine if we should ignore clicks.
         // We will ignore clicks if the element is the body, the html element,

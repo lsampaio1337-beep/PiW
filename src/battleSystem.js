@@ -9,11 +9,46 @@ class BattleSystem {
         if (!encounter) return null;
         return {
             ...encounter,
+            uuid: encounter.uuid || (typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : 'pkmn_' + Date.now() + '_' + Math.random().toString(36).slice(2)),
             types: encounter.types ? [...encounter.types] : undefined,
             ivs: encounter.ivs ? { ...encounter.ivs } : undefined,
             currentStats: encounter.currentStats ? { ...encounter.currentStats } : undefined,
             moves: encounter.moves ? encounter.moves.map(m => ({ ...m })) : undefined
         };
+    }
+
+    _normalizePotionName(rawName) {
+        return rawName === 'Big' ? 'Big Potion' : rawName;
+    }
+
+    _revertDittoOnFaint(fainted) {
+        if (!fainted || !fainted.isTransformed || !fainted.transformedIntoId) return;
+
+        fainted.isTransformed = false;
+        fainted.transformedIntoId = null;
+        fainted.transformedIntoName = null;
+        fainted.id = 132;
+        fainted.name = 'Ditto';
+
+        const newBase = this.getPokemonBase(132);
+        if (!newBase) return;
+
+        fainted.types = newBase.types;
+        fainted.bst = newBase.hp + newBase.atk + newBase.def + newBase.spa + newBase.spd + newBase.spe;
+
+        const vitamins = fainted.vitamins || {};
+        fainted.maxHp = mathEngine.calculateHP(newBase.hp, fainted.ivs.hp, fainted.level, fainted.quality, vitamins.hp || 0);
+        if (fainted.currentStats) {
+            fainted.currentStats.hp = fainted.maxHp;
+            fainted.currentStats.atk = mathEngine.calculateStat(newBase.atk, fainted.ivs.atk, fainted.level, fainted.quality, vitamins.atk || 0);
+            fainted.currentStats.def = mathEngine.calculateStat(newBase.def, fainted.ivs.def, fainted.level, fainted.quality, vitamins.def || 0);
+            fainted.currentStats.spa = mathEngine.calculateStat(newBase.spa, fainted.ivs.spa, fainted.level, fainted.quality, vitamins.spa || 0);
+            fainted.currentStats.spd = mathEngine.calculateStat(newBase.spd, fainted.ivs.spd, fainted.level, fainted.quality, vitamins.spd || 0);
+            fainted.currentStats.spe = mathEngine.calculateStat(newBase.spe, fainted.ivs.spe, fainted.level, fainted.quality, vitamins.spe || 0);
+        }
+
+        fainted.currentHp = Math.min(fainted.currentHp, fainted.maxHp);
+        fainted.moves = this.getLearnsetMoves(newBase, fainted.level).slice(-4);
     }
 
     constructor(gameState, updateUI) {
@@ -26,6 +61,7 @@ class BattleSystem {
         this.isFainting = false;
 
         this.consecutiveHeals = 0;
+        this.turnCount = 0;
 
 
         this.multiplayerState = {
@@ -301,25 +337,27 @@ class BattleSystem {
         let maxExpectedDamage = -1;
 
         // In a full implementation, attacker.moves would have populated Move objects
-        if (!attacker.moves) return null;
-        for (const move of attacker.moves) {
-            // Very simplified: skip if missing data
-            if (!move || move.power === 0) continue;
+        if (attacker.moves) {
+            for (const move of attacker.moves) {
+                // Very simplified: skip if missing data
+                if (!move || move.power === 0) continue;
 
-            // Do not use Self-Destruct or Explosion normally
-            if (move.name === 'Self-Destruct' || move.name === 'Self Destruct' || move.name === 'Explosion') continue;
+                // Do not use Self-Destruct or Explosion normally
+                if (move.name === 'Self-Destruct' || move.name === 'Self Destruct' || move.name === 'Explosion') continue;
 
-            const isPhysical = move.category === 'Physical';
-            const atkStat = isPhysical ? attacker.currentStats.atk : attacker.currentStats.spa;
-            const defStat = isPhysical ? defender.currentStats.def : defender.currentStats.spd;
-            const eff = this.getTypeEffectiveness(move.type, defender.types);
+                const isPhysical = move.category === 'Physical';
+                const atkStat = isPhysical ? attacker.currentStats.atk : attacker.currentStats.spa;
+                const defStat = isPhysical ? defender.currentStats.def : defender.currentStats.spd;
+                const safeDefStat = defStat > 0 ? defStat : 1;
+                const eff = this.getTypeEffectiveness(move.type, defender.types);
 
-            // Expected damage ignores crit/random modifier for selection
-            const expDamage = Math.floor((((attacker.level + 5) / 125) * (move.power * atkStat / defStat)) + 2) * eff * attacker.quality;
+                // Expected damage ignores crit/random modifier for selection
+                const expDamage = Math.floor((((attacker.level + 5) / 125) * (move.power * atkStat / safeDefStat)) + 2) * eff;
 
-            if (expDamage > maxExpectedDamage) {
-                maxExpectedDamage = expDamage;
-                bestMove = move;
+                if (expDamage > maxExpectedDamage) {
+                    maxExpectedDamage = expDamage;
+                    bestMove = move;
+                }
             }
         }
 
@@ -407,6 +445,7 @@ class BattleSystem {
 
     generateMultiplayerEncounter(slideDelay) {
         if (!this.multiplayerState.opponentParty) return;
+        this.turnCount = 0;
 
         const pokemonDef = this.multiplayerState.opponentParty[this.multiplayerState.currentPokemonIndex];
         if (!pokemonDef) {
@@ -433,8 +472,7 @@ class BattleSystem {
             currentStats: stats,
             moves: pokemonDef.moves || this.getLearnsetMoves(pokemonBase, pokemonDef.level),
             isBoss: false,
-            catchRate: 0,
-            xp: mathEngine.calculateTotalXP(pokemonDef.level)
+            catchRate: 0
         };
 
         this.updateUI();
@@ -818,13 +856,15 @@ class BattleSystem {
             }).join('');
 
             // Rest phase UI
-            contentArea.innerHTML = `
+            const restHtml = `
                 <div id="gym-rest-area">
                     <p>You may organize your party.</p>
                     ${trainerButtonsHtml}
                     <button class="action-btn action-btn-danger" onclick="window.battleEngine.stopGymBattle()" style="width: 100%;">Flee Gym</button>
                 </div>
             `;
+            const restDoc = new DOMParser().parseFromString(restHtml, 'text/html');
+            contentArea.replaceChildren(...restDoc.body.childNodes);
             const closeBtn = document.getElementById('btn-close-map-inner-modal');
             if (closeBtn) {
                 closeBtn.style.pointerEvents = '';
@@ -869,10 +909,7 @@ class BattleSystem {
             `;
             const parser = new DOMParser();
             const doc = parser.parseFromString(htmlContent, 'text/html');
-            contentArea.innerHTML = '';
-            while (doc.body.firstChild) {
-                contentArea.appendChild(doc.body.firstChild);
-            }
+            contentArea.replaceChildren(...doc.body.childNodes);
             window.battleEngine = this;
         }
     }
@@ -988,6 +1025,7 @@ class BattleSystem {
     generateGymEncounter(slideDelay) {
         const gym = this.gymState.gym;
         if (!gym) return;
+        this.turnCount = 0;
 
         const trainer = gym.trainers[this.gymState.currentTrainerIndex];
         if (!trainer) {
@@ -1044,8 +1082,7 @@ class BattleSystem {
 
         // Track seen for pokedex
         if (!this.state.stats.seenSpecies) this.state.stats.seenSpecies = {};
-        if (!this.state.stats.seenSpecies) this.state.stats.seenSpecies = {};
-            this.state.stats.seenSpecies[pokemonBase.name] = true;
+        this.state.stats.seenSpecies[pokemonBase.name] = true;
 
         // Give them good IVs based on gym progression
         const ivs = { hp: ivValue, atk: ivValue, def: ivValue, spa: ivValue, spd: ivValue, spe: ivValue };
@@ -1078,8 +1115,7 @@ class BattleSystem {
             evm: mathEngine.calculateEVM(bst, level, q.q, totalIV),
             pp: mathEngine.calculatePP(bst, level, q.q, totalIV),
             bst: bst,
-            moves: this.getLearnsetMoves(pokemonBase, level),
-            xp: mathEngine.calculateTotalXP(level)
+            moves: this.getLearnsetMoves(pokemonBase, level)
         };
 
         this.isSearching = false;
@@ -1095,6 +1131,7 @@ class BattleSystem {
     }
 
     generateEncounter(slideDelay) {
+        this.turnCount = 0;
         let pokemonBase;
         let level;
         let q;
@@ -1270,8 +1307,7 @@ class BattleSystem {
             pp: mathEngine.calculatePP(bst, level, q.q, totalIV),
             bst: bst,
             moves: this.getLearnsetMoves(pokemonBase, level),
-            isDisguisedDitto: isDisguisedDitto,
-            xp: mathEngine.calculateTotalXP(level)
+            isDisguisedDitto: isDisguisedDitto
         };
 
         this.isSearching = false;
@@ -1366,6 +1402,9 @@ class BattleSystem {
         }
 
         // Attack
+        if (attacker === leader) {
+            this.turnCount++;
+        }
         const move = this.getBestMove(attacker, defender);
         const isPhysical = move.category === 'Physical';
         const atkStat = isPhysical ? attacker.currentStats.atk : attacker.currentStats.spa;
@@ -1476,7 +1515,7 @@ class BattleSystem {
         }, delay);
     }
 
-    tryUsePotion(pokemon) {
+    tryUsePotion(pokemon, tier = this.state.settings.activePotionTier) {
         if (this.gymState && this.gymState.isActive) return false; // Auto potions disabled in Gyms
 
         if (pokemon.currentHp >= pokemon.maxHp) return false; // don't heal if full
@@ -1484,14 +1523,22 @@ class BattleSystem {
         let threshold = this.state.settings.autoPotionThreshold !== undefined ? this.state.settings.autoPotionThreshold : 25;
         if ((pokemon.currentHp / pokemon.maxHp) * 100 > threshold) return false;
 
-        let tier = this.state.settings.activePotionTier;
+        if (tier === undefined || tier === null) tier = this.state.settings.activePotionTier;
         if (tier < 0) return false;
 
-        const potName = this.state.config.balance.items.potions[tier].name;
-        if (this.state.backpack.potions[potName] > 0) {
-            this.state.backpack.potions[potName]--;
+        const potionConfig = this.state.config?.balance?.items?.potions?.[tier];
+        if (!potionConfig) return false;
+
+        const potName = this._normalizePotionName(potionConfig.name);
+        const isInfinite = Boolean(this.state.settings?.infiniteItems);
+        const count = this.state.backpack?.potions?.[potName] || 0;
+
+        if (isInfinite || count > 0) {
+            if (!isInfinite) {
+                this.state.backpack.potions[potName]--;
+            }
             if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') window.trackDailyChallenge('defeat_endurance', { streak: 0 });
-            pokemon.currentHp = Math.min(pokemon.maxHp, pokemon.currentHp + this.state.config.balance.items.potions[tier].heal);
+            pokemon.currentHp = Math.min(pokemon.maxHp, pokemon.currentHp + potionConfig.heal);
             return true;
         }
         return false;
@@ -1717,7 +1764,7 @@ class BattleSystem {
                             window.trackDailyChallenge('catch_weak', { quality: caughtPokemon.qualityName });
                             window.trackDailyChallenge('catch_species', { species: caughtPokemon.name });
                             window.trackDailyChallenge('catch_type', { types: caughtPokemon.types });
-                            window.trackDailyChallenge('catch_ball_tier', { ball: this.activeEncounter.caughtBall });
+                            window.trackDailyChallenge('catch_ball_tier', { ball: ballResult.ballName });
                             if (["Johto Safari Zone", "Kanto Safari Zone"].includes(this.state.currentRoute)) window.trackDailyChallenge('safari_catch');
                             if (this.state.currentRoute === 'Celadon Casino') window.trackDailyChallenge('casino_catch'); // Would need species tracking logic inside trackDailyChallenge if we fully implement it
                         }
@@ -1850,6 +1897,7 @@ class BattleSystem {
 
             if (!this.state.backpack.stones) this.state.backpack.stones = {};
             this.state.backpack.stones[randomVitamin] = (this.state.backpack.stones[randomVitamin] || 0) + dropQuantity;
+            lootedItemsThisBattle[randomVitamin] = (lootedItemsThisBattle[randomVitamin] || 0) + dropQuantity;
         }
 
         let customDropChance = (2.0 * (sumIV / 600.0)) / 100.0;
@@ -2080,35 +2128,46 @@ class BattleSystem {
 
     checkRouteUnlocks() {
         // Evaluate active challenge defeat trackers
-        if (!this.state.config || !window.getCurrentUnlocks()) return;
+        const currentUnlocks = (typeof window !== 'undefined' && typeof window.getCurrentUnlocks === 'function')
+            ? window.getCurrentUnlocks()
+            : null;
+        if (!this.state.config || !currentUnlocks) return;
         if (!this.state.stats.activeChallenges || this.state.stats.activeChallenges.length === 0) return;
 
-        if (!this._unlocksCache) {
+        const currentRegion = this.state.currentRegionName || 'Kanto';
+        if (!this._unlocksCache || this._unlocksCacheRegion !== currentRegion) {
             this._unlocksCache = new Map();
-            for (let u of window.getCurrentUnlocks()) {
-                this._unlocksCache.set(u.areaId, u);
+            this._unlocksCacheRegion = currentRegion;
+            for (const u of currentUnlocks) {
+                if (!this._unlocksCache.has(u.areaId)) {
+                    this._unlocksCache.set(u.areaId, []);
+                }
+                this._unlocksCache.get(u.areaId).push(u);
             }
         }
 
-        for (let activeId of this.state.stats.activeChallenges) {
-            let unlock = this._unlocksCache.get(activeId);
-            if (!unlock) continue;
+        for (const activeId of this.state.stats.activeChallenges) {
+            const unlocks = this._unlocksCache.get(activeId);
+            if (!unlocks) continue;
 
-            let req = unlock.requirements;
-            if (req.defeatCountRoute && req.defeatCountRoute.route === this.state.currentRoute) {
-                this.state.stats.challengeRouteDefeats = (this.state.stats.challengeRouteDefeats || 0) + 1;
-            }
+            for (const unlock of unlocks) {
+                const req = unlock.requirements;
+                if (!req) continue;
+                if (req.defeatCountRoute && req.defeatCountRoute.route === this.state.currentRoute) {
+                    this.state.stats.challengeRouteDefeats = (this.state.stats.challengeRouteDefeats || 0) + 1;
+                }
 
-            if (req.defeatSpecific && this.activeEncounter.name === req.defeatSpecific.name) {
-                 if (!this.state.stats.challengeSpecificDefeats) this.state.stats.challengeSpecificDefeats = {};
-                 this.state.stats.challengeSpecificDefeats[this.activeEncounter.name] = (this.state.stats.challengeSpecificDefeats[this.activeEncounter.name] || 0) + 1;
-            }
-
-            if (req.defeatMultipleSpecific) {
-                const targetMatch = req.defeatMultipleSpecific.find(t => t.name === this.activeEncounter.name);
-                if (targetMatch) {
+                if (req.defeatSpecific && this.activeEncounter.name === req.defeatSpecific.name) {
                      if (!this.state.stats.challengeSpecificDefeats) this.state.stats.challengeSpecificDefeats = {};
                      this.state.stats.challengeSpecificDefeats[this.activeEncounter.name] = (this.state.stats.challengeSpecificDefeats[this.activeEncounter.name] || 0) + 1;
+                }
+
+                if (req.defeatMultipleSpecific) {
+                    const targetMatch = req.defeatMultipleSpecific.find(t => t.name === this.activeEncounter.name);
+                    if (targetMatch) {
+                         if (!this.state.stats.challengeSpecificDefeats) this.state.stats.challengeSpecificDefeats = {};
+                         this.state.stats.challengeSpecificDefeats[this.activeEncounter.name] = (this.state.stats.challengeSpecificDefeats[this.activeEncounter.name] || 0) + 1;
+                    }
                 }
             }
         }
@@ -2186,32 +2245,7 @@ class BattleSystem {
             const fainted = this.state.party.shift();
 
             // Revert Ditto Transformation on Faint
-            if (fainted && fainted.isTransformed && fainted.transformedIntoId) {
-                fainted.isTransformed = false;
-                fainted.transformedIntoId = null;
-                fainted.transformedIntoName = null;
-                fainted.id = 132;
-                fainted.name = 'Ditto';
-
-                const newBase = this.getPokemonBase(132);
-                if (newBase) {
-                    fainted.types = newBase.types;
-                    fainted.bst = newBase.hp + newBase.atk + newBase.def + newBase.spa + newBase.spd + newBase.spe;
-
-                    // Recalculate stats
-                    fainted.maxHp = Math.floor((((2 * newBase.hp + fainted.ivs.hp) * fainted.level / 100) + fainted.level + 10) * fainted.quality);
-                    fainted.currentStats.atk = Math.floor((((2 * newBase.atk + fainted.ivs.atk) * fainted.level / 100) + 5) * fainted.quality);
-                    fainted.currentStats.def = Math.floor((((2 * newBase.def + fainted.ivs.def) * fainted.level / 100) + 5) * fainted.quality);
-                    fainted.currentStats.spa = Math.floor((((2 * newBase.spa + fainted.ivs.spa) * fainted.level / 100) + 5) * fainted.quality);
-                    fainted.currentStats.spd = Math.floor((((2 * newBase.spd + fainted.ivs.spd) * fainted.level / 100) + 5) * fainted.quality);
-                    fainted.currentStats.spe = Math.floor((((2 * newBase.spe + fainted.ivs.spe) * fainted.level / 100) + 5) * fainted.quality);
-
-                    fainted.currentHp = Math.min(fainted.currentHp, fainted.maxHp);
-
-                    // Moves
-                    fainted.moves = this.getLearnsetMoves(newBase, fainted.level).slice(-4);
-                }
-            }
+            this._revertDittoOnFaint(fainted);
             this.state.party.push(fainted);
 
             this.isFainting = false;
@@ -2366,8 +2400,12 @@ class BattleSystem {
 
         let initialBalls = this.state.settings.activeBallTier >= 0 ?
             this.state.backpack.pokeballs[this.state.config.balance.items.pokeballs[this.state.settings.activeBallTier].name] || 0 : 0;
-        let initialPotions = this.state.settings.activePotionTier >= 0 ?
-            this.state.backpack.potions[this.state.config.balance.items.potions[this.state.settings.activePotionTier].name] || 0 : 0;
+        const initialPotionRaw = this.state.settings.activePotionTier >= 0
+            ? this.state.config.balance.items.potions[this.state.settings.activePotionTier]?.name
+            : null;
+        let initialPotions = initialPotionRaw
+            ? (this.state.backpack.potions[this._normalizePotionName(initialPotionRaw)] || 0)
+            : 0;
 
         // Ensure we don't simulate too many frames and hang the browser if time is huge
         // Limit to approx max of 111h of simulation steps, but it evaluates fast
@@ -2463,6 +2501,7 @@ class BattleSystem {
             const evm = mathEngine.calculateEVM(bst, level, q.q, totalIV);
             const pp = mathEngine.calculatePP(bst, level, q.q, totalIV);
 
+            this.turnCount = 0;
             this.activeEncounter = {
                 id: pokemonBase.id,
                 name: pokemonBase.name,
@@ -2477,8 +2516,7 @@ class BattleSystem {
                 xp: mathEngine.calculateTotalXP(level),
                 evxp: evxp, evm: evm, pp: pp,
                 bst: bst,
-                moves: this.getLearnsetMoves(pokemonBase, level),
-                xp: mathEngine.calculateTotalXP(level)
+                moves: this.getLearnsetMoves(pokemonBase, level)
             };
 
             let leaderSpe = leader.currentStats ? leader.currentStats.spe : 10;
@@ -2524,6 +2562,9 @@ class BattleSystem {
                     }
                 }
 
+                if (isLeader) {
+                    this.turnCount++;
+                }
                 const move = this.getBestMove(attacker, defender);
                 const isPhysical = move.category === 'Physical';
                 const atkStat = isPhysical ? attacker.currentStats.atk : attacker.currentStats.spa;
@@ -2802,28 +2843,7 @@ class BattleSystem {
                 const fainted = this.state.party.shift();
 
                 // Revert Ditto Transformation on Faint
-                if (fainted && fainted.isTransformed && fainted.transformedIntoId) {
-                    fainted.isTransformed = false;
-                    fainted.transformedIntoId = null;
-                    fainted.transformedIntoName = null;
-                    fainted.id = 132;
-                    fainted.name = 'Ditto';
-
-                    const newBase = this.getPokemonBase(132);
-                    if (newBase) {
-                        fainted.types = newBase.types;
-                        fainted.bst = newBase.hp + newBase.atk + newBase.def + newBase.spa + newBase.spd + newBase.spe;
-                        fainted.maxHp = Math.floor((((2 * newBase.hp + fainted.ivs.hp) * fainted.level / 100) + fainted.level + 10) * fainted.quality);
-                        fainted.currentStats.atk = Math.floor((((2 * newBase.atk + fainted.ivs.atk) * fainted.level / 100) + 5) * fainted.quality);
-                        fainted.currentStats.def = Math.floor((((2 * newBase.def + fainted.ivs.def) * fainted.level / 100) + 5) * fainted.quality);
-                        fainted.currentStats.spa = Math.floor((((2 * newBase.spa + fainted.ivs.spa) * fainted.level / 100) + 5) * fainted.quality);
-                        fainted.currentStats.spd = Math.floor((((2 * newBase.spd + fainted.ivs.spd) * fainted.level / 100) + 5) * fainted.quality);
-                        fainted.currentStats.spe = Math.floor((((2 * newBase.spe + fainted.ivs.spe) * fainted.level / 100) + 5) * fainted.quality);
-                        fainted.currentHp = Math.min(fainted.currentHp, fainted.maxHp);
-
-                        fainted.moves = this.getLearnsetMoves(newBase, fainted.level).slice(-4);
-                    }
-                }
+                this._revertDittoOnFaint(fainted);
 
                 this.state.party.push(fainted);
             }
@@ -2839,8 +2859,12 @@ class BattleSystem {
 
         let finalBalls = this.state.settings.activeBallTier >= 0 ?
             this.state.backpack.pokeballs[this.state.config.balance.items.pokeballs[this.state.settings.activeBallTier].name] || 0 : 0;
-        let finalPotions = this.state.settings.activePotionTier >= 0 ?
-            this.state.backpack.potions[this.state.config.balance.items.potions[this.state.settings.activePotionTier].name] || 0 : 0;
+        const finalPotionRaw = this.state.settings.activePotionTier >= 0
+            ? this.state.config.balance.items.potions[this.state.settings.activePotionTier]?.name
+            : null;
+        let finalPotions = finalPotionRaw
+            ? (this.state.backpack.potions[this._normalizePotionName(finalPotionRaw)] || 0)
+            : 0;
 
         results.ballsUsed = Math.max(0, initialBalls - finalBalls);
         results.potionsUsed = Math.max(0, initialPotions - finalPotions);

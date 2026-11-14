@@ -1,4 +1,4 @@
-import { normalizeSpawnChances, normalizeRoutesData } from '../src/utils/chanceUtils.js';
+import { normalizeSpawnChances, normalizeRoutesData } from '../../src/utils/chanceUtils.js';
 
 describe('chanceUtils', () => {
     describe('normalizeSpawnChances', () => {

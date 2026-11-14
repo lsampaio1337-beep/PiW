@@ -1,6 +1,12 @@
 import { state } from '../state.js';
 import { VITAMINS } from '../constants.js';
 
+const STONE_TYPES = [
+    "Normal Stone", "Fire Stone", "Water Stone", "Grass Stone", "Electric Stone", "Ice Stone",
+    "Fighting Stone", "Poison Stone", "Ground Stone", "Flying Stone", "Psychic Stone", "Bug Stone",
+    "Rock Stone", "Ghost Stone", "Dragon Stone", "Steel Stone", "Dark Stone", "Fairy Stone"
+];
+
 export function renderTokenShopHtml() {
     let html = `
         <div style="display: flex; flex-direction: column; align-items: center; padding: 20px; color: white; box-sizing: border-box; width: 100%;">
@@ -269,9 +275,8 @@ window.buyTokenItemRandom = function(itemType) {
             if (!state.backpack.stones[itemAwarded]) state.backpack.stones[itemAwarded] = 0;
             state.backpack.stones[itemAwarded] += 1;
         } else if (itemType === 'stone') {
-            const stoneTypes = ["Normal Stone", "Fire Stone", "Water Stone", "Grass Stone", "Electric Stone", "Ice Stone", "Fighting Stone", "Poison Stone", "Ground Stone", "Flying Stone", "Psychic Stone", "Bug Stone", "Rock Stone", "Ghost Stone", "Dragon Stone", "Steel Stone", "Dark Stone", "Fairy Stone"];
-            const index = Math.floor(Math.random() * stoneTypes.length);
-            itemAwarded = stoneTypes[index];
+            const index = Math.floor(Math.random() * STONE_TYPES.length);
+            itemAwarded = STONE_TYPES[index];
             if (!state.backpack.stones[itemAwarded]) state.backpack.stones[itemAwarded] = 0;
             state.backpack.stones[itemAwarded] += 1;
         }
@@ -286,8 +291,7 @@ window.showTokenItemSelect = function(itemType) {
         itemsToSelect = VITAMINS.map(v => ({ name: v, img: `Assets/Items/Vitamins/${v}.png` }));
         title = "Select a Vitamin";
     } else if (itemType === 'stone') {
-        const stoneTypes = ["Normal Stone", "Fire Stone", "Water Stone", "Grass Stone", "Electric Stone", "Ice Stone", "Fighting Stone", "Poison Stone", "Ground Stone", "Flying Stone", "Psychic Stone", "Bug Stone", "Rock Stone", "Ghost Stone", "Dragon Stone", "Steel Stone", "Dark Stone", "Fairy Stone"];
-        itemsToSelect = stoneTypes.map(s => ({ name: s, img: `Assets/Items/Stones/${s}.png` }));
+        itemsToSelect = STONE_TYPES.map(s => ({ name: s, img: `Assets/Items/Stones/${s}.png` }));
         title = "Select an Evolution Stone";
     }
 
@@ -308,7 +312,7 @@ window.showTokenItemSelect = function(itemType) {
 
     html += `
             </div>
-            <button onclick="window.showCalendar('shop')" style="margin-top: 20px; padding: 10px 20px; background: #e74c3c; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Cancel</button>
+            <button onclick="if(window.closeModal) window.closeModal('window-token-select')" style="margin-top: 20px; padding: 10px 20px; background: #e74c3c; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Cancel</button>
         </div>
     `;
 
@@ -318,6 +322,7 @@ window.showTokenItemSelect = function(itemType) {
 };
 
 window.confirmTokenItemSelect = function(itemName) {
+    if (window.closeModal) window.closeModal('window-token-select');
     handleTokenPurchase(2, () => {
         if (!state.backpack.stones[itemName]) {
             state.backpack.stones[itemName] = 0;

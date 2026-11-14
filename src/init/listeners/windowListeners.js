@@ -18,6 +18,8 @@ export function setupWindowToggles() {
         closeInnerBtn.addEventListener('click', () => {
             const overlay = document.getElementById('main-view-inner-modal-overlay');
             if (overlay) overlay.style.display = 'none';
+            const innerModal = document.getElementById('main-view-inner-modal');
+            if (innerModal && innerModal.classList) innerModal.classList.remove('prof-lab-inner-modal');
             const moneyDisplay = document.getElementById('inner-modal-money-display');
             if (moneyDisplay) moneyDisplay.style.display = 'none';
         });
