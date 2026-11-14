@@ -1894,7 +1894,7 @@ export const kalosRoutes = [
     ]
   },
   {
-    "name": "Pokémon League",
+    "name": "Kalos Pokemon League",
     "challengeName": "Challenge 43",
     "spawns": []
   },
@@ -3432,7 +3432,13 @@ export const kalosUnlocks = [
     "unlocks": [
       "Route 10"
     ],
-    "requirements": {}
+    "requirements": {
+      "earnBadge": {
+        "name": "Cliff Badge",
+        "leader": "Grant",
+        "badgeCount": 2
+      }
+    }
   },
   {
     "challengeName": "Challenge 18",
@@ -3872,7 +3878,7 @@ export const kalosUnlocks = [
     "challengeName": "Challenge 42",
     "areaId": "Victory Road",
     "unlocks": [
-      "Pokémon League"
+      "Kalos Pokemon League"
     ],
     "requirements": {
       "catchSpeciesOr": [
@@ -3895,7 +3901,7 @@ export const kalosUnlocks = [
   },
   {
     "challengeName": "Challenge 43",
-    "areaId": "Pokémon League",
+    "areaId": "Kalos Pokemon League",
     "unlocks": [
       "Path to Dragon Territory",
       "Extra Challenge F (Roaming)",
@@ -3903,7 +3909,9 @@ export const kalosUnlocks = [
       "Extra Challenge G (Roaming)",
       "Path to Secret Chambers"
     ],
-    "requirements": {}
+    "requirements": {
+      "defeatKalosChampion": true
+    }
   },
   {
     "challengeName": "Extra Challenge A 1",

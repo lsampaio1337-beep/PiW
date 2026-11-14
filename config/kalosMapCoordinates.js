@@ -200,7 +200,7 @@ export const kalosMapCoordinates = {
     "y": 90
   },
   "pokmonleague": {
-    "name": "Pokémon League",
+    "name": "Kalos Pokemon League",
     "x": 40,
     "y": 90
   },
