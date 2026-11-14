@@ -51,6 +51,22 @@ function evaluateRequirements(req, unlock) {
         });
     }
 
+    if (req.catchRouteQuality) {
+        let route = req.catchRouteQuality.route;
+        let quality = req.catchRouteQuality.quality;
+        let reqCount = req.catchRouteQuality.count;
+        let rqKey = `Route_${route}_${quality}`;
+        let caught = state.stats.challengeCaughtSpecific ? (state.stats.challengeCaughtSpecific[rqKey] || 0) : 0;
+        progress.push({
+            type: 'catchRouteQuality',
+            route: route,
+            quality: quality,
+            current: caught,
+            required: reqCount,
+            isMet: caught >= reqCount
+        });
+    }
+
     if (req.catchSpecies) {
         for (let spec of req.catchSpecies) {
             let caughtCount = state.stats.caughtSpecies ? (state.stats.caughtSpecies[spec.species] || 0) : 0;
@@ -373,6 +389,9 @@ function formatRequirements(progressList) {
             let displayRoute = (p.route || "").replace(/\s*\([^)]+\)$/, "");
             let routeText = displayRoute === "Route 1" ? " on Route 1" : ` on ${displayRoute}`;
             textParts.push(`Defeat ${p.required} Pokémon${routeText} ${countDisplay(p.current, p.required)}${getStatusHtml(p.isMet)}`);
+        } else if (p.type === 'catchRouteQuality') {
+            let displayRoute = (p.route || "").replace(/\s*\([^)]+\)$/, "");
+            textParts.push(`Catch ${p.required} ${p.quality} Pokémon on ${displayRoute} ${countDisplay(p.current, p.required)}${getStatusHtml(p.isMet)}`);
         } else if (p.type === 'catchSpecies') {
             textParts.push(`Catch ${p.required} ${formatSpecies(p.species)} ${countDisplay(p.current, p.required)}${getStatusHtml(p.isMet)}`);
 } else if (p.type === 'catchSpeciesByQuality') {

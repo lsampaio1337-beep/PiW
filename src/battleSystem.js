@@ -1762,6 +1762,12 @@ class BattleSystem {
                         // Track purely by quality (ignoring type/species)
                         let qualityOnlyKey = "Any_" + qName;
                         this.state.stats.challengeCaughtSpecific[qualityOnlyKey] = (this.state.stats.challengeCaughtSpecific[qualityOnlyKey] || 0) + 1;
+
+                        // Track by route + quality
+                        if (this.state.currentRoute) {
+                            let routeQualityKey = `Route_${this.state.currentRoute}_${qName}`;
+                            this.state.stats.challengeCaughtSpecific[routeQualityKey] = (this.state.stats.challengeCaughtSpecific[routeQualityKey] || 0) + 1;
+                        }
                     }
                 };
 

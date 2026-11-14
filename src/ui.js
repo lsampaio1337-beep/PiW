@@ -235,6 +235,10 @@ window.completeChallenge = function(targetAreaId) {
         if (unlock.requirements.defeatCountRoute) {
             state.stats.challengeRouteDefeats = 0;
         }
+        if (unlock.requirements.catchRouteQuality && state.stats.challengeCaughtSpecific) {
+            const rqKey = `Route_${unlock.requirements.catchRouteQuality.route}_${unlock.requirements.catchRouteQuality.quality}`;
+            delete state.stats.challengeCaughtSpecific[rqKey];
+        }
         if (unlock.requirements.defeatSpecific) {
              if (state.stats.challengeSpecificDefeats) delete state.stats.challengeSpecificDefeats[unlock.requirements.defeatSpecific.name];
         }
@@ -337,6 +341,11 @@ window.cheatProgressChallenge = function(targetAreaId) {
     if (req) {
         if (req.defeatCountRoute) {
             state.stats.challengeRouteDefeats = Math.max(state.stats.challengeRouteDefeats || 0, req.defeatCountRoute.count);
+        }
+        if (req.catchRouteQuality) {
+            if (!state.stats.challengeCaughtSpecific) state.stats.challengeCaughtSpecific = {};
+            const rqKey = `Route_${req.catchRouteQuality.route}_${req.catchRouteQuality.quality}`;
+            state.stats.challengeCaughtSpecific[rqKey] = Math.max(state.stats.challengeCaughtSpecific[rqKey] || 0, req.catchRouteQuality.count);
         }
         if (req.defeatSpecific) {
             if (req.defeatSpecific.name === '__proto__' || req.defeatSpecific.name === 'constructor' || req.defeatSpecific.name === 'prototype') return;
@@ -482,6 +491,11 @@ if (req.catchSpeciesByQuality) {
         }
         if (req.defeatCountRoute) {
             state.stats.challengeRouteDefeats = req.defeatCountRoute.count;
+        }
+        if (req.catchRouteQuality) {
+            if (!state.stats.challengeCaughtSpecific) state.stats.challengeCaughtSpecific = {};
+            const rqKey = `Route_${req.catchRouteQuality.route}_${req.catchRouteQuality.quality}`;
+            state.stats.challengeCaughtSpecific[rqKey] = req.catchRouteQuality.count;
         }
         if (req.defeatSpecific) {
             if (req.defeatSpecific.name === '__proto__' || req.defeatSpecific.name === 'constructor' || req.defeatSpecific.name === 'prototype') return;
