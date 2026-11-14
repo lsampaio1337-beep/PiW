@@ -59,16 +59,33 @@ This sheet outlines all the tasks players must complete to progress.
 
 *   **Challenge Name:** The identifier for the challenge.
 *   **Requisite:** The current coded requirements to complete the challenge.
-*   **Sugestion for Req:** A dynamically generated suggestion for what the requirement *should* be, based on route contents to ensure engaging gameplay:
-    *   If multiple new Pokémon appear, suggests catching them (capped mathematically to ensure < 200 total encounters).
-    *   If a new Pokémon has a high spawn rate (>20%) but low BST/Level, suggests catching a Rare, Epic, or Weak quality variant.
-    *   If a Pokémon has a very low spawn rate, suggests defeating it multiple times (calculated to force 100-150 encounters).
-    *   If a new Type appears, suggests defeating that Type X times.
-    *   For Gyms/League, suggests defeating the Leader/Champion.
-    *   Fallback: "Defeat X Pokémon", where X scales from 25-50 (early game) to 100-150 (mid game), 200-250 (late game), and 300 (post-game).
-*   **Reward Map:** The location unlocked by completing the challenge.
-*   **Reward Challenge:** The subsequent challenge unlocked.
-*   **Reward Gift:** Items given upon completion.
+*   **Sugestion for Req:** A dynamically generated, game-engine-compatible requirement suggestion (output as valid JSON matching the `Requisite` schema in `src/ui/mainControl.js`, or a non-spawn flag for empty hubs) tailored to each route's spawn table, progression stage, and regional variety:
+    *   **1. Special, Boss & Non-Wild Locations (Checked First):**
+        *   **Key / Gate / Condition Challenges:** Challenges starting with `Key `, containing `Condition`, or holding `completeChallenges` without wild spawns keep/suggest `{"completeChallenges":[...]}`.
+        *   **Pokémon League / Champion / Red:** Suggests `{"defeatRed":true}` for Red, `{"defeatEliteFourAndChampion":true}` for Kanto/Johto, and `{"defeat<Region>Champion":true}` for Hoenn–Paldea.
+        *   **Gyms / Stadiums / Grand Trials:** Suggests `{"earnBadge":{...}}` (preserving existing badge metadata or filling leader/name from `config/gyms.js`, excluding `(High Level)` rematch zones and `Battle Tower`).
+        *   **Non-Badge Bosses:** Empty-spawn entries matching a `config/gyms.js` boss (e.g., Lysandre) output `Defeat Boss: <Leader>`.
+        *   **Roaming & Legendary Lairs:** `(Roaming)` challenges suggest `defeatMultipleSpecific` (or `defeatSpecific`) with `count: 1` per roamer; routes with `1–4` spawns where all have `BST >= 580` suggest `catchSpecies` (`count: 1` each, up to 3).
+        *   **No Wild Spawns:** Battle facilities (`Battle`/`Tower`/`Frontier`/`Dojo`/`Hideout`) suggest scaled `defeatCountRoute`; other empty-spawn towns/hubs output `No wild spawns (Boss/Trainer/Story Req)`.
+    *   **2. Tutorial Route:** The first wild-spawn Main Challenge always suggests `{"defeatCountRoute":{"route":"<Route>","count":25}}` so players are never RNG-locked before earning Pokéballs and currency.
+    *   **3. Encounter Budget & Quality Probabilities:** Before scoring wild-route options, spawns across primary and secondary areas are merged per species and checked against the progression budget (`progress` in chain):
+        *   *Quarter 1 (0–25%):* Target `28–50` encounters (cap `80`).
+        *   *Quarter 2 (25–50%):* Target `50–85` encounters (cap `120`).
+        *   *Quarter 3 (50–75%):* Target `85–130` encounters (cap `165`).
+        *   *Quarter 4 (75–100%):* Target `125–175` encounters (cap `220`).
+        *   *Extra / Post-Game:* Target `120–210` encounters (cap `280`).
+        *   *Quality Odds Reference (base `mathEngine.js` table):* `Weak` (`12.3%`, **only Q1–Q2** so late-game Quality Boosters don't make it overly rare), `Uncommon+` (`45.1%`), `Rare+` (`20.1%`), `Rare` (`12.5%`), `Epic` (`7.5%`).
+    *   **4. Wild Route Archetypes (Scored by Route Fit + Anti-Repetition):** Every valid archetype within the route's encounter budget is scored by route fit and penalized if recently used (`-60` same as previous route, `-30` two routes ago, `-15` three routes ago, plus `-6` per prior usage in the chain):
+        *   **`catchSpecies` (New Pokémon Showcase):** Picks `1–3` distinct-family `First?` species (prioritizing rare `2.5%–10%` flagships or `2–3` mid-rate spawns; bumping single common spawns to `2–4` catches) while keeping total expected encounters within cap.
+        *   **`catchSpeciesOr` / `catchSpeciesAnyOf` (Dual-Target Choice):** Pairs two comparable or same-type species (preferring new `5%–25%` spawns) as an "A or B" catch (`1–3` each) or shared quota (`2–6` combined).
+        *   **`defeatSpecific` (Single-Species Hunt):** Targets a notable `4%–35%` spawn (preferring `BST >= 400`, evolved, or `6%–20%` spawns) with `count` scaled mathematically to `targetEnc * chance` (clamped `2–30`, or `1` if `<= 3%`), ensuring balanced encounters.
+        *   **`defeatMultipleSpecific` (Multi-Target Hunt):** Picks `2–3` spawns with `>= 10%` chance (strong bonus for same evolution family pairs like `Exeggcute` + `Exeggutor`), splitting `targetEnc` cleanly (`2–15` each).
+        *   **`catchByType` / `catchByQualityAndType` (Elemental Route Mastery):** Activated when a non-Normal elemental type (or Normal `>= 65%`) has `>= 40%` combined chance across `>= 2` species (or `>= 55%`), with a biome-name bonus (e.g., Water/Sea/Fishing -> `Water`, Forest/Woods -> `Bug`/`Grass`, Cave/Mountain -> `Rock`/`Ground`, Frost/Ice -> `Ice`, Tower/Pyre -> `Ghost`, Volcano -> `Fire`). Uses `catchByType` (`3–15` catches) or `catchByQualityAndType` (`Uncommon` in Q1, `Rare` in Q2–Extra, `Epic` in Q4/Extra when `>= 60%`).
+        *   **Quality Hunts (`catchSpeciesByQuality`, `catchSpeciesByQualityOrHigher`, `catchByQuality`):** Uses `Weak` on low-BST (`<= 330`) staples in Q1–Q2; `Uncommon+`/`Rare+`/`Epic+` via `catchSpeciesByQualityOrHigher` on `>= 20%` spawns; or route-wide `catchByQuality` (`Uncommon+`, `Rare+`, `Epic`) on diverse routes.
+        *   **`defeatCountRoute` (Endurance Checkpoint):** Always available as a scaled battle checkpoint (Q1 `30–50`, Q2 `60–100`, Q3 `100–150`, Q4 `150–225` / Victory Road `200–250`, Extra `150–300`); boosted when a route has no new Pokémon, is an endurance area (`Victory Road`, `Safari`, `Sea Route`, `Hideout`, `Underwater`), or `>= 4` routes have passed since the last route-defeat challenge.
+*   **Reward Map:** The location(s) unlocked on the map by completing the challenge (`unlocks`).
+*   **Reward Challenge:** The challenge(s) (`Challenge Name`) activated/unlocked when this challenge is completed — resolved from each unlocked area in `unlocks` (matching its `areaId` to the corresponding challenge) as well as any challenge whose `completeChallenges` or `completeAnyOfChallenges` depends on this challenge.
+*   **Reward Gift:** Comma-separated list of all items earned and sent to the Gift Window (`state.stats.pendingGifts`) upon completion (formatted as `Item xCount`, supporting both `gifts` arrays and single `gift` entries).
 
 ---
 

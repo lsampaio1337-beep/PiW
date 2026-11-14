@@ -108,6 +108,13 @@ _pokemonDataArr.forEach((p) => { pokemonData[p.id] = p; });
 
 const { pokedexIndexes } = loadDataFile('config/pokedexIndexes.js', ['pokedexIndexes']);
 const { types } = loadDataFile('config/types.js', ['types']);
+const { defaultExport: gymsList } = loadDataFile('config/gyms.js', ['defaultExport']);
+const gymsByName = new Map();
+if (Array.isArray(gymsList)) {
+    gymsList.forEach(g => {
+        if (g && g.name) gymsByName.set(g.name.toLowerCase(), g);
+    });
+}
 
 const REGIONS = [
     { num: 1, name: 'Kanto', prefix: '', routesVar: 'routes', unlocksVar: 'unlocks', mapVar: 'mapCoordinates' },
@@ -154,6 +161,527 @@ for (const id in pokemonData) {
 function reqString(req) {
     if (!req) return '';
     return JSON.stringify(req);
+}
+
+function getEvoRoot(id) {
+    let curr = String(id);
+    const seen = new Set();
+    while (evosBackward[curr] && !seen.has(curr)) {
+        seen.add(curr);
+        curr = String(evosBackward[curr]);
+    }
+    return curr;
+}
+
+function clamp(val, minVal, maxVal) {
+    return Math.max(minVal, Math.min(maxVal, val));
+}
+
+function roundNice(val, minVal = 1, maxVal = 300) {
+    let n = Math.round(val);
+    if (n >= 16 && n < 100) {
+        n = Math.round(n / 5) * 5;
+    } else if (n >= 100) {
+        n = Math.round(n / 25) * 25;
+    } else if (n === 9 || n === 11) {
+        n = 10;
+    } else if (n === 14) {
+        n = 15;
+    }
+    return clamp(n, minVal, maxVal);
+}
+
+const QUALITY_PROBS = {
+    Weak: 1474 / 12000,
+    UncommonPlus: (12000 - 6586) / 12000,
+    RarePlus: (12000 - 9593) / 12000,
+    Rare: (11097 - 9593) / 12000,
+    Epic: (11999 - 11097) / 12000
+};
+
+function getBiomeMatchTypes(areaName) {
+    const lower = (areaName || '').toLowerCase();
+    const matched = new Set();
+    if (/water|sea|ocean|lake|river|bay|shore|beach|fishing|surf|reef|tidepool|underwater|canal|stream|pond|spring/.test(lower)) matched.add('Water');
+    if (/forest|woods|grove|meadow|garden|jungle|floral|flower|petal|moss|bush/.test(lower)) { matched.add('Bug'); matched.add('Grass'); }
+    if (/cave|cavern|tunnel|mountain|mount|mt\.|peak|cliff|rock|ruin|quarry|crag|pass|canyon|diglett|digglett/.test(lower)) { matched.add('Rock'); matched.add('Ground'); }
+    if (/ice|frost|snow|glacier|blizzard|frozen|cold/.test(lower)) matched.add('Ice');
+    if (/tower|hotel|cemetery|crypt|pyre|haunted|ghost|spirit|ruin/.test(lower)) matched.add('Ghost');
+    if (/volcano|fiery|lava|magma|ember|cinder|furnace|heat/.test(lower)) matched.add('Fire');
+    if (/dragon|meteor|celestial|sky pillar/.test(lower)) matched.add('Dragon');
+    if (/power plant|electric|thunder|volt|charge/.test(lower)) matched.add('Electric');
+    if (/marsh|swamp|bog|toxic|sewer|sludge/.test(lower)) matched.add('Poison');
+    if (/desert|sand|dunes/.test(lower)) matched.add('Ground');
+    if (/dojo|martial|fighting/.test(lower)) matched.add('Fighting');
+    return matched;
+}
+
+function collectChallengeSpawns(c, areaNames, routes, seenBeforeChallenge) {
+    const merged = new Map();
+    const sourceTables = [];
+
+    if (c.spawns && Array.isArray(c.spawns) && c.spawns.length > 0) {
+        sourceTables.push(c.spawns);
+    } else {
+        for (const aName of areaNames) {
+            const r = routes.find(ro => ro.name === aName);
+            if (r && r.spawns && r.spawns.length > 0) {
+                sourceTables.push(r.spawns);
+            }
+        }
+    }
+
+    const tableCount = sourceTables.length || 1;
+    for (const table of sourceTables) {
+        let tableSum = 0;
+        for (const s of table) tableSum += (Number(s.chance) || 0);
+        const norm = tableSum > 0 ? tableSum : 1;
+
+        for (const s of table) {
+            const pk = pokemonData[s.pokemonId];
+            if (!pk) continue;
+            const p = ((Number(s.chance) || 0) / norm) / tableCount;
+            if (!merged.has(s.pokemonId)) {
+                merged.set(s.pokemonId, {
+                    pokemonId: s.pokemonId,
+                    pk,
+                    name: pk.name,
+                    types: pk.types || [],
+                    bst: getBST(pk),
+                    evoRoot: getEvoRoot(s.pokemonId),
+                    chance: p,
+                    isNew: !seenBeforeChallenge.has(s.pokemonId)
+                });
+            } else {
+                merged.get(s.pokemonId).chance += p;
+            }
+        }
+    }
+
+    return Array.from(merged.values()).sort((a, b) => b.chance - a.chance);
+}
+
+function suggestRequirement({ region, c, areaNames, challengeIndex, totalInChain, isMain, quarter, spawns, tracker }) {
+    const primaryArea = areaNames[0] || '';
+    const areaLower = primaryArea.toLowerCase();
+    const chalName = c.challengeName || '';
+    const chalLower = chalName.toLowerCase();
+    const req = c.requirements || {};
+
+    // 1. Special / Non-Wild Challenges
+    if (areaLower === 'red' || req.defeatRed) {
+        return JSON.stringify({ defeatRed: true });
+    }
+
+    if (chalLower.startsWith('key ') || areaLower.startsWith('key ') || chalLower.includes('condition') ||
+        (req.completeChallenges && spawns.length === 0 && !req.earnBadge)) {
+        return JSON.stringify({ completeChallenges: req.completeChallenges || [] });
+    }
+
+    const isLeague = areaLower.includes('pokemon league') || areaLower.includes('pokémon league') ||
+        (region.num === 8 && areaLower.includes('wyndon stadium')) ||
+        Boolean(req.defeatEliteFourAndChampion) ||
+        Object.keys(req).some(k => /^defeat.*Champion$/.test(k));
+    if (isLeague) {
+        if (region.num <= 2) return JSON.stringify({ defeatEliteFourAndChampion: true });
+        return JSON.stringify({ [`defeat${region.name}Champion`]: true });
+    }
+
+    const matchedGym = gymsByName.get(areaLower);
+    const isGymLike = Boolean(req.earnBadge) || (
+        !areaLower.includes('high level') &&
+        !areaLower.includes('battle tower') &&
+        (areaLower.includes('gym') || areaLower.includes('stadium') || areaLower.includes('grand trial'))
+    );
+    if (isGymLike) {
+        tracker.badgeCounter += 1;
+        if (req.earnBadge) {
+            return JSON.stringify({ earnBadge: req.earnBadge });
+        }
+        return JSON.stringify({
+            earnBadge: {
+                name: `${region.name} Badge ${tracker.badgeCounter}`,
+                leader: matchedGym?.leader || 'Leader',
+                badgeCount: tracker.badgeCounter
+            }
+        });
+    }
+
+    if (matchedGym && spawns.length === 0) {
+        return `Defeat Boss: ${matchedGym.leader || primaryArea}`;
+    }
+
+    if (chalLower.includes('(roaming)')) {
+        if (req.defeatMultipleSpecific) return JSON.stringify({ defeatMultipleSpecific: req.defeatMultipleSpecific });
+        if (req.defeatSpecific) return JSON.stringify({ defeatSpecific: req.defeatSpecific });
+        if (spawns.length > 1) {
+            return JSON.stringify({ defeatMultipleSpecific: spawns.slice(0, 4).map(s => ({ name: s.name, count: 1 })) });
+        }
+        if (spawns.length === 1) {
+            return JSON.stringify({ defeatSpecific: { name: spawns[0].name, count: 1 } });
+        }
+    }
+
+    if (spawns.length >= 1 && spawns.length <= 4 && spawns.every(s => s.bst >= 580)) {
+        return JSON.stringify({ catchSpecies: spawns.slice(0, 3).map(s => ({ species: s.name, count: 1 })) });
+    }
+
+    if (spawns.length === 0) {
+        if (/battle|tower|frontier|dojo|hideout/.test(areaLower)) {
+            const cnt = isMain ? (quarter <= 2 ? 75 : 125) : 150;
+            return JSON.stringify({ defeatCountRoute: { route: primaryArea, count: cnt } });
+        }
+        return 'No wild spawns (Boss/Trainer/Story Req)';
+    }
+
+    // 2. Tutorial First Wild Route
+    if (isMain && !tracker.firstWildRouteDone) {
+        tracker.firstWildRouteDone = true;
+        tracker.recentCategories.unshift('defeatCountRoute');
+        tracker.categoryCounts.defeatCountRoute = (tracker.categoryCounts.defeatCountRoute || 0) + 1;
+        tracker.routeDefeatStreak = 0;
+        return JSON.stringify({ defeatCountRoute: { route: primaryArea, count: 25 } });
+    }
+
+    // 3. Encounter Budget
+    const progress = totalInChain > 1 ? challengeIndex / (totalInChain - 1) : (isMain ? 0.5 : 1.0);
+    let targetEnc, minEnc, maxEnc;
+    if (isMain) {
+        if (quarter === 1) {
+            targetEnc = Math.round(28 + Math.min(1, progress * 4) * 22);
+            minEnc = 15; maxEnc = 80;
+        } else if (quarter === 2) {
+            targetEnc = Math.round(50 + Math.min(1, Math.max(0, progress - 0.25) * 4) * 35);
+            minEnc = 25; maxEnc = 120;
+        } else if (quarter === 3) {
+            targetEnc = Math.round(85 + Math.min(1, Math.max(0, progress - 0.50) * 4) * 45);
+            minEnc = 40; maxEnc = 165;
+        } else {
+            targetEnc = Math.round(125 + Math.min(1, Math.max(0, progress - 0.75) * 4) * 50);
+            minEnc = 55; maxEnc = 220;
+        }
+    } else {
+        targetEnc = Math.round(120 + progress * 90);
+        minEnc = 50; maxEnc = 280;
+    }
+
+    const candidates = [];
+    const newSpawns = spawns.filter(s => s.isNew && s.chance > 0);
+    const biomeTypes = getBiomeMatchTypes(primaryArea);
+
+    // --- Candidate A: catchSpecies (New Pokemon Showcase) ---
+    if (newSpawns.length > 0) {
+        const sortedNew = [...newSpawns].sort((a, b) => {
+            const aFlagship = (a.chance >= 0.03 && a.chance <= 0.15) ? 1 : 0;
+            const bFlagship = (b.chance >= 0.03 && b.chance <= 0.15) ? 1 : 0;
+            if (aFlagship !== bFlagship) return bFlagship - aFlagship;
+            return b.bst - a.bst;
+        });
+
+        const picked = [];
+        const usedRoots = new Set();
+        let estEnc = 0;
+
+        // Check for a rare new flagship (2.5% - 10%)
+        const flagship = sortedNew.find(s => s.chance >= 0.025 && s.chance <= 0.10 && (1 / s.chance) <= maxEnc);
+        if (flagship) {
+            picked.push({ species: flagship.name, count: 1, chance: flagship.chance });
+            usedRoots.add(flagship.evoRoot);
+            estEnc += 1 / flagship.chance + 5;
+        }
+
+        for (const s of sortedNew) {
+            if (picked.length >= 3) break;
+            if (usedRoots.has(s.evoRoot)) continue;
+            if (s.chance < 0.05) continue;
+            const addEnc = 1 / s.chance + 5;
+            if (estEnc + addEnc <= maxEnc && (picked.length === 0 || estEnc < targetEnc * 0.9)) {
+                picked.push({ species: s.name, count: 1, chance: s.chance });
+                usedRoots.add(s.evoRoot);
+                estEnc += addEnc;
+            }
+        }
+
+        // If only 1 common new spawn was picked and it's too quick, bump count to 2-3
+        if (picked.length === 1 && estEnc < minEnc && picked[0].chance >= 0.18) {
+            const desired = clamp(Math.round((targetEnc * 0.55) * picked[0].chance), 2, 4);
+            const newEst = desired / picked[0].chance + 4 * desired;
+            if (newEst <= maxEnc) {
+                picked[0].count = desired;
+                estEnc = newEst;
+            }
+        }
+
+        if (picked.length > 0 && estEnc <= maxEnc) {
+            const fitBonus = (picked.length >= 2 ? 15 : 0) + (flagship ? 10 : 0);
+            candidates.push({
+                category: 'catchSpecies',
+                req: { catchSpecies: picked.map(p => ({ species: p.species, count: p.count })) },
+                score: 62 + fitBonus,
+                estEnc
+            });
+        }
+    }
+
+    // --- Candidate B: catchSpeciesOr / catchSpeciesAnyOf (Dual-Target Choice) ---
+    const pairPool = newSpawns.length >= 2 ? newSpawns : spawns.filter(s => s.chance >= 0.05 && s.chance <= 0.25);
+    if (pairPool.length >= 2) {
+        let bestPair = null;
+        let bestPairScore = -1;
+        for (let a = 0; a < pairPool.length; a++) {
+            for (let b = a + 1; b < pairPool.length; b++) {
+                const pA = pairPool[a], pB = pairPool[b];
+                if (pA.evoRoot === pB.evoRoot) continue;
+                const sharedType = pA.types.some(t => pB.types.includes(t)) ? 10 : 0;
+                const bothNew = (pA.isNew && pB.isNew) ? 15 : 0;
+                const rateSim = 10 - Math.abs(pA.chance - pB.chance) * 30;
+                const sc = sharedType + bothNew + rateSim;
+                if (sc > bestPairScore) {
+                    bestPairScore = sc;
+                    bestPair = [pA, pB];
+                }
+            }
+        }
+
+        if (bestPair) {
+            const [pA, pB] = bestPair;
+            const pSum = pA.chance + pB.chance;
+            const cOr = pSum <= 0.22 ? 1 : clamp(Math.round(targetEnc * pSum * 0.40), 1, 3);
+            const estOr = cOr / pSum + 5 * cOr;
+            if (estOr >= minEnc * 0.55 && estOr <= maxEnc) {
+                candidates.push({
+                    category: 'catchSpeciesOr',
+                    req: { catchSpeciesOr: [{ species: pA.name, count: cOr }, { species: pB.name, count: cOr }] },
+                    score: 58 + (pA.isNew && pB.isNew ? 12 : 0),
+                    estEnc: estOr
+                });
+            }
+
+            if (pA.chance >= 0.08 && pB.chance >= 0.08) {
+                const totalAny = clamp(roundNice(targetEnc * pSum * 0.38, 2, 6), 2, 6);
+                const estAny = totalAny / pSum + 4 * totalAny;
+                if (estAny >= minEnc * 0.6 && estAny <= maxEnc) {
+                    const sameType = pA.types.some(t => pB.types.includes(t));
+                    candidates.push({
+                        category: 'catchSpeciesAnyOf',
+                        req: { catchSpeciesAnyOf: [[{ species: pA.name, count: totalAny }, { species: pB.name, count: totalAny }]] },
+                        score: 54 + (sameType ? 10 : 0),
+                        estEnc: estAny
+                    });
+                }
+            }
+        }
+    }
+
+    // --- Candidate C: defeatSpecific (Single-Species Hunt) ---
+    const huntPool = spawns.filter(s => s.chance >= 0.04 && s.chance <= 0.35);
+    if (huntPool.length > 0) {
+        const sortedHunt = [...huntPool].sort((a, b) => {
+            const aIdeal = (a.chance >= 0.06 && a.chance <= 0.20 ? 15 : 0) + (a.bst >= 400 ? 10 : 0) + (a.isNew ? 8 : 0);
+            const bIdeal = (b.chance >= 0.06 && b.chance <= 0.20 ? 15 : 0) + (b.bst >= 400 ? 10 : 0) + (b.isNew ? 8 : 0);
+            return bIdeal - aIdeal || b.bst - a.bst;
+        });
+        const target = sortedHunt[0];
+        const cnt = target.chance <= 0.03 ? 1 : roundNice(targetEnc * target.chance, 2, 30);
+        const estEnc = cnt / target.chance;
+        if (estEnc >= minEnc * 0.65 && estEnc <= maxEnc) {
+            candidates.push({
+                category: 'defeatSpecific',
+                req: { defeatSpecific: { name: target.name, count: cnt } },
+                score: 60 + (target.bst >= 400 ? 8 : 0) + (newSpawns.length === 0 ? 10 : 0),
+                estEnc
+            });
+        }
+    }
+
+    // --- Candidate D: defeatMultipleSpecific (Multi-Target Hunt) ---
+    const multiPool = spawns.filter(s => s.chance >= 0.10);
+    if (multiPool.length >= 2) {
+        // Prefer an evolution family pair on the same route, else top 2 distinct families
+        let chosen = null;
+        for (let a = 0; a < multiPool.length && !chosen; a++) {
+            for (let b = a + 1; b < multiPool.length; b++) {
+                if (multiPool[a].evoRoot === multiPool[b].evoRoot) {
+                    chosen = [multiPool[a], multiPool[b]];
+                    break;
+                }
+            }
+        }
+        const isEvoPair = Boolean(chosen);
+        if (!chosen) {
+            const distinct = [];
+            const roots = new Set();
+            for (const s of multiPool) {
+                if (!roots.has(s.evoRoot)) {
+                    distinct.push(s);
+                    roots.add(s.evoRoot);
+                }
+                if (distinct.length >= (quarter >= 3 ? 3 : 2)) break;
+            }
+            if (distinct.length >= 2) chosen = distinct;
+        }
+
+        if (chosen) {
+            const splitFactor = chosen.length === 3 ? 0.35 : 0.45;
+            const targets = chosen.map(s => ({
+                name: s.name,
+                count: roundNice(targetEnc * splitFactor * s.chance, 2, 15),
+                chance: s.chance
+            }));
+            const estEnc = Math.max(...targets.map(t => t.count / t.chance)) * 1.15;
+            if (estEnc >= minEnc * 0.65 && estEnc <= maxEnc) {
+                candidates.push({
+                    category: 'defeatMultipleSpecific',
+                    req: { defeatMultipleSpecific: targets.map(t => ({ name: t.name, count: t.count })) },
+                    score: 58 + (isEvoPair ? 14 : 0) + (newSpawns.length <= 1 ? 8 : 0),
+                    estEnc
+                });
+            }
+        }
+    }
+
+    // --- Candidate E: catchByType / catchByQualityAndType (Elemental Mastery) ---
+    const typeTotals = new Map();
+    for (const s of spawns) {
+        for (const t of s.types) {
+            if (!typeTotals.has(t)) typeTotals.set(t, { sumChance: 0, count: 0 });
+            const entry = typeTotals.get(t);
+            entry.sumChance += s.chance;
+            entry.count += 1;
+        }
+    }
+    const eligibleTypes = Array.from(typeTotals.entries())
+        .filter(([t, info]) => (t !== 'Normal' || info.sumChance >= 0.65) && ((info.sumChance >= 0.40 && info.count >= 2) || info.sumChance >= 0.55))
+        .sort((a, b) => {
+            const aBiome = biomeTypes.has(a[0]) ? 1 : 0;
+            const bBiome = biomeTypes.has(b[0]) ? 1 : 0;
+            if (aBiome !== bBiome) return bBiome - aBiome;
+            return b[1].sumChance - a[1].sumChance;
+        });
+
+    if (eligibleTypes.length > 0) {
+        const [bestType, info] = eligibleTypes[0];
+        const biomeBonus = biomeTypes.has(bestType) ? 18 : 0;
+
+        const cntType = roundNice(targetEnc * info.sumChance * 0.35, 3, 15);
+        const estType = cntType / info.sumChance + 3 * cntType;
+        if (estType >= minEnc * 0.6 && estType <= maxEnc) {
+            candidates.push({
+                category: 'catchByType',
+                req: { catchByType: { type: bestType, count: cntType } },
+                score: 56 + biomeBonus,
+                estEnc: estType
+            });
+        }
+
+        let qual = 'Rare';
+        let qProb = QUALITY_PROBS.Rare;
+        if (isMain && quarter === 1) { qual = 'Uncommon'; qProb = QUALITY_PROBS.UncommonPlus * 0.55; }
+        else if ((!isMain || quarter === 4) && info.sumChance >= 0.60) { qual = 'Epic'; qProb = QUALITY_PROBS.Epic; }
+
+        const qCount = (qual === 'Rare' && (!isMain || quarter >= 3) && info.sumChance >= 0.70 && (2 / (info.sumChance * qProb)) <= maxEnc) ? 2 : 1;
+        const estQType = qCount / (info.sumChance * qProb) + 5;
+        if (estQType >= minEnc * 0.5 && estQType <= maxEnc) {
+            candidates.push({
+                category: 'catchByQualityAndType',
+                req: { catchByQualityAndType: { type: bestType, quality: qual, count: qCount } },
+                score: 60 + biomeBonus,
+                estEnc: estQType
+            });
+        }
+    }
+
+    // --- Candidate F: Quality Hunts (Species-Specific or Route-Wide) ---
+    const commonLowBst = spawns.find(s => s.chance >= 0.20 && s.bst <= 330);
+    const commonAny = spawns.find(s => s.chance >= 0.20);
+    if (isMain && quarter <= 2 && commonLowBst && (1 / (commonLowBst.chance * QUALITY_PROBS.Weak)) <= maxEnc) {
+        const useWeak = quarter === 2 || commonLowBst.bst <= 260;
+        if (useWeak) {
+            candidates.push({
+                category: 'catchSpeciesQuality',
+                req: { catchSpeciesByQuality: [{ species: commonLowBst.name, quality: 'Weak', count: 1 }] },
+                score: 64 + (commonLowBst.bst <= 260 ? 10 : 0),
+                estEnc: 1 / (commonLowBst.chance * QUALITY_PROBS.Weak) + 4
+            });
+        }
+    }
+    if (commonAny) {
+        let qual = 'Rare';
+        let qProb = QUALITY_PROBS.RarePlus;
+        if (isMain && quarter === 1) { qual = 'Uncommon'; qProb = QUALITY_PROBS.UncommonPlus; }
+        else if ((!isMain || quarter === 4) && commonAny.chance >= 0.28 && (1 / (commonAny.chance * QUALITY_PROBS.Epic)) <= maxEnc) {
+            qual = 'Epic'; qProb = QUALITY_PROBS.Epic;
+        }
+        const estQual = 1 / (commonAny.chance * qProb) + 5;
+        if (estQual >= minEnc * 0.5 && estQual <= maxEnc) {
+            candidates.push({
+                category: 'catchSpeciesQuality',
+                req: { catchSpeciesByQualityOrHigher: [{ species: commonAny.name, quality: qual, count: 1 }] },
+                score: 60 + (commonAny.bst < 360 ? 8 : 0),
+                estEnc: estQual
+            });
+        }
+    }
+    if (spawns.length >= 3) {
+        let qualStr = 'Rare+';
+        let qProb = QUALITY_PROBS.RarePlus;
+        let qCount = 1;
+        if (isMain && quarter === 1) { qualStr = 'Uncommon+'; qProb = QUALITY_PROBS.UncommonPlus; qCount = 2; }
+        else if (isMain && quarter >= 3) { qualStr = 'Rare+'; qProb = QUALITY_PROBS.RarePlus; qCount = 2; }
+        else if (!isMain) { qualStr = 'Epic'; qProb = QUALITY_PROBS.Epic; qCount = 1; }
+        const estRouteQ = qCount / qProb + 5 * qCount;
+        if (estRouteQ <= maxEnc) {
+            candidates.push({
+                category: 'catchByQuality',
+                req: { catchByQuality: { quality: qualStr, count: qCount } },
+                score: 52,
+                estEnc: estRouteQ
+            });
+        }
+    }
+
+    // --- Candidate G: defeatCountRoute (Route Endurance Checkpoint) ---
+    let defeatCount;
+    if (isMain) {
+        if (quarter === 1) defeatCount = roundNice(targetEnc, 30, 50);
+        else if (quarter === 2) defeatCount = roundNice(targetEnc, 60, 100);
+        else if (quarter === 3) defeatCount = roundNice(targetEnc, 100, 150);
+        else defeatCount = areaLower.includes('victory road') ? roundNice(Math.max(targetEnc, 200), 200, 250) : roundNice(targetEnc, 150, 225);
+    } else {
+        defeatCount = roundNice(targetEnc, 150, 300);
+    }
+    const isEnduranceRoute = /victory road|safari|sea route|hideout|underwater/.test(areaLower);
+    const streakBonus = tracker.routeDefeatStreak >= 4 ? 25 : 0;
+    candidates.push({
+        category: 'defeatCountRoute',
+        req: { defeatCountRoute: { route: primaryArea, count: defeatCount } },
+        score: 46 + (newSpawns.length === 0 ? 28 : 0) + (isEnduranceRoute ? 22 : 0) + streakBonus,
+        estEnc: defeatCount
+    });
+
+    // --- Step 5: Pick Best Candidate with Anti-Repetition ---
+    let best = candidates[0];
+    let bestFinalScore = -Infinity;
+    for (const cand of candidates) {
+        let penalty = 0;
+        if (tracker.recentCategories[0] === cand.category) penalty += 60;
+        if (tracker.recentCategories[1] === cand.category) penalty += 30;
+        if (tracker.recentCategories[2] === cand.category) penalty += 15;
+        penalty += (tracker.categoryCounts[cand.category] || 0) * 6;
+
+        const finalScore = cand.score - penalty;
+        if (finalScore > bestFinalScore) {
+            bestFinalScore = finalScore;
+            best = cand;
+        }
+    }
+
+    tracker.recentCategories.unshift(best.category);
+    if (tracker.recentCategories.length > 5) tracker.recentCategories.pop();
+    tracker.categoryCounts[best.category] = (tracker.categoryCounts[best.category] || 0) + 1;
+    tracker.routeDefeatStreak = best.category === 'defeatCountRoute' ? 0 : tracker.routeDefeatStreak + 1;
+
+    return JSON.stringify(best.req);
 }
 
 async function processRegion(region, counter) {
@@ -303,16 +831,74 @@ if (!Array.isArray(routes)) {
         }
         return stage;
     };
+    const areaToChallenges = new Map();
+    const prereqToChallenges = new Map();
+    const addMapEntry = (map, key, val) => {
+        if (!key || !val) return;
+        if (!map.has(key)) map.set(key, []);
+        const list = map.get(key);
+        if (!list.includes(val)) list.push(val);
+    };
+    for (const u of unlocks) {
+        const cLabel = u.challengeName || u.areaId || u.name;
+        const primaryArea = u.areaId || u.name;
+        addMapEntry(areaToChallenges, primaryArea, cLabel);
+        const uReq = u.requirements || {};
+        for (const depList of [uReq.completeChallenges, uReq.completeAnyOfChallenges]) {
+            if (Array.isArray(depList)) {
+                for (const dep of depList) {
+                    addMapEntry(prereqToChallenges, formatChallengeName(dep), cLabel);
+                    addMapEntry(prereqToChallenges, dep, cLabel);
+                }
+            }
+        }
+    }
+
+    const formatGiftString = (c) => {
+        if (Array.isArray(c.gifts) && c.gifts.length > 0) {
+            return c.gifts
+                .map(g => (typeof g === 'string' ? g : `${g.item} x${g.count || 1}`))
+                .join(', ');
+        }
+        if (c.gift) {
+            return typeof c.gift === 'string' ? c.gift : `${c.gift.item} x${c.gift.count || 1}`;
+        }
+        return '';
+    };
+
+    const resolveUnlockedChallenges = (c) => {
+        const unlocked = [];
+        const addUnlocked = (label) => {
+            if (label && !unlocked.includes(label)) unlocked.push(label);
+        };
+        if (Array.isArray(c.unlocks)) {
+            for (const area of c.unlocks) {
+                for (const target of (areaToChallenges.get(area) || [])) {
+                    addUnlocked(target);
+                }
+            }
+        }
+        for (const key of [c.challengeName, c.areaId, c.name]) {
+            if (key && prereqToChallenges.has(key)) {
+                for (const target of prereqToChallenges.get(key)) {
+                    addUnlocked(target);
+                }
+            }
+        }
+        return unlocked.join(', ');
+    };
+
 const mainSeenSets = [];
     const processUnlocks = (challengeList, isMain, startChallengeIndex, initialSeenSet) => {
         let currentSeen = new Map(initialSeenSet);
+        const reqTracker = { recentCategories: [], categoryCounts: {}, routeDefeatStreak: 0, badgeCounter: 0, firstWildRouteDone: false };
         for (let i = 0; i < challengeList.length; i++) {
             const c = challengeList[i];
             const areaNames = [c.areaId || c.name];
             if (c.secondaryAreas && Array.isArray(c.secondaryAreas)) {
                 areaNames.push(...c.secondaryAreas);
             }
-            const isLeagueOrKey = c.challengeName && (c.challengeName.includes('League') || c.challengeName.includes('Key'));
+            const seenBeforeChallenge = new Set(currentSeen.keys());
 
             let primaryAdded = false;
 
@@ -322,7 +908,7 @@ const mainSeenSets = [];
 
                 const req = c.requirements || {};
                 let unlockStr = (c.unlocks || []).join(', ');
-                let giftStr = c.gift ? `${c.gift.item} x${c.gift.count}` : '';
+                let giftStr = formatGiftString(c);
 
                 let avgBST = 0;
                 if (spawns.length > 0) {
@@ -575,51 +1161,33 @@ const mainSeenSets = [];
                     });
                 }
 
-                let sugReq = "";
-                let newPkCount = 0;
-                let lowAppPk = null;
-                let highAppLowBstPk = null;
-
-                if (spawns.length > 0) {
-                    spawns.forEach(s => {
-                        let cPct = (s.chance || 0);
-                        let b = getBST(pokemonData[s.pokemonId]);
-                        if (routesData.find(rd => rd["Route"] === areaName && rd["Pokemon Name"] === pokemonData[s.pokemonId]?.name && rd["First?"] === "")) {
-                            newPkCount++;
-                            if (cPct > 0.20 && b < 350) highAppLowBstPk = pokemonData[s.pokemonId];
-                        }
-                        if (cPct < 0.10) lowAppPk = pokemonData[s.pokemonId];
-                    });
-                }
-
                 if (!primaryAdded) {
-                    if (areaName.toLowerCase().includes("gym") || isLeagueOrKey) {
-                        sugReq = "Defeat Leader/Champion";
-                    } else if (newPkCount > 0) {
-                        sugReq = `Catch ${Math.min(newPkCount, 3)} new pokemon`;
-                    } else if (highAppLowBstPk) {
-                        sugReq = `Catch Rare+ ${highAppLowBstPk.name}`;
-                    } else if (lowAppPk) {
-                        let n = 150;
-                        sugReq = `Defeat ${n} ${lowAppPk.name}`;
-                    } else {
-                        let n = isMain ? (quarter <= 2 ? 50 : (quarter === 3 ? 150 : 250)) : 300;
-                        sugReq = `Defeat ${n} pokemon in route`;
-                    }
+                    const aggregatedSpawns = collectChallengeSpawns(c, areaNames, routes, seenBeforeChallenge);
+                    const sugReq = suggestRequirement({
+                        region,
+                        c,
+                        areaNames,
+                        challengeIndex: i,
+                        totalInChain: challengeList.length,
+                        isMain,
+                        quarter,
+                        spawns: aggregatedSpawns,
+                        tracker: reqTracker
+                    });
 
                     challengesData.push({
                         "Challenge Name": c.challengeName,
                         "Requisite": reqString(req),
                         "Sugestion for Req": sugReq,
                         "Reward Map": unlockStr,
-                        "Reward Challenge": "",
+                        "Reward Challenge": resolveUnlockedChallenges(c),
                         "Reward Gift": giftStr
                     });
                     primaryAdded = true;
                 }
             });
             if (isMain) {
-                mainSeenSets[i] = new Set(currentSeen);
+                mainSeenSets[i] = new Map(currentSeen);
             }
         }
 
@@ -630,7 +1198,7 @@ const mainSeenSets = [];
 
     const mainSeenSet = processUnlocks(mainChallenges, true, 0, new Map());
     Object.keys(extraChallenges).sort().forEach(k => {
-        let splitSeenSet = new Set(mainSeenSet);
+        let splitSeenSet = new Map(mainSeenSet);
         if (extraChallenges[k].length > 0) {
             const firstExtraReq = extraChallenges[k][0].requirements;
             if (firstExtraReq && firstExtraReq.challenge) {
@@ -639,7 +1207,7 @@ const mainSeenSets = [];
                 if (match) {
                     const idx = parseInt(match[1]) - 1;
                     if (idx >= 0 && idx < mainSeenSets.length) {
-                        splitSeenSet = new Set(mainSeenSets[idx]);
+                        splitSeenSet = new Map(mainSeenSets[idx]);
                     }
                 }
             }
@@ -648,7 +1216,7 @@ const mainSeenSets = [];
     });
 
     if (typeof hChallenges !== 'undefined' && hChallenges.length > 0) {
-        processUnlocks(hChallenges, false, mainChallenges.length, new Set(mainSeenSet));
+        processUnlocks(hChallenges, false, mainChallenges.length, new Map(mainSeenSet));
     }
 
     // Add remaining maps that haven't been added yet
