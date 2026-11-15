@@ -1510,6 +1510,19 @@ const missingData = [];
         mergedRoutesData.forEach(r => delete r["Route (Secondary)"]);
     }
 
+    const regionSuffix = ` (${region.name})`;
+    const stripRegionSuffix = (rows) => {
+        for (const row of rows) {
+            for (const key of Object.keys(row)) {
+                if (typeof row[key] === 'string' && row[key].includes(regionSuffix)) {
+                    row[key] = row[key].replaceAll(regionSuffix, '');
+                }
+            }
+        }
+    };
+    stripRegionSuffix(mergedRoutesData);
+    stripRegionSuffix(challengesData);
+
     const wb = xlsx.utils.book_new();
     const wsRoutes = xlsx.utils.json_to_sheet(mergedRoutesData);
     xlsx.utils.book_append_sheet(wb, wsRoutes, "Routes");
