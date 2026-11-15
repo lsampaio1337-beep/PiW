@@ -2213,13 +2213,37 @@ export const unovaRoutes = [
         "pokemonId": 498,
         "minLevel": 80,
         "maxLevel": 86,
-        "chance": 0.5
+        "chance": 0.2222
       },
       {
         "pokemonId": 501,
         "minLevel": 80,
         "maxLevel": 86,
-        "chance": 0.5
+        "chance": 0.2222
+      },
+      {
+        "pokemonId": 495,
+        "minLevel": 80,
+        "maxLevel": 86,
+        "chance": 0.2222
+      },
+      {
+        "pokemonId": 497,
+        "minLevel": 83,
+        "maxLevel": 89,
+        "chance": 0.1111
+      },
+      {
+        "pokemonId": 500,
+        "minLevel": 83,
+        "maxLevel": 89,
+        "chance": 0.1111
+      },
+      {
+        "pokemonId": 503,
+        "minLevel": 83,
+        "maxLevel": 89,
+        "chance": 0.1111
       }
     ]
   },
@@ -2715,7 +2739,13 @@ export const unovaUnlocks = [
           "count": 1
         }
       ]
-    }
+    },
+    "gifts": [
+      {
+        "item": "Normal Stone",
+        "count": 1
+      }
+    ]
   },
   {
     "challengeName": "Challenge 04",
@@ -2730,7 +2760,13 @@ export const unovaUnlocks = [
           "count": 1
         }
       ]
-    }
+    },
+    "gifts": [
+      {
+        "item": "Water Stone",
+        "count": 1
+      }
+    ]
   },
   {
     "challengeName": "Challenge 05",
@@ -2774,7 +2810,13 @@ export const unovaUnlocks = [
           "count": 1
         }
       ]
-    }
+    },
+    "gifts": [
+      {
+        "item": "Water Stone",
+        "count": 1
+      }
+    ]
   },
   {
     "challengeName": "Challenge 08",
@@ -2803,7 +2845,13 @@ export const unovaUnlocks = [
           "count": 1
         }
       ]
-    }
+    },
+    "gifts": [
+      {
+        "item": "Grass Stone",
+        "count": 1
+      }
+    ]
   },
   {
     "challengeName": "Challenge 10",
@@ -2818,7 +2866,13 @@ export const unovaUnlocks = [
           "count": 1
         }
       ]
-    }
+    },
+    "gifts": [
+      {
+        "item": "Poison Stone",
+        "count": 1
+      }
+    ]
   },
   {
     "challengeName": "Challenge 11",
@@ -2833,7 +2887,13 @@ export const unovaUnlocks = [
           "count": 1
         }
       ]
-    }
+    },
+    "gifts": [
+      {
+        "item": "Normal Stone",
+        "count": 1
+      }
+    ]
   },
   {
     "challengeName": "Challenge 12",
@@ -2892,7 +2952,13 @@ export const unovaUnlocks = [
           "count": 1
         }
       ]
-    }
+    },
+    "gifts": [
+      {
+        "item": "Ground Stone",
+        "count": 1
+      }
+    ]
   },
   {
     "challengeName": "Challenge 16",
@@ -2907,7 +2973,13 @@ export const unovaUnlocks = [
           "count": 1
         }
       ]
-    }
+    },
+    "gifts": [
+      {
+        "item": "Ground Stone",
+        "count": 1
+      }
+    ]
   },
   {
     "challengeName": "Challenge 17",
@@ -2922,7 +2994,13 @@ export const unovaUnlocks = [
           "count": 1
         }
       ]
-    }
+    },
+    "gifts": [
+      {
+        "item": "Electric Stone",
+        "count": 1
+      }
+    ]
   },
   {
     "challengeName": "Challenge 18",
@@ -2981,7 +3059,13 @@ export const unovaUnlocks = [
           "count": 1
         }
       ]
-    }
+    },
+    "gifts": [
+      {
+        "item": "Water Stone",
+        "count": 1
+      }
+    ]
   },
   {
     "challengeName": "Challenge 22",
@@ -3025,7 +3109,13 @@ export const unovaUnlocks = [
           "count": 1
         }
       ]
-    }
+    },
+    "gifts": [
+      {
+        "item": "Steel Stone",
+        "count": 1
+      }
+    ]
   },
   {
     "challengeName": "Challenge 25",
@@ -3085,7 +3175,17 @@ export const unovaUnlocks = [
           "count": 1
         }
       ]
-    }
+    },
+    "gifts": [
+      {
+        "item": "Ghost Stone",
+        "count": 1
+      },
+      {
+        "item": "Psychic Stone",
+        "count": 1
+      }
+    ]
   },
   {
     "challengeName": "Challenge 29",
@@ -3100,7 +3200,17 @@ export const unovaUnlocks = [
           "count": 1
         }
       ]
-    }
+    },
+    "gifts": [
+      {
+        "item": "Ground Stone",
+        "count": 1
+      },
+      {
+        "item": "Fire Stone",
+        "count": 1
+      }
+    ]
   },
   {
     "challengeName": "Challenge 30",
@@ -3115,7 +3225,13 @@ export const unovaUnlocks = [
           "count": 1
         }
       ]
-    }
+    },
+    "gifts": [
+      {
+        "item": "Water Stone",
+        "count": 1
+      }
+    ]
   },
   {
     "challengeName": "Challenge 31",
@@ -3146,7 +3262,13 @@ export const unovaUnlocks = [
           "count": 1
         }
       ]
-    }
+    },
+    "gifts": [
+      {
+        "item": "Psychic Stone",
+        "count": 1
+      }
+    ]
   },
   {
     "challengeName": "Challenge 33",
@@ -3176,7 +3298,13 @@ export const unovaUnlocks = [
           "count": 1
         }
       ]
-    }
+    },
+    "gifts": [
+      {
+        "item": "Normal Stone",
+        "count": 1
+      }
+    ]
   },
   {
     "challengeName": "Challenge 35",
@@ -3191,7 +3319,17 @@ export const unovaUnlocks = [
           "count": 1
         }
       ]
-    }
+    },
+    "gifts": [
+      {
+        "item": "Bug Stone",
+        "count": 1
+      },
+      {
+        "item": "Grass Stone",
+        "count": 1
+      }
+    ]
   },
   {
     "challengeName": "Challenge 36",
@@ -3309,7 +3447,13 @@ export const unovaUnlocks = [
           "count": 1
         }
       ]
-    }
+    },
+    "gifts": [
+      {
+        "item": "Water Stone",
+        "count": 1
+      }
+    ]
   },
   {
     "challengeName": "Challenge 44",
@@ -3324,7 +3468,13 @@ export const unovaUnlocks = [
           "count": 1
         }
       ]
-    }
+    },
+    "gifts": [
+      {
+        "item": "Steel Stone",
+        "count": 1
+      }
+    ]
   },
   {
     "challengeName": "Challenge 45",
@@ -3354,7 +3504,13 @@ export const unovaUnlocks = [
           "count": 1
         }
       ]
-    }
+    },
+    "gifts": [
+      {
+        "item": "Ice Stone",
+        "count": 1
+      }
+    ]
   },
   {
     "challengeName": "Challenge 47",
@@ -3384,7 +3540,17 @@ export const unovaUnlocks = [
           "count": 1
         }
       ]
-    }
+    },
+    "gifts": [
+      {
+        "item": "Dark Stone",
+        "count": 1
+      },
+      {
+        "item": "Dragon Stone",
+        "count": 1
+      }
+    ]
   },
   {
     "challengeName": "Unova Final Challenge",
@@ -3393,6 +3559,7 @@ export const unovaUnlocks = [
       "New Region to Travel",
       "Route 1 (Unova)",
       "Daycare",
+      "Nacrene City",
       "Route 10 (Unova)"
     ],
     "requirements": {
@@ -3428,7 +3595,13 @@ export const unovaUnlocks = [
           "count": 10
         }
       ]
-    }
+    },
+    "gifts": [
+      {
+        "item": "Greatball",
+        "count": 15
+      }
+    ]
   },
   {
     "challengeName": "Extra Challenge A 02",
@@ -3443,7 +3616,13 @@ export const unovaUnlocks = [
           "count": 10
         }
       ]
-    }
+    },
+    "gifts": [
+      {
+        "item": "Greatball",
+        "count": 30
+      }
+    ]
   },
   {
     "challengeName": "Extra Challenge A 03",
@@ -3458,7 +3637,13 @@ export const unovaUnlocks = [
           "count": 10
         }
       ]
-    }
+    },
+    "gifts": [
+      {
+        "item": "Regular Potion",
+        "count": 20
+      }
+    ]
   },
   {
     "challengeName": "Extra Challenge A 04",
@@ -3473,7 +3658,17 @@ export const unovaUnlocks = [
           "count": 10
         }
       ]
-    }
+    },
+    "gifts": [
+      {
+        "item": "Dragon Stone",
+        "count": 1
+      },
+      {
+        "item": "Regular Potion",
+        "count": 30
+      }
+    ]
   },
   {
     "challengeName": "Extra Challenge A 05",
@@ -3488,7 +3683,17 @@ export const unovaUnlocks = [
           "count": 10
         }
       ]
-    }
+    },
+    "gifts": [
+      {
+        "item": "Ice Stone",
+        "count": 1
+      },
+      {
+        "item": "Big Potion",
+        "count": 5
+      }
+    ]
   },
   {
     "challengeName": "Extra Challenge A 06",
@@ -3508,8 +3713,16 @@ export const unovaUnlocks = [
     },
     "gifts": [
       {
-        "item": "Masterball",
+        "item": "Rock Stone",
         "count": 1
+      },
+      {
+        "item": "Steel Stone",
+        "count": 1
+      },
+      {
+        "item": "Big Potion",
+        "count": 10
       }
     ]
   },
@@ -3536,7 +3749,13 @@ export const unovaUnlocks = [
           "count": 10
         }
       ]
-    }
+    },
+    "gifts": [
+      {
+        "item": "Greatball",
+        "count": 20
+      }
+    ]
   },
   {
     "challengeName": "Extra Challenge B 02",
@@ -3551,13 +3770,23 @@ export const unovaUnlocks = [
           "count": 10
         }
       ]
-    }
+    },
+    "gifts": [
+      {
+        "item": "Fairy Stone",
+        "count": 1
+      },
+      {
+        "item": "Greatball",
+        "count": 20
+      }
+    ]
   },
   {
     "challengeName": "Extra Challenge B 03",
     "areaId": "Dreamyard",
     "unlocks": [
-      "Route 17"
+      "Route 18"
     ],
     "requirements": {
       "catchSpecies": [
@@ -3566,30 +3795,31 @@ export const unovaUnlocks = [
           "count": 10
         }
       ]
-    }
+    },
+    "gifts": [
+      {
+        "item": "Psychic Stone",
+        "count": 1
+      },
+      {
+        "item": "Big Potion",
+        "count": 5
+      }
+    ]
   },
   {
     "challengeName": "Extra Challenge B 04",
-    "areaId": "Route 17",
-    "unlocks": [
-      "Route 18"
-    ],
-    "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Scrafty",
-          "count": 10
-        }
-      ]
-    }
-  },
-  {
-    "challengeName": "Extra Challenge B 05",
     "areaId": "Route 18",
     "unlocks": [],
     "requirements": {
       "catchSpeciesRoute": "Route 18"
-    }
+    },
+    "gifts": [
+      {
+        "item": "Big Potion",
+        "count": 15
+      }
+    ]
   },
   {
     "challengeName": "Extra Challenge C Condition",
@@ -3614,7 +3844,21 @@ export const unovaUnlocks = [
           "count": 10
         }
       ]
-    }
+    },
+    "gifts": [
+      {
+        "item": "Grass Stone",
+        "count": 1
+      },
+      {
+        "item": "Fire Stone",
+        "count": 1
+      },
+      {
+        "item": "Water Stone",
+        "count": 1
+      }
+    ]
   },
   {
     "challengeName": "Extra Challenge C 02",
@@ -3629,7 +3873,17 @@ export const unovaUnlocks = [
           "count": 10
         }
       ]
-    }
+    },
+    "gifts": [
+      {
+        "item": "Electric Stone",
+        "count": 1
+      },
+      {
+        "item": "Big Potion",
+        "count": 5
+      }
+    ]
   },
   {
     "challengeName": "Extra Challenge C 03",
@@ -3644,7 +3898,17 @@ export const unovaUnlocks = [
           "count": 10
         }
       ]
-    }
+    },
+    "gifts": [
+      {
+        "item": "Normal Stone",
+        "count": 2
+      },
+      {
+        "item": "Big Potion",
+        "count": 10
+      }
+    ]
   },
   {
     "challengeName": "Extra Challenge C 04",
@@ -3659,7 +3923,21 @@ export const unovaUnlocks = [
           "count": 10
         }
       ]
-    }
+    },
+    "gifts": [
+      {
+        "item": "Electric Stone",
+        "count": 1
+      },
+      {
+        "item": "Fighting Stone",
+        "count": 1
+      },
+      {
+        "item": "Big Potion",
+        "count": 15
+      }
+    ]
   },
   {
     "challengeName": "Extra Challenge D Condition",
@@ -3673,19 +3951,6 @@ export const unovaUnlocks = [
   },
   {
     "challengeName": "Extra Challenge D 01",
-    "areaId": "Daycare",
-    "unlocks": [
-      "Nacrene City"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Daycare",
-        "count": 20
-      }
-    }
-  },
-  {
-    "challengeName": "Extra Challenge D 02",
     "areaId": "Nacrene City",
     "unlocks": [
       "Pinwheel Forest"
@@ -3697,10 +3962,20 @@ export const unovaUnlocks = [
           "count": 10
         }
       ]
-    }
+    },
+    "gifts": [
+      {
+        "item": "Grass Stone",
+        "count": 1
+      },
+      {
+        "item": "Ultraball",
+        "count": 10
+      }
+    ]
   },
   {
-    "challengeName": "Extra Challenge D 03",
+    "challengeName": "Extra Challenge D 02",
     "areaId": "Pinwheel Forest",
     "unlocks": [
       "Cave of Being"
@@ -3712,10 +3987,16 @@ export const unovaUnlocks = [
           "count": 10
         }
       ]
-    }
+    },
+    "gifts": [
+      {
+        "item": "Ultraball",
+        "count": 25
+      }
+    ]
   },
   {
-    "challengeName": "Extra Challenge D 04",
+    "challengeName": "Extra Challenge D 03",
     "areaId": "Cave of Being",
     "unlocks": [
       "Liberty Garden"
@@ -3727,7 +4008,13 @@ export const unovaUnlocks = [
           "count": 10
         }
       ]
-    }
+    },
+    "gifts": [
+      {
+        "item": "Masterball",
+        "count": 1
+      }
+    ]
   },
   {
     "challengeName": "Extra Challenge E Condition",
@@ -3752,7 +4039,13 @@ export const unovaUnlocks = [
           "count": 10
         }
       ]
-    }
+    },
+    "gifts": [
+      {
+        "item": "Greatball",
+        "count": 40
+      }
+    ]
   },
   {
     "challengeName": "Extra Challenge E 02",
@@ -3767,7 +4060,17 @@ export const unovaUnlocks = [
           "count": 10
         }
       ]
-    }
+    },
+    "gifts": [
+      {
+        "item": "Big Potion",
+        "count": 10
+      },
+      {
+        "item": "Ultraball",
+        "count": 10
+      }
+    ]
   },
   {
     "challengeName": "Extra Challenge E 03",
@@ -3786,7 +4089,17 @@ export const unovaUnlocks = [
           "count": 1
         }
       ]
-    }
+    },
+    "gifts": [
+      {
+        "item": "Ice Stone",
+        "count": 1
+      },
+      {
+        "item": "Ultraball",
+        "count": 25
+      }
+    ]
   },
   {
     "challengeName": "Extra Challenge C 05",
@@ -3822,7 +4135,7 @@ export const unovaUnlocks = [
     ]
   },
   {
-    "challengeName": "Extra Challenge D 05",
+    "challengeName": "Extra Challenge D 04",
     "areaId": "Liberty Garden",
     "unlocks": [
       "Key to Dragonspiral Clouds Challenge"
@@ -3842,16 +4155,10 @@ export const unovaUnlocks = [
           "count": 1
         }
       ]
-    },
-    "gifts": [
-      {
-        "item": "Masterball",
-        "count": 1
-      }
-    ]
+    }
   },
   {
-    "challengeName": "Extra Challenge E 05",
+    "challengeName": "Extra Challenge E 04",
     "areaId": "Abundant Shrine Depths",
     "unlocks": [
       "Key to Dragonspiral Clouds Challenge"
@@ -3888,13 +4195,13 @@ export const unovaUnlocks = [
     "requirements": {
       "completeChallenges": [
         "Extra Challenge C 05",
-        "Extra Challenge D 05",
-        "Extra Challenge E 05"
+        "Extra Challenge D 04",
+        "Extra Challenge E 04"
       ],
       "activeAnyOfChallenges": [
         "Extra Challenge C 05",
-        "Extra Challenge D 05",
-        "Extra Challenge E 05"
+        "Extra Challenge D 04",
+        "Extra Challenge E 04"
       ]
     }
   },
@@ -3919,7 +4226,13 @@ export const unovaUnlocks = [
           "count": 1
         }
       ]
-    }
+    },
+    "gifts": [
+      {
+        "item": "Masterball",
+        "count": 1
+      }
+    ]
   },
   {
     "challengeName": "Dragonspiral Higher Clouds Challenge",

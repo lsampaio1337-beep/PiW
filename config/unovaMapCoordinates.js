@@ -74,11 +74,6 @@ const unovaMapCoordinates = {
     "x": 58.53,
     "y": 54.88
   },
-  "17": {
-    "name": "Route 17",
-    "x": 80.5,
-    "y": 89.13
-  },
   "18": {
     "name": "Route 18",
     "x": 76.47,
