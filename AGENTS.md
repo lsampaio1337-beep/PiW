@@ -82,7 +82,10 @@ All agents MUST follow these mandatory rules and recognize the following chat sh
   * `/rb`:
     * **R**emove active **B**ranch: Switch back to `main`, then force delete the previously open feature branch and clean up its `.bat` launcher.
   * `/mm`:
-    * **M**erge to **M**ain: Explicit permission to merge the current branch into `main`. Verify tests pass, switch to `main`, and merge the branch cleanly.
+    * **M**erge to **M**ain: Explicit permission to merge the current branch into `main`. Verify tests pass, switch to `main`, merge the branch cleanly, and delete the merged side branch.
   * `/exc`:
     * Generate the regional `.xlsx` file based strictly on the rules in `xlsx.md` and export a copy directly to `C:\Users\lsamp\OneDrive\Desktop\PiW`.
+  * `/eb`:
+    * **E**xplain **B**ack: Before executing, explain back to the user what they asked you to do so they can confirm you understood it correctly.
+    * Structure the explanation in bullet points and include a concrete example if possible.
 
