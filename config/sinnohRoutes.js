@@ -2564,10 +2564,6 @@ export const sinnohUnlocks = [
           count: 1
         }
       ]
-    },
-    gift: {
-      item: "Electric Stone",
-      count: 1
     }
   },
   {
@@ -2583,6 +2579,10 @@ export const sinnohUnlocks = [
           count: 1
         }
       ]
+    },
+    gift: {
+      item: "Bug Stone",
+      count: 1
     }
   },
   {
@@ -2598,7 +2598,17 @@ export const sinnohUnlocks = [
           count: 1
         }
       ]
-    }
+    },
+    gifts: [
+      {
+        item: "Normal Stone",
+        count: 1
+      },
+      {
+        item: "Flying Stone",
+        count: 1
+      }
+    ]
   },
   {
     challengeName: "Challenge 11",
@@ -2628,6 +2638,10 @@ export const sinnohUnlocks = [
           count: 1
         }
       ]
+    },
+    gift: {
+      item: "Psychic Stone",
+      count: 1
     }
   },
   {
@@ -2643,6 +2657,10 @@ export const sinnohUnlocks = [
           count: 1
         }
       ]
+    },
+    gift: {
+      item: "Rock Stone",
+      count: 1
     }
   },
   {
@@ -2688,7 +2706,17 @@ export const sinnohUnlocks = [
           count: 1
         }
       ]
-    }
+    },
+    gifts: [
+      {
+        item: "Normal Stone",
+        count: 1
+      },
+      {
+        item: "Ghost Stone",
+        count: 1
+      }
+    ]
   },
   {
     challengeName: "Challenge 17",
@@ -2761,6 +2789,10 @@ export const sinnohUnlocks = [
           count: 1
         }
       ]
+    },
+    gift: {
+      item: "Water Stone",
+      count: 1
     }
   },
   {
@@ -2839,6 +2871,10 @@ export const sinnohUnlocks = [
           count: 1
         }
       ]
+    },
+    gift: {
+      item: "Water Stone",
+      count: 1
     }
   },
   {
@@ -2912,6 +2948,10 @@ export const sinnohUnlocks = [
           count: 1
         }
       ]
+    },
+    gift: {
+      item: "Electric Stone",
+      count: 1
     }
   },
   {
@@ -2944,7 +2984,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    challengeName: "Challenge 33",
+    challengeName: "Challenge 34",
     areaId: "Victory Road (Sinnoh)",
     unlocks: [
       "Sinnoh Pokemon League"
@@ -2956,10 +2996,14 @@ export const sinnohUnlocks = [
           count: 1
         }
       ]
+    },
+    gift: {
+      item: "Ground Stone",
+      count: 1
     }
   },
   {
-    challengeName: "Challenge 34",
+    challengeName: "Challenge 35",
     areaId: "Sinnoh Pokemon League",
     unlocks: [
       "Iron Island",
