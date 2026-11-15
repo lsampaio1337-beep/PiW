@@ -3019,14 +3019,26 @@ export const unovaUnlocks = [
   },
   {
     "challengeName": "Challenge 19",
-    "areaId": "Lostlorn Forest",
+    "areaId": "Lostlorn Forest Rainbow Corner",
     "unlocks": [
       "Nimbasa Gym"
     ],
     "requirements": {
       "catchSpecies": [
         {
-          "species": "Unfezant",
+          "species": "Glaceon",
+          "count": 1
+        },
+        {
+          "species": "Leafeon",
+          "count": 1
+        },
+        {
+          "species": "Espeon",
+          "count": 1
+        },
+        {
+          "species": "Umbreon",
           "count": 1
         }
       ]
@@ -4257,4 +4269,57 @@ export const unovaUnlocks = [
       }
     ]
   }
-];
+];  {
+    "name": "Lostlorn Forest Rainbow Corner",
+    "spawns": [
+      {
+        "pokemonId": 133,
+        "minLevel": 24,
+        "maxLevel": 26,
+        "chance": 0.16
+      },
+      {
+        "pokemonId": 134,
+        "minLevel": 25,
+        "maxLevel": 27,
+        "chance": 0.12
+      },
+      {
+        "pokemonId": 135,
+        "minLevel": 25,
+        "maxLevel": 27,
+        "chance": 0.12
+      },
+      {
+        "pokemonId": 136,
+        "minLevel": 25,
+        "maxLevel": 27,
+        "chance": 0.12
+      },
+      {
+        "pokemonId": 196,
+        "minLevel": 25,
+        "maxLevel": 27,
+        "chance": 0.12
+      },
+      {
+        "pokemonId": 197,
+        "minLevel": 25,
+        "maxLevel": 27,
+        "chance": 0.12
+      },
+      {
+        "pokemonId": 470,
+        "minLevel": 25,
+        "maxLevel": 27,
+        "chance": 0.12
+      },
+      {
+        "pokemonId": 471,
+        "minLevel": 25,
+        "maxLevel": 27,
+        "chance": 0.12
+      }
+    ]
+  },
+

@@ -304,6 +304,26 @@ const unovaMapCoordinates = {
     "x": 58.56,
     "y": 47.66
   },
+  "lostlorn_forest_rainbow_corner": {
+    "name": "Lostlorn Forest Rainbow Corner",
+    "x": 60.56,
+    "y": 47.66
+  },
+  "lostlorn_forest_rainbow_corner": {
+    "name": "Lostlorn Forest Rainbow Corner",
+    "x": 60.56,
+    "y": 47.66
+  },
+  "lostlorn_forest_rainbow_corner": {
+    "name": "Lostlorn Forest Rainbow Corner",
+    "x": 60.56,
+    "y": 47.66
+  },
+  "lostlorn_forest_rainbow_corner": {
+    "name": "Lostlorn Forest Rainbow Corner",
+    "x": 60.56,
+    "y": 47.66
+  },
   "undella_bay": {
     "name": "Undella Bay",
     "x": 88.3,
