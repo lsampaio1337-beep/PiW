@@ -1164,8 +1164,7 @@ export const hoennRoutes = [
         "chance": 1/10
       },
       {
-        "pokemonId": 352,
-        "minLevel": 63,
+        "pokemonId": 288,
         "maxLevel": 69,
         "chance": 1/10
       },
@@ -1948,6 +1947,10 @@ export const hoennUnlocks = [
           "count": 1
         }
       ]
+    },
+    "gift": {
+      "item": "Water Stone",
+      "count": 1
     }
   },
   {
@@ -2032,6 +2035,10 @@ export const hoennUnlocks = [
           "count": 1
         }
       ]
+    },
+    "gift": {
+      "item": "Water Stone",
+      "count": 1
     }
   },
   {
@@ -2055,6 +2062,10 @@ export const hoennUnlocks = [
           "count": 1
         }
       ]
+    },
+    "gift": {
+      "item": "Electric Stone",
+      "count": 1
     }
   },
   {
@@ -2180,10 +2191,6 @@ export const hoennUnlocks = [
     "unlocks": [
       "Route 115"
     ],
-    "gift": {
-      "item": "Dragon Stone",
-      "count": 1
-    },
     "requirements": {
       "catchSpecies": [
         {
@@ -2191,6 +2198,10 @@ export const hoennUnlocks = [
           "count": 2
         }
       ]
+    },
+    "gift": {
+      "item": "Psychic Stone",
+      "count": 1
     }
   },
   {
@@ -2204,7 +2215,17 @@ export const hoennUnlocks = [
         "name": "Jigglypuff",
         "count": 10
       }
-    }
+    },
+    "gifts": [
+      {
+        "item": "Normal Stone",
+        "count": 1
+      },
+      {
+        "item": "Flying Stone",
+        "count": 1
+      }
+    ]
   },
   {
     "challengeName": "Challenge 26",
@@ -2279,6 +2300,10 @@ export const hoennUnlocks = [
           "count": 1
         }
       ]
+    },
+    "gift": {
+      "item": "Dark Stone",
+      "count": 1
     }
   },
   {
@@ -2294,6 +2319,10 @@ export const hoennUnlocks = [
         "route": "Route 121",
         "count": 150
       }
+    },
+    "gift": {
+      "item": "Ghost Stone",
+      "count": 1
     }
   },
   {
@@ -2484,14 +2513,12 @@ export const hoennUnlocks = [
       "Trick House",
       "Unlock a new region"
     ],
-    "gifts": [
-      {
-        "item": "Masterball",
-        "count": 2
-      }
-    ],
     "requirements": {
       "defeatHoennChampion": true
+    },
+    "gift": {
+      "item": "Masterball",
+      "count": 1
     }
   },
   {
@@ -2500,10 +2527,6 @@ export const hoennUnlocks = [
     "unlocks": [
       "Starter Sanctuary"
     ],
-    "gift": {
-      "item": "Ultraball",
-      "count": 10
-    },
     "requirements": {
       "catchSpecies": [
         {
@@ -2511,6 +2534,10 @@ export const hoennUnlocks = [
           "count": 3
         }
       ]
+    },
+    "gift": {
+      "item": "Greatball",
+      "count": 10
     }
   },
   {
@@ -2534,7 +2561,21 @@ export const hoennUnlocks = [
           "count": 1
         }
       ]
-    }
+    },
+    "gifts": [
+      {
+        "item": "Grass Stone",
+        "count": 1
+      },
+      {
+        "item": "Fire Stone",
+        "count": 1
+      },
+      {
+        "item": "Water Stone",
+        "count": 1
+      }
+    ]
   },
   {
     "challengeName": "Extra Challenge A 03",
@@ -2558,10 +2599,20 @@ export const hoennUnlocks = [
         }
       ]
     },
-    "gift": {
-      "item": "Grass Stone",
-      "count": 2
-    }
+    "gifts": [
+      {
+        "item": "Grass Stone",
+        "count": 1
+      },
+      {
+        "item": "Fire Stone",
+        "count": 1
+      },
+      {
+        "item": "Water Stone",
+        "count": 1
+      }
+    ]
   },
   {
     "challengeName": "Extra Challenge A 04",
@@ -2569,10 +2620,6 @@ export const hoennUnlocks = [
     "unlocks": [
       "Battle Frontier Facility"
     ],
-    "gift": {
-      "item": "Masterball",
-      "count": 1
-    },
     "requirements": {
       "catchSpecies": [
         {
@@ -2600,6 +2647,10 @@ export const hoennUnlocks = [
           "count": 1
         }
       ]
+    },
+    "gift": {
+      "item": "Greatball",
+      "count": 30
     }
   },
   {
@@ -2608,15 +2659,15 @@ export const hoennUnlocks = [
     "unlocks": [
       "The Solitary Atoll"
     ],
-    "gift": {
-      "item": "Masterball",
-      "count": 1
-    },
     "requirements": {
       "defeatCountRoute": {
         "route": "Battle Frontier Facility",
         "count": 100
       }
+    },
+    "gift": {
+      "item": "Ultraball",
+      "count": 15
     }
   },
   {
@@ -2625,10 +2676,6 @@ export const hoennUnlocks = [
     "unlocks": [
       "Key to Nebula Fissure Challenge"
     ],
-    "gift": {
-      "item": "Masterball",
-      "count": 2
-    },
     "requirements": {
       "catchSpecies": [
         {
@@ -2640,6 +2687,10 @@ export const hoennUnlocks = [
           "count": 1
         }
       ]
+    },
+    "gift": {
+      "item": "Masterball",
+      "count": 1
     }
   },
   {
@@ -2648,10 +2699,6 @@ export const hoennUnlocks = [
     "unlocks": [
       "Rustboro Fossil Lab"
     ],
-    "gift": {
-      "item": "Masterball",
-      "count": 1
-    },
     "requirements": {
       "catchSpecies": [
         {
@@ -2663,6 +2710,10 @@ export const hoennUnlocks = [
           "count": 1
         }
       ]
+    },
+    "gift": {
+      "item": "Electric Stone",
+      "count": 2
     }
   },
   {
@@ -2671,10 +2722,6 @@ export const hoennUnlocks = [
     "unlocks": [
       "Abandoned Ship"
     ],
-    "gift": {
-      "item": "Root Fossil",
-      "count": 1
-    },
     "requirements": {
       "catchSpecies": [
         {
@@ -2686,6 +2733,10 @@ export const hoennUnlocks = [
           "count": 1
         }
       ]
+    },
+    "gift": {
+      "item": "Rock Stone",
+      "count": 2
     }
   },
   {
@@ -2694,10 +2745,6 @@ export const hoennUnlocks = [
     "unlocks": [
       "Enemy Hideout"
     ],
-    "gift": {
-      "item": "Deep Sea Scale",
-      "count": 1
-    },
     "requirements": {
       "catchSpecies": [
         {
@@ -2705,6 +2752,10 @@ export const hoennUnlocks = [
           "count": 1
         }
       ]
+    },
+    "gift": {
+      "item": "Water Stone",
+      "count": 2
     }
   },
   {
@@ -2713,15 +2764,15 @@ export const hoennUnlocks = [
     "unlocks": [
       "Sealed Chamber"
     ],
-    "gift": {
-      "item": "Masterball",
-      "count": 1
-    },
     "requirements": {
       "defeatCountRoute": {
         "route": "Enemy Hideout",
         "count": 100
       }
+    },
+    "gift": {
+      "item": "Poison Stone",
+      "count": 3
     }
   },
   {
@@ -2730,10 +2781,6 @@ export const hoennUnlocks = [
     "unlocks": [
       "Ancient Ruins"
     ],
-    "gift": {
-      "item": "Masterball",
-      "count": 2
-    },
     "requirements": {
       "catchSpecies": [
         {
@@ -2745,6 +2792,10 @@ export const hoennUnlocks = [
           "count": 1
         }
       ]
+    },
+    "gift": {
+      "item": "Ultraball",
+      "count": 15
     }
   },
   {
@@ -2753,10 +2804,6 @@ export const hoennUnlocks = [
     "unlocks": [
       "Key to Nebula Fissure Challenge"
     ],
-    "gift": {
-      "item": "Masterball",
-      "count": 1
-    },
     "requirements": {
       "catchSpecies": [
         {
@@ -2772,6 +2819,10 @@ export const hoennUnlocks = [
           "count": 1
         }
       ]
+    },
+    "gift": {
+      "item": "Masterball",
+      "count": 1
     }
   },
   {
@@ -2815,10 +2866,6 @@ export const hoennUnlocks = [
     "challengeName": "Nebula Fissure Challenge",
     "areaId": "Nebula Fissure",
     "unlocks": [],
-    "gift": {
-      "item": "Masterball",
-      "count": 1
-    },
     "requirements": {
       "catchSpecies": [
         {
@@ -2834,6 +2881,10 @@ export const hoennUnlocks = [
           "count": 1
         }
       ]
+    },
+    "gift": {
+      "item": "Masterball",
+      "count": 2
     }
   }
 ];
