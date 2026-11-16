@@ -56,4 +56,27 @@ describe('getSpriteUrl', () => {
         expect(getSpriteUrl(1)).toBe('');
         state.config = originalConfig; // Restore
     });
+
+    it('should return Reg1-Reg4 URLs when legacySprites is enabled for regions 1-4', () => {
+        state.settings = { legacySprites: true };
+
+        state.currentRegionName = 'Kanto';
+        expect(getSpriteUrl(1)).toBe('Assets/Pokemon Sprites/Reg1 RBY/Gen1RBY_0001_bulbasaur.png');
+
+        state.currentRegionName = 'Johto';
+        expect(getSpriteUrl(1)).toBe('Assets/Pokemon Sprites/Reg2 C/Gen2C_0001_bulbasaur.png');
+
+        state.currentRegionName = 'Hoenn';
+        expect(getSpriteUrl(1)).toBe('Assets/Pokemon Sprites/Reg3 E/Gen3E_0001_bulbasaur.png');
+
+        state.currentRegionName = 'Sinnoh';
+        expect(getSpriteUrl(1, true)).toBe('Assets/Pokemon Sprites/Reg4 P/Gen4P_0001_bulbasaur_shiny.png');
+
+        state.currentRegionName = 'Unova';
+        expect(getSpriteUrl(1)).toBe('Assets/Pokemon Sprites/Reg5 BW/Gen5BW_0001_bulbasaur.png');
+
+        state.settings.legacySprites = false;
+        state.currentRegionName = 'Kanto';
+        expect(getSpriteUrl(1)).toBe('Assets/Pokemon Sprites/Reg5 BW/Gen5BW_0001_bulbasaur.png');
+    });
 });

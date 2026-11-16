@@ -3,16 +3,35 @@ import { state, globals } from '../state.js';
 import { showModal } from '../ui.js';
 import * as mathEngine from '../mathEngine.js';
 import { showCheatControlModal } from './cheatControl.js';
+import { clearAllSpriteCaches } from '../utils/sprites.js';
+
+export function toggleLegacySprites(value) {
+    state.settings.legacySprites = (value === 'true' || value === true);
+    clearAllSpriteCaches();
+    if (window.updateUI) window.updateUI();
+}
+window.toggleLegacySprites = toggleLegacySprites;
 
 export function showSettings() {
     const battleSystem = globals.battleSystem;
     if (battleSystem && battleSystem.gymState && battleSystem.gymState.isActive) return;
 
+    const isLegacy = !!state.settings?.legacySprites;
     const settingsHTML = `
+        <div style="margin-bottom: 12px;">
+            <label for="legacy-sprites-checkbox" style="cursor: pointer;">
+                <input type="checkbox" id="legacy-sprites-checkbox" ${isLegacy ? 'checked' : ''} style="margin-right: 6px;">
+                Legacy Sprites
+            </label>
+        </div>
         <button onclick="window.exportLog()">Export Save Log</button>
         <button onclick="window.activateCheat()" style="margin-left: 10px; background-color: #c0392b; color: white;">Cheat</button>
     `;
     showModal("Settings", settingsHTML, "window-settings");
+    const checkboxEl = document.getElementById('legacy-sprites-checkbox');
+    if (checkboxEl) {
+        checkboxEl.addEventListener('change', (e) => toggleLegacySprites(e.target.checked));
+    }
 }
 
 export function showTimeLapseModal() {

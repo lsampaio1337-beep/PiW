@@ -145,6 +145,20 @@ window.toggleSaleSelection = function(uuid) {
 window.pokemonFilters = window.pokemonFilters || {
     name: '', minLvl: '', maxLvl: '', minQ: '', maxQ: '', minIV: '', maxIV: '', breedableOnly: false
 };
+window.showPokemonFilters = window.showPokemonFilters || false;
+if (typeof window.showSafeSpots === 'undefined') {
+    window.showSafeSpots = true;
+}
+
+window.togglePokemonFilters = function() {
+    window.showPokemonFilters = !window.showPokemonFilters;
+    renderBackpackTab('pokemon');
+};
+
+window.toggleSafeSpots = function() {
+    window.showSafeSpots = !window.showSafeSpots;
+    renderBackpackTab('pokemon');
+};
 
 window.clearPokemonFilter = function() {
     window.pokemonFilters = { name: '', minLvl: '', maxLvl: '', minQ: '', maxQ: '', minIV: '', maxIV: '', breedableOnly: false };
@@ -174,11 +188,15 @@ export function renderPokemonTab(area) {
         `;
     }
 
+    const activeTabStyle = 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2);';
+    const inactiveTabStyle = 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid rgba(255, 255, 255, 0.2);';
+
     let content = `
-        <div style="text-align: center; margin-bottom: 5px;">
-            <button onclick="document.getElementById('pokemon-filters').style.display = document.getElementById('pokemon-filters').style.display === 'none' ? 'block' : 'none';" style="background: none; border: 1px solid #777; color: white; cursor: pointer; border-radius: 4px; padding: 2px 5px;">🔍 Toggle Filters</button>
+        <div style="display: flex; justify-content: center; gap: 8px; margin-bottom: 5px;">
+            <button onclick="window.togglePokemonFilters()" style="${window.showPokemonFilters ? activeTabStyle : inactiveTabStyle} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 13px; transition: all 0.2s;">🔍 Filters</button>
+            <button onclick="window.toggleSafeSpots()" style="${window.showSafeSpots ? activeTabStyle : inactiveTabStyle} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 13px; transition: all 0.2s;">🔒 Safe</button>
         </div>
-        <div id="pokemon-filters" style="display: none; background: rgba(0,0,0,0.7); padding: 5px; border-radius: 5px; margin-bottom: 10px; font-size: 12px; text-align: center;">
+        <div id="pokemon-filters" style="display: ${window.showPokemonFilters ? 'block' : 'none'}; background: rgba(0,0,0,0.7); padding: 5px; border-radius: 5px; margin-bottom: 10px; font-size: 12px; text-align: center;">
             <input type="text" id="pfilter-name" placeholder="Name" value="${escapeHTML(filters.name)}" oninput="window.updatePokemonFilter('name', this.value)" style="width: 80px; margin: 2px;">
             <input type="number" id="pfilter-minLvl" placeholder="Min Lv" value="${escapeHTML(filters.minLvl)}" oninput="window.updatePokemonFilter('minLvl', this.value)" style="width: 50px; margin: 2px; -moz-appearance: textfield;">
             <input type="number" id="pfilter-maxLvl" placeholder="Max Lv" value="${escapeHTML(filters.maxLvl)}" oninput="window.updatePokemonFilter('maxLvl', this.value)" style="width: 50px; margin: 2px; -moz-appearance: textfield;">
@@ -189,11 +207,23 @@ export function renderPokemonTab(area) {
             <style>#pokemon-filters input::-webkit-outer-spin-button, #pokemon-filters input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }</style>
         </div>
         ${sellControlsHtml}
+    `;
 
+    const showSafe = window.showSafeSpots;
+    const activeFlex = showSafe
+        ? 'flex: 0 0 calc((100% - 76px) * 2 / 7 + 17px);'
+        : 'flex: 0 0 calc((100% - 59px) * 2 / 7 + 17px);';
+    const storageFlex = showSafe
+        ? 'flex: 0 0 calc((100% - 76px) * 3 / 7 + 22px);'
+        : 'flex: 0 0 calc((100% - 59px) * 5 / 7 + 32px);';
+    const storageCols = showSafe ? 3 : 5;
+    const safeFlex = 'flex: 0 0 calc((100% - 76px) * 2 / 7 + 17px);';
+
+    content += `
         <div style="display: flex; gap: 10px; width: 100%; height: 100%; min-height: 0; overflow-x: hidden; flex-grow: 1;">
             <!-- Column 1: Active -->
-            <div style="flex: 2; border: 1px solid #555; padding: 5px; display: flex; flex-direction: column; min-width: 0; min-height: 0; overflow-x: hidden;">
-                <h4 style="text-align: center; margin-top:0;">Active</h4>
+            <div style="${activeFlex} box-sizing: border-box; border: 1px solid #555; padding: 5px; display: flex; flex-direction: column; min-width: 0; min-height: 0; overflow-x: hidden;">
+                <h4 style="text-align: center; margin-top:0; margin-bottom: 5px;">Active</h4>
                 <div id="active-scroll-container" style="display: grid; grid-template-columns: repeat(2, 1fr); grid-auto-rows: max-content; gap: 5px; overflow-y: auto; overflow-x: hidden; align-content: start; flex-grow: 1; padding-bottom: 20px; min-height: 0;">
     `;
 
@@ -245,9 +275,9 @@ export function renderPokemonTab(area) {
             </div>
 
             <!-- Column 2: Storage -->
-            <div ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, 'storage')" style="flex: 3; border: 1px solid #555; padding: 5px; display: flex; flex-direction: column; min-width: 0; min-height: 0; overflow-x: hidden;">
-                <h4 style="text-align: center; margin-top:0;">Storage</h4>
-                <div id="storage-scroll-container" style="display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: max-content; gap: 5px; overflow-y: auto; overflow-x: hidden; align-content: start; flex-grow: 1; padding-bottom: 20px; min-height: 0;">
+            <div ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, 'storage')" style="${storageFlex} box-sizing: border-box; border: 1px solid #555; padding: 5px; display: flex; flex-direction: column; min-width: 0; min-height: 0; overflow-x: hidden;">
+                <h4 style="text-align: center; margin-top:0; margin-bottom: 5px;">Storage</h4>
+                <div id="storage-scroll-container" style="display: grid; grid-template-columns: repeat(${storageCols}, 1fr); grid-auto-rows: max-content; gap: 5px; overflow-y: auto; overflow-x: hidden; align-content: start; flex-grow: 1; padding-bottom: 20px; min-height: 0;">
     `;
 
     for (let i = 0; i < state.storage.length; i++) {
@@ -258,23 +288,28 @@ export function renderPokemonTab(area) {
 
     content += `
                 </div>
-            </div>
+            </div>`;
 
+    if (showSafe) {
+        content += `
             <!-- Column 3: Safe -->
-            <div ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, 'safe')" style="flex: 2; border: 1px solid #555; padding: 5px; display: flex; flex-direction: column; min-width: 0; min-height: 0; overflow-x: hidden;">
-                <h4 style="text-align: center; margin-top:0;">Safe</h4>
+            <div id="safe-section" ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, 'safe')" style="${safeFlex} box-sizing: border-box; border: 1px solid #555; padding: 5px; display: flex; flex-direction: column; min-width: 0; min-height: 0; overflow-x: hidden;">
+                <h4 style="text-align: center; margin-top:0; margin-bottom: 5px;">Safe</h4>
                 <div id="safe-scroll-container" style="display: grid; grid-template-columns: repeat(2, 1fr); grid-auto-rows: max-content; gap: 5px; overflow-y: auto; overflow-x: hidden; align-content: start; flex-grow: 1; padding-bottom: 20px; min-height: 0;">
-    `;
+        `;
 
-    for (let i = 0; i < state.safe.length; i++) {
-        let p = state.safe[i];
-        content += renderSlotUI(p, 'safe', i, true);
+        for (let i = 0; i < state.safe.length; i++) {
+            let p = state.safe[i];
+            content += renderSlotUI(p, 'safe', i, true);
+        }
+        content += `<div style="border: 1px dashed #3498db; aspect-ratio: 1 / 1.5; display: flex; align-items: center; justify-content: center; font-size: 20px; cursor: pointer; box-sizing: border-box;" title="Empty Slot">+</div>`;
+
+        content += `
+                </div>
+            </div>`;
     }
-    content += `<div style="border: 1px dashed #3498db; aspect-ratio: 1 / 1.5; display: flex; align-items: center; justify-content: center; font-size: 20px; cursor: pointer; box-sizing: border-box;" title="Empty Slot">+</div>`;
 
     content += `
-                </div>
-            </div>
         </div>
         <div style="font-size: 10px; text-align: center; margin-top: 5px; color: #ccc;">Drag and Drop to move Pokémon.</div>
     `;

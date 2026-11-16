@@ -9,6 +9,13 @@ function sanitizeSpriteName(name) {
         .replace(/[^a-zA-Z0-9]/g, '');
 }
 
+const LEGACY_REGION_SPRITES = {
+    Kanto: { folder: 'Reg1 RBY', prefix: 'Gen1RBY' },
+    Johto: { folder: 'Reg2 C', prefix: 'Gen2C' },
+    Hoenn: { folder: 'Reg3 E', prefix: 'Gen3E' },
+    Sinnoh: { folder: 'Reg4 P', prefix: 'Gen4P' }
+};
+
 export function getSpriteUrl(id, isShiny = false) {
     if (!state || !state.config || (!state.config.pokemonMap && !state.config.pokemonData) || id === undefined || id === null) return '';
     const pData = state.config.pokemonMap
@@ -17,7 +24,12 @@ export function getSpriteUrl(id, isShiny = false) {
     if (!pData) return '';
     const paddedId = id.toString().padStart(4, '0');
     const safeName = sanitizeSpriteName(pData.name);
-    return `Assets/Pokemon Sprites/Reg5 BW/Gen5BW_${paddedId}_${safeName}${isShiny ? '_shiny' : ''}.png`;
+
+    const legacyCfg = state.settings?.legacySprites ? LEGACY_REGION_SPRITES[state.currentRegionName] : null;
+    const folder = legacyCfg ? legacyCfg.folder : 'Reg5 BW';
+    const prefix = legacyCfg ? legacyCfg.prefix : 'Gen5BW';
+
+    return `Assets/Pokemon Sprites/${folder}/${prefix}_${paddedId}_${safeName}${isShiny ? '_shiny' : ''}.png`;
 };
 
 const routeTrimCache = new Map();
@@ -39,6 +51,15 @@ export function clearRouteSpriteCache() {
         revokeBlobUrl(url);
     }
     routeTrimCache.clear();
+}
+
+export function clearAllSpriteCaches() {
+    clearRouteSpriteCache();
+    for (const url of partyTrimCache.values()) {
+        revokeBlobUrl(url);
+    }
+    partyTrimCache.clear();
+    inFlightTrims.clear();
 }
 
 function trimImageElement(img, naturalUrl) {

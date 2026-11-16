@@ -111,7 +111,8 @@ export const state = {
         windowSettings: {}, // Stores window positions and sizes
         smartCapture: {},
         smartCaptureShiny: {},
-        globalSmartCaptureShiny: undefined
+        globalSmartCaptureShiny: undefined,
+        legacySprites: false
     },
     regions: {},
     config: {}
