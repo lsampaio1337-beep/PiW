@@ -2096,7 +2096,7 @@ async function init() {
             btn.style.borderRadius = "9999px";
             btn.style.textAlign = "left";
             btn.style.fontWeight = "bold";
-            btn.style.width = "80%";
+            btn.style.width = "64%";
             btn.style.position = "relative";
             btn.style.zIndex = "1";
             btn.style.flexDirection = "column";
@@ -2127,7 +2127,7 @@ async function init() {
             playedDiv.style.fontSize = "18px";
             playedDiv.style.fontWeight = "bold";
             playedDiv.style.marginBottom = "5px";
-            playedDiv.textContent = `Last Played: ${lastPlayedStr}`;
+            playedDiv.textContent = lastPlayedStr;
 
 
             leftSide.appendChild(titleDiv);
@@ -2147,7 +2147,6 @@ async function init() {
             medalsContainer.style.justifyContent = "center";
             medalsContainer.style.alignItems = "center";
             medalsContainer.style.gap = "2px";
-            medalsContainer.style.minWidth = "194px";
 
             let earnedAnyMedal = false;
 
