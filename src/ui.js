@@ -2067,13 +2067,14 @@ async function init() {
             const profileName = pData.profileName || `Profile ${index + 1}`;
 
             const btn = document.createElement('button');
-            btn.style.padding = "10px";
+            btn.className = 'action-btn-pill';
+            btn.style.padding = "10px 22px";
             btn.style.fontSize = "16px";
             btn.style.cursor = "pointer";
-            btn.style.backgroundColor = "#FFC107"; // Big Yellow Button
-            btn.style.color = "black";
+            btn.style.backgroundColor = "#3498db"; // Blue Pill Button
+            btn.style.color = "white";
             btn.style.border = "4px solid black";
-            btn.style.borderRadius = "5px";
+            btn.style.borderRadius = "9999px";
             btn.style.textAlign = "left";
             btn.style.fontWeight = "bold";
 
