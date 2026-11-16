@@ -2090,13 +2090,20 @@ async function init() {
 
             const leftSide = document.createElement('div');
             leftSide.style.display = "flex";
+            leftSide.style.flex = "1";
             leftSide.style.flexDirection = "column";
-            leftSide.style.alignItems = "flex-start";
+            leftSide.style.alignItems = "center";
+            leftSide.style.textAlign = "center";
+
+            const middleSide = document.createElement('div');
+            middleSide.style.flex = "1";
 
             const rightSide = document.createElement('div');
             rightSide.style.display = "flex";
+            rightSide.style.flex = "1";
             rightSide.style.flexDirection = "column";
-            rightSide.style.alignItems = "flex-end";
+            rightSide.style.alignItems = "center";
+            rightSide.style.textAlign = "center";
 
             const titleDiv = document.createElement('div');
             titleDiv.style.fontSize = "18px";
@@ -2116,6 +2123,7 @@ async function init() {
             rightSide.appendChild(playedDiv);
 
             textWrapper.appendChild(leftSide);
+            textWrapper.appendChild(middleSide);
             textWrapper.appendChild(rightSide);
 
             btn.appendChild(textWrapper);
