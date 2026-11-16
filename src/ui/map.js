@@ -602,7 +602,7 @@ export function navigateToLocation(locationName) {
             vGym.style.backgroundPosition = "center";
 
             let html = `
-                <div style="position: absolute; top: 30%; left: 50%; transform: translateX(-50%); text-align: center; color: white; background: rgba(0,0,0,0.8); padding: 20px; border-radius: 10px; font-size: 20px; width: 60%; font-family: monospace;">
+                <div style="position: absolute; top: 30%; left: 50%; transform: translateX(-50%); text-align: center; color: white; background: rgba(0,0,0,0.8); padding: 20px; border-radius: 10px; border: 2px solid #1abc9c; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.65), 0 0 14px rgba(26, 188, 156, 0.25); font-size: 20px; width: 60%; font-family: monospace;">
                   <p id="safari-welcome-msg">Welcome to ${locationName}! Here we charge a fee per battle you have and you can use our SafariBalls at will.<br><br>Do you wanna enter ${locationName}?</p>
                   <button id="btn-enter-safari" style="margin-top: 20px; padding: 10px 20px; font-size: 18px; cursor: pointer; background: #ffcc00; border: none; border-radius: 5px; color: black; font-weight: bold;">Enter ($${state.config.balance.safariZonePrice || 500})</button>
                 </div>
