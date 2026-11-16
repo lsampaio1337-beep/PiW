@@ -432,7 +432,7 @@ export function showMap() {
 
     // Inner modal for gym overlays natively locked to the map
     html += `
-            <div id="map-inner-modal-overlay" onclick="window.handleMapInnerModalBackdropClick(event)" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 1000; align-items: center; justify-content: center; box-sizing: border-box; padding: 2%; /* Fallback padding */">
+            <div id="map-inner-modal-overlay" onclick="window.handleMapInnerModalBackdropClick(event)" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.75); z-index: 1000; align-items: center; justify-content: center; box-sizing: border-box; padding: 2%; /* Fallback padding */">
                 <div id="map-inner-modal" class="floating-window" onclick="event.stopPropagation()" onmousedown="event.stopPropagation()" style="box-sizing: border-box; display: flex; flex-direction: column; overflow: hidden; /* Dynamic sizing will be applied via JS */ max-width: 100%; max-height: 100%;">
                     <div class="window-header" style="position: relative; cursor: default;">
                         <span id="map-inner-modal-title">Gym</span>

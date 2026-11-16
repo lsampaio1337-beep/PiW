@@ -459,7 +459,7 @@ export function showSmartCaptureMode() {
 
     // Add the inner modal structure for ball selections/global settings
     html += `
-        <div id="smart-capture-inner-modal-overlay" onclick="if(event.target === this) { this.style.display = 'none'; }" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); z-index: 10; align-items: flex-start; justify-content: center; padding: 20px 0; box-sizing: border-box;">
+        <div id="smart-capture-inner-modal-overlay" onclick="if(event.target === this) { this.style.display = 'none'; }" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.75); z-index: 10; align-items: flex-start; justify-content: center; padding: 20px 0; box-sizing: border-box;">
             <div id="smart-capture-inner-modal" class="floating-window" style="width: 90%; height: auto; max-height: calc(100% - 40px); display: flex; flex-direction: column; overflow: hidden; pointer-events: auto;">
                 <div class="window-header" style="position: relative; cursor: default;">
                     <span id="smart-capture-inner-modal-title">Modal</span>
