@@ -2111,13 +2111,11 @@ async function init() {
             leftSide.style.display = "flex";
             leftSide.style.flexDirection = "column";
             leftSide.style.alignItems = "flex-start";
-            leftSide.style.marginLeft = "10%";
 
             const rightSide = document.createElement('div');
             rightSide.style.display = "flex";
             rightSide.style.flexDirection = "column";
             rightSide.style.alignItems = "flex-end";
-            rightSide.style.marginRight = "10%";
 
             const titleDiv = document.createElement('div');
             titleDiv.style.fontSize = "18px";
@@ -2227,12 +2225,24 @@ async function init() {
                 medalBtn.style.border = "4px solid black";
                 medalBtn.style.borderRadius = "9999px";
                 medalBtn.style.marginTop = "-4px";
-                medalBtn.style.width = "100%";
+                medalBtn.style.width = "auto";
                 medalBtn.style.display = "flex";
                 medalBtn.style.justifyContent = "center";
                 medalBtn.style.alignItems = "center";
                 medalBtn.appendChild(medalsContainer);
                 medalBtn.onclick = () => btn.click();
+                const setPairHover = (hovered) => {
+                    const bg = hovered ? "#2980b9" : "#3498db";
+                    const tf = hovered ? "scale(1.02)" : "";
+                    btn.style.backgroundColor = bg;
+                    btn.style.transform = tf;
+                    medalBtn.style.backgroundColor = bg;
+                    medalBtn.style.transform = tf;
+                };
+                btn.onmouseenter = () => setPairHover(true);
+                btn.onmouseleave = () => setPairHover(false);
+                medalBtn.onmouseenter = () => setPairHover(true);
+                medalBtn.onmouseleave = () => setPairHover(false);
                 profileCard.appendChild(medalBtn);
             }
 
