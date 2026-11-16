@@ -2074,12 +2074,12 @@ async function init() {
             btn.style.backgroundColor = "#3498db"; // Blue Pill Button
             btn.style.color = "white";
             btn.style.border = "4px solid black";
-            btn.style.borderRadius = "12px";
+            btn.style.borderRadius = "9999px";
             btn.style.textAlign = "left";
             btn.style.fontWeight = "bold";
 
             btn.style.width = "max-content";
-            btn.style.minWidth = "60%";
+            btn.style.minWidth = "78%";
             btn.style.flexDirection = "column";
 
             const textWrapper = document.createElement('div');
