@@ -196,15 +196,51 @@ export function renderPokemonTab(area) {
             <button onclick="window.togglePokemonFilters()" style="${window.showPokemonFilters ? activeTabStyle : inactiveTabStyle} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 13px; transition: all 0.2s;">🔍 Filters</button>
             <button onclick="window.toggleSafeSpots()" style="${window.showSafeSpots ? activeTabStyle : inactiveTabStyle} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 13px; transition: all 0.2s;">🔒 Safe</button>
         </div>
-        <div id="pokemon-filters" style="display: ${window.showPokemonFilters ? 'block' : 'none'}; background: rgba(0,0,0,0.7); padding: 5px; border-radius: 5px; margin-bottom: 10px; font-size: 12px; text-align: center;">
-            <input type="text" id="pfilter-name" placeholder="Name" value="${escapeHTML(filters.name)}" oninput="window.updatePokemonFilter('name', this.value)" style="width: 80px; margin: 2px;">
-            <input type="number" id="pfilter-minLvl" placeholder="Min Lv" value="${escapeHTML(filters.minLvl)}" oninput="window.updatePokemonFilter('minLvl', this.value)" style="width: 50px; margin: 2px; -moz-appearance: textfield;">
-            <input type="number" id="pfilter-maxLvl" placeholder="Max Lv" value="${escapeHTML(filters.maxLvl)}" oninput="window.updatePokemonFilter('maxLvl', this.value)" style="width: 50px; margin: 2px; -moz-appearance: textfield;">
-            <input type="number" id="pfilter-minQ" placeholder="Min Q" value="${escapeHTML(filters.minQ)}" oninput="window.updatePokemonFilter('minQ', this.value)" style="width: 50px; margin: 2px; -moz-appearance: textfield;">
-            <input type="number" id="pfilter-maxQ" placeholder="Max Q" value="${escapeHTML(filters.maxQ)}" oninput="window.updatePokemonFilter('maxQ', this.value)" style="width: 50px; margin: 2px; -moz-appearance: textfield;">
-            <input type="number" id="pfilter-minIV" placeholder="Min ∑IV" value="${escapeHTML(filters.minIV)}" oninput="window.updatePokemonFilter('minIV', this.value)" style="width: 60px; margin: 2px; -moz-appearance: textfield;">
-            <input type="number" id="pfilter-maxIV" placeholder="Max ∑IV" value="${escapeHTML(filters.maxIV)}" oninput="window.updatePokemonFilter('maxIV', this.value)" style="width: 60px; margin: 2px; -moz-appearance: textfield;">
-            <style>#pokemon-filters input::-webkit-outer-spin-button, #pokemon-filters input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }</style>
+        <div id="pokemon-filters" style="display: ${window.showPokemonFilters ? 'flex' : 'none'}; flex-wrap: wrap; align-items: center; justify-content: center; gap: 6px; background: rgba(20, 28, 38, 0.92); border: 1px solid #3498db; border-radius: 10px; padding: 8px 10px; margin-bottom: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.45); font-size: 12px; color: #ecf0f1;">
+            <div style="display: flex; align-items: center; gap: 4px;">
+                <span style="color: #95a5a6; font-weight: bold;">Name</span>
+                <input type="text" id="pfilter-name" placeholder="Search..." value="${escapeHTML(filters.name)}" oninput="window.updatePokemonFilter('name', this.value)" class="pfilter-input" style="width: 75px;">
+            </div>
+            <div style="display: flex; align-items: center; gap: 3px;">
+                <span style="color: #95a5a6; font-weight: bold;">Lv</span>
+                <input type="number" id="pfilter-minLvl" placeholder="Min" value="${escapeHTML(filters.minLvl)}" oninput="window.updatePokemonFilter('minLvl', this.value)" class="pfilter-input" style="width: 38px;">
+                <span style="color: #7f8c8d;">-</span>
+                <input type="number" id="pfilter-maxLvl" placeholder="Max" value="${escapeHTML(filters.maxLvl)}" oninput="window.updatePokemonFilter('maxLvl', this.value)" class="pfilter-input" style="width: 38px;">
+            </div>
+            <div style="display: flex; align-items: center; gap: 3px;">
+                <span style="color: #95a5a6; font-weight: bold;">Q</span>
+                <input type="number" id="pfilter-minQ" placeholder="Min" value="${escapeHTML(filters.minQ)}" oninput="window.updatePokemonFilter('minQ', this.value)" class="pfilter-input" style="width: 38px;">
+                <span style="color: #7f8c8d;">-</span>
+                <input type="number" id="pfilter-maxQ" placeholder="Max" value="${escapeHTML(filters.maxQ)}" oninput="window.updatePokemonFilter('maxQ', this.value)" class="pfilter-input" style="width: 38px;">
+            </div>
+            <div style="display: flex; align-items: center; gap: 3px;">
+                <span style="color: #95a5a6; font-weight: bold;">∑IV</span>
+                <input type="number" id="pfilter-minIV" placeholder="Min" value="${escapeHTML(filters.minIV)}" oninput="window.updatePokemonFilter('minIV', this.value)" class="pfilter-input" style="width: 40px;">
+                <span style="color: #7f8c8d;">-</span>
+                <input type="number" id="pfilter-maxIV" placeholder="Max" value="${escapeHTML(filters.maxIV)}" oninput="window.updatePokemonFilter('maxIV', this.value)" class="pfilter-input" style="width: 40px;">
+            </div>
+            <button onclick="window.clearPokemonFilter(); window.renderBackpackTab('pokemon');" style="background: rgba(231, 76, 60, 0.2); color: #e74c3c; border: 1px solid rgba(231, 76, 60, 0.5); border-radius: 6px; padding: 4px 8px; font-size: 11px; font-weight: bold; cursor: pointer; transition: all 0.2s;">Clear</button>
+            <style>
+                #pokemon-filters .pfilter-input {
+                    background: #16202a;
+                    color: #ecf0f1;
+                    border: 1px solid #34495e;
+                    border-radius: 6px;
+                    padding: 4px 6px;
+                    font-size: 12px;
+                    outline: none;
+                    -moz-appearance: textfield;
+                    transition: border-color 0.2s;
+                }
+                #pokemon-filters .pfilter-input:focus {
+                    border-color: #3498db;
+                }
+                #pokemon-filters input::-webkit-outer-spin-button,
+                #pokemon-filters input::-webkit-inner-spin-button {
+                    -webkit-appearance: none;
+                    margin: 0;
+                }
+            </style>
         </div>
         ${sellControlsHtml}
     `;
