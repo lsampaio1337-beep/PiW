@@ -126,9 +126,6 @@ function getActionsHtml(p, pData, location, idx) {
         <div>
             <button onclick="window.showVitaminsModal('${location}', ${idx})" style="background: #e67e22; cursor: pointer; vertical-align: middle; width: max-content; min-width: 100px; height: 40px; font-size: 14px; font-weight: bold; line-height: 1.2; padding: 5px 10px; text-align: center; display: inline-flex; align-items: center; justify-content: center; flex-direction: column; border: none; border-radius: 5px; color: white;">Vitamins</button>
         </div>
-        <div>
-            <button onclick="window.showEvolutionModal(${pData.id})" style="background: #9b59b6; cursor: pointer; vertical-align: middle; width: max-content; min-width: 100px; height: 40px; font-size: 14px; font-weight: bold; line-height: 1.2; padding: 5px 10px; text-align: center; display: inline-flex; align-items: center; justify-content: center; flex-direction: column; border: none; border-radius: 5px; color: white;">Evolution</button>
-        </div>
     </div>`;
 }
 
@@ -417,18 +414,4 @@ window.useVitamin = function(location, idx, vitaminName, statKey) {
     // Refresh modals (Stats first, then Vitamins so Vitamins stays on top)
     showPokemonStats(idx, location);
     window.showVitaminsModal(location, idx);
-};
-
-window.showEvolutionModal = function(pokemonId) {
-    const pData = getPokemonConfig(pokemonId, state);
-    if (!pData) return;
-
-    const evoTreeHtml = buildEvolutionLineHtml(pData, state);
-    const html = `
-        <div class="content-panel" style="max-height: 80vh; overflow-y: auto; overflow-x: hidden;">
-            ${evoTreeHtml || '<p style="text-align: center; color: #ccc;">No evolution data available.</p>'}
-        </div>
-    `;
-
-    showModal(`${escapeHTML(pData.name)} - Evolution`, html, "window-pokemon-evolution");
 };

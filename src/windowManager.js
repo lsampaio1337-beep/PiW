@@ -278,7 +278,7 @@ export class WindowManager {
             'selectSmartCaptureBall', 'selectStarter', 'sellMarketItem', 'sellSelectedPokemon', 'sellSetMax',
             'setActiveItem', 'setAutoPotionThreshold', 'setLeader', 'setSmartCaptureGlobalMode',
             'setSmartCaptureShinyMode', 'showActiveItemSelection', 'showAddPokemonModal', 'showBackpackAndFocus',
-            'showCalendar', 'showChallengesModal', 'showDexEntry', 'showEvolutionModal', 'showGameAlert', 'showLevelUp',
+            'showCalendar', 'showChallengesModal', 'showDexEntry', 'showGameAlert', 'showLevelUp',
             'showMapTooltip', 'showModal', 'showPokemonStats', 'showPokemonStatsByUuid', 'showProfLabModal',
             'showSmartCaptureBallSelection', 'showSmartCaptureMode', 'showTimeLapseModal', 'showTimeLapseResults',
             'showTokenItemSelect', 'showTrainerStats', 'showVitaminsModal', 'showZzZConfirmationModal',
