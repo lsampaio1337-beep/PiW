@@ -258,8 +258,8 @@ export function renderPokemonTab(area) {
     content += `
         <div style="display: flex; gap: 10px; width: 100%; height: 100%; min-height: 0; overflow-x: hidden; flex-grow: 1;">
             <!-- Column 1: Active -->
-            <div style="${activeFlex} box-sizing: border-box; border: 1px solid #555; padding: 5px; display: flex; flex-direction: column; min-width: 0; min-height: 0; overflow-x: hidden;">
-                <div id="active-scroll-container" style="display: grid; grid-template-columns: repeat(2, 1fr); grid-auto-rows: max-content; gap: 5px; overflow-y: auto; overflow-x: hidden; align-content: start; flex-grow: 1; padding-bottom: 20px; min-height: 0;">
+            <div style="${activeFlex} align-self: flex-start; max-height: 100%; box-sizing: border-box; border: 1px solid #555; padding: 5px; display: flex; flex-direction: column; min-width: 0; min-height: 0; overflow-x: hidden;">
+                <div id="active-scroll-container" style="display: grid; grid-template-columns: repeat(2, 1fr); grid-auto-rows: max-content; gap: 5px; overflow-y: auto; overflow-x: hidden; align-content: start; flex-grow: 1; min-height: 0;">
     `;
 
 
@@ -327,8 +327,8 @@ export function renderPokemonTab(area) {
     if (showSafe) {
         content += `
             <!-- Column 3: Safe -->
-            <div id="safe-section" ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, 'safe')" style="${safeFlex} box-sizing: border-box; border: 1px solid #555; padding: 5px; display: flex; flex-direction: column; min-width: 0; min-height: 0; overflow-x: hidden;">
-                <div id="safe-scroll-container" style="display: grid; grid-template-columns: repeat(2, 1fr); grid-auto-rows: max-content; gap: 5px; overflow-y: auto; overflow-x: hidden; align-content: start; flex-grow: 1; padding-bottom: 20px; min-height: 0;">
+            <div id="safe-section" ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, 'safe')" style="${safeFlex} align-self: flex-start; max-height: 100%; box-sizing: border-box; border: 1px solid #555; padding: 5px; display: flex; flex-direction: column; min-width: 0; min-height: 0; overflow-x: hidden;">
+                <div id="safe-scroll-container" style="display: grid; grid-template-columns: repeat(2, 1fr); grid-auto-rows: max-content; gap: 5px; overflow-y: auto; overflow-x: hidden; align-content: start; flex-grow: 1; min-height: 0;">
         `;
 
         for (let i = 0; i < state.safe.length; i++) {
