@@ -1,0 +1,342 @@
+{
+  "Bulbasaur": {
+    "Reg2": [
+      {
+        "level": "1",
+        "move": "Tackle",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 35
+      },
+      {
+        "level": "10",
+        "move": "Vine Whip",
+        "type": "Grass",
+        "cat": "Special",
+        "power": 35
+      },
+      {
+        "level": "20",
+        "move": "Razor Leaf",
+        "type": "Grass",
+        "cat": "Special",
+        "power": 55
+      },
+      {
+        "level": "46",
+        "move": "SolarBeam",
+        "type": "Grass",
+        "cat": "Special",
+        "power": 120
+      }
+    ],
+    "Reg3": [
+      {
+        "level": "1",
+        "move": "Tackle",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 35
+      },
+      {
+        "level": "10",
+        "move": "Vine Whip",
+        "type": "Grass",
+        "cat": "Special",
+        "power": 35
+      },
+      {
+        "level": "20",
+        "move": "Razor Leaf",
+        "type": "Grass",
+        "cat": "Special",
+        "power": 55
+      },
+      {
+        "level": "46",
+        "move": "SolarBeam",
+        "type": "Grass",
+        "cat": "Special",
+        "power": 120
+      }
+    ],
+    "Reg4": [
+      {
+        "level": "1",
+        "move": "Tackle",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 35
+      },
+      {
+        "level": "9",
+        "move": "Vine Whip",
+        "type": "Grass",
+        "cat": "Physical",
+        "power": 35
+      },
+      {
+        "level": "15",
+        "move": "Take Down",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 90
+      },
+      {
+        "level": "19",
+        "move": "Razor Leaf",
+        "type": "Grass",
+        "cat": "Physical",
+        "power": 55
+      },
+      {
+        "level": "27",
+        "move": "Double-Edge",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 120
+      },
+      {
+        "level": "37",
+        "move": "Seed Bomb",
+        "type": "Grass",
+        "cat": "Physical",
+        "power": 80
+      }
+    ],
+    "Reg5": [
+      {
+        "level": "1",
+        "move": "Tackle",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 50
+      },
+      {
+        "level": "9",
+        "move": "Vine Whip",
+        "type": "Grass",
+        "cat": "Physical",
+        "power": 35
+      },
+      {
+        "level": "15",
+        "move": "Take Down",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 90
+      },
+      {
+        "level": "19",
+        "move": "Razor Leaf",
+        "type": "Grass",
+        "cat": "Physical",
+        "power": 55
+      },
+      {
+        "level": "27",
+        "move": "Double-Edge",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 120
+      },
+      {
+        "level": "37",
+        "move": "Seed Bomb",
+        "type": "Grass",
+        "cat": "Physical",
+        "power": 80
+      }
+    ],
+    "Reg6": [
+      {
+        "level": "1",
+        "move": "Tackle",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 50
+      },
+      {
+        "level": "9",
+        "move": "Vine Whip",
+        "type": "Grass",
+        "cat": "Physical",
+        "power": 45
+      },
+      {
+        "level": "15",
+        "move": "Take Down",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 90
+      },
+      {
+        "level": "19",
+        "move": "Razor Leaf",
+        "type": "Grass",
+        "cat": "Physical",
+        "power": 55
+      },
+      {
+        "level": "27",
+        "move": "Double-Edge",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 120
+      },
+      {
+        "level": "37",
+        "move": "Seed Bomb",
+        "type": "Grass",
+        "cat": "Physical",
+        "power": 80
+      }
+    ],
+    "Reg7": [
+      {
+        "level": "1",
+        "move": "Tackle",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 40
+      },
+      {
+        "level": "9",
+        "move": "Vine Whip",
+        "type": "Grass",
+        "cat": "Physical",
+        "power": 45
+      },
+      {
+        "level": "15",
+        "move": "Take Down",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 90
+      },
+      {
+        "level": "19",
+        "move": "Razor Leaf",
+        "type": "Grass",
+        "cat": "Physical",
+        "power": 55
+      },
+      {
+        "level": "27",
+        "move": "Double-Edge",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 120
+      },
+      {
+        "level": "37",
+        "move": "Seed Bomb",
+        "type": "Grass",
+        "cat": "Physical",
+        "power": 80
+      }
+    ],
+    "Reg8": [
+      {
+        "level": "1",
+        "move": "Tackle",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 40
+      },
+      {
+        "level": "3",
+        "move": "Vine Whip",
+        "type": "Grass",
+        "cat": "Physical",
+        "power": 45
+      },
+      {
+        "level": "12",
+        "move": "Razor Leaf",
+        "type": "Grass",
+        "cat": "Physical",
+        "power": 55
+      },
+      {
+        "level": "18",
+        "move": "Seed Bomb",
+        "type": "Grass",
+        "cat": "Physical",
+        "power": 80
+      },
+      {
+        "level": "21",
+        "move": "Take Down",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 90
+      },
+      {
+        "level": "33",
+        "move": "Double-Edge",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 120
+      },
+      {
+        "level": "36",
+        "move": "Solar Beam",
+        "type": "Grass",
+        "cat": "Special",
+        "power": 120
+      }
+    ],
+    "Reg10": [
+      {
+        "level": "1",
+        "move": "Tackle",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 40
+      },
+      {
+        "level": "3",
+        "move": "Vine Whip",
+        "type": "Grass",
+        "cat": "Physical",
+        "power": 45
+      },
+      {
+        "level": "12",
+        "move": "Razor Leaf",
+        "type": "Grass",
+        "cat": "Physical",
+        "power": 55
+      },
+      {
+        "level": "18",
+        "move": "Seed Bomb",
+        "type": "Grass",
+        "cat": "Physical",
+        "power": 80
+      },
+      {
+        "level": "21",
+        "move": "Take Down",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 90
+      },
+      {
+        "level": "33",
+        "move": "Power Whip",
+        "type": "Grass",
+        "cat": "Physical",
+        "power": 120
+      },
+      {
+        "level": "36",
+        "move": "Solar Beam",
+        "type": "Grass",
+        "cat": "Special",
+        "power": 120
+      }
+    ]
+  }
+}

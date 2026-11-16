@@ -925,25 +925,38 @@ const mainSeenSets = [];
 
                 let baseMin = 1;
                 if (isMain) {
-                    if (mainChallenges.length > 1) {
-                        baseMin = Math.round(1 + ((79) * (i / (mainChallenges.length - 1))));
+                    let lastWildMainIdx = mainChallenges.length - 1;
+                    const vrIdx = mainChallenges.findIndex(ch => (ch.areaId || ch.name || '').includes('Victory Road'));
+                    if (vrIdx !== -1) {
+                        lastWildMainIdx = vrIdx;
+                    } else {
+                        for (let idx = mainChallenges.length - 1; idx >= 0; idx--) {
+                            const ch = mainChallenges[idx];
+                            const rObj = routes.find(ro => ro.name === ch.areaId || ro.name === ch.name);
+                            if ((ch.spawns && ch.spawns.length > 0) || (rObj && rObj.spawns && rObj.spawns.length > 0)) {
+                                lastWildMainIdx = idx;
+                                break;
+                            }
+                        }
+                    }
+                    if (lastWildMainIdx > 0) {
+                        const progress = Math.min(1, i / lastWildMainIdx);
+                        baseMin = Math.round(1 + (90 * progress));
                     }
                 } else {
-                     const totalExtra = challengeList.length;
-                     let startLvl = 80;
-                     if (totalExtra > 0) {
-                         baseMin = Math.round(startLvl + ((20) * (i / totalExtra)));
-                     }
+                     let startLvl = 91;
+                     baseMin = startLvl + (2 * (i + 1));
                 }
 
                 let diff = 0;
                 let baseMax = baseMin;
+                const spreadPct = isMain ? 0.1 : 0.15;
                 if (baseMin < 12) diff = 2;
                 else if (baseMin < 30) diff = 3;
                 else {
-                    let tempDiff = baseMin * 0.1;
+                    let tempDiff = baseMin * spreadPct;
                     let avg = (baseMin + baseMin + tempDiff) / 2;
-                    diff = Math.floor(avg * 0.1);
+                    diff = Math.floor(avg * spreadPct);
                     if (diff > 8) diff = 8;
                 }
                 baseMax = baseMin + diff;
