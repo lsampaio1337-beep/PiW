@@ -508,6 +508,16 @@ function updatePokemonSpriteUI(spriteWrapper, pokemonSprite, pokemon, battleSyst
         pokemonSprite.src = newSrc;
     }
 
+    const paddedId = String(pokemonId).padStart(4, '0');
+    const targetHeight = state.config?.spriteSizes?.[paddedId];
+    if (targetHeight) {
+        pokemonSprite.style.height = `${targetHeight}px`;
+        pokemonSprite.style.width = 'auto';
+    } else {
+        pokemonSprite.style.height = '';
+        pokemonSprite.style.width = '';
+    }
+
     const isFlying = pokemon.types && (pokemon.types.includes('Flying') || pokemon.types.includes('Wind'));
     spriteWrapper.style.justifyContent = isFlying ? 'flex-start' : 'flex-end';
     spriteWrapper.style.alignItems = isPlayer ? 'flex-end' : 'flex-start';

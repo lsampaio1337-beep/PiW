@@ -73,6 +73,7 @@ All agents MUST follow these mandatory rules and recognize the following chat sh
   * When working on ANY branch, all requested code changes and edits MUST be performed ONLY on that branch.
   * **NEVER** merge any branch into `main` unless the user explicitly commands `/mm` or gives direct explicit instructions to merge.
   * Whenever making changes on a feature branch, commit them cleanly to that branch so uncommitted changes do not bleed into `main` when switching.
+  * **Branch Launcher Rule:** Every time a new branch is created, create a `<BranchName>.bat` launcher in `C:\Users\lsamp\OneDrive\Desktop\PiW\` (matching `main.bat`: `pushd` to `C:\Users\lsamp\OneDrive\Desktop\PiW\Main`, `git checkout <BranchName> >nul 2>&1`, and `call "aaa.bat"`) to execute the game.
 
 * **Chat Shortcuts:**
   * `/nb <name>` (or `/nb $$`):

@@ -1421,7 +1421,7 @@ export function updateUI() {
 }
 
 async function loadConfigs() {
-    const [pokemonData, routes, gyms, balance, moves, types, mapCoordinates, gymAssets] = await Promise.all([
+    const [pokemonData, routes, gyms, balance, moves, types, mapCoordinates, gymAssets, spriteSizes] = await Promise.all([
       fetch(new URL('../data/pokemon.json', import.meta.url)).then(res => res.json()),
       import('../config/routes.js').then(m => m.routes),
       import('../config/gyms.js').then(m => m.default),
@@ -1430,9 +1430,11 @@ async function loadConfigs() {
       import('../config/types.js').then(m => m.default),
       import('../config/mapCoordinates.js').then(m => m.default),
       import('../config/gymAssets.js').then(m => m.default),
+      fetch(new URL('../config/spriteSizes.json', import.meta.url)).then(res => res.json()).catch(() => ({})),
     ]);
 
     state.config.pokemonData = pokemonData;
+    state.config.spriteSizes = spriteSizes;
 
     // Precompute pokemonMap for O(1) lookups
     state.config.pokemonMap = new Map();
@@ -3301,7 +3303,7 @@ function renderStarterSelection(currentRegion, labContent) {
         const p = state.config.pokemonData.find(p => p.id === id);
         const name = p ? p.name : 'Unknown';
         const paddedId = id.toString().padStart(4, '0');
-        const spriteSrc = `Assets/Pokemon Sprites/Reg5 BW/Gen5BW_${paddedId}_${name}.png`;
+        const spriteSrc = window.getSpriteUrl ? window.getSpriteUrl(id, false) : `Assets/Pokemon Sprites/Reg5 BW/Gen5BW_${paddedId}_${name}.png`;
 
         const btn = document.createElement('button');
         btn.onclick = () => window.selectStarter(id);
