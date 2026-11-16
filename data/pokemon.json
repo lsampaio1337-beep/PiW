@@ -57605,7 +57605,7 @@
     "paldea_id": 664
   },
   {
-    "id": 3.3,
+    "id": 3.2,
     "name": "Venusaur (Mega Venusaur)",
     "types": [
       "Grass",
@@ -58359,7 +58359,7 @@
     ]
   },
   {
-    "id": 37.2,
+    "id": 37.1,
     "name": "Vulpix (Alolan Vulpix)",
     "types": [
       "Ice"
@@ -58467,7 +58467,7 @@
     "learnset": []
   },
   {
-    "id": 58.2,
+    "id": 58.1,
     "name": "Growlithe (Hisuian Growlithe)",
     "types": [
       "Fire",
@@ -58668,7 +58668,7 @@
     "learnset": []
   },
   {
-    "id": 76.2,
+    "id": 76.1,
     "name": "Golem (Alolan Golem)",
     "types": [
       "Rock",
@@ -58762,7 +58762,7 @@
     "learnset": []
   },
   {
-    "id": 83.2,
+    "id": 83.1,
     "name": "Farfetch'd (Galarian Farfetch'd)",
     "types": [
       "Fighting"
@@ -58777,7 +58777,7 @@
     "learnset": []
   },
   {
-    "id": 88.2,
+    "id": 88.1,
     "name": "Grimer (Alolan Grimer)",
     "types": [
       "Poison",
@@ -58898,7 +58898,7 @@
     "learnset": []
   },
   {
-    "id": 101.2,
+    "id": 101.1,
     "name": "Electrode (Hisuian Electrode)",
     "types": [
       "Electric",
@@ -58946,7 +58946,7 @@
     "learnset": []
   },
   {
-    "id": 110.2,
+    "id": 110.1,
     "name": "Weezing (Galarian Weezing)",
     "types": [
       "Poison",
@@ -59292,7 +59292,7 @@
     ]
   },
   {
-    "id": 133.3,
+    "id": 133.2,
     "name": "Eevee (Partner Eevee)",
     "types": [
       "Normal"
