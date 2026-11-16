@@ -12,6 +12,8 @@ import Storage from "./storage.js";
 import { state, setBattleSystem, globals } from './state.js';
 import { trackDailyChallenge, checkAndResetDailyChallenges } from './ui/dailyChallenges.js';
 import { showHelp } from './ui/help.js';
+import { hydratePokemonInfo } from './utils/pokemonDataLoader.js';
+import { pokedexIndexes } from '../config/pokedexIndexes.js';
 
 window.globals = globals;
 
@@ -1421,8 +1423,8 @@ export function updateUI() {
 }
 
 async function loadConfigs() {
-    const [pokemonData, routes, gyms, balance, moves, types, mapCoordinates, gymAssets, spriteSizes] = await Promise.all([
-      fetch(new URL('../data/pokemon.json', import.meta.url)).then(res => res.json()),
+    const [pokemonInfo, routes, gyms, balance, moves, types, mapCoordinates, gymAssets, spriteSizes] = await Promise.all([
+      fetch(new URL('../data/pokemon_info.json', import.meta.url)).then(res => res.json()),
       import('../config/routes.js').then(m => m.routes),
       import('../config/gyms.js').then(m => m.default),
       import('../config/balance.js').then(m => m.default),
@@ -1433,14 +1435,11 @@ async function loadConfigs() {
       fetch(new URL('../config/spriteSizes.json', import.meta.url)).then(res => res.json()).catch(() => ({})),
     ]);
 
-    state.config.pokemonData = pokemonData;
+    const hydrated = hydratePokemonInfo(pokemonInfo, moves, pokedexIndexes);
+    state.config.pokemonInfo = pokemonInfo;
+    state.config.pokemonData = hydrated.pokemonData;
+    state.config.pokemonMap = hydrated.pokemonMap;
     state.config.spriteSizes = spriteSizes;
-
-    // Precompute pokemonMap for O(1) lookups
-    state.config.pokemonMap = new Map();
-    for (const pd of pokemonData) {
-        state.config.pokemonMap.set(pd.id, pd);
-    }
     state.config.routes = normalizeRoutesData(routes);
     const unlocksModule = await import('../config/routes.js');
     state.config.unlocks = unlocksModule.unlocks;
@@ -1467,10 +1466,10 @@ async function loadConfigs() {
     state.config.gyms = gyms;
     state.config.gymAssets = gymAssets;
     state.config.balance = balance;
-    state.config.moves = moves;
+    state.config.moves = hydrated.moves;
     state.config.types = types;
     state.config.mapCoordinates = mapCoordinates;
-    state.config.allPokemonNames = pokemonData.map(p => p.name);
+    state.config.allPokemonNames = hydrated.pokemonData.map(p => p.name);
 
     // Precompute evolution parents for O(1) lookups
     const evolutionParents = {};
@@ -3290,7 +3289,9 @@ function renderStarterSelection(currentRegion, labContent) {
     containerDiv.style.top = '50%';
     containerDiv.style.transform = 'translateY(-50%)';
     containerDiv.style.padding = '30px';
-    containerDiv.style.borderRadius = '8px';
+    containerDiv.style.borderRadius = '12px';
+    containerDiv.style.border = '2px solid #1abc9c';
+    containerDiv.style.boxShadow = '0 8px 24px rgba(0, 0, 0, 0.65), 0 0 14px rgba(26, 188, 156, 0.25)';
 
     let h2 = document.createElement('h2');
     h2.textContent = 'Choose your Starter Pokémon';
@@ -3329,16 +3330,7 @@ function renderStarterSelection(currentRegion, labContent) {
 
 function renderAssignmentsAndBoosters(labContent) {
     let containerDiv = document.createElement('div');
-    containerDiv.style.backgroundColor = 'rgba(0,0,0,0.85)';
-    containerDiv.style.position = 'absolute';
-    containerDiv.style.left = '15%';
-    containerDiv.style.top = '50%';
-    containerDiv.style.transform = 'translateY(-50%)';
-    containerDiv.style.padding = '20px';
-    containerDiv.style.borderRadius = '8px';
-    containerDiv.style.width = '250px';
-    containerDiv.style.color = 'white';
-    containerDiv.style.textAlign = 'center';
+    containerDiv.className = 'prof-lab-lobby-modal';
 
     let h2 = document.createElement('h2');
     h2.style.marginTop = '0';
@@ -3357,7 +3349,7 @@ function renderAssignmentsAndBoosters(labContent) {
 
     let btn = document.createElement('button');
     btn.onclick = () => window.showProfLabModal();
-    btn.className = 'action-btn action-btn-primary';
+    btn.className = 'action-btn action-btn-primary action-btn-pill';
     btn.style.width = '100%';
     btn.textContent = 'Assignments and Boosters';
     innerDiv.appendChild(btn);

@@ -2,6 +2,7 @@ import { VITAMINS, WHITE_CANDY_DEFEAT_REQUIREMENT } from "./constants.js";
 // src/battleSystem.js
 import * as mathEngine from './mathEngine.js';
 import { escapeHTML } from './utils/stringUtils.js';
+import { getLearnsetForRegion } from './utils/pokemonDataLoader.js';
 
 class BattleSystem {
 
@@ -1323,10 +1324,11 @@ class BattleSystem {
     }
 
     getLearnsetMoves(pokemonBase, level) {
-        if (!pokemonBase.learnset) return [];
+        const learnset = getLearnsetForRegion(pokemonBase, this.state?.currentRegionName, this.state?.config?.moves);
+        if (!learnset || learnset.length === 0) return [];
         let learned = [];
         let learnedSet = new Set();
-        for (const ls of pokemonBase.learnset) {
+        for (const ls of learnset) {
             if (level >= ls.level) {
                 const moveName = ls.move;
                 if (this.state.config.moves[moveName] && !learnedSet.has(moveName)) {

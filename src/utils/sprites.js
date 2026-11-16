@@ -46,17 +46,58 @@ const LEGACY_FIRST_VARIATION_OVERRIDES = {
     }
 };
 
+const SPRITE_FOLDER_FALLBACK_ORDER = [4, 5, 6, 7, 8, 9, 10, 3, 2, 1, 0];
+
+function toCanonId(id, pData) {
+    if (pData && pData.canonId) return pData.canonId;
+    const str = String(id);
+    if (/^\d{4}(\.\d+)?$/.test(str)) return str;
+    const dotIdx = str.indexOf('.');
+    if (dotIdx === -1) return str.padStart(4, '0');
+    return `${str.slice(0, dotIdx).padStart(4, '0')}${str.slice(dotIdx)}`;
+}
+
 export function getSpriteUrl(id, isShiny = false) {
-    if (!state || !state.config || (!state.config.pokemonMap && !state.config.pokemonData) || id === undefined || id === null) return '';
+    if (!state || !state.config || (!state.config.pokemonMap && !state.config.pokemonData && !state.config.pokemonInfo) || id === undefined || id === null) return '';
     const pData = state.config.pokemonMap
-        ? (state.config.pokemonMap.get(Number(id)) || state.config.pokemonMap.get(id))
-        : state.config.pokemonData.find(pd => pd.id == id);
+        ? (state.config.pokemonMap.get(id) || state.config.pokemonMap.get(Number(id)))
+        : state.config.pokemonData?.find(pd => pd.id == id);
+
+    const legacyCfg = state.settings?.legacySprites ? LEGACY_REGION_SPRITES[state.currentRegionName] : null;
+    const preferredFolder = legacyCfg ? legacyCfg.folder : 'Reg5 BW';
+
+    const pokemonInfo = state.config.pokemonInfo;
+    if (pokemonInfo && pokemonInfo.pokemon && pokemonInfo.folders) {
+        const canonId = toCanonId(id, pData);
+        const entry = pokemonInfo.pokemon[canonId];
+        if (entry && entry.sprite && Array.isArray(entry.folders) && entry.folders.length > 0) {
+            const preferredMeta = pokemonInfo.folders.find(f => f.folder === preferredFolder);
+            let chosen = null;
+            if (preferredMeta && entry.folders.includes(preferredMeta.id) && (!isShiny || preferredMeta.hasShiny)) {
+                chosen = preferredMeta;
+            } else {
+                for (const fId of SPRITE_FOLDER_FALLBACK_ORDER) {
+                    if (!entry.folders.includes(fId)) continue;
+                    const fm = pokemonInfo.folders.find(f => f.id === fId);
+                    if (fm && (!isShiny || fm.hasShiny)) {
+                        chosen = fm;
+                        break;
+                    }
+                }
+                if (!chosen) chosen = pokemonInfo.folders.find(f => f.id === entry.folders[0]);
+            }
+            if (chosen) {
+                const shinySuffix = isShiny && chosen.hasShiny ? '_shiny' : '';
+                return `Assets/Pokemon Sprites/${chosen.folder}/${chosen.prefix}_${canonId}_${entry.sprite}${shinySuffix}.png`;
+            }
+        }
+    }
+
     if (!pData) return '';
     const paddedId = id.toString().padStart(4, '0');
     const safeName = sanitizeSpriteName(pData.name);
 
-    const legacyCfg = state.settings?.legacySprites ? LEGACY_REGION_SPRITES[state.currentRegionName] : null;
-    const folder = legacyCfg ? legacyCfg.folder : 'Reg5 BW';
+    const folder = preferredFolder;
     const prefix = legacyCfg ? legacyCfg.prefix : 'Gen5BW';
 
     const numId = Number(id);
