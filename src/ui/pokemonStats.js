@@ -54,13 +54,15 @@ function markEvolvedSpeciesCaught(speciesName, isShiny) {
 
 function getEvolveRequirements(p, evo, state) {
     const requiredLevel = evo.level;
+    const toData = getPokemonConfig(evo.to, state);
+    const stoneTypes = (toData && toData.types && toData.types.length > 0) ? toData.types : p.types;
     const baseStones = Math.ceil(p.level * 0.2);
-    const stonesReq = p.types.length === 1 ? baseStones : Math.ceil(baseStones / 2);
+    const stonesReq = stoneTypes.length === 1 ? baseStones : Math.ceil(baseStones / 2);
 
     let hasStones = true;
     let missingStonesHtml = "";
 
-    for (const type of p.types) {
+    for (const type of stoneTypes) {
         const stoneName = type + " Stone";
         const hasCount = state.backpack?.stones?.[stoneName] || 0;
         if (hasCount < stonesReq) {
@@ -77,6 +79,7 @@ function getEvolveRequirements(p, evo, state) {
         hasStones,
         requiredLevel,
         stonesReq,
+        stoneTypes,
         missingStonesHtml: missingStonesHtml.trim()
     };
 }
@@ -289,7 +292,7 @@ export function evolvePokemon(location, idx, toId) {
         }
 
         // Deduct stones
-        for (const type of p.types) {
+        for (const type of req.stoneTypes) {
             const stoneName = type + " Stone";
             if (!state.backpack.stones) state.backpack.stones = {};
             state.backpack.stones[stoneName] = (state.backpack.stones[stoneName] || 0) - req.stonesReq;
@@ -363,13 +366,16 @@ window.showMultipleEvolveModal = function(location, idx) {
 
     const buttonsHtml = pData.evolutions.map(evo => {
         const req = getEvolveRequirements(p, evo, state);
-        return `<button ${req.canEvolve ? '' : 'disabled'} onclick="window.closeVitaminsInnerWindow(); window.evolvePokemon('${location}', ${idx}, ${evo.to})" style="background: ${req.canEvolve ? '#2ecc71' : '#7f8c8d'}; color: white; border: none; border-radius: 8px; padding: 10px 15px; font-weight: bold; cursor: ${req.canEvolve ? 'pointer' : 'not-allowed'}; ${req.canEvolve ? '' : 'opacity: 0.6;'} width: 100%; display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px;">Consume ${req.missingStonesHtml}?</button>`;
+        const toData = getPokemonConfig(evo.to, state);
+        const isRevealed = toData && ((state.stats?.seenSpecies?.[toData.name]) || (state.stats?.caughtSpecies?.[toData.name]));
+        const toName = isRevealed ? escapeHTML(toData.name) : "???";
+        return `<button ${req.canEvolve ? '' : 'disabled'} onclick="window.closeVitaminsInnerWindow(); window.evolvePokemon('${location}', ${idx}, ${evo.to})" style="background: ${req.canEvolve ? '#2ecc71' : '#7f8c8d'}; color: white; border: none; border-radius: 8px; padding: 10px 14px; font-weight: bold; font-size: 14px; line-height: 1.3; cursor: ${req.canEvolve ? 'pointer' : 'not-allowed'}; ${req.canEvolve ? '' : 'opacity: 0.6;'} width: 70%; display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px;">Consume ${req.missingStonesHtml} to evolve into ${toName}</button>`;
     }).join('');
 
     const html = `
-        <div style="display: flex; flex-direction: column; gap: 10px;">
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
             ${buttonsHtml}
-            <button onclick="window.closeVitaminsInnerWindow()" style="background: #e74c3c; color: white; border: none; border-radius: 8px; padding: 10px 15px; font-weight: bold; cursor: pointer; width: 100%;">No</button>
+            <button onclick="window.closeVitaminsInnerWindow()" style="background: #e74c3c; color: white; border: none; border-radius: 8px; padding: 10px 14px; font-weight: bold; font-size: 14px; cursor: pointer; width: 70%;">No</button>
         </div>
     `;
     const innerWin = document.getElementById('pokemon-vitamins-inner-window');
