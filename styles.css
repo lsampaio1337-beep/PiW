@@ -775,38 +775,41 @@ input[type="number"] {
 #modal-content-box button.stats-action-btn {
     margin-top: 0;
     background: #3498db;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    padding: 5px 15px;
+    font-weight: bold;
     cursor: pointer;
-    vertical-align: middle;
+    font-size: 14px;
+    line-height: 1.2;
     width: 180px;
     height: 40px;
-    font-size: 13px;
-    font-weight: bold;
-    line-height: 1.2;
-    padding: 5px 10px;
-    text-align: center;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    border: none;
-    border-radius: 5px;
-    color: white;
-    transition: background-color 0.2s ease, transform 0.1s ease;
+    text-align: center;
+    vertical-align: middle;
+    transition: all 0.2s;
 }
 #modal-content-box button.stats-action-btn:hover {
     background: #2980b9;
+    border-color: rgba(255, 255, 255, 0.4);
 }
 #modal-content-box button.stats-action-btn:active {
     transform: scale(0.98);
 }
 #modal-content-box button.stats-action-btn:disabled {
-    background: #6c7a7b;
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.5);
+    border-color: rgba(255, 255, 255, 0.1);
     cursor: not-allowed;
-    opacity: 0.8;
     font-size: 12px;
 }
 #modal-content-box button.stats-action-btn:disabled:hover {
-    background: #6c7a7b;
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.1);
     transform: none;
 }
 
