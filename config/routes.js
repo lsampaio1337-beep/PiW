@@ -1,10 +1,6 @@
 import { kalosRoutes, kalosUnlocks } from './kalosRoutes.js';
 const routes = [
   {
-    "name": "Spot",
-    "spawns": []
-  },
-  {
     "name": "Route 1 (Kanto)",
     "spawns": [
       {
@@ -1269,31 +1265,31 @@ const routes = [
         "pokemonId": 67,
         "minLevel": 82,
         "maxLevel": 90,
-        "chance": 0.25
+        "chance": 0.13
       },
       {
         "pokemonId": 75,
         "minLevel": 85,
         "maxLevel": 93,
-        "chance": 0.25
+        "chance": 0.13
       },
       {
         "pokemonId": 42,
         "minLevel": 80,
         "maxLevel": 87,
-        "chance": 0.23
+        "chance": 0.13
       },
       {
         "pokemonId": 95,
         "minLevel": 85,
         "maxLevel": 93,
-        "chance": 0.15
+        "chance": 0.07
       },
       {
         "pokemonId": 105,
         "minLevel": 85,
         "maxLevel": 93,
-        "chance": 0.1
+        "chance": 0.07
       },
       {
         "pokemonId": 146,
@@ -1301,16 +1297,14 @@ const routes = [
         "maxLevel": 95,
         "chance": 0.02
       },
-      { "pokemonId": 26, "minLevel": 95, "maxLevel": 99, "chance": 0.1 },
-      { "pokemonId": 31, "minLevel": 96, "maxLevel": 100, "chance": 0.1 },
-      { "pokemonId": 34, "minLevel": 96, "maxLevel": 100, "chance": 0.1 },
-      { "pokemonId": 59, "minLevel": 96, "maxLevel": 100, "chance": 0.1 },
-      { "pokemonId": 112, "minLevel": 96, "maxLevel": 100, "chance": 0.1 },
-      { "pokemonId": 57, "minLevel": 95, "maxLevel": 99, "chance": 0.1 },
-      { "pokemonId": 210, "minLevel": 94, "maxLevel": 98, "chance": 0.1 },
-      { "pokemonId": 178, "minLevel": 94, "maxLevel": 98, "chance": 0.1 },
-      { "pokemonId": 82, "minLevel": 95, "maxLevel": 99, "chance": 0.1 },
-      { "pokemonId": 89, "minLevel": 94, "maxLevel": 98, "chance": 0.1 }
+      { "pokemonId": 26, "minLevel": 95, "maxLevel": 99, "chance": 0.07 },
+      { "pokemonId": 31, "minLevel": 96, "maxLevel": 100, "chance": 0.05 },
+      { "pokemonId": 34, "minLevel": 96, "maxLevel": 100, "chance": 0.05 },
+      { "pokemonId": 59, "minLevel": 96, "maxLevel": 100, "chance": 0.05 },
+      { "pokemonId": 112, "minLevel": 96, "maxLevel": 100, "chance": 0.06 },
+      { "pokemonId": 57, "minLevel": 95, "maxLevel": 99, "chance": 0.05 },
+      { "pokemonId": 82, "minLevel": 95, "maxLevel": 99, "chance": 0.07 },
+      { "pokemonId": 89, "minLevel": 94, "maxLevel": 98, "chance": 0.06 }
     ]
   },
   {
@@ -1320,7 +1314,7 @@ const routes = [
         "pokemonId": 42,
         "minLevel": 87,
         "maxLevel": 95,
-        "chance": 0.2
+        "chance": 0.23
       },
       {
         "pokemonId": 82,
@@ -1350,13 +1344,13 @@ const routes = [
         "pokemonId": 113,
         "minLevel": 90,
         "maxLevel": 98,
-        "chance": 0.19
+        "chance": 0.15
       },
       {
         "pokemonId": 150,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.01
+        "chance": 0.02
       }
     ]
   },
@@ -1439,11 +1433,11 @@ const routes = [
   {
     "name": "Fossil Revival Lab",
     "spawns": [
-      { "pokemonId": 138, "minLevel": 78, "maxLevel": 86, "chance": 0.2 },
-      { "pokemonId": 140, "minLevel": 78, "maxLevel": 86, "chance": 0.2 },
-      { "pokemonId": 142, "minLevel": 82, "maxLevel": 90, "chance": 0.2 },
-      { "pokemonId": 139, "minLevel": 80, "maxLevel": 88, "chance": 0.2 },
-      { "pokemonId": 141, "minLevel": 80, "maxLevel": 88, "chance": 0.2 }
+      { "pokemonId": 138, "minLevel": 78, "maxLevel": 86, "chance": 0.17 },
+      { "pokemonId": 140, "minLevel": 78, "maxLevel": 86, "chance": 0.27 },
+      { "pokemonId": 142, "minLevel": 82, "maxLevel": 90, "chance": 0.12 },
+      { "pokemonId": 139, "minLevel": 80, "maxLevel": 88, "chance": 0.17 },
+      { "pokemonId": 141, "minLevel": 80, "maxLevel": 88, "chance": 0.27 }
 ]
   },
   {
@@ -1569,10 +1563,9 @@ export const unlocks = [
   { "challengeName": "Challenge 21", "areaId": "Route 7 (Kanto)", "unlocks": ["Pokemon Tower"], "requirements": { "defeatCountRoute": { "route": "Route 7 (Kanto)", "count": 150 } } },
   { "challengeName": "Challenge 22", "areaId": "Pokemon Tower", "unlocks": ["Route 12 (Kanto)"], "gift": { "item": "Ghost Stone", "count": 2 }, "requirements": { "catchSpecies": [{ "species": "Haunter", "count": 2 }, { "species": "Cubone", "count": 1 }] } },
   { "challengeName": "Challenge 23", "areaId": "Route 12 (Kanto)", "unlocks": ["Route 13 (Kanto)"], "requirements": { "catchSpecies": [{ "species": "Farfetch'd", "count": 3 }] } },
-  { "challengeName": "Challenge 24", "areaId": "Route 13 (Kanto)", "unlocks": ["Route 14,15"], "requirements": { "catchSpecies": [{ "species": "Victreebel", "count": 1 }, { "species": "Vileplume", "count": 1 }] } },
-  { "challengeName": "Challenge 25", "areaId": "Route 14,15", "unlocks": ["Saffron Gym"], "gift": { "item": "Normal Stone", "count": 2 }, "requirements": { "catchSpecies": [{ "species": "Ditto", "count": 5 }] } },
-  { "challengeName": "Challenge 26", "areaId": "Saffron Gym", "unlocks": ["Cycling Road (16-18)"], "requirements": { "earnBadge": { "name": "Marsh Badge", "leader": "Sabrina", "badgeCount": 5 } } },
-  { "challengeName": "Challenge 27", "areaId": "Cycling Road (16-18)", "unlocks": ["Kanto Safari Zone (Kanto)"], "requirements": { "catchSpecies": [{ "species": "Dodrio", "count": 2 }] } },
+  { "challengeName": "Challenge 24", "areaId": "Route 13 (Kanto)", "unlocks": ["Saffron Gym"], "requirements": { "catchSpecies": [{ "species": "Victreebel", "count": 1 }, { "species": "Vileplume", "count": 1 }] } },
+  { "challengeName": "Challenge 26", "areaId": "Saffron Gym", "unlocks": ["Cycling Road (Kanto)"], "requirements": { "earnBadge": { "name": "Marsh Badge", "leader": "Sabrina", "badgeCount": 5 } } },
+  { "challengeName": "Challenge 27", "areaId": "Cycling Road (Kanto)", "unlocks": ["Kanto Safari Zone (Kanto)"], "requirements": { "catchSpecies": [{ "species": "Dodrio", "count": 2 }] } },
   { "challengeName": "Challenge 28", "areaId": "Kanto Safari Zone (Kanto)", "unlocks": ["Fuchsia Gym"], "gift": { "item": "Ultraball", "count": 10 }, "requirements": { "defeatCountRoute": { "route": "Kanto Safari Zone (Kanto)", "count": 100 } } },
   { "challengeName": "Challenge 29", "areaId": "Fuchsia Gym", "unlocks": ["Sea Routes (Kanto)"], "requirements": { "earnBadge": { "name": "Soul Badge", "leader": "Koga", "badgeCount": 6 } } },
   { "challengeName": "Challenge 30", "areaId": "Sea Routes (Kanto)", "unlocks": ["Pokemon Mansion (Kanto)"], "requirements": { "defeatCountRoute": { "route": "Sea Routes (Kanto)", "count": 250 } } },
@@ -1593,7 +1586,7 @@ export const unlocks = [
   { "challengeName": "Extra Challenge A 06", "areaId": "Trade With Friends Hub", "unlocks": ["Power Plant"], "gift": { "item": "Ultraball", "count": 20 }, "requirements": { "catchSpecies": [{ "species": "Gengar", "count": 1 }, { "species": "Golem", "count": 1 }, { "species": "Alakazam", "count": 1 }, { "species": "Machamp", "count": 1 }] } },
   { "challengeName": "Extra Challenge A 07", "areaId": "Power Plant", "unlocks": ["Seafoam Islands"], "gift": { "item": "Masterball", "count": 1 }, "requirements": { "defeatSpecific": { "name": "Zapdos", "count": 5 } } },
   { "challengeName": "Extra Challenge A 08", "areaId": "Seafoam Islands", "unlocks": ["Victory Road (Kanto)"], "gift": { "item": "Masterball", "count": 1 }, "requirements": { "defeatSpecific": { "name": "Articuno", "count": 5 } } },
-  { "challengeName": "Extra Challenge A 09", "areaId": "Victory Road (Kanto)", "unlocks": ["Cerulean Cave"], "gift": { "item": "Masterball", "count": 1 }, "requirements": { "defeatSpecific": { "name": "Moltres", "count": 5 } } },
+  { "challengeName": "Extra Challenge A 09", "areaId": "Victory Road (Kanto)", "unlocks": ["Cerulean Cave"], "gift": { "item": "Masterball", "count": 1 }, "requirements": { "catchSpeciesAnyOfByQuality": [{ "species": ["Nidoking", "Nidoqueen"], "quality": "Rare", "count": 1 }] } },
   { "challengeName": "Extra Challenge A 10", "areaId": "Cerulean Cave", "unlocks": ["Kanto Pokemon League", "Key for Indigo Summit Challenge"], "gift": { "item": "Masterball", "count": 2 }, "requirements": { "defeatSpecific": { "name": "Mewtwo", "count": 5 } } },
   { "challengeName": "Extra Challenge B", "areaId": "Extra Challenge B", "unlocks": ["Key for Indigo Summit Challenge"], "requirements": { "catchSpeciesUniqueCount": 150 } },
   { "challengeName": "Key for Indigo Summit Challenge", "areaId": "Key for Indigo Summit Challenge", "unlocks": ["Indigo Summit", "Indigo Summit Challenge"], "requirements": { "completeChallenges": ["Extra Challenge A 10", "Extra Challenge B"] } },
