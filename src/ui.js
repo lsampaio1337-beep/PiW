@@ -2147,8 +2147,7 @@ async function init() {
             medalsContainer.style.justifyContent = "center";
             medalsContainer.style.alignItems = "center";
             medalsContainer.style.gap = "2px";
-            medalsContainer.style.marginLeft = "10px";
-            medalsContainer.style.marginTop = "10px";
+            medalsContainer.style.minWidth = "194px";
 
             let earnedAnyMedal = false;
 
