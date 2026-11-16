@@ -3328,13 +3328,13 @@ function renderStarterSelection(currentRegion, labContent) {
     labContent.replaceChildren(containerDiv);
 }
 
-function renderAssignmentsAndBoosters(labContent) {
+function renderAssignmentsAndBoosters(currentRegion, labContent) {
     let containerDiv = document.createElement('div');
     containerDiv.className = 'prof-lab-lobby-modal';
 
     let h2 = document.createElement('h2');
     h2.style.marginTop = '0';
-    h2.textContent = 'Professor Lab';
+    h2.textContent = `${currentRegion} Professor Lab`;
     containerDiv.appendChild(h2);
 
     let flexDiv = document.createElement('div');
@@ -3351,7 +3351,9 @@ function renderAssignmentsAndBoosters(labContent) {
     btn.onclick = () => window.showProfLabModal();
     btn.className = 'action-btn action-btn-primary action-btn-pill';
     btn.style.width = '100%';
-    btn.textContent = 'Assignments and Boosters';
+    btn.appendChild(document.createTextNode('Assignments'));
+    btn.appendChild(document.createElement('br'));
+    btn.appendChild(document.createTextNode('and Boosters'));
     innerDiv.appendChild(btn);
 
     if (state.stats.showProfLobbyNotification) {
@@ -3389,7 +3391,7 @@ export function renderProfessorLab() {
     if (!state.stats.hasPickedStarter) {
         renderStarterSelection(currentRegion, labContent);
     } else {
-        renderAssignmentsAndBoosters(labContent);
+        renderAssignmentsAndBoosters(currentRegion, labContent);
     }
 }
 
