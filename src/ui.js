@@ -2096,26 +2096,28 @@ async function init() {
             btn.style.borderRadius = "9999px";
             btn.style.textAlign = "left";
             btn.style.fontWeight = "bold";
-            btn.style.width = "64%";
+            btn.style.width = "26%";
+            btn.style.minWidth = "max-content";
             btn.style.position = "relative";
             btn.style.zIndex = "1";
             btn.style.flexDirection = "column";
 
             const textWrapper = document.createElement('div');
             textWrapper.style.display = "flex";
-            textWrapper.style.justifyContent = "space-between";
+            textWrapper.style.flexDirection = "column";
+            textWrapper.style.justifyContent = "center";
             textWrapper.style.alignItems = "center";
             textWrapper.style.width = "100%";
 
             const leftSide = document.createElement('div');
             leftSide.style.display = "flex";
             leftSide.style.flexDirection = "column";
-            leftSide.style.alignItems = "flex-start";
+            leftSide.style.alignItems = "center";
 
             const rightSide = document.createElement('div');
             rightSide.style.display = "flex";
             rightSide.style.flexDirection = "column";
-            rightSide.style.alignItems = "flex-end";
+            rightSide.style.alignItems = "center";
 
             const titleDiv = document.createElement('div');
             titleDiv.style.fontSize = "18px";
