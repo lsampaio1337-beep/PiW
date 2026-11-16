@@ -16,6 +16,36 @@ const LEGACY_REGION_SPRITES = {
     Sinnoh: { folder: 'Reg4 P', prefix: 'Gen4P' }
 };
 
+// Pokémon whose sprites only exist as numbered variations (no standard form)
+// map to their first variation (.1_<FormName>) so they don't show a broken '?' image.
+const FIRST_VARIATION_SPRITES = {
+    201: '.1_Unown_A',
+    386: '.1_Deoxys_Attack',
+    412: '.1_Burmy_Plant',
+    413: '.1_Wormadam_Plant',
+    421: '.1_Cherrim_Overcast',
+    422: '.1_Shellos_East',
+    423: '.1_Gastrodon_East',
+    487: '.1_Giratina_Altered',
+    492: '.1_Shaymin_Land',
+    493: '.1_Arceus_Bug',
+    550: '.1_Basculin_BlueStriped',
+    555: '.1_Darmanitan_Standard',
+    585: '.1_Deerling_Autumn',
+    586: '.1_Sawsbuck_Autumn',
+    641: '.1_Tornadus_Incarnate',
+    642: '.1_Thundurus_Incarnate',
+    645: '.1_Landorus_Incarnate',
+    647: '.1_Keldeo_Ordinary',
+    648: '.1_Meloetta_Aria'
+};
+
+const LEGACY_FIRST_VARIATION_OVERRIDES = {
+    'Reg3 E': {
+        386: '.1_Deoxys_Speed'
+    }
+};
+
 export function getSpriteUrl(id, isShiny = false) {
     if (!state || !state.config || (!state.config.pokemonMap && !state.config.pokemonData) || id === undefined || id === null) return '';
     const pData = state.config.pokemonMap
@@ -29,7 +59,11 @@ export function getSpriteUrl(id, isShiny = false) {
     const folder = legacyCfg ? legacyCfg.folder : 'Reg5 BW';
     const prefix = legacyCfg ? legacyCfg.prefix : 'Gen5BW';
 
-    return `Assets/Pokemon Sprites/${folder}/${prefix}_${paddedId}_${safeName}${isShiny ? '_shiny' : ''}.png`;
+    const numId = Number(id);
+    const firstVariation = LEGACY_FIRST_VARIATION_OVERRIDES[folder]?.[numId] ?? FIRST_VARIATION_SPRITES[numId];
+    const spriteSuffix = firstVariation ? `${paddedId}${firstVariation}` : `${paddedId}_${safeName}`;
+
+    return `Assets/Pokemon Sprites/${folder}/${prefix}_${spriteSuffix}${isShiny ? '_shiny' : ''}.png`;
 };
 
 const routeTrimCache = new Map();
