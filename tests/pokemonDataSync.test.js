@@ -31,16 +31,38 @@ describe('Pokemon Data & Sprite Sync Integrity', () => {
     const pokemonInfo = JSON.parse(fs.readFileSync(POKEMON_INFO_PATH, 'utf8'));
     const pokemonJson = JSON.parse(fs.readFileSync(POKEMON_JSON_PATH, 'utf8'));
 
+    const folderById = new Map(pokemonInfo.folders.map(f => [f.id, f]));
+    const folderByName = new Map(pokemonInfo.folders.map(f => [f.folder, f]));
+
+    function resolvePokemonEntry(id) {
+        const entry = pokemonInfo.pokemon[id];
+        if (!entry) return null;
+        const baseId = id.split('.')[0];
+        const base = id.includes('.') ? pokemonInfo.pokemon[baseId] : null;
+        return {
+            id,
+            name: entry.name,
+            types: entry.types ?? base?.types,
+            stats: entry.stats ?? base?.stats,
+            sprite: entry.sprite,
+            folders: entry.folders,
+            moveset: entry.moveset ?? base?.moveset ?? {},
+        };
+    }
+
     beforeAll(() => {
         state.config.pokemonData = pokemonJson;
     });
 
-    it('verifies all sprite PNG headers, naming conventions, shiny pairing, and canonical variation IDs', () => {
+    it('verifies all sprite PNG headers, uniform folder prefixes, naming conventions, shiny pairing, and canonical variation IDs', () => {
         const varFormIds = new Map();
         const headerBuf = Buffer.alloc(8);
         let totalPngs = 0;
 
         for (const folder of folders) {
+            const folderMeta = folderByName.get(folder);
+            expect(folderMeta).toBeDefined();
+
             const dirPath = path.join(SPRITES_DIR, folder);
             const fileSet = new Set(fs.readdirSync(dirPath));
 
@@ -60,9 +82,10 @@ describe('Pokemon Data & Sprite Sync Integrity', () => {
                 const m = stem.match(/^([^_]+)_(\d{4}(?:\.\d+)?)_(.+)$/);
                 expect(m).not.toBeNull();
 
-                const [, , idStr, rest] = m;
-                const isVar = idStr.includes('.');
+                const [, prefix, idStr, rest] = m;
+                expect(prefix).toBe(folderMeta.prefix);
 
+                const isVar = idStr.includes('.');
                 if (isVar) {
                     expect(rest.includes('_')).toBe(true);
                     const key = `${idStr.split('.')[0]}|${rest}`;
@@ -73,8 +96,9 @@ describe('Pokemon Data & Sprite Sync Integrity', () => {
                 }
 
                 if (isShiny) {
+                    expect(folderMeta.hasShiny).toBe(true);
                     expect(fileSet.has(`${stem}.png`)).toBe(true);
-                } else if (folder !== 'Gen9') {
+                } else if (folderMeta.hasShiny) {
                     expect(fileSet.has(`${stem}_shiny.png`)).toBe(true);
                 }
             }
@@ -86,46 +110,69 @@ describe('Pokemon Data & Sprite Sync Integrity', () => {
         expect(conflicts).toEqual([]);
     });
 
-    it('verifies pokemon_info.json completeness, uniqueness, and 1-to-1 sprite linkage', () => {
-        const entries = Object.entries(pokemonInfo);
+    it('verifies normalized pokemon_info.json completeness, move references, and 1-to-1 sprite reconstruction', () => {
+        expect(Array.isArray(pokemonInfo.folders)).toBe(true);
+        expect(pokemonInfo.folders.length).toBe(11);
+        expect(pokemonInfo.moves && typeof pokemonInfo.moves).toBe('object');
+        expect(Object.keys(pokemonInfo.moves).length).toBe(619);
+
+        const entries = Object.entries(pokemonInfo.pokemon);
         expect(entries.length).toBe(1552);
 
-        const seenIds = new Set();
         const linkedRelPaths = new Set();
+        const seenNames = new Set();
 
-        for (const [name, entry] of entries) {
-            expect(typeof entry.PokedexNationalID).toBe('string');
-            expect(seenIds.has(entry.PokedexNationalID)).toBe(false);
-            seenIds.add(entry.PokedexNationalID);
+        for (const [id, rawEntry] of entries) {
+            expect(/^\d{4}(?:\.\d+)?$/.test(id)).toBe(true);
+            expect(seenNames.has(rawEntry.name)).toBe(false);
+            seenNames.add(rawEntry.name);
 
-            expect(Array.isArray(entry.PokemonType)).toBe(true);
-            expect(entry.PokemonType.length).toBeGreaterThanOrEqual(1);
-            expect(entry.PokemonType.length).toBeLessThanOrEqual(2);
-            for (const t of entry.PokemonType) {
+            const resolved = resolvePokemonEntry(id);
+            expect(Array.isArray(resolved.types)).toBe(true);
+            expect(resolved.types.length).toBeGreaterThanOrEqual(1);
+            expect(resolved.types.length).toBeLessThanOrEqual(2);
+            for (const t of resolved.types) {
                 expect(VALID_TYPES.has(t)).toBe(true);
             }
 
-            const s = entry.Stats;
-            expect(s).toBeDefined();
-            const sum = s.hp + s.atk + s.def + s.spa + s.spd + s.spe;
-            expect(s.bst).toBe(sum);
-            if (name !== 'MissingNo') {
-                expect(s.bst).toBeGreaterThan(0);
-                expect(entry.Moveset && Object.keys(entry.Moveset).length).toBeGreaterThan(0);
+            expect(Array.isArray(resolved.stats)).toBe(true);
+            expect(resolved.stats.length).toBe(7);
+            const [hp, atk, def, spa, spd, spe, bst] = resolved.stats;
+            expect(bst).toBe(hp + atk + def + spa + spd + spe);
+
+            if (id !== '0000') {
+                expect(bst).toBeGreaterThan(0);
+                expect(Object.keys(resolved.moveset).length).toBeGreaterThan(0);
+                for (const regArr of Object.values(resolved.moveset)) {
+                    expect(Array.isArray(regArr)).toBe(true);
+                    for (const tuple of regArr) {
+                        expect(Array.isArray(tuple)).toBe(true);
+                        expect(tuple.length).toBe(2);
+                        expect(pokemonInfo.moves[tuple[1]]).toBeDefined();
+                    }
+                }
             }
 
-            expect(entry.Sprites).toBeDefined();
-            for (const [folder, pair] of Object.entries(entry.Sprites)) {
-                for (const kind of ['normal', 'shiny']) {
-                    const f = pair[kind];
-                    if (!f) continue;
-                    const rel = `${folder}/${f}`;
-                    expect(fs.existsSync(path.join(SPRITES_DIR, folder, f))).toBe(true);
-                    const m = f.match(/^[^_]+_(\d{4}(?:\.\d+)?)_.+\.png$/);
-                    expect(m).not.toBeNull();
-                    expect(m[1]).toBe(entry.PokedexNationalID);
-                    linkedRelPaths.add(rel);
+            expect(Array.isArray(resolved.folders)).toBe(true);
+            if (resolved.sprite) {
+                expect(resolved.folders.length).toBeGreaterThan(0);
+                for (const fId of resolved.folders) {
+                    const fm = folderById.get(fId);
+                    expect(fm).toBeDefined();
+                    const normalFile = `${fm.prefix}_${id}_${resolved.sprite}.png`;
+                    const normalRel = `${fm.folder}/${normalFile}`;
+                    expect(fs.existsSync(path.join(SPRITES_DIR, fm.folder, normalFile))).toBe(true);
+                    linkedRelPaths.add(normalRel);
+
+                    if (fm.hasShiny) {
+                        const shinyFile = `${fm.prefix}_${id}_${resolved.sprite}_shiny.png`;
+                        const shinyRel = `${fm.folder}/${shinyFile}`;
+                        expect(fs.existsSync(path.join(SPRITES_DIR, fm.folder, shinyFile))).toBe(true);
+                        linkedRelPaths.add(shinyRel);
+                    }
                 }
+            } else {
+                expect(resolved.folders).toEqual([]);
             }
         }
 
@@ -142,27 +189,22 @@ describe('Pokemon Data & Sprite Sync Integrity', () => {
         }
     });
 
-    it('verifies data/pokemon.json aligns with pokemon_info.json and getSpriteUrl resolves every Reg1-Reg5 sprite', () => {
-        const infoByName = new Map(Object.entries(pokemonInfo));
+    it('verifies data/pokemon.json aligns with resolved pokemon_info.json and getSpriteUrl resolves every Reg1-Reg5 sprite', () => {
+        const infoByName = new Map();
         const infoByNumId = new Map();
-        for (const [name, entry] of Object.entries(pokemonInfo)) {
-            const num = Number(entry.PokedexNationalID);
-            if (!infoByNumId.has(num)) infoByNumId.set(num, { name, entry });
+        for (const id of Object.keys(pokemonInfo.pokemon)) {
+            const resolved = resolvePokemonEntry(id);
+            infoByName.set(resolved.name, resolved);
+            const num = Number(id);
+            if (!infoByNumId.has(num)) infoByNumId.set(num, resolved);
         }
 
         for (const p of pokemonJson) {
-            const match = infoByName.has(p.name)
-                ? { name: p.name, entry: infoByName.get(p.name) }
-                : infoByNumId.get(p.id);
+            const match = infoByName.get(p.name) || infoByNumId.get(p.id);
             expect(match).toBeDefined();
-            expect(Number(match.entry.PokedexNationalID)).toBe(p.id);
-            expect(p.types).toEqual(match.entry.PokemonType);
-            expect(p.hp).toBe(match.entry.Stats.hp);
-            expect(p.atk).toBe(match.entry.Stats.atk);
-            expect(p.def).toBe(match.entry.Stats.def);
-            expect(p.spa).toBe(match.entry.Stats.spa);
-            expect(p.spd).toBe(match.entry.Stats.spd);
-            expect(p.spe).toBe(match.entry.Stats.spe);
+            expect(Number(match.id)).toBe(p.id);
+            expect(p.types).toEqual(match.types);
+            expect([p.hp, p.atk, p.def, p.spa, p.spd, p.spe]).toEqual(match.stats.slice(0, 6));
         }
 
         const regionChecks = [
@@ -187,34 +229,33 @@ describe('Pokemon Data & Sprite Sync Integrity', () => {
     });
 
     it('verifies Male vs Female differences in Moveset, Stats, and Sprites for Meowstic, Indeedee, Basculegion, and Oinkologne', () => {
-        expect(pokemonInfo['Meowstic'].PokedexNationalID).toBe('0678');
-        expect(pokemonInfo['Meowstic (Female)'].PokedexNationalID).toBe('0678.1');
-        expect(pokemonInfo['Meowstic (Mega Meowstic)'].PokedexNationalID).toBe('0678.2');
-        expect(pokemonInfo['Meowstic (Female)'].Moveset).not.toEqual(pokemonInfo['Meowstic'].Moveset);
-        expect(pokemonInfo['Meowstic (Female)'].Sprites['Reg6 XY'].normal).toBe('Gen6XY_0678.1_Meowstic_Female.png');
-        expect(pokemonInfo['Meowstic (Female)'].Sprites['Reg8 SS'].normal).toBe('Gen8H_0678.1_Meowstic_Female.png');
+        const pkm = pokemonInfo.pokemon;
+        expect(pkm['0678'].name).toBe('Meowstic');
+        expect(pkm['0678.1'].name).toBe('Meowstic (Female)');
+        expect(pkm['0678.2'].name).toBe('Meowstic (Mega Meowstic)');
+        expect(pkm['0678.1'].moveset).toBeDefined();
+        expect(pkm['0678.1'].moveset).not.toEqual(pkm['0678'].moveset);
+        expect(pkm['0678.1'].sprite).toBe('Meowstic_Female');
+        expect(pkm['0678.1'].folders).toEqual([5, 7, 10]);
 
-        expect(pokemonInfo['Indeedee'].PokedexNationalID).toBe('0876');
-        expect(pokemonInfo['Indeedee (Female)'].PokedexNationalID).toBe('0876.1');
-        expect(pokemonInfo['Indeedee (Female)'].Stats).toEqual({
-            hp: 70, atk: 55, def: 65, spa: 95, spd: 105, spe: 85, bst: 475
-        });
-        expect(pokemonInfo['Indeedee (Female)'].Stats).not.toEqual(pokemonInfo['Indeedee'].Stats);
-        expect(pokemonInfo['Indeedee (Female)'].Moveset).not.toEqual(pokemonInfo['Indeedee'].Moveset);
-        expect(pokemonInfo['Indeedee (Female)'].Sprites['Reg8 SS'].normal).toBe('Gen8H_0876.1_Indeedee_Female.png');
+        expect(pkm['0876'].name).toBe('Indeedee');
+        expect(pkm['0876.1'].name).toBe('Indeedee (Female)');
+        expect(pkm['0876.1'].stats).toEqual([70, 55, 65, 95, 105, 85, 475]);
+        expect(pkm['0876.1'].stats).not.toEqual(pkm['0876'].stats);
+        expect(pkm['0876.1'].moveset).not.toEqual(pkm['0876'].moveset);
+        expect(pkm['0876.1'].sprite).toBe('Indeedee_Female');
+        expect(pkm['0876.1'].folders).toEqual([7, 10]);
 
-        expect(pokemonInfo['Basculegion'].PokedexNationalID).toBe('0902');
-        expect(pokemonInfo['Basculegion (Female)'].PokedexNationalID).toBe('0902.1');
-        expect(pokemonInfo['Basculegion (Female)'].Stats).toEqual({
-            hp: 120, atk: 92, def: 65, spa: 100, spd: 75, spe: 78, bst: 530
-        });
-        expect(pokemonInfo['Basculegion (Female)'].Sprites['Reg9 LA'].normal).toBe('Gen8LA_0902.1_Basculegion_Female.png');
+        expect(pkm['0902'].name).toBe('Basculegion');
+        expect(pkm['0902.1'].name).toBe('Basculegion (Female)');
+        expect(pkm['0902.1'].stats).toEqual([120, 92, 65, 100, 75, 78, 530]);
+        expect(pkm['0902.1'].sprite).toBe('Basculegion_Female');
+        expect(pkm['0902.1'].folders).toEqual([7, 8, 10]);
 
-        expect(pokemonInfo['Oinkologne'].PokedexNationalID).toBe('0916');
-        expect(pokemonInfo['Oinkologne (Female)'].PokedexNationalID).toBe('0916.1');
-        expect(pokemonInfo['Oinkologne (Female)'].Stats).toEqual({
-            hp: 115, atk: 90, def: 70, spa: 59, spd: 90, spe: 65, bst: 489
-        });
-        expect(pokemonInfo['Oinkologne (Female)'].Sprites['Reg8 SS'].normal).toBe('Gen8H_0916.1_Oinkologne_Female.png');
+        expect(pkm['0916'].name).toBe('Oinkologne');
+        expect(pkm['0916.1'].name).toBe('Oinkologne (Female)');
+        expect(pkm['0916.1'].stats).toEqual([115, 90, 70, 59, 90, 65, 489]);
+        expect(pkm['0916.1'].sprite).toBe('Oinkologne_Female');
+        expect(pkm['0916.1'].folders).toEqual([7, 10]);
     });
 });
