@@ -2069,7 +2069,7 @@ async function init() {
             const profileCard = document.createElement('div');
             profileCard.style.display = "flex";
             profileCard.style.flexDirection = "column";
-            profileCard.style.gap = "6px";
+            profileCard.style.alignItems = "center";
             profileCard.style.width = "max-content";
             profileCard.style.minWidth = "78%";
 
@@ -2084,7 +2084,7 @@ async function init() {
             btn.style.borderRadius = "9999px";
             btn.style.textAlign = "left";
             btn.style.fontWeight = "bold";
-            btn.style.width = "100%";
+            btn.style.width = "80%";
             btn.style.flexDirection = "column";
 
             const textWrapper = document.createElement('div');
