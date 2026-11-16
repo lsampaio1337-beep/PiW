@@ -66,7 +66,7 @@ function getEvolveRequirements(p, evo, state) {
         if (hasCount < stonesReq) {
             hasStones = false;
         }
-        missingStonesHtml += `${missingStonesHtml ? ' and ' : ''}${stonesReq}<img src="Assets/Items/Stones/${stoneName}.png" style="width: 16px; height: 16px; vertical-align: middle; margin-left: 2px; margin-right: 5px;" title="${stoneName}">`;
+        missingStonesHtml += `${missingStonesHtml ? ' and ' : ''}${stonesReq}<img src="Assets/Items/Stones/${stoneName}.png" style="width: 16px; height: 16px; vertical-align: middle; margin: 0 2px;" title="${stoneName}">`;
     }
 
     const hasLevel = p.level >= requiredLevel;
@@ -106,7 +106,7 @@ function getActionsHtml(p, pData, location, idx) {
             if (pData.evolutions.length > 1) {
                 btnText = "Multiple<br>Evolutions";
             } else if (!req.canEvolve) {
-                btnText = `<span style="line-height:1.2;">Need lv. ${req.requiredLevel}</span><span style="line-height:1.2; display:flex; align-items:center;">Need ${req.missingStonesHtml}</span>`;
+                btnText = `<span style="line-height:1.2;">Need lv. ${req.requiredLevel}</span><span style="line-height:1.2; display:flex; align-items:center; justify-content:center;">Need ${req.missingStonesHtml}</span>`;
             }
 
             return `
