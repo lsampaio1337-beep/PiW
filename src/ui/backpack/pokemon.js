@@ -265,7 +265,7 @@ export function renderPokemonTab(area) {
     content += `
         <div style="display: flex; gap: 10px; width: 100%; height: 100%; min-height: 0; overflow-x: hidden; flex-grow: 1;">
             <!-- Column 1: Active -->
-            <div style="${activeFlex} align-self: flex-start; max-height: 100%; border: 1px solid rgba(52, 152, 219, 0.35); ${basePanelStyle}">
+            <div style="${activeFlex} align-self: flex-start; max-height: 100%; border: 2px solid rgba(52, 152, 219, 0.75); ${basePanelStyle}">
                 <div id="active-scroll-container" style="display: grid; grid-template-columns: repeat(2, 1fr); grid-auto-rows: max-content; gap: 5px; overflow-y: auto; overflow-x: hidden; align-content: start; flex-grow: 1; min-height: 0;">
     `;
 
@@ -317,9 +317,8 @@ export function renderPokemonTab(area) {
             </div>
 
             <!-- Column 2: Storage -->
-            <div ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, 'storage')" style="${storageFlex} border: 1px solid rgba(255, 255, 255, 0.16); ${basePanelStyle}">
-                <h4 style="text-align: center; margin-top:0; margin-bottom: 5px;">Storage</h4>
-                <div id="storage-scroll-container" style="display: grid; grid-template-columns: repeat(${storageCols}, 1fr); grid-auto-rows: max-content; gap: 5px; overflow-y: auto; overflow-x: hidden; align-content: start; flex-grow: 1; padding-bottom: 20px; min-height: 0;">
+            <div ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, 'storage')" style="${storageFlex} border: 2px solid rgba(255, 255, 255, 0.35); ${basePanelStyle}">
+                <div id="storage-scroll-container" style="display: grid; grid-template-columns: repeat(${storageCols}, 1fr); grid-auto-rows: max-content; gap: 5px; overflow-y: auto; overflow-x: hidden; align-content: start; flex-grow: 1; min-height: 0;">
     `;
 
     for (let i = 0; i < state.storage.length; i++) {
@@ -335,7 +334,7 @@ export function renderPokemonTab(area) {
     if (showSafe) {
         content += `
             <!-- Column 3: Safe -->
-            <div id="safe-section" ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, 'safe')" style="${safeFlex} align-self: flex-start; max-height: 100%; border: 1px solid rgba(241, 196, 15, 0.3); ${basePanelStyle}">
+            <div id="safe-section" ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, 'safe')" style="${safeFlex} align-self: flex-start; max-height: 100%; border: 2px solid rgba(241, 196, 15, 0.75); ${basePanelStyle}">
                 <div id="safe-scroll-container" style="display: grid; grid-template-columns: repeat(2, 1fr); grid-auto-rows: max-content; gap: 5px; overflow-y: auto; overflow-x: hidden; align-content: start; flex-grow: 1; min-height: 0;">
         `;
 

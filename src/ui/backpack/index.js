@@ -61,7 +61,7 @@ export function showBackpack() {
                             <span onclick="window.closeBackpackPocket()" style="position: absolute; top: 5px; right: 5px; font-size: 12px; font-weight: bold; line-height: 1; padding: 0; cursor: pointer; color: white;">X</span>
                         </div>
                         <div class="window-content-container" style="flex: 1; overflow-y: auto;">
-                            <div id="backpack-inner-content" style="padding: 15px; box-sizing: border-box; width: 100%; height: 100%;">
+                            <div id="backpack-inner-content" style="padding: 5px; box-sizing: border-box; width: 100%; height: 100%;">
                                 <h3 style="text-align: center; margin-top: 0; color: #ddd;">Select a pocket to view items.</h3>
                             </div>
                         </div>
