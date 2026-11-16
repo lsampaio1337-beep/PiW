@@ -3290,7 +3290,9 @@ function renderStarterSelection(currentRegion, labContent) {
     containerDiv.style.top = '50%';
     containerDiv.style.transform = 'translateY(-50%)';
     containerDiv.style.padding = '30px';
-    containerDiv.style.borderRadius = '8px';
+    containerDiv.style.borderRadius = '12px';
+    containerDiv.style.border = '2px solid #1abc9c';
+    containerDiv.style.boxShadow = '0 8px 24px rgba(0, 0, 0, 0.65), 0 0 14px rgba(26, 188, 156, 0.25)';
 
     let h2 = document.createElement('h2');
     h2.textContent = 'Choose your Starter Pokémon';
@@ -3329,16 +3331,7 @@ function renderStarterSelection(currentRegion, labContent) {
 
 function renderAssignmentsAndBoosters(labContent) {
     let containerDiv = document.createElement('div');
-    containerDiv.style.backgroundColor = 'rgba(0,0,0,0.85)';
-    containerDiv.style.position = 'absolute';
-    containerDiv.style.left = '15%';
-    containerDiv.style.top = '50%';
-    containerDiv.style.transform = 'translateY(-50%)';
-    containerDiv.style.padding = '20px';
-    containerDiv.style.borderRadius = '8px';
-    containerDiv.style.width = '250px';
-    containerDiv.style.color = 'white';
-    containerDiv.style.textAlign = 'center';
+    containerDiv.className = 'prof-lab-lobby-modal';
 
     let h2 = document.createElement('h2');
     h2.style.marginTop = '0';
@@ -3357,7 +3350,7 @@ function renderAssignmentsAndBoosters(labContent) {
 
     let btn = document.createElement('button');
     btn.onclick = () => window.showProfLabModal();
-    btn.className = 'action-btn action-btn-primary';
+    btn.className = 'action-btn action-btn-primary action-btn-pill';
     btn.style.width = '100%';
     btn.textContent = 'Assignments and Boosters';
     innerDiv.appendChild(btn);
