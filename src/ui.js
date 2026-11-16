@@ -2025,6 +2025,18 @@ async function init() {
             }
         };
 
+        for (let count = 0; count <= 10; count++) {
+            validProfiles.push({
+                id: `fake_profile_${count}`,
+                data: {
+                    profileName: "Fake profile",
+                    _fakeMedalCount: count,
+                    globalStats: { playtime: count * 3600 },
+                    lastPlayed: Date.now()
+                }
+            });
+        }
+
         validProfiles.forEach((profileObj, index) => {
             const profileId = profileObj.id;
             const pData = profileObj.data;
@@ -2142,11 +2154,12 @@ async function init() {
 
             let earnedAnyMedal = false;
 
-            regions.forEach(region => {
+            regions.forEach((region, rIdx) => {
                 let activeTier = null;
 
-                // On profile load, state.config is available.
-                if (typeof state !== 'undefined' && state && state.config && state.config.pokemonData) {
+                if (pData._fakeMedalCount !== undefined) {
+                    if (rIdx < pData._fakeMedalCount) activeTier = 'First';
+                } else if (typeof state !== 'undefined' && state && state.config && state.config.pokemonData) {
                     let caughtCount = 0;
                     let shinyCount = 0;
                     let totalInRegion = 0;
@@ -2189,7 +2202,6 @@ async function init() {
                     }
                 }
 
-                if (!activeTier) activeTier = 'Third'; // TEMP TEST: display every medal
                 if (activeTier) {
                     earnedAnyMedal = true;
                     const medalImg = document.createElement('img');
