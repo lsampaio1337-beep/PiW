@@ -115,7 +115,7 @@ function getActionsHtml(p, pData, location, idx) {
 
             return `
                 <div>
-                    <button ${req.canEvolve ? '' : 'disabled'} onclick="window.evolvePokemon('${location}', ${idx}, ${evo.to})" style="${req.canEvolve ? 'background: #2ecc71;' : 'background: #7f8c8d; cursor: not-allowed;'} vertical-align: middle; width: max-content; min-width: 200px; height: 40px; font-size: 12px; line-height: 1.2; padding: 5px 10px; text-align: center; display: inline-flex; align-items: center; justify-content: center; flex-direction: column;">${btnText}</button>
+                    <button ${req.canEvolve ? '' : 'disabled'} onclick="window.evolvePokemon('${location}', ${idx}, ${evo.to})" class="stats-action-btn">${btnText}</button>
                 </div>
             `;
         }).join('');
@@ -124,7 +124,7 @@ function getActionsHtml(p, pData, location, idx) {
     return `<div style="margin-top: 15px; border-top: 1px solid #555; padding-top: 10px; display: flex; justify-content: center; gap: 10px;">
         ${evolveHtml}
         <div>
-            <button onclick="window.showVitaminsModal('${location}', ${idx})" style="background: #e67e22; cursor: pointer; vertical-align: middle; width: max-content; min-width: 100px; height: 40px; font-size: 14px; font-weight: bold; line-height: 1.2; padding: 5px 10px; text-align: center; display: inline-flex; align-items: center; justify-content: center; flex-direction: column; border: none; border-radius: 5px; color: white;">Vitamins</button>
+            <button onclick="window.showVitaminsModal('${location}', ${idx})" class="stats-action-btn">Vitamins</button>
         </div>
     </div>`;
 }
