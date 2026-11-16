@@ -103,14 +103,10 @@ function getActionsHtml(p, pData, location, idx) {
             const req = getEvolveRequirements(p, evo, state);
 
             let btnText = "Evolve";
-            if (!req.canEvolve) {
-                if (!req.hasLevel && !req.hasStones) {
-                    btnText = `<span style="line-height:1.2;">Need Lv. ${req.requiredLevel}</span><span style="line-height:1.2; display:flex; align-items:center;">Need ${req.missingStonesHtml} to evolve</span>`;
-                } else if (!req.hasLevel) {
-                    btnText = `Need Lv. ${req.requiredLevel} to evolve`;
-                } else if (!req.hasStones) {
-                    btnText = `<span style="display:flex; align-items:center;">Need ${req.missingStonesHtml} to evolve</span>`;
-                }
+            if (pData.evolutions.length > 1) {
+                btnText = "Multiple<br>Evolutions";
+            } else if (!req.canEvolve) {
+                btnText = `<span style="line-height:1.2;">Need lv. ${req.requiredLevel}</span><span style="line-height:1.2; display:flex; align-items:center;">Need ${req.missingStonesHtml}</span>`;
             }
 
             return `
@@ -124,7 +120,7 @@ function getActionsHtml(p, pData, location, idx) {
     return `<div style="margin-top: 15px; border-top: 1px solid #555; padding-top: 10px; display: flex; justify-content: center; gap: 10px;">
         ${evolveHtml}
         <div>
-            <button onclick="window.showVitaminsModal('${location}', ${idx})" class="stats-action-btn">Vitamins</button>
+            <button onclick="window.showVitaminsModal('${location}', ${idx})" class="stats-action-btn">Consume<br>Vitamins</button>
         </div>
     </div>`;
 }
