@@ -772,7 +772,7 @@ input[type="number"] {
 }
 
 /* --- Pokemon Stats Action Buttons (Evolve & Vitamins) --- */
-#modal-content-box button.stats-action-btn {
+button.stats-action-btn {
     margin-top: 0;
     background: #3498db;
     color: white;
@@ -793,21 +793,21 @@ input[type="number"] {
     vertical-align: middle;
     transition: all 0.2s;
 }
-#modal-content-box button.stats-action-btn:hover {
+button.stats-action-btn:hover {
     background: #2980b9;
     border-color: rgba(255, 255, 255, 0.4);
 }
-#modal-content-box button.stats-action-btn:active {
+button.stats-action-btn:active {
     transform: scale(0.98);
 }
-#modal-content-box button.stats-action-btn:disabled {
+button.stats-action-btn:disabled {
     background: rgba(255, 255, 255, 0.1);
     color: rgba(255, 255, 255, 0.5);
     border-color: rgba(255, 255, 255, 0.1);
     cursor: not-allowed;
     font-size: 12px;
 }
-#modal-content-box button.stats-action-btn:disabled:hover {
+button.stats-action-btn:disabled:hover {
     background: rgba(255, 255, 255, 0.1);
     border-color: rgba(255, 255, 255, 0.1);
     transform: none;
