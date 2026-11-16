@@ -99,11 +99,18 @@ export function showPokemonStatsByUuid(uuid) {
     }
 }
 
+function isPokemonInRegion(pd, state) {
+    if (!pd) return false;
+    const regionName = state.currentRegionName || 'Kanto';
+    const regionIdField = regionName.toLowerCase() + '_id';
+    return pd[regionIdField] !== undefined;
+}
+
 function getActionsHtml(p, pData, location, idx) {
     const btnBaseStyle = 'border: 1px solid transparent; border-radius: 15px; padding: 6px 15px; font-weight: bold; font-size: 13px; line-height: 1.2; transition: all 0.2s; display: inline-flex; align-items: center; justify-content: center; flex-direction: column; text-align: center; width: 240px; height: 52px; box-sizing: border-box;';
     let evolveHtml = "";
     if (!pData) return;
-    const validEvolutions = (pData.evolutions || []).filter(evo => getPokemonConfig(evo.to, state));
+    const validEvolutions = (pData.evolutions || []).filter(evo => isPokemonInRegion(getPokemonConfig(evo.to, state), state));
     if (validEvolutions.length > 1) {
         const canAnyEvolve = validEvolutions.some(evo => getEvolveRequirements(p, evo, state).canEvolve);
         evolveHtml = `
@@ -365,7 +372,7 @@ window.showMultipleEvolveModal = function(location, idx) {
     const p = list[idx];
     const pData = getPokemonConfig(p.id, state);
     if (!pData) return;
-    const validEvolutions = (pData.evolutions || []).filter(evo => getPokemonConfig(evo.to, state));
+    const validEvolutions = (pData.evolutions || []).filter(evo => isPokemonInRegion(getPokemonConfig(evo.to, state), state));
     if (validEvolutions.length === 0) return;
 
     const buttonsHtml = validEvolutions.map(evo => {

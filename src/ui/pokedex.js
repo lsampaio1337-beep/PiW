@@ -163,6 +163,13 @@ export function showDexEntry(id) {
     }
 }
 
+function isPokemonInRegion(pd, state) {
+    if (!pd) return false;
+    const regionName = state.currentRegionName || 'Kanto';
+    const regionIdField = regionName.toLowerCase() + '_id';
+    return pd[regionIdField] !== undefined;
+}
+
 export function buildEvolutionLineHtml(pData, state) {
     let baseId = pData.id;
     while (state.config.evolutionParents && state.config.evolutionParents[baseId] !== undefined) {
@@ -186,7 +193,7 @@ export function buildEvolutionLineHtml(pData, state) {
             <span style="font-size: 10px; cursor: ${cursor};" ${onClick}>${displayName}</span>
         </div>`;
 
-        const validEvos = (pd.evolutions || []).filter(evo => getPokemonById(evo.to, state));
+        const validEvos = (pd.evolutions || []).filter(evo => isPokemonInRegion(getPokemonById(evo.to, state), state));
         if (validEvos.length > 0) {
             html = `<div style="display: flex; align-items: center;">` + html;
 
