@@ -1,5 +1,14 @@
 import { state } from '../state.js';
 
+function sanitizeSpriteName(name) {
+    if (!name) return '';
+    return String(name)
+        .replace(/♀/g, 'F')
+        .replace(/♂/g, 'M')
+        .replace(/é/gi, 'e')
+        .replace(/[^a-zA-Z0-9]/g, '');
+}
+
 export function getSpriteUrl(id, isShiny = false) {
     if (!state || !state.config || (!state.config.pokemonMap && !state.config.pokemonData) || id === undefined || id === null) return '';
     const pData = state.config.pokemonMap
@@ -7,7 +16,8 @@ export function getSpriteUrl(id, isShiny = false) {
         : state.config.pokemonData.find(pd => pd.id == id);
     if (!pData) return '';
     const paddedId = id.toString().padStart(4, '0');
-    return `Assets/Pokemon Sprites/Natural/Gen5/${paddedId}_${pData.name}${isShiny ? '_shiny' : ''}.png`;
+    const safeName = sanitizeSpriteName(pData.name);
+    return `Assets/Pokemon Sprites/Reg5 BW/Gen5BW_${paddedId}_${safeName}${isShiny ? '_shiny' : ''}.png`;
 };
 
 const routeTrimCache = new Map();

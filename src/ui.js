@@ -3301,7 +3301,7 @@ function renderStarterSelection(currentRegion, labContent) {
         const p = state.config.pokemonData.find(p => p.id === id);
         const name = p ? p.name : 'Unknown';
         const paddedId = id.toString().padStart(4, '0');
-        const spriteSrc = `Assets/Pokemon Sprites/Natural/Gen5/${paddedId}_${name}.png`;
+        const spriteSrc = `Assets/Pokemon Sprites/Reg5 BW/Gen5BW_${paddedId}_${name}.png`;
 
         const btn = document.createElement('button');
         btn.onclick = () => window.selectStarter(id);

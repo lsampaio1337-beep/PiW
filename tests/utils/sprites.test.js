@@ -8,6 +8,12 @@ jest.mock('../../src/state.js', () => ({
             pokemonData: [
                 { id: 1, name: 'bulbasaur' },
                 { id: 25, name: 'pikachu' },
+                { id: 29, name: 'Nidoran♀' },
+                { id: 32, name: 'Nidoran♂' },
+                { id: 83, name: "Farfetch'd" },
+                { id: 122, name: 'Mr. Mime' },
+                { id: 439, name: 'Mime Jr.' },
+                { id: 474, name: 'Porygon-Z' },
             ]
         }
     }
@@ -15,13 +21,22 @@ jest.mock('../../src/state.js', () => ({
 
 describe('getSpriteUrl', () => {
     it('should return correct URL for normal pokemon', () => {
-        expect(getSpriteUrl(1)).toBe('Assets/Pokemon Sprites/Natural/Gen5/0001_bulbasaur.png');
-        expect(getSpriteUrl(25)).toBe('Assets/Pokemon Sprites/Natural/Gen5/0025_pikachu.png');
+        expect(getSpriteUrl(1)).toBe('Assets/Pokemon Sprites/Reg5 BW/Gen5BW_0001_bulbasaur.png');
+        expect(getSpriteUrl(25)).toBe('Assets/Pokemon Sprites/Reg5 BW/Gen5BW_0025_pikachu.png');
     });
 
     it('should return correct URL for shiny pokemon', () => {
-        expect(getSpriteUrl(1, true)).toBe('Assets/Pokemon Sprites/Natural/Gen5/0001_bulbasaur_shiny.png');
-        expect(getSpriteUrl(25, true)).toBe('Assets/Pokemon Sprites/Natural/Gen5/0025_pikachu_shiny.png');
+        expect(getSpriteUrl(1, true)).toBe('Assets/Pokemon Sprites/Reg5 BW/Gen5BW_0001_bulbasaur_shiny.png');
+        expect(getSpriteUrl(25, true)).toBe('Assets/Pokemon Sprites/Reg5 BW/Gen5BW_0025_pikachu_shiny.png');
+    });
+
+    it('should sanitize special characters in pokemon names', () => {
+        expect(getSpriteUrl(29)).toBe('Assets/Pokemon Sprites/Reg5 BW/Gen5BW_0029_NidoranF.png');
+        expect(getSpriteUrl(32)).toBe('Assets/Pokemon Sprites/Reg5 BW/Gen5BW_0032_NidoranM.png');
+        expect(getSpriteUrl(83)).toBe('Assets/Pokemon Sprites/Reg5 BW/Gen5BW_0083_Farfetchd.png');
+        expect(getSpriteUrl(122)).toBe('Assets/Pokemon Sprites/Reg5 BW/Gen5BW_0122_MrMime.png');
+        expect(getSpriteUrl(439)).toBe('Assets/Pokemon Sprites/Reg5 BW/Gen5BW_0439_MimeJr.png');
+        expect(getSpriteUrl(474)).toBe('Assets/Pokemon Sprites/Reg5 BW/Gen5BW_0474_PorygonZ.png');
     });
 
     it('should return empty string if pokemon id does not exist', () => {
