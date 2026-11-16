@@ -97,34 +97,41 @@ export function showPokemonStatsByUuid(uuid) {
 }
 
 function getActionsHtml(p, pData, location, idx) {
+    const btnBaseStyle = 'border: 1px solid transparent; border-radius: 15px; padding: 6px 15px; font-weight: bold; font-size: 13px; line-height: 1.2; transition: all 0.2s; display: inline-flex; align-items: center; justify-content: center; flex-direction: column; text-align: center; width: 240px; height: 52px; box-sizing: border-box;';
     let evolveHtml = "";
-    if (pData.evolutions && pData.evolutions.length > 0) {
-        evolveHtml = pData.evolutions.map(evo => {
-            const req = getEvolveRequirements(p, evo, state);
+    if (pData.evolutions && pData.evolutions.length > 1) {
+        const canAnyEvolve = pData.evolutions.some(evo => getEvolveRequirements(p, evo, state).canEvolve);
+        evolveHtml = `
+            <div>
+                <button ${canAnyEvolve ? '' : 'disabled'} onclick="window.showMultipleEvolveModal('${location}', ${idx})" style="${btnBaseStyle} background: ${canAnyEvolve ? '#3498db' : '#7f8c8d'}; color: white; cursor: ${canAnyEvolve ? 'pointer' : 'not-allowed'}; ${canAnyEvolve ? '' : 'opacity: 0.6;'}">Multiple<br>Evolutions</button>
+            </div>
+        `;
+    } else if (pData.evolutions && pData.evolutions.length === 1) {
+        const evo = pData.evolutions[0];
+        const req = getEvolveRequirements(p, evo, state);
 
-            let btnText = "Evolve";
-            if (!req.canEvolve) {
-                if (!req.hasLevel && !req.hasStones) {
-                    btnText = `<span style="line-height:1.2;">Need Lv. ${req.requiredLevel}</span><span style="line-height:1.2; display:flex; align-items:center;">Need ${req.missingStonesHtml} to evolve</span>`;
-                } else if (!req.hasLevel) {
-                    btnText = `Need Lv. ${req.requiredLevel} to evolve`;
-                } else if (!req.hasStones) {
-                    btnText = `<span style="display:flex; align-items:center;">Need ${req.missingStonesHtml} to evolve</span>`;
-                }
+        let btnText = "Evolve";
+        if (!req.canEvolve) {
+            if (!req.hasLevel && !req.hasStones) {
+                btnText = `<span style="line-height:1.2;">Need Lv. ${req.requiredLevel}</span><span style="line-height:1.2; display:flex; align-items:center;">Need ${req.missingStonesHtml} to evolve</span>`;
+            } else if (!req.hasLevel) {
+                btnText = `Need Lv. ${req.requiredLevel} to evolve`;
+            } else if (!req.hasStones) {
+                btnText = `<span style="display:flex; align-items:center;">Need ${req.missingStonesHtml} to evolve</span>`;
             }
+        }
 
-            return `
-                <div>
-                    <button ${req.canEvolve ? '' : 'disabled'} onclick="window.evolvePokemon('${location}', ${idx}, ${evo.to})" style="${req.canEvolve ? 'background: #2ecc71;' : 'background: #7f8c8d; cursor: not-allowed;'} vertical-align: middle; width: max-content; min-width: 200px; height: 40px; font-size: 12px; line-height: 1.2; padding: 5px 10px; text-align: center; display: inline-flex; align-items: center; justify-content: center; flex-direction: column;">${btnText}</button>
-                </div>
-            `;
-        }).join('');
+        evolveHtml = `
+            <div>
+                <button ${req.canEvolve ? '' : 'disabled'} onclick="window.showEvolveConfirmModal('${location}', ${idx}, ${evo.to})" style="${btnBaseStyle} background: ${req.canEvolve ? '#3498db' : '#7f8c8d'}; color: white; cursor: ${req.canEvolve ? 'pointer' : 'not-allowed'}; ${req.canEvolve ? '' : 'opacity: 0.6;'}">${btnText}</button>
+            </div>
+        `;
     }
 
-    return `<div style="margin-top: 15px; border-top: 1px solid #555; padding-top: 10px; display: flex; justify-content: center; gap: 10px;">
+    return `<div style="margin-top: 15px; border-top: 2px solid #fff; padding: 15px 0; display: flex; justify-content: center; align-items: center; gap: 15px;">
         ${evolveHtml}
         <div>
-            <button onclick="window.showVitaminsModal('${location}', ${idx})" style="background: #e67e22; cursor: pointer; vertical-align: middle; width: max-content; min-width: 100px; height: 40px; font-size: 14px; font-weight: bold; line-height: 1.2; padding: 5px 10px; text-align: center; display: inline-flex; align-items: center; justify-content: center; flex-direction: column; border: none; border-radius: 5px; color: white;">Vitamins</button>
+            <button onclick="window.showVitaminsModal('${location}', ${idx})" style="${btnBaseStyle} background: #3498db; color: white; cursor: pointer;">Consume<br>Vitamins</button>
         </div>
     </div>`;
 }
@@ -198,7 +205,7 @@ function getIndividualHtml(p, sumIV, actionsHtml) {
 function getCollectiveHtml(pData, state) {
     const fullEvoTreeHtml = buildEvolutionLineHtml(pData, state);
     return `
-        <div style="margin-top: 20px; border-top: 2px solid #fff; padding-top: 15px;">
+        <div style="margin-top: 0; border-top: 2px solid #fff; padding-top: 15px;">
             <h3 style="margin-top: 0;">Species Data</h3>
             ${getSpeciesDataHtml(pData, state)}
             ${fullEvoTreeHtml}
@@ -220,9 +227,20 @@ export function showPokemonStats(idx, location) {
     const collectiveHtml = getCollectiveHtml(pData, state);
 
     let html = `
-        <div class="content-panel" style="max-height: 80vh; overflow-y: auto; overflow-x: hidden;">
-            ${individualHtml}
-            ${collectiveHtml}
+        <div style="position: relative;">
+            <div class="content-panel" style="max-height: 80vh; overflow-y: auto; overflow-x: hidden;">
+                ${individualHtml}
+                ${collectiveHtml}
+            </div>
+            <div id="pokemon-vitamins-inner-window" onclick="event.stopPropagation()" class="floating-window" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 500px; max-width: 95%; height: auto; max-height: 90%; flex-direction: column; z-index: 10; display: none; overflow: hidden;">
+                <div class="window-header" style="position: relative; cursor: default;">
+                    <span id="pokemon-vitamins-inner-title">Vitamins</span>
+                    <span onclick="window.closeVitaminsInnerWindow()" style="position: absolute; top: 5px; right: 5px; font-size: 12px; font-weight: bold; line-height: 1; padding: 0; cursor: pointer; color: white;">X</span>
+                </div>
+                <div class="window-content-container" style="flex: 1; overflow-y: auto;">
+                    <div id="pokemon-vitamins-inner-content" style="padding: 15px; box-sizing: border-box; width: 100%;"></div>
+                </div>
+            </div>
         </div>
     `;
 
@@ -331,6 +349,71 @@ export function evolvePokemon(location, idx, toId) {
     if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') window.trackDailyChallenge('evolve_pokemon');
 }
 
+window.closeVitaminsInnerWindow = function() {
+    const innerWin = document.getElementById('pokemon-vitamins-inner-window');
+    if (innerWin) innerWin.style.display = 'none';
+};
+
+window.showMultipleEvolveModal = function(location, idx) {
+    const list = state[location];
+    if (!list || !list[idx]) return;
+    const p = list[idx];
+    const pData = getPokemonConfig(p.id, state);
+    if (!pData || !pData.evolutions) return;
+
+    const buttonsHtml = pData.evolutions.map(evo => {
+        const req = getEvolveRequirements(p, evo, state);
+        return `<button ${req.canEvolve ? '' : 'disabled'} onclick="window.closeVitaminsInnerWindow(); window.evolvePokemon('${location}', ${idx}, ${evo.to})" style="background: ${req.canEvolve ? '#2ecc71' : '#7f8c8d'}; color: white; border: none; border-radius: 8px; padding: 10px 15px; font-weight: bold; cursor: ${req.canEvolve ? 'pointer' : 'not-allowed'}; ${req.canEvolve ? '' : 'opacity: 0.6;'} width: 100%; display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px;">Consume ${req.missingStonesHtml}?</button>`;
+    }).join('');
+
+    const html = `
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+            ${buttonsHtml}
+            <button onclick="window.closeVitaminsInnerWindow()" style="background: #e74c3c; color: white; border: none; border-radius: 8px; padding: 10px 15px; font-weight: bold; cursor: pointer; width: 100%;">No</button>
+        </div>
+    `;
+    const innerWin = document.getElementById('pokemon-vitamins-inner-window');
+    const innerTitle = document.getElementById('pokemon-vitamins-inner-title');
+    const innerContent = document.getElementById('pokemon-vitamins-inner-content');
+    if (innerWin && innerTitle && innerContent) {
+        innerTitle.textContent = `Evolve ${p.name}`;
+        innerContent.innerHTML = html;
+        innerWin.style.display = 'flex';
+    }
+};
+
+window.showEvolveConfirmModal = function(location, idx, toId) {
+    const list = state[location];
+    if (!list || !list[idx]) return;
+    const p = list[idx];
+    const pData = getPokemonConfig(p.id, state);
+    if (!pData || !pData.evolutions) return;
+    const evo = pData.evolutions.find(e => e.to === toId);
+    if (!evo) return;
+    const req = getEvolveRequirements(p, evo, state);
+
+    const html = `
+        <div style="text-align: center; color: white; padding: 10px;">
+            <p style="font-size: 16px; margin-top: 0; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px;">
+                Consume ${req.missingStonesHtml}?
+            </p>
+            <div style="display: flex; justify-content: center; gap: 15px;">
+                <button onclick="window.closeVitaminsInnerWindow(); window.evolvePokemon('${location}', ${idx}, ${toId})" style="background: #2ecc71; color: white; border: none; border-radius: 8px; padding: 8px 25px; font-weight: bold; cursor: pointer; font-size: 14px;">Yes</button>
+                <button onclick="window.closeVitaminsInnerWindow()" style="background: #e74c3c; color: white; border: none; border-radius: 8px; padding: 8px 25px; font-weight: bold; cursor: pointer; font-size: 14px;">No</button>
+            </div>
+        </div>
+    `;
+
+    const innerWin = document.getElementById('pokemon-vitamins-inner-window');
+    const innerTitle = document.getElementById('pokemon-vitamins-inner-title');
+    const innerContent = document.getElementById('pokemon-vitamins-inner-content');
+    if (innerWin && innerTitle && innerContent) {
+        innerTitle.textContent = `Evolve ${p.name}`;
+        innerContent.innerHTML = html;
+        innerWin.style.display = 'flex';
+    }
+};
+
 window.showVitaminsModal = function(location, idx) {
     const list = state[location];
     if (!list || !list[idx]) return;
@@ -363,7 +446,7 @@ window.showVitaminsModal = function(location, idx) {
         if (isMaxed) {
             btnHtml = `<button disabled style="background: #7f8c8d; cursor: not-allowed; padding: 5px 10px; border: none; border-radius: 4px; color: white; width: 100%;">Maxed</button>`;
         } else {
-            btnHtml = `<button ${canUse ? '' : 'disabled'} onclick="window.useVitamin('${location}', ${idx}, '${v.name}', '${v.stat}')" style="${canUse ? 'background: #2ecc71; cursor: pointer;' : 'background: #7f8c8d; cursor: not-allowed;'} padding: 5px 10px; border: none; border-radius: 4px; color: white; width: 100%;">Use Vitamin (Owned: ${owned})</button>`;
+            btnHtml = `<button ${canUse ? '' : 'disabled'} onclick="window.useVitamin('${location}', ${idx}, '${v.name}', '${v.stat}')" style="${canUse ? 'background: #3498db; cursor: pointer;' : 'background: #7f8c8d; cursor: not-allowed;'} padding: 5px 10px; border: none; border-radius: 4px; color: white; width: 100%;">Use Vitamin (Owned: ${owned})</button>`;
         }
 
         html += `
@@ -380,7 +463,16 @@ window.showVitaminsModal = function(location, idx) {
         </div>
     `;
 
-    showModal(`Vitamins for ${escapeHTML(p.name)}`, html, "window-vitamins", "500px");
+    const innerWin = document.getElementById('pokemon-vitamins-inner-window');
+    const innerTitle = document.getElementById('pokemon-vitamins-inner-title');
+    const innerContent = document.getElementById('pokemon-vitamins-inner-content');
+    if (innerWin && innerTitle && innerContent) {
+        innerTitle.textContent = `Vitamins for ${p.name}`;
+        innerContent.innerHTML = html;
+        innerWin.style.display = 'flex';
+    } else {
+        showModal(`Vitamins for ${escapeHTML(p.name)}`, html, "window-vitamins", "500px");
+    }
 };
 
 
