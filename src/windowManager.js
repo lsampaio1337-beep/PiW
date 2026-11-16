@@ -281,7 +281,7 @@ export class WindowManager {
             'showCalendar', 'showChallengesModal', 'showDexEntry', 'showGameAlert', 'showLevelUp',
             'showMapTooltip', 'showModal', 'showPokemonStats', 'showPokemonStatsByUuid', 'showProfLabModal',
             'showSmartCaptureBallSelection', 'showSmartCaptureMode', 'showTimeLapseModal', 'showTimeLapseResults',
-            'showTokenItemSelect', 'showTrainerStats', 'showVitaminsModal', 'showZzZConfirmationModal',
+            'showTokenItemSelect', 'showTrainerStats', 'showVitaminsModal', 'showEvolveConfirmModal', 'showZzZConfirmationModal',
             'skipProfTutorial', 'startCasinoEncounter', 'startGymBattle', 'startNewGame', 'switchMapRegion', 'promptWakeUpRegion',
             'switchMultiplayerTab', 'switchView', 'toggleMarketPokemonFilters', 'toggleMarketPokemonSaleSelection',
             'toggleSaleSelection', 'trackDailyChallenge', 'transformDitto', 'updateBuyItemPrice',

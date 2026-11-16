@@ -99,22 +99,26 @@ export function showPokemonStatsByUuid(uuid) {
 function getActionsHtml(p, pData, location, idx) {
     let evolveHtml = "";
     if (pData.evolutions && pData.evolutions.length > 0) {
-        evolveHtml = pData.evolutions.map(evo => {
-            const req = getEvolveRequirements(p, evo, state);
-
-            let btnText = "Evolve";
-            if (pData.evolutions.length > 1) {
-                btnText = "Multiple<br>Evolutions";
-            } else if (!req.canEvolve) {
-                btnText = `<span style="line-height:1.2;">Need lv. ${req.requiredLevel}</span><span style="line-height:1.2; display:flex; align-items:center; justify-content:center;">Need ${req.missingStonesHtml}</span>`;
-            }
-
-            return `
+        if (pData.evolutions.length > 1) {
+            const canEvolveAny = pData.evolutions.some(evo => getEvolveRequirements(p, evo, state).canEvolve);
+            evolveHtml = `
                 <div>
-                    <button ${req.canEvolve ? '' : 'disabled'} onclick="window.evolvePokemon('${location}', ${idx}, ${evo.to})" class="stats-action-btn">${btnText}</button>
+                    <button ${canEvolveAny ? '' : 'disabled'} onclick="window.showEvolveConfirmModal('${location}', ${idx})" class="stats-action-btn">Multiple<br>Evolutions</button>
                 </div>
             `;
-        }).join('');
+        } else {
+            const evo = pData.evolutions[0];
+            const req = getEvolveRequirements(p, evo, state);
+            let btnText = "Evolve";
+            if (!req.canEvolve) {
+                btnText = `<span style="line-height:1.2;">Need lv. ${req.requiredLevel}</span><span style="line-height:1.2; display:flex; align-items:center; justify-content:center;">Need ${req.missingStonesHtml}</span>`;
+            }
+            evolveHtml = `
+                <div>
+                    <button ${req.canEvolve ? '' : 'disabled'} onclick="window.showEvolveConfirmModal('${location}', ${idx})" class="stats-action-btn">${btnText}</button>
+                </div>
+            `;
+        }
     }
 
     return `<div style="margin-top: 15px; border-top: 1px solid #555; padding-top: 10px; display: flex; justify-content: center; gap: 10px;">
@@ -331,6 +335,61 @@ window.showVitaminsModal = function(location, idx) {
     const list = state[location];
     if (!list || !list[idx]) return;
     const p = list[idx];
+
+export function showEvolveConfirmModal(location, idx) {
+    const list = state[location];
+    const p = list ? list[idx] : null;
+    if (!p) return;
+
+    const pData = POKEDEX_MAP[p.id];
+    if (!pData || !pData.evolutions || pData.evolutions.length === 0) return;
+
+    const evoLineHtml = buildEvolutionLineHtml(pData, state);
+    let bodyHtml = '';
+
+    if (pData.evolutions.length === 1) {
+        const evo = pData.evolutions[0];
+        const req = getEvolveRequirements(p, evo, state);
+        bodyHtml = `
+            <div style="margin: 15px 0; font-size: 16px; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 4px;">
+                Consume ${req.missingStonesHtml}?
+            </div>
+            <div style="display: flex; justify-content: center; gap: 12px; margin-top: 15px;">
+                <button onclick="window.closeModal('window-evolve-confirm'); window.evolvePokemon('${location}', ${idx}, ${evo.to})" style="background: #2ecc71; color: white; border: none; border-radius: 5px; padding: 8px 24px; font-weight: bold; cursor: pointer; font-size: 14px;">Yes</button>
+                <button onclick="window.closeModal('window-evolve-confirm')" style="background: #e74c3c; color: white; border: none; border-radius: 5px; padding: 8px 24px; font-weight: bold; cursor: pointer; font-size: 14px;">No</button>
+            </div>
+        `;
+    } else {
+        const buttonsHtml = pData.evolutions.map(evo => {
+            const req = getEvolveRequirements(p, evo, state);
+            return `
+                <button ${req.canEvolve ? '' : 'disabled'} onclick="window.closeModal('window-evolve-confirm'); window.evolvePokemon('${location}', ${idx}, ${evo.to})" style="background: ${req.canEvolve ? '#3498db' : '#6c7a7b'}; color: white; border: none; border-radius: 8px; padding: 10px 16px; font-weight: bold; cursor: ${req.canEvolve ? 'pointer' : 'not-allowed'}; opacity: ${req.canEvolve ? '1' : '0.6'}; font-size: 14px; display: flex; align-items: center; justify-content: center; gap: 4px; width: 100%;">
+                    Consume ${req.missingStonesHtml}?
+                </button>
+            `;
+        }).join('');
+
+        bodyHtml = `
+            <div style="display: flex; flex-direction: column; gap: 8px; margin: 15px 0;">
+                ${buttonsHtml}
+            </div>
+            <div style="display: flex; justify-content: center; margin-top: 12px;">
+                <button onclick="window.closeModal('window-evolve-confirm')" style="background: #e74c3c; color: white; border: none; border-radius: 5px; padding: 8px 24px; font-weight: bold; cursor: pointer; font-size: 14px;">No</button>
+            </div>
+        `;
+    }
+
+    const html = `
+        <div style="text-align: center; color: white;">
+            ${evoLineHtml}
+            ${bodyHtml}
+        </div>
+    `;
+
+    showModal(`Evolve ${escapeHTML(p.name)}`, html, "window-evolve-confirm", "500px");
+}
+
+window.showEvolveConfirmModal = showEvolveConfirmModal;
 
     const vitamins = [
         { name: "HP Up", stat: "hp", displayName: "HP Up", shortName: "HP" },
