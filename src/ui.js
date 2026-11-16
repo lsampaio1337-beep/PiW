@@ -2074,7 +2074,7 @@ async function init() {
             btn.style.backgroundColor = "#3498db"; // Blue Pill Button
             btn.style.color = "white";
             btn.style.border = "4px solid black";
-            btn.style.borderRadius = "9999px";
+            btn.style.borderRadius = "12px";
             btn.style.textAlign = "left";
             btn.style.fontWeight = "bold";
 
