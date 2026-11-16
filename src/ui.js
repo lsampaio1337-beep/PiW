@@ -2069,6 +2069,7 @@ async function init() {
             const profileCard = document.createElement('div');
             profileCard.style.display = "flex";
             profileCard.style.flexDirection = "column";
+            profileCard.style.alignItems = "center";
             profileCard.style.width = "max-content";
             profileCard.style.minWidth = "78%";
 
@@ -2083,7 +2084,9 @@ async function init() {
             btn.style.borderRadius = "9999px";
             btn.style.textAlign = "left";
             btn.style.fontWeight = "bold";
-            btn.style.width = "100%";
+            btn.style.width = "64%";
+            btn.style.position = "relative";
+            btn.style.zIndex = "1";
             btn.style.flexDirection = "column";
 
             const textWrapper = document.createElement('div');
@@ -2112,7 +2115,7 @@ async function init() {
             playedDiv.style.fontSize = "18px";
             playedDiv.style.fontWeight = "bold";
             playedDiv.style.marginBottom = "5px";
-            playedDiv.textContent = `Last Played: ${lastPlayedStr}`;
+            playedDiv.textContent = lastPlayedStr;
 
 
             leftSide.appendChild(titleDiv);
@@ -2132,8 +2135,6 @@ async function init() {
             medalsContainer.style.justifyContent = "center";
             medalsContainer.style.alignItems = "center";
             medalsContainer.style.gap = "2px";
-            medalsContainer.style.marginLeft = "10px";
-            medalsContainer.style.marginTop = "10px";
 
             let earnedAnyMedal = false;
 
@@ -2201,21 +2202,32 @@ async function init() {
             profileCard.appendChild(btn);
 
             if (earnedAnyMedal) {
-                btn.style.borderRadius = "24px 24px 0 0";
                 const medalBtn = document.createElement('button');
                 medalBtn.className = 'action-btn-pill';
                 medalBtn.style.padding = "14px 22px";
                 medalBtn.style.cursor = "pointer";
                 medalBtn.style.backgroundColor = "#3498db";
                 medalBtn.style.border = "4px solid black";
-                medalBtn.style.borderTop = "none";
-                medalBtn.style.borderRadius = "0 0 24px 24px";
-                medalBtn.style.width = "100%";
+                medalBtn.style.borderRadius = "9999px";
+                medalBtn.style.marginTop = "-4px";
+                medalBtn.style.width = "auto";
                 medalBtn.style.display = "flex";
                 medalBtn.style.justifyContent = "center";
                 medalBtn.style.alignItems = "center";
                 medalBtn.appendChild(medalsContainer);
                 medalBtn.onclick = () => btn.click();
+                const setPairHover = (hovered) => {
+                    const bg = hovered ? "#2980b9" : "#3498db";
+                    const tf = hovered ? "scale(1.02)" : "";
+                    btn.style.backgroundColor = bg;
+                    btn.style.transform = tf;
+                    medalBtn.style.backgroundColor = bg;
+                    medalBtn.style.transform = tf;
+                };
+                btn.onmouseenter = () => setPairHover(true);
+                btn.onmouseleave = () => setPairHover(false);
+                medalBtn.onmouseenter = () => setPairHover(true);
+                medalBtn.onmouseleave = () => setPairHover(false);
                 profileCard.appendChild(medalBtn);
             }
 
