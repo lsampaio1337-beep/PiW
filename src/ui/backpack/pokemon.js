@@ -114,8 +114,13 @@ function renderSlotUI(p, listName, origIndex, isDraggable) {
     let finalImgSrc = window.getSpriteUrl(finalId, p.qualityName === 'Shiny');
     let imageHtml = `<img src="${finalImgSrc}" class="${glowClass}" style="height: 100%; width: 100%; object-fit: contain; z-index: 1;" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='">`;
 
+    const listKey = listName.toLowerCase();
+    const cardBorderColor = listKey === 'storage'
+        ? 'rgba(255, 255, 255, 0.35)'
+        : (listKey === 'safe' ? 'rgba(241, 196, 15, 0.75)' : 'rgba(52, 152, 219, 0.75)');
+
     return `
-        <div class="${slotClass}" ${dataAttr} style="background: #2c3e50; border: 2px solid #3498db; border-radius: 10px; aspect-ratio: 1 / 1.5; display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 4%; box-sizing: border-box; position: relative; container-type: inline-size; overflow: hidden; ${cursorStyle}; width: 100%; ${selectionStyle}" title="Q=${p.quality.toFixed(2)} & ∑IV=${sumIV}" ${dragAttr} ${clickHandler}>
+        <div class="${slotClass}" ${dataAttr} style="background: #2c3e50; border: 2px solid ${cardBorderColor}; border-radius: 10px; aspect-ratio: 1 / 1.5; display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 4%; box-sizing: border-box; position: relative; container-type: inline-size; overflow: hidden; ${cursorStyle}; width: 100%; ${selectionStyle}" title="Q=${p.quality.toFixed(2)} & ∑IV=${sumIV}" ${dragAttr} ${clickHandler}>
             <div onclick="event.stopPropagation(); window.showPokemonStatsByUuid('${safeUuid}')" style="position: absolute; top: 2cqw; right: 2cqw; cursor: pointer; background: #34495e; color: white; border-radius: 50%; width: 20cqw; height: 20cqw; text-align: center; display: flex; align-items: center; justify-content: center; font-size: 14cqw; font-weight: bold; z-index: 3;" title="View Info">i</div>
 
             <div style="font-size: 16cqw; font-weight: bold; margin-top: 10cqw; margin-bottom: 1cqw; display: flex; align-items: center; justify-content: center; text-align: center; line-height: 1.1; z-index: 1; color: white;">${escapeHTML(p.name)}</div>
@@ -321,7 +326,7 @@ export function renderPokemonTab(area) {
         let p = state.storage[i];
         content += renderSlotUI(p, 'storage', i, true);
     }
-    content += `<div style="border: 1px dashed rgba(52, 152, 219, 0.6); border-radius: 6px; aspect-ratio: 1 / 1.5; display: flex; align-items: center; justify-content: center; text-align: center; font-size: 14px; color: #aaa; box-sizing: border-box;" title="Empty Slot">Storage<br>+</div>`;
+    content += `<div style="border: 1px dashed rgba(255, 255, 255, 0.35); border-radius: 6px; aspect-ratio: 1 / 1.5; display: flex; align-items: center; justify-content: center; text-align: center; font-size: 14px; color: #aaa; box-sizing: border-box;" title="Empty Slot">Storage<br>+</div>`;
 
     content += `
                 </div>
@@ -338,7 +343,7 @@ export function renderPokemonTab(area) {
             let p = state.safe[i];
             content += renderSlotUI(p, 'safe', i, true);
         }
-        content += `<div style="border: 1px dashed rgba(52, 152, 219, 0.6); border-radius: 6px; aspect-ratio: 1 / 1.5; display: flex; align-items: center; justify-content: center; text-align: center; font-size: 14px; color: #aaa; cursor: pointer; box-sizing: border-box;" title="Empty Slot">Safe<br>+</div>`;
+        content += `<div style="border: 1px dashed rgba(241, 196, 15, 0.75); border-radius: 6px; aspect-ratio: 1 / 1.5; display: flex; align-items: center; justify-content: center; text-align: center; font-size: 14px; color: #aaa; cursor: pointer; box-sizing: border-box;" title="Empty Slot">Safe<br>+</div>`;
 
         content += `
                 </div>
