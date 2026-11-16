@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { getSpriteUrl } from '../src/utils/sprites.js';
 import { state } from '../src/state.js';
+import { pokedexIndexes } from '../config/pokedexIndexes.js';
 
 const REPO_ROOT = path.resolve(__dirname, '..');
 const SPRITES_DIR = path.join(REPO_ROOT, 'Assets', 'Pokemon Sprites');
@@ -257,5 +258,55 @@ describe('Pokemon Data & Sprite Sync Integrity', () => {
         expect(pkm['0916.1'].stats).toEqual([115, 90, 70, 59, 90, 65, 489]);
         expect(pkm['0916.1'].sprite).toBe('Oinkologne_Female');
         expect(pkm['0916.1'].folders).toEqual([7, 10]);
+    });
+
+    it('verifies moves metadata, evolution targets, sorted folder indices, pokedexIndexes coverage, and PNG IHDR dimensions', () => {
+        const VALID_CATS = new Set(['Physical', 'Special', 'Status']);
+        for (const [moveName, m] of Object.entries(pokemonInfo.moves)) {
+            expect(moveName.length).toBeGreaterThan(0);
+            expect(VALID_TYPES.has(m.type)).toBe(true);
+            expect(VALID_CATS.has(m.cat)).toBe(true);
+            expect(typeof m.power).toBe('number');
+            expect(m.power).toBeGreaterThanOrEqual(0);
+        }
+
+        const pkm = pokemonInfo.pokemon;
+        for (const [id, entry] of Object.entries(pkm)) {
+            for (let i = 1; i < entry.folders.length; i++) {
+                expect(entry.folders[i]).toBeGreaterThan(entry.folders[i - 1]);
+            }
+            if (entry.evolutions) {
+                for (const evo of entry.evolutions) {
+                    const targetKey = String(evo.to).padStart(4, '0');
+                    expect(pkm[targetKey]).toBeDefined();
+                }
+            }
+        }
+
+        for (const numId of pokedexIndexes.national) {
+            expect(pkm[String(numId).padStart(4, '0')]).toBeDefined();
+        }
+        for (const regList of Object.values(pokedexIndexes.regional)) {
+            for (const numId of regList) {
+                expect(pkm[String(numId).padStart(4, '0')]).toBeDefined();
+            }
+        }
+
+        const ihdrBuf = Buffer.alloc(24);
+        for (const folder of folders) {
+            const dirPath = path.join(SPRITES_DIR, folder);
+            for (const file of fs.readdirSync(dirPath)) {
+                if (!file.endsWith('.png')) continue;
+                const fd = fs.openSync(path.join(dirPath, file), 'r');
+                const bytesRead = fs.readSync(fd, ihdrBuf, 0, 24, 0);
+                fs.closeSync(fd);
+                expect(bytesRead).toBe(24);
+                expect(ihdrBuf.subarray(12, 16).toString('ascii')).toBe('IHDR');
+                const width = ihdrBuf.readUInt32BE(16);
+                const height = ihdrBuf.readUInt32BE(20);
+                expect(width).toBeGreaterThan(0);
+                expect(height).toBeGreaterThan(0);
+            }
+        }
     });
 });
