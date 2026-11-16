@@ -388,11 +388,12 @@ describe('buildEvolutionLineHtml', () => {
 
     test('handles missing pokemon data in evolution chain gracefully', () => {
         const { buildEvolutionLineHtml } = require('../../src/ui/pokedex.js');
-        // Add fake evolution pointing to non-existent pokemon
+        // Add fake evolution pointing to non-existent pokemon (e.g., future generation)
         state.config.pokemonData[1].evolutions.push({ level: 100, to: 999 });
 
         const html = buildEvolutionLineHtml(state.config.pokemonData[1], state);
         expect(html).toBeTruthy();
+        expect(html).not.toContain('Lv.100');
     });
 });
 

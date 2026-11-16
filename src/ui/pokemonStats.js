@@ -102,15 +102,17 @@ export function showPokemonStatsByUuid(uuid) {
 function getActionsHtml(p, pData, location, idx) {
     const btnBaseStyle = 'border: 1px solid transparent; border-radius: 15px; padding: 6px 15px; font-weight: bold; font-size: 13px; line-height: 1.2; transition: all 0.2s; display: inline-flex; align-items: center; justify-content: center; flex-direction: column; text-align: center; width: 240px; height: 52px; box-sizing: border-box;';
     let evolveHtml = "";
-    if (pData.evolutions && pData.evolutions.length > 1) {
-        const canAnyEvolve = pData.evolutions.some(evo => getEvolveRequirements(p, evo, state).canEvolve);
+    if (!pData) return;
+    const validEvolutions = (pData.evolutions || []).filter(evo => getPokemonConfig(evo.to, state));
+    if (validEvolutions.length > 1) {
+        const canAnyEvolve = validEvolutions.some(evo => getEvolveRequirements(p, evo, state).canEvolve);
         evolveHtml = `
             <div>
                 <button ${canAnyEvolve ? '' : 'disabled'} onclick="window.showMultipleEvolveModal('${location}', ${idx})" style="${btnBaseStyle} background: ${canAnyEvolve ? '#3498db' : '#7f8c8d'}; color: white; cursor: ${canAnyEvolve ? 'pointer' : 'not-allowed'}; ${canAnyEvolve ? '' : 'opacity: 0.6;'}">Multiple<br>Evolutions</button>
             </div>
         `;
-    } else if (pData.evolutions && pData.evolutions.length === 1) {
-        const evo = pData.evolutions[0];
+    } else if (validEvolutions.length === 1) {
+        const evo = validEvolutions[0];
         const req = getEvolveRequirements(p, evo, state);
 
         let btnText = "Evolve";
@@ -362,9 +364,11 @@ window.showMultipleEvolveModal = function(location, idx) {
     if (!list || !list[idx]) return;
     const p = list[idx];
     const pData = getPokemonConfig(p.id, state);
-    if (!pData || !pData.evolutions) return;
+    if (!pData) return;
+    const validEvolutions = (pData.evolutions || []).filter(evo => getPokemonConfig(evo.to, state));
+    if (validEvolutions.length === 0) return;
 
-    const buttonsHtml = pData.evolutions.map(evo => {
+    const buttonsHtml = validEvolutions.map(evo => {
         const req = getEvolveRequirements(p, evo, state);
         const toData = getPokemonConfig(evo.to, state);
         const isRevealed = toData && ((state.stats?.seenSpecies?.[toData.name]) || (state.stats?.caughtSpecies?.[toData.name]));

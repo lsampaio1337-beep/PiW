@@ -186,11 +186,12 @@ export function buildEvolutionLineHtml(pData, state) {
             <span style="font-size: 10px; cursor: ${cursor};" ${onClick}>${displayName}</span>
         </div>`;
 
-        if (pd.evolutions && pd.evolutions.length > 0) {
+        const validEvos = (pd.evolutions || []).filter(evo => getPokemonById(evo.to, state));
+        if (validEvos.length > 0) {
             html = `<div style="display: flex; align-items: center;">` + html;
 
             let evosHtml = `<div style="display: flex; flex-direction: column; justify-content: center; margin-left: 10px;">`;
-            for (const evo of pd.evolutions) {
+            for (const evo of validEvos) {
                 evosHtml += `<div style="display: flex; align-items: center; margin: 5px 0;">
                     <div style="font-size: 10px; color: #aaa; margin-right: 5px;">Lv.${evo.level} ➔</div>
                     ${buildTree(evo.to)}
