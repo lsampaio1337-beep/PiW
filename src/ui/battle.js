@@ -2,6 +2,9 @@ import { VITAMINS } from "../constants.js";
 import { TYPE_COLORS } from '../ui.js';
 import { state, globals } from '../state.js';
 import { getCapacity } from '../mathEngine.js';
+import { getTrimmedSpriteUrl, precacheRouteSprites } from '../utils/sprites.js';
+
+let lastPrecachedRoute = null;
 
 
 
@@ -493,12 +496,15 @@ function updateHpBarUI(hpBar, hpText, hpPct, currentHp, maxHp) {
 function updatePokemonSpriteUI(spriteWrapper, pokemonSprite, pokemon, battleSystem, isPlayer, shouldAnimateSliding) {
     if (!spriteWrapper || !pokemonSprite) return;
 
+    if (state.currentRoute && state.currentRoute !== lastPrecachedRoute) {
+        lastPrecachedRoute = state.currentRoute;
+        precacheRouteSprites(state.currentRoute);
+    }
+
     let pokemonId = pokemon.isDisguisedDitto ? 132 : pokemon.id;
-    let spriteSuffix = pokemon.qualityName === 'Shiny' ? '_shiny_clean.png' : '_clean.png';
-    let paddedId = String(pokemonId).padStart(4, '0');
-    let pokemonName = findPokemonConfig(pokemonId)?.name || 'Unknown';
-    const newSrc = `Assets/Pokemon Sprites/Clean/Gen5/${paddedId}_${pokemonName}${spriteSuffix}`;
-    if (pokemonSprite.getAttribute('src') !== newSrc) {
+    const isShiny = pokemon.qualityName === 'Shiny';
+    const newSrc = getTrimmedSpriteUrl(pokemonId, isShiny, isPlayer);
+    if (newSrc && pokemonSprite.getAttribute('src') !== newSrc) {
         pokemonSprite.src = newSrc;
     }
 
