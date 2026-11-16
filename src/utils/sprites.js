@@ -30,7 +30,7 @@ const FIRST_VARIATION_SPRITES = {
     492: '.1_Shaymin_Land',
     493: '.1_Arceus_Bug',
     550: '.1_Basculin_BlueStriped',
-    555: '.1_Darmanitan_Standard',
+    555: '.3_Darmanitan_Standard',
     585: '.1_Deerling_Autumn',
     586: '.1_Sawsbuck_Autumn',
     641: '.1_Tornadus_Incarnate',
@@ -42,7 +42,7 @@ const FIRST_VARIATION_SPRITES = {
 
 const LEGACY_FIRST_VARIATION_OVERRIDES = {
     'Reg3 E': {
-        386: '.1_Deoxys_Speed'
+        386: '.4_Deoxys_Speed'
     }
 };
 

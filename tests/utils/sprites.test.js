@@ -91,7 +91,7 @@ describe('getSpriteUrl', () => {
 
         state.settings = { legacySprites: true };
         state.currentRegionName = 'Hoenn';
-        expect(getSpriteUrl(386)).toBe('Assets/Pokemon Sprites/Reg3 E/Gen3E_0386.1_Deoxys_Speed.png');
+        expect(getSpriteUrl(386)).toBe('Assets/Pokemon Sprites/Reg3 E/Gen3E_0386.4_Deoxys_Speed.png');
         state.settings.legacySprites = false;
     });
 });

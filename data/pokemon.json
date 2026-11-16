@@ -57605,7 +57605,7 @@
     "paldea_id": 664
   },
   {
-    "id": 3.1,
+    "id": 3.3,
     "name": "Venusaur (Mega Venusaur)",
     "types": [
       "Grass",
@@ -57682,7 +57682,7 @@
     ]
   },
   {
-    "id": 6.1,
+    "id": 6.2,
     "name": "Charizard (Mega Charizard X)",
     "types": [
       "Fire",
@@ -57747,7 +57747,7 @@
     ]
   },
   {
-    "id": 6.2,
+    "id": 6.3,
     "name": "Charizard (Mega Charizard Y)",
     "types": [
       "Fire",
@@ -57812,7 +57812,7 @@
     ]
   },
   {
-    "id": 9.1,
+    "id": 9.2,
     "name": "Blastoise (Mega Blastoise)",
     "types": [
       "Water"
@@ -58359,7 +58359,7 @@
     ]
   },
   {
-    "id": 37.1,
+    "id": 37.2,
     "name": "Vulpix (Alolan Vulpix)",
     "types": [
       "Ice"
@@ -58467,7 +58467,7 @@
     "learnset": []
   },
   {
-    "id": 58.1,
+    "id": 58.2,
     "name": "Growlithe (Hisuian Growlithe)",
     "types": [
       "Fire",
@@ -58668,7 +58668,7 @@
     "learnset": []
   },
   {
-    "id": 76.1,
+    "id": 76.2,
     "name": "Golem (Alolan Golem)",
     "types": [
       "Rock",
@@ -58730,7 +58730,7 @@
     "learnset": []
   },
   {
-    "id": 80.1,
+    "id": 80.2,
     "name": "Slowbro (Mega Slowbro)",
     "types": [
       "Water",
@@ -58746,7 +58746,7 @@
     "learnset": []
   },
   {
-    "id": 80.2,
+    "id": 80.1,
     "name": "Slowbro (Galarian Slowbro)",
     "types": [
       "Poison",
@@ -58762,7 +58762,7 @@
     "learnset": []
   },
   {
-    "id": 83.1,
+    "id": 83.2,
     "name": "Farfetch'd (Galarian Farfetch'd)",
     "types": [
       "Fighting"
@@ -58777,7 +58777,7 @@
     "learnset": []
   },
   {
-    "id": 88.1,
+    "id": 88.2,
     "name": "Grimer (Alolan Grimer)",
     "types": [
       "Poison",
@@ -58809,7 +58809,7 @@
     "learnset": []
   },
   {
-    "id": 94.1,
+    "id": 94.2,
     "name": "Gengar (Mega Gengar)",
     "types": [
       "Ghost",
@@ -58898,7 +58898,7 @@
     "learnset": []
   },
   {
-    "id": 101.1,
+    "id": 101.2,
     "name": "Electrode (Hisuian Electrode)",
     "types": [
       "Electric",
@@ -58946,7 +58946,7 @@
     "learnset": []
   },
   {
-    "id": 110.1,
+    "id": 110.2,
     "name": "Weezing (Galarian Weezing)",
     "types": [
       "Poison",
@@ -59180,7 +59180,7 @@
     ]
   },
   {
-    "id": 128.1,
+    "id": 128.3,
     "name": "Tauros (Combat Breed)",
     "types": [
       "Fighting"
@@ -59211,7 +59211,7 @@
     "learnset": []
   },
   {
-    "id": 128.3,
+    "id": 128.1,
     "name": "Tauros (Aqua Breed)",
     "types": [
       "Fighting",
@@ -59292,7 +59292,7 @@
     ]
   },
   {
-    "id": 133.1,
+    "id": 133.3,
     "name": "Eevee (Partner Eevee)",
     "types": [
       "Normal"
@@ -61389,7 +61389,7 @@
     ]
   },
   {
-    "id": 351.1,
+    "id": 351.3,
     "name": "Castform (Sunny Form)",
     "types": [
       "Fire"
@@ -61404,7 +61404,7 @@
     "learnset": []
   },
   {
-    "id": 351.2,
+    "id": 351.1,
     "name": "Castform (Rainy Form)",
     "types": [
       "Water"
@@ -61419,7 +61419,7 @@
     "learnset": []
   },
   {
-    "id": 351.3,
+    "id": 351.2,
     "name": "Castform (Snowy Form)",
     "types": [
       "Ice"
@@ -62326,7 +62326,7 @@
     ]
   },
   {
-    "id": 386.1,
+    "id": 386.3,
     "name": "Deoxys (Normal Forme)",
     "types": [
       "Psychic"
@@ -62341,7 +62341,7 @@
     "learnset": []
   },
   {
-    "id": 386.2,
+    "id": 386.1,
     "name": "Deoxys (Attack Forme)",
     "types": [
       "Psychic"
@@ -62356,7 +62356,7 @@
     "learnset": []
   },
   {
-    "id": 386.3,
+    "id": 386.2,
     "name": "Deoxys (Defense Forme)",
     "types": [
       "Psychic"
@@ -63103,7 +63103,7 @@
     ]
   },
   {
-    "id": 479.1,
+    "id": 479.3,
     "name": "Rotom (Heat Rotom)",
     "types": [
       "Electric",
@@ -63119,7 +63119,7 @@
     "learnset": []
   },
   {
-    "id": 479.2,
+    "id": 479.5,
     "name": "Rotom (Wash Rotom)",
     "types": [
       "Electric",
@@ -63135,7 +63135,7 @@
     "learnset": []
   },
   {
-    "id": 479.3,
+    "id": 479.2,
     "name": "Rotom (Frost Rotom)",
     "types": [
       "Electric",
@@ -63151,7 +63151,7 @@
     "learnset": []
   },
   {
-    "id": 479.4,
+    "id": 479.1,
     "name": "Rotom (Fan Rotom)",
     "types": [
       "Electric",
@@ -63167,7 +63167,7 @@
     "learnset": []
   },
   {
-    "id": 479.5,
+    "id": 479.4,
     "name": "Rotom (Mow Rotom)",
     "types": [
       "Electric",
@@ -63767,7 +63767,7 @@
     "learnset": []
   },
   {
-    "id": 550.1,
+    "id": 550.2,
     "name": "Basculin (Red-Striped Form)",
     "types": [
       "Water"
@@ -63782,7 +63782,7 @@
     "learnset": []
   },
   {
-    "id": 550.2,
+    "id": 550.1,
     "name": "Basculin (Blue-Striped Form)",
     "types": [
       "Water"
@@ -63827,7 +63827,7 @@
     "learnset": []
   },
   {
-    "id": 555.1,
+    "id": 555.3,
     "name": "Darmanitan (Standard Mode)",
     "types": [
       "Fire"
@@ -63842,7 +63842,7 @@
     "learnset": []
   },
   {
-    "id": 555.2,
+    "id": 555.4,
     "name": "Darmanitan (Zen Mode)",
     "types": [
       "Fire",
@@ -63858,7 +63858,7 @@
     "learnset": []
   },
   {
-    "id": 555.3,
+    "id": 555.1,
     "name": "Darmanitan (Galarian Standard Mode)",
     "types": [
       "Ice"
@@ -63873,7 +63873,7 @@
     "learnset": []
   },
   {
-    "id": 555.4,
+    "id": 555.2,
     "name": "Darmanitan (Galarian Zen Mode)",
     "types": [
       "Ice",
@@ -64338,7 +64338,7 @@
     "learnset": []
   },
   {
-    "id": 646.1,
+    "id": 646.2,
     "name": "Kyurem (White Kyurem)",
     "types": [
       "Dragon",
@@ -64354,7 +64354,7 @@
     "learnset": []
   },
   {
-    "id": 646.2,
+    "id": 646.1,
     "name": "Kyurem (Black Kyurem)",
     "types": [
       "Dragon",
@@ -65027,7 +65027,7 @@
     ]
   },
   {
-    "id": 670.1,
+    "id": 670.2,
     "name": "Floette (Eternal Flower)",
     "types": [
       "Fairy"
@@ -65042,7 +65042,7 @@
     "learnset": []
   },
   {
-    "id": 670.2,
+    "id": 670.7,
     "name": "Floette (Mega Floette)",
     "types": [
       "Fairy"
@@ -65072,7 +65072,7 @@
     "learnset": []
   },
   {
-    "id": 681.1,
+    "id": 681.2,
     "name": "Aegislash (Shield Forme)",
     "types": [
       "Steel",
@@ -65137,7 +65137,7 @@
     ]
   },
   {
-    "id": 681.2,
+    "id": 681.1,
     "name": "Aegislash (Blade Forme)",
     "types": [
       "Steel",
@@ -65579,7 +65579,7 @@
     ]
   },
   {
-    "id": 710.2,
+    "id": 710.3,
     "name": "Pumpkaboo (Small Size)",
     "types": [
       "Ghost",
@@ -65644,7 +65644,7 @@
     ]
   },
   {
-    "id": 710.3,
+    "id": 710.2,
     "name": "Pumpkaboo (Large Size)",
     "types": [
       "Ghost",
@@ -65851,7 +65851,7 @@
     ]
   },
   {
-    "id": 711.2,
+    "id": 711.3,
     "name": "Gourgeist (Small Size)",
     "types": [
       "Ghost",
@@ -65928,7 +65928,7 @@
     ]
   },
   {
-    "id": 711.3,
+    "id": 711.2,
     "name": "Gourgeist (Large Size)",
     "types": [
       "Ghost",
@@ -66098,7 +66098,7 @@
     "learnset": []
   },
   {
-    "id": 718.1,
+    "id": 718.2,
     "name": "Zygarde (50% Forme)",
     "types": [
       "Dragon",
@@ -66187,7 +66187,7 @@
     ]
   },
   {
-    "id": 718.2,
+    "id": 718.1,
     "name": "Zygarde (10% Forme)",
     "types": [
       "Dragon",
@@ -66656,7 +66656,7 @@
     "learnset": []
   },
   {
-    "id": 741.2,
+    "id": 741.3,
     "name": "Oricorio (Pom-Pom Style)",
     "types": [
       "Electric",
@@ -66672,7 +66672,7 @@
     "learnset": []
   },
   {
-    "id": 741.3,
+    "id": 741.2,
     "name": "Oricorio (Pa'u Style)",
     "types": [
       "Psychic",
@@ -66719,7 +66719,7 @@
     "learnset": []
   },
   {
-    "id": 745.1,
+    "id": 745.2,
     "name": "Lycanroc (Midday Form)",
     "types": [
       "Rock"
@@ -66734,7 +66734,7 @@
     "learnset": []
   },
   {
-    "id": 745.2,
+    "id": 745.3,
     "name": "Lycanroc (Midnight Form)",
     "types": [
       "Rock"
@@ -66749,7 +66749,7 @@
     "learnset": []
   },
   {
-    "id": 745.3,
+    "id": 745.1,
     "name": "Lycanroc (Dusk Form)",
     "types": [
       "Rock"
@@ -66764,7 +66764,7 @@
     "learnset": []
   },
   {
-    "id": 746.1,
+    "id": 746.2,
     "name": "Wishiwashi (Solo Form)",
     "types": [
       "Water"
@@ -66779,7 +66779,7 @@
     "learnset": []
   },
   {
-    "id": 746.2,
+    "id": 746.1,
     "name": "Wishiwashi (School Form)",
     "types": [
       "Water"
@@ -66871,7 +66871,7 @@
     ]
   },
   {
-    "id": 774.1,
+    "id": 774.4,
     "name": "Minior (Meteor Form)",
     "types": [
       "Rock",
@@ -66887,7 +66887,7 @@
     "learnset": []
   },
   {
-    "id": 774.2,
+    "id": 774.6,
     "name": "Minior (Core Form)",
     "types": [
       "Rock",
@@ -66980,7 +66980,7 @@
     ]
   },
   {
-    "id": 800.1,
+    "id": 800.2,
     "name": "Necrozma (Dusk Mane Necrozma)",
     "types": [
       "Psychic",
@@ -66996,7 +66996,7 @@
     "learnset": []
   },
   {
-    "id": 800.2,
+    "id": 800.1,
     "name": "Necrozma (Dawn Wings Necrozma)",
     "types": [
       "Psychic",
@@ -67028,7 +67028,7 @@
     "learnset": []
   },
   {
-    "id": 801.1,
+    "id": 801.2,
     "name": "Magearna (Mega Magearna)",
     "types": [
       "Steel",
@@ -67205,7 +67205,7 @@
     "learnset": []
   },
   {
-    "id": 849.2,
+    "id": 849.3,
     "name": "Toxtricity (Low Key Form)",
     "types": [
       "Electric",
@@ -67473,7 +67473,7 @@
     ]
   },
   {
-    "id": 888.1,
+    "id": 888.2,
     "name": "Zacian (Hero of Many Battles)",
     "types": [
       "Fairy"
@@ -67488,7 +67488,7 @@
     "learnset": []
   },
   {
-    "id": 888.2,
+    "id": 888.1,
     "name": "Zacian (Crowned Sword)",
     "types": [
       "Fairy",
@@ -67504,7 +67504,7 @@
     "learnset": []
   },
   {
-    "id": 889.1,
+    "id": 889.2,
     "name": "Zamazenta (Hero of Many Battles)",
     "types": [
       "Fighting"
@@ -67519,7 +67519,7 @@
     "learnset": []
   },
   {
-    "id": 889.2,
+    "id": 889.1,
     "name": "Zamazenta (Crowned Shield)",
     "types": [
       "Fighting",
@@ -67551,7 +67551,7 @@
     "learnset": []
   },
   {
-    "id": 892.1,
+    "id": 892.3,
     "name": "Urshifu (Single Strike Style)",
     "types": [
       "Fighting",
@@ -67567,7 +67567,7 @@
     "learnset": []
   },
   {
-    "id": 892.2,
+    "id": 892.1,
     "name": "Urshifu (Rapid Strike Style)",
     "types": [
       "Fighting",
@@ -67663,7 +67663,7 @@
     "learnset": []
   },
   {
-    "id": 925.1,
+    "id": 925.2,
     "name": "Maushold (Family of Four)",
     "types": [
       "Normal"
@@ -67678,7 +67678,7 @@
     "learnset": []
   },
   {
-    "id": 925.2,
+    "id": 925.1,
     "name": "Maushold (Family of Three)",
     "types": [
       "Normal"
@@ -67693,7 +67693,7 @@
     "learnset": []
   },
   {
-    "id": 931.1,
+    "id": 931.2,
     "name": "Squawkabilly (Green Plumage)",
     "types": [
       "Normal",
@@ -67770,7 +67770,7 @@
     ]
   },
   {
-    "id": 931.2,
+    "id": 931.1,
     "name": "Squawkabilly (Blue Plumage)",
     "types": [
       "Normal",
@@ -67847,7 +67847,7 @@
     ]
   },
   {
-    "id": 931.3,
+    "id": 931.4,
     "name": "Squawkabilly (Yellow Plumage)",
     "types": [
       "Normal",
@@ -67924,7 +67924,7 @@
     ]
   },
   {
-    "id": 931.4,
+    "id": 931.3,
     "name": "Squawkabilly (White Plumage)",
     "types": [
       "Normal",
@@ -68082,7 +68082,7 @@
     ]
   },
   {
-    "id": 964.1,
+    "id": 964.2,
     "name": "Palafin (Zero Form)",
     "types": [
       "Water"
@@ -68097,7 +68097,7 @@
     "learnset": []
   },
   {
-    "id": 964.2,
+    "id": 964.1,
     "name": "Palafin (Hero Form)",
     "types": [
       "Water"
@@ -68461,7 +68461,7 @@
     ]
   },
   {
-    "id": 982.1,
+    "id": 982.2,
     "name": "Dudunsparce (Two-Segment Form)",
     "types": [
       "Normal"
@@ -68476,7 +68476,7 @@
     "learnset": []
   },
   {
-    "id": 982.2,
+    "id": 982.1,
     "name": "Dudunsparce (Three-Segment Form)",
     "types": [
       "Normal"
@@ -68620,7 +68620,7 @@
     ]
   },
   {
-    "id": 1017.1,
+    "id": 1017.3,
     "name": "Ogerpon (Teal Mask)",
     "types": [
       "Grass"
@@ -68635,7 +68635,7 @@
     "learnset": []
   },
   {
-    "id": 1017.2,
+    "id": 1017.4,
     "name": "Ogerpon (Wellspring Mask)",
     "types": [
       "Grass",
@@ -68651,7 +68651,7 @@
     "learnset": []
   },
   {
-    "id": 1017.3,
+    "id": 1017.2,
     "name": "Ogerpon (Hearthflame Mask)",
     "types": [
       "Grass",
@@ -68667,7 +68667,7 @@
     "learnset": []
   },
   {
-    "id": 1017.4,
+    "id": 1017.1,
     "name": "Ogerpon (Cornerstone Mask)",
     "types": [
       "Grass",
@@ -68698,7 +68698,7 @@
     "learnset": []
   },
   {
-    "id": 1024.2,
+    "id": 1024.3,
     "name": "Terapagos (Terastal Form)",
     "types": [
       "Normal"
@@ -68713,7 +68713,7 @@
     "learnset": []
   },
   {
-    "id": 1024.3,
+    "id": 1024.2,
     "name": "Terapagos (Stellar Form)",
     "types": [
       "Normal"
