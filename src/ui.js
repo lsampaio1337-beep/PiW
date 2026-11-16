@@ -2066,6 +2066,13 @@ async function init() {
             // Get profile name
             const profileName = pData.profileName || `Profile ${index + 1}`;
 
+            const profileCard = document.createElement('div');
+            profileCard.style.display = "flex";
+            profileCard.style.flexDirection = "column";
+            profileCard.style.gap = "6px";
+            profileCard.style.width = "max-content";
+            profileCard.style.minWidth = "78%";
+
             const btn = document.createElement('button');
             btn.className = 'action-btn-pill';
             btn.style.padding = "10px 22px";
@@ -2077,9 +2084,7 @@ async function init() {
             btn.style.borderRadius = "9999px";
             btn.style.textAlign = "left";
             btn.style.fontWeight = "bold";
-
-            btn.style.width = "max-content";
-            btn.style.minWidth = "78%";
+            btn.style.width = "100%";
             btn.style.flexDirection = "column";
 
             const textWrapper = document.createElement('div');
@@ -2197,8 +2202,23 @@ async function init() {
                 }
             });
 
+            profileCard.appendChild(btn);
+
             if (earnedAnyMedal) {
-                btn.appendChild(medalsContainer);
+                const medalBtn = document.createElement('button');
+                medalBtn.className = 'action-btn-pill';
+                medalBtn.style.padding = "14px 22px";
+                medalBtn.style.cursor = "pointer";
+                medalBtn.style.backgroundColor = "#3498db";
+                medalBtn.style.border = "4px solid black";
+                medalBtn.style.borderRadius = "9999px";
+                medalBtn.style.width = "100%";
+                medalBtn.style.display = "flex";
+                medalBtn.style.justifyContent = "center";
+                medalBtn.style.alignItems = "center";
+                medalBtn.appendChild(medalsContainer);
+                medalBtn.onclick = () => btn.click();
+                profileCard.appendChild(medalBtn);
             }
 
 
@@ -2350,7 +2370,7 @@ async function init() {
                 }
             };
 
-            profilesContainer.appendChild(btn);
+            profilesContainer.appendChild(profileCard);
         });
 
         document.getElementById('btn-rename-profile').onclick = () => {
