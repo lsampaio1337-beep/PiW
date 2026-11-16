@@ -38379,6 +38379,102 @@
     "paldea_id": 550
   },
   {
+    "id": 678.1,
+    "name": "Meowstic (Female)",
+    "types": [
+      "Psychic"
+    ],
+    "hp": 74,
+    "atk": 48,
+    "def": 76,
+    "spa": 83,
+    "spd": 81,
+    "spe": 104,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Scratch"
+      },
+      {
+        "level": 1,
+        "move": "Leer"
+      },
+      {
+        "level": 1,
+        "move": "Magical Leaf"
+      },
+      {
+        "level": 1,
+        "move": "Me First"
+      },
+      {
+        "level": 1,
+        "move": "Stored Power"
+      },
+      {
+        "level": 5,
+        "move": "Covet"
+      },
+      {
+        "level": 9,
+        "move": "Confusion"
+      },
+      {
+        "level": 13,
+        "move": "Light Screen"
+      },
+      {
+        "level": 17,
+        "move": "Psybeam"
+      },
+      {
+        "level": 19,
+        "move": "Fake Out"
+      },
+      {
+        "level": 22,
+        "move": "Disarming Voice"
+      },
+      {
+        "level": 25,
+        "move": "Psyshock"
+      },
+      {
+        "level": 28,
+        "move": "Charge Beam"
+      },
+      {
+        "level": 31,
+        "move": "Shadow Ball"
+      },
+      {
+        "level": 35,
+        "move": "Extrasensory"
+      },
+      {
+        "level": 40,
+        "move": "Psychic"
+      },
+      {
+        "level": 43,
+        "move": "Role Play"
+      },
+      {
+        "level": 45,
+        "move": "Signal Beam"
+      },
+      {
+        "level": 48,
+        "move": "Sucker Punch"
+      },
+      {
+        "level": 50,
+        "move": "Future Sight"
+      }
+    ]
+  },
+  {
     "id": 679,
     "name": "Honedge",
     "types": [
@@ -48791,6 +48887,75 @@
     "paldea_id": 241
   },
   {
+    "id": 876.1,
+    "name": "Indeedee (Female)",
+    "types": [
+      "Psychic",
+      "Normal"
+    ],
+    "hp": 70,
+    "atk": 55,
+    "def": 65,
+    "spa": 95,
+    "spd": 105,
+    "spe": 85,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Stored Power"
+      },
+      {
+        "level": 1,
+        "move": "Play Nice"
+      },
+      {
+        "level": 5,
+        "move": "Baton Pass"
+      },
+      {
+        "level": 10,
+        "move": "Disarming Voice"
+      },
+      {
+        "level": 15,
+        "move": "Psybeam"
+      },
+      {
+        "level": 20,
+        "move": "Helping Hand"
+      },
+      {
+        "level": 25,
+        "move": "Follow Me"
+      },
+      {
+        "level": 30,
+        "move": "Aromatherapy"
+      },
+      {
+        "level": 35,
+        "move": "Psychic"
+      },
+      {
+        "level": 40,
+        "move": "Calm Mind"
+      },
+      {
+        "level": 45,
+        "move": "Guard Split"
+      },
+      {
+        "level": 50,
+        "move": "Psychic Terrain"
+      },
+      {
+        "level": 55,
+        "move": "Healing Wish"
+      }
+    ]
+  },
+  {
     "id": 877,
     "name": "Morpeko",
     "types": [
@@ -50293,6 +50458,95 @@
     "paldea_id": 494
   },
   {
+    "id": 902.1,
+    "name": "Basculegion (Female)",
+    "types": [
+      "Water",
+      "Ghost"
+    ],
+    "hp": 120,
+    "atk": 92,
+    "def": 65,
+    "spa": 100,
+    "spd": 75,
+    "spe": 78,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Tail Whip"
+      },
+      {
+        "level": 1,
+        "move": "Water Gun"
+      },
+      {
+        "level": 1,
+        "move": "Shadow Ball"
+      },
+      {
+        "level": 1,
+        "move": "Phantom Force"
+      },
+      {
+        "level": 4,
+        "move": "Tackle"
+      },
+      {
+        "level": 8,
+        "move": "Flail"
+      },
+      {
+        "level": 12,
+        "move": "Aqua Jet"
+      },
+      {
+        "level": 16,
+        "move": "Bite"
+      },
+      {
+        "level": 20,
+        "move": "Scary Face"
+      },
+      {
+        "level": 24,
+        "move": "Headbutt"
+      },
+      {
+        "level": 28,
+        "move": "Soak"
+      },
+      {
+        "level": 32,
+        "move": "Crunch"
+      },
+      {
+        "level": 36,
+        "move": "Take Down"
+      },
+      {
+        "level": 40,
+        "move": "Uproar"
+      },
+      {
+        "level": 44,
+        "move": "Wave Crash"
+      },
+      {
+        "level": 48,
+        "move": "Thrash"
+      },
+      {
+        "level": 52,
+        "move": "Double Edge"
+      },
+      {
+        "level": 56,
+        "move": "Head Smash"
+      }
+    ]
+  },
+  {
     "id": 903,
     "name": "Sneasler",
     "types": [
@@ -51155,6 +51409,82 @@
       }
     ],
     "paldea_id": 11
+  },
+  {
+    "id": 916.1,
+    "name": "Oinkologne (Female)",
+    "types": [
+      "Normal"
+    ],
+    "hp": 115,
+    "atk": 90,
+    "def": 70,
+    "spa": 59,
+    "spd": 90,
+    "spe": 65,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 1,
+        "move": "Tail Whip"
+      },
+      {
+        "level": 3,
+        "move": "Disarming Voice"
+      },
+      {
+        "level": 6,
+        "move": "Echoed Voice"
+      },
+      {
+        "level": 9,
+        "move": "Mud Shot"
+      },
+      {
+        "level": 12,
+        "move": "Covet"
+      },
+      {
+        "level": 15,
+        "move": "Dig"
+      },
+      {
+        "level": 17,
+        "move": "Headbutt"
+      },
+      {
+        "level": 23,
+        "move": "Yawn"
+      },
+      {
+        "level": 28,
+        "move": "Take Down"
+      },
+      {
+        "level": 30,
+        "move": "Work Up"
+      },
+      {
+        "level": 34,
+        "move": "Uproar"
+      },
+      {
+        "level": 39,
+        "move": "Double Edge"
+      },
+      {
+        "level": 45,
+        "move": "Earth Power"
+      },
+      {
+        "level": 51,
+        "move": "Belch"
+      }
+    ]
   },
   {
     "id": 917,
@@ -65057,7 +65387,7 @@
     "learnset": []
   },
   {
-    "id": 678.1,
+    "id": 678.2,
     "name": "Meowstic (Mega Meowstic)",
     "types": [
       "Psychic"

@@ -80,7 +80,7 @@ describe('Pokemon Data & Sprite Sync Integrity', () => {
             }
         }
 
-        expect(totalPngs).toBe(13028);
+        expect(totalPngs).toBe(13044);
 
         const conflicts = Array.from(varFormIds.entries()).filter(([, ids]) => ids.size > 1);
         expect(conflicts).toEqual([]);
@@ -88,7 +88,7 @@ describe('Pokemon Data & Sprite Sync Integrity', () => {
 
     it('verifies pokemon_info.json completeness, uniqueness, and 1-to-1 sprite linkage', () => {
         const entries = Object.entries(pokemonInfo);
-        expect(entries.length).toBe(1548);
+        expect(entries.length).toBe(1552);
 
         const seenIds = new Set();
         const linkedRelPaths = new Set();
@@ -184,5 +184,37 @@ describe('Pokemon Data & Sprite Sync Integrity', () => {
                 }
             }
         }
+    });
+
+    it('verifies Male vs Female differences in Moveset, Stats, and Sprites for Meowstic, Indeedee, Basculegion, and Oinkologne', () => {
+        expect(pokemonInfo['Meowstic'].PokedexNationalID).toBe('0678');
+        expect(pokemonInfo['Meowstic (Female)'].PokedexNationalID).toBe('0678.1');
+        expect(pokemonInfo['Meowstic (Mega Meowstic)'].PokedexNationalID).toBe('0678.2');
+        expect(pokemonInfo['Meowstic (Female)'].Moveset).not.toEqual(pokemonInfo['Meowstic'].Moveset);
+        expect(pokemonInfo['Meowstic (Female)'].Sprites['Reg6 XY'].normal).toBe('Gen6XY_0678.1_Meowstic_Female.png');
+        expect(pokemonInfo['Meowstic (Female)'].Sprites['Reg8 SS'].normal).toBe('Gen8H_0678.1_Meowstic_Female.png');
+
+        expect(pokemonInfo['Indeedee'].PokedexNationalID).toBe('0876');
+        expect(pokemonInfo['Indeedee (Female)'].PokedexNationalID).toBe('0876.1');
+        expect(pokemonInfo['Indeedee (Female)'].Stats).toEqual({
+            hp: 70, atk: 55, def: 65, spa: 95, spd: 105, spe: 85, bst: 475
+        });
+        expect(pokemonInfo['Indeedee (Female)'].Stats).not.toEqual(pokemonInfo['Indeedee'].Stats);
+        expect(pokemonInfo['Indeedee (Female)'].Moveset).not.toEqual(pokemonInfo['Indeedee'].Moveset);
+        expect(pokemonInfo['Indeedee (Female)'].Sprites['Reg8 SS'].normal).toBe('Gen8H_0876.1_Indeedee_Female.png');
+
+        expect(pokemonInfo['Basculegion'].PokedexNationalID).toBe('0902');
+        expect(pokemonInfo['Basculegion (Female)'].PokedexNationalID).toBe('0902.1');
+        expect(pokemonInfo['Basculegion (Female)'].Stats).toEqual({
+            hp: 120, atk: 92, def: 65, spa: 100, spd: 75, spe: 78, bst: 530
+        });
+        expect(pokemonInfo['Basculegion (Female)'].Sprites['Reg9 LA'].normal).toBe('Gen8LA_0902.1_Basculegion_Female.png');
+
+        expect(pokemonInfo['Oinkologne'].PokedexNationalID).toBe('0916');
+        expect(pokemonInfo['Oinkologne (Female)'].PokedexNationalID).toBe('0916.1');
+        expect(pokemonInfo['Oinkologne (Female)'].Stats).toEqual({
+            hp: 115, atk: 90, def: 70, spa: 59, spd: 90, spe: 65, bst: 489
+        });
+        expect(pokemonInfo['Oinkologne (Female)'].Sprites['Reg8 SS'].normal).toBe('Gen8H_0916.1_Oinkologne_Female.png');
     });
 });
