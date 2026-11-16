@@ -2085,6 +2085,8 @@ async function init() {
             btn.style.textAlign = "left";
             btn.style.fontWeight = "bold";
             btn.style.width = "80%";
+            btn.style.position = "relative";
+            btn.style.zIndex = "1";
             btn.style.flexDirection = "column";
 
             const textWrapper = document.createElement('div');
@@ -2212,6 +2214,7 @@ async function init() {
                 medalBtn.style.backgroundColor = "#3498db";
                 medalBtn.style.border = "4px solid black";
                 medalBtn.style.borderRadius = "9999px";
+                medalBtn.style.marginTop = "-4px";
                 medalBtn.style.width = "100%";
                 medalBtn.style.display = "flex";
                 medalBtn.style.justifyContent = "center";
