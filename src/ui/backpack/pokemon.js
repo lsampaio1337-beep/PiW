@@ -255,10 +255,12 @@ export function renderPokemonTab(area) {
     const storageCols = showSafe ? 3 : 5;
     const safeFlex = 'flex: 0 0 calc((100% - 76px) * 2 / 7 + 17px);';
 
+    const basePanelStyle = 'box-sizing: border-box; border-radius: 8px; background: rgba(0, 0, 0, 0.22); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 2px 6px rgba(0, 0, 0, 0.25); padding: 6px; display: flex; flex-direction: column; min-width: 0; min-height: 0; overflow-x: hidden;';
+
     content += `
         <div style="display: flex; gap: 10px; width: 100%; height: 100%; min-height: 0; overflow-x: hidden; flex-grow: 1;">
             <!-- Column 1: Active -->
-            <div style="${activeFlex} align-self: flex-start; max-height: 100%; box-sizing: border-box; border: 1px solid #555; padding: 5px; display: flex; flex-direction: column; min-width: 0; min-height: 0; overflow-x: hidden;">
+            <div style="${activeFlex} align-self: flex-start; max-height: 100%; border: 2px solid rgba(52, 152, 219, 0.75); ${basePanelStyle}">
                 <div id="active-scroll-container" style="display: grid; grid-template-columns: repeat(2, 1fr); grid-auto-rows: max-content; gap: 5px; overflow-y: auto; overflow-x: hidden; align-content: start; flex-grow: 1; min-height: 0;">
     `;
 
@@ -310,7 +312,7 @@ export function renderPokemonTab(area) {
             </div>
 
             <!-- Column 2: Storage -->
-            <div ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, 'storage')" style="${storageFlex} box-sizing: border-box; border: 1px solid #555; padding: 5px; display: flex; flex-direction: column; min-width: 0; min-height: 0; overflow-x: hidden;">
+            <div ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, 'storage')" style="${storageFlex} border: 2px solid rgba(255, 255, 255, 0.35); ${basePanelStyle}">
                 <div id="storage-scroll-container" style="display: grid; grid-template-columns: repeat(${storageCols}, 1fr); grid-auto-rows: max-content; gap: 5px; overflow-y: auto; overflow-x: hidden; align-content: start; flex-grow: 1; padding-bottom: 20px; min-height: 0;">
     `;
 
@@ -318,7 +320,7 @@ export function renderPokemonTab(area) {
         let p = state.storage[i];
         content += renderSlotUI(p, 'storage', i, true);
     }
-    content += `<div style="border: 1px dashed #3498db; aspect-ratio: 1 / 1.5; display: flex; align-items: center; justify-content: center; text-align: center; font-size: 20px; box-sizing: border-box;" title="Empty Slot">Storage<br>+</div>`;
+    content += `<div style="border: 1px dashed rgba(52, 152, 219, 0.6); border-radius: 6px; aspect-ratio: 1 / 1.5; display: flex; align-items: center; justify-content: center; text-align: center; font-size: 14px; color: #aaa; box-sizing: border-box;" title="Empty Slot">Storage<br>+</div>`;
 
     content += `
                 </div>
@@ -327,7 +329,7 @@ export function renderPokemonTab(area) {
     if (showSafe) {
         content += `
             <!-- Column 3: Safe -->
-            <div id="safe-section" ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, 'safe')" style="${safeFlex} align-self: flex-start; max-height: 100%; box-sizing: border-box; border: 1px solid #555; padding: 5px; display: flex; flex-direction: column; min-width: 0; min-height: 0; overflow-x: hidden;">
+            <div id="safe-section" ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, 'safe')" style="${safeFlex} align-self: flex-start; max-height: 100%; border: 2px solid rgba(241, 196, 15, 0.75); ${basePanelStyle}">
                 <div id="safe-scroll-container" style="display: grid; grid-template-columns: repeat(2, 1fr); grid-auto-rows: max-content; gap: 5px; overflow-y: auto; overflow-x: hidden; align-content: start; flex-grow: 1; min-height: 0;">
         `;
 
@@ -335,7 +337,7 @@ export function renderPokemonTab(area) {
             let p = state.safe[i];
             content += renderSlotUI(p, 'safe', i, true);
         }
-        content += `<div style="border: 1px dashed #3498db; aspect-ratio: 1 / 1.5; display: flex; align-items: center; justify-content: center; text-align: center; font-size: 20px; cursor: pointer; box-sizing: border-box;" title="Empty Slot">Safe<br>+</div>`;
+        content += `<div style="border: 1px dashed rgba(52, 152, 219, 0.6); border-radius: 6px; aspect-ratio: 1 / 1.5; display: flex; align-items: center; justify-content: center; text-align: center; font-size: 14px; color: #aaa; cursor: pointer; box-sizing: border-box;" title="Empty Slot">Safe<br>+</div>`;
 
         content += `
                 </div>
