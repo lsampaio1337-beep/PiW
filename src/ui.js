@@ -2025,8 +2025,8 @@ async function init() {
             }
         };
 
-        for (let count = 0; count <= 10; count++) {
-            validProfiles.push({
+        for (let count = 10; count >= 0; count--) {
+            validProfiles.unshift({
                 id: `fake_profile_${count}`,
                 data: {
                     profileName: "Fake profile",
