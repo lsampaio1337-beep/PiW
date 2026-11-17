@@ -2126,12 +2126,16 @@ async function init() {
 
         const updateHeader = () => {
             const h2 = document.getElementById('save-action-title');
+            const renameBtn = document.getElementById('btn-rename-profile');
+            const deleteBtn = document.getElementById('btn-delete-profile');
+            if (renameBtn) renameBtn.classList.toggle('is-active', profileAction === 'rename');
+            if (deleteBtn) deleteBtn.classList.toggle('is-active', profileAction === 'delete');
             if (h2) {
                 if (profileAction === 'rename') {
-                    setSafeHTML(h2, "Select a game to <span style='color: #3498db;'>rename.</span>");
+                    setSafeHTML(h2, "Select a game to <span style='color: #f59e0b;'>rename.</span>");
                     h2.style.display = 'block';
                 } else if (profileAction === 'delete') {
-                    setSafeHTML(h2, "Select a game to <span style='color: #f44336;'>delete.</span>");
+                    setSafeHTML(h2, "Select a game to <span style='color: #ef4444;'>delete.</span>");
                     h2.style.display = 'block';
                 } else {
                     if (typeof h2.replaceChildren === 'function') h2.replaceChildren();
@@ -2146,29 +2150,14 @@ async function init() {
 
             if (!pData) {
                 const corruptCard = document.createElement('div');
-                corruptCard.style.display = "flex";
-                corruptCard.style.alignItems = "center";
-                corruptCard.style.justifyContent = "space-between";
-                corruptCard.style.width = "64%";
-                corruptCard.style.padding = "10px 22px";
-                corruptCard.style.backgroundColor = "#7f1d1d";
-                corruptCard.style.color = "white";
-                corruptCard.style.border = "4px solid black";
-                corruptCard.style.borderRadius = "9999px";
-                corruptCard.style.fontWeight = "bold";
+                corruptCard.className = 'profile-corrupt-card';
 
                 const label = document.createElement('span');
                 label.textContent = `Corrupted Save (${profileId})`;
 
                 const delBtn = document.createElement('button');
+                delBtn.className = 'profile-corrupt-del-btn';
                 delBtn.textContent = "Delete";
-                delBtn.style.cursor = "pointer";
-                delBtn.style.padding = "4px 12px";
-                delBtn.style.borderRadius = "9999px";
-                delBtn.style.border = "2px solid black";
-                delBtn.style.backgroundColor = "#ef4444";
-                delBtn.style.color = "white";
-                delBtn.style.fontWeight = "bold";
                 delBtn.onclick = () => {
                     if (confirm(`Delete corrupted save "${profileId}"?`)) {
                         storage.deleteProfile(profileId);
@@ -2257,9 +2246,17 @@ async function init() {
 
             const titleDiv = document.createElement('div');
             titleDiv.className = 'profile-title';
-            titleDiv.textContent = `"${profileName}" - ${playtimeStr}`;
+            titleDiv.textContent = `${profileName} · ${playtimeStr}`;
 
             titleRow.appendChild(titleDiv);
+
+            if (pData.currentRegionName) {
+                const regionBadge = document.createElement('span');
+                regionBadge.className = 'profile-region-badge';
+                regionBadge.textContent = pData.currentRegionName;
+                titleRow.appendChild(regionBadge);
+            }
+
             leftSide.appendChild(titleRow);
 
             // Party mini sprites preview
@@ -2283,47 +2280,60 @@ async function init() {
             }
 
             const playedDiv = document.createElement('div');
-            playedDiv.style.fontSize = "1rem";
-            playedDiv.style.fontWeight = "bold";
+            playedDiv.className = 'profile-played';
             playedDiv.textContent = pData.lastPlayed ? formatRelativeTime(pData.lastPlayed) : lastPlayedStr;
             playedDiv.title = lastPlayedStr;
 
-            if (Array.isArray(pData.party) && pData.party.length > 0) {
-                const partyRow = document.createElement('div');
-                partyRow.style.display = "flex";
-                partyRow.style.alignItems = "center";
-                partyRow.style.gap = "4px";
-                partyRow.style.marginTop = "2px";
-                pData.party.slice(0, 6).forEach(mon => {
-                    if (!mon || !mon.name) return;
-                    const sprite = document.createElement('img');
-                    sprite.alt = mon.name;
-                    sprite.title = `${mon.name} (Lv.${mon.level || 1})`;
-                    const folder = mon.isShiny ? 'Shiny' : 'Normal';
-                    sprite.src = `Assets/Pokemon/${folder}/${mon.name}.png`;
-                    sprite.style.width = "32px";
-                    sprite.style.height = "32px";
-                    sprite.style.objectFit = "contain";
-                    sprite.style.imageRendering = "pixelated";
-                    sprite.style.background = "rgba(0, 0, 0, 0.22)";
-                    sprite.style.borderRadius = "50%";
-                    sprite.style.padding = "2px";
-                    sprite.onerror = () => { sprite.style.display = 'none'; };
-                    partyRow.appendChild(sprite);
-                });
-                if (partyRow.children.length > 0) {
-                    leftSide.appendChild(partyRow);
-                }
+            rightSide.appendChild(playedDiv);
+
+            const inlineActions = document.createElement('div');
+            inlineActions.className = 'profile-inline-actions';
+
+            if (pData.isZzZMode) {
+                const sleepImg = document.createElement('img');
+                sleepImg.src = "Assets/Extra/Icons/IconSleep.png";
+                sleepImg.className = 'profile-sleep-badge';
+                sleepImg.title = "ZzZ Mode Active";
+                inlineActions.appendChild(sleepImg);
             }
 
-            rightSide.appendChild(playedDiv);
+            const inlineRenameBtn = document.createElement('button');
+            inlineRenameBtn.type = 'button';
+            inlineRenameBtn.className = 'profile-icon-btn';
+            inlineRenameBtn.textContent = 'Rename';
+            inlineRenameBtn.title = `Rename ${profileName}`;
+            inlineRenameBtn.onclick = (e) => {
+                e.stopPropagation();
+                if (renameModal && renameInput) {
+                    pendingRenameId = profileId;
+                    renameInput.value = profileName;
+                    renameModal.style.display = 'flex';
+                }
+            };
+
+            const inlineDeleteBtn = document.createElement('button');
+            inlineDeleteBtn.type = 'button';
+            inlineDeleteBtn.className = 'profile-icon-btn delete';
+            inlineDeleteBtn.textContent = 'Delete';
+            inlineDeleteBtn.title = `Delete ${profileName}`;
+            inlineDeleteBtn.onclick = (e) => {
+                e.stopPropagation();
+                if (confirm(`Are you sure you want to delete "${profileName}"? This cannot be undone.`)) {
+                    storage.deleteProfile(profileId);
+                    renderProfilesList();
+                }
+            };
+
+            inlineActions.appendChild(inlineRenameBtn);
+            inlineActions.appendChild(inlineDeleteBtn);
+            rightSide.appendChild(inlineActions);
 
             textWrapper.appendChild(leftSide);
             textWrapper.appendChild(rightSide);
 
             btn.appendChild(textWrapper);
 
-            // Add Medals Container on the second row
+            // Add Medals Container inside the profile card
             const medalsContainer = document.createElement('div');
             medalsContainer.className = 'profile-medals-container';
 
@@ -2384,36 +2394,12 @@ async function init() {
                 }
             });
 
+            if (earnedAnyMedal) {
+                btn.appendChild(medalsContainer);
+            }
+
             cardRow.appendChild(btn);
             profileCard.appendChild(cardRow);
-
-            if (earnedAnyMedal) {
-                const medalBtn = document.createElement('button');
-                medalBtn.className = 'action-btn-pill profile-medal-btn';
-                medalBtn.appendChild(medalsContainer);
-                medalBtn.onclick = () => btn.click();
-                const setPairHover = (hovered) => {
-                    btn.classList.toggle('is-hovered', hovered);
-                    medalBtn.classList.toggle('is-hovered', hovered);
-                };
-                btn.onmouseenter = () => setPairHover(true);
-                btn.onmouseleave = () => setPairHover(false);
-                medalBtn.onmouseenter = () => setPairHover(true);
-                medalBtn.onmouseleave = () => setPairHover(false);
-                profileCard.appendChild(medalBtn);
-            }
-
-
-
-            if (pData.isZzZMode) {
-                const sleepImg = document.createElement('img');
-                sleepImg.src = "Assets/Extra/Icons/IconSleep.png";
-                sleepImg.style.height = "100%";
-                sleepImg.style.maxHeight = "60px";
-                sleepImg.style.marginLeft = "10px";
-                sleepImg.title = "ZzZ Mode Active";
-                btn.appendChild(sleepImg);
-            }
 
             btn.onclick = async () => {
                 if (profileAction === 'rename') {

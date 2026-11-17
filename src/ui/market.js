@@ -115,40 +115,38 @@ export function setupMarket(vCenter) {
 }
 
 
-function getMarketBuyHtml() {
+function getMarketBuyHtml(hasUnlockedUpgrades = true) {
     return `
-        <div id="market-buy-wrapper" style="display: flex; flex-direction: column; width: 100%; height: 100%; margin-top: 0px; --m-width: min(90vw, 825px);">
-
-            <div id="market-buy-content" style="display: flex; flex-wrap: wrap; gap: calc(var(--m-width) * 0.018); justify-content: center; overflow-y: scroll; flex: 1; padding: calc(var(--m-width) * 0.018); box-sizing: border-box;">
+        <div id="market-buy-wrapper" class="market-shell">
+            <div class="market-subnav">
+                <div class="piw-tab-bar">
+                    <button onclick="window.openPokeMarketBuy()" class="piw-tab-btn is-active-buy">Buy</button>
+                    <button onclick="if(window.openPokeMarketSell) window.openPokeMarketSell()" class="piw-tab-btn">Sell</button>
+                </div>
+                <div class="piw-tab-bar">
+                    <button id="market-tab-buy-pokeballs" onclick="window.renderPokeMarketTab('pokeballs')" class="piw-tab-btn">Balls</button>
+                    <button id="market-tab-buy-potions" onclick="window.renderPokeMarketTab('potions')" class="piw-tab-btn">Potions</button>
+                    <button id="market-tab-buy-stones" onclick="window.renderPokeMarketTab('stones')" class="piw-tab-btn">Stones</button>
+                    <button id="market-tab-buy-vitamins" onclick="window.renderPokeMarketTab('vitamins')" class="piw-tab-btn">Vitamins</button>
+                    ${hasUnlockedUpgrades ? `<button id="market-tab-buy-upgrades" onclick="window.renderPokeMarketTab('upgrades')" class="piw-tab-btn">Upgrades</button>` : ''}
+                </div>
+            </div>
+            <div id="market-buy-content" class="market-grid-scroll">
                 <!-- Cards injected here -->
             </div>
         </div>
     `;
 }
 
-function getMarketBuyTitleHtml(hasUnlockedUpgrades) {
-    return `
-        <div style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
-            <div style="display: inline-flex; background: rgba(0, 0, 0, 0.2); border-radius: 20px; padding: 3px; gap: 5px;">
-                <button onclick="window.openPokeMarketBuy()" style="background: linear-gradient(to bottom, #2ecc71, #27ae60); color: white; border: 1px solid #2ecc71; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.2); font-size: 14px;">Buy</button>
-                <button onclick="if(window.openPokeMarketSell) window.openPokeMarketSell()" style="background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;" onmouseover="this.style.color='white'; this.style.background='rgba(255,255,255,0.1)';" onmouseout="this.style.color='rgba(255, 255, 255, 0.7)'; this.style.background='transparent';">Sell</button>
-            </div>
-            <div style="display: inline-flex; background: rgba(0, 0, 0, 0.2); border-radius: 20px; padding: 3px; gap: 5px;">
-                <button id="market-tab-buy-pokeballs" onclick="window.renderPokeMarketTab('pokeballs')" style="background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;">Balls</button>
-                <button id="market-tab-buy-potions" onclick="window.renderPokeMarketTab('potions')" style="background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;">Potions</button>
-                <button id="market-tab-buy-stones" onclick="window.renderPokeMarketTab('stones')" style="background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;">Stones</button>
-                <button id="market-tab-buy-vitamins" onclick="window.renderPokeMarketTab('vitamins')" style="background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;">Vitamins</button>
-                ${hasUnlockedUpgrades ? `<button id="market-tab-buy-upgrades" onclick="window.renderPokeMarketTab('upgrades')" style="background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;">Upgrades</button>` : ''}
-            </div>
-        </div>
-    `;
+function getMarketBuyTitleHtml() {
+    return `PokéMart`;
 }
 
 export function openPokeMarketBuy() {
     // Glass is available by default now, so upgrades are always unlocked.
     const hasUnlockedUpgrades = true;
 
-    const html = getMarketBuyHtml();
+    const html = getMarketBuyHtml(hasUnlockedUpgrades);
 
     const overlay = document.getElementById('main-view-inner-modal-overlay');
     const title = document.getElementById('main-view-inner-modal-title');
@@ -159,7 +157,7 @@ export function openPokeMarketBuy() {
         moneyDisplay.style.display = 'block';
     }
 
-    const titleHtml = getMarketBuyTitleHtml(hasUnlockedUpgrades);
+    const titleHtml = getMarketBuyTitleHtml();
 
     if (overlay && title && content) {
         safeSetHTML(title, titleHtml);
@@ -323,23 +321,22 @@ function generateMarketItemCard(item, category, stock) {
     }
 
     return `
-        <div class="market-item-card" data-price="${item.price}" data-id="${safeItemNameAttr}" data-category="${safeCategoryAttr}"
-            style="width: calc(16.666% - calc(var(--m-width) * 0.018 * 5 / 6)); background: #2c3e50; border: 2px solid #2ecc71; border-radius: 10px; padding: calc(var(--m-width) * 0.012); text-align: center; transition: transform 0.2s; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; box-sizing: border-box;">
-            <div style="font-size: calc(var(--m-width) * 0.017); font-weight: bold; margin-bottom: calc(var(--m-width) * 0.006); height: calc(var(--m-width) * 0.038); display: flex; align-items: center; justify-content: center; text-align: center; line-height: 1.1;">${escapedDisplayName}</div>
-            <img src="${safeImg}" style="width: calc(var(--m-width) * 0.072); height: calc(var(--m-width) * 0.072); object-fit: contain; margin-bottom: calc(var(--m-width) * 0.006);">
-            ${category !== 'stones' ? `<div style="font-size: calc(var(--m-width) * 0.014); color: #f1c40f; margin-bottom: calc(var(--m-width) * 0.006); line-height: 1.1;">${item.attrLabel ? String(item.attrLabel).replace(/&lt;br&gt;/gi, '<br>') : ''}</div>` : ''}
-            ${category !== 'upgrades' ? `<div style="font-size: calc(var(--m-width) * 0.014); color: #bdc3c7; line-height: 1.1; margin-bottom: calc(var(--m-width) * 0.006);">Stock: ${formatMarketNumberDown(stock)}</div>` : ''}
+        <div class="market-item-card" data-price="${item.price}" data-id="${safeItemNameAttr}" data-category="${safeCategoryAttr}">
+            <div class="market-card-title">${escapedDisplayName}</div>
+            <img src="${safeImg}" class="market-card-img">
+            ${category !== 'stones' ? `<div class="market-card-attr">${item.attrLabel ? String(item.attrLabel).replace(/&lt;br&gt;/gi, '<br>') : ''}</div>` : ''}
+            ${category !== 'upgrades' ? `<div class="market-card-stock">Stock: ${formatMarketNumberDown(stock)}</div>` : ''}
 
-            <div style="width: 100%; margin-top: auto;">
+            <div class="market-card-footer">
                 ${category !== 'upgrades' ? `
-                <div style="display: flex; gap: 5px; margin-top: calc(var(--m-width) * 0.006); align-items: center; justify-content: center; width: 100%;">
-                    <input type="text" id="buy-qty-${safeId}" value="1" oninput="if(window.updateBuyItemPrice) window.updateBuyItemPrice('${safeItemNameJS}', '${safeCategoryJS}', ${item.price})" style="width: calc(var(--m-width) * 0.06); height: calc(var(--m-width) * 0.025); padding: 0 calc(var(--m-width) * 0.006); font-size: calc(var(--m-width) * 0.015); text-align: center; border-radius: 5px; border: 1px solid #ccc; box-sizing: border-box; margin: 0; outline: none;">
+                <div class="market-qty-row">
+                    <input type="text" id="buy-qty-${safeId}" value="1" oninput="if(window.updateBuyItemPrice) window.updateBuyItemPrice('${safeItemNameJS}', '${safeCategoryJS}', ${item.price})" class="market-qty-input">
                     ${(category === 'pokeballs' || category === 'potions') ? `
-                    <button onclick="if(window.buySetMax) window.buySetMax('${safeItemNameJS}', '${safeCategoryJS}', ${item.price})" style="display: flex; align-items: center; justify-content: center; padding: 0 calc(var(--m-width) * 0.006); height: calc(var(--m-width) * 0.025); font-size: calc(var(--m-width) * 0.015); font-weight: bold; border-radius: 5px; cursor: pointer; background: #95a5a6; color: white; border: none; box-sizing: border-box; margin: 0;">Max</button>
+                    <button onclick="if(window.buySetMax) window.buySetMax('${safeItemNameJS}', '${safeCategoryJS}', ${item.price})" class="market-max-btn">Max</button>
                     ` : ''}
                 </div>
                 ` : ''}
-                <button id="buy-btn-${safeId}" onclick="${buyAction}" class="market-final-price" style="margin-top: calc(var(--m-width) * 0.012); background: #2ecc71; color: white; border: 2px solid white; border-radius: 8px; padding: 5px 15px; font-size: calc(var(--m-width) * 0.017); font-weight: bold; cursor: pointer; width: 100%;">${formatMarketNumber(item.price)}</button>
+                <button id="buy-btn-${safeId}" onclick="${buyAction}" class="market-final-price market-action-btn">$${formatMarketNumber(item.price)}</button>
             </div>
         </div>
     `;
@@ -351,27 +348,17 @@ function updateMarketTabStyles(activeCategory) {
     tabs.forEach(tab => {
         const btn = document.getElementById(`market-tab-buy-${tab}`);
         if (btn) {
-            if (tab === activeCategory) {
-                btn.style.background = 'linear-gradient(to bottom, #2ecc71, #27ae60)';
-                btn.style.color = 'white';
-                btn.style.border = '1px solid #2ecc71';
-                btn.style.boxShadow = '0 2px 4px rgba(0,0,0,0.2)';
-            } else {
-                btn.style.background = 'transparent';
-                btn.style.color = 'rgba(255, 255, 255, 0.7)';
-                btn.style.border = '1px solid transparent';
-                btn.style.boxShadow = 'none';
-            }
+            btn.classList.toggle('is-active-buy', tab === activeCategory);
         }
     });
 }
 
 function generateMarketItemsHTML(items, category) {
     if (category === 'upgrades' && items.length === 0) {
-        return `<div style="text-align: center; font-size: calc(var(--m-width) * 0.024); color: white; width: 100%; margin-top: calc(var(--m-width) * 0.05); padding-bottom: calc(var(--m-width) * 0.05);">No available upgrade to be bought.</div>`;
+        return `<div style="text-align: center; font-size: 16px; color: #94a3b8; width: 100%; padding: 40px 16px;">No available upgrade to be bought.</div>`;
     }
 
-    let html = `<div style="--m-width: min(76vw, 750px); display: flex; flex-wrap: wrap; gap: calc(var(--m-width) * 0.018); justify-content: center; width: 100%;">`;
+    let html = `<div class="market-grid">`;
     items.forEach(item => {
         let stock = 0;
         const targetCategory = category === 'vitamins' ? 'stones' : category;
@@ -522,43 +509,63 @@ export function newBuyItem(itemId, baseCost, category, upgradeType = null, displ
 
 function getMarketSellHtml() {
     return `
-        <div id="market-sell-wrapper" style="display: flex; flex-direction: column; width: 100%; height: 100%; margin-top: 0px; --m-width: min(90vw, 825px); overflow-y: auto;">
+        <div id="market-sell-wrapper" class="market-shell">
+            <div class="market-subnav">
+                <div class="piw-tab-bar">
+                    <button onclick="window.openPokeMarketBuy()" class="piw-tab-btn">Buy</button>
+                    <button onclick="if(window.openPokeMarketSell) window.openPokeMarketSell()" class="piw-tab-btn is-active-sell">Sell</button>
+                </div>
+                <div class="piw-tab-bar">
+                    <button id="market-tab-sell-pokeballs" onclick="if(window.renderPokeMarketSellTab) window.renderPokeMarketSellTab('pokeballs')" class="piw-tab-btn">Balls</button>
+                    <button id="market-tab-sell-potions" onclick="if(window.renderPokeMarketSellTab) window.renderPokeMarketSellTab('potions')" class="piw-tab-btn">Potions</button>
+                    <button id="market-tab-sell-stones" onclick="if(window.renderPokeMarketSellTab) window.renderPokeMarketSellTab('stones')" class="piw-tab-btn">Stones</button>
+                    <button id="market-tab-sell-vitamins" onclick="if(window.renderPokeMarketSellTab) window.renderPokeMarketSellTab('vitamins')" class="piw-tab-btn">Vitamins</button>
+                    <button id="market-tab-sell-pokemon" onclick="if(window.renderPokeMarketSellTab) window.renderPokeMarketSellTab('pokemon')" class="piw-tab-btn">Pokemon</button>
+                </div>
+            </div>
 
-            <div id="market-pokemon-sell-controls" style="display: none; flex-direction: column; align-items: center; justify-content: center; margin-bottom: calc(var(--m-width) * 0.015); gap: calc(var(--m-width) * 0.012);">
-                <div style="font-size: calc(var(--m-width) * 0.022); font-weight: bold; color: white;">Selected: <span id="market-pokemon-sell-count">0</span> | Total: $<span id="market-pokemon-sell-total">0</span> <span onclick="if(window.toggleMarketPokemonFilters) window.toggleMarketPokemonFilters()" style="cursor: pointer; user-select: none;">🔍</span></div>
-                <div style="display: flex; gap: calc(var(--m-width) * 0.012);">
-                    <button onclick="if(window.marketSelectAllPokemonForSale) window.marketSelectAllPokemonForSale()" style="padding: calc(var(--m-width) * 0.012) calc(var(--m-width) * 0.024); font-size: calc(var(--m-width) * 0.019); font-weight: bold; border-radius: 5px; background: #3498db; color: white; cursor: pointer; border: none;">Select Visible</button>
-                    <button onclick="if(window.marketDeselectAllPokemonForSale) window.marketDeselectAllPokemonForSale()" style="padding: calc(var(--m-width) * 0.012) calc(var(--m-width) * 0.024); font-size: calc(var(--m-width) * 0.019); font-weight: bold; border-radius: 5px; background: #95a5a6; color: white; cursor: pointer; border: none;">Deselect All</button>
-                    <button onclick="if(window.marketSellSelectedPokemon) window.marketSellSelectedPokemon()" style="padding: calc(var(--m-width) * 0.012) calc(var(--m-width) * 0.024); font-size: calc(var(--m-width) * 0.019); font-weight: bold; border-radius: 5px; background: #e74c3c; color: white; cursor: pointer; border: none;">Sell Selected</button>
+            <div id="market-pokemon-sell-controls" class="market-sell-controls">
+                <div class="market-sell-summary">
+                    <div class="market-sell-stats">
+                        <span>Selected: <span id="market-pokemon-sell-count">0</span></span>
+                        <span style="color: #64748b;">|</span>
+                        <span style="color: #4ade80;">Total: $<span id="market-pokemon-sell-total">0</span></span>
+                    </div>
+                    <div class="market-sell-btns">
+                        <button onclick="if(window.toggleMarketPokemonFilters) window.toggleMarketPokemonFilters()" class="market-ctrl-btn" style="background: #334155;">🔍 Filters</button>
+                        <button onclick="if(window.marketSelectAllPokemonForSale) window.marketSelectAllPokemonForSale()" class="market-ctrl-btn" style="background: #2563eb;">Select Visible</button>
+                        <button onclick="if(window.marketDeselectAllPokemonForSale) window.marketDeselectAllPokemonForSale()" class="market-ctrl-btn" style="background: #475569;">Deselect All</button>
+                        <button onclick="if(window.marketSellSelectedPokemon) window.marketSellSelectedPokemon()" class="market-ctrl-btn" style="background: #dc2626;">Sell Selected</button>
+                    </div>
                 </div>
 
-                <div id="market-pokemon-filters" style="display: none; flex-wrap: nowrap; gap: calc(var(--m-width) * 0.012); justify-content: center; align-items: center; background: #2c3e50; padding: calc(var(--m-width) * 0.012); border-radius: 8px; border: 1px solid #7f8c8d; width: 100%; box-sizing: border-box;">
-                    <div style="display: flex; gap: calc(var(--m-width) * 0.006); align-items: center;">
-                        <label style="color: white; font-size: calc(var(--m-width) * 0.017);">Name:</label>
-                        <input type="text" id="market-filter-name" oninput="if(window.renderPokeMarketSellTab) window.renderPokeMarketSellTab('pokemon')" style="width: calc(var(--m-width) * 0.1); padding: calc(var(--m-width) * 0.006); border-radius: 4px; border: 1px solid #ccc; font-size: calc(var(--m-width) * 0.017);">
+                <div id="market-pokemon-filters" class="piw-filter-bar" style="display: none;">
+                    <div class="piw-filter-group">
+                        <label class="piw-filter-label">Name</label>
+                        <input type="text" id="market-filter-name" placeholder="Search..." oninput="if(window.renderPokeMarketSellTab) window.renderPokeMarketSellTab('pokemon')" class="piw-filter-input" style="width: 90px;">
                     </div>
-                    <div style="display: flex; gap: calc(var(--m-width) * 0.006); align-items: center;">
-                        <label style="color: white; font-size: calc(var(--m-width) * 0.017);">Level:</label>
-                        <input type="text" id="market-filter-level-min" placeholder="Min" oninput="if(window.sanitizeMarketNumberInput) window.sanitizeMarketNumberInput(this); if(window.renderPokeMarketSellTab) window.renderPokeMarketSellTab('pokemon')" style="width: calc(var(--m-width) * 0.04); padding: calc(var(--m-width) * 0.006); border-radius: 4px; border: 1px solid #ccc; font-size: calc(var(--m-width) * 0.017);">
-                        <span style="color: white;">-</span>
-                        <input type="text" id="market-filter-level-max" placeholder="Max" oninput="if(window.sanitizeMarketNumberInput) window.sanitizeMarketNumberInput(this); if(window.renderPokeMarketSellTab) window.renderPokeMarketSellTab('pokemon')" style="width: calc(var(--m-width) * 0.04); padding: calc(var(--m-width) * 0.006); border-radius: 4px; border: 1px solid #ccc; font-size: calc(var(--m-width) * 0.017);">
+                    <div class="piw-filter-group">
+                        <label class="piw-filter-label">Lv</label>
+                        <input type="text" id="market-filter-level-min" placeholder="Min" oninput="if(window.sanitizeMarketNumberInput) window.sanitizeMarketNumberInput(this); if(window.renderPokeMarketSellTab) window.renderPokeMarketSellTab('pokemon')" class="piw-filter-input" style="width: 44px;">
+                        <span style="color: #64748b;">-</span>
+                        <input type="text" id="market-filter-level-max" placeholder="Max" oninput="if(window.sanitizeMarketNumberInput) window.sanitizeMarketNumberInput(this); if(window.renderPokeMarketSellTab) window.renderPokeMarketSellTab('pokemon')" class="piw-filter-input" style="width: 44px;">
                     </div>
-                    <div style="display: flex; gap: calc(var(--m-width) * 0.006); align-items: center;">
-                        <label style="color: white; font-size: calc(var(--m-width) * 0.017);">Q:</label>
-                        <input type="text" id="market-filter-q-min" placeholder="Min" oninput="if(window.sanitizeMarketQInput) window.sanitizeMarketQInput(this); if(window.renderPokeMarketSellTab) window.renderPokeMarketSellTab('pokemon')" style="width: calc(var(--m-width) * 0.04); padding: calc(var(--m-width) * 0.006); border-radius: 4px; border: 1px solid #ccc; font-size: calc(var(--m-width) * 0.017);">
-                        <span style="color: white;">-</span>
-                        <input type="text" id="market-filter-q-max" placeholder="Max" oninput="if(window.sanitizeMarketQInput) window.sanitizeMarketQInput(this); if(window.renderPokeMarketSellTab) window.renderPokeMarketSellTab('pokemon')" style="width: calc(var(--m-width) * 0.04); padding: calc(var(--m-width) * 0.006); border-radius: 4px; border: 1px solid #ccc; font-size: calc(var(--m-width) * 0.017);">
+                    <div class="piw-filter-group">
+                        <label class="piw-filter-label">Q</label>
+                        <input type="text" id="market-filter-q-min" placeholder="Min" oninput="if(window.sanitizeMarketQInput) window.sanitizeMarketQInput(this); if(window.renderPokeMarketSellTab) window.renderPokeMarketSellTab('pokemon')" class="piw-filter-input" style="width: 44px;">
+                        <span style="color: #64748b;">-</span>
+                        <input type="text" id="market-filter-q-max" placeholder="Max" oninput="if(window.sanitizeMarketQInput) window.sanitizeMarketQInput(this); if(window.renderPokeMarketSellTab) window.renderPokeMarketSellTab('pokemon')" class="piw-filter-input" style="width: 44px;">
                     </div>
-                    <div style="display: flex; gap: calc(var(--m-width) * 0.006); align-items: center;">
-                        <label style="color: white; font-size: calc(var(--m-width) * 0.017);">SumIV:</label>
-                        <input type="text" id="market-filter-sumiv-min" placeholder="Min" oninput="if(window.sanitizeMarketNumberInput) window.sanitizeMarketNumberInput(this); if(window.renderPokeMarketSellTab) window.renderPokeMarketSellTab('pokemon')" style="width: calc(var(--m-width) * 0.04); padding: calc(var(--m-width) * 0.006); border-radius: 4px; border: 1px solid #ccc; font-size: calc(var(--m-width) * 0.017);">
-                        <span style="color: white;">-</span>
-                        <input type="text" id="market-filter-sumiv-max" placeholder="Max" oninput="if(window.sanitizeMarketNumberInput) window.sanitizeMarketNumberInput(this); if(window.renderPokeMarketSellTab) window.renderPokeMarketSellTab('pokemon')" style="width: calc(var(--m-width) * 0.04); padding: calc(var(--m-width) * 0.006); border-radius: 4px; border: 1px solid #ccc; font-size: calc(var(--m-width) * 0.017);">
+                    <div class="piw-filter-group">
+                        <label class="piw-filter-label">∑IV</label>
+                        <input type="text" id="market-filter-sumiv-min" placeholder="Min" oninput="if(window.sanitizeMarketNumberInput) window.sanitizeMarketNumberInput(this); if(window.renderPokeMarketSellTab) window.renderPokeMarketSellTab('pokemon')" class="piw-filter-input" style="width: 46px;">
+                        <span style="color: #64748b;">-</span>
+                        <input type="text" id="market-filter-sumiv-max" placeholder="Max" oninput="if(window.sanitizeMarketNumberInput) window.sanitizeMarketNumberInput(this); if(window.renderPokeMarketSellTab) window.renderPokeMarketSellTab('pokemon')" class="piw-filter-input" style="width: 46px;">
                     </div>
                 </div>
             </div>
 
-            <div id="market-sell-content" style="display: flex; flex-wrap: wrap; gap: calc(var(--m-width) * 0.018); justify-content: center; overflow-y: scroll; flex: 1; padding: calc(var(--m-width) * 0.018); box-sizing: border-box;">
+            <div id="market-sell-content" class="market-grid-scroll">
                 <!-- Cards injected here -->
             </div>
         </div>
@@ -566,21 +573,7 @@ function getMarketSellHtml() {
 }
 
 function getMarketSellTitleHtml() {
-    return `
-        <div style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
-            <div style="display: inline-flex; background: rgba(0, 0, 0, 0.2); border-radius: 20px; padding: 3px; gap: 5px;">
-                <button onclick="window.openPokeMarketBuy()" style="background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;" onmouseover="this.style.color='white'; this.style.background='rgba(255,255,255,0.1)';" onmouseout="this.style.color='rgba(255, 255, 255, 0.7)'; this.style.background='transparent';">Buy</button>
-                <button onclick="if(window.openPokeMarketSell) window.openPokeMarketSell()" style="background: linear-gradient(to bottom, #e74c3c, #c0392b); color: white; border: 1px solid #e74c3c; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.2); font-size: 14px;">Sell</button>
-            </div>
-            <div style="display: inline-flex; background: rgba(0, 0, 0, 0.2); border-radius: 20px; padding: 3px; gap: 5px;">
-                <button id="market-tab-sell-pokeballs" onclick="if(window.renderPokeMarketSellTab) window.renderPokeMarketSellTab('pokeballs')" style="background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;">Balls</button>
-                <button id="market-tab-sell-potions" onclick="if(window.renderPokeMarketSellTab) window.renderPokeMarketSellTab('potions')" style="background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;">Potions</button>
-                <button id="market-tab-sell-stones" onclick="if(window.renderPokeMarketSellTab) window.renderPokeMarketSellTab('stones')" style="background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;">Stones</button>
-                <button id="market-tab-sell-vitamins" onclick="if(window.renderPokeMarketSellTab) window.renderPokeMarketSellTab('vitamins')" style="background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;">Vitamins</button>
-                <button id="market-tab-sell-pokemon" onclick="if(window.renderPokeMarketSellTab) window.renderPokeMarketSellTab('pokemon')" style="background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;">Pokemon</button>
-            </div>
-        </div>
-    `;
+    return `PokéMart`;
 }
 
 export function openPokeMarketSell() {
@@ -640,17 +633,7 @@ function setupMarketSellTabUI(category) {
     tabs.forEach(tab => {
         const btn = document.getElementById(`market-tab-sell-${tab}`);
         if (btn) {
-            if (tab === category) {
-                btn.style.background = 'linear-gradient(to bottom, #e74c3c, #c0392b)';
-                btn.style.color = 'white';
-                btn.style.border = '1px solid #e74c3c';
-                btn.style.boxShadow = '0 2px 4px rgba(0,0,0,0.2)';
-            } else {
-                btn.style.background = 'transparent';
-                btn.style.color = 'rgba(255, 255, 255, 0.7)';
-                btn.style.border = '1px solid transparent';
-                btn.style.boxShadow = 'none';
-            }
+            btn.classList.toggle('is-active-sell', tab === category);
         }
     });
 
@@ -719,7 +702,7 @@ function getMarketSellItems(category) {
 }
 
 function renderMarketSellItemsList(content, category, items) {
-    let html = `<div style="--m-width: min(76vw, 750px); display: flex; flex-wrap: wrap; gap: calc(var(--m-width) * 0.018); justify-content: center; width: 100%;">`;
+    let html = `<div class="market-grid">`;
     items.forEach(item => {
         let escapedDisplayName = escapeHTML(item.displayName || item.name).replace(/&lt;br&gt;/gi, '<br>');
         if (category === 'potions') escapedDisplayName = escapedDisplayName.replace(' Potion', '<br>Potion');
@@ -740,19 +723,18 @@ function renderMarketSellItemsList(content, category, items) {
         const safeImg = escapeHTML(item.img);
 
         html += `
-            <div class="market-item-card" data-basesell="${baseSellPrice}" data-id="${safeItemNameAttr}" data-category="${safeCategoryAttr}" data-stock="${stock}"
-                style="width: calc(16.666% - calc(var(--m-width) * 0.018 * 5 / 6)); box-sizing: border-box; background: #2c3e50; border: 2px solid #e74c3c; border-radius: 10px; padding: calc(var(--m-width) * 0.012); text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: flex-start;">
-                <div style="font-size: calc(var(--m-width) * 0.017); font-weight: bold; margin-bottom: calc(var(--m-width) * 0.006); height: calc(var(--m-width) * 0.038); display: flex; align-items: center; justify-content: center; text-align: center; line-height: 1.1;">${escapedDisplayName}</div>
-                <img src="${safeImg}" style="width: calc(var(--m-width) * 0.072); height: calc(var(--m-width) * 0.072); object-fit: contain; margin-bottom: calc(var(--m-width) * 0.006);">
-                ${item.attrLabel ? `<div style="font-size: calc(var(--m-width) * 0.014); color: #f1c40f; margin-bottom: calc(var(--m-width) * 0.006); line-height: 1.1;">${item.attrLabel ? String(item.attrLabel).replace(/&lt;br&gt;/gi, '<br>') : ''}</div>` : ''}
-                <div style="font-size: calc(var(--m-width) * 0.014); color: #bdc3c7; line-height: 1.1;">Stock: ${formatMarketNumberDown(stock)}</div>
+            <div class="market-item-card is-sell" data-basesell="${baseSellPrice}" data-id="${safeItemNameAttr}" data-category="${safeCategoryAttr}" data-stock="${stock}">
+                <div class="market-card-title">${escapedDisplayName}</div>
+                <img src="${safeImg}" class="market-card-img">
+                ${item.attrLabel ? `<div class="market-card-attr">${item.attrLabel ? String(item.attrLabel).replace(/&lt;br&gt;/gi, '<br>') : ''}</div>` : ''}
+                <div class="market-card-stock">Stock: ${formatMarketNumberDown(stock)}</div>
 
-                <div style="width: 100%; margin-top: auto;">
-                    <div style="display: flex; gap: 5px; margin-top: calc(var(--m-width) * 0.012); align-items: center; justify-content: center; width: 100%;">
-                        <input type="text" id="sell-qty-${safeId}" value="${stock > 0 ? 1 : 0}" oninput="if(window.updateSellItemPrice) window.updateSellItemPrice('${safeItemNameJS}', '${safeCategoryJS}')" style="width: calc(var(--m-width) * 0.06); height: calc(var(--m-width) * 0.025); padding: 0 calc(var(--m-width) * 0.006); font-size: calc(var(--m-width) * 0.015); text-align: center; border-radius: 5px; border: 1px solid #ccc; box-sizing: border-box; margin: 0; outline: none;">
-                        <button onclick="if(window.sellSetMax) window.sellSetMax('${safeItemNameJS}', '${safeCategoryJS}')" style="display: flex; align-items: center; justify-content: center; padding: 0 calc(var(--m-width) * 0.006); height: calc(var(--m-width) * 0.025); font-size: calc(var(--m-width) * 0.015); font-weight: bold; border-radius: 5px; cursor: pointer; background: #95a5a6; color: white; border: none; box-sizing: border-box; margin: 0;">Max</button>
+                <div class="market-card-footer">
+                    <div class="market-qty-row">
+                        <input type="text" id="sell-qty-${safeId}" value="${stock > 0 ? 1 : 0}" oninput="if(window.updateSellItemPrice) window.updateSellItemPrice('${safeItemNameJS}', '${safeCategoryJS}')" class="market-qty-input">
+                        <button onclick="if(window.sellSetMax) window.sellSetMax('${safeItemNameJS}', '${safeCategoryJS}')" class="market-max-btn">Max</button>
                     </div>
-                    <button id="sell-btn-${safeId}" onclick="if(window.sellMarketItem) window.sellMarketItem('${safeItemNameJS}', ${baseSellPrice}, '${safeCategoryJS}')" style="margin-top: calc(var(--m-width) * 0.012); background: #e74c3c; color: white; border: 2px solid white; border-radius: 8px; padding: 5px 15px; font-size: calc(var(--m-width) * 0.017); font-weight: bold; cursor: pointer; width: 100%;">$${formatMarketNumber(stock > 0 ? baseSellPrice : 0)}</button>
+                    <button id="sell-btn-${safeId}" onclick="if(window.sellMarketItem) window.sellMarketItem('${safeItemNameJS}', ${baseSellPrice}, '${safeCategoryJS}')" class="market-action-btn is-sell">$${formatMarketNumber(stock > 0 ? baseSellPrice : 0)}</button>
                 </div>
             </div>
         `;
@@ -763,7 +745,7 @@ function renderMarketSellItemsList(content, category, items) {
 }
 
 function renderMarketSellPokemonList(content) {
-    let html = `<div style="--m-width: min(76vw, 750px); display: flex; flex-wrap: wrap; gap: calc(var(--m-width) * 0.018); justify-content: center; width: 100%;">`;
+    let html = `<div class="market-grid">`;
 
     const filterName = (document.getElementById('market-filter-name')?.value || '').toLowerCase();
     const filterLevelMin = parseFloat(document.getElementById('market-filter-level-min')?.value);
@@ -808,19 +790,18 @@ function renderMarketSellPokemonList(content) {
         else if (p.qualityName === "Regular") glowClass = "glow-regular";
 
         let isSelected = window.marketSelectedPokemonForSale && window.marketSelectedPokemonForSale.has(p.uuid);
-        let selectionStyle = isSelected ? 'outline: 3px solid #ff0000; outline-offset: -3px; background: rgba(255,0,0,0.2);' : 'background: #2c3e50; border: 2px solid #777;';
 
         html += `
             <div onclick="if(window.toggleMarketPokemonSaleSelection) window.toggleMarketPokemonSaleSelection('${p.uuid}')"
-                style="width: calc(16.666% - calc(var(--m-width) * 0.018 * 5 / 6)); box-sizing: border-box; ${selectionStyle} border-radius: 10px; padding: calc(var(--m-width) * 0.012); text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; position: relative;">
-                <div style="font-size: calc(var(--m-width) * 0.017); font-weight: bold; margin-bottom: calc(var(--m-width) * 0.006); line-height: 1.1; color: white;">${escapeHTML(String(pName))}</div>
-                <div style="flex: 1; width: 100%; display: flex; align-items: center; justify-content: center; position: relative; height: calc(var(--m-width) * 0.072); margin-bottom: calc(var(--m-width) * 0.006);">
+                class="market-pokemon-card ${isSelected ? 'is-selected' : ''}">
+                <div style="font-size: 13px; font-weight: bold; margin-bottom: 4px; line-height: 1.15; color: white;">${escapeHTML(String(pName))}</div>
+                <div style="flex: 1; width: 100%; display: flex; align-items: center; justify-content: center; position: relative; height: 54px; margin-bottom: 4px;">
                     <img src="${escapeHTML(imgSrc)}" class="${glowClass}" style="max-height: 100%; max-width: 100%; object-fit: contain; z-index: 1;" onerror="this.style.display='none'">
                 </div>
-                <div style="font-size: calc(var(--m-width) * 0.014); color: #bdc3c7; line-height: 1.1;">Lv. ${p.level}</div>
-                <div style="font-size: calc(var(--m-width) * 0.014); color: #f1c40f; line-height: 1.1;">Q: ${p.quality.toFixed(2)}</div>
-                <div style="font-size: calc(var(--m-width) * 0.014); color: #3498db; line-height: 1.1;">∑IV: ${sumIV}</div>
-                <div style="font-size: calc(var(--m-width) * 0.017); font-weight: bold; color: #2ecc71; margin-top: calc(var(--m-width) * 0.012); line-height: 1.1;">$${formatMarketNumber(pEv)}</div>
+                <div style="font-size: 11.5px; color: #cbd5e1; line-height: 1.15;">Lv. ${p.level}</div>
+                <div style="font-size: 11.5px; color: #fbbf24; line-height: 1.15;">Q: ${p.quality.toFixed(2)}</div>
+                <div style="font-size: 11.5px; color: #38bdf8; line-height: 1.15;">∑IV: ${sumIV}</div>
+                <div style="font-size: 13px; font-weight: bold; color: #4ade80; margin-top: 6px; line-height: 1.15;">$${formatMarketNumber(pEv)}</div>
             </div>
         `;
     });

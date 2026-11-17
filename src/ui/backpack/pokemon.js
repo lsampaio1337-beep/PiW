@@ -196,53 +196,40 @@ export function renderPokemonTab(area) {
         `;
     }
 
-    const activeTabStyle = 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2);';
-    const inactiveTabStyle = 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid rgba(255, 255, 255, 0.2);';
-
     let content = `
-        <div style="display: flex; justify-content: center; gap: 8px; margin-bottom: 5px;">
-            <button onclick="window.togglePokemonFilters()" style="${window.showPokemonFilters ? activeTabStyle : inactiveTabStyle} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 13px; transition: all 0.2s;">🔍 Filters</button>
-            <button onclick="window.toggleSafeSpots()" style="${window.showSafeSpots ? activeTabStyle : inactiveTabStyle} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 13px; transition: all 0.2s;">🔒 Safe</button>
+        <div style="display: flex; flex-direction: column; height: 100%; min-height: 0; gap: 8px;">
+        <div style="display: flex; justify-content: center; flex-shrink: 0;">
+            <div class="piw-tab-bar">
+                <button onclick="window.togglePokemonFilters()" class="piw-tab-btn ${window.showPokemonFilters ? 'is-active' : ''}">🔍 Filters</button>
+                <button onclick="window.toggleSafeSpots()" class="piw-tab-btn ${window.showSafeSpots ? 'is-active' : ''}">🔒 Safe</button>
+            </div>
         </div>
-        <div id="pokemon-filters" style="display: ${window.showPokemonFilters ? 'flex' : 'none'}; flex-wrap: wrap; align-items: center; justify-content: center; gap: 6px; background: rgba(20, 28, 38, 0.92); border: 1px solid #3498db; border-radius: 10px; padding: 8px 10px; margin-bottom: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.45); font-size: 12px; color: #ecf0f1;">
-            <div style="display: flex; align-items: center; gap: 4px;">
-                <span style="color: #95a5a6; font-weight: bold;">Name</span>
-                <input type="text" id="pfilter-name" placeholder="Search..." value="${escapeHTML(filters.name)}" oninput="window.updatePokemonFilter('name', this.value)" class="pfilter-input" style="width: 75px;">
+        <div id="pokemon-filters" class="piw-filter-bar" style="display: ${window.showPokemonFilters ? 'flex' : 'none'}; flex-shrink: 0;">
+            <div class="piw-filter-group">
+                <span class="piw-filter-label">Name</span>
+                <input type="text" id="pfilter-name" placeholder="Search..." value="${escapeHTML(filters.name)}" oninput="window.updatePokemonFilter('name', this.value)" class="piw-filter-input pfilter-input" style="width: 85px;">
             </div>
-            <div style="display: flex; align-items: center; gap: 3px;">
-                <span style="color: #95a5a6; font-weight: bold;">Lv</span>
-                <input type="number" id="pfilter-minLvl" placeholder="Min" value="${escapeHTML(filters.minLvl)}" oninput="window.updatePokemonFilter('minLvl', this.value)" class="pfilter-input" style="width: 38px;">
-                <span style="color: #7f8c8d;">-</span>
-                <input type="number" id="pfilter-maxLvl" placeholder="Max" value="${escapeHTML(filters.maxLvl)}" oninput="window.updatePokemonFilter('maxLvl', this.value)" class="pfilter-input" style="width: 38px;">
+            <div class="piw-filter-group">
+                <span class="piw-filter-label">Lv</span>
+                <input type="number" id="pfilter-minLvl" placeholder="Min" value="${escapeHTML(filters.minLvl)}" oninput="window.updatePokemonFilter('minLvl', this.value)" class="piw-filter-input pfilter-input" style="width: 42px;">
+                <span style="color: #64748b;">-</span>
+                <input type="number" id="pfilter-maxLvl" placeholder="Max" value="${escapeHTML(filters.maxLvl)}" oninput="window.updatePokemonFilter('maxLvl', this.value)" class="piw-filter-input pfilter-input" style="width: 42px;">
             </div>
-            <div style="display: flex; align-items: center; gap: 3px;">
-                <span style="color: #95a5a6; font-weight: bold;">Q</span>
-                <input type="number" id="pfilter-minQ" placeholder="Min" value="${escapeHTML(filters.minQ)}" oninput="window.updatePokemonFilter('minQ', this.value)" class="pfilter-input" style="width: 38px;">
-                <span style="color: #7f8c8d;">-</span>
-                <input type="number" id="pfilter-maxQ" placeholder="Max" value="${escapeHTML(filters.maxQ)}" oninput="window.updatePokemonFilter('maxQ', this.value)" class="pfilter-input" style="width: 38px;">
+            <div class="piw-filter-group">
+                <span class="piw-filter-label">Q</span>
+                <input type="number" id="pfilter-minQ" placeholder="Min" value="${escapeHTML(filters.minQ)}" oninput="window.updatePokemonFilter('minQ', this.value)" class="piw-filter-input pfilter-input" style="width: 42px;">
+                <span style="color: #64748b;">-</span>
+                <input type="number" id="pfilter-maxQ" placeholder="Max" value="${escapeHTML(filters.maxQ)}" oninput="window.updatePokemonFilter('maxQ', this.value)" class="piw-filter-input pfilter-input" style="width: 42px;">
             </div>
-            <div style="display: flex; align-items: center; gap: 3px;">
-                <span style="color: #95a5a6; font-weight: bold;">∑IV</span>
-                <input type="number" id="pfilter-minIV" placeholder="Min" value="${escapeHTML(filters.minIV)}" oninput="window.updatePokemonFilter('minIV', this.value)" class="pfilter-input" style="width: 40px;">
-                <span style="color: #7f8c8d;">-</span>
-                <input type="number" id="pfilter-maxIV" placeholder="Max" value="${escapeHTML(filters.maxIV)}" oninput="window.updatePokemonFilter('maxIV', this.value)" class="pfilter-input" style="width: 40px;">
+            <div class="piw-filter-group">
+                <span class="piw-filter-label">∑IV</span>
+                <input type="number" id="pfilter-minIV" placeholder="Min" value="${escapeHTML(filters.minIV)}" oninput="window.updatePokemonFilter('minIV', this.value)" class="piw-filter-input pfilter-input" style="width: 44px;">
+                <span style="color: #64748b;">-</span>
+                <input type="number" id="pfilter-maxIV" placeholder="Max" value="${escapeHTML(filters.maxIV)}" oninput="window.updatePokemonFilter('maxIV', this.value)" class="piw-filter-input pfilter-input" style="width: 44px;">
             </div>
-            <button onclick="window.clearPokemonFilter(); window.renderBackpackTab('pokemon');" style="background: rgba(231, 76, 60, 0.2); color: #e74c3c; border: 1px solid rgba(231, 76, 60, 0.5); border-radius: 6px; padding: 4px 8px; font-size: 11px; font-weight: bold; cursor: pointer; transition: all 0.2s;">Clear</button>
+            <button onclick="window.clearPokemonFilter(); window.renderBackpackTab('pokemon');" style="background: rgba(231, 76, 60, 0.2); color: #f87171; border: 1px solid rgba(231, 76, 60, 0.45); border-radius: 6px; padding: 4px 10px; font-size: 11px; font-weight: bold; cursor: pointer; transition: all 0.2s;">Clear</button>
             <style>
-                #pokemon-filters .pfilter-input {
-                    background: #16202a;
-                    color: #ecf0f1;
-                    border: 1px solid #34495e;
-                    border-radius: 6px;
-                    padding: 4px 6px;
-                    font-size: 12px;
-                    outline: none;
-                    -moz-appearance: textfield;
-                    transition: border-color 0.2s;
-                }
-                #pokemon-filters .pfilter-input:focus {
-                    border-color: #3498db;
-                }
+                #pokemon-filters .pfilter-input { -moz-appearance: textfield; }
                 #pokemon-filters input::-webkit-outer-spin-button,
                 #pokemon-filters input::-webkit-inner-spin-button {
                     -webkit-appearance: none;
@@ -255,21 +242,19 @@ export function renderPokemonTab(area) {
 
     window.showSafeSpots = state.settings?.showSafeSpots ?? true;
     const showSafe = window.showSafeSpots;
-    const activeFlex = showSafe
-        ? 'flex: 0 0 calc((100% - 76px) * 2 / 7 + 17px);'
-        : 'flex: 0 0 calc((100% - 59px) * 2 / 7 + 17px);';
-    const storageFlex = showSafe
-        ? 'flex: 0 0 calc((100% - 76px) * 3 / 7 + 22px);'
-        : 'flex: 0 0 calc((100% - 59px) * 5 / 7 + 32px);';
+    const gridCols = showSafe ? '2fr 3fr 2fr' : '2fr 5fr';
     const storageCols = showSafe ? 3 : 5;
-    const safeFlex = 'flex: 0 0 calc((100% - 76px) * 2 / 7 + 17px);';
 
-    const basePanelStyle = 'box-sizing: border-box; border-radius: 8px; background: rgba(0, 0, 0, 0.22); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 2px 6px rgba(0, 0, 0, 0.25); padding: 6px; display: flex; flex-direction: column; min-width: 0; min-height: 0; overflow-x: hidden;';
+    const basePanelStyle = 'box-sizing: border-box; border-radius: 10px; background: rgba(15, 23, 34, 0.65); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 2px 6px rgba(0, 0, 0, 0.25); padding: 8px; display: flex; flex-direction: column; min-width: 0; min-height: 0; overflow: hidden;';
 
     content += `
-        <div style="display: flex; gap: 10px; width: 100%; height: 100%; min-height: 0; overflow-x: hidden; flex-grow: 1;">
+        <div style="display: grid; grid-template-columns: ${gridCols}; gap: 10px; width: 100%; flex: 1; min-height: 0; overflow: hidden;">
             <!-- Column 1: Active -->
-            <div style="${activeFlex} align-self: flex-start; max-height: 100%; border: 2px solid rgba(52, 152, 219, 0.75); ${basePanelStyle}">
+            <div style="max-height: 100%; border: 1.5px solid rgba(56, 189, 248, 0.6); ${basePanelStyle}">
+                <div class="backpack-col-header" style="color: #7dd3fc;">
+                    <span>Active</span>
+                    <span>${state.party.length}/6</span>
+                </div>
                 <div id="active-scroll-container" style="display: grid; grid-template-columns: repeat(2, 1fr); grid-auto-rows: max-content; gap: 5px; overflow-y: auto; overflow-x: hidden; align-content: start; flex-grow: 1; min-height: 0;">
     `;
 
@@ -321,7 +306,11 @@ export function renderPokemonTab(area) {
             </div>
 
             <!-- Column 2: Storage -->
-            <div ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, 'storage')" style="${storageFlex} border: 2px solid rgba(255, 255, 255, 0.35); ${basePanelStyle}">
+            <div ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, 'storage')" style="border: 1.5px solid rgba(148, 163, 184, 0.4); ${basePanelStyle}">
+                <div class="backpack-col-header" style="color: #e2e8f0;">
+                    <span>Storage</span>
+                    <span>${state.storage.length}</span>
+                </div>
                 <div id="storage-scroll-container" style="display: grid; grid-template-columns: repeat(${storageCols}, 1fr); grid-auto-rows: max-content; gap: 5px; overflow-y: auto; overflow-x: hidden; align-content: start; flex-grow: 1; min-height: 0;">
     `;
 
@@ -338,7 +327,11 @@ export function renderPokemonTab(area) {
     if (showSafe) {
         content += `
             <!-- Column 3: Safe -->
-            <div id="safe-section" ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, 'safe')" style="${safeFlex} align-self: flex-start; max-height: 100%; border: 2px solid rgba(241, 196, 15, 0.75); ${basePanelStyle}">
+            <div id="safe-section" ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, 'safe')" style="max-height: 100%; border: 1.5px solid rgba(251, 191, 36, 0.65); ${basePanelStyle}">
+                <div class="backpack-col-header" style="color: #fde68a;">
+                    <span>Safe</span>
+                    <span>${state.safe.length}</span>
+                </div>
                 <div id="safe-scroll-container" style="display: grid; grid-template-columns: repeat(2, 1fr); grid-auto-rows: max-content; gap: 5px; overflow-y: auto; overflow-x: hidden; align-content: start; flex-grow: 1; min-height: 0;">
         `;
 
@@ -355,7 +348,8 @@ export function renderPokemonTab(area) {
 
     content += `
         </div>
-        <div style="font-size: 10px; text-align: center; margin-top: 5px; color: #ccc;">Drag and Drop to move Pokémon.</div>
+        <div style="font-size: 11px; text-align: center; color: #94a3b8; flex-shrink: 0;">Drag and drop to move Pokémon.</div>
+        </div>
     `;
 
 
