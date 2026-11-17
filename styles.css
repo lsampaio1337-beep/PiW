@@ -732,8 +732,96 @@ input[type="number"] {
 
 
 #party-window {
-    width: 250px;
+    width: 140px;
     height: auto;
+}
+
+#party-window #left-col {
+    padding: 5px;
+}
+
+#party-window #party-list,
+#party-window #day-care {
+    gap: 5px;
+}
+
+#party-window .party-slot {
+    padding: 4px 5px 4px 6px;
+    border-radius: 7px;
+}
+
+#party-window .team-card-body {
+    gap: 5px;
+    min-height: 36px;
+}
+
+#party-window .team-sprite-stage {
+    flex: 0 0 32px;
+    height: 32px;
+    border-radius: 7px;
+}
+
+#party-window .team-sprite-pedestal {
+    width: 22px;
+    height: 5px;
+    bottom: 3px;
+}
+
+#party-window .team-sprite-img,
+#party-window .team-sprite-ghost {
+    max-width: 26px;
+    max-height: 26px;
+}
+
+#party-window .team-card-info {
+    gap: 2px;
+}
+
+#party-window .team-poke-name {
+    font-size: 9.5px;
+}
+
+#party-window .team-lv-pill {
+    font-size: 7.5px;
+    padding: 0 3px;
+}
+
+#party-window .team-type-dots {
+    display: none;
+}
+
+#party-window .team-actions {
+    gap: 2px;
+}
+
+#party-window .team-crown-btn,
+#party-window .team-info-btn {
+    width: 13px;
+    height: 13px;
+    font-size: 8px;
+}
+
+#party-window .team-bar-track {
+    height: 10px;
+}
+
+#party-window .team-bar-track.is-xp {
+    height: 9px;
+}
+
+#party-window .team-bar-cell {
+    font-size: 6.8px;
+}
+
+#party-window .team-bar-label {
+    font-size: 6px;
+    padding: 0 1px;
+}
+
+#party-window .team-stage-badge.is-top-left,
+#party-window .team-stage-badge.is-bottom-right {
+    font-size: 6px !important;
+    padding: 0 3px !important;
 }
 
 #left-col {
@@ -897,15 +985,27 @@ input[type="number"] {
 #main-control {
     display: flex;
     align-items: center;
-    padding: 20px;
-    gap: 20px;
+    flex-wrap: nowrap;
+    padding: 8px 12px;
+    gap: 7px;
     box-sizing: border-box;
-    width: 100%;
+    width: max-content;
+}
+
+.nav-icon-slot {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
 }
 
 .nav-icon {
-    height: 40px;
-    width: auto;
+    height: 34px;
+    width: 34px;
+    padding: 5px;
+    flex-shrink: 0;
+    box-sizing: content-box;
     cursor: pointer;
     transition: transform 0.2s ease, filter 0.2s ease;
     object-fit: contain;
