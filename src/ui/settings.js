@@ -4,6 +4,7 @@ import { showModal } from '../ui.js';
 import * as mathEngine from '../mathEngine.js';
 import { showCheatControlModal } from './cheatControl.js';
 import { clearAllSpriteCaches } from '../utils/sprites.js';
+import { encryptSaveText, decryptSaveText } from '../utils/saveCrypto.js';
 
 export function toggleLegacySprites(value) {
     state.settings.legacySprites = (value === 'true' || value === true);
@@ -433,6 +434,82 @@ export function exportLog() {
     if (state.storageRef) {
         state.storageRef.exportLog(state);
     }
+}
+
+export function exportData() {
+    try {
+        const jsonString = JSON.stringify(state, (key, value) => {
+            if (key === 'config' || key === 'dayCareRef' || key === 'storageRef') return undefined;
+            return value;
+        });
+        const encrypted = encryptSaveText(jsonString);
+        const safeName = (state.profileName || 'profile').replace(/[^a-zA-Z0-9_-]/g, '_');
+        const blob = new Blob([encrypted], { type: 'text/plain' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `piw_save_${safeName}.txt`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    } catch (e) {
+        console.error('Data export failed:', e);
+        if (window.showGameAlert) {
+            window.showGameAlert('Failed to export save data.');
+        }
+    }
+}
+
+export function triggerImportData() {
+    const fileInput = document.getElementById('import-data-file-input');
+    if (!fileInput) return;
+
+    fileInput.onchange = async (e) => {
+        const file = e.target.files && e.target.files[0];
+        if (!file) return;
+
+        try {
+            const encryptedText = await file.text();
+            const plainJson = decryptSaveText(encryptedText);
+            const parsed = JSON.parse(plainJson);
+            if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) {
+                throw new Error('Invalid save data structure.');
+            }
+
+            if (state.storageRef) {
+                const storage = state.storageRef;
+                const profileId = storage.currentProfileId || storage.createNewProfile();
+                const serialized = JSON.stringify(parsed);
+                storage._writeLocalStorageSafe(profileId, serialized);
+                const disk = storage._getDiskStorage();
+                if (disk) {
+                    disk.writeProfile(profileId, serialized);
+                }
+                const res = storage.loadProfileIntoState(profileId, state);
+                if (!res || !res.ok) {
+                    throw new Error((res && res.error) || 'Failed to load restored profile.');
+                }
+                storage.save(state);
+            }
+
+            if (window.updateMainControl) window.updateMainControl();
+            if (window.updateUI) window.updateUI();
+            if (window.showGameAlert) {
+                window.showGameAlert('Save data restored successfully!');
+            }
+        } catch (err) {
+            console.error('Data restore failed:', err);
+            if (window.showGameAlert) {
+                window.showGameAlert(`Restore failed: ${err.message || 'Invalid save file.'}`);
+            }
+        } finally {
+            fileInput.value = '';
+        }
+    };
+
+    fileInput.value = '';
+    fileInput.click();
 }
 
 export function activateCheat() {
