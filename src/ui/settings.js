@@ -18,14 +18,49 @@ export function showSettings() {
 
     const isLegacy = !!state.settings?.legacySprites;
     const settingsHTML = `
-        <div style="margin-bottom: 12px;">
-            <label for="legacy-sprites-checkbox" style="cursor: pointer;">
-                <input type="checkbox" id="legacy-sprites-checkbox" ${isLegacy ? 'checked' : ''} style="margin-right: 6px;">
-                Legacy Sprites
-            </label>
+        <div class="settings-container">
+            <div class="settings-section">
+                <div class="settings-section-title">Display &amp; Graphics</div>
+                <div class="settings-card">
+                    <div class="settings-row">
+                        <div class="settings-info">
+                            <div class="settings-label">Legacy Sprites</div>
+                            <div class="settings-desc">Use classic sprites instead of modern sprites across battles and menus.</div>
+                        </div>
+                        <label class="settings-switch" for="legacy-sprites-checkbox" title="Toggle Legacy Sprites">
+                            <input type="checkbox" id="legacy-sprites-checkbox" ${isLegacy ? 'checked' : ''}>
+                            <span class="settings-slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <div class="settings-section-title">Data &amp; Save Management</div>
+                <div class="settings-card">
+                    <div class="settings-row">
+                        <div class="settings-info">
+                            <div class="settings-label">Export Save Log</div>
+                            <div class="settings-desc">Download a snapshot of your current save data and session logs.</div>
+                        </div>
+                        <button type="button" class="settings-btn settings-btn-primary" onclick="window.exportLog()">Export Log</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <div class="settings-section-title settings-section-title-danger">Developer &amp; Debug</div>
+                <div class="settings-card settings-card-danger">
+                    <div class="settings-row">
+                        <div class="settings-info">
+                            <div class="settings-label">Cheat &amp; Debug Tools</div>
+                            <div class="settings-desc">Open developer controls for testing encounters, items, and progression.</div>
+                        </div>
+                        <button type="button" class="settings-btn settings-btn-danger" onclick="window.activateCheat()">Open Cheats</button>
+                    </div>
+                </div>
+            </div>
         </div>
-        <button onclick="window.exportLog()">Export Save Log</button>
-        <button onclick="window.activateCheat()" style="margin-left: 10px; background-color: #c0392b; color: white;">Cheat</button>
     `;
     showModal("Settings", settingsHTML, "window-settings");
     const checkboxEl = document.getElementById('legacy-sprites-checkbox');
