@@ -1,6 +1,15 @@
 const { app, BrowserWindow, ipcMain, screen } = require('electron');
 const path = require('path');
 const fs = require('fs');
+const { createSaveManager } = require('./src/electron/saveManager');
+
+let saveManager = null;
+function getSaveManager() {
+    if (!saveManager) {
+        saveManager = createSaveManager(path.join(app.getPath('userData'), 'saves'));
+    }
+    return saveManager;
+}
 
 // Fix transparency issues conditionally rather than disabling hardware acceleration entirely
 if (process.platform === 'linux') {
@@ -74,6 +83,31 @@ ipcMain.on('set-ignore-mouse-events', (event, ignore, options) => {
     if (currentWindow) {
         currentWindow.setIgnoreMouseEvents(ignore, options);
     }
+});
+
+// Durable disk-backed profile save IPC handlers
+ipcMain.on('save-storage:list-profiles', (event) => {
+    event.returnValue = getSaveManager().listProfiles();
+});
+
+ipcMain.on('save-storage:read-profile', (event, profileId) => {
+    event.returnValue = getSaveManager().readProfile(profileId);
+});
+
+ipcMain.on('save-storage:write-profile', (event, profileId, jsonString) => {
+    event.returnValue = getSaveManager().writeProfile(profileId, jsonString);
+});
+
+ipcMain.on('save-storage:write-master-index', (event, profiles) => {
+    event.returnValue = getSaveManager().writeMasterIndex(profiles);
+});
+
+ipcMain.on('save-storage:delete-profile', (event, profileId) => {
+    event.returnValue = getSaveManager().deleteProfile(profileId);
+});
+
+ipcMain.on('save-storage:get-save-dir', (event) => {
+    event.returnValue = getSaveManager().baseDir;
 });
 
 app.whenReady().then(() => {

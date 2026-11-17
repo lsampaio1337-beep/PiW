@@ -242,3 +242,130 @@ describe('Storage.loadProfileIntoState', () => {
         expect(storage.loadProfileIntoState('profile_123', null).ok).toBe(false);
     });
 });
+
+describe('Storage failsafes & recovery', () => {
+    let storage;
+    let mockDisk;
+    let store;
+
+    beforeEach(() => {
+        store = new Map();
+        Object.defineProperty(window, 'localStorage', {
+            value: {
+                get length() { return store.size; },
+                key: jest.fn((i) => Array.from(store.keys())[i] ?? null),
+                getItem: jest.fn((k) => (store.has(k) ? store.get(k) : null)),
+                setItem: jest.fn((k, v) => { store.set(k, String(v)); }),
+                removeItem: jest.fn((k) => { store.delete(k); })
+            },
+            writable: true
+        });
+
+        const diskFiles = new Map();
+        let diskIndex = [];
+        mockDisk = {
+            listProfiles: jest.fn(() => ({ ok: true, profiles: [...diskIndex] })),
+            readProfile: jest.fn((id) => diskFiles.has(id)
+                ? { ok: true, data: JSON.parse(diskFiles.get(id)), raw: diskFiles.get(id), source: 'primary' }
+                : { ok: false }),
+            writeProfile: jest.fn((id, json) => {
+                diskFiles.set(id, json);
+                if (!diskIndex.includes(id)) diskIndex.push(id);
+                return { ok: true };
+            }),
+            writeMasterIndex: jest.fn((arr) => {
+                diskIndex = [...arr];
+                return { ok: true };
+            }),
+            deleteProfile: jest.fn((id) => {
+                diskFiles.delete(id);
+                diskIndex = diskIndex.filter(x => x !== id);
+                return { ok: true };
+            })
+        };
+
+        window.electronAPI = { saveStorage: mockDisk };
+        storage = new Storage();
+    });
+
+    afterEach(() => {
+        delete window.electronAPI;
+        jest.restoreAllMocks();
+    });
+
+    test('refuses to overwrite a progressed profile with an empty state', () => {
+        const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+        const pid = storage.createNewProfile();
+        const goodState = {
+            party: [{ name: 'Charmander', level: 12 }],
+            storage: [],
+            stats: { hasPickedStarter: true },
+            globalStats: { playtime: 120 }
+        };
+        expect(storage.save(goodState)).toBe(true);
+
+        const emptyState = {
+            party: [],
+            storage: [],
+            stats: { hasPickedStarter: false },
+            globalStats: { playtime: 0 }
+        };
+        expect(storage.save(emptyState)).toBe(false);
+        expect(errorSpy).toHaveBeenCalled();
+
+        const loaded = storage.getProfileData(pid);
+        expect(loaded.party).toHaveLength(1);
+        expect(loaded.party[0].name).toBe('Charmander');
+    });
+
+    test('succeeds via disk storage even when localStorage throws QuotaExceededError', () => {
+        const warnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+        const pid = storage.createNewProfile();
+        window.localStorage.setItem.mockImplementation(() => {
+            throw new Error('QuotaExceededError');
+        });
+
+        const state = {
+            party: [{ name: 'Squirtle', level: 8 }],
+            storage: [],
+            stats: { hasPickedStarter: true }
+        };
+        expect(storage.save(state)).toBe(true);
+        expect(mockDisk.writeProfile).toHaveBeenCalledWith(pid, expect.any(String));
+        expect(storage.getProfileData(pid).party[0].name).toBe('Squirtle');
+        warnSpy.mockRestore();
+    });
+
+    test('recovers corrupted primary localStorage from backup slot or disk', () => {
+        const warnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+        const pid = storage.createNewProfile();
+        storage.save({
+            party: [{ name: 'Bulbasaur', level: 10 }],
+            storage: [],
+            stats: { hasPickedStarter: true }
+        });
+
+        // Corrupt primary localStorage entry
+        store.set(pid, '{broken-json');
+
+        const recovered = storage.getProfileData(pid);
+        expect(recovered).not.toBeNull();
+        expect(recovered.party[0].name).toBe('Bulbasaur');
+        // Primary localStorage should be self-healed
+        expect(() => JSON.parse(store.get(pid))).not.toThrow();
+        warnSpy.mockRestore();
+    });
+
+    test('syncProfiles recovers orphaned localStorage profiles when master index is lost', () => {
+        store.set('profile_orphan_99', JSON.stringify({
+            profileName: 'Orphan',
+            party: [{ name: 'Eevee', level: 15 }],
+            lastPlayed: 5000
+        }));
+
+        const syncedStorage = new Storage();
+        const profiles = syncedStorage.getProfiles();
+        expect(profiles).toContain('profile_orphan_99');
+        expect(mockDisk.writeProfile).toHaveBeenCalledWith('profile_orphan_99', expect.any(String));
+    });
+});

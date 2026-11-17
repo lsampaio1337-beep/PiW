@@ -1816,16 +1816,23 @@ function setupAutosave() {
     if (autosaveInterval) {
         clearInterval(autosaveInterval);
     }
+    const safeSave = () => {
+        if (storage.currentProfileId) {
+            storage.save(state);
+        }
+    };
     // Autosave loop
-    autosaveInterval = setInterval(() => {
-        storage.save(state);
-    }, 60000);
+    autosaveInterval = setInterval(safeSave, 60000);
 
-    // Save on beforeunload
+    // Save on beforeunload, pagehide, and tab/window hide
     if (!hasUnloadAutosaveListener) {
         hasUnloadAutosaveListener = true;
-        window.addEventListener('beforeunload', () => {
-            storage.save(state);
+        window.addEventListener('beforeunload', safeSave);
+        window.addEventListener('pagehide', safeSave);
+        document.addEventListener('visibilitychange', () => {
+            if (document.visibilityState === 'hidden') {
+                safeSave();
+            }
         });
     }
 }
@@ -1991,9 +1998,8 @@ async function init() {
 
         if (btnRenameSave) {
             btnRenameSave.onclick = () => {
-                if (pendingRenameId && pendingRenameData && renameInput.value.trim() !== "") {
-                    pendingRenameData.profileName = renameInput.value.trim();
-                    window.localStorage.setItem(pendingRenameId, JSON.stringify(pendingRenameData));
+                if (pendingRenameId && renameInput.value.trim() !== "") {
+                    storage.renameProfile(pendingRenameId, renameInput.value.trim());
                     window.location.reload();
                 }
             };
@@ -2256,62 +2262,17 @@ async function init() {
                     updateHeader();
                 } else {
                     // Load Action
+                    const loadResult = storage.loadProfileIntoState(profileId, state);
+                    if (!loadResult || !loadResult.ok) {
+                        alert(`Failed to load "${profileName}". Save data could not be recovered.`);
+                        return;
+                    }
+
                     splashScreen.style.display = 'none';
                     window.windowManager.toggleWindow('save-manager-modal', false);
                     window.windowManager.toggleWindow('main-control-window', true);
                     window.windowManager.toggleWindow('party-window', true);
                     window.windowManager.toggleWindow('main-view-window', true);
-
-                    storage.setCurrentProfile(profileId);
-
-                    // Perform a deep merge to preserve nested object structures (like stats, backpack)
-                    const deepMerge = (target, source) => {
-                        if (typeof source !== 'object' || source === null) return source;
-                        if (Array.isArray(source)) return source;
-                        for (const key of Object.keys(source)) {
-                            if (key === '__proto__' || key === 'constructor' || key === 'prototype') continue;
-                            if (source[key] instanceof Object && !Array.isArray(source[key])) {
-                                if (!target[key]) target[key] = {};
-                                deepMerge(target[key], source[key]);
-                            } else {
-                                target[key] = source[key];
-                            }
-                        }
-                        return target;
-                    };
-                    deepMerge(state, pData);
-
-                    // Initialize caughtSpeciesCount for older saves
-                    if (state.stats && state.stats.caughtSpecies) {
-                        state.stats.caughtSpeciesCount = Object.keys(state.stats.caughtSpecies).length;
-                    } else if (state.stats) {
-                        state.stats.caughtSpeciesCount = 0;
-                    }
-
-                    // Migrate old save data to new globalStats structure
-                    if (pData.stats) {
-                        if (pData.stats.playtime !== undefined) state.globalStats.playtime = pData.stats.playtime;
-                        if (pData.stats.hasSeenProfTutorial !== undefined) state.globalStats.hasSeenProfTutorial = pData.stats.hasSeenProfTutorial;
-                        if (pData.stats.hasSeenZzZTutorial !== undefined) state.globalStats.hasSeenZzZTutorial = pData.stats.hasSeenZzZTutorial;
-                        if (pData.stats.hasSeenMultiplayerIcon !== undefined) state.globalStats.hasSeenMultiplayerIcon = pData.stats.hasSeenMultiplayerIcon;
-                        if (pData.stats.hasSeenGiftIcon !== undefined) state.globalStats.hasSeenGiftIcon = pData.stats.hasSeenGiftIcon;
-                        if (pData.stats.hasSeenJohtoMap !== undefined) state.globalStats.hasSeenJohtoMap = pData.stats.hasSeenJohtoMap;
-                        if (pData.stats.hasSeenDaycare !== undefined) state.stats.hasSeenDaycare = pData.stats.hasSeenDaycare;
-                        if (pData.stats.hasSeenBonusCandyModal !== undefined) state.globalStats.hasSeenBonusCandyModal = pData.stats.hasSeenBonusCandyModal;
-                    }
-
-
-                    if (!state.currentRegionName) {
-                        state.currentRegionName = 'Kanto';
-                    }
-                    if (!state.regions) {
-                        state.regions = {};
-                    }
-
-                    // Fallback for older saves
-                    if (state.settings.autoPotionThreshold === undefined) {
-                        state.settings.autoPotionThreshold = 25;
-                    }
 
                     // Handle backwards compatibility for challenges
                     if (state.stats.completedChallenges !== undefined && (!state.stats.completedChallengeIds || state.stats.completedChallengeIds.length === 0)) {
