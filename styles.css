@@ -1103,7 +1103,8 @@ input[type="number"] {
     border-radius: 9999px;
     text-align: left;
     font-weight: bold;
-    width: 64%;
+    width: 420px;
+    flex-shrink: 0;
     position: relative;
     z-index: 1;
     display: flex;
@@ -1245,7 +1246,7 @@ input[type="number"] {
 
 .profile-medal-img {
     width: auto;
-    height: 44px;
+    height: 88px;
     object-fit: contain;
     image-rendering: pixelated;
 }

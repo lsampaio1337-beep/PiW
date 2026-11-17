@@ -1933,6 +1933,32 @@ async function init() {
     await loadConfigs();
 
     const profiles = storage.getProfiles();
+    if (!profiles.includes('fake_profile_1')) {
+        const fakeRegions = ['Kanto', 'Johto', 'Hoenn', 'Sinnoh', 'Unova', 'Kalos', 'Alola', 'Galar', 'Hisui', 'Paldea'];
+        const now = Date.now();
+        for (let i = 1; i <= 10; i++) {
+            const pid = `fake_profile_${i}`;
+            const fakeData = {
+                profileName: `Trainer ${i}`,
+                currentRegionName: fakeRegions[i - 1],
+                lastPlayed: now - i * 3600000,
+                stats: { playtime: i * 1800, caughtSpecies: {}, caughtShiniesSpecies: {} },
+                regions: {}
+            };
+            fakeRegions.slice(0, i).forEach(reg => {
+                const regKey = reg.toLowerCase() + '_id';
+                const firstMon = state?.config?.pokemonData?.find(p => p[regKey]);
+                const caught = firstMon ? { [firstMon.name]: 1 } : {};
+                fakeData.regions[reg] = { stats: { caughtSpecies: caught, caughtShiniesSpecies: {} } };
+                if (reg === 'Kanto' && firstMon) {
+                    fakeData.stats.caughtSpecies[firstMon.name] = 1;
+                }
+            });
+            window.localStorage.setItem(pid, JSON.stringify(fakeData));
+            if (!profiles.includes(pid)) profiles.push(pid);
+        }
+        window.localStorage.setItem(storage.masterKey, JSON.stringify(profiles));
+    }
     const splashScreen = document.getElementById('splash-screen');
     const saveManagerModal = document.getElementById('save-manager-modal');
     const profilesContainer = document.getElementById('profiles-container');
@@ -2106,12 +2132,7 @@ async function init() {
             titleDiv.className = 'profile-title';
             titleDiv.textContent = `"${profileName}" - ${playtimeStr}`;
 
-            const regionBadge = document.createElement('span');
-            regionBadge.className = 'profile-region-badge';
-            regionBadge.textContent = pData.currentRegionName || 'Kanto';
-
             titleRow.appendChild(titleDiv);
-            titleRow.appendChild(regionBadge);
             leftSide.appendChild(titleRow);
 
             // Party mini sprites preview
@@ -2137,11 +2158,8 @@ async function init() {
             const playedDiv = document.createElement('div');
             playedDiv.style.fontSize = "18px";
             playedDiv.style.fontWeight = "bold";
-            playedDiv.style.marginBottom = "5px";
             playedDiv.textContent = pData.lastPlayed ? formatRelativeTime(pData.lastPlayed) : lastPlayedStr;
             playedDiv.title = lastPlayedStr;
-
-            leftSide.appendChild(titleDiv);
 
             rightSide.appendChild(playedDiv);
 
@@ -2216,39 +2234,7 @@ async function init() {
                 }
             });
 
-            const inlineActions = document.createElement('div');
-            inlineActions.className = 'profile-inline-actions';
-
-            const inlineRenameBtn = document.createElement('button');
-            inlineRenameBtn.className = 'profile-icon-btn';
-            inlineRenameBtn.textContent = '✏️';
-            inlineRenameBtn.title = `Rename "${profileName}"`;
-            inlineRenameBtn.onclick = (e) => {
-                e.stopPropagation();
-                if (renameModal && renameInput) {
-                    pendingRenameId = profileId;
-                    renameInput.value = profileName;
-                    renameModal.style.display = 'flex';
-                }
-            };
-
-            const inlineDeleteBtn = document.createElement('button');
-            inlineDeleteBtn.className = 'profile-icon-btn delete';
-            inlineDeleteBtn.textContent = '🗑️';
-            inlineDeleteBtn.title = `Delete "${profileName}"`;
-            inlineDeleteBtn.onclick = (e) => {
-                e.stopPropagation();
-                if (confirm(`Are you sure you want to delete "${profileName}"? This cannot be undone.`)) {
-                    storage.deleteProfile(profileId);
-                    renderProfilesList();
-                }
-            };
-
-            inlineActions.appendChild(inlineRenameBtn);
-            inlineActions.appendChild(inlineDeleteBtn);
-
             cardRow.appendChild(btn);
-            cardRow.appendChild(inlineActions);
             profileCard.appendChild(cardRow);
 
             if (earnedAnyMedal) {

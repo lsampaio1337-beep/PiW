@@ -176,6 +176,24 @@ export default class Storage {
         return this.getProfileData(this.currentProfileId);
     }
 
+    loadProfileIntoState(profileId, state) {
+        if (!profileId || !state) {
+            return { ok: false, error: "Invalid profileId or state" };
+        }
+        const data = this.getProfileData(profileId);
+        if (!data || typeof data !== "object") {
+            return { ok: false, error: "Profile data missing or corrupted" };
+        }
+
+        const preservedConfig = state.config;
+        Object.assign(state, data);
+        if (preservedConfig !== undefined) {
+            state.config = preservedConfig;
+        }
+        this.setCurrentProfile(profileId);
+        return { ok: true };
+    }
+
     reset() {
         if (!this.currentProfileId) return;
         try {
