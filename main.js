@@ -1,6 +1,8 @@
-const { app, BrowserWindow, ipcMain, screen } = require('electron');
+const { app, BrowserWindow, ipcMain, screen, Menu } = require('electron');
 const path = require('path');
 const fs = require('fs');
+
+let isMainControlMinimized = false;
 
 // Fix transparency issues conditionally rather than disabling hardware acceleration entirely
 if (process.platform === 'linux') {
@@ -20,6 +22,8 @@ function createWindow() {
     }
 
     const win = new BrowserWindow({
+        title: 'PiW',
+        icon: path.join(__dirname, 'Assets', 'Items', 'Balls', 'Pokeball.png'),
         width: width,
         height: height,
         x: x,
@@ -57,6 +61,25 @@ function createWindow() {
         }
         win.show();
     });
+
+    win.on('minimize', () => {
+        if (isMainControlMinimized) {
+            isMainControlMinimized = false;
+            setImmediate(() => {
+                if (!win.isDestroyed()) {
+                    win.restore();
+                    win.focus();
+                    win.webContents.send('restore-main-control', { fromMinimize: true });
+                }
+            });
+        }
+    });
+
+    win.on('focus', () => {
+        if (isMainControlMinimized && !win.isDestroyed()) {
+            win.webContents.send('restore-main-control', { fromMinimize: false });
+        }
+    });
 }
 
 // Handle click-through messages from the renderer process
@@ -76,7 +99,19 @@ ipcMain.on('set-ignore-mouse-events', (event, ignore, options) => {
     }
 });
 
+ipcMain.on('set-main-control-minimized', (_event, minimized) => {
+    isMainControlMinimized = Boolean(minimized);
+});
+
+app.setName('PiW');
+if (process.platform === 'win32') {
+    app.setAppUserModelId('PiW');
+}
+
 app.whenReady().then(() => {
+    // Remove default application menu so Ctrl+W is handled by the renderer instead of closing the whole app
+    Menu.setApplicationMenu(null);
+
     // Delay window creation on Linux to allow the compositor to initialize correctly
     // so transparent windows work without disabling hardware acceleration.
     if (process.platform === 'linux') {
