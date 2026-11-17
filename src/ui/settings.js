@@ -39,10 +39,10 @@ export function showSettings() {
                             <div class="settings-label">App Icon Location</div>
                             <div class="settings-desc">Choose whether PiW appears on the Windows taskbar or in the system tray.</div>
                         </div>
-                        <select id="icon-location-select" class="settings-select" style="padding: 6px 10px; border-radius: 6px; background: #2c3e50; color: white; border: 1px solid #1abc9c; cursor: pointer;">
-                            <option value="taskbar" ${iconLocation === 'taskbar' ? 'selected' : ''}>Taskbar</option>
-                            <option value="tray" ${iconLocation === 'tray' ? 'selected' : ''}>System Tray</option>
-                        </select>
+                        <div style="display: flex; gap: 8px;">
+                            <button type="button" id="btn-icon-taskbar" class="settings-btn ${iconLocation === 'taskbar' ? 'settings-btn-primary' : ''}" ${iconLocation === 'taskbar' ? 'disabled' : ''} style="${iconLocation === 'taskbar' ? '' : 'opacity: 0.6;'}">Taskbar</button>
+                            <button type="button" id="btn-icon-tray" class="settings-btn ${iconLocation === 'tray' ? 'settings-btn-primary' : ''}" ${iconLocation === 'tray' ? 'disabled' : ''} style="${iconLocation === 'tray' ? '' : 'opacity: 0.6;'}">System Tray</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -79,19 +79,29 @@ export function showSettings() {
     if (checkboxEl) {
         checkboxEl.addEventListener('change', (e) => toggleLegacySprites(e.target.checked));
     }
-    const iconSelectEl = document.getElementById('icon-location-select');
-    if (iconSelectEl) {
-        iconSelectEl.addEventListener('change', (e) => {
-            const value = e.target.value === 'tray' ? 'tray' : 'taskbar';
-            localStorage.setItem('piw_icon_location', value);
-            if (!state.settings) state.settings = {};
-            state.settings.iconLocation = value;
-            storage.save(state);
-            if (window.electronAPI) {
-                window.electronAPI.send('set-icon-location', value);
-            }
-        });
-    }
+    const btnTaskbar = document.getElementById('btn-icon-taskbar');
+    const btnTray = document.getElementById('btn-icon-tray');
+    const setIconLocation = (value) => {
+        localStorage.setItem('piw_icon_location', value);
+        if (!state.settings) state.settings = {};
+        state.settings.iconLocation = value;
+        storage.save(state);
+        if (window.electronAPI) {
+            window.electronAPI.send('set-icon-location', value);
+        }
+        if (btnTaskbar && btnTray) {
+            const isTaskbar = value === 'taskbar';
+            btnTaskbar.disabled = isTaskbar;
+            btnTaskbar.classList.toggle('settings-btn-primary', isTaskbar);
+            btnTaskbar.style.opacity = isTaskbar ? '' : '0.6';
+
+            btnTray.disabled = !isTaskbar;
+            btnTray.classList.toggle('settings-btn-primary', !isTaskbar);
+            btnTray.style.opacity = !isTaskbar ? '' : '0.6';
+        }
+    };
+    if (btnTaskbar) btnTaskbar.addEventListener('click', () => setIconLocation('taskbar'));
+    if (btnTray) btnTray.addEventListener('click', () => setIconLocation('tray'));
 }
 
 export function showTimeLapseModal() {
