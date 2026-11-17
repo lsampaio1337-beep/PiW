@@ -2004,6 +2004,11 @@ input[type="number"] {
     border-radius: 12px;
 }
 
+#main-control-header {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
 #main-control {
     display: flex;
     align-items: center;
