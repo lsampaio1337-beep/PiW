@@ -165,7 +165,6 @@ export function showCalendar(tab = 'activities') {
         window.updateMainControl();
     }
 
-    const tokenCount = state.trainer?.tokens || 0;
     const hasClaimableReward = checkDailyRewardAvailable();
     const hasClaimableChallenge = checkAnyDailyChallengeCompleted();
     const showActivityDot = hasClaimableReward || hasClaimableChallenge;
@@ -193,14 +192,14 @@ export function showCalendar(tab = 'activities') {
                 align-items: center;
                 justify-content: space-between;
                 margin-bottom: 12px;
-                border-bottom: 1px solid #f1c40f;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.35);
                 padding-bottom: 5px;
             }
             #window-calendar .cal-section-title {
                 margin: 0;
                 font-size: 18px;
                 font-weight: bold;
-                color: #f1c40f;
+                color: #ffffff;
             }
             #window-calendar .cal-week-pill {
                 background: rgba(52, 152, 219, 0.2);
@@ -316,8 +315,7 @@ export function showCalendar(tab = 'activities') {
             }
             #window-calendar .cal-challenges-section {
                 margin-top: 18px;
-                padding-top: 16px;
-                border-top: 1px solid rgba(255, 255, 255, 0.1);
+                padding-top: 8px;
             }
             #window-calendar .cal-challenges-list {
                 display: flex;
@@ -440,17 +438,13 @@ export function showCalendar(tab = 'activities') {
     let html = `<div class="cal-root">`;
 
     let titleHtml = `
-        <div style="display: flex; align-items: center; justify-content: space-between; width: 100%; gap: 12px; padding-right: 28px; box-sizing: border-box;">
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
             <div style="font-weight: 700; font-size: 18px; color: white; letter-spacing: 0.3px;">Daily Calendar</div>
             <div style="display: inline-flex; background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255,255,255,0.08); border-radius: 999px; padding: 3px; gap: 4px;">
                 <button onclick="window.showCalendar('activities')" style="${tab === 'activities' ? 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 6px rgba(52,152,219,0.35);' : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;'} border-radius: 999px; padding: 5px 14px; font-weight: 600; cursor: pointer; font-size: 13px; transition: all 0.2s; display: inline-flex; align-items: center; gap: 6px;">
                     Activities${showActivityDot ? '<span style="width: 7px; height: 7px; border-radius: 50%; background: #2ecc71; display: inline-block;"></span>' : ''}
                 </button>
                 <button onclick="window.showCalendar('shop')" style="${tab === 'shop' ? 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 6px rgba(52,152,219,0.35);' : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;'} border-radius: 999px; padding: 5px 14px; font-weight: 600; cursor: pointer; font-size: 13px; transition: all 0.2s;">Shop</button>
-            </div>
-            <div style="display: inline-flex; align-items: center; gap: 6px; background: rgba(0, 0, 0, 0.35); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 999px; padding: 4px 11px; font-size: 13px; font-weight: 700; color: #fde047;" title="Daily Tokens">
-                <img src="Assets/Extra/Token.png" style="width: 18px; height: 18px;">
-                <span>${tokenCount}</span>
             </div>
         </div>
     `;
@@ -544,7 +538,7 @@ export function showCalendar(tab = 'activities') {
                 <div class="cal-day-items">
                     ${itemsHtml}
                 </div>
-                ${statusBadge}
+                ${statusBadge || '<div class="cal-badge" style="visibility: hidden;">&nbsp;</div>'}
             </div>
         `;
     }
