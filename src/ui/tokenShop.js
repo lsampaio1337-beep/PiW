@@ -180,7 +180,7 @@ function renderCategory(title, items) {
     if (items.length === 0) return '';
     let html = `
         <div style="display: flex; flex-direction: column; width: 100%; margin-bottom: 20px;">
-            <div style="font-size: 18px; font-weight: bold; color: #f1c40f; margin-bottom: 10px; border-bottom: 1px solid #f1c40f; padding-bottom: 5px;">${title}</div>
+            <div style="font-size: 18px; font-weight: bold; color: #ffffff; margin-bottom: 10px; border-bottom: 1px solid rgba(255, 255, 255, 0.35); padding-bottom: 5px;">${title}</div>
             <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; justify-content: center; width: 100%;">
     `;
     items.forEach(item => {
@@ -315,7 +315,7 @@ window.showTokenItemSelect = function(itemType) {
     overlay.style.cssText = 'position: absolute; inset: 0; background: rgba(15, 23, 42, 0.94); z-index: 50; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 16px; box-sizing: border-box; border-radius: 6px;';
 
     let gridHtml = `
-        <div style="font-size: 18px; font-weight: bold; color: #f1c40f; margin-bottom: 4px;">${title}</div>
+        <div style="font-size: 18px; font-weight: bold; color: #ffffff; margin-bottom: 4px;">${title}</div>
         <div style="font-size: 13px; color: #cbd5e1; margin-bottom: 14px;">Cost: 2 Tokens</div>
         <div style="display: grid; grid-template-columns: repeat(${gridCols}, 1fr); gap: 8px; width: 100%; max-width: ${gridCols === 6 ? '700px' : '420px'};">
     `;
