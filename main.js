@@ -113,7 +113,11 @@ function applyIconLocation(location) {
         if (process.platform === 'win32' && wasVisible) {
             mainWin.hide();
             mainWin.setSkipTaskbar(useTray);
-            mainWin.show();
+            setTimeout(() => {
+                if (mainWin && !mainWin.isDestroyed()) {
+                    mainWin.show();
+                }
+            }, 50);
         } else {
             mainWin.setSkipTaskbar(useTray);
         }
