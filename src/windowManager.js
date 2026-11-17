@@ -483,17 +483,9 @@ export class WindowManager {
                     winElement.dataset.settingsLoaded = 'true';
                     if (window.state && window.state.settings && window.state.settings.windowSettings && window.state.settings.windowSettings[windowId]) {
                         const savedSettings = window.state.settings.windowSettings[windowId];
-                        if (windowId === 'party-window' || windowId === 'main-control-window') {
+                        if (windowId === 'party-window') {
                             delete savedSettings.width;
                             delete savedSettings.height;
-                            winElement.style.width = windowId === 'party-window' ? '224px' : 'auto';
-                            winElement.style.height = 'auto';
-                            if (typeof winElement.resetResizeDims === 'function') {
-                                winElement.resetResizeDims();
-                            }
-                            if (windowId === 'main-control-window') {
-                                setTimeout(() => this.autoAdjustWidth(windowId), 100);
-                            }
                         } else {
                             if (savedSettings.width) winElement.style.width = savedSettings.width;
                             if (savedSettings.height) winElement.style.height = savedSettings.height;

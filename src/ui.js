@@ -1642,12 +1642,12 @@ function _createStarterPokemon(pData) {
 }
 
 function _refreshPartyWindowHeight(partyWindow) {
+    updateTeamWindow();
     if (partyWindow && window.windowManager) {
         if (typeof partyWindow.adjustHeightForNewContent === 'function') {
             partyWindow.adjustHeightForNewContent();
         }
     }
-    updateTeamWindow();
 }
 
 function _initializeInitialRoutes(id) {
