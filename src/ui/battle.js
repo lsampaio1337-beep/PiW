@@ -2,7 +2,7 @@ import { VITAMINS } from "../constants.js";
 import { TYPE_COLORS } from '../ui.js';
 import { state, globals } from '../state.js';
 import { getCapacity } from '../mathEngine.js';
-import { getTrimmedSpriteUrl, precacheRouteSprites } from '../utils/sprites.js';
+import { getTrimmedSpriteUrl, precacheRouteSprites, getCachedTrimmedSpriteUrl, getSpriteUrl, trimAndCacheSprite } from '../utils/sprites.js';
 
 let lastPrecachedRoute = null;
 
@@ -516,6 +516,49 @@ export function getTargetSpriteHeight(pokemonId, spriteSizes) {
     return Math.max(BATTLE_SPRITE_MIN_HEIGHT, Math.round(rawSize * BATTLE_SPRITE_SCALE));
 }
 
+function applyTrimmedPokemonSprite(pokemonSprite, pokemonId, isShiny, isPlayer) {
+    const spriteKey = `${pokemonId}:${isShiny ? 1 : 0}:${isPlayer ? 1 : 0}`;
+    const cachedUrl = typeof getCachedTrimmedSpriteUrl === 'function'
+        ? getCachedTrimmedSpriteUrl(pokemonId, isShiny, isPlayer)
+        : getTrimmedSpriteUrl(pokemonId, isShiny, isPlayer);
+
+    if (cachedUrl) {
+        pokemonSprite.dataset.spriteKey = spriteKey;
+        delete pokemonSprite.dataset.loadingSpriteKey;
+        if (pokemonSprite.getAttribute('src') !== cachedUrl) {
+            pokemonSprite.src = cachedUrl;
+        }
+        pokemonSprite.style.visibility = '';
+        return;
+    }
+
+    const naturalUrl = typeof getSpriteUrl === 'function' ? getSpriteUrl(pokemonId, isShiny) : '';
+    if (!naturalUrl || typeof trimAndCacheSprite !== 'function') {
+        pokemonSprite.dataset.spriteKey = spriteKey;
+        delete pokemonSprite.dataset.loadingSpriteKey;
+        pokemonSprite.style.visibility = '';
+        return;
+    }
+
+    // Keep sprite hidden until transparent padding is trimmed so it never renders tiny and jumps in size.
+    if (pokemonSprite.dataset.spriteKey !== spriteKey) {
+        pokemonSprite.dataset.spriteKey = spriteKey;
+        pokemonSprite.style.visibility = 'hidden';
+    }
+
+    if (pokemonSprite.dataset.loadingSpriteKey === spriteKey) return;
+    pokemonSprite.dataset.loadingSpriteKey = spriteKey;
+
+    trimAndCacheSprite(naturalUrl, isPlayer).then((resolvedUrl) => {
+        if (pokemonSprite.dataset.spriteKey !== spriteKey) return;
+        delete pokemonSprite.dataset.loadingSpriteKey;
+        if (resolvedUrl && pokemonSprite.getAttribute('src') !== resolvedUrl) {
+            pokemonSprite.src = resolvedUrl;
+        }
+        pokemonSprite.style.visibility = '';
+    });
+}
+
 function updatePokemonSpriteUI(spriteWrapper, pokemonSprite, pokemon, battleSystem, isPlayer, shouldAnimateSliding) {
     if (!spriteWrapper || !pokemonSprite) return;
 
@@ -526,14 +569,11 @@ function updatePokemonSpriteUI(spriteWrapper, pokemonSprite, pokemon, battleSyst
 
     const pokemonId = pokemon.isDisguisedDitto ? 132 : pokemon.id;
     const isShiny = pokemon.qualityName === 'Shiny';
-    const newSrc = getTrimmedSpriteUrl(pokemonId, isShiny, isPlayer);
-    if (newSrc && pokemonSprite.getAttribute('src') !== newSrc) {
-        pokemonSprite.src = newSrc;
-    }
-
     const targetHeight = getTargetSpriteHeight(pokemonId, state.config?.spriteSizes);
     pokemonSprite.style.height = `${targetHeight}px`;
     pokemonSprite.style.width = 'auto';
+
+    applyTrimmedPokemonSprite(pokemonSprite, pokemonId, isShiny, isPlayer);
 
     pokemonSprite.classList.toggle('is-player', Boolean(isPlayer));
     pokemonSprite.style.transform = '';
