@@ -571,7 +571,21 @@ if (req.catchSpeciesByQuality) {
         }
 
     }
-        if (window.updateUI) window.updateUI();
+    // Auto-collect any pending gym/badge gifts so the challenge can be claimed immediately
+    if (state.stats.pendingGifts && state.stats.pendingGifts.length > 0 && typeof window.claimPendingGift === 'function') {
+        const giftWin = document.getElementById('window-gifts');
+        const wasGiftOpen = giftWin && giftWin.style.display !== 'none';
+        for (let i = state.stats.pendingGifts.length - 1; i >= 0; i--) {
+            if (state.stats.pendingGifts[i] && state.stats.pendingGifts[i].type === 'badge') {
+                window.claimPendingGift(i);
+            }
+        }
+        if (!wasGiftOpen && window.windowManager) {
+            window.windowManager.closeDynamicWindow('window-gifts');
+        }
+    }
+
+    if (window.updateUI) window.updateUI();
     const challengeWinCheat = document.getElementById('window-challenges');
     if (challengeWinCheat && challengeWinCheat.style.display !== 'none') {
         window.showChallengesModal(); // refresh modal
@@ -583,7 +597,7 @@ if (req.catchSpeciesByQuality) {
     setTimeout(() => {
         const modal = document.getElementById('window-challenges');
         if (modal) {
-            const completeBtns = Array.from(modal.querySelectorAll('button')).filter(btn => btn.innerText.includes('Complete'));
+            const completeBtns = Array.from(modal.querySelectorAll('button')).filter(btn => btn.classList.contains('pc-btn-complete') || btn.innerText.includes('Claim') || btn.innerText.includes('Complete'));
             if (completeBtns.length > 0) {
                 // Find the specific complete button for this area
                 const safeAreaId = targetAreaId.replace(/'/g, "\\'");
@@ -596,168 +610,221 @@ if (req.catchSpeciesByQuality) {
 
 };
 
+function buildRewardPills(unlock) {
+    let pills = [];
+    if (unlock.unlocks && unlock.unlocks.length > 0) {
+        for (let area of unlock.unlocks) {
+            pills.push(`<span class="pc-reward-pill">🗺️ ${area}</span>`);
+        }
+    }
+    if (unlock.gift || unlock.gifts) {
+        pills.push(`<span class="pc-reward-pill is-gift">🎁 Gift</span>`);
+    }
+    if (pills.length === 0) {
+        pills.push(`<span class="pc-reward-pill">🗺️ Next Area</span>`);
+    }
+    return pills.join('');
+}
+
+window.togglePastChallenges = function() {
+    const list = document.getElementById('pc-past-challenges-list');
+    const btn = document.getElementById('pc-past-toggle-btn');
+    if (!list || !btn) return;
+    const isHidden = list.style.display === 'none';
+    list.style.display = isHidden ? 'flex' : 'none';
+    btn.textContent = isHidden ? 'Hide' : 'Show';
+};
+
 window.showChallengesModal = function() {
-    if (!window.getCurrentUnlocks()) return;
+    const unlocks = window.getCurrentUnlocks();
+    if (!unlocks) return;
 
-    let html = `<div id="challenges-content-wrapper" class="content-panel" style="display:flex; flex-direction:column; gap:15px; text-align:left;">`;
+    const regionName = state.currentRegionName || "Kanto";
+    const activeChallenges = state.stats.activeChallenges || [];
+    const activeChallengesCount = activeChallenges.length;
 
-    // Active Challenges Sector
-    let activeChallengesCount = state.stats.activeChallenges ? state.stats.activeChallenges.length : 0;
+    let actualCompletedIds = [];
+    if (state.stats.completedChallengeIds) {
+        const unlockSet = new Set(unlocks.map(u => u.areaId));
+        actualCompletedIds = state.stats.completedChallengeIds.filter(id => unlockSet.has(id));
+    }
+    const completedCount = actualCompletedIds.length;
+    const totalCount = unlocks.length;
+    const overallPct = totalCount > 0 ? Math.min(100, Math.round((completedCount / totalCount) * 100)) : 0;
 
-    html += `<div style="border: 1px solid #555; padding: 10px; border-radius: 5px; background-color: rgba(0,0,0,0.5);">
-                <h3 style="margin-top: 0; margin-bottom: 10px; border-bottom: 1px solid #444; padding-bottom: 5px; font-size: 16px;">${activeChallengesCount > 1 ? 'Active Challenges' : 'Active Challenge'}</h3>
-                <div style="display: flex; flex-direction: column; gap: 15px;">`;
-
-    // The 150 Challenge should only appear if the Final Challenge (Pokemon League) has been completed
-
-
-
-    if (activeChallengesCount === 0) {
-        html += `<div style="text-align: center; font-size: 16px; color: #aaa;">No active Challenge</div>`;
+    let readyCount = 0;
+    const activeCardsData = [];
+    for (let activeId of activeChallenges) {
+        let unlock = unlocks.find(u => u.areaId === activeId);
+        if (!unlock) continue;
+        let cData = getChallengeData(unlock);
+        if (cData.isMet) readyCount++;
+        activeCardsData.push({ unlock, cData });
     }
 
+    let html = `<div id="challenges-content-wrapper" class="content-panel pc-wrapper">`;
 
+    // Regional Summary Banner
+    html += `<div class="pc-summary-bar">
+                <div class="pc-summary-stats">
+                    <span class="pc-summary-title">${regionName} Progress</span>
+                    <span class="pc-summary-pill">🏆 ${completedCount} / ${totalCount} Completed</span>`;
+    if (readyCount > 0) {
+        html += `<span class="pc-summary-pill is-ready">✨ ${readyCount} Claim</span>`;
+    }
+    html += `   </div>
+                <div class="pc-summary-progress">
+                    <div class="pc-summary-progress-label">
+                        <span>Region Completion</span>
+                        <span>${overallPct}%</span>
+                    </div>
+                    <div class="pc-progress-track">
+                        <div class="pc-progress-fill ${overallPct === 100 ? 'is-met' : ''}" style="width: ${overallPct}%;"></div>
+                    </div>
+                </div>
+             </div>`;
 
-    if (activeChallengesCount > 0) {
-        for (let activeId of state.stats.activeChallenges) {
-            let unlock = window.getCurrentUnlocks().find(u => u.areaId === activeId);
-            if (!unlock) continue;
+    // Active Challenges Sector
+    html += `<div class="pc-section">
+                <div class="pc-section-header">
+                    <h3 class="pc-section-title">${activeChallengesCount > 1 ? 'Active Challenges' : 'Active Challenge'} <span class="pc-count-badge">${activeChallengesCount}</span></h3>
+                </div>
+                <div class="pc-cards-list">`;
 
-            let cData = getChallengeData(unlock);
+    if (activeCardsData.length === 0) {
+        html += `<div class="pc-empty-state">
+                    <div class="pc-empty-icon">🏆</div>
+                    <div class="pc-empty-title">All Challenges Completed!</div>
+                    <div class="pc-empty-sub">Your next goal is to earn all regional Medals.</div>
+                 </div>`;
+    } else {
+        for (let { unlock, cData } of activeCardsData) {
             let isExtra = unlock.challengeName && unlock.challengeName.includes("Extra");
-            let rewardsStr = "";
-            if (unlock.unlocks && unlock.unlocks.length > 0) {
-                rewardsStr = "Unlocks " + unlock.unlocks.join(" + ");
-            }
-            if (unlock.gift || unlock.gifts) {
-                if (rewardsStr) {
-                    rewardsStr += " + Gift";
-                } else {
-                    rewardsStr = "Gift";
-                }
-            }
-            if (!rewardsStr) rewardsStr = "Unlocks Next Area";
-
             let displayName = unlock.challengeName || (isExtra ? 'Extra Challenge - ' + unlock.areaId : 'Challenge - ' + unlock.areaId);
-
-            html += `<div style="border: 1px solid #333; padding: 10px; border-radius: 5px; background-color: rgba(255,255,255,0.05);">
-                        <div style="color: ${isExtra ? '#ff9800' : '#4CAF50'}; font-weight: bold; margin-bottom: 5px;">${displayName}</div>`;
-
-            html += `<div style="margin-bottom: 5px;"><b>Requirements:</b></div>
-                     <ul style="margin-top: 0; padding-left: 20px;">`;
-
-            for (let part of cData.textParts) {
-                html += `<li>${part}</li>`;
-            }
-
-            html += `</ul>
-                     <div style="margin-top: 10px; color: #4CAF50;"><b>Rewards:</b> ${rewardsStr}</div>`;
-
+            let cardClasses = `pc-card${isExtra ? ' is-extra' : ''}${cData.isMet ? ' is-ready' : ''}`;
             let safeAreaId = unlock.areaId.replace(/'/g, "\\'");
             const attrAreaId = unlock.areaId.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 
-            html += `<div style="text-align: center; margin-top: 15px; display: flex; justify-content: center; gap: 10px;">
-                         <button onclick="window.cheatProgressChallenge('${safeAreaId}')" style="padding: 10px 20px; font-size: 16px; font-weight: bold; background-color: orange; color: white; border: none; border-radius: 5px; cursor: pointer;">Cheat Progress</button>`;
-
+            let headerActions = `<button class="pc-btn-cheat" onclick="window.cheatProgressChallenge('${safeAreaId}')">Cheat</button>`;
             if (cData.isMet) {
-                 html += `<button data-area-id="${attrAreaId}" onclick="window.completeChallenge('${safeAreaId}')" style="padding: 10px 20px; font-size: 16px; font-weight: bold; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;">Complete ✔️</button>`;
+                headerActions += `<button class="pc-btn-complete" data-area-id="${attrAreaId}" onclick="window.completeChallenge('${safeAreaId}')">Claim ✔️</button>`;
+            } else {
+                headerActions += `<span class="pc-status-badge">In Progress</span>`;
             }
-            html += `</div></div>`;
+
+            html += `<div class="${cardClasses}">
+                        <div class="pc-card-header">
+                            <div class="pc-card-title-group">
+                                <span class="pc-type-tag">${isExtra ? 'Extra' : 'Main'}</span>
+                                <span class="pc-card-title">${displayName}</span>
+                                <span class="pc-inline-rewards">${buildRewardPills(unlock)}</span>
+                            </div>
+                            <div class="pc-header-actions">
+                                ${headerActions}
+                            </div>
+                        </div>`;
+
+            html += `<ul class="pc-req-list">`;
+            const progressList = cData.progressList || [];
+            for (let idx = 0; idx < cData.textParts.length; idx++) {
+                const part = cData.textParts[idx];
+                const prog = progressList[idx];
+                const isReqMet = prog ? prog.isMet : false;
+                let barHtml = '';
+                if (prog && typeof prog.required === 'number' && prog.required > 0) {
+                    const currentVal = Math.min(prog.current || 0, prog.required);
+                    const pct = Math.min(100, Math.round((currentVal / prog.required) * 100));
+                    barHtml = `<div class="pc-progress-track">
+                                   <div class="pc-progress-fill ${isReqMet ? 'is-met' : ''}" style="width: ${pct}%;"></div>
+                               </div>`;
+                }
+                html += `<li class="pc-req-item ${isReqMet ? 'is-met' : ''}">
+                            <div class="pc-req-top">
+                                <span class="pc-req-text">${part}</span>
+                            </div>
+                            ${barHtml}
+                         </li>`;
+            }
+            html += `</ul></div>`;
         }
     }
 
     html += `</div></div>`;
 
     // Past Challenges Sector
-    let actualCompletedIds = [];
-    let completedCount = 0;
-    if (state.stats.completedChallengeIds) {
-        const unlocks = window.getCurrentUnlocks();
-        if (unlocks) {
-            const unlockSet = new Set(unlocks.map(u => u.areaId));
-            actualCompletedIds = state.stats.completedChallengeIds.filter(id => unlockSet.has(id));
-        } else {
-            actualCompletedIds = state.stats.completedChallengeIds;
-        }
-        completedCount = actualCompletedIds.length;
-    }
-
-
-
     if (completedCount > 0) {
         let pastTitle = completedCount === 1 ? "Past Challenge" : "Past Challenges";
-        html += `<div style="border: 1px solid #555; padding: 10px; border-radius: 5px; background-color: rgba(0,0,0,0.5);">
-                    <h3 style="margin-top: 0; margin-bottom: 10px; border-bottom: 1px solid #444; padding-bottom: 5px; font-size: 16px;">${pastTitle}</h3>
-                    <div style="display: flex; flex-direction: column; gap: 10px;">`;
-
-
-
+        const defaultCollapsed = activeCardsData.length > 0;
+        html += `<div class="pc-section">
+                    <div class="pc-section-header">
+                        <h3 class="pc-section-title">${pastTitle} <span class="pc-count-badge">${completedCount}</span></h3>
+                        <button id="pc-past-toggle-btn" class="pc-toggle-btn" onclick="window.togglePastChallenges()">${defaultCollapsed ? 'Show' : 'Hide'}</button>
+                    </div>
+                    <div id="pc-past-challenges-list" class="pc-cards-list" style="display: ${defaultCollapsed ? 'none' : 'flex'};">`;
 
         for (let i = actualCompletedIds.length - 1; i >= 0; i--) {
-             let completedId = actualCompletedIds[i];
-             let pUnlock = window.getCurrentUnlocks().find(u => u.areaId === completedId);
-             if (!pUnlock) continue;
+            let completedId = actualCompletedIds[i];
+            let pUnlock = unlocks.find(u => u.areaId === completedId);
+            if (!pUnlock) continue;
 
-             let isExtra = pUnlock.challengeName && pUnlock.challengeName.includes("Extra");
+            let isExtra = pUnlock.challengeName && pUnlock.challengeName.includes("Extra");
+            let pData = getChallengeData(pUnlock);
+            let displayName = pUnlock.challengeName || (isExtra ? 'Extra Challenge - ' + pUnlock.areaId : 'Challenge - ' + pUnlock.areaId);
 
-             // Fake the data slightly to make it look completed, though getChallengeData will naturally evaluate to true
-             let pData = getChallengeData(pUnlock);
-
-
-             let pRewards = "";
-             if (pUnlock.unlocks && pUnlock.unlocks.length > 0) {
-                 pRewards = "Unlocks " + pUnlock.unlocks.join(" + ");
-             }
-             if (pUnlock.gift || pUnlock.gifts) {
-                 if (pRewards) {
-                     pRewards += " + Gift";
-                 } else {
-                     pRewards = "Gift";
-                 }
-             }
-             if (!pRewards) pRewards = "Unlocks Next Area"; // Fallback if somehow both missing
-
-
-             let displayName = pUnlock.challengeName || (isExtra ? 'Extra Challenge - ' + pUnlock.areaId : 'Challenge - ' + pUnlock.areaId);
-
-             html += `<div style="border: 1px solid #333; padding: 10px; border-radius: 5px; background-color: rgba(255,255,255,0.05);">
-                          <div style="color: ${isExtra ? '#ff9800' : '#4CAF50'}; font-weight: bold; margin-bottom: 5px;">${displayName}</div>
-                          <ul style="margin-top: 0; margin-bottom: 5px; padding-left: 20px; font-size: 14px;">`;
-             for (let part of pData.textParts) {
-                  // Ensure we show them as complete using words
-
-                  // For past challenges, ensure they look complete and numbers match max requirements
-                  // The text might look like "Defeat 25 Pokémon on Route 1 (0/25)"
-                  // We extract the required count and force it to say (25/25) [Complete]
-                  part = part.replace(/\(\d+\/(\d+)\)/, (match, p1) => `(${p1}/${p1})`);
-                  if (!part.includes("[Complete]")) {
-                       part += ` <span style="color: green;">[Complete]</span>`;
-                  }
-                  part = part.replace(/color: red/g, 'color: green');
-
-                  html += `<li>${part}</li>`;
-             }
-             html += `</ul>
-                      <div style="font-size: 14px; color: #4CAF50;"><b>Rewards:</b> ${pRewards}</div>
-                      </div>`;
+            html += `<div class="pc-card is-past ${isExtra ? 'is-extra' : ''}">
+                        <div class="pc-card-header">
+                            <div class="pc-card-title-group">
+                                <span class="pc-type-tag">${isExtra ? 'Extra' : 'Main'}</span>
+                                <span class="pc-card-title">${displayName}</span>
+                            </div>
+                            <span class="pc-status-badge is-done">Completed</span>
+                        </div>
+                        <ul class="pc-req-list">`;
+            for (let part of pData.textParts) {
+                part = part.replace(/\(\d+\/(\d+)\)/, (match, p1) => `(${p1}/${p1})`);
+                if (!part.includes("[Complete]")) {
+                    part += ` <span style="color: #4ade80;">[Complete]</span>`;
+                }
+                part = part.replace(/color: red/g, 'color: #4ade80');
+                html += `<li class="pc-req-item is-met">
+                            <div class="pc-req-top">
+                                <span class="pc-req-text">${part}</span>
+                            </div>
+                         </li>`;
+            }
+            html += `</ul>
+                     <div class="pc-rewards-row">
+                        <span class="pc-rewards-label">Rewards</span>
+                        ${buildRewardPills(pUnlock)}
+                     </div>
+                     </div>`;
         }
         html += `</div></div>`;
     }
 
     html += `</div>`;
 
-    showModal("Progress Challenges", html, "window-challenges", "1000px");
+    showModal("Progress Challenges", html, "window-challenges", "800px");
     const win = document.getElementById("window-challenges");
     if (win) {
-        // We handle the max height natively in windowManager now, so remove the strict CSS limit
-        win.style.maxHeight = '';
-
-        if (window.windowManager) window.windowManager.setWindowProportions('window-challenges', 1.0);
-
-        // Ensure the content container scrolls if it overflows
+        win.style.maxHeight = '80vh';
         const contentContainer = win.querySelector('.window-content-container');
         if (contentContainer) {
             contentContainer.style.overflowY = 'auto';
+        }
+        // Clear any corrupted saved dimensions for window-challenges
+        if (state.settings?.windowSettings?.['window-challenges']) {
+            const saved = state.settings.windowSettings['window-challenges'];
+            const sw = parseInt(saved.width, 10);
+            const sh = parseInt(saved.height, 10);
+            if (!sw || sw < 300 || !sh || sh < 200) {
+                delete state.settings.windowSettings['window-challenges'];
+                win.style.width = '800px';
+                win.style.height = 'auto';
+                if (window.windowManager) {
+                    window.windowManager.recalculateWindowSize('window-challenges');
+                }
+            }
         }
     }
 };
@@ -1968,29 +2035,42 @@ async function init() {
     };
     window.startNewGame = startNewGame;
 
-    // Filter corrupted/empty profiles and map them to their data
-    let validProfiles = profiles
-        .map(id => ({ id, data: storage.getProfileData(id) }))
-        .filter(p => p.data !== null);
+    const regions = ['Kanto', 'Johto', 'Hoenn', 'Sinnoh', 'Unova', 'Kalos', 'Alola', 'Galar', 'Hisui', 'Paldea'];
+    const regionPokemonMap = new Map();
+    if (typeof state !== 'undefined' && state && state.config && state.config.pokemonData) {
+        regions.forEach(region => {
+            const regionKey = region.toLowerCase() + '_id';
+            regionPokemonMap.set(
+                region,
+                state.config.pokemonData.filter(p => Boolean(p[regionKey])).map(p => p.name)
+            );
+        });
+    }
 
-    // Sort descending by lastPlayed so newest is always on top
-    validProfiles.sort((a, b) => {
-        const timeA = a.data.lastPlayed || 0;
-        const timeB = b.data.lastPlayed || 0;
-        return timeB - timeA;
-    });
+    const renderProfilesList = () => {
+        const currentProfiles = storage.getProfiles();
+        const mappedProfiles = currentProfiles.map(id => ({ id, data: storage.getProfileData(id) }));
 
-    if (validProfiles.length > 0 && saveManagerModal && splashScreen) {
+        // Sort descending by lastPlayed so newest is always on top; corrupted saves at the bottom
+        mappedProfiles.sort((a, b) => {
+            const timeA = a.data ? (a.data.lastPlayed || 0) : -1;
+            const timeB = b.data ? (b.data.lastPlayed || 0) : -1;
+            return timeB - timeA;
+        });
+
+        if (mappedProfiles.length === 0 || !saveManagerModal || !splashScreen) {
+            if (profilesContainer) profilesContainer.innerHTML = '';
+            return;
+        }
+
         splashScreen.style.display = 'flex';
-        if (saveManagerModal) saveManagerModal.style.display = 'flex';
-
+        saveManagerModal.style.display = 'flex';
         profilesContainer.innerHTML = ''; // clear
 
         let profileAction = 'load';
 
         // Variables to hold pending rename state
         let pendingRenameId = null;
-        let pendingRenameData = null;
 
         const renameModal = document.getElementById('rename-modal');
         const renameInput = document.getElementById('rename-input');
@@ -2010,7 +2090,6 @@ async function init() {
             btnRenameCancel.onclick = () => {
                 if (renameModal) renameModal.style.display = 'none';
                 pendingRenameId = null;
-                pendingRenameData = null;
                 profileAction = 'load';
                 updateHeader();
             };
@@ -2032,9 +2111,47 @@ async function init() {
             }
         };
 
-        validProfiles.forEach((profileObj, index) => {
+        mappedProfiles.forEach((profileObj, index) => {
             const profileId = profileObj.id;
             const pData = profileObj.data;
+
+            if (!pData) {
+                const corruptCard = document.createElement('div');
+                corruptCard.style.display = "flex";
+                corruptCard.style.alignItems = "center";
+                corruptCard.style.justifyContent = "space-between";
+                corruptCard.style.width = "64%";
+                corruptCard.style.padding = "10px 22px";
+                corruptCard.style.backgroundColor = "#7f1d1d";
+                corruptCard.style.color = "white";
+                corruptCard.style.border = "4px solid black";
+                corruptCard.style.borderRadius = "9999px";
+                corruptCard.style.fontWeight = "bold";
+
+                const label = document.createElement('span');
+                label.textContent = `Corrupted Save (${profileId})`;
+
+                const delBtn = document.createElement('button');
+                delBtn.textContent = "Delete";
+                delBtn.style.cursor = "pointer";
+                delBtn.style.padding = "4px 12px";
+                delBtn.style.borderRadius = "9999px";
+                delBtn.style.border = "2px solid black";
+                delBtn.style.backgroundColor = "#ef4444";
+                delBtn.style.color = "white";
+                delBtn.style.fontWeight = "bold";
+                delBtn.onclick = () => {
+                    if (confirm(`Delete corrupted save "${profileId}"?`)) {
+                        storage.deleteProfile(profileId);
+                        renderProfilesList();
+                    }
+                };
+
+                corruptCard.appendChild(label);
+                corruptCard.appendChild(delBtn);
+                profilesContainer.appendChild(corruptCard);
+                return;
+            }
 
             // Format playtime
             let playtimeStr = "0h 0m 0s";
@@ -2178,7 +2295,6 @@ async function init() {
             btn.appendChild(textWrapper);
 
             // Add Medals Container on the second row
-            const regions = ['Kanto', 'Johto', 'Hoenn', 'Sinnoh', 'Unova', 'Kalos', 'Alola', 'Galar', 'Hisui', 'Paldea'];
             const medalsContainer = document.createElement('div');
             medalsContainer.className = 'profile-medals-container';
 
@@ -2186,12 +2302,12 @@ async function init() {
 
             regions.forEach(region => {
                 let activeTier = null;
+                const regionSpecies = regionPokemonMap.get(region);
 
-                // On profile load, state.config is available.
-                if (typeof state !== 'undefined' && state && state.config && state.config.pokemonData) {
+                if (regionSpecies && regionSpecies.length > 0) {
                     let caughtCount = 0;
                     let shinyCount = 0;
-                    let totalInRegion = 0;
+                    const totalInRegion = regionSpecies.length;
 
                     let regionalStats;
                     if (pData.currentRegionName === region) {
@@ -2203,20 +2319,16 @@ async function init() {
                         regionalStats = pData.stats;
                     }
 
-                    const regionKey = region.toLowerCase() + '_id';
-                    state.config.pokemonData.forEach(p => {
-                        if (p[regionKey]) {
-                            totalInRegion++;
-                            if (regionalStats) {
-                                if (regionalStats.caughtSpecies && regionalStats.caughtSpecies[p.name]) {
-                                    caughtCount++;
-                                }
-                                if (regionalStats.caughtShiniesSpecies && regionalStats.caughtShiniesSpecies[p.name]) {
-                                    shinyCount++;
-                                }
+                    if (regionalStats) {
+                        for (const speciesName of regionSpecies) {
+                            if (regionalStats.caughtSpecies && regionalStats.caughtSpecies[speciesName]) {
+                                caughtCount++;
+                            }
+                            if (regionalStats.caughtShiniesSpecies && regionalStats.caughtShiniesSpecies[speciesName]) {
+                                shinyCount++;
                             }
                         }
-                    });
+                    }
 
                     const hasFirst = caughtCount > 0;
                     const hasSecond = totalInRegion > 0 && caughtCount >= totalInRegion;
@@ -2278,14 +2390,13 @@ async function init() {
                 if (profileAction === 'rename') {
                     if (renameModal && renameInput) {
                         pendingRenameId = profileId;
-                        pendingRenameData = pData;
                         renameInput.value = profileName;
                         renameModal.style.display = 'flex';
                     }
                 } else if (profileAction === 'delete') {
                     if (confirm(`Are you sure you want to delete "${profileName}"? This cannot be undone.`)) {
                         storage.deleteProfile(profileId);
-                        window.location.reload();
+                        renderProfilesList();
                     }
                     profileAction = 'load';
                     updateHeader();
@@ -2379,10 +2490,8 @@ async function init() {
             updateHeader();
         };
 
-    } else {
-        if (splashScreen) splashScreen.style.display = 'flex';
-        if (saveManagerModal) saveManagerModal.style.display = 'flex';
-    }
+    };
+    renderProfilesList();
 
     // Bind buttons (they might be missing if bypass Professor Lab)
     const btnBulbasaur = document.getElementById('choose-bulbasaur');
