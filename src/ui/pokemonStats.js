@@ -244,13 +244,15 @@ export function showPokemonStats(idx, location) {
                 ${individualHtml}
                 ${collectiveHtml}
             </div>
-            <div id="pokemon-vitamins-inner-window" onclick="event.stopPropagation()" class="floating-window" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 500px; max-width: 95%; height: auto; max-height: 90%; flex-direction: column; z-index: 10; display: none; overflow: hidden;">
-                <div class="window-header" style="position: relative; cursor: default;">
-                    <span id="pokemon-vitamins-inner-title">Vitamins</span>
-                    <span onclick="window.closeVitaminsInnerWindow()" style="position: absolute; top: 5px; right: 5px; font-size: 12px; font-weight: bold; line-height: 1; padding: 0; cursor: pointer; color: white;">X</span>
-                </div>
-                <div class="window-content-container" style="flex: 1; overflow-y: auto;">
-                    <div id="pokemon-vitamins-inner-content" style="padding: 15px; box-sizing: border-box; width: 100%;"></div>
+            <div id="pokemon-vitamins-inner-overlay" onclick="if(event.target === this) window.closeVitaminsInnerWindow()" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.75); z-index: 10; align-items: center; justify-content: center;">
+                <div id="pokemon-vitamins-inner-window" onclick="event.stopPropagation()" class="floating-window" style="position: relative; width: 500px; max-width: 95%; height: auto; max-height: 90%; flex-direction: column; display: none; overflow: hidden;">
+                    <div class="window-header" style="position: relative; cursor: default;">
+                        <span id="pokemon-vitamins-inner-title">Vitamins</span>
+                        <span onclick="window.closeVitaminsInnerWindow()" style="position: absolute; top: 5px; right: 5px; font-size: 12px; font-weight: bold; line-height: 1; padding: 0; cursor: pointer; color: white;">X</span>
+                    </div>
+                    <div class="window-content-container" style="flex: 1; overflow-y: auto;">
+                        <div id="pokemon-vitamins-inner-content" style="padding: 15px; box-sizing: border-box; width: 100%;"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -362,6 +364,8 @@ export function evolvePokemon(location, idx, toId) {
 }
 
 window.closeVitaminsInnerWindow = function() {
+    const overlay = document.getElementById('pokemon-vitamins-inner-overlay');
+    if (overlay) overlay.style.display = 'none';
     const innerWin = document.getElementById('pokemon-vitamins-inner-window');
     if (innerWin) innerWin.style.display = 'none';
 };
@@ -389,12 +393,14 @@ window.showMultipleEvolveModal = function(location, idx) {
             <button onclick="window.closeVitaminsInnerWindow()" style="background: #e74c3c; color: white; border: none; border-radius: 8px; padding: 10px 14px; font-weight: bold; font-size: 14px; cursor: pointer; width: 70%;">No</button>
         </div>
     `;
+    const overlay = document.getElementById('pokemon-vitamins-inner-overlay');
     const innerWin = document.getElementById('pokemon-vitamins-inner-window');
     const innerTitle = document.getElementById('pokemon-vitamins-inner-title');
     const innerContent = document.getElementById('pokemon-vitamins-inner-content');
     if (innerWin && innerTitle && innerContent) {
         innerTitle.textContent = `Evolve ${p.name}`;
         innerContent.innerHTML = html;
+        if (overlay) overlay.style.display = 'flex';
         innerWin.style.display = 'flex';
     }
 };
@@ -421,12 +427,14 @@ window.showEvolveConfirmModal = function(location, idx, toId) {
         </div>
     `;
 
+    const overlay = document.getElementById('pokemon-vitamins-inner-overlay');
     const innerWin = document.getElementById('pokemon-vitamins-inner-window');
     const innerTitle = document.getElementById('pokemon-vitamins-inner-title');
     const innerContent = document.getElementById('pokemon-vitamins-inner-content');
     if (innerWin && innerTitle && innerContent) {
         innerTitle.textContent = `Evolve ${p.name}`;
         innerContent.innerHTML = html;
+        if (overlay) overlay.style.display = 'flex';
         innerWin.style.display = 'flex';
     }
 };
@@ -480,12 +488,14 @@ window.showVitaminsModal = function(location, idx) {
         </div>
     `;
 
+    const overlay = document.getElementById('pokemon-vitamins-inner-overlay');
     const innerWin = document.getElementById('pokemon-vitamins-inner-window');
     const innerTitle = document.getElementById('pokemon-vitamins-inner-title');
     const innerContent = document.getElementById('pokemon-vitamins-inner-content');
     if (innerWin && innerTitle && innerContent) {
         innerTitle.textContent = `Vitamins for ${p.name}`;
         innerContent.innerHTML = html;
+        if (overlay) overlay.style.display = 'flex';
         innerWin.style.display = 'flex';
     } else {
         showModal(`Vitamins for ${escapeHTML(p.name)}`, html, "window-vitamins", "500px");
