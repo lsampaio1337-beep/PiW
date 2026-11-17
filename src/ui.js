@@ -2140,35 +2140,35 @@ async function init() {
             }
         };
 
+        const formatRelativeTime = (ts) => {
+            if (!ts) return "Unknown";
+            const diffSec = Math.max(0, Math.floor((Date.now() - ts) / 1000));
+            if (diffSec < 60) return "Just now";
+            const diffMin = Math.floor(diffSec / 60);
+            if (diffMin < 60) return `${diffMin}m ago`;
+            const diffHr = Math.floor(diffMin / 60);
+            if (diffHr < 24) return `${diffHr}h ago`;
+            const diffDay = Math.floor(diffHr / 24);
+            if (diffDay === 1) return "Yesterday";
+            if (diffDay < 30) return `${diffDay}d ago`;
+            const diffMo = Math.floor(diffDay / 30);
+            return `${diffMo}mo ago`;
+        };
+
         mappedProfiles.forEach((profileObj, index) => {
             const profileId = profileObj.id;
             const pData = profileObj.data;
 
             if (!pData) {
                 const corruptCard = document.createElement('div');
-                corruptCard.style.display = "flex";
-                corruptCard.style.alignItems = "center";
-                corruptCard.style.justifyContent = "space-between";
-                corruptCard.style.width = "64%";
-                corruptCard.style.padding = "10px 22px";
-                corruptCard.style.backgroundColor = "#7f1d1d";
-                corruptCard.style.color = "white";
-                corruptCard.style.border = "4px solid black";
-                corruptCard.style.borderRadius = "9999px";
-                corruptCard.style.fontWeight = "bold";
+                corruptCard.className = 'profile-corrupt-card';
 
                 const label = document.createElement('span');
                 label.textContent = `Corrupted Save (${profileId})`;
 
                 const delBtn = document.createElement('button');
+                delBtn.className = 'profile-corrupt-del-btn';
                 delBtn.textContent = "Delete";
-                delBtn.style.cursor = "pointer";
-                delBtn.style.padding = "4px 12px";
-                delBtn.style.borderRadius = "9999px";
-                delBtn.style.border = "2px solid black";
-                delBtn.style.backgroundColor = "#ef4444";
-                delBtn.style.color = "white";
-                delBtn.style.fontWeight = "bold";
                 delBtn.onclick = () => {
                     if (confirm(`Delete corrupted save "${profileId}"?`)) {
                         storage.deleteProfile(profileId);
@@ -2220,58 +2220,62 @@ async function init() {
             const profileName = pData.profileName || `Profile ${index + 1}`;
 
             const profileCard = document.createElement('div');
-            profileCard.style.display = "flex";
-            profileCard.style.flexDirection = "column";
-            profileCard.style.alignItems = "center";
-            profileCard.style.width = "max-content";
-            profileCard.style.minWidth = "78%";
+            profileCard.className = 'profile-card';
+
+            const cardRow = document.createElement('div');
+            cardRow.className = 'profile-card-row';
 
             const btn = document.createElement('button');
-            btn.className = 'action-btn-pill';
-            btn.style.padding = "10px 22px";
-            btn.style.fontSize = "16px";
-            btn.style.cursor = "pointer";
-            btn.style.backgroundColor = "#3498db"; // Blue Pill Button
-            btn.style.color = "white";
-            btn.style.border = "4px solid black";
-            btn.style.borderRadius = "9999px";
-            btn.style.textAlign = "left";
-            btn.style.fontWeight = "bold";
-            btn.style.width = "64%";
-            btn.style.position = "relative";
-            btn.style.zIndex = "1";
-            btn.style.flexDirection = "column";
+            btn.className = 'action-btn-pill profile-btn';
 
             const textWrapper = document.createElement('div');
-            textWrapper.style.display = "flex";
-            textWrapper.style.justifyContent = "space-between";
-            textWrapper.style.alignItems = "center";
-            textWrapper.style.width = "100%";
+            textWrapper.className = 'profile-text-wrapper';
 
             const leftSide = document.createElement('div');
-            leftSide.style.display = "flex";
-            leftSide.style.flexDirection = "column";
-            leftSide.style.alignItems = "flex-start";
+            leftSide.className = 'profile-left';
 
             const rightSide = document.createElement('div');
-            rightSide.style.display = "flex";
-            rightSide.style.flexDirection = "column";
-            rightSide.style.alignItems = "flex-end";
+            rightSide.className = 'profile-right';
+
+            const titleRow = document.createElement('div');
+            titleRow.className = 'profile-title-row';
 
             const titleDiv = document.createElement('div');
-            titleDiv.style.fontSize = "18px";
-            titleDiv.style.marginBottom = "5px";
-            titleDiv.style.fontWeight = "bold";
+            titleDiv.className = 'profile-title';
             titleDiv.textContent = `"${profileName}" - ${playtimeStr}`;
 
+            const regionBadge = document.createElement('span');
+            regionBadge.className = 'profile-region-badge';
+            regionBadge.textContent = pData.currentRegionName || 'Kanto';
+
+            titleRow.appendChild(titleDiv);
+            titleRow.appendChild(regionBadge);
+            leftSide.appendChild(titleRow);
+
+            // Party mini sprites preview
+            if (Array.isArray(pData.party) && pData.party.length > 0) {
+                const partyRow = document.createElement('div');
+                partyRow.className = 'profile-party-row';
+                pData.party.slice(0, 6).forEach(mon => {
+                    if (!mon || !mon.name) return;
+                    const sprite = document.createElement('img');
+                    sprite.className = 'profile-party-sprite';
+                    sprite.alt = mon.name;
+                    sprite.title = `${mon.name} (Lv.${mon.level || 1})`;
+                    const folder = mon.isShiny ? 'Shiny' : 'Normal';
+                    sprite.src = `Assets/Pokemon/${folder}/${mon.name}.png`;
+                    sprite.onerror = () => { sprite.style.display = 'none'; };
+                    partyRow.appendChild(sprite);
+                });
+                if (partyRow.children.length > 0) {
+                    leftSide.appendChild(partyRow);
+                }
+            }
+
             const playedDiv = document.createElement('div');
-            playedDiv.style.fontSize = "18px";
-            playedDiv.style.fontWeight = "bold";
-            playedDiv.style.marginBottom = "5px";
-            playedDiv.textContent = lastPlayedStr;
-
-
-            leftSide.appendChild(titleDiv);
+            playedDiv.className = 'profile-played';
+            playedDiv.textContent = pData.lastPlayed ? formatRelativeTime(pData.lastPlayed) : lastPlayedStr;
+            playedDiv.title = lastPlayedStr;
 
             rightSide.appendChild(playedDiv);
 
@@ -2282,11 +2286,7 @@ async function init() {
 
             // Add Medals Container on the second row
             const medalsContainer = document.createElement('div');
-            medalsContainer.style.display = "flex";
-            medalsContainer.style.flexWrap = "nowrap"; // Keep them in a single row
-            medalsContainer.style.justifyContent = "center";
-            medalsContainer.style.alignItems = "center";
-            medalsContainer.style.gap = "2px";
+            medalsContainer.className = 'profile-medals-container';
 
             let earnedAnyMedal = false;
 
@@ -2336,41 +2336,58 @@ async function init() {
                 if (activeTier) {
                     earnedAnyMedal = true;
                     const medalImg = document.createElement('img');
+                    medalImg.className = 'profile-medal-img';
                     medalImg.src = `Assets/Extra/Medals/${region} ${activeTier}.png`;
                     medalImg.alt = `${region} Medal`;
-                    medalImg.style.width = "auto";
-                    medalImg.style.height = "96px";
-                    medalImg.style.objectFit = "contain";
-                    medalImg.style.imageRendering = "pixelated";
+                    medalImg.title = `${region} (${activeTier} Medal)`;
                     medalImg.onerror = () => { medalImg.src = `Assets/Extra/Medals/Kanto ${activeTier}.png`; };
                     medalsContainer.appendChild(medalImg);
                 }
             });
 
-            profileCard.appendChild(btn);
+            const inlineActions = document.createElement('div');
+            inlineActions.className = 'profile-inline-actions';
+
+            const inlineRenameBtn = document.createElement('button');
+            inlineRenameBtn.className = 'profile-icon-btn';
+            inlineRenameBtn.textContent = '✏️';
+            inlineRenameBtn.title = `Rename "${profileName}"`;
+            inlineRenameBtn.onclick = (e) => {
+                e.stopPropagation();
+                if (renameModal && renameInput) {
+                    pendingRenameId = profileId;
+                    renameInput.value = profileName;
+                    renameModal.style.display = 'flex';
+                }
+            };
+
+            const inlineDeleteBtn = document.createElement('button');
+            inlineDeleteBtn.className = 'profile-icon-btn delete';
+            inlineDeleteBtn.textContent = '🗑️';
+            inlineDeleteBtn.title = `Delete "${profileName}"`;
+            inlineDeleteBtn.onclick = (e) => {
+                e.stopPropagation();
+                if (confirm(`Are you sure you want to delete "${profileName}"? This cannot be undone.`)) {
+                    storage.deleteProfile(profileId);
+                    renderProfilesList();
+                }
+            };
+
+            inlineActions.appendChild(inlineRenameBtn);
+            inlineActions.appendChild(inlineDeleteBtn);
+
+            cardRow.appendChild(btn);
+            cardRow.appendChild(inlineActions);
+            profileCard.appendChild(cardRow);
 
             if (earnedAnyMedal) {
                 const medalBtn = document.createElement('button');
-                medalBtn.className = 'action-btn-pill';
-                medalBtn.style.padding = "14px 22px";
-                medalBtn.style.cursor = "pointer";
-                medalBtn.style.backgroundColor = "#3498db";
-                medalBtn.style.border = "4px solid black";
-                medalBtn.style.borderRadius = "9999px";
-                medalBtn.style.marginTop = "-4px";
-                medalBtn.style.width = "auto";
-                medalBtn.style.display = "flex";
-                medalBtn.style.justifyContent = "center";
-                medalBtn.style.alignItems = "center";
+                medalBtn.className = 'action-btn-pill profile-medal-btn';
                 medalBtn.appendChild(medalsContainer);
                 medalBtn.onclick = () => btn.click();
                 const setPairHover = (hovered) => {
-                    const bg = hovered ? "#2980b9" : "#3498db";
-                    const tf = hovered ? "scale(1.02)" : "";
-                    btn.style.backgroundColor = bg;
-                    btn.style.transform = tf;
-                    medalBtn.style.backgroundColor = bg;
-                    medalBtn.style.transform = tf;
+                    btn.classList.toggle('is-hovered', hovered);
+                    medalBtn.classList.toggle('is-hovered', hovered);
                 };
                 btn.onmouseenter = () => setPairHover(true);
                 btn.onmouseleave = () => setPairHover(false);
@@ -2604,36 +2621,43 @@ async function init() {
 
         window.showZzZConfirmationModal = function() {
             const grains = state.stats.jigglypuffGrains || 0;
+            const hours = Math.floor(grains / 60);
+            const mins = grains % 60;
+            const formattedDuration = hours > 0 ? `${hours}h ${mins}m` : `${mins}m`;
             const showTutorial = !state.globalStats.hasSeenZzZTutorial;
             const htmlContent = `
-                <div class="content-panel" style="display: flex; flex-direction: column; gap: 15px; width: 100%; box-sizing: border-box; position: relative;">
+                <div class="content-panel zzz-panel">
                     ${showTutorial ? `
-                    <div id="zzz-tutorial-overlay-inner" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1000; background: rgba(0, 0, 0, 0.7); display: flex; flex-direction: column; align-items: center; justify-content: center; border-radius: 8px;">
-                        <div style="background: #34495e; padding: 20px; border-radius: 10px; border: 2px solid #00ffff; text-align: center; color: white; max-width: 80%;">
-                            <div style="margin-top: 0; font-size: 16px;">
-                                <p>Welcome to ZzZ Mode!</p>
-                                <p>You will earn 1 grain of Jigglypuff Dust for every minute you play.</p>
-                                <p>Each grain will grant 1 minute of offline farming.</p>
-                                <p>Sleep well!</p>
-                            </div>
-                            <button id="btn-dismiss-zzz-inner" style="padding: 10px 20px; background: #2ecc71; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; margin-top: 10px; font-size: 16px;">Ok.</button>
+                    <div id="zzz-tutorial-overlay-inner" class="zzz-tutorial-overlay">
+                        <div class="zzz-tutorial-card">
+                            <h4>Welcome to ZzZ Mode!</h4>
+                            <p>Earn <strong>1 grain</strong> of Jigglypuff Dust for every minute you play.</p>
+                            <p>Each grain grants <strong>1 minute</strong> of offline farming while you sleep.</p>
+                            <p>Sleep well!</p>
+                            <button id="btn-dismiss-zzz-inner" class="zzz-tutorial-btn">Got it!</button>
                         </div>
                     </div>
                     ` : ''}
-                    <div style="display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.2); border-radius: 8px; padding: 20px; border: 1px solid #334155; gap: 20px;">
-                        <div style="flex: 1; display: flex; justify-content: flex-end;">
-                            <img src="Assets/Extra/Jigglypuff Dust.png" style="width: 120px; height: auto; filter: drop-shadow(0 0 10px rgba(255, 192, 203, 0.4));">
+                    <div class="zzz-hero-card">
+                        <span class="zzz-star s1"></span>
+                        <span class="zzz-star s2"></span>
+                        <span class="zzz-star s3"></span>
+                        <span class="zzz-star s4"></span>
+                        <div class="zzz-dust-wrap">
+                            <div class="zzz-dust-aura"></div>
+                            <img src="Assets/Extra/Jigglypuff Dust.png" class="zzz-dust-img" alt="Jigglypuff Dust">
                         </div>
-                        <div style="flex: 1; display: flex; flex-direction: column; align-items: center; text-align: center;">
-                            <div style="font-size: 14px; color: #94a3b8; text-transform: uppercase; letter-spacing: 2px;">Available Grains</div>
-                            <div id="zzz-current-grains" style="font-size: 36px; font-weight: bold; color: #fbcfe8; text-shadow: 0 2px 4px rgba(0,0,0,0.8); margin: 5px 0;">${grains}</div>
-                            <div id="zzz-max-offline-time" style="font-size: 12px; color: #cbd5e1;">(1 grain = 1min offline farm)</div>
+                        <div class="zzz-stats-col">
+                            <div class="zzz-badge">Available Grains</div>
+                            <div id="zzz-current-grains" class="zzz-grains-value">${grains}</div>
+                            <div class="zzz-duration-pill">Max Offline Farm: ${formattedDuration}</div>
+                            <div id="zzz-max-offline-time" class="zzz-subtext">${grains > 0 ? '1 grain = 1 min offline farm' : 'Play actively to earn Jigglypuff Dust (1 grain/min)'}</div>
                         </div>
                     </div>
 
-                    <div style="display: flex; gap: 10px; justify-content: center; margin-top: 10px; padding-bottom: 5px;">
-                        <button id="btn-zzz-yes" style="padding: 12px; font-size: 16px; font-weight: bold; cursor: pointer; background: linear-gradient(to right, #3b82f6, #2563eb); color: white; border: 1px solid #60a5fa; border-radius: 8px; flex: 1; box-shadow: 0 4px 6px rgba(0,0,0,0.3); text-transform: uppercase; letter-spacing: 1px;">Go to Sleep</button>
-                        <button id="btn-zzz-no" style="padding: 12px; font-size: 16px; font-weight: bold; cursor: pointer; background: linear-gradient(to right, #ef4444, #dc2626); color: white; border: 1px solid #f87171; border-radius: 8px; flex: 1; box-shadow: 0 4px 6px rgba(0,0,0,0.3); text-transform: uppercase; letter-spacing: 1px;">Cancel</button>
+                    <div class="zzz-actions">
+                        <button id="btn-zzz-yes" class="zzz-btn zzz-btn-sleep">Go to Sleep</button>
+                        <button id="btn-zzz-no" class="zzz-btn zzz-btn-cancel">Cancel</button>
                     </div>
                 </div>
             `;
