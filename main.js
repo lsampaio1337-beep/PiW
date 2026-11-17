@@ -20,6 +20,8 @@ function createWindow() {
     }
 
     const win = new BrowserWindow({
+        title: 'PiW',
+        icon: path.join(__dirname, 'Assets', 'Items', 'Balls', 'Pokeball.png'),
         width: width,
         height: height,
         x: x,
@@ -75,6 +77,11 @@ ipcMain.on('set-ignore-mouse-events', (event, ignore, options) => {
         currentWindow.setIgnoreMouseEvents(ignore, options);
     }
 });
+
+app.setName('PiW');
+if (process.platform === 'win32') {
+    app.setAppUserModelId('PiW');
+}
 
 app.whenReady().then(() => {
     // Remove default application menu so Ctrl+W is handled by the renderer instead of closing the whole app

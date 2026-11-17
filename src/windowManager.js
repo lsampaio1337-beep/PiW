@@ -940,7 +940,7 @@ export class WindowManager {
 
     autoAdjustWidth(windowId) {
         const winElement = document.getElementById(windowId);
-        if (!winElement) return;
+        if (!winElement || winElement.dataset.minimized === 'true') return;
 
         const scalerElement = winElement.querySelector('.window-content-scaler');
         if (!scalerElement) return;

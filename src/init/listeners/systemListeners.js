@@ -1,11 +1,37 @@
 import { promptExitGame } from '../../ui.js';
 
 export function setupSystemEventListeners() {
-    const minimizeAllBtn = document.getElementById('btn-minimize-all-game');
-    if (minimizeAllBtn) {
-        minimizeAllBtn.addEventListener('click', () => {
-            if (window.electronAPI) {
-                window.electronAPI.send('minimize-game');
+    const minimizeMainControlBtn = document.getElementById('btn-minimize-all-game');
+    if (minimizeMainControlBtn) {
+        minimizeMainControlBtn.addEventListener('click', () => {
+            const mainControlWin = document.getElementById('main-control-window');
+            if (!mainControlWin) return;
+
+            const contentContainer = mainControlWin.querySelector('.window-content-container');
+            const resizeHandle = mainControlWin.querySelector('.window-resize-handle');
+            const isMinimized = mainControlWin.dataset.minimized === 'true';
+
+            if (isMinimized) {
+                if (contentContainer) contentContainer.style.display = 'flex';
+                if (resizeHandle) resizeHandle.style.display = '';
+                mainControlWin.style.height = mainControlWin.dataset.preMinimizeHeight || 'auto';
+                mainControlWin.style.width = mainControlWin.dataset.preMinimizeWidth || 'auto';
+                mainControlWin.style.minWidth = mainControlWin.dataset.preMinimizeMinWidth || '0';
+                delete mainControlWin.dataset.minimized;
+                minimizeMainControlBtn.textContent = '-';
+                minimizeMainControlBtn.title = 'Minimize Main Control';
+            } else {
+                mainControlWin.dataset.preMinimizeHeight = mainControlWin.style.height || '';
+                mainControlWin.dataset.preMinimizeWidth = mainControlWin.style.width || '';
+                mainControlWin.dataset.preMinimizeMinWidth = mainControlWin.style.minWidth || '';
+                if (contentContainer) contentContainer.style.display = 'none';
+                if (resizeHandle) resizeHandle.style.display = 'none';
+                mainControlWin.style.height = 'auto';
+                mainControlWin.style.width = 'auto';
+                mainControlWin.style.minWidth = '180px';
+                mainControlWin.dataset.minimized = 'true';
+                minimizeMainControlBtn.textContent = '+';
+                minimizeMainControlBtn.title = 'Restore Main Control';
             }
         });
     }
