@@ -2391,6 +2391,8 @@ class BattleSystem {
             outOfMoney: false,
             simulatedTimeMs: 0,
             xpEarned: 0,
+            whiteCandiesEarned: 0,
+            partyFaints: 0,
             itemsLooted: {},
             itemsMissed: {},
             caughtPokemonList: []
@@ -2399,21 +2401,11 @@ class BattleSystem {
         if (this.state.party.length === 0) return results;
 
         let totalSimTime = 0;
-        let lastKnownMoney = this.state.trainer.money;
+        let lastKnownMoney = Number.isFinite(this.state.trainer.money) ? this.state.trainer.money : 0;
         let lastKnownCaught = this.state.stats.caught;
         let lastKnownShinies = this.state.stats.shiniesCaught || 0;
         let lastKnownEncounters = this.state.stats.battlesWon || 0; // Approximate encounters fought using battlesWon
         let lastKnownShinyEncounters = this.state.stats.shiniesSeen || 0;
-        let initialLeaderXP = this.state.party[0] ? this.state.party[0].xp : 0;
-
-        let initialBalls = this.state.settings.activeBallTier >= 0 ?
-            this.state.backpack.pokeballs[this.state.config.balance.items.pokeballs[this.state.settings.activeBallTier].name] || 0 : 0;
-        const initialPotionRaw = this.state.settings.activePotionTier >= 0
-            ? this.state.config.balance.items.potions[this.state.settings.activePotionTier]?.name
-            : null;
-        let initialPotions = initialPotionRaw
-            ? (this.state.backpack.potions[this._normalizePotionName(initialPotionRaw)] || 0)
-            : 0;
 
         // Ensure we don't simulate too many frames and hang the browser if time is huge
         // Limit to approx max of 111h of simulation steps, but it evaluates fast
@@ -2561,6 +2553,7 @@ class BattleSystem {
                             leaderConsecutiveHeals = 0;
                         } else {
                             if (this.tryUsePotion(attacker)) {
+                                results.potionsUsed++;
                                 leaderConsecutiveHeals++;
                                 return true; // Potion takes the turn
                             }
@@ -2625,6 +2618,8 @@ class BattleSystem {
                     let threshold = this.state.settings.autoPotionThreshold !== undefined ? this.state.settings.autoPotionThreshold : 25;
                     while ((leader.currentHp / leader.maxHp) * 100 <= threshold) {
                         if (!this.tryUsePotion(leader)) break;
+                        results.potionsUsed++;
+                        combatTime += leaderDelay;
                     }
                 }
 
@@ -2632,6 +2627,7 @@ class BattleSystem {
                 if (this.state.stats.bonusCandyDefeats >= WHITE_CANDY_DEFEAT_REQUIREMENT) {
                     this.state.stats.bonusCandyDefeats -= WHITE_CANDY_DEFEAT_REQUIREMENT;
                     this.state.stats.whiteCandies = (this.state.stats.whiteCandies || 0) + 1;
+                    results.whiteCandiesEarned++;
                 }
 
                 // Track Daily Challenges
@@ -2659,6 +2655,7 @@ class BattleSystem {
 
                 if (this.state.settings.autoCatch) {
                     const ballResult = this.throwPokeball();
+                    if (ballResult.used) results.ballsUsed++;
                     if (ballResult.caught) {
                         let caughtPokemon = this.cloneEncounter(this.activeEncounter);
                         let trackingName = this.activeEncounter.name;
@@ -2730,9 +2727,11 @@ class BattleSystem {
                 const lootMultiplier = 1 + (0.0025 * (this.state.stats.greenCandies || 0));
                 const moneyMultiplier = 1 + (0.01 * (this.state.stats.greenCandies || 0));
                 this.grantXP(leader, evxp, false);
+                results.xpEarned += evxp;
         if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') window.trackDailyChallenge('gain_exp', { amount: evxp });
                 let earnedZzZ = Math.floor(evm * moneyMultiplier);
-                this.state.trainer.money += earnedZzZ;
+                if (!Number.isFinite(earnedZzZ)) earnedZzZ = 0;
+                this.state.trainer.money = (Number.isFinite(this.state.trainer.money) ? this.state.trainer.money : 0) + earnedZzZ;
                 if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') {
                     window.trackDailyChallenge('earn_money', { amount: earnedZzZ });
                 }
@@ -2848,6 +2847,7 @@ class BattleSystem {
                 this.state.stats.battlesWon++;
             } else {
                 leader.currentHp = 0;
+                results.partyFaints++;
                 const fainted = this.state.party.shift();
 
                 // Revert Ditto Transformation on Faint
@@ -2864,21 +2864,7 @@ class BattleSystem {
         results.shinies = (this.state.stats.shiniesCaught || 0) - lastKnownShinies;
         results.encounters = (this.state.stats.battlesWon || 0) - lastKnownEncounters;
         results.shinyEncounters = (this.state.stats.shiniesSeen || 0) - lastKnownShinyEncounters;
-
-        let finalBalls = this.state.settings.activeBallTier >= 0 ?
-            this.state.backpack.pokeballs[this.state.config.balance.items.pokeballs[this.state.settings.activeBallTier].name] || 0 : 0;
-        const finalPotionRaw = this.state.settings.activePotionTier >= 0
-            ? this.state.config.balance.items.potions[this.state.settings.activePotionTier]?.name
-            : null;
-        let finalPotions = finalPotionRaw
-            ? (this.state.backpack.potions[this._normalizePotionName(finalPotionRaw)] || 0)
-            : 0;
-
-        results.ballsUsed = Math.max(0, initialBalls - finalBalls);
-        results.potionsUsed = Math.max(0, initialPotions - finalPotions);
-
         results.simulatedTimeMs = totalSimTime;
-        results.xpEarned = this.state.party[0] ? this.state.party[0].xp - initialLeaderXP : 0;
 
         if (results.fainted) {
             // Track faint

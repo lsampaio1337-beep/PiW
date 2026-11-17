@@ -9,13 +9,22 @@ import DayCare from "./dayCare.js";
 import Storage from "./storage.js";
 
 // Import State and modules
-import { state, setBattleSystem, globals } from './state.js';
+import { state, setBattleSystem, globals, swapRegion } from './state.js';
 import { trackDailyChallenge, checkAndResetDailyChallenges } from './ui/dailyChallenges.js';
 import { showHelp } from './ui/help.js';
+import {
+    ZZZ_CONFIG,
+    calculateZzZSimulationParams,
+    consumeZzZGrains,
+    summarizeZzZResults,
+    buildZzZResultsModalHtml,
+    buildZzZWakeUpModalHtml,
+} from './ui/zzz.js';
 import { hydratePokemonInfo } from './utils/pokemonDataLoader.js';
 import { pokedexIndexes } from '../config/pokedexIndexes.js';
 
 window.globals = globals;
+if (globals) globals.swapRegion = swapRegion;
 
 import { showProfTutorialIfNeeded, skipProfTutorial, proceedProfTutorial, concludeProfTutorial } from './ui/tutorials/profTutorial.js';
 window.skipProfTutorial = skipProfTutorial;
@@ -105,7 +114,7 @@ import { showPokemonStats, showPokemonStatsByUuid, evolvePokemon } from './ui/po
 import { showBonusCandyModal } from './ui/bonusCandy.js';
 window.showBonusCandyModal = showBonusCandyModal;
 window.showGiftModal = showGiftModal;
-import { showSettings, exportLog, showAddPokemonModal, forceNextEncounter, forceNextCapture, activateCheat, showTimeLapseModal, runTimeLapse } from './ui/settings.js';
+import { showSettings, exportLog, exportData, triggerImportData, showAddPokemonModal, forceNextEncounter, forceNextCapture, activateCheat, showTimeLapseModal, runTimeLapse } from './ui/settings.js';
 import { setupMarket, buyItem, openPokeMarketBuy, renderPokeMarketTab, updateBuyItemPrice, buySetMax } from './ui/market.js';
 import { showBackpack, renderBackpackTab, setActiveItem, setAutoPotionThreshold } from './ui/backpack/index.js';
 import { dragStart, dragOver, handleDrop } from './ui/backpack/pokemon.js';
@@ -154,6 +163,8 @@ window.showPokemonStatsByUuid = showPokemonStatsByUuid;
 window.evolvePokemon = evolvePokemon;
 window.showSettings = showSettings;
 window.exportLog = exportLog;
+window.exportData = exportData;
+window.triggerImportData = triggerImportData;
 window.buyItem = buyItem;
 window.updateBuyItemPrice = updateBuyItemPrice;
 window.buySetMax = buySetMax;
@@ -2289,7 +2300,7 @@ async function init() {
             }
 
             const playedDiv = document.createElement('div');
-            playedDiv.style.fontSize = "18px";
+            playedDiv.style.fontSize = "1rem";
             playedDiv.style.fontWeight = "bold";
             playedDiv.textContent = pData.lastPlayed ? formatRelativeTime(pData.lastPlayed) : lastPlayedStr;
             playedDiv.title = lastPlayedStr;
@@ -2636,7 +2647,9 @@ async function init() {
             const grains = state.stats.jigglypuffGrains || 0;
             const hours = Math.floor(grains / 60);
             const mins = grains % 60;
-            const formattedDuration = hours > 0 ? `${hours}h ${mins}m` : `${mins}m`;
+            const formattedDuration = ZZZ_CONFIG.useGrainBased
+                ? (hours > 0 ? `${hours}h ${mins}m` : `${mins}m`)
+                : '1h 0m';
             const showTutorial = !state.globalStats.hasSeenZzZTutorial;
             const htmlContent = `
                 <div class="content-panel zzz-panel">
@@ -2664,7 +2677,7 @@ async function init() {
                             <div class="zzz-badge">Available Grains</div>
                             <div id="zzz-current-grains" class="zzz-grains-value">${grains}</div>
                             <div class="zzz-duration-pill">Max Offline Farm: ${formattedDuration}</div>
-                            <div id="zzz-max-offline-time" class="zzz-subtext">${grains > 0 ? '1 grain = 1 min offline farm' : 'Play actively to earn Jigglypuff Dust (1 grain/min)'}</div>
+                            <div id="zzz-max-offline-time" class="zzz-subtext">${ZZZ_CONFIG.useGrainBased ? (grains > 0 ? '1 grain = 1 min offline farm' : 'Play actively to earn Jigglypuff Dust (1 grain/min)') : 'Fixed 1 hour offline hunt per ZzZ session'}</div>
                         </div>
                     </div>
 
@@ -2675,9 +2688,10 @@ async function init() {
                 </div>
             `;
 
-            showModal("ZzZ Mode", htmlContent, "window-zzz-confirmation", "460px");
+            showModal("ZzZ Mode", htmlContent, "window-zzz-confirmation", "340px");
             const winZzz = document.getElementById('window-zzz-confirmation');
             if (winZzz) {
+                winZzz.style.width = '340px';
                 winZzz._sizeInitialized = false;
             }
             if (window.windowManager) window.windowManager.recalculateWindowSize('window-zzz-confirmation');
@@ -3706,137 +3720,28 @@ export function renderProfessorLab() {
 
 
 window.simulateSleepFarm = function() {
-    // Simulate sleep farm
-    let timeElapsedMs = Date.now() - (state.zzzTimestamp || Date.now());
-    timeElapsedMs = Math.max(0, timeElapsedMs); // Prevent negative time if system clock changes
-
-    // Cap time elapsed by grains
-    let availableGrains = state.stats.jigglypuffGrains || 0;
-    let maxTimeMs = availableGrains * 60000;
-
-    if (timeElapsedMs > maxTimeMs) {
-        timeElapsedMs = maxTimeMs;
-    }
+    const { timeElapsedMs, maxTimeMs, availableGrains } = calculateZzZSimulationParams(state, Date.now(), ZZZ_CONFIG);
 
     const results = globals.battleSystem.runFastForward(timeElapsedMs);
+    const displayTimeMs = results.simulatedTimeMs !== undefined ? results.simulatedTimeMs : timeElapsedMs;
 
-    let displayTimeMs = results.simulatedTimeMs !== undefined ? results.simulatedTimeMs : timeElapsedMs;
-
-    // Make sure to cap the max time back to max available grains to avoid overdraft when resuming from save/etc.
-    let actualTimeConsumedMs = Math.min(displayTimeMs, maxTimeMs);
-    let consumedGrains = Math.ceil(actualTimeConsumedMs / 60000);
-    state.stats.jigglypuffGrains = Math.max(0, availableGrains - consumedGrains);
-    state.stats.jigglypuffGrainsUsed = (state.stats.jigglypuffGrainsUsed || 0) + consumedGrains;
-
-    // Track Daily Challenges
-    trackDailyChallenge('sleep_minutes', { amount: Math.floor(actualTimeConsumedMs / 60000) });
+    const { sleepMinutes } = consumeZzZGrains(state, displayTimeMs, maxTimeMs, availableGrains, ZZZ_CONFIG);
+    trackDailyChallenge('sleep_minutes', { amount: sleepMinutes });
 
     state.isZzZMode = false;
     state.zzzTimestamp = null;
     storage.save(state);
 
-    // Format Time based on actual simulated time returned by the engine
-    let totalSeconds = Math.floor(displayTimeMs / 1000);
-    let d = Math.floor(totalSeconds / (3600 * 24));
-    let h = Math.floor((totalSeconds % (3600 * 24)) / 3600);
-    let m = Math.floor((totalSeconds % 3600) / 60);
-    let s = totalSeconds % 60;
+    const summary = summarizeZzZResults(results, state, maxTimeMs, ZZZ_CONFIG);
+    const resultsHtml = buildZzZResultsModalHtml(summary, state);
 
-    let timeStr = "";
-    if (d > 0) timeStr += `${d}d`;
-    if (h > 0 || d > 0) timeStr += `${h}h`;
-    if (m > 0 || h > 0 || d > 0) timeStr += `${m}m`;
-    timeStr += `${s}s`; // Always display seconds
-
-    // Items Used Names
-    let ballUsedStr = "No Ball Used";
-    let ballIconStr = `<div style="font-size: 18px; color: #64748b; margin-bottom: 5px;">-</div>`;
-    if (state.settings.activeBallTier >= 0) {
-        const ballName = state.config.balance.items.pokeballs[state.settings.activeBallTier].name;
-        ballUsedStr = `${results.ballsUsed} ${ballName}s`;
-        ballIconStr = `<img src="Assets/Items/Balls/${ballName}.png" style="width: 30px; height: 30px; margin-bottom: 5px;" alt="${ballName}">`;
+    showModal("ZzZ Mode", resultsHtml, "window-zzz-rewards", "320px");
+    const winRewards = document.getElementById('window-zzz-rewards');
+    if (winRewards) {
+        winRewards.style.width = '320px';
+        winRewards._sizeInitialized = false;
     }
-
-    let potionUsedStr = "No Potion Used";
-    let potionIconStr = `<div style="font-size: 18px; color: #64748b; margin-bottom: 5px;">-</div>`;
-    if (state.settings.activePotionTier >= 0) {
-        const rawPotionName = state.config.balance.items.potions[state.settings.activePotionTier].name;
-        const potionName = rawPotionName === 'Big' ? 'Big Potion' : rawPotionName;
-        potionUsedStr = `${results.potionsUsed} ${potionName}s`;
-        potionIconStr = `<img src="Assets/Items/Potions/${potionName}.png" style="width: 30px; height: 30px; margin-bottom: 5px;" alt="${potionName}">`;
-    }
-
-    let faintedBanner = "";
-    if (results.fainted) {
-        faintedBanner = `<div style="background: rgba(239, 68, 68, 0.2); border: 1px solid #ef4444; border-radius: 8px; padding: 10px; color: #fca5a5; text-align: center; font-weight: bold; margin-top: 5px;">❌ Farm Stopped: Party Fainted</div>`;
-    } else if (results.outOfMoney) {
-        faintedBanner = `<div style="background: rgba(239, 68, 68, 0.2); border: 1px solid #ef4444; border-radius: 8px; padding: 10px; color: #fca5a5; text-align: center; font-weight: bold; margin-top: 5px;">❌ Farm Stopped: No money to buy more entries</div>`;
-    } else if (results.simulatedTimeMs !== undefined && results.simulatedTimeMs >= maxTimeMs) {
-        faintedBanner = `<div style="background: rgba(234, 179, 8, 0.2); border: 1px solid #facc15; border-radius: 8px; padding: 10px; color: #fde047; text-align: center; font-weight: bold; margin-top: 5px;">❌ Farm Stopped: Jigglypuff Dust ended</div>`;
-    } else {
-        faintedBanner = `<div style="background: rgba(16, 185, 129, 0.2); border: 1px solid #10b981; border-radius: 8px; padding: 10px; color: #6ee7b7; text-align: center; font-weight: bold; margin-top: 5px;">✅ Farm Stopped: Logged in a save</div>`;
-    }
-
-    // Show results modal
-
-
-    const resultsHtml = `
-        <div class="content-panel">
-        <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.3); padding: 8px 12px; border-radius: 8px; margin-bottom: 15px;">
-            <div style="font-size: 14px; color: #cbd5e1;">📍 <b>Route:</b> ${(state.currentRoute || '').replace(/\s*\([^)]+\)$/, '')}</div>
-            <div style="font-size: 14px; color: #cbd5e1;">⏳ <b>Time:</b> ${timeStr.trim()}</div>
-        </div>
-
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-
-            <!-- Money Earned -->
-            <div style="background: rgba(16, 185, 129, 0.1); border: 1px solid #10b981; border-radius: 8px; padding: 12px; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-                <div style="font-size: 11px; color: #6ee7b7; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px;">Money Earned</div>
-                <div style="font-size: 18px; font-weight: bold; color: #10b981;">+$${Math.floor(results.moneyEarned).toLocaleString('pt-BR')}</div>
-            </div>
-
-            <!-- XP Earned -->
-            <div style="background: rgba(59, 130, 246, 0.1); border: 1px solid #3b82f6; border-radius: 8px; padding: 12px; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-                <div style="font-size: 11px; color: #93c5fd; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px;">XP Earned</div>
-                <div style="font-size: 18px; font-weight: bold; color: #3b82f6;">+${Math.floor(results.xpEarned).toLocaleString('pt-BR')} XP</div>
-            </div>
-
-            <!-- Caught Card -->
-            <div style="background: rgba(255,255,255,0.05); border: 1px solid #475569; border-radius: 8px; padding: 12px; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-                <div style="font-size: 11px; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px;">Pokémon Caught</div>
-                <div style="font-size: 18px; font-weight: bold; color: #fff;">${results.caught}/${results.encounters}</div>
-                <div style="font-size: 10px; color: #cbd5e1; margin-top: 5px;">Encounters</div>
-            </div>
-
-            <!-- Shinies Card -->
-            <div style="background: rgba(250, 204, 21, 0.1); border: 1px solid #facc15; border-radius: 8px; padding: 12px; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-                <div style="font-size: 11px; color: #fde047; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px;">Shiny Caught</div>
-                <div style="font-size: 18px; font-weight: bold; color: #facc15;">${results.shinies}/${results.shinyEncounters}</div>
-                <div style="font-size: 10px; color: #fef08a; margin-top: 5px;">Encounters</div>
-            </div>
-
-            <!-- Consumables Card: Balls -->
-            <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid #475569; border-radius: 8px; padding: 12px; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-                <div style="font-size: 11px; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px;">Balls Used</div>
-                ${ballIconStr}
-                <div style="font-size: 12px; font-weight: bold; color: #fff;">${ballUsedStr}</div>
-            </div>
-
-            <!-- Consumables Card: Potions -->
-            <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid #475569; border-radius: 8px; padding: 12px; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-                <div style="font-size: 11px; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px;">Potions Used</div>
-                ${potionIconStr}
-                <div style="font-size: 12px; font-weight: bold; color: #fff;">${potionUsedStr}</div>
-            </div>
-        </div>
-
-        <!-- Banner directly indicating faint or end -->
-        ${faintedBanner}
-        <button id="btn-zzz-results-close-dynamic" style="padding: 12px; font-size: 16px; font-weight: bold; cursor: pointer; background: linear-gradient(to right, #10b981, #059669); color: white; border: 1px solid #34d399; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); margin-top: 15px; width: 100%; text-transform: uppercase; letter-spacing: 1px;">Claim Rewards</button>
-        </div>
-    `;
-
-    showModal("ZzZ Mode", resultsHtml, "window-zzz-rewards");
+    if (window.windowManager) window.windowManager.recalculateWindowSize('window-zzz-rewards');
 
     document.getElementById('btn-zzz-results-close-dynamic').onclick = () => {
         if(window.windowManager) window.windowManager.closeDynamicWindow('window-zzz-rewards');
@@ -3862,16 +3767,15 @@ window.simulateSleepFarm = function() {
 
 
 window.promptWakeUpRegion = function(regionName) {
-    const resumeHtml = `
-    <div class="content-panel" style="display: flex; flex-direction: column; gap: 15px; width: 100%; text-align: center;">
-        <p style="color: white; margin: 0;">Do you want to wake up and collect your offline farm?</p>
-        <div style="display: flex; gap: 10px; justify-content: center; margin-top: 10px;">
-            <button id="btn-zzz-wakeup-yes" style="padding: 10px; font-size: 16px; font-weight: bold; cursor: pointer; background-color: #4CAF50; color: white; border: none; border-radius: 5px; flex: 1;">Yes</button>
-            <button id="btn-zzz-wakeup-no" style="padding: 10px; font-size: 16px; font-weight: bold; cursor: pointer; background-color: #f44336; color: white; border: none; border-radius: 5px; flex: 1;">No</button>
-        </div>
-    </div>
-    `;
-    showModal(`Wake Up ${regionName}?`, resumeHtml, "window-zzz-wakeup", "400px");
+    const resumeHtml = buildZzZWakeUpModalHtml(regionName, state, ZZZ_CONFIG);
+    showModal(`Wake Up ${regionName}?`, resumeHtml, "window-zzz-wakeup", "450px");
+    const winWakeup = document.getElementById('window-zzz-wakeup');
+    if (winWakeup) {
+        winWakeup.style.width = '450px';
+        winWakeup.style.height = 'auto';
+        winWakeup._sizeInitialized = false;
+    }
+    if (window.windowManager) window.windowManager.recalculateWindowSize('window-zzz-wakeup');
 
     document.getElementById('btn-zzz-wakeup-no').onclick = () => {
         if(window.windowManager) window.windowManager.closeDynamicWindow('window-zzz-wakeup');
@@ -3881,17 +3785,21 @@ window.promptWakeUpRegion = function(regionName) {
         if(window.windowManager) window.windowManager.closeDynamicWindow('window-zzz-wakeup');
         if (window.closeModal) window.closeModal();
 
-        if (state.currentRegionName !== regionName) {
-            window.currentMapRegion = regionName;
-            if (typeof globals.swapRegion === 'function') globals.swapRegion(regionName);
-        }
-
         if (globals.battleSystem) {
             globals.battleSystem.stop();
+            globals.battleSystem.activeEncounter = null;
+            globals.battleSystem.isSearching = false;
+        }
+
+        if (state.currentRegionName !== regionName) {
+            window.currentMapRegion = regionName;
+            swapRegion(regionName);
         }
 
         window.simulateSleepFarm();
         window.updateZzZModeUI();
+        updateMainControl();
+        updateUI();
 
         if (window.windowManager) window.windowManager.toggleWindow('main-view-window', true);
     };
