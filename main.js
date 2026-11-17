@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, screen } = require('electron');
+const { app, BrowserWindow, ipcMain, screen, Menu } = require('electron');
 const path = require('path');
 const fs = require('fs');
 const { createMultiSaveManager } = require('./src/electron/saveManager');
@@ -14,6 +14,9 @@ function getSaveDirectories() {
 
     // Place 1: Electron userData (AppData\Roaming\<App>\saves)
     addDir(path.join(app.getPath('userData'), 'saves'));
+
+    // Place 1b: Legacy Idle Pokemon World Roaming saves (in case app.setName changed userData)
+    addDir(path.join(app.getPath('appData'), 'Idle Pokemon World', 'saves'));
 
     // Place 2: LocalAppData (survives Roaming resets and stays outside OneDrive)
     if (process.env.LOCALAPPDATA) {
@@ -45,6 +48,8 @@ function getSaveManager() {
     return saveManager;
 }
 
+let isMainControlMinimized = false;
+
 // Fix transparency issues conditionally rather than disabling hardware acceleration entirely
 if (process.platform === 'linux') {
     app.commandLine.appendSwitch('enable-transparent-visuals');
@@ -63,6 +68,8 @@ function createWindow() {
     }
 
     const win = new BrowserWindow({
+        title: 'PiW',
+        icon: path.join(__dirname, 'Assets', 'Items', 'Balls', 'Pokeball.png'),
         width: width,
         height: height,
         x: x,
@@ -99,6 +106,25 @@ function createWindow() {
             }
         }
         win.show();
+    });
+
+    win.on('minimize', () => {
+        if (isMainControlMinimized) {
+            isMainControlMinimized = false;
+            setImmediate(() => {
+                if (!win.isDestroyed()) {
+                    win.restore();
+                    win.focus();
+                    win.webContents.send('restore-main-control', { fromMinimize: true });
+                }
+            });
+        }
+    });
+
+    win.on('focus', () => {
+        if (isMainControlMinimized && !win.isDestroyed()) {
+            win.webContents.send('restore-main-control', { fromMinimize: false });
+        }
     });
 }
 
@@ -148,7 +174,19 @@ ipcMain.on('save-storage:get-save-dirs', (event) => {
     event.returnValue = getSaveManager().getSaveDirs();
 });
 
+ipcMain.on('set-main-control-minimized', (_event, minimized) => {
+    isMainControlMinimized = Boolean(minimized);
+});
+
+app.setName('PiW');
+if (process.platform === 'win32') {
+    app.setAppUserModelId('PiW');
+}
+
 app.whenReady().then(() => {
+    // Remove default application menu so Ctrl+W is handled by the renderer instead of closing the whole app
+    Menu.setApplicationMenu(null);
+
     // Delay window creation on Linux to allow the compositor to initialize correctly
     // so transparent windows work without disabling hardware acceleration.
     if (process.platform === 'linux') {

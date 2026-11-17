@@ -33,4 +33,40 @@ export function setupWindowToggles() {
             }
         });
     }
+
+    window.addEventListener('keydown', (event) => {
+        if ((event.ctrlKey || event.metaKey) && !event.altKey && !event.shiftKey && event.key.toLowerCase() === 'w') {
+            event.preventDefault();
+
+            const wm = window.windowManager;
+            const topmost = wm ? wm.getTopmostVisibleWindow() : null;
+
+            if (!topmost || topmost.id === 'main-control-window' || topmost.id === 'save-manager-modal') {
+                if (typeof window.promptExitGame === 'function') {
+                    window.promptExitGame();
+                }
+                return;
+            }
+
+            if (topmost.id === 'modal-content-box') {
+                if (typeof window.closeModal === 'function') {
+                    window.closeModal();
+                }
+                return;
+            }
+
+            if (topmost.id === 'main-view-window') {
+                const innerOverlay = document.getElementById('main-view-inner-modal-overlay');
+                if (innerOverlay && innerOverlay.style.display !== 'none' && window.getComputedStyle(innerOverlay).display !== 'none') {
+                    const closeInnerBtn = document.getElementById('btn-close-inner-modal');
+                    if (closeInnerBtn) {
+                        closeInnerBtn.click();
+                        return;
+                    }
+                }
+            }
+
+            wm.closeDynamicWindow(topmost.id);
+        }
+    });
 }
