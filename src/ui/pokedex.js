@@ -66,38 +66,81 @@ export function hasCaughtSpecies(id, state) {
            false;
 }
 
-export function showPokedex() {
-    let html = `<div style="display:flex; flex-wrap:wrap; justify-content:center; max-height:400px; overflow-y:auto; gap:10px; padding: 2%; box-sizing: border-box;">`;
+let activePokedexFilter = 'all';
 
+window.setPokedexFilter = function(filter) {
+    activePokedexFilter = filter || 'all';
+    const btns = document.querySelectorAll('#pokedex-filter-group .pokedex-filter-btn');
+    btns.forEach(btn => {
+        btn.classList.toggle('is-active', btn.dataset.filter === activePokedexFilter);
+    });
+    window.applyPokedexFilters();
+};
+
+window.applyPokedexFilters = function() {
+    const searchEl = document.getElementById('pokedex-search-input');
+    const query = (searchEl ? searchEl.value : '').trim().toLowerCase();
+    const cards = document.querySelectorAll('#pokedex-grid .pokedex-card');
+    cards.forEach(card => {
+        const name = (card.dataset.name || '').toLowerCase();
+        const num = (card.dataset.num || '').toLowerCase();
+        const status = card.dataset.status || 'unseen';
+        const isShiny = card.dataset.shiny === '1';
+
+        const matchesQuery = !query || name.includes(query) || num.includes(query) || (`#${num}`).includes(query);
+        let matchesFilter = true;
+        if (activePokedexFilter === 'caught') matchesFilter = status === 'caught';
+        else if (activePokedexFilter === 'seen') matchesFilter = status === 'seen' || status === 'caught';
+        else if (activePokedexFilter === 'unseen') matchesFilter = status === 'unseen';
+        else if (activePokedexFilter === 'shiny') matchesFilter = isShiny;
+
+        card.style.display = (matchesQuery && matchesFilter) ? 'flex' : 'none';
+    });
+};
+
+export function showPokedex() {
+    activePokedexFilter = 'all';
     const regionName = state.currentRegionName || 'Kanto';
+    let html = `<div class="pokedex-container">`;
+
     if (!state.config.pokemonData) {
-        html += "<p>Loading Pokedex data...</p>";
+        html += `<div style="padding: 20px; text-align: center;"><p>Loading Pokedex data...</p></div>`;
     } else {
         const regionIdField = regionName.toLowerCase() + '_id';
-
         const regionalDex = state.config.pokemonData.filter(p => p[regionIdField] !== undefined);
         regionalDex.sort((a, b) => a[regionIdField] - b[regionIdField]);
         const ownedIds = getOwnedSpeciesIds(state);
 
-        for(const pData of regionalDex) {
+        let seenCount = 0;
+        let caughtCount = 0;
+        let shinyCount = 0;
+        let cardsHtml = '';
+
+        for (const pData of regionalDex) {
             const isSeen = Boolean(state.stats.seenSpecies && state.stats.seenSpecies[pData.name]);
             const isCaught = Boolean((state.stats.caughtSpecies && state.stats.caughtSpecies[pData.name]) || ownedIds.has(pData.id));
-            const hasSeenShiny = state.stats.seenShiniesSpecies && state.stats.seenShiniesSpecies[pData.name];
-            const hasCaughtShiny = state.stats.caughtShiniesSpecies && state.stats.caughtShiniesSpecies[pData.name];
+            const hasSeenShiny = Boolean(state.stats.seenShiniesSpecies && state.stats.seenShiniesSpecies[pData.name]);
+            const hasCaughtShiny = Boolean(state.stats.caughtShiniesSpecies && state.stats.caughtShiniesSpecies[pData.name]);
+
+            if (isSeen || isCaught) seenCount++;
+            if (isCaught) caughtCount++;
+            if (hasCaughtShiny) shinyCount++;
 
             const isRevealed = isCaught || hasCaughtShiny;
-            let filter = isRevealed ? "none" : "brightness(0)";
-            let cursor = isRevealed ? "pointer" : "default";
-            let onClick = isRevealed ? `onclick="window.showDexEntry(${pData.id})"` : "";
-            let displayName = isRevealed ? pData.name : "???";
+            const filter = isRevealed ? "none" : "brightness(0)";
+            const onClick = isRevealed ? `onclick="window.showDexEntry(${pData.id})"` : "";
+            const displayName = isRevealed ? pData.name : "???";
+            const status = isCaught ? 'caught' : (isSeen ? 'seen' : 'unseen');
 
             let cardClass = "pokedex-card";
-            // Set width dynamically assuming a ~10px gap to fit exactly 9 items per row
-            let cardStyle = "width: calc((100% / 9) - 10px); text-align: center; font-size: 10px; box-sizing: border-box;";
-
+            if (isRevealed) cardClass += " is-clickable";
             if (!isSeen && !isCaught) {
-                cardStyle += " border: 2px solid transparent; background: transparent;";
-            } else {
+                cardClass += " is-unseen";
+            } else if (!isRevealed) {
+                cardClass += " is-seen-only";
+            }
+
+            if (isSeen || isCaught) {
                 if (hasSeenShiny || hasCaughtShiny) {
                     cardClass += " pokedex-card-shiny";
                 }
@@ -106,16 +149,53 @@ export function showPokedex() {
                 }
             }
 
-            html += `<div class="${cardClass}" style="${cardStyle}">
-                <div style="font-weight:bold;">#${pData[regionIdField]}</div>
-                <div style="font-size: 9px; margin-bottom: 2px;">${displayName}</div>
-                <img src="${window.getSpriteUrl(pData.id, false)}" style="width: 50px; height: 50px; filter: ${filter}; cursor: ${cursor};" ${onClick}>
+            cardsHtml += `<div class="${cardClass}" data-name="${isRevealed ? pData.name : ''}" data-num="${pData[regionIdField]}" data-status="${status}" data-shiny="${hasCaughtShiny ? '1' : '0'}" ${onClick}>
+                <div class="pokedex-card-num">#${pData[regionIdField]}</div>
+                <div class="pokedex-card-name" title="${displayName}">${displayName}</div>
+                <img class="pokedex-card-img" src="${window.getSpriteUrl(pData.id, false)}" style="filter: ${filter};">
             </div>`;
         }
+
+        const total = regionalDex.length;
+        const pct = total > 0 ? Math.round((caughtCount / total) * 100) : 0;
+
+        html += `
+            <div class="pokedex-header">
+                <div class="pokedex-stats-row">
+                    <div class="pokedex-stats-pills">
+                        <span class="pokedex-stat-pill is-caught">Caught: ${caughtCount}/${total} (${pct}%)</span>
+                        <span class="pokedex-stat-pill">Seen: ${seenCount}/${total}</span>
+                        <span class="pokedex-stat-pill is-shiny">Shiny: ${shinyCount}/${total}</span>
+                    </div>
+                </div>
+                <div class="pokedex-controls-row">
+                    <input id="pokedex-search-input" class="pokedex-search" type="text" placeholder="Search by name or #...">
+                    <div id="pokedex-filter-group" class="pokedex-filter-group">
+                        <button class="pokedex-filter-btn is-active" data-filter="all">All</button>
+                        <button class="pokedex-filter-btn" data-filter="caught">Caught</button>
+                        <button class="pokedex-filter-btn" data-filter="seen">Seen</button>
+                        <button class="pokedex-filter-btn" data-filter="unseen">Unseen</button>
+                        <button class="pokedex-filter-btn" data-filter="shiny">Shiny</button>
+                    </div>
+                </div>
+            </div>
+            <div id="pokedex-grid" class="pokedex-grid">
+                ${cardsHtml}
+            </div>
+        `;
     }
 
     html += `</div>`;
     showModal(`${regionName} Pokedex`, html, "window-pokedex");
+
+    const searchInput = document.getElementById('pokedex-search-input');
+    if (searchInput) {
+        searchInput.addEventListener('input', () => window.applyPokedexFilters());
+    }
+    const filterBtns = document.querySelectorAll('#pokedex-filter-group .pokedex-filter-btn');
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => window.setPokedexFilter(btn.dataset.filter));
+    });
 }
 
 export function showDexEntry(id) {
@@ -130,7 +210,7 @@ export function showDexEntry(id) {
 
     const html = `
         <div class="content-panel" style="text-align:center; height: 100%; overflow-y: auto; padding: 12px; box-sizing: border-box;">
-            <div style="background: rgba(0,0,0,0.45); padding: 14px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08); margin-bottom: 12px; display: flex; flex-direction: column; align-items: center;">
+            <div style="background: linear-gradient(180deg, #27374d 0%, #1d2a3a 100%); padding: 14px; border-radius: 10px; border: 2px solid #3498db; margin-bottom: 12px; display: flex; flex-direction: column; align-items: center;">
                 <h2 style="margin: 0 0 8px 0;">#${pData.id} ${pData.name}</h2>
                 <img id="dex-sprite-${pData.id}" src="${window.getSpriteUrl(pData.id, false)}" style="width: 100px; height: 100px;">
                 <div style="margin: 8px 0;">
@@ -174,7 +254,11 @@ function isPokemonInRegion(pd, state) {
 export function buildEvolutionLineHtml(pData, state) {
     let baseId = pData.id;
     while (state.config.evolutionParents && state.config.evolutionParents[baseId] !== undefined) {
-        baseId = state.config.evolutionParents[baseId];
+        const parentId = state.config.evolutionParents[baseId];
+        if (!isPokemonInRegion(getPokemonById(parentId, state), state)) {
+            break;
+        }
+        baseId = parentId;
     }
 
     function buildTree(currentId) {
@@ -190,8 +274,8 @@ export function buildEvolutionLineHtml(pData, state) {
         let displayName = isRevealed ? pd.name : "???";
 
         let html = `<div style="display: flex; flex-direction: column; align-items: center; margin: 5px;">
-            <img src="${window.getSpriteUrl(pd.id, false)}" style="width: 50px; height: 50px; filter: ${filter}; cursor: ${cursor};" ${onClick} title="${displayName}">
-            <span style="font-size: 10px; cursor: ${cursor};" ${onClick}>${displayName}</span>
+            <img src="${window.getSpriteUrl(pd.id, false)}" style="width: 80px; height: 80px; filter: ${filter}; cursor: ${cursor};" ${onClick} title="${displayName}">
+            <span style="font-size: 12px; cursor: ${cursor};" ${onClick}>${displayName}</span>
         </div>`;
 
         const validEvos = (pd.evolutions || []).filter(evo => isPokemonInRegion(getPokemonById(evo.to, state), state));
@@ -201,7 +285,7 @@ export function buildEvolutionLineHtml(pData, state) {
             let evosHtml = `<div style="display: flex; flex-direction: column; justify-content: center; margin-left: 10px;">`;
             for (const evo of validEvos) {
                 evosHtml += `<div style="display: flex; align-items: center; margin: 5px 0;">
-                    <div style="font-size: 10px; color: #aaa; margin-right: 5px;">Lv.${evo.level} ➔</div>
+                    <div style="font-size: 12px; color: #aaa; margin-right: 5px;">Lv.${evo.level} ➔</div>
                     ${buildTree(evo.to)}
                 </div>`;
             }
@@ -213,7 +297,7 @@ export function buildEvolutionLineHtml(pData, state) {
     }
 
     let treeHtml = buildTree(baseId);
-    return `<div style="text-align: left; margin: 15px 0; font-size: 14px; background: rgba(0,0,0,0.5); padding: 10px; border-radius: 5px; overflow-x: auto; max-height: 220px; overflow-y: auto;">
+    return `<div style="text-align: left; margin: 15px 0; font-size: 14px; background: linear-gradient(180deg, #27374d 0%, #1d2a3a 100%); border: 2px solid #3498db; padding: 10px; border-radius: 10px; overflow-x: auto; max-height: 220px; overflow-y: auto;">
         <h4 style="margin: 0 0 10px 0;">Evolution Line</h4>
         <div style="display: flex; align-items: center; justify-content: center;">
             ${treeHtml}
@@ -270,7 +354,7 @@ export function getSpeciesDataHtml(pData, state) {
     }
 
     let movesHtml = `
-        <div style="background: rgba(0,0,0,0.45); padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08); margin: 12px 0; text-align: left;">
+        <div style="background: linear-gradient(180deg, #27374d 0%, #1d2a3a 100%); padding: 12px; border-radius: 10px; border: 2px solid #3498db; margin: 12px 0; text-align: left;">
             <h4 style="margin: 0 0 8px 0; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 4px;">Moveset</h4>
             <div style="max-height: 240px; overflow-y: auto;">
                 <table style="width: 100%; text-align: left; font-size: 13px; border-collapse: collapse;">
@@ -308,7 +392,7 @@ export function getSpeciesDataHtml(pData, state) {
     `;
 
     return `
-        <div style="background: rgba(0,0,0,0.45); padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08); margin: 12px 0; text-align: left;">
+        <div style="background: linear-gradient(180deg, #27374d 0%, #1d2a3a 100%); padding: 12px; border-radius: 10px; border: 2px solid #3498db; margin: 12px 0; text-align: left;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 4px;">
                 <h4 style="margin: 0;">Base Stats</h4>
                 <span style="font-size: 13px; font-weight: bold; background: rgba(255,255,255,0.12); padding: 2px 8px; border-radius: 10px;">BST: ${bst}</span>
@@ -324,7 +408,7 @@ export function getSpeciesDataHtml(pData, state) {
         </div>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; margin: 12px 0; text-align: left; font-size: 13px;">
-            <div style="background: rgba(0,0,0,0.45); padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08);">
+            <div style="background: linear-gradient(180deg, #27374d 0%, #1d2a3a 100%); padding: 12px; border-radius: 10px; border: 2px solid #3498db;">
                 <h4 style="margin: 0 0 8px 0; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 4px;">Defensive Effectiveness</h4>
                 <div style="display: flex; flex-direction: column; gap: 4px;">
                     ${Object.keys(def4x).length ? `<div><b>Very Weak To (4x):</b> ${formatTypes(def4x)}</div>` : ''}
@@ -335,7 +419,7 @@ export function getSpeciesDataHtml(pData, state) {
                 </div>
             </div>
 
-            <div style="background: rgba(0,0,0,0.45); padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08);">
+            <div style="background: linear-gradient(180deg, #27374d 0%, #1d2a3a 100%); padding: 12px; border-radius: 10px; border: 2px solid #3498db;">
                 <h4 style="margin: 0 0 8px 0; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 4px;">Offensive Effectiveness</h4>
                 <div style="display: flex; flex-direction: column; gap: 4px;">
                     ${Object.keys(off2x).length ? `<div><b>Super Effective (2x):</b> ${formatTypes(off2x)}</div>` : ''}

@@ -395,6 +395,22 @@ describe('buildEvolutionLineHtml', () => {
         expect(html).toBeTruthy();
         expect(html).not.toContain('Lv.100');
     });
+
+    test('excludes pre-evolutions not in the current region', () => {
+        const { buildEvolutionLineHtml } = require('../../src/ui/pokedex.js');
+        state.currentRegionName = 'Kanto';
+        const pichu = { id: 172, name: 'Pichu', johto_id: 21, evolutions: [{ level: 20, to: 25 }] };
+        const pikachu = { id: 25, name: 'Pikachu', kanto_id: 25, evolutions: [{ level: 30, to: 26 }] };
+        const raichu = { id: 26, name: 'Raichu', kanto_id: 26, evolutions: [] };
+        state.config.pokemonData.push(pichu, pikachu, raichu);
+        state.config.evolutionParents = { ...(state.config.evolutionParents || {}), 25: 172, 26: 25 };
+        state.stats.seenSpecies['Pikachu'] = true;
+
+        const html = buildEvolutionLineHtml(pikachu, state);
+        expect(html).toContain('Pikachu');
+        expect(html).not.toContain('Lv.20');
+        expect(html).toContain('Lv.30');
+    });
 });
 
 describe('getSpeciesDataHtml', () => {

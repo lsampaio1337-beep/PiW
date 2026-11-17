@@ -212,7 +212,7 @@ export function showGiftModal() {
     html += generateClaimedGiftsHTML(claimed);
 
     if (pending.length === 0 && claimed.length === 0) {
-        html += `<div class="gift-empty-state">No gifts yet. Defeat Gym Leaders or complete Challenges to earn gifts!</div>`;
+        html += `<div class="gift-empty-state">No gifts yet.</div>`;
     }
 
     html += `</div>`;

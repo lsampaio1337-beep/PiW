@@ -301,18 +301,202 @@ input[type="number"] {
     animation: pulseMarker 1.5s infinite ease-in-out;
 }
 
-/* Pokedex Card Styles */
+/* Pokedex Layout & Card Styles */
+.pokedex-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    max-height: 575px;
+    color: #ecf0f1;
+    box-sizing: border-box;
+}
+
+.pokedex-header {
+    padding: 10px 14px;
+    background: rgba(0, 0, 0, 0.35);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.pokedex-stats-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.pokedex-stats-pills {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.pokedex-stat-pill {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 999px;
+    padding: 3px 9px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.pokedex-stat-pill.is-caught {
+    border-color: rgba(52, 152, 219, 0.45);
+    color: #7cc4fa;
+}
+
+.pokedex-stat-pill.is-shiny {
+    border-color: rgba(241, 196, 15, 0.45);
+    color: #f7dc6f;
+}
+
+.pokedex-progress-wrap {
+    flex: 1;
+    min-width: 120px;
+    max-width: 220px;
+    height: 7px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.pokedex-progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #3498db, #2ecc71);
+    border-radius: 999px;
+    transition: width 0.25s ease;
+}
+
+.pokedex-controls-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.pokedex-search {
+    flex: 1;
+    min-width: 140px;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 6px;
+    color: #fff;
+    padding: 5px 10px;
+    font-size: 12px;
+    outline: none;
+}
+
+.pokedex-search:focus {
+    border-color: #3498db;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.pokedex-filter-group {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+}
+
+.pokedex-filter-btn {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: #bdc3c7;
+    border-radius: 6px;
+    padding: 4px 9px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.pokedex-filter-btn:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+}
+
+.pokedex-filter-btn.is-active {
+    background: #2980b9;
+    border-color: #3498db;
+    color: #fff;
+}
+
+.pokedex-grid {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    gap: 10px;
+    padding: 12px 14px;
+    overflow-y: auto;
+    flex: 1;
+    align-content: start;
+    box-sizing: border-box;
+}
+
 .pokedex-card {
-    background: #2c3e50;
+    background: linear-gradient(180deg, #27374d 0%, #1d2a3a 100%);
     border: 2px solid #3498db;
     border-radius: 10px;
-    padding: 10px;
+    padding: 8px 6px;
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
+    font-size: 10px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+    position: relative;
+}
+
+.pokedex-card.is-clickable {
+    cursor: pointer;
+}
+
+.pokedex-card.is-clickable:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+    border-color: #5dade2;
+}
+
+.pokedex-card.is-unseen {
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px dashed rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.35);
+}
+
+.pokedex-card.is-seen-only {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.pokedex-card-num {
+    font-weight: 700;
+    font-size: 10px;
+    opacity: 0.8;
+}
+
+.pokedex-card-name {
+    font-size: 10px;
+    font-weight: 600;
+    margin: 2px 0 4px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+.pokedex-card-img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
 }
 
 @property --pokedex-shiny-angle {

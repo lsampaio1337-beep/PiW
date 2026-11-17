@@ -1933,32 +1933,6 @@ async function init() {
     await loadConfigs();
 
     const profiles = storage.getProfiles();
-    if (!profiles.includes('fake_profile_1')) {
-        const fakeRegions = ['Kanto', 'Johto', 'Hoenn', 'Sinnoh', 'Unova', 'Kalos', 'Alola', 'Galar', 'Hisui', 'Paldea'];
-        const now = Date.now();
-        for (let i = 1; i <= 10; i++) {
-            const pid = `fake_profile_${i}`;
-            const fakeData = {
-                profileName: `Trainer ${i}`,
-                currentRegionName: fakeRegions[i - 1],
-                lastPlayed: now - i * 3600000,
-                stats: { playtime: i * 1800, caughtSpecies: {}, caughtShiniesSpecies: {} },
-                regions: {}
-            };
-            fakeRegions.slice(0, i).forEach(reg => {
-                const regKey = reg.toLowerCase() + '_id';
-                const firstMon = state?.config?.pokemonData?.find(p => p[regKey]);
-                const caught = firstMon ? { [firstMon.name]: 1 } : {};
-                fakeData.regions[reg] = { stats: { caughtSpecies: caught, caughtShiniesSpecies: {} } };
-                if (reg === 'Kanto' && firstMon) {
-                    fakeData.stats.caughtSpecies[firstMon.name] = 1;
-                }
-            });
-            window.localStorage.setItem(pid, JSON.stringify(fakeData));
-            if (!profiles.includes(pid)) profiles.push(pid);
-        }
-        window.localStorage.setItem(storage.masterKey, JSON.stringify(profiles));
-    }
     const splashScreen = document.getElementById('splash-screen');
     const saveManagerModal = document.getElementById('save-manager-modal');
     const profilesContainer = document.getElementById('profiles-container');

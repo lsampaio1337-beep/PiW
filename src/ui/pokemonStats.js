@@ -164,7 +164,7 @@ function getActualStatsHtml(p) {
         </div>
     `;
     return `
-        <div style="background: rgba(0,0,0,0.45); padding: 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08); text-align: left; min-width: 150px; flex: 1; display: flex; flex-direction: column;">
+        <div style="background: linear-gradient(180deg, #27374d 0%, #1d2a3a 100%); padding: 15px; border-radius: 10px; border: 2px solid #3498db; text-align: left; min-width: 150px; flex: 1; display: flex; flex-direction: column;">
             <h3 style="margin: 0 0 12px 0; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 6px;">Actual Stats</h3>
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; flex: 1; align-content: center;">
                 ${statItem('HP', p.maxHp, getVitHtml(v.hp, 'HP Up'))}
@@ -180,7 +180,7 @@ function getActualStatsHtml(p) {
 
 function getBasicInfoHtml(p, sumIV) {
     return `
-        <div style="background: rgba(0,0,0,0.45); padding: 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08); text-align: center; flex: 1; font-size: 14px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+        <div style="background: linear-gradient(180deg, #27374d 0%, #1d2a3a 100%); padding: 15px; border-radius: 10px; border: 2px solid #3498db; text-align: center; flex: 1; font-size: 14px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
             <img src="${window.getSpriteUrl(p.id, p.qualityName === 'Shiny')}" style="width: 100px; height: 100px;"><br>
             <p style="margin: 5px 0;"><b>Type:</b> ${p.types.map(t => formatType(t)).join(' ')}</p>
             <b>Quality:</b> ${p.qualityName} (Q=${p.quality.toFixed(2)})<br>
@@ -200,7 +200,7 @@ function getIvDistributionHtml(p) {
         </div>
     `;
     return `
-        <div style="background: rgba(0,0,0,0.45); padding: 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08); text-align: left; min-width: 200px; flex: 1; display: flex; flex-direction: column;">
+        <div style="background: linear-gradient(180deg, #27374d 0%, #1d2a3a 100%); padding: 15px; border-radius: 10px; border: 2px solid #3498db; text-align: left; min-width: 200px; flex: 1; display: flex; flex-direction: column;">
             <h3 style="margin: 0 0 12px 0; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 6px;">IV Distribution</h3>
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; flex: 1; align-content: center;">
                 ${ivBar('HP', p.ivs.hp)}
