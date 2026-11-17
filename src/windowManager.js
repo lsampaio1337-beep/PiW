@@ -991,7 +991,7 @@ export class WindowManager {
         let actualContentHeight = 0;
         Array.from(scalerElement.children).forEach(child => {
             const rect = child.getBoundingClientRect();
-            if (rect.height > actualContentHeight) actualContentHeight = rect.height;
+            if (rect.height > actualContentHeight) actualContentHeight = Math.ceil(rect.height);
         });
         if (actualContentHeight > newOriginalHeight) {
             newOriginalHeight = actualContentHeight;
