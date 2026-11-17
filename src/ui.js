@@ -1821,8 +1821,8 @@ function setupAutosave() {
             storage.save(state);
         }
     };
-    // Autosave loop
-    autosaveInterval = setInterval(safeSave, 60000);
+    // Autosave loop (every 30s)
+    autosaveInterval = setInterval(safeSave, 30000);
 
     // Save on beforeunload, pagehide, and tab/window hide
     if (!hasUnloadAutosaveListener) {
@@ -1945,6 +1945,7 @@ async function init() {
     const profilesContainer = document.getElementById('profiles-container');
 
     const startNewGame = () => {
+        storage.setCurrentProfile(null);
         state.globalStats.hasSeenProfTutorial = false;
         state.globalStats.hasSeenGiftIcon = false;
         state.globalStats.hasSeenMultiplayerIcon = false;
@@ -3139,16 +3140,16 @@ function generateTrainerUpgradesHtml() {
 
 export const promptExitGame = () => {
     if (confirm("Do you want to leave the game?")) {
-        if (state.party.length === 0 && state.storage.length === 0) {
-            window.close();
-        } else {
+        if (storage.currentProfileId) {
             storage.save(state);
-            window.close(); // Closes the app completely (works in Electron/app context)
         }
+        window.close(); // Closes the app completely (works in Electron/app context)
     }
 };
 
 window.promptExitGame = promptExitGame;
+window.saveGame = () => storage.save(state);
+window.requestSaveGame = () => storage.requestSave(state);
 
 
 // Ensure the UI script runs

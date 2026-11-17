@@ -7,10 +7,11 @@ export default class Storage {
         this.masterKey = "idle_pokemon_world_profiles";
         this.currentProfileId = null;
         this._saveTimer = null;
+        this._lastKnownSeq = new Map();
 
         // Migrate old single save to new profile system if exists
         this.migrateOldSave();
-        // Synchronize & self-heal profiles between Electron disk storage and localStorage
+        // Synchronize & self-heal profiles across all disk save places and localStorage
         this.syncProfiles();
     }
 
@@ -41,26 +42,101 @@ export default class Storage {
         return null;
     }
 
-    _hasProgress(data) {
+    _hasPokemon(data) {
         if (!data || typeof data !== 'object') return false;
         if (Array.isArray(data.party) && data.party.length > 0) return true;
         if (Array.isArray(data.storage) && data.storage.length > 0) return true;
+        if (data.regions && typeof data.regions === 'object') {
+            for (const region of Object.values(data.regions)) {
+                if (!region || typeof region !== 'object') continue;
+                if (Array.isArray(region.party) && region.party.length > 0) return true;
+                if (Array.isArray(region.storage) && region.storage.length > 0) return true;
+            }
+        }
+        return false;
+    }
+
+    _hasProgress(data) {
+        if (!data || typeof data !== 'object') return false;
+        if (this._hasPokemon(data)) return true;
         if (data.stats && data.stats.hasPickedStarter) return true;
         if (data.globalStats && data.globalStats.playtime > 0) return true;
         if (data.stats && data.stats.playtime > 0) return true;
+        if (data.regions && typeof data.regions === 'object') {
+            for (const region of Object.values(data.regions)) {
+                if (region && typeof region === 'object' && region.stats && region.stats.hasPickedStarter) {
+                    return true;
+                }
+            }
+        }
         return false;
+    }
+
+    _getSaveTimestamp(data) {
+        if (!data || typeof data !== 'object') return 0;
+        const savedAt = typeof data.savedAt === 'number' && Number.isFinite(data.savedAt) ? data.savedAt : 0;
+        const lastPlayed = typeof data.lastPlayed === 'number' && Number.isFinite(data.lastPlayed) ? data.lastPlayed : 0;
+        return Math.max(savedAt, lastPlayed);
+    }
+
+    _getSaveSeq(data) {
+        if (!data || typeof data !== 'object') return 0;
+        return typeof data._saveSeq === 'number' && Number.isFinite(data._saveSeq) ? data._saveSeq : 0;
+    }
+
+    _getPlaytime(data) {
+        if (!data || typeof data !== 'object') return 0;
+        const globalPlaytime = data.globalStats && typeof data.globalStats.playtime === 'number' ? data.globalStats.playtime : 0;
+        const regionalPlaytime = data.stats && typeof data.stats.playtime === 'number' ? data.stats.playtime : 0;
+        return Math.max(globalPlaytime, regionalPlaytime);
+    }
+
+    _getPokemonCount(data) {
+        if (!data || typeof data !== 'object') return 0;
+        let count = 0;
+        if (Array.isArray(data.party)) count += data.party.length;
+        if (Array.isArray(data.storage)) count += data.storage.length;
+        if (data.stats && data.stats.caughtSpecies && typeof data.stats.caughtSpecies === 'object') {
+            count += Object.keys(data.stats.caughtSpecies).length;
+        }
+        if (data.regions && typeof data.regions === 'object') {
+            for (const region of Object.values(data.regions)) {
+                if (!region || typeof region !== 'object') continue;
+                if (Array.isArray(region.party)) count += region.party.length;
+                if (Array.isArray(region.storage)) count += region.storage.length;
+                if (region.stats && region.stats.caughtSpecies && typeof region.stats.caughtSpecies === 'object') {
+                    count += Object.keys(region.stats.caughtSpecies).length;
+                }
+            }
+        }
+        return count;
+    }
+
+    _compareSaves(a, b) {
+        if (!a && !b) return 0;
+        if (!a) return -1;
+        if (!b) return 1;
+
+        const aProg = this._hasProgress(a);
+        const bProg = this._hasProgress(b);
+        if (aProg !== bProg) return aProg ? 1 : -1;
+
+        const tsDiff = this._getSaveTimestamp(a) - this._getSaveTimestamp(b);
+        if (tsDiff !== 0) return tsDiff;
+
+        const seqDiff = this._getSaveSeq(a) - this._getSaveSeq(b);
+        if (seqDiff !== 0) return seqDiff;
+
+        const ptDiff = this._getPlaytime(a) - this._getPlaytime(b);
+        if (ptDiff !== 0) return ptDiff;
+
+        return this._getPokemonCount(a) - this._getPokemonCount(b);
     }
 
     _pickNewerSave(a, b) {
         if (!a) return b || null;
         if (!b) return a;
-        const aHasProgress = this._hasProgress(a);
-        const bHasProgress = this._hasProgress(b);
-        if (aHasProgress && !bHasProgress) return a;
-        if (bHasProgress && !aHasProgress) return b;
-        const tsA = typeof a.lastPlayed === 'number' ? a.lastPlayed : 0;
-        const tsB = typeof b.lastPlayed === 'number' ? b.lastPlayed : 0;
-        return tsB > tsA ? b : a;
+        return this._compareSaves(b, a) > 0 ? b : a;
     }
 
     _scanLocalStorageProfileIds() {
@@ -163,7 +239,7 @@ export default class Storage {
                 this._scanLocalStorageProfileIds().forEach(id => mergedIds.add(id));
             }
 
-            // 3. Collect from disk (which also self-heals from *.json files on disk)
+            // 3. Collect from all disk save places (which also self-heal from *.json files on disk)
             if (disk) {
                 try {
                     const diskList = disk.listProfiles();
@@ -177,13 +253,15 @@ export default class Storage {
 
             if (mergedIds.size === 0) return;
 
-            // 4. Reconcile each profile between disk and localStorage
+            // 4. Reconcile each profile across all save places, keeping ONLY the single latest valid copy
             for (const profileId of mergedIds) {
-                let lsData = null;
+                let lsPrimary = null;
+                let lsBackup = null;
                 if (ls) {
-                    lsData = this._parseValidObject(ls.getItem(profileId)) ||
-                             this._parseValidObject(ls.getItem(profileId + BACKUP_SUFFIX));
+                    lsPrimary = this._parseValidObject(ls.getItem(profileId));
+                    lsBackup = this._parseValidObject(ls.getItem(profileId + BACKUP_SUFFIX));
                 }
+                const lsData = this._pickNewerSave(lsPrimary, lsBackup);
 
                 let diskData = null;
                 if (disk) {
@@ -197,19 +275,22 @@ export default class Storage {
                     }
                 }
 
-                const best = this._pickNewerSave(diskData, lsData);
-                if (!best) continue;
+                const latest = this._pickNewerSave(diskData, lsData);
+                if (!latest) continue;
 
-                const serialized = JSON.stringify(best);
-                if (disk && (!diskData || best !== diskData)) {
+                this._lastKnownSeq.set(profileId, Math.max(this._lastKnownSeq.get(profileId) || 0, this._getSaveSeq(latest)));
+
+                const serialized = JSON.stringify(latest);
+                if (disk && (!diskData || this._compareSaves(latest, diskData) > 0)) {
                     try {
                         disk.writeProfile(profileId, serialized);
                     } catch {
                         // ignore
                     }
                 }
-                if (ls && (!lsData || best !== lsData)) {
+                if (ls && (!lsPrimary || this._compareSaves(latest, lsPrimary) > 0)) {
                     this._writeLocalStorageSafe(profileId, serialized);
+                    this._writeLocalStorageSafe(profileId + BACKUP_SUFFIX, serialized);
                 }
             }
 
@@ -294,14 +375,28 @@ export default class Storage {
         }
 
         const bestLs = this._pickNewerSave(primaryLsData, backupLsData);
-        const best = this._pickNewerSave(diskData, bestLs);
+        const latest = this._pickNewerSave(diskData, bestLs);
 
-        // Self-heal primary localStorage if backup or disk had valid data while primary was missing/corrupted
-        if (best && !primaryLsData && ls) {
-            this._writeLocalStorageSafe(profileId, JSON.stringify(best));
+        if (latest) {
+            this._lastKnownSeq.set(profileId, Math.max(this._lastKnownSeq.get(profileId) || 0, this._getSaveSeq(latest)));
+            const serialized = JSON.stringify(latest);
+
+            // Self-heal stale/corrupted localStorage with ONLY the latest valid save
+            if (ls && (!primaryLsData || this._compareSaves(latest, primaryLsData) > 0)) {
+                this._writeLocalStorageSafe(profileId, serialized);
+                this._writeLocalStorageSafe(profileId + BACKUP_SUFFIX, serialized);
+            }
+            // Self-heal stale disk save places if localStorage had a newer save
+            if (disk && (!diskData || this._compareSaves(latest, diskData) > 0)) {
+                try {
+                    disk.writeProfile(profileId, serialized);
+                } catch {
+                    // ignore
+                }
+            }
         }
 
-        return best;
+        return latest;
     }
 
     deleteProfile(profileId) {
@@ -317,6 +412,7 @@ export default class Storage {
                 disk.deleteProfile(profileId);
             }
 
+            this._lastKnownSeq.delete(profileId);
             let profiles = this.getProfiles().filter(id => id !== profileId);
             this._persistMasterIndex(profiles);
         } catch (e) {
@@ -337,6 +433,7 @@ export default class Storage {
                 if (disk) {
                     disk.deleteProfile(pid);
                 }
+                this._lastKnownSeq.delete(pid);
             }
             if (ls) {
                 ls.removeItem(this.masterKey);
@@ -360,10 +457,15 @@ export default class Storage {
         profiles.push(newProfileId);
         this._persistMasterIndex(profiles);
         this.currentProfileId = newProfileId;
+        this._lastKnownSeq.set(newProfileId, 0);
         return newProfileId;
     }
 
     save(state) {
+        if (this._saveTimer) {
+            clearTimeout(this._saveTimer);
+            this._saveTimer = null;
+        }
         if (!this.currentProfileId) {
             console.error("Cannot save: No current profile selected.");
             return false;
@@ -374,17 +476,31 @@ export default class Storage {
         }
 
         try {
-            // Failsafe: never overwrite a progressed profile with an empty/uninitialized state
-            if (!this._hasProgress(state)) {
-                const existing = this.getProfileData(this.currentProfileId);
-                if (this._hasProgress(existing)) {
-                    console.error(`Refused to overwrite progressed profile ${this.currentProfileId} with empty state.`);
-                    return false;
-                }
+            const existing = this.getProfileData(this.currentProfileId);
+
+            // Failsafe 1: never overwrite a progressed profile with an empty/uninitialized state
+            if (!this._hasProgress(state) && this._hasProgress(existing)) {
+                console.error(`Refused to overwrite progressed profile ${this.currentProfileId} with empty state.`);
+                return false;
             }
 
-            // Inject a last played timestamp for UI
-            state.lastPlayed = Date.now();
+            // Failsafe 2: never overwrite a profile that has Pokemon with a state that lost all Pokemon across all regions
+            if (!this._hasPokemon(state) && this._hasPokemon(existing)) {
+                console.error(`Refused to overwrite profile ${this.currentProfileId}: incoming state has no Pokemon while existing save does.`);
+                return false;
+            }
+
+            // Inject monotonic save sequence and timestamps
+            const prevSeq = Math.max(
+                this._getSaveSeq(state),
+                this._getSaveSeq(existing),
+                this._lastKnownSeq.get(this.currentProfileId) || 0
+            );
+            const now = Date.now();
+            state._saveSeq = prevSeq + 1;
+            state.savedAt = now;
+            state.lastPlayed = now;
+            this._lastKnownSeq.set(this.currentProfileId, state._saveSeq);
 
             // Simple replacer to avoid the specific dayCareRef circular issue and config without breaking legitimate duplicate objects
             const jsonString = JSON.stringify(state, (key, value) => {
@@ -429,6 +545,7 @@ export default class Storage {
     }
 
     requestSave(state, delayMs = 1500) {
+        if (!this.currentProfileId || !state) return;
         if (this._saveTimer) {
             clearTimeout(this._saveTimer);
         }
@@ -444,6 +561,11 @@ export default class Storage {
         const data = this.getProfileData(profileId);
         if (!data) return false;
         data.profileName = trimmed;
+        const now = Date.now();
+        data._saveSeq = Math.max(this._getSaveSeq(data), this._lastKnownSeq.get(profileId) || 0) + 1;
+        data.savedAt = now;
+        this._lastKnownSeq.set(profileId, data._saveSeq);
+
         try {
             const jsonString = JSON.stringify(data);
             let diskOk = false;
@@ -501,6 +623,8 @@ export default class Storage {
         if (preservedConfig !== undefined) {
             state.config = preservedConfig;
         }
+        if (!Array.isArray(state.party)) state.party = [];
+        if (!Array.isArray(state.storage)) state.storage = [];
 
         if (state.stats && state.stats.caughtSpecies) {
             state.stats.caughtSpeciesCount = Object.keys(state.stats.caughtSpecies).length;

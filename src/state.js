@@ -173,7 +173,8 @@ export function swapRegion(newRegionName) {
     const currentRegion = state.currentRegionName;
     state.regions[currentRegion] = {};
     for (let key in REGION_TEMPLATE) {
-        state.regions[currentRegion][key] = JSON.parse(JSON.stringify(state[key]));
+        const val = state[key] !== undefined ? state[key] : REGION_TEMPLATE[key];
+        state.regions[currentRegion][key] = JSON.parse(JSON.stringify(val));
     }
 
     // Initialize or unpack new region
@@ -217,6 +218,9 @@ export function swapRegion(newRegionName) {
     }
 
     state.currentRegionName = newRegionName;
+    if (typeof window !== 'undefined' && typeof window.saveGame === 'function') {
+        window.saveGame();
+    }
 }
 
 

@@ -1,12 +1,46 @@
 const { app, BrowserWindow, ipcMain, screen } = require('electron');
 const path = require('path');
 const fs = require('fs');
-const { createSaveManager } = require('./src/electron/saveManager');
+const { createMultiSaveManager } = require('./src/electron/saveManager');
 
 let saveManager = null;
+function getSaveDirectories() {
+    const dirs = [];
+    const addDir = (dirPath) => {
+        if (dirPath && !dirs.includes(dirPath)) {
+            dirs.push(dirPath);
+        }
+    };
+
+    // Place 1: Electron userData (AppData\Roaming\<App>\saves)
+    addDir(path.join(app.getPath('userData'), 'saves'));
+
+    // Place 2: LocalAppData (survives Roaming resets and stays outside OneDrive)
+    if (process.env.LOCALAPPDATA) {
+        addDir(path.join(process.env.LOCALAPPDATA, 'Idle Pokemon World', 'saves'));
+    } else {
+        addDir(path.join(app.getPath('appData'), 'Idle Pokemon World Backups', 'saves'));
+    }
+
+    // Place 3: User Documents folder (survives AppData wipes / reinstalls)
+    try {
+        addDir(path.join(app.getPath('documents'), 'Idle Pokemon World', 'saves'));
+    } catch {
+        // documents path may be unavailable in restricted environments
+    }
+
+    // Place 4: Portable backup beside executable/app directory
+    const appSideDir = app.isPackaged
+        ? path.join(path.dirname(app.getPath('exe')), 'saves_backup')
+        : path.join(__dirname, 'saves_backup');
+    addDir(appSideDir);
+
+    return dirs;
+}
+
 function getSaveManager() {
     if (!saveManager) {
-        saveManager = createSaveManager(path.join(app.getPath('userData'), 'saves'));
+        saveManager = createMultiSaveManager(getSaveDirectories());
     }
     return saveManager;
 }
@@ -108,6 +142,10 @@ ipcMain.on('save-storage:delete-profile', (event, profileId) => {
 
 ipcMain.on('save-storage:get-save-dir', (event) => {
     event.returnValue = getSaveManager().baseDir;
+});
+
+ipcMain.on('save-storage:get-save-dirs', (event) => {
+    event.returnValue = getSaveManager().getSaveDirs();
 });
 
 app.whenReady().then(() => {

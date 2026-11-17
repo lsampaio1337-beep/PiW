@@ -15,6 +15,7 @@ contextBridge.exposeInMainWorld('electronAPI', {
         writeProfile: (profileId, jsonString) => ipcRenderer.sendSync('save-storage:write-profile', profileId, jsonString),
         writeMasterIndex: (profiles) => ipcRenderer.sendSync('save-storage:write-master-index', profiles),
         deleteProfile: (profileId) => ipcRenderer.sendSync('save-storage:delete-profile', profileId),
-        getSaveDir: () => ipcRenderer.sendSync('save-storage:get-save-dir')
+        getSaveDir: () => ipcRenderer.sendSync('save-storage:get-save-dir'),
+        getSaveDirs: () => ipcRenderer.sendSync('save-storage:get-save-dirs')
     }
 });

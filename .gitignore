@@ -9,3 +9,4 @@ package-lock.json
 *.rej
 *.patch
 server.log
+saves_backup/

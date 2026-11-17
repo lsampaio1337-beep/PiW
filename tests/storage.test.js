@@ -368,4 +368,60 @@ describe('Storage failsafes & recovery', () => {
         expect(profiles).toContain('profile_orphan_99');
         expect(mockDisk.writeProfile).toHaveBeenCalledWith('profile_orphan_99', expect.any(String));
     });
+
+    test('reloads ONLY the latest profile data across localStorage and disk and repairs stale store', () => {
+        const pid = storage.createNewProfile();
+        // Put older save on disk
+        mockDisk.writeProfile(pid, JSON.stringify({
+            profileName: 'Trainer',
+            party: [{ name: 'Pikachu', level: 10 }],
+            savedAt: 1000,
+            _saveSeq: 2
+        }));
+        // Put newer save in localStorage
+        store.set(pid, JSON.stringify({
+            profileName: 'Trainer',
+            party: [{ name: 'Raichu', level: 35 }],
+            savedAt: 5000,
+            _saveSeq: 6
+        }));
+
+        const state = { party: [], storage: [], stats: {}, globalStats: {}, settings: {}, config: { untouched: true } };
+        const res = storage.loadProfileIntoState(pid, state);
+
+        expect(res.ok).toBe(true);
+        expect(state.party[0].name).toBe('Raichu');
+        expect(state.config.untouched).toBe(true);
+        // Stale disk save should be repaired with the newer localStorage copy
+        expect(mockDisk.readProfile(pid).data.party[0].name).toBe('Raichu');
+    });
+
+    test('refuses to overwrite a multi-region profile if incoming state lost all Pokemon across all regions', () => {
+        const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+        const pid = storage.createNewProfile();
+        const saved = storage.save({
+            party: [],
+            storage: [],
+            currentRegionName: 'Johto',
+            regions: {
+                Kanto: { party: [{ name: 'Charizard', level: 55 }], storage: [], stats: { hasPickedStarter: true } }
+            },
+            stats: { hasPickedStarter: false },
+            globalStats: { playtime: 500 }
+        });
+        expect(saved).toBe(true);
+
+        // Simulate corrupted in-memory state with playtime intact but zero Pokemon everywhere
+        const brokenState = {
+            party: [],
+            storage: [],
+            currentRegionName: 'Johto',
+            regions: {},
+            stats: { hasPickedStarter: false },
+            globalStats: { playtime: 500 }
+        };
+        expect(storage.save(brokenState)).toBe(false);
+        expect(storage.getProfileData(pid).regions.Kanto.party[0].name).toBe('Charizard');
+        errorSpy.mockRestore();
+    });
 });

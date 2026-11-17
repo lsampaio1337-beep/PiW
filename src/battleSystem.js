@@ -1729,6 +1729,9 @@ class BattleSystem {
                         }
                         this.state.storage.push(caughtPokemon);
                         this.state.stats.caught++;
+                        if (typeof window !== 'undefined' && typeof window.requestSaveGame === 'function') {
+                            window.requestSaveGame();
+                        }
                         if (defeatedEncounter.qualityName === "Shiny") {
                             this.state.stats.shiniesCaught = (this.state.stats.shiniesCaught || 0) + 1;
                             if (!this.state.stats.caughtShiniesSpecies) this.state.stats.caughtShiniesSpecies = {};
@@ -2113,6 +2116,9 @@ class BattleSystem {
                 }
             }
             this.updateGymUI();
+            if (typeof window !== 'undefined' && typeof window.requestSaveGame === 'function') {
+                window.requestSaveGame();
+            }
             if (typeof window.switchView === 'function') {
                 // Return main view to normal state (safari, center, etc., but since we are in map, maybe BATTLE_ARENA or idle)
                 // Gym overlay is still active on the map window.
