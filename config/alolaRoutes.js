@@ -9,79 +9,67 @@ export const alolaRoutes = [
         "pokemonId": 10,
         "minLevel": 10,
         "maxLevel": 13,
-        "chance": 0.1064
+        "chance": 0.122
       },
       {
         "pokemonId": 11,
         "minLevel": 10,
         "maxLevel": 13,
-        "chance": 0.0426
+        "chance": 0.0488
       },
       {
         "pokemonId": 19,
         "minLevel": 11,
         "maxLevel": 14,
-        "chance": 0.0851
-      },
-      {
-        "pokemonId": 143,
-        "minLevel": 10,
-        "maxLevel": 13,
-        "chance": 0.0638
+        "chance": 0.0975
       },
       {
         "pokemonId": 165,
         "minLevel": 10,
         "maxLevel": 13,
-        "chance": 0.0426
+        "chance": 0.0488
       },
       {
         "pokemonId": 167,
         "minLevel": 10,
         "maxLevel": 13,
-        "chance": 0.0426
-      },
-      {
-        "pokemonId": 185,
-        "minLevel": 10,
-        "maxLevel": 13,
-        "chance": 0.0638
+        "chance": 0.0488
       },
       {
         "pokemonId": 438,
         "minLevel": 11,
         "maxLevel": 14,
-        "chance": 0.1277
+        "chance": 0.1464
       },
       {
         "pokemonId": 440,
         "minLevel": 10,
         "maxLevel": 13,
-        "chance": 0.1277
+        "chance": 0.1464
       },
       {
         "pokemonId": 446,
         "minLevel": 11,
         "maxLevel": 14,
-        "chance": 0.0426
+        "chance": 0.0488
       },
       {
         "pokemonId": 731,
         "minLevel": 11,
         "maxLevel": 14,
-        "chance": 0.0851
+        "chance": 0.0975
       },
       {
         "pokemonId": 734,
         "minLevel": 11,
         "maxLevel": 14,
-        "chance": 0.0851
+        "chance": 0.0975
       },
       {
         "pokemonId": 744,
         "minLevel": 11,
         "maxLevel": 14,
-        "chance": 0.0849
+        "chance": 0.0975
       }
     ]
   },
@@ -324,26 +312,7 @@ export const alolaRoutes = [
     "primaryName": "Hau'oli City",
     "secondaryName": "Main",
     "pokeapiArea": "hauoli-city-main",
-    "spawns": [
-      {
-        "pokemonId": 97,
-        "minLevel": 29,
-        "maxLevel": 29,
-        "chance": 0.3333
-      },
-      {
-        "pokemonId": 760,
-        "minLevel": 28,
-        "maxLevel": 28,
-        "chance": 0.3333
-      },
-      {
-        "pokemonId": 801,
-        "minLevel": 50,
-        "maxLevel": 50,
-        "chance": 0.3334
-      }
-    ]
+    "spawns": []
   },
   {
     "name": "Hau'oli City - Shopping District",
@@ -435,91 +404,61 @@ export const alolaRoutes = [
         "pokemonId": 72,
         "minLevel": 15,
         "maxLevel": 18,
-        "chance": 0.086
+        "chance": 0.1311
       },
       {
         "pokemonId": 129,
         "minLevel": 10,
         "maxLevel": 22,
-        "chance": 0.086
-      },
-      {
-        "pokemonId": 130,
-        "minLevel": 10,
-        "maxLevel": 22,
-        "chance": 0.0645
-      },
-      {
-        "pokemonId": 222,
-        "minLevel": 10,
-        "maxLevel": 22,
-        "chance": 0.086
+        "chance": 0.1311
       },
       {
         "pokemonId": 223,
         "minLevel": 10,
         "maxLevel": 22,
-        "chance": 0.0968
-      },
-      {
-        "pokemonId": 224,
-        "minLevel": 10,
-        "maxLevel": 22,
-        "chance": 0.0645
+        "chance": 0.1476
       },
       {
         "pokemonId": 278,
         "minLevel": 15,
         "maxLevel": 18,
-        "chance": 0.043
+        "chance": 0.0655
       },
       {
         "pokemonId": 366,
         "minLevel": 10,
         "maxLevel": 22,
-        "chance": 0.0215
-      },
-      {
-        "pokemonId": 367,
-        "minLevel": 10,
-        "maxLevel": 22,
-        "chance": 0.0645
-      },
-      {
-        "pokemonId": 368,
-        "minLevel": 10,
-        "maxLevel": 22,
-        "chance": 0.0645
+        "chance": 0.0328
       },
       {
         "pokemonId": 370,
         "minLevel": 10,
         "maxLevel": 22,
-        "chance": 0.086
+        "chance": 0.1311
       },
       {
         "pokemonId": 456,
         "minLevel": 15,
         "maxLevel": 18,
-        "chance": 0.043
+        "chance": 0.0655
       },
       {
         "pokemonId": 458,
         "minLevel": 15,
         "maxLevel": 18,
-        "chance": 0.043
+        "chance": 0.0655
       },
       {
         "pokemonId": 746,
         "minLevel": 10,
         "maxLevel": 22,
-        "chance": 0.086
+        "chance": 0.1311
       },
       {
         "pokemonId": 747,
         "minLevel": 10,
         "maxLevel": 22,
-        "chance": 0.0647
+        "chance": 0.0987
       }
     ]
   },
@@ -733,25 +672,19 @@ export const alolaRoutes = [
         "pokemonId": 41,
         "minLevel": 8,
         "maxLevel": 11,
-        "chance": 0.1321
+        "chance": 0.2121
       },
       {
         "pokemonId": 714,
         "minLevel": 8,
         "maxLevel": 11,
-        "chance": 0.1132
+        "chance": 0.1818
       },
       {
         "pokemonId": 734,
         "minLevel": 10,
         "maxLevel": 10,
-        "chance": 0.3774
-      },
-      {
-        "pokemonId": 795,
-        "minLevel": 60,
-        "maxLevel": 60,
-        "chance": 0.3773
+        "chance": 0.6061
       }
     ]
   },
@@ -821,49 +754,43 @@ export const alolaRoutes = [
         "pokemonId": 21,
         "minLevel": 9,
         "maxLevel": 12,
-        "chance": 0.1289
+        "chance": 0.1381
       },
       {
         "pokemonId": 56,
         "minLevel": 9,
         "maxLevel": 12,
-        "chance": 0.1333
+        "chance": 0.1428
       },
       {
         "pokemonId": 371,
         "minLevel": 9,
         "maxLevel": 12,
-        "chance": 0.0044
-      },
-      {
-        "pokemonId": 373,
-        "minLevel": 9,
-        "maxLevel": 12,
-        "chance": 0.0667
+        "chance": 0.0047
       },
       {
         "pokemonId": 701,
         "minLevel": 9,
         "maxLevel": 12,
-        "chance": 0.0444
+        "chance": 0.0476
       },
       {
         "pokemonId": 734,
         "minLevel": 9,
         "maxLevel": 12,
-        "chance": 0.0444
+        "chance": 0.0476
       },
       {
         "pokemonId": 739,
         "minLevel": 10,
         "maxLevel": 13,
-        "chance": 0.4444
+        "chance": 0.4762
       },
       {
         "pokemonId": 742,
         "minLevel": 9,
         "maxLevel": 12,
-        "chance": 0.1335
+        "chance": 0.143
       }
     ]
   },
@@ -876,49 +803,43 @@ export const alolaRoutes = [
         "pokemonId": 10,
         "minLevel": 9,
         "maxLevel": 12,
-        "chance": 0.102
+        "chance": 0.1724
       },
       {
         "pokemonId": 11,
         "minLevel": 9,
         "maxLevel": 12,
-        "chance": 0.0367
+        "chance": 0.062
       },
       {
         "pokemonId": 12,
         "minLevel": 9,
         "maxLevel": 12,
-        "chance": 0.1265
+        "chance": 0.2138
       },
       {
         "pokemonId": 546,
         "minLevel": 9,
         "maxLevel": 12,
-        "chance": 0.0816
+        "chance": 0.1379
       },
       {
         "pokemonId": 548,
         "minLevel": 10,
         "maxLevel": 12,
-        "chance": 0.0816
+        "chance": 0.1379
       },
       {
         "pokemonId": 669,
         "minLevel": 9,
         "maxLevel": 12,
-        "chance": 0.0816
+        "chance": 0.1379
       },
       {
         "pokemonId": 742,
         "minLevel": 9,
         "maxLevel": 12,
-        "chance": 0.0816
-      },
-      {
-        "pokemonId": 794,
-        "minLevel": 65,
-        "maxLevel": 65,
-        "chance": 0.4084
+        "chance": 0.1381
       }
     ]
   },
@@ -931,67 +852,55 @@ export const alolaRoutes = [
         "pokemonId": 41,
         "minLevel": 9,
         "maxLevel": 18,
-        "chance": 0.1782
+        "chance": 0.2022
       },
       {
         "pokemonId": 54,
         "minLevel": 9,
         "maxLevel": 18,
-        "chance": 0.0693
+        "chance": 0.0786
       },
       {
         "pokemonId": 86,
         "minLevel": 15,
         "maxLevel": 18,
-        "chance": 0.0594
+        "chance": 0.0674
       },
       {
         "pokemonId": 124,
         "minLevel": 9,
         "maxLevel": 12,
-        "chance": 0.0297
+        "chance": 0.0337
       },
       {
         "pokemonId": 129,
         "minLevel": 10,
         "maxLevel": 22,
-        "chance": 0.2574
-      },
-      {
-        "pokemonId": 130,
-        "minLevel": 10,
-        "maxLevel": 22,
-        "chance": 0.0594
+        "chance": 0.2921
       },
       {
         "pokemonId": 225,
         "minLevel": 9,
         "maxLevel": 18,
-        "chance": 0.0594
+        "chance": 0.0674
       },
       {
         "pokemonId": 238,
         "minLevel": 9,
         "maxLevel": 12,
-        "chance": 0.0594
+        "chance": 0.0674
       },
       {
         "pokemonId": 339,
         "minLevel": 10,
         "maxLevel": 22,
-        "chance": 0.1386
-      },
-      {
-        "pokemonId": 340,
-        "minLevel": 10,
-        "maxLevel": 22,
-        "chance": 0.0594
+        "chance": 0.1573
       },
       {
         "pokemonId": 440,
         "minLevel": 9,
         "maxLevel": 12,
-        "chance": 0.0298
+        "chance": 0.0339
       }
     ]
   },
@@ -1004,97 +913,73 @@ export const alolaRoutes = [
         "pokemonId": 72,
         "minLevel": 15,
         "maxLevel": 18,
-        "chance": 0.0769
+        "chance": 0.093
       },
       {
         "pokemonId": 79,
         "minLevel": 15,
         "maxLevel": 18,
-        "chance": 0.0385
-      },
-      {
-        "pokemonId": 80,
-        "minLevel": 15,
-        "maxLevel": 18,
-        "chance": 0.0288
+        "chance": 0.0466
       },
       {
         "pokemonId": 90,
         "minLevel": 10,
         "maxLevel": 22,
-        "chance": 0.0769
+        "chance": 0.093
       },
       {
         "pokemonId": 129,
         "minLevel": 10,
         "maxLevel": 22,
-        "chance": 0.1154
-      },
-      {
-        "pokemonId": 130,
-        "minLevel": 10,
-        "maxLevel": 22,
-        "chance": 0.0577
-      },
-      {
-        "pokemonId": 199,
-        "minLevel": 15,
-        "maxLevel": 18,
-        "chance": 0.0288
+        "chance": 0.1395
       },
       {
         "pokemonId": 223,
         "minLevel": 10,
         "maxLevel": 22,
-        "chance": 0.1058
-      },
-      {
-        "pokemonId": 224,
-        "minLevel": 10,
-        "maxLevel": 22,
-        "chance": 0.0577
+        "chance": 0.1279
       },
       {
         "pokemonId": 278,
         "minLevel": 15,
         "maxLevel": 18,
-        "chance": 0.1154
+        "chance": 0.1395
       },
       {
         "pokemonId": 371,
         "minLevel": 15,
         "maxLevel": 18,
-        "chance": 0.0192
+        "chance": 0.0232
       },
       {
         "pokemonId": 372,
         "minLevel": 15,
         "maxLevel": 18,
-        "chance": 0.0288
+        "chance": 0.0348
       },
       {
         "pokemonId": 456,
         "minLevel": 15,
         "maxLevel": 18,
-        "chance": 0.0385
+        "chance": 0.0466
       },
       {
         "pokemonId": 458,
         "minLevel": 15,
         "maxLevel": 18,
-        "chance": 0.0385
+        "chance": 0.0466
       },
       {
         "pokemonId": 734,
         "minLevel": 15,
         "maxLevel": 18,
-        "chance": 0.0577
+        "chance": 0.0698
       },
       {
         "pokemonId": 746,
         "minLevel": 10,
         "maxLevel": 22,
-        "chance": 0.1154
+        "chance": 0.1395
       }
     ]
   },
@@ -1107,91 +992,61 @@ export const alolaRoutes = [
         "pokemonId": 72,
         "minLevel": 15,
         "maxLevel": 18,
-        "chance": 0.0792
+        "chance": 0.1127
       },
       {
         "pokemonId": 129,
         "minLevel": 10,
         "maxLevel": 22,
-        "chance": 0.0792
-      },
-      {
-        "pokemonId": 130,
-        "minLevel": 10,
-        "maxLevel": 22,
-        "chance": 0.0594
-      },
-      {
-        "pokemonId": 222,
-        "minLevel": 10,
-        "maxLevel": 22,
-        "chance": 0.0594
+        "chance": 0.1127
       },
       {
         "pokemonId": 223,
         "minLevel": 10,
         "maxLevel": 22,
-        "chance": 0.0891
-      },
-      {
-        "pokemonId": 224,
-        "minLevel": 10,
-        "maxLevel": 22,
-        "chance": 0.0594
+        "chance": 0.1267
       },
       {
         "pokemonId": 278,
         "minLevel": 15,
         "maxLevel": 18,
-        "chance": 0.0396
+        "chance": 0.0563
       },
       {
         "pokemonId": 366,
         "minLevel": 10,
         "maxLevel": 22,
-        "chance": 0.1188
-      },
-      {
-        "pokemonId": 367,
-        "minLevel": 10,
-        "maxLevel": 22,
-        "chance": 0.0594
-      },
-      {
-        "pokemonId": 368,
-        "minLevel": 10,
-        "maxLevel": 22,
-        "chance": 0.0594
+        "chance": 0.169
       },
       {
         "pokemonId": 370,
         "minLevel": 10,
         "maxLevel": 22,
-        "chance": 0.0792
+        "chance": 0.1127
       },
       {
         "pokemonId": 456,
         "minLevel": 15,
         "maxLevel": 18,
-        "chance": 0.0396
+        "chance": 0.0563
       },
       {
         "pokemonId": 458,
         "minLevel": 15,
         "maxLevel": 18,
-        "chance": 0.0396
+        "chance": 0.0563
       },
       {
         "pokemonId": 746,
         "minLevel": 10,
         "maxLevel": 22,
-        "chance": 0.0792
+        "chance": 0.1127
       },
       {
         "pokemonId": 747,
         "minLevel": 10,
         "maxLevel": 22,
-        "chance": 0.0595
+        "chance": 0.0846
       }
     ]
   },
@@ -1249,37 +1104,31 @@ export const alolaRoutes = [
         "pokemonId": 66,
         "minLevel": 11,
         "maxLevel": 14,
-        "chance": 0.15
+        "chance": 0.3
       },
       {
         "pokemonId": 327,
         "minLevel": 11,
         "maxLevel": 14,
-        "chance": 0.15
+        "chance": 0.3
       },
       {
         "pokemonId": 524,
         "minLevel": 11,
         "maxLevel": 14,
-        "chance": 0.05
+        "chance": 0.1
       },
       {
         "pokemonId": 703,
         "minLevel": 11,
         "maxLevel": 14,
-        "chance": 0.05
+        "chance": 0.1
       },
       {
         "pokemonId": 744,
         "minLevel": 11,
         "maxLevel": 14,
-        "chance": 0.1
-      },
-      {
-        "pokemonId": 800,
-        "minLevel": 75,
-        "maxLevel": 75,
-        "chance": 0.5
+        "chance": 0.2
       }
     ]
   },
@@ -1941,61 +1790,55 @@ export const alolaRoutes = [
         "pokemonId": 104,
         "minLevel": 16,
         "maxLevel": 19,
-        "chance": 0.0873
+        "chance": 0.1372
       },
       {
         "pokemonId": 115,
         "minLevel": 16,
         "maxLevel": 19,
-        "chance": 0.0582
+        "chance": 0.0915
       },
       {
         "pokemonId": 126,
         "minLevel": 16,
         "maxLevel": 19,
-        "chance": 0.0545
+        "chance": 0.0857
       },
       {
         "pokemonId": 240,
         "minLevel": 16,
         "maxLevel": 19,
-        "chance": 0.0545
+        "chance": 0.0857
       },
       {
         "pokemonId": 440,
         "minLevel": 16,
         "maxLevel": 19,
-        "chance": 0.0545
+        "chance": 0.0857
       },
       {
         "pokemonId": 661,
         "minLevel": 16,
         "maxLevel": 19,
-        "chance": 0.1091
+        "chance": 0.1715
       },
       {
         "pokemonId": 662,
         "minLevel": 16,
         "maxLevel": 19,
-        "chance": 0.0545
+        "chance": 0.0857
       },
       {
         "pokemonId": 757,
         "minLevel": 16,
         "maxLevel": 19,
-        "chance": 0.1091
+        "chance": 0.1715
       },
       {
         "pokemonId": 758,
         "minLevel": 16,
         "maxLevel": 19,
-        "chance": 0.0545
-      },
-      {
-        "pokemonId": 793,
-        "minLevel": 55,
-        "maxLevel": 55,
-        "chance": 0.3638
+        "chance": 0.0855
       }
     ]
   },
@@ -2572,25 +2415,19 @@ export const alolaRoutes = [
         "pokemonId": 41,
         "minLevel": 20,
         "maxLevel": 23,
-        "chance": 0.3243
+        "chance": 0.7058
       },
       {
         "pokemonId": 42,
         "minLevel": 20,
         "maxLevel": 23,
-        "chance": 0.0811
+        "chance": 0.1765
       },
       {
         "pokemonId": 246,
         "minLevel": 20,
         "maxLevel": 23,
-        "chance": 0.0541
-      },
-      {
-        "pokemonId": 793,
-        "minLevel": 55,
-        "maxLevel": 55,
-        "chance": 0.5405
+        "chance": 0.1177
       }
     ]
   },
@@ -2658,31 +2495,25 @@ export const alolaRoutes = [
         "pokemonId": 41,
         "minLevel": 21,
         "maxLevel": 24,
-        "chance": 0.093
+        "chance": 0.1739
       },
       {
         "pokemonId": 42,
         "minLevel": 21,
         "maxLevel": 24,
-        "chance": 0.0698
+        "chance": 0.1305
       },
       {
         "pokemonId": 92,
         "minLevel": 21,
         "maxLevel": 24,
-        "chance": 0.2326
+        "chance": 0.4348
       },
       {
         "pokemonId": 708,
         "minLevel": 21,
         "maxLevel": 24,
-        "chance": 0.1395
-      },
-      {
-        "pokemonId": 796,
-        "minLevel": 65,
-        "maxLevel": 65,
-        "chance": 0.4651
+        "chance": 0.2608
       }
     ]
   },
@@ -5563,6 +5394,126 @@ export const alolaRoutes = [
     "name": "Battle Tree",
     "primaryName": "Battle Tree",
     "spawns": []
+  },
+  {
+    "name": "Postgame",
+    "primaryName": "Postgame",
+    "spawns": [
+      {
+        "pokemonId": 97,
+        "minLevel": 55,
+        "maxLevel": 60,
+        "chance": 0.0526
+      },
+      {
+        "pokemonId": 760,
+        "minLevel": 55,
+        "maxLevel": 60,
+        "chance": 0.0526
+      },
+      {
+        "pokemonId": 801,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.0526
+      },
+      {
+        "pokemonId": 130,
+        "minLevel": 55,
+        "maxLevel": 60,
+        "chance": 0.0526
+      },
+      {
+        "pokemonId": 222,
+        "minLevel": 55,
+        "maxLevel": 60,
+        "chance": 0.0526
+      },
+      {
+        "pokemonId": 224,
+        "minLevel": 55,
+        "maxLevel": 60,
+        "chance": 0.0526
+      },
+      {
+        "pokemonId": 367,
+        "minLevel": 55,
+        "maxLevel": 60,
+        "chance": 0.0526
+      },
+      {
+        "pokemonId": 368,
+        "minLevel": 55,
+        "maxLevel": 60,
+        "chance": 0.0526
+      },
+      {
+        "pokemonId": 143,
+        "minLevel": 55,
+        "maxLevel": 60,
+        "chance": 0.0526
+      },
+      {
+        "pokemonId": 185,
+        "minLevel": 55,
+        "maxLevel": 60,
+        "chance": 0.0526
+      },
+      {
+        "pokemonId": 340,
+        "minLevel": 55,
+        "maxLevel": 60,
+        "chance": 0.0526
+      },
+      {
+        "pokemonId": 80,
+        "minLevel": 55,
+        "maxLevel": 60,
+        "chance": 0.0526
+      },
+      {
+        "pokemonId": 199,
+        "minLevel": 55,
+        "maxLevel": 60,
+        "chance": 0.0526
+      },
+      {
+        "pokemonId": 800,
+        "minLevel": 75,
+        "maxLevel": 75,
+        "chance": 0.0526
+      },
+      {
+        "pokemonId": 795,
+        "minLevel": 60,
+        "maxLevel": 60,
+        "chance": 0.0526
+      },
+      {
+        "pokemonId": 794,
+        "minLevel": 65,
+        "maxLevel": 65,
+        "chance": 0.0526
+      },
+      {
+        "pokemonId": 793,
+        "minLevel": 60,
+        "maxLevel": 60,
+        "chance": 0.0526
+      },
+      {
+        "pokemonId": 796,
+        "minLevel": 65,
+        "maxLevel": 65,
+        "chance": 0.0535
+      },
+      {
+        "pokemonId": 373,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.0523
+      }
+    ]
   }
 ];
 
@@ -5654,12 +5605,7 @@ export const alolaUnlocks = [
     "unlocks": [
       "Hau'oli City - Shopping District"
     ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Hau'oli City - Main",
-        "count": 10
-      }
-    }
+    "requirements": {}
   },
   {
     "challengeName": "Challenge 09",
@@ -6864,8 +6810,21 @@ export const alolaUnlocks = [
   {
     "challengeName": "Challenge 109",
     "areaId": "Battle Tree",
-    "unlocks": [],
+    "unlocks": [
+      "Postgame"
+    ],
     "requirements": {}
+  },
+  {
+    "challengeName": "Challenge 110",
+    "areaId": "Postgame",
+    "unlocks": [],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Postgame",
+        "count": 10
+      }
+    }
   }
 ];
 

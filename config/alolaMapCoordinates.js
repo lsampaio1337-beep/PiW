@@ -434,5 +434,9 @@ export const alolaMapCoordinates = {
   "Battle Tree": {
     "x": 50,
     "y": 350
+  },
+  "Postgame": {
+    "x": 100,
+    "y": 350
   }
 };
