@@ -2286,47 +2286,13 @@ async function init() {
 
             rightSide.appendChild(playedDiv);
 
-            const inlineActions = document.createElement('div');
-            inlineActions.className = 'profile-inline-actions';
-
             if (pData.isZzZMode) {
                 const sleepImg = document.createElement('img');
                 sleepImg.src = "Assets/Extra/Icons/IconSleep.png";
                 sleepImg.className = 'profile-sleep-badge';
                 sleepImg.title = "ZzZ Mode Active";
-                inlineActions.appendChild(sleepImg);
+                rightSide.appendChild(sleepImg);
             }
-
-            const inlineRenameBtn = document.createElement('button');
-            inlineRenameBtn.type = 'button';
-            inlineRenameBtn.className = 'profile-icon-btn';
-            inlineRenameBtn.textContent = 'Rename';
-            inlineRenameBtn.title = `Rename ${profileName}`;
-            inlineRenameBtn.onclick = (e) => {
-                e.stopPropagation();
-                if (renameModal && renameInput) {
-                    pendingRenameId = profileId;
-                    renameInput.value = profileName;
-                    renameModal.style.display = 'flex';
-                }
-            };
-
-            const inlineDeleteBtn = document.createElement('button');
-            inlineDeleteBtn.type = 'button';
-            inlineDeleteBtn.className = 'profile-icon-btn delete';
-            inlineDeleteBtn.textContent = 'Delete';
-            inlineDeleteBtn.title = `Delete ${profileName}`;
-            inlineDeleteBtn.onclick = (e) => {
-                e.stopPropagation();
-                if (confirm(`Are you sure you want to delete "${profileName}"? This cannot be undone.`)) {
-                    storage.deleteProfile(profileId);
-                    renderProfilesList();
-                }
-            };
-
-            inlineActions.appendChild(inlineRenameBtn);
-            inlineActions.appendChild(inlineDeleteBtn);
-            rightSide.appendChild(inlineActions);
 
             textWrapper.appendChild(leftSide);
             textWrapper.appendChild(rightSide);

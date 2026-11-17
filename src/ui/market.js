@@ -78,7 +78,8 @@ export function setupMarket(vCenter) {
 
     const btnHealAll = document.createElement('button');
     btnHealAll.id = 'btn-heal-all';
-    btnHealAll.style.cssText = "background: #3498db; color: white; border: 3px solid white; border-radius: 12px; padding: 15px 30px; font-size: 24px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.5); margin-top: -20%;";
+    btnHealAll.className = 'pcpm-btn pcpm-btn-heal';
+    btnHealAll.style.marginTop = '-20%';
     btnHealAll.textContent = 'Heal';
 
     const rightPanel = document.createElement('div');
@@ -86,7 +87,7 @@ export function setupMarket(vCenter) {
 
     const btnMarket = document.createElement('button');
     btnMarket.id = 'btn-market-market';
-    btnMarket.style.cssText = "background: #f1c40f; color: black; border: 3px solid white; border-radius: 12px; padding: 15px 30px; font-size: 24px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.5);";
+    btnMarket.className = 'pcpm-btn pcpm-btn-market';
     btnMarket.textContent = 'Market';
 
     rightPanel.appendChild(btnMarket);
@@ -562,6 +563,7 @@ function getMarketSellHtml() {
                         <span style="color: #64748b;">-</span>
                         <input type="text" id="market-filter-sumiv-max" placeholder="Max" oninput="if(window.sanitizeMarketNumberInput) window.sanitizeMarketNumberInput(this); if(window.renderPokeMarketSellTab) window.renderPokeMarketSellTab('pokemon')" class="piw-filter-input" style="width: 46px;">
                     </div>
+                    <button onclick="if(window.clearMarketPokemonFilters) window.clearMarketPokemonFilters()" style="background: rgba(231, 76, 60, 0.2); color: #f87171; border: 1px solid rgba(231, 76, 60, 0.45); border-radius: 6px; padding: 4px 10px; font-size: 11px; font-weight: bold; cursor: pointer; transition: all 0.2s;">Clear</button>
                 </div>
             </div>
 
@@ -953,6 +955,14 @@ window.toggleMarketPokemonFilters = function() {
             filters.style.display = 'none';
         }
     }
+};
+
+window.clearMarketPokemonFilters = function() {
+    ['name', 'level-min', 'level-max', 'q-min', 'q-max', 'sumiv-min', 'sumiv-max'].forEach(id => {
+        const input = document.getElementById(`market-filter-${id}`);
+        if (input) input.value = '';
+    });
+    if (window.renderPokeMarketSellTab) window.renderPokeMarketSellTab('pokemon');
 };
 
 window.marketSelectAllPokemonForSale = function() {

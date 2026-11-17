@@ -1,4 +1,5 @@
 import { state } from '../../state.js';
+import { getCapacity, getCurrentCount } from '../../mathEngine.js';
 import { renderPokeballsTab } from './pokeballs.js';
 import { renderPotionsTab } from './potions.js';
 import { renderStonesTab } from './stones.js';
@@ -57,9 +58,10 @@ export function showBackpack() {
             </div>
 
             <div id="backpack-content-overlay" class="backpack-content-overlay" onclick="if(event.target === this) { event.stopPropagation(); window.closeBackpackPocket(); }">
-                <div id="backpack-content-area" class="backpack-content-panel" onclick="event.stopPropagation()" style="display: none;">
+                <div id="backpack-content-area" class="floating-window backpack-content-panel" onclick="event.stopPropagation()" style="display: none;">
                     <div class="backpack-subbar">
                         <div id="backpack-pocket-title" class="backpack-subbar-title">Pocket</div>
+                        <span id="backpack-pokemon-total" class="backpack-total-pill" style="display: none;"></span>
                         <button type="button" class="backpack-back-btn" onclick="window.closeBackpackPocket()">Bag View</button>
                     </div>
                     <div id="backpack-inner-content" class="backpack-inner-scroll">
@@ -72,8 +74,8 @@ export function showBackpack() {
 
     if (window.showModal) {
         const titleHtml = `
-            <div class="backpack-header-bar">
-                <span>Backpack</span>
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 6px; width: 100%;">
+                <div style="font-weight: 700; font-size: 18px; color: white; letter-spacing: 0.3px;">Backpack</div>
                 <div id="backpack-main-nav" class="piw-tab-bar" onmousedown="event.stopPropagation()">
                     <button id="bp-nav-pokemon" onclick="window.renderBackpackTab('pokemon')" class="piw-tab-btn">Pokémons</button>
                     <button id="bp-nav-pokeballs" onclick="window.renderBackpackTab('pokeballs')" class="piw-tab-btn">Balls</button>
@@ -112,6 +114,18 @@ export function renderBackpackTab(tab) {
 
     // Default simple titles
     let pocketTitleHtml = '';
+
+    const totalEl = document.getElementById('backpack-pokemon-total');
+    if (totalEl) {
+        if (tab === 'pokemon') {
+            const totalMons = getCurrentCount(state, 'box');
+            const maxMons = getCapacity(state, 'box');
+            totalEl.textContent = `${totalMons}/${maxMons}`;
+            totalEl.style.display = 'inline-block';
+        } else {
+            totalEl.style.display = 'none';
+        }
+    }
 
     if (tab === 'pokeballs') {
         pocketTitleHtml = 'Pokéballs';

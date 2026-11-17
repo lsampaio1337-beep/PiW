@@ -247,13 +247,16 @@ export function renderPokemonTab(area) {
 
     const basePanelStyle = 'box-sizing: border-box; border-radius: 10px; background: rgba(15, 23, 34, 0.65); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 2px 6px rgba(0, 0, 0, 0.25); padding: 8px; display: flex; flex-direction: column; min-width: 0; min-height: 0; overflow: hidden;';
 
+    const daycareCount = (state.breeding ? state.breeding.length : 0) + (state.training ? state.training.length : 0);
+    const activeCountText = state.stats?.hasSeenDaycare ? `${state.party.length}+${daycareCount}` : `${state.party.length}`;
+
     content += `
-        <div style="display: grid; grid-template-columns: ${gridCols}; gap: 10px; width: 100%; flex: 1; min-height: 0; overflow: hidden;">
+        <div style="display: grid; grid-template-columns: ${gridCols}; gap: 10px; width: 100%; flex: 1; min-height: 0; overflow: hidden; align-items: start;">
             <!-- Column 1: Active -->
-            <div style="max-height: 100%; border: 1.5px solid rgba(56, 189, 248, 0.6); ${basePanelStyle}">
+            <div style="align-self: start; max-height: 100%; border: 1.5px solid rgba(56, 189, 248, 0.6); ${basePanelStyle}">
                 <div class="backpack-col-header" style="color: #7dd3fc;">
                     <span>Active</span>
-                    <span>${state.party.length}/6</span>
+                    <span>${activeCountText}</span>
                 </div>
                 <div id="active-scroll-container" style="display: grid; grid-template-columns: repeat(2, 1fr); grid-auto-rows: max-content; gap: 5px; overflow-y: auto; overflow-x: hidden; align-content: start; flex-grow: 1; min-height: 0;">
     `;
@@ -306,7 +309,7 @@ export function renderPokemonTab(area) {
             </div>
 
             <!-- Column 2: Storage -->
-            <div ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, 'storage')" style="border: 1.5px solid rgba(148, 163, 184, 0.4); ${basePanelStyle}">
+            <div ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, 'storage')" style="align-self: stretch; max-height: 100%; border: 1.5px solid rgba(148, 163, 184, 0.4); ${basePanelStyle}">
                 <div class="backpack-col-header" style="color: #e2e8f0;">
                     <span>Storage</span>
                     <span>${state.storage.length}</span>
@@ -327,7 +330,7 @@ export function renderPokemonTab(area) {
     if (showSafe) {
         content += `
             <!-- Column 3: Safe -->
-            <div id="safe-section" ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, 'safe')" style="max-height: 100%; border: 1.5px solid rgba(251, 191, 36, 0.65); ${basePanelStyle}">
+            <div id="safe-section" ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, 'safe')" style="align-self: start; max-height: 100%; border: 1.5px solid rgba(251, 191, 36, 0.65); ${basePanelStyle}">
                 <div class="backpack-col-header" style="color: #fde68a;">
                     <span>Safe</span>
                     <span>${state.safe.length}</span>
