@@ -449,13 +449,13 @@ function formatRequirements(progressList) {
 }
 
 export function getChallengeData(unlock) {
-    if (!unlock) return { isMet: false, textParts: [] };
+    if (!unlock) return { isMet: false, textParts: [], progressList: [] };
 
     let progressList = evaluateRequirements(unlock.requirements, unlock);
     let isMet = progressList.every(p => p.isMet);
     let textParts = formatRequirements(progressList);
 
-    return { isMet, textParts };
+    return { isMet, textParts, progressList };
 }
 
 
