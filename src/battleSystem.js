@@ -905,13 +905,21 @@ class BattleSystem {
         } else {
             // Gym completed
             const htmlContent = `
-                <h3>You defeated ${escapeHTML(gym.leader)}!</h3>
-                <p>A Gift is awaiting for you.</p>
-                <button class="action-btn action-btn-primary" onclick="window.battleEngine.stopGymBattle()" style="margin-top: 10px; width: 100%;">Leave</button>
+                <div class="gym-victory-card">
+                    <span class="gym-victory-badge">Victory</span>
+                    <h3 class="gym-victory-title">You defeated ${escapeHTML(gym.leader)}!</h3>
+                    <div class="gym-gift-callout">A Gift is awaiting for you.</div>
+                    <button class="action-btn gym-victory-btn" onclick="window.battleEngine.stopGymBattle()">Leave</button>
+                </div>
             `;
             const parser = new DOMParser();
             const doc = parser.parseFromString(htmlContent, 'text/html');
             contentArea.replaceChildren(...doc.body.childNodes);
+            const closeBtn = document.getElementById('btn-close-map-inner-modal');
+            if (closeBtn) {
+                closeBtn.style.pointerEvents = '';
+                closeBtn.style.opacity = '';
+            }
             window.battleEngine = this;
         }
     }

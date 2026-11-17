@@ -2250,13 +2250,6 @@ async function init() {
 
             titleRow.appendChild(titleDiv);
 
-            if (pData.currentRegionName) {
-                const regionBadge = document.createElement('span');
-                regionBadge.className = 'profile-region-badge';
-                regionBadge.textContent = pData.currentRegionName;
-                titleRow.appendChild(regionBadge);
-            }
-
             leftSide.appendChild(titleRow);
 
             // Party mini sprites preview

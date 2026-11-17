@@ -2303,6 +2303,59 @@ input[type="number"] {
     filter: brightness(1.08);
 }
 
+.gym-victory-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.65em;
+    width: 100%;
+    text-align: center;
+}
+
+.gym-victory-badge {
+    font-size: 0.78em;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.25em 0.85em;
+    border-radius: 999px;
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.28), rgba(234, 179, 8, 0.16));
+    border: 1px solid rgba(251, 191, 36, 0.6);
+    color: #fde68a;
+}
+
+.gym-victory-title {
+    margin: 0;
+    font-size: 1.25em;
+    font-weight: 800;
+    color: #f8fafc;
+    line-height: 1.25;
+}
+
+.gym-gift-callout {
+    width: 100%;
+    padding: 0.6em 0.8em;
+    border-radius: 0.5em;
+    background: rgba(22, 163, 74, 0.2);
+    border: 1px solid rgba(74, 222, 128, 0.45);
+    color: #bbf7d0;
+    font-size: 0.9em;
+    font-weight: 600;
+    box-sizing: border-box;
+}
+
+.gym-victory-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #16a34a, #22c55e);
+    border: 1px solid rgba(134, 239, 172, 0.55);
+    color: #ffffff;
+    box-shadow: 0 3px 12px rgba(34, 197, 94, 0.35);
+}
+
+.gym-victory-btn:hover:not(:disabled) {
+    filter: brightness(1.08);
+}
+
 /* --- Action Buttons --- */
 .action-btn {
     padding: 10px 20px;
@@ -4861,7 +4914,7 @@ input[type="number"] {
 
 .backpack-item-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(118px, 1fr));
+    grid-template-columns: repeat(6, minmax(0, 1fr));
     gap: 10px;
     width: 100%;
     box-sizing: border-box;
