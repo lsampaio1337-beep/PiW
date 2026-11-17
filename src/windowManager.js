@@ -813,7 +813,8 @@ export class WindowManager {
             if (!isResizing) return;
 
             const dx = e.clientX - startX;
-            let newWidth = Math.max(200, startWidth + dx); // minimum width 200px
+            const minWidth = winElement.id === 'party-window' ? 60 : 200;
+            let newWidth = Math.max(minWidth, startWidth + dx);
 
             if (winElement.id === 'window-map' && winElement._mapAspectRatio) {
                 const headerH = headerElement ? headerElement.offsetHeight : 0;
