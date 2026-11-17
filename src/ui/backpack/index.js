@@ -93,6 +93,7 @@ export function showBackpack() {
         const contentContainer = win?.querySelector('.window-content-container');
         if (contentContainer) {
             contentContainer.style.minWidth = '800px';
+            contentContainer.style.setProperty('padding', '0px', 'important');
         }
         if (win) {
             // Apply maximum height logic for Backpack based on aspect ratio constraint (800 / 1279 * 1350 = ~844px)

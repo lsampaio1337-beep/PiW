@@ -239,8 +239,8 @@ export function showPokemonStats(idx, location) {
     const collectiveHtml = getCollectiveHtml(pData, state);
 
     let html = `
-        <div style="position: relative;">
-            <div class="content-panel" style="max-height: 80vh; overflow-y: auto; overflow-x: hidden;">
+        <div style="position: relative; width: 100%; height: 100%;">
+            <div class="content-panel" style="max-height: 80vh; overflow-y: auto; overflow-x: hidden; padding: 15px; box-sizing: border-box;">
                 ${individualHtml}
                 ${collectiveHtml}
             </div>
@@ -259,6 +259,13 @@ export function showPokemonStats(idx, location) {
     `;
 
     showModal(`${escapeHTML(p.name)} (Lv. ${p.level})`, html, "window-pokemon-stats");
+    const statsWin = document.getElementById('window-pokemon-stats');
+    if (statsWin) {
+        const innerContent = statsWin.querySelector('.window-content-container');
+        if (innerContent) {
+            innerContent.style.setProperty('padding', '0px', 'important');
+        }
+    }
 }
 
 
