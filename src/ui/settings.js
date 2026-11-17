@@ -18,14 +18,28 @@ export function showSettings() {
 
     const isLegacy = !!state.settings?.legacySprites;
     const settingsHTML = `
-        <div style="margin-bottom: 12px;">
-            <label for="legacy-sprites-checkbox" style="cursor: pointer;">
-                <input type="checkbox" id="legacy-sprites-checkbox" ${isLegacy ? 'checked' : ''} style="margin-right: 6px;">
-                Legacy Sprites
-            </label>
+        <div class="settings-container">
+            <div class="settings-section">
+                <h4 class="settings-section-title">Display</h4>
+                <div class="settings-row">
+                    <div class="settings-row-info">
+                        <label for="legacy-sprites-checkbox" class="settings-row-label">Legacy Sprites</label>
+                        <span class="settings-row-desc">Use classic retro sprite assets</span>
+                    </div>
+                    <label class="settings-switch">
+                        <input type="checkbox" id="legacy-sprites-checkbox" ${isLegacy ? 'checked' : ''}>
+                        <span class="settings-switch-slider"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="settings-section">
+                <h4 class="settings-section-title">Data &amp; Tools</h4>
+                <div class="settings-actions">
+                    <button class="settings-btn settings-btn-primary" onclick="window.exportLog()">Export Save Log</button>
+                    <button class="settings-btn settings-btn-danger" onclick="window.activateCheat()">Cheat</button>
+                </div>
+            </div>
         </div>
-        <button onclick="window.exportLog()">Export Save Log</button>
-        <button onclick="window.activateCheat()" style="margin-left: 10px; background-color: #c0392b; color: white;">Cheat</button>
     `;
     showModal("Settings", settingsHTML, "window-settings");
     const checkboxEl = document.getElementById('legacy-sprites-checkbox');
