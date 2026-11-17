@@ -1053,6 +1053,14 @@ export class WindowManager {
             }
         }
 
+        // If width hasn't changed and window is already initialized, restore and skip height recalculation
+        if (currentOriginalWidthStr && !isNaN(parseInt(currentOriginalWidthStr)) && newOriginalWidth === currentOriginalWidth && winElement._originalHeight > 0) {
+            scalerElement.style.position = oldPosition;
+            scalerElement.style.transform = oldScale;
+            scalerElement.style.width = currentOriginalWidth + 'px';
+            return;
+        }
+
         // Restore positioning and lock exact aspect ratio so manual resize scales cleanly
         const headerElement = winElement.querySelector('.window-header');
         const headerH = headerElement ? headerElement.offsetHeight : 0;
