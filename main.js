@@ -2,6 +2,8 @@ const { app, BrowserWindow, ipcMain, screen, Menu } = require('electron');
 const path = require('path');
 const fs = require('fs');
 
+let isMainControlMinimized = false;
+
 // Fix transparency issues conditionally rather than disabling hardware acceleration entirely
 if (process.platform === 'linux') {
     app.commandLine.appendSwitch('enable-transparent-visuals');
@@ -59,6 +61,25 @@ function createWindow() {
         }
         win.show();
     });
+
+    win.on('minimize', () => {
+        if (isMainControlMinimized) {
+            isMainControlMinimized = false;
+            setImmediate(() => {
+                if (!win.isDestroyed()) {
+                    win.restore();
+                    win.focus();
+                    win.webContents.send('restore-main-control', { fromMinimize: true });
+                }
+            });
+        }
+    });
+
+    win.on('focus', () => {
+        if (isMainControlMinimized && !win.isDestroyed()) {
+            win.webContents.send('restore-main-control', { fromMinimize: false });
+        }
+    });
 }
 
 // Handle click-through messages from the renderer process
@@ -76,6 +97,10 @@ ipcMain.on('set-ignore-mouse-events', (event, ignore, options) => {
     if (currentWindow) {
         currentWindow.setIgnoreMouseEvents(ignore, options);
     }
+});
+
+ipcMain.on('set-main-control-minimized', (_event, minimized) => {
+    isMainControlMinimized = Boolean(minimized);
 });
 
 app.setName('PiW');
