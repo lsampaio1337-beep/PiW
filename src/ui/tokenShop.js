@@ -284,45 +284,62 @@ window.buyTokenItemRandom = function(itemType) {
     });
 };
 
+window.closeTokenInnerModal = function() {
+    const existing = document.getElementById('token-inner-modal');
+    if (existing) existing.remove();
+};
+
 window.showTokenItemSelect = function(itemType) {
     let itemsToSelect = [];
     let title = "";
+    let gridCols = 3;
     if (itemType === 'vitamin') {
         itemsToSelect = VITAMINS.map(v => ({ name: v, img: `Assets/Items/Vitamins/${v}.png` }));
         title = "Select a Vitamin";
+        gridCols = 3; // 2 rows, 3 columns
     } else if (itemType === 'stone') {
         itemsToSelect = STONE_TYPES.map(s => ({ name: s, img: `Assets/Items/Stones/${s}.png` }));
         title = "Select an Evolution Stone";
+        gridCols = 6; // 3 rows, 6 columns
     }
 
-    let html = `
-        <div style="display: flex; flex-direction: column; align-items: center; padding: 20px; color: white;">
-            <div style="font-size: 20px; font-weight: bold; margin-bottom: 20px;">Cost: 2 Tokens</div>
-            <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
+    window.closeTokenInnerModal();
+
+    const container = document.getElementById('window-calendar-content') || document.getElementById('calendar-content-area');
+    if (!container) return;
+
+    container.style.position = 'relative';
+
+    const overlay = document.createElement('div');
+    overlay.id = 'token-inner-modal';
+    overlay.style.cssText = 'position: absolute; inset: 0; background: rgba(15, 23, 42, 0.94); z-index: 50; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 16px; box-sizing: border-box; border-radius: 6px;';
+
+    let gridHtml = `
+        <div style="font-size: 18px; font-weight: bold; color: #f1c40f; margin-bottom: 4px;">${title}</div>
+        <div style="font-size: 13px; color: #cbd5e1; margin-bottom: 14px;">Cost: 2 Tokens</div>
+        <div style="display: grid; grid-template-columns: repeat(${gridCols}, 1fr); gap: 8px; width: 100%; max-width: ${gridCols === 6 ? '700px' : '420px'};">
     `;
 
     itemsToSelect.forEach(item => {
-        html += `
-            <div onclick="window.confirmTokenItemSelect('${item.name}')" style="background: #2c3e50; border: 2px solid #3498db; border-radius: 10px; padding: 10px; text-align: center; cursor: pointer; transition: transform 0.2s; width: 100px; height: 110px; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; box-sizing: border-box;">
-                <img src="${item.img}" style="width: 48px; height: 48px; object-fit: contain; margin-bottom: 5px;">
-                <div style="font-size: 12px; font-weight: bold;">${item.name}</div>
+        gridHtml += `
+            <div onclick="window.confirmTokenItemSelect('${item.name}')" style="background: #1e293b; border: 1.5px solid #3498db; border-radius: 8px; padding: 8px 6px; text-align: center; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; box-sizing: border-box;">
+                <img src="${item.img}" style="width: 38px; height: 38px; object-fit: contain;">
+                <div style="font-size: 11px; font-weight: 600; color: #f8fafc; line-height: 1.2;">${item.name}</div>
             </div>
         `;
     });
 
-    html += `
-            </div>
-            <button onclick="if(window.closeModal) window.closeModal('window-token-select')" style="margin-top: 20px; padding: 10px 20px; background: #e74c3c; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Cancel</button>
+    gridHtml += `
         </div>
+        <button onclick="window.closeTokenInnerModal()" style="margin-top: 16px; padding: 7px 20px; background: #e74c3c; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 13px;">Cancel</button>
     `;
 
-    if (window.showModal) {
-        window.showModal(title, html, "window-token-select", "600px", "auto");
-    }
+    overlay.innerHTML = gridHtml;
+    container.appendChild(overlay);
 };
 
 window.confirmTokenItemSelect = function(itemName) {
-    if (window.closeModal) window.closeModal('window-token-select');
+    window.closeTokenInnerModal();
     handleTokenPurchase(2, () => {
         if (!state.backpack.stones[itemName]) {
             state.backpack.stones[itemName] = 0;

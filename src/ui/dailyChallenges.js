@@ -302,11 +302,13 @@ export function getDailyChallengesHtml() {
             cardClass += ' cal-challenge-card--ready';
         }
 
+        let cleanText = (c.text || '').replace(/^<(?:b|strong)>[^<]*<\/(?:b|strong)>\s*:?\s*/i, '');
+
         html += `
             <div class="${cardClass}">
                 <div class="cal-challenge-info">
                     <div class="cal-challenge-text">
-                        ${c.text}
+                        ${cleanText}
                     </div>
                     <div class="cal-progress-track">
                         <div class="cal-progress-fill" style="width: ${pct}%;"></div>
