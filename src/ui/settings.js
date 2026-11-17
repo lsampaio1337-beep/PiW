@@ -40,10 +40,14 @@ export function showSettings() {
                 <div class="settings-card">
                     <div class="settings-row">
                         <div class="settings-info">
-                            <div class="settings-label">Export Save Log</div>
-                            <div class="settings-desc">Download a snapshot of your current save data and session logs.</div>
+                            <div class="settings-label">Data</div>
+                            <div class="settings-desc">Download or Restore data for a profile</div>
                         </div>
-                        <button type="button" class="settings-btn settings-btn-primary" onclick="window.exportLog()">Export Log</button>
+                        <div style="display: flex; gap: 8px; flex-shrink: 0;">
+                            <button type="button" class="settings-btn settings-btn-primary" onclick="window.exportData()">Download</button>
+                            <button type="button" class="settings-btn settings-btn-primary" onclick="window.triggerImportData()">Restore</button>
+                        </div>
+                        <input type="file" id="import-data-file-input" accept=".txt" style="display: none;">
                     </div>
                 </div>
             </div>

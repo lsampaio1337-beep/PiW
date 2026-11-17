@@ -755,17 +755,25 @@ if (!Array.isArray(routes)) {
 
 
     const allSpawnsToFetch = new Set();
+    const spawnNameToId = new Map();
     routes.forEach(r => {
         (r.spawns || []).forEach(s => {
             const pk = pokemonData[s.pokemonId];
-            if (pk && pk.name) allSpawnsToFetch.add(pk.name.toLowerCase());
+            if (pk && pk.name) {
+                const lower = pk.name.toLowerCase();
+                allSpawnsToFetch.add(lower);
+                if (!spawnNameToId.has(lower)) spawnNameToId.set(lower, s.pokemonId);
+            }
         });
     });
 
     const encounterCache = {};
     for (const pkName of allSpawnsToFetch) {
         try {
-            const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${pkName}/encounters`);
+            let res = await fetch(`https://pokeapi.co/api/v2/pokemon/${pkName}/encounters`);
+            if (!res.ok && spawnNameToId.has(pkName)) {
+                res = await fetch(`https://pokeapi.co/api/v2/pokemon/${spawnNameToId.get(pkName)}/encounters`);
+            }
             if (res.ok) {
                 const data = await res.json();
                 encounterCache[pkName] = data.map(d => d.location_area.name);
@@ -973,8 +981,8 @@ const mainSeenSets = [];
                     routesData.push({
                         "Unlocked at": (i === 0 && isMain && !primaryAdded) ? "" : ((i > 0 && !primaryAdded) ? challengeList[i-1].challengeName : ""),
                         "Challenge": c.challengeName,
-                        "Route": areaName,
-                        "Route (Secondary)": primaryAdded ? "Yes" : "",
+                        "Route": (r && r.primaryName) ? r.primaryName : areaName,
+                        "Route (Secondary)": (r && r.secondaryName) ? r.secondaryName : (primaryAdded ? "Yes" : ""),
                         "Pokemon Name": "",
                         "First?": "",
                         "Type 1": "",
@@ -1138,11 +1146,15 @@ const mainSeenSets = [];
                         }
                         const normalizedRoute = matchableRouteName.replace(/[^a-z0-9]/g, '');
 
-                            for (const loc of locations) {
-                                const normalizedLoc = loc.replace(/[^a-z0-9]/g, '');
-                                if (normalizedLoc.includes(normalizedRoute) || normalizedRoute.includes(normalizedLoc)) {
-                                    typeOk = "Legacy";
-                                    break;
+                            if (r && r.pokeapiArea && locations.includes(r.pokeapiArea)) {
+                                typeOk = "Legacy";
+                            } else {
+                                for (const loc of locations) {
+                                    const normalizedLoc = loc.replace(/[^a-z0-9]/g, '');
+                                    if (normalizedLoc.includes(normalizedRoute) || normalizedRoute.includes(normalizedLoc)) {
+                                        typeOk = "Legacy";
+                                        break;
+                                    }
                                 }
                             }
                         }
@@ -1150,8 +1162,8 @@ const mainSeenSets = [];
                         routesData.push({
                             "Unlocked at": (i === 0 && isMain && !primaryAdded) ? "" : ((i > 0 && !primaryAdded) ? challengeList[i-1].challengeName : ""),
                             "Challenge": c.challengeName,
-                            "Route": areaName,
-                            "Route (Secondary)": primaryAdded ? "Yes" : "",
+                            "Route": (r && r.primaryName) ? r.primaryName : areaName,
+                            "Route (Secondary)": (r && r.secondaryName) ? r.secondaryName : (primaryAdded ? "Yes" : ""),
                             "Pokemon Name": pkName,
                             "First?": first,
                             "Type 1": pk.types && pk.types.length > 0 ? pk.types[0] : "",
@@ -1362,11 +1374,15 @@ const mainSeenSets = [];
                     if (region.num === 9) { typeOk = "Legacy"; } else if (encounterCache[pkName.toLowerCase()]) {
                         const locations = encounterCache[pkName.toLowerCase()];
                         const normalizedRoute = routeNameLower.replace(/[^a-z0-9]/g, '');
-                        for (const loc of locations) {
-                            const normalizedLoc = loc.replace(/[^a-z0-9]/g, '');
-                            if (normalizedLoc.includes(normalizedRoute) || normalizedRoute.includes(normalizedLoc)) {
-                                typeOk = "Legacy";
-                                break;
+                        if (r && r.pokeapiArea && locations.includes(r.pokeapiArea)) {
+                            typeOk = "Legacy";
+                        } else {
+                            for (const loc of locations) {
+                                const normalizedLoc = loc.replace(/[^a-z0-9]/g, '');
+                                if (normalizedLoc.includes(normalizedRoute) || normalizedRoute.includes(normalizedLoc)) {
+                                    typeOk = "Legacy";
+                                    break;
+                                }
                             }
                         }
                     }
@@ -1374,8 +1390,8 @@ const mainSeenSets = [];
                     routesData.push({
                         "Unlocked at": "",
                         "Challenge": "",
-                        "Route": mapName,
-                        "Route (Secondary)": "",
+                        "Route": (r && r.primaryName) ? r.primaryName : mapName,
+                        "Route (Secondary)": (r && r.secondaryName) ? r.secondaryName : "",
                         "Pokemon Name": pkName,
                         "First?": first,
                         "Type 1": pk.types && pk.types.length > 0 ? pk.types[0] : "",

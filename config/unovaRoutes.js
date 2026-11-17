@@ -324,67 +324,25 @@ export const unovaRoutes = [
         "pokemonId": 301,
         "minLevel": 16,
         "maxLevel": 19,
-        "chance": 0.09090909090909091
+        "chance": 0.15
       },
       {
         "pokemonId": 300,
         "minLevel": 13,
         "maxLevel": 16,
-        "chance": 0.4
+        "chance": 0.35
       },
       {
         "pokemonId": 427,
         "minLevel": 15,
         "maxLevel": 18,
-        "chance": 0.25
+        "chance": 0.3
       },
       {
         "pokemonId": 133,
         "minLevel": 15,
         "maxLevel": 18,
-        "chance": 0.35
-      },
-      {
-        "pokemonId": 134,
-        "minLevel": 18,
-        "maxLevel": 21,
-        "chance": 0.09090909090909091
-      },
-      {
-        "pokemonId": 135,
-        "minLevel": 18,
-        "maxLevel": 21,
-        "chance": 0.09090909090909091
-      },
-      {
-        "pokemonId": 136,
-        "minLevel": 18,
-        "maxLevel": 21,
-        "chance": 0.09090909090909091
-      },
-      {
-        "pokemonId": 196,
-        "minLevel": 18,
-        "maxLevel": 21,
-        "chance": 0.09090909090909091
-      },
-      {
-        "pokemonId": 197,
-        "minLevel": 18,
-        "maxLevel": 21,
-        "chance": 0.09090909090909091
-      },
-      {
-        "pokemonId": 470,
-        "minLevel": 18,
-        "maxLevel": 21,
-        "chance": 0.09090909090909091
-      },
-      {
-        "pokemonId": 471,
-        "minLevel": 18,
-        "maxLevel": 21,
-        "chance": 0.09090909090909091
+        "chance": 0.2
       }
     ]
   },
@@ -2756,7 +2714,10 @@ export const unovaUnlocks = [
       "Floccesy Ranch"
     ],
     "requirements": {
-      "defeatCount": 20
+      "defeatCountRoute": {
+        "route": "Route 19",
+        "count": 20
+      }
     }
   },
   {
@@ -2766,11 +2727,11 @@ export const unovaUnlocks = [
       "Aspertia Gym"
     ],
     "requirements": {
-      "catchSpecies": [
+      "catchSpeciesByQualityOrHigher": [
         {
           "species": "Sunkern",
-          "count": 1,
-          "minQuality": "Uncommon"
+          "quality": "Uncommon",
+          "count": 1
         }
       ]
     }
@@ -2858,7 +2819,7 @@ export const unovaUnlocks = [
       "Virbank Gym"
     ],
     "requirements": {
-      "catchType": {
+      "catchByType": {
         "type": "Water",
         "count": 5
       }
@@ -2913,12 +2874,10 @@ export const unovaUnlocks = [
       "Castelia Park"
     ],
     "requirements": {
-      "defeatSpecies": [
-        {
-          "species": "Zubat",
-          "count": 10
-        }
-      ]
+      "defeatSpecific": {
+        "name": "Zubat",
+        "count": 10
+      }
     },
     "gifts": [
       {
@@ -2955,11 +2914,11 @@ export const unovaUnlocks = [
       "Castelia Gym"
     ],
     "requirements": {
-      "catchSpecies": [
+      "catchSpeciesByQualityOrHigher": [
         {
           "species": "Woobat",
-          "count": 1,
-          "minQuality": "Uncommon"
+          "quality": "Uncommon",
+          "count": 1
         }
       ]
     }
@@ -2985,7 +2944,10 @@ export const unovaUnlocks = [
       "Desert Resort"
     ],
     "requirements": {
-      "defeatCount": 50
+      "defeatCountRoute": {
+        "route": "Route 4 (Unova)",
+        "count": 50
+      }
     }
   },
   {
@@ -2995,7 +2957,10 @@ export const unovaUnlocks = [
       "Relic Castle"
     ],
     "requirements": {
-      "defeatCount": 75
+      "defeatCountRoute": {
+        "route": "Desert Resort",
+        "count": 75
+      }
     },
     "gifts": [
       {
@@ -3011,12 +2976,10 @@ export const unovaUnlocks = [
       "Nimbasa City"
     ],
     "requirements": {
-      "defeatSpecies": [
-        {
-          "species": "Volcarona",
-          "count": 2
-        }
-      ]
+      "defeatSpecific": {
+        "name": "Volcarona",
+        "count": 2
+      }
     },
     "gifts": [
       {
@@ -3032,12 +2995,10 @@ export const unovaUnlocks = [
       "Route 16 (Unova)"
     ],
     "requirements": {
-      "defeatSpecies": [
-        {
-          "species": "Minun",
-          "count": 20
-        }
-      ]
+      "defeatSpecific": {
+        "name": "Minun",
+        "count": 20
+      }
     },
     "gifts": [
       {
@@ -3050,7 +3011,7 @@ export const unovaUnlocks = [
     "challengeName": "Challenge 18",
     "areaId": "Route 16 (Unova)",
     "unlocks": [
-      "Lostlorn Forest"
+      "Lostlorn Forest Rainbow Corner"
     ],
     "requirements": {
       "catchSpecies": [
@@ -3113,7 +3074,7 @@ export const unovaUnlocks = [
       "Driftveil Gym"
     ],
     "requirements": {
-      "catchUniqueSpecies": 5
+      "catchSpeciesUniqueCount": 5
     },
     "gifts": [
       {
@@ -3143,7 +3104,10 @@ export const unovaUnlocks = [
       "Chargestone Cave"
     ],
     "requirements": {
-      "defeatCount": 100
+      "defeatCountRoute": {
+        "route": "Route 6 (Unova)",
+        "count": 100
+      }
     }
   },
   {
@@ -3153,13 +3117,13 @@ export const unovaUnlocks = [
       "Route 7 (Unova)"
     ],
     "requirements": {
-      "defeatSpecies": [
+      "defeatMultipleSpecific": [
         {
-          "species": "Ferroseed",
+          "name": "Ferroseed",
           "count": 10
         },
         {
-          "species": "Klink",
+          "name": "Klink",
           "count": 10
         }
       ]
@@ -3178,13 +3142,13 @@ export const unovaUnlocks = [
       "Celestial Tower"
     ],
     "requirements": {
-      "defeatSpecies": [
+      "defeatMultipleSpecific": [
         {
-          "species": "Zebstrika",
+          "name": "Zebstrika",
           "count": 5
         },
         {
-          "species": "Zoroark",
+          "name": "Zoroark",
           "count": 5
         }
       ]
@@ -3197,7 +3161,7 @@ export const unovaUnlocks = [
       "Mistralton Gym"
     ],
     "requirements": {
-      "catchUniqueSpecies": 5
+      "catchSpeciesUniqueCount": 5
     }
   },
   {
@@ -3222,13 +3186,13 @@ export const unovaUnlocks = [
       "Reversal Mountain"
     ],
     "requirements": {
-      "defeatSpecies": [
+      "defeatMultipleSpecific": [
         {
-          "species": "Gothita",
+          "name": "Gothita",
           "count": 10
         },
         {
-          "species": "Solosis",
+          "name": "Solosis",
           "count": 10
         }
       ]
@@ -3251,12 +3215,10 @@ export const unovaUnlocks = [
       "Undella Bay"
     ],
     "requirements": {
-      "defeatSpecies": [
-        {
-          "species": "Flygon",
-          "count": 5
-        }
-      ]
+      "defeatSpecific": {
+        "name": "Flygon",
+        "count": 5
+      }
     },
     "gifts": [
       {
@@ -3276,7 +3238,10 @@ export const unovaUnlocks = [
       "Route 14 (Unova)"
     ],
     "requirements": {
-      "defeatCount": 125
+      "defeatCountRoute": {
+        "route": "Undella Bay",
+        "count": 125
+      }
     },
     "gifts": [
       {
@@ -3308,13 +3273,13 @@ export const unovaUnlocks = [
       "Route 13 (Unova)"
     ],
     "requirements": {
-      "defeatSpecies": [
+      "defeatMultipleSpecific": [
         {
-          "species": "Bronzong",
+          "name": "Bronzong",
           "count": 10
         },
         {
-          "species": "Chimecho",
+          "name": "Chimecho",
           "count": 15
         }
       ]
@@ -3333,23 +3298,14 @@ export const unovaUnlocks = [
       "Route 12 (Unova)"
     ],
     "requirements": {
-      "catchAnySpecies": [
-        {
-          "species": "Floatzel",
-          "count": 1,
-          "minQuality": "Uncommon"
-        },
-        {
-          "species": "Drifblim",
-          "count": 1,
-          "minQuality": "Uncommon"
-        },
-        {
-          "species": "Seismitoad",
-          "count": 1,
-          "minQuality": "Uncommon"
-        }
-      ]
+      "catchSpeciesAnyOf": {
+        "species": [
+          "Floatzel",
+          "Drifblim",
+          "Seismitoad"
+        ],
+        "count": 1
+      }
     }
   },
   {
@@ -3359,12 +3315,10 @@ export const unovaUnlocks = [
       "Route 11 (Unova)"
     ],
     "requirements": {
-      "defeatSpecies": [
-        {
-          "species": "Dunsparce",
-          "count": 15
-        }
-      ]
+      "defeatSpecific": {
+        "name": "Dunsparce",
+        "count": 15
+      }
     },
     "gifts": [
       {
@@ -3409,12 +3363,10 @@ export const unovaUnlocks = [
       "Route 9 (Unova)"
     ],
     "requirements": {
-      "defeatSpecies": [
-        {
-          "species": "Gligar",
-          "count": 15
-        }
-      ]
+      "defeatSpecific": {
+        "name": "Gligar",
+        "count": 15
+      }
     }
   },
   {
@@ -3424,13 +3376,13 @@ export const unovaUnlocks = [
       "Opelucid Gym"
     ],
     "requirements": {
-      "defeatSpecies": [
+      "defeatMultipleSpecific": [
         {
-          "species": "Minccino",
+          "name": "Minccino",
           "count": 15
         },
         {
-          "species": "Liepard",
+          "name": "Liepard",
           "count": 15
         }
       ]
@@ -3502,7 +3454,10 @@ export const unovaUnlocks = [
       "Seaside Cave"
     ],
     "requirements": {
-      "defeatCount": 100
+      "defeatCountRoute": {
+        "route": "Route 21",
+        "count": 100
+      }
     }
   },
   {
@@ -3512,12 +3467,10 @@ export const unovaUnlocks = [
       "P2 Laboratory"
     ],
     "requirements": {
-      "defeatSpecies": [
-        {
-          "species": "Alomomola",
-          "count": 10
-        }
-      ]
+      "defeatSpecific": {
+        "name": "Alomomola",
+        "count": 10
+      }
     },
     "gifts": [
       {
@@ -3533,16 +3486,13 @@ export const unovaUnlocks = [
       "Wellspring Cave"
     ],
     "requirements": {
-      "catchAnySpecies": [
-        {
-          "species": "Klinklang",
-          "count": 1
-        },
-        {
-          "species": "Magnezone",
-          "count": 1
-        }
-      ]
+      "catchSpeciesAnyOf": {
+        "species": [
+          "Klinklang",
+          "Magnezone"
+        ],
+        "count": 1
+      }
     },
     "gifts": [
       {
@@ -3558,13 +3508,13 @@ export const unovaUnlocks = [
       "Giant Chasm"
     ],
     "requirements": {
-      "defeatSpecies": [
+      "defeatMultipleSpecific": [
         {
-          "species": "Grimer",
+          "name": "Grimer",
           "count": 30
         },
         {
-          "species": "Weezing",
+          "name": "Weezing",
           "count": 15
         }
       ]
@@ -3598,20 +3548,14 @@ export const unovaUnlocks = [
       "Victory Road (Unova)"
     ],
     "requirements": {
-      "catchAnySpecies": [
-        {
-          "species": "Mienshao",
-          "count": 1
-        },
-        {
-          "species": "Gliscor",
-          "count": 1
-        },
-        {
-          "species": "Roserade",
-          "count": 1
-        }
-      ]
+      "catchSpeciesAnyOf": {
+        "species": [
+          "Mienshao",
+          "Gliscor",
+          "Roserade"
+        ],
+        "count": 1
+      }
     }
   },
   {
@@ -3621,12 +3565,10 @@ export const unovaUnlocks = [
       "Unova Pokemon League"
     ],
     "requirements": {
-      "defeatSpecies": [
-        {
-          "species": "Hydreigon",
-          "count": 2
-        }
-      ]
+      "defeatSpecific": {
+        "name": "Hydreigon",
+        "count": 2
+      }
     },
     "gifts": [
       {
@@ -3676,11 +3618,11 @@ export const unovaUnlocks = [
       "Moor of Icirrus"
     ],
     "requirements": {
-      "catchSpecies": [
+      "catchSpeciesByQualityOrHigher": [
         {
           "species": "Croagunk",
-          "count": 1,
-          "minQuality": "Uncommon"
+          "quality": "Uncommon",
+          "count": 1
         }
       ]
     },
@@ -3744,12 +3686,10 @@ export const unovaUnlocks = [
       "Twist Mountain"
     ],
     "requirements": {
-      "defeatSpecies": [
-        {
-          "species": "Haxorus",
-          "count": 5
-        }
-      ]
+      "defeatSpecific": {
+        "name": "Haxorus",
+        "count": 5
+      }
     },
     "gifts": [
       {
@@ -3793,7 +3733,10 @@ export const unovaUnlocks = [
     "areaId": "Underground Ruins",
     "unlocks": [],
     "requirements": {
-      "defeatCount": 150
+      "defeatCountRoute": {
+        "route": "Underground Ruins",
+        "count": 150
+      }
     },
     "gifts": [
       {
@@ -3848,12 +3791,10 @@ export const unovaUnlocks = [
       "Dreamyard"
     ],
     "requirements": {
-      "defeatSpecies": [
-        {
-          "species": "Wigglytuff",
-          "count": 15
-        }
-      ]
+      "defeatSpecific": {
+        "name": "Wigglytuff",
+        "count": 15
+      }
     },
     "gifts": [
       {
@@ -3873,13 +3814,13 @@ export const unovaUnlocks = [
       "Route 18"
     ],
     "requirements": {
-      "defeatSpecies": [
+      "defeatMultipleSpecific": [
         {
-          "species": "Munna",
+          "name": "Munna",
           "count": 30
         },
         {
-          "species": "Rufflet",
+          "name": "Rufflet",
           "count": 3
         }
       ]
@@ -3900,20 +3841,14 @@ export const unovaUnlocks = [
     "areaId": "Route 18",
     "unlocks": [],
     "requirements": {
-      "catchAnySpecies": [
-        {
-          "species": "Carnivine",
-          "count": 1
-        },
-        {
-          "species": "Crustle",
-          "count": 1
-        },
-        {
-          "species": "Scrafty",
-          "count": 1
-        }
-      ]
+      "catchSpeciesAnyOf": {
+        "species": [
+          "Carnivine",
+          "Crustle",
+          "Scrafty"
+        ],
+        "count": 1
+      }
     },
     "gifts": [
       {
@@ -3976,12 +3911,10 @@ export const unovaUnlocks = [
       "Route 2 (Unova)"
     ],
     "requirements": {
-      "defeatSpecies": [
-        {
-          "species": "Ampharos",
-          "count": 10
-        }
-      ]
+      "defeatSpecific": {
+        "name": "Ampharos",
+        "count": 10
+      }
     },
     "gifts": [
       {
@@ -4001,12 +3934,10 @@ export const unovaUnlocks = [
       "Route 3 (Unova)"
     ],
     "requirements": {
-      "defeatSpecies": [
-        {
-          "species": "Slaking",
-          "count": 2
-        }
-      ]
+      "defeatSpecific": {
+        "name": "Slaking",
+        "count": 2
+      }
     },
     "gifts": [
       {
@@ -4026,16 +3957,13 @@ export const unovaUnlocks = [
       "Moor of Icirrus Depths"
     ],
     "requirements": {
-      "catchAnySpecies": [
-        {
-          "species": "Throh",
-          "count": 1
-        },
-        {
-          "species": "Sawk",
-          "count": 1
-        }
-      ]
+      "catchSpeciesAnyOf": {
+        "species": [
+          "Throh",
+          "Sawk"
+        ],
+        "count": 1
+      }
     },
     "gifts": [
       {
@@ -4069,12 +3997,10 @@ export const unovaUnlocks = [
       "Pinwheel Forest"
     ],
     "requirements": {
-      "defeatSpecies": [
-        {
-          "species": "Stoutland",
-          "count": 10
-        }
-      ]
+      "defeatSpecific": {
+        "name": "Stoutland",
+        "count": 10
+      }
     },
     "gifts": [
       {
@@ -4094,16 +4020,13 @@ export const unovaUnlocks = [
       "Cave of Being"
     ],
     "requirements": {
-      "catchAnySpecies": [
-        {
-          "species": "Yanmega",
-          "count": 1
-        },
-        {
-          "species": "Tangrowth",
-          "count": 1
-        }
-      ]
+      "catchSpeciesAnyOf": {
+        "species": [
+          "Yanmega",
+          "Tangrowth"
+        ],
+        "count": 1
+      }
     },
     "gifts": [
       {
@@ -4119,7 +4042,10 @@ export const unovaUnlocks = [
       "Liberty Garden"
     ],
     "requirements": {
-      "defeatCount": 150
+      "defeatCountRoute": {
+        "route": "Cave of Being",
+        "count": 150
+      }
     },
     "gifts": [
       {
@@ -4145,16 +4071,13 @@ export const unovaUnlocks = [
       "Nature Sanctuary"
     ],
     "requirements": {
-      "catchAnySpecies": [
-        {
-          "species": "Braviary",
-          "count": 1
-        },
-        {
-          "species": "Mandibuzz",
-          "count": 1
-        }
-      ]
+      "catchSpeciesAnyOf": {
+        "species": [
+          "Braviary",
+          "Mandibuzz"
+        ],
+        "count": 1
+      }
     },
     "gifts": [
       {
@@ -4170,16 +4093,13 @@ export const unovaUnlocks = [
       "Hidden Grotto"
     ],
     "requirements": {
-      "catchAnySpecies": [
-        {
-          "species": "Arcanine",
-          "count": 1
-        },
-        {
-          "species": "Ninetales",
-          "count": 1
-        }
-      ]
+      "catchSpeciesAnyOf": {
+        "species": [
+          "Arcanine",
+          "Ninetales"
+        ],
+        "count": 1
+      }
     },
     "gifts": [
       {
@@ -4199,12 +4119,10 @@ export const unovaUnlocks = [
       "Abundant Shrine Depths"
     ],
     "requirements": {
-      "defeatSpecies": [
-        {
-          "species": "Cryogonal",
-          "count": 10
-        }
-      ]
+      "defeatSpecific": {
+        "name": "Cryogonal",
+        "count": 10
+      }
     },
     "gifts": [
       {
@@ -4314,7 +4232,7 @@ export const unovaUnlocks = [
         "Extra Challenge D 04",
         "Extra Challenge E 04"
       ],
-      "activeAnyOfChallenges": [
+      "completeAnyOfChallenges": [
         "Extra Challenge C 05",
         "Extra Challenge D 04",
         "Extra Challenge E 04"
