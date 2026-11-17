@@ -1795,9 +1795,6 @@ function gameClockTick() {
 
 
 function startGame() {
-    if (window.electronAPI) {
-        window.electronAPI.send('set-icon-location', state.settings?.iconLocation === 'tray' ? 'tray' : 'taskbar');
-    }
     if (globals.battleSystem) {
         globals.battleSystem.stop();
     }
@@ -1922,6 +1919,12 @@ function setupDragAndDropScrolling() {
 }
 
 async function init() {
+    // Apply global icon location preference immediately on app startup
+    if (window.electronAPI) {
+        const iconLocation = localStorage.getItem('piw_icon_location') === 'tray' ? 'tray' : 'taskbar';
+        window.electronAPI.send('set-icon-location', iconLocation);
+    }
+
     // Desktop Overlay init
     window.windowManager = new WindowManager(); window.WindowManager = WindowManager;
     setupClickThrough();

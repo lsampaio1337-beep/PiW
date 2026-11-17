@@ -17,7 +17,8 @@ export function showSettings() {
     if (battleSystem && battleSystem.gymState && battleSystem.gymState.isActive) return;
 
     const isLegacy = !!state.settings?.legacySprites;
-    const iconLocation = state.settings?.iconLocation === 'tray' ? 'tray' : 'taskbar';
+    const savedIconLocation = localStorage.getItem('piw_icon_location') || state.settings?.iconLocation;
+    const iconLocation = savedIconLocation === 'tray' ? 'tray' : 'taskbar';
     const settingsHTML = `
         <div class="settings-container">
             <div class="settings-section">
@@ -82,6 +83,7 @@ export function showSettings() {
     if (iconSelectEl) {
         iconSelectEl.addEventListener('change', (e) => {
             const value = e.target.value === 'tray' ? 'tray' : 'taskbar';
+            localStorage.setItem('piw_icon_location', value);
             if (!state.settings) state.settings = {};
             state.settings.iconLocation = value;
             storage.save(state);
