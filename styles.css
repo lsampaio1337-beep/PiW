@@ -2828,15 +2828,17 @@ input[type="number"] {
 .profile-medals-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
     width: 100%;
     padding-top: 8px;
     border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .profile-medal-img {
+    flex: 0 0 calc((100% - 32px) / 5);
+    max-width: calc((100% - 32px) / 5);
     width: auto;
     height: 80px;
     object-fit: contain;
@@ -4872,11 +4874,12 @@ input[type="number"] {
 }
 
 .backpack-subbar {
+    position: relative;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     gap: 10px;
-    padding: 8px 14px;
+    padding: 8px 36px;
     background: rgba(10, 16, 24, 0.65);
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     flex-shrink: 0;
@@ -4886,6 +4889,17 @@ input[type="number"] {
     font-size: 14px;
     font-weight: 700;
     color: #e2e8f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.backpack-subbar-close {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .backpack-back-btn {
@@ -4913,11 +4927,18 @@ input[type="number"] {
 }
 
 .backpack-item-grid {
-    display: grid;
-    grid-template-columns: repeat(6, minmax(0, 1fr));
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: flex-start;
     gap: 10px;
     width: 100%;
     box-sizing: border-box;
+}
+
+.backpack-item-grid > .backpack-item-card {
+    flex: 0 0 calc((100% - 50px) / 6);
+    min-width: 96px;
 }
 
 .backpack-item-card {

@@ -60,9 +60,11 @@ export function showBackpack() {
             <div id="backpack-content-overlay" class="backpack-content-overlay" onclick="if(event.target === this) { event.stopPropagation(); window.closeBackpackPocket(); }">
                 <div id="backpack-content-area" class="floating-window backpack-content-panel" onclick="event.stopPropagation()" style="display: none;">
                     <div class="backpack-subbar">
-                        <div id="backpack-pocket-title" class="backpack-subbar-title">Pocket</div>
-                        <span id="backpack-pokemon-total" class="backpack-total-pill" style="display: none;"></span>
-                        <button type="button" class="backpack-back-btn" onclick="window.closeBackpackPocket()">Bag View</button>
+                        <div class="backpack-subbar-title">
+                            <span id="backpack-pocket-title">Pocket</span>
+                            <span id="backpack-pokemon-total" class="backpack-total-pill" style="display: none;"></span>
+                        </div>
+                        <span class="window-ctrl-btn is-close backpack-subbar-close" onclick="window.closeBackpackPocket()" title="Close Pocket">X</span>
                     </div>
                     <div id="backpack-inner-content" class="backpack-inner-scroll">
                         <h3 style="text-align: center; margin-top: 0; color: #ddd;">Select a pocket to view items.</h3>
