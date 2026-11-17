@@ -386,18 +386,46 @@ window.showMultipleEvolveModal = function(location, idx) {
     const validEvolutions = (pData.evolutions || []).filter(evo => isPokemonInRegion(getPokemonConfig(evo.to, state), state));
     if (validEvolutions.length === 0) return;
 
-    const buttonsHtml = validEvolutions.map(evo => {
+    const isShiny = !!(p.isShiny || p.quality === 'Shiny');
+    const fromImgPath = window.getSpriteUrl(p.id, isShiny);
+
+    const cardsHtml = validEvolutions.map(evo => {
         const req = getEvolveRequirements(p, evo, state);
         const toData = getPokemonConfig(evo.to, state);
         const isRevealed = toData && ((state.stats?.seenSpecies?.[toData.name]) || (state.stats?.caughtSpecies?.[toData.name]));
         const toName = isRevealed ? escapeHTML(toData.name) : "???";
-        return `<button ${req.canEvolve ? '' : 'disabled'} onclick="window.closeVitaminsInnerWindow(); window.evolvePokemon('${location}', ${idx}, ${evo.to})" style="background: ${req.canEvolve ? '#2ecc71' : '#7f8c8d'}; color: white; border: none; border-radius: 8px; padding: 10px 14px; font-weight: bold; font-size: 14px; line-height: 1.3; cursor: ${req.canEvolve ? 'pointer' : 'not-allowed'}; ${req.canEvolve ? '' : 'opacity: 0.6;'} width: 70%; display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px;">Consume ${req.missingStonesHtml} to evolve into ${toName}</button>`;
+        const toImgPath = window.getSpriteUrl(evo.to, isShiny);
+        const btnBg = req.canEvolve ? 'linear-gradient(180deg, #2ecc71, #27ae60)' : '#7f8c8d';
+        const btnShadow = req.canEvolve ? 'box-shadow: 0 3px 8px rgba(46, 204, 113, 0.3);' : 'opacity: 0.6;';
+        return `
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 10px; background: linear-gradient(145deg, rgba(20, 30, 48, 0.9), rgba(36, 59, 85, 0.7)); border: 1px solid #3498db; box-shadow: 0 4px 15px rgba(52, 152, 219, 0.25); padding: 12px 16px; border-radius: 10px; width: fit-content;">
+                <div style="display: flex; align-items: center; justify-content: center; gap: 14px;">
+                    <div style="display: flex; flex-direction: column; align-items: center;">
+                        <div style="background: rgba(255, 255, 255, 0.06); border-radius: 50%; padding: 5px; display: flex; align-items: center; justify-content: center;">
+                            <img src="${fromImgPath}" style="width: 48px; height: 48px; object-fit: contain; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));">
+                        </div>
+                        <span style="font-size: 11px; font-weight: 600; color: #ecf0f1; margin-top: 4px;">${escapeHTML(p.name)}</span>
+                    </div>
+                    <div style="display: flex; flex-direction: column; align-items: center; gap: 2px;">
+                        <span style="background: rgba(52, 152, 219, 0.2); border: 1px solid rgba(52, 152, 219, 0.5); border-radius: 12px; padding: 2px 8px; font-size: 11px; font-weight: bold; color: #74b9ff;">Lv.${evo.level}</span>
+                        <span style="font-size: 15px; color: #3498db; line-height: 1;">➔</span>
+                    </div>
+                    <div style="display: flex; flex-direction: column; align-items: center;">
+                        <div style="background: rgba(255, 255, 255, 0.06); border-radius: 50%; padding: 5px; display: flex; align-items: center; justify-content: center;">
+                            <img src="${toImgPath}" style="width: 48px; height: 48px; object-fit: contain; filter: ${isRevealed ? 'drop-shadow(0 2px 4px rgba(0,0,0,0.5))' : 'brightness(0)'};">
+                        </div>
+                        <span style="font-size: 11px; font-weight: 600; color: ${isRevealed ? '#ecf0f1' : '#95a5a6'}; margin-top: 4px;">${toName}</span>
+                    </div>
+                </div>
+                <button ${req.canEvolve ? '' : 'disabled'} onclick="window.closeVitaminsInnerWindow(); window.evolvePokemon('${location}', ${idx}, ${evo.to})" style="background: ${btnBg}; color: white; border: none; border-radius: 8px; padding: 7px 16px; font-weight: bold; font-size: 13px; cursor: ${req.canEvolve ? 'pointer' : 'not-allowed'}; ${btnShadow} width: 100%; display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px;">Consume ${req.missingStonesHtml}</button>
+            </div>
+        `;
     }).join('');
 
     const html = `
-        <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
-            ${buttonsHtml}
-            <button onclick="window.closeVitaminsInnerWindow()" style="background: #e74c3c; color: white; border: none; border-radius: 8px; padding: 10px 14px; font-weight: bold; font-size: 14px; cursor: pointer; width: 70%;">No</button>
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 6px 10px 10px 10px;">
+            ${cardsHtml}
+            <button onclick="window.closeVitaminsInnerWindow()" style="background: linear-gradient(180deg, #e74c3c, #c0392b); color: white; border: none; border-radius: 8px; padding: 9px 28px; font-weight: bold; font-size: 14px; cursor: pointer; box-shadow: 0 3px 8px rgba(231, 76, 60, 0.3);">No</button>
         </div>
     `;
     const overlay = document.getElementById('pokemon-vitamins-inner-overlay');
@@ -429,33 +457,33 @@ window.showEvolveConfirmModal = function(location, idx, toId) {
     const toImgPath = window.getSpriteUrl(toId, isShiny);
     const filterStyle = isRevealed ? '' : 'filter: brightness(0);';
 
+    const btnBg = req.canEvolve ? 'linear-gradient(180deg, #2ecc71, #27ae60)' : '#7f8c8d';
+    const btnShadow = req.canEvolve ? 'box-shadow: 0 3px 8px rgba(46, 204, 113, 0.3);' : 'opacity: 0.6;';
+
     const html = `
-        <div style="text-align: center; color: white; padding: 6px 10px 10px 10px;">
-            <p style="font-size: 15px; font-weight: 600; color: #ecf0f1; margin-top: 0; margin-bottom: 14px; display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 5px;">
-                Consume ${req.missingStonesHtml}?
-            </p>
-            <div style="display: flex; align-items: center; justify-content: center; gap: 14px; background: linear-gradient(145deg, rgba(20, 30, 48, 0.9), rgba(36, 59, 85, 0.7)); border: 1px solid #3498db; box-shadow: 0 4px 15px rgba(52, 152, 219, 0.25); padding: 14px 20px; border-radius: 10px; width: fit-content; margin: 0 auto 18px auto;">
-                <div style="display: flex; flex-direction: column; align-items: center;">
-                    <div style="background: rgba(255, 255, 255, 0.06); border-radius: 50%; padding: 6px; display: flex; align-items: center; justify-content: center;">
-                        <img src="${fromImgPath}" style="width: 56px; height: 56px; object-fit: contain; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));">
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 6px 10px 10px 10px;">
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 10px; background: linear-gradient(145deg, rgba(20, 30, 48, 0.9), rgba(36, 59, 85, 0.7)); border: 1px solid #3498db; box-shadow: 0 4px 15px rgba(52, 152, 219, 0.25); padding: 12px 16px; border-radius: 10px; width: fit-content;">
+                <div style="display: flex; align-items: center; justify-content: center; gap: 14px;">
+                    <div style="display: flex; flex-direction: column; align-items: center;">
+                        <div style="background: rgba(255, 255, 255, 0.06); border-radius: 50%; padding: 5px; display: flex; align-items: center; justify-content: center;">
+                            <img src="${fromImgPath}" style="width: 48px; height: 48px; object-fit: contain; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));">
+                        </div>
+                        <span style="font-size: 11px; font-weight: 600; color: #ecf0f1; margin-top: 4px;">${escapeHTML(p.name)}</span>
                     </div>
-                    <span style="font-size: 12px; font-weight: 600; color: #ecf0f1; margin-top: 6px;">${escapeHTML(p.name)}</span>
-                </div>
-                <div style="display: flex; flex-direction: column; align-items: center; gap: 2px;">
-                    <span style="background: rgba(52, 152, 219, 0.2); border: 1px solid rgba(52, 152, 219, 0.5); border-radius: 12px; padding: 2px 8px; font-size: 11px; font-weight: bold; color: #74b9ff;">Lv.${evo.level}</span>
-                    <span style="font-size: 16px; color: #3498db; line-height: 1;">➔</span>
-                </div>
-                <div style="display: flex; flex-direction: column; align-items: center;">
-                    <div style="background: rgba(255, 255, 255, 0.06); border-radius: 50%; padding: 6px; display: flex; align-items: center; justify-content: center;">
-                        <img src="${toImgPath}" style="width: 56px; height: 56px; object-fit: contain; ${filterStyle} filter: ${isRevealed ? 'drop-shadow(0 2px 4px rgba(0,0,0,0.5))' : 'brightness(0)'};">
+                    <div style="display: flex; flex-direction: column; align-items: center; gap: 2px;">
+                        <span style="background: rgba(52, 152, 219, 0.2); border: 1px solid rgba(52, 152, 219, 0.5); border-radius: 12px; padding: 2px 8px; font-size: 11px; font-weight: bold; color: #74b9ff;">Lv.${evo.level}</span>
+                        <span style="font-size: 15px; color: #3498db; line-height: 1;">➔</span>
                     </div>
-                    <span style="font-size: 12px; font-weight: 600; color: ${isRevealed ? '#ecf0f1' : '#95a5a6'}; margin-top: 6px;">${toName}</span>
+                    <div style="display: flex; flex-direction: column; align-items: center;">
+                        <div style="background: rgba(255, 255, 255, 0.06); border-radius: 50%; padding: 5px; display: flex; align-items: center; justify-content: center;">
+                            <img src="${toImgPath}" style="width: 48px; height: 48px; object-fit: contain; filter: ${isRevealed ? 'drop-shadow(0 2px 4px rgba(0,0,0,0.5))' : 'brightness(0)'};">
+                        </div>
+                        <span style="font-size: 11px; font-weight: 600; color: ${isRevealed ? '#ecf0f1' : '#95a5a6'}; margin-top: 4px;">${toName}</span>
+                    </div>
                 </div>
+                <button ${req.canEvolve ? '' : 'disabled'} onclick="window.closeVitaminsInnerWindow(); window.evolvePokemon('${location}', ${idx}, ${toId})" style="background: ${btnBg}; color: white; border: none; border-radius: 8px; padding: 7px 16px; font-weight: bold; font-size: 13px; cursor: ${req.canEvolve ? 'pointer' : 'not-allowed'}; ${btnShadow} width: 100%; display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px;">Consume ${req.missingStonesHtml}</button>
             </div>
-            <div style="display: flex; justify-content: center; gap: 14px;">
-                <button onclick="window.closeVitaminsInnerWindow(); window.evolvePokemon('${location}', ${idx}, ${toId})" style="background: linear-gradient(180deg, #2ecc71, #27ae60); color: white; border: none; border-radius: 8px; padding: 9px 28px; font-weight: bold; cursor: pointer; font-size: 14px; box-shadow: 0 3px 8px rgba(46, 204, 113, 0.3);">Yes</button>
-                <button onclick="window.closeVitaminsInnerWindow()" style="background: linear-gradient(180deg, #e74c3c, #c0392b); color: white; border: none; border-radius: 8px; padding: 9px 28px; font-weight: bold; cursor: pointer; font-size: 14px; box-shadow: 0 3px 8px rgba(231, 76, 60, 0.3);">No</button>
-            </div>
+            <button onclick="window.closeVitaminsInnerWindow()" style="background: linear-gradient(180deg, #e74c3c, #c0392b); color: white; border: none; border-radius: 8px; padding: 9px 28px; font-weight: bold; font-size: 14px; cursor: pointer; box-shadow: 0 3px 8px rgba(231, 76, 60, 0.3);">No</button>
         </div>
     `;
 
