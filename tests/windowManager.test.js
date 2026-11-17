@@ -261,7 +261,7 @@ describe('WindowManager', () => {
         try {
             windowManager.autoAdjustWidth('main-control-window');
             expect(mainCtrl._originalWidth).toBe(200);
-            expect(mainCtrl.style.height).toBe('110px');
+            expect(mainCtrl.style.height).toBe('');
 
             // Minimize window and add a new icon (width grows to 300)
             mainCtrl.dataset.minimized = 'true';
@@ -271,13 +271,13 @@ describe('WindowManager', () => {
             expect(mainCtrl.dataset.needsAutoAdjust).toBe('true');
             expect(mainCtrl._originalWidth).toBe(200);
 
-            // Restore window -> autoAdjustWidth runs and updates width/height
+            // Restore window -> autoAdjustWidth runs and updates width only (never height)
             delete mainCtrl.dataset.minimized;
             windowManager.toggleWindow('main-control-window', true);
             expect(mainCtrl.dataset.needsAutoAdjust).toBeUndefined();
             expect(mainCtrl._originalWidth).toBe(300);
             expect(mainCtrl.style.width).toBe('300px');
-            expect(mainCtrl.style.height).toBe('110px');
+            expect(mainCtrl.style.height).toBe('auto');
         } finally {
             mainCtrl.remove();
         }

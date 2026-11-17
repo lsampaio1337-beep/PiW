@@ -1071,8 +1071,8 @@ export class WindowManager {
             }
         }
 
-        // If width and height haven't changed and window is already initialized, restore and skip recalculation
-        if (currentOriginalWidthStr && !isNaN(parseInt(currentOriginalWidthStr)) && newOriginalWidth === currentOriginalWidth && winElement._originalHeight > 0 && newOriginalHeight === winElement._originalHeight) {
+        // If width hasn't changed and window is already initialized, restore and skip
+        if (currentOriginalWidthStr && !isNaN(parseInt(currentOriginalWidthStr)) && newOriginalWidth === currentOriginalWidth) {
             scalerElement.style.position = oldPosition;
             scalerElement.style.transform = oldScale;
             scalerElement.style.width = currentOriginalWidth + 'px';
@@ -1080,28 +1080,23 @@ export class WindowManager {
             return;
         }
 
-        // Restore positioning and lock exact aspect ratio so manual resize scales cleanly
-        const headerElement = winElement.querySelector('.window-header');
-        const headerH = headerElement ? headerElement.offsetHeight : 0;
+        // Restore positioning and width without ever adjusting height
         const finalOriginalWidth = winElement._originalWidth || newOriginalWidth;
-        const finalOriginalHeight = newOriginalHeight || winElement._originalHeight;
-        if (finalOriginalHeight > 0) winElement._originalHeight = finalOriginalHeight;
-
-        if (finalOriginalWidth > 0 && finalOriginalHeight > 0) {
+        if (finalOriginalWidth > 0) {
             const currentW = parseFloat(winElement.style.width) || finalOriginalWidth;
             const scale = currentW / finalOriginalWidth;
             scalerElement.style.position = 'absolute';
             scalerElement.style.top = '0px';
             scalerElement.style.left = '0px';
             scalerElement.style.width = finalOriginalWidth + 'px';
-            scalerElement.style.height = finalOriginalHeight + 'px';
+            scalerElement.style.height = oldScalerHeight;
             scalerElement.style.transform = `scale(${scale})`;
-            winElement.style.height = (headerH + finalOriginalHeight * scale) + 'px';
             this.saveWindowData(windowId);
         } else {
             scalerElement.style.position = oldPosition;
             scalerElement.style.transform = oldScale;
             scalerElement.style.width = scalerElement.style.getPropertyValue('--original-width');
+            scalerElement.style.height = oldScalerHeight;
         }
     }
 
