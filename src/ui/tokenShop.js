@@ -13,7 +13,7 @@ export function renderTokenShopHtml() {
             <div style="display: flex; justify-content: center; width: 100%; margin-bottom: 20px;">
                 <div style="display: flex; align-items: center; gap: 10px; background: rgba(0,0,0,0.5); padding: 10px 20px; border-radius: 10px; border: 2px solid #3498db;">
                     <img src="Assets/Extra/Token.png" style="width: 48px; height: 48px; object-fit: contain;">
-                    <span style="font-size: 24px; font-weight: bold; color: #f1c40f; display: flex; align-items: center;">Daily Tokens: ${state.trainer.tokens || 0}</span>
+                    <span style="font-size: 24px; font-weight: bold; color: #ffffff; display: flex; align-items: center;">Daily Tokens: ${state.trainer.tokens || 0}</span>
                 </div>
             </div>
 

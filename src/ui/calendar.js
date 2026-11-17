@@ -315,8 +315,7 @@ export function showCalendar(tab = 'activities') {
             }
             #window-calendar .cal-challenges-section {
                 margin-top: 18px;
-                padding-top: 16px;
-                border-top: 1px solid rgba(255, 255, 255, 0.1);
+                padding-top: 8px;
             }
             #window-calendar .cal-challenges-list {
                 display: flex;
