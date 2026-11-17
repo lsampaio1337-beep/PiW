@@ -2135,34 +2135,6 @@ async function init() {
 
             leftSide.appendChild(titleDiv);
 
-            if (Array.isArray(pData.party) && pData.party.length > 0) {
-                const partyRow = document.createElement('div');
-                partyRow.style.display = "flex";
-                partyRow.style.alignItems = "center";
-                partyRow.style.gap = "4px";
-                partyRow.style.marginTop = "2px";
-                pData.party.slice(0, 6).forEach(mon => {
-                    if (!mon || !mon.name) return;
-                    const sprite = document.createElement('img');
-                    sprite.alt = mon.name;
-                    sprite.title = `${mon.name} (Lv.${mon.level || 1})`;
-                    const folder = mon.isShiny ? 'Shiny' : 'Normal';
-                    sprite.src = `Assets/Pokemon/${folder}/${mon.name}.png`;
-                    sprite.style.width = "32px";
-                    sprite.style.height = "32px";
-                    sprite.style.objectFit = "contain";
-                    sprite.style.imageRendering = "pixelated";
-                    sprite.style.background = "rgba(0, 0, 0, 0.22)";
-                    sprite.style.borderRadius = "50%";
-                    sprite.style.padding = "2px";
-                    sprite.onerror = () => { sprite.style.display = 'none'; };
-                    partyRow.appendChild(sprite);
-                });
-                if (partyRow.children.length > 0) {
-                    leftSide.appendChild(partyRow);
-                }
-            }
-
             rightSide.appendChild(playedDiv);
 
             textWrapper.appendChild(leftSide);
