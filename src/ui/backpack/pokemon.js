@@ -161,7 +161,10 @@ window.togglePokemonFilters = function() {
 };
 
 window.toggleSafeSpots = function() {
-    window.showSafeSpots = !window.showSafeSpots;
+    if (!state.settings) state.settings = {};
+    const current = state.settings.showSafeSpots ?? true;
+    state.settings.showSafeSpots = !current;
+    window.showSafeSpots = state.settings.showSafeSpots;
     renderBackpackTab('pokemon');
 };
 
@@ -250,6 +253,7 @@ export function renderPokemonTab(area) {
         ${sellControlsHtml}
     `;
 
+    window.showSafeSpots = state.settings?.showSafeSpots ?? true;
     const showSafe = window.showSafeSpots;
     const activeFlex = showSafe
         ? 'flex: 0 0 calc((100% - 76px) * 2 / 7 + 17px);'
