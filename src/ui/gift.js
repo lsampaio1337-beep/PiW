@@ -113,22 +113,19 @@ function generateBadgeGiftHTML(gift, isPending, index) {
     }
 
     const title = gift.gymName ? gift.gymName + ' Badge' : 'Badge';
-
-    let wrapperStyle = isPending
-        ? `cursor: pointer; padding: 10px; border: 1px solid #ccc; border-radius: 5px; background: rgba(0,0,0,0.5); transition: background 0.2s;`
-        : `padding: 10px; border: 1px solid #444; border-radius: 5px; background: rgba(0,0,0,0.2);`;
-
-    let imgStyle = isPending
-        ? `width: 50px; height: 50px;`
-        : `width: 50px; height: 50px; filter: drop-shadow(0 0 5px gold);`;
-
-    let clickHandlers = isPending
-        ? `onclick="window.claimPendingGift(${index})" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(0,0,0,0.5)'"`
-        : "";
+    const stateClass = isPending ? 'is-pending' : 'is-claimed';
+    const clickHandlers = isPending ? `onclick="window.claimPendingGift(${index})"` : '';
+    const statusPill = isPending
+        ? `<span class="gift-status-pill is-claim">Claim</span>`
+        : `<span class="gift-status-pill is-done">Claimed</span>`;
 
     return `
-        <div ${clickHandlers} style="${wrapperStyle}">
-            <img src="./Assets/Gym/Badges/${window.getBadgeFileName(badgeRegion, badgeNum)}" style="${imgStyle}" title="${title}">
+        <div class="gift-card is-badge ${stateClass}" ${clickHandlers} title="${title}">
+            <div class="gift-icon-wrap">
+                <img class="gift-icon-img" src="./Assets/Gym/Badges/${window.getBadgeFileName(badgeRegion, badgeNum)}" alt="${title}">
+            </div>
+            <div class="gift-label">${title}</div>
+            ${statusPill}
         </div>
     `;
 }
@@ -137,20 +134,20 @@ function generateBadgeGiftHTML(gift, isPending, index) {
 function generateItemGiftHTML(gift, isPending, index) {
     let imgPath = gift.item.includes("Key") ? `Assets/Items/KeyItems/${gift.item.replace(/ /g, "_")}.png` : gift.item.includes("Potion") ? `Assets/Items/Potions/${gift.item}.png` : gift.item.includes("Stone") ? `Assets/Items/Stones/${gift.item}.png` : VITAMINS.includes(gift.item) ? `Assets/Items/Vitamins/${gift.item}.png` : `Assets/Items/Balls/${gift.item}.png`;
 
-    let wrapperStyle = isPending
-        ? `cursor: pointer; padding: 10px; border: 1px solid #ccc; border-radius: 5px; background: rgba(0,0,0,0.5); transition: background 0.2s;`
-        : `padding: 10px; border: 1px solid #444; border-radius: 5px; background: rgba(0,0,0,0.2);`;
-
-    let clickHandlers = isPending
-        ? `onclick="window.claimPendingGift(${index})" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(0,0,0,0.5)'"`
-        : "";
+    const stateClass = isPending ? 'is-pending' : 'is-claimed';
+    const clickHandlers = isPending ? `onclick="window.claimPendingGift(${index})"` : '';
+    const statusPill = isPending
+        ? `<span class="gift-status-pill is-claim">Claim</span>`
+        : `<span class="gift-status-pill is-done">Claimed</span>`;
 
     return `
-        <div ${clickHandlers} style="${wrapperStyle}">
-            <div style="position: relative; display: inline-block;">
-                <img src="${imgPath}" style="width: 50px; height: 50px;" title="${gift.item}">
-                ${gift.count > 1 ? `<span style="position: absolute; bottom: -5px; right: -5px; background: rgba(0,0,0,0.8); color: white; padding: 2px 5px; border-radius: 10px; font-size: 12px; font-weight: bold;">x${gift.count}</span>` : ''}
+        <div class="gift-card is-item ${stateClass}" ${clickHandlers} title="${gift.item}">
+            <div class="gift-icon-wrap">
+                <img class="gift-icon-img" src="${imgPath}" alt="${gift.item}">
+                ${gift.count > 1 ? `<span class="gift-qty-badge">x${gift.count}</span>` : ''}
             </div>
+            <div class="gift-label">${gift.item}</div>
+            ${statusPill}
         </div>
     `;
 }
@@ -168,38 +165,41 @@ function generateGiftHTML(gift, isPending, index = -1) {
 function generatePendingGiftsHTML(pending) {
     if (!pending || pending.length === 0) return '';
 
-    let html = `<h3 style="margin-top: 0; margin-bottom: 10px;">Pending Gifts</h3>`;
-    html += `<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 20px;">`;
+    let html = `<div class="gift-section is-pending-section">`;
+    html += `<div class="gift-section-header">`;
+    html += `<h3 class="gift-section-title">Pending Gifts</h3>`;
+    html += `<span class="gift-count-badge is-pending">${pending.length}</span>`;
+    html += `</div>`;
+    html += `<div class="gift-grid">`;
 
     pending.forEach((gift, index) => {
         html += generateGiftHTML(gift, true, index);
     });
 
-    html += `</div>`;
+    html += `</div></div>`;
     return html;
 }
 
-function generateClaimedGiftsHTML(claimed, hasPending) {
+function generateClaimedGiftsHTML(claimed) {
     if (!claimed || claimed.length === 0) return '';
 
-    let html = '';
-    if (hasPending) {
-        html += `<hr style="border: 1px solid #444; margin: 20px 0;">`;
-    }
-
-    html += `<h3 style="margin-top: 0; margin-bottom: 10px;">Collected Gifts</h3>`;
-    html += `<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;">`;
+    let html = `<div class="gift-section">`;
+    html += `<div class="gift-section-header">`;
+    html += `<h3 class="gift-section-title">Collected Gifts</h3>`;
+    html += `<span class="gift-count-badge">${claimed.length}</span>`;
+    html += `</div>`;
+    html += `<div class="gift-grid">`;
 
     claimed.forEach((gift) => {
         html += generateGiftHTML(gift, false);
     });
 
-    html += `</div>`;
+    html += `</div></div>`;
     return html;
 }
 
 export function showGiftModal() {
-    let html = `<div style="text-align: center; padding: 2%; box-sizing: border-box;">`;
+    let html = `<div class="gift-window-content">`;
 
     const pending = state.stats.pendingGifts || [];
     html += generatePendingGiftsHTML(pending);
@@ -209,7 +209,11 @@ export function showGiftModal() {
     }
 
     const claimed = state.stats.claimedGifts || [];
-    html += generateClaimedGiftsHTML(claimed, pending.length > 0);
+    html += generateClaimedGiftsHTML(claimed);
+
+    if (pending.length === 0 && claimed.length === 0) {
+        html += `<div class="gift-empty-state">No gifts yet. Defeat Gym Leaders or complete Challenges to earn gifts!</div>`;
+    }
 
     html += `</div>`;
 
