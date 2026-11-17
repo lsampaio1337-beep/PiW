@@ -1051,7 +1051,8 @@ export class WindowManager {
         const headerElement = winElement.querySelector('.window-header');
         const headerH = headerElement ? headerElement.offsetHeight : 0;
         const finalOriginalWidth = winElement._originalWidth || newOriginalWidth;
-        const finalOriginalHeight = winElement._originalHeight || newOriginalHeight;
+        const finalOriginalHeight = newOriginalHeight || winElement._originalHeight;
+        if (finalOriginalHeight > 0) winElement._originalHeight = finalOriginalHeight;
 
         if (finalOriginalWidth > 0 && finalOriginalHeight > 0) {
             const currentW = parseFloat(winElement.style.width) || finalOriginalWidth;
