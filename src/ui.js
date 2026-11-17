@@ -2471,6 +2471,11 @@ async function init() {
             updateHeader();
         };
 
+        setTimeout(() => {
+            if (typeof saveManagerModal.adjustHeightForNewContent === 'function') {
+                saveManagerModal.adjustHeightForNewContent();
+            }
+        }, 0);
     };
     renderProfilesList();
 
