@@ -421,12 +421,22 @@ window.showEvolveConfirmModal = function(location, idx, toId) {
     const evo = pData.evolutions.find(e => e.to === toId);
     if (!evo) return;
     const req = getEvolveRequirements(p, evo, state);
+    const toData = getPokemonConfig(toId, state);
+    const isRevealed = toData && ((state.stats?.seenSpecies?.[toData.name]) || (state.stats?.caughtSpecies?.[toData.name]));
+    const toName = isRevealed ? escapeHTML(toData.name) : "???";
+    const isShiny = !!(p.isShiny || p.quality === 'Shiny');
+    const imgPath = window.getSpriteUrl(toId, isShiny);
+    const filterStyle = isRevealed ? '' : 'filter: brightness(0);';
 
     const html = `
         <div style="text-align: center; color: white; padding: 10px;">
-            <p style="font-size: 16px; margin-top: 0; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px;">
+            <p style="font-size: 16px; margin-top: 0; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px;">
                 Consume ${req.missingStonesHtml}?
             </p>
+            <div style="display: flex; flex-direction: column; align-items: center; margin-bottom: 16px;">
+                <img src="${imgPath}" style="width: 72px; height: 72px; object-fit: contain; ${filterStyle}">
+                <span style="font-size: 14px; font-weight: bold; margin-top: 4px;">${toName}</span>
+            </div>
             <div style="display: flex; justify-content: center; gap: 15px;">
                 <button onclick="window.closeVitaminsInnerWindow(); window.evolvePokemon('${location}', ${idx}, ${toId})" style="background: #2ecc71; color: white; border: none; border-radius: 8px; padding: 8px 25px; font-weight: bold; cursor: pointer; font-size: 14px;">Yes</button>
                 <button onclick="window.closeVitaminsInnerWindow()" style="background: #e74c3c; color: white; border: none; border-radius: 8px; padding: 8px 25px; font-weight: bold; cursor: pointer; font-size: 14px;">No</button>
