@@ -310,8 +310,8 @@ function getCurrentCount(state, type) {
         if (!state.backpack || !state.backpack.potions) return 0;
         const potions = state.backpack.potions;
         for (const key in potions) {
-            if (Object.prototype.hasOwnProperty.call(potions, key)) {
-                count += potions[key];
+            if (Object.prototype.hasOwnProperty.call(potions, key) && key !== 'Max Potion') {
+                count += potions[key] || 0;
             }
         }
     } else if (type === 'box') {
