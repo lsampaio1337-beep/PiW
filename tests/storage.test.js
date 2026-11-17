@@ -184,3 +184,61 @@ describe('Storage.reset', () => {
         expect(consoleLogSpy).not.toHaveBeenCalled();
     });
 });
+
+describe('Storage.loadProfileIntoState', () => {
+    let storage;
+
+    beforeEach(() => {
+        storage = new Storage();
+        jest.clearAllMocks();
+    });
+
+    test('should load valid profile data into state, preserve config, and set currentProfileId', () => {
+        const savedData = {
+            trainer: { money: 500, badges: 2 },
+            party: [{ name: 'Bulbasaur', level: 10 }]
+        };
+        window.localStorage.getItem.mockReturnValueOnce(JSON.stringify(savedData));
+
+        const state = {
+            trainer: { money: 0, badges: 0 },
+            party: [],
+            config: { pokemonData: ['Bulbasaur'] }
+        };
+
+        const result = storage.loadProfileIntoState('profile_123', state);
+
+        expect(result).toEqual({ ok: true });
+        expect(storage.currentProfileId).toBe('profile_123');
+        expect(state.trainer).toEqual({ money: 500, badges: 2 });
+        expect(state.party).toEqual([{ name: 'Bulbasaur', level: 10 }]);
+        expect(state.config).toEqual({ pokemonData: ['Bulbasaur'] });
+    });
+
+    test('should return ok: false when profile data is missing', () => {
+        window.localStorage.getItem.mockReturnValueOnce(null);
+        const state = { trainer: { money: 0 } };
+
+        const result = storage.loadProfileIntoState('profile_missing', state);
+
+        expect(result.ok).toBe(false);
+        expect(storage.currentProfileId).toBeNull();
+    });
+
+    test('should return ok: false when profile data is corrupted JSON', () => {
+        const warnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+        window.localStorage.getItem.mockReturnValueOnce('{invalid-json');
+        const state = { trainer: { money: 0 } };
+
+        const result = storage.loadProfileIntoState('profile_corrupt', state);
+
+        expect(result.ok).toBe(false);
+        expect(storage.currentProfileId).toBeNull();
+        warnSpy.mockRestore();
+    });
+
+    test('should return ok: false when profileId or state is missing', () => {
+        expect(storage.loadProfileIntoState(null, {}).ok).toBe(false);
+        expect(storage.loadProfileIntoState('profile_123', null).ok).toBe(false);
+    });
+});
