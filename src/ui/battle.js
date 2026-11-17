@@ -493,6 +493,29 @@ function updateHpBarUI(hpBar, hpText, hpPct, currentHp, maxHp) {
     hpPct.innerText = `${Math.floor(pct)}%`;
 }
 
+const BATTLE_SPRITE_SCALE = 0.43;
+const BATTLE_SPRITE_MIN_HEIGHT = 29;
+const BATTLE_SPRITE_FALLBACK_HEIGHT = 52;
+
+export function getTargetSpriteHeight(pokemonId, spriteSizes) {
+    if (!spriteSizes || pokemonId === undefined || pokemonId === null) {
+        return BATTLE_SPRITE_FALLBACK_HEIGHT;
+    }
+    const rawStr = String(pokemonId);
+    const dotIdx = rawStr.indexOf('.');
+    const paddedId = dotIdx === -1
+        ? rawStr.padStart(4, '0')
+        : `${rawStr.slice(0, dotIdx).padStart(4, '0')}${rawStr.slice(dotIdx)}`;
+
+    let rawSize = spriteSizes[paddedId];
+    if (!rawSize && dotIdx !== -1) {
+        const basePadded = rawStr.slice(0, dotIdx).padStart(4, '0');
+        rawSize = spriteSizes[basePadded];
+    }
+    if (!rawSize) return BATTLE_SPRITE_FALLBACK_HEIGHT;
+    return Math.max(BATTLE_SPRITE_MIN_HEIGHT, Math.round(rawSize * BATTLE_SPRITE_SCALE));
+}
+
 function updatePokemonSpriteUI(spriteWrapper, pokemonSprite, pokemon, battleSystem, isPlayer, shouldAnimateSliding) {
     if (!spriteWrapper || !pokemonSprite) return;
 
@@ -501,34 +524,43 @@ function updatePokemonSpriteUI(spriteWrapper, pokemonSprite, pokemon, battleSyst
         precacheRouteSprites(state.currentRoute);
     }
 
-    let pokemonId = pokemon.isDisguisedDitto ? 132 : pokemon.id;
+    const pokemonId = pokemon.isDisguisedDitto ? 132 : pokemon.id;
     const isShiny = pokemon.qualityName === 'Shiny';
     const newSrc = getTrimmedSpriteUrl(pokemonId, isShiny, isPlayer);
     if (newSrc && pokemonSprite.getAttribute('src') !== newSrc) {
         pokemonSprite.src = newSrc;
     }
 
-    const paddedId = String(pokemonId).padStart(4, '0');
-    const targetHeight = state.config?.spriteSizes?.[paddedId];
-    if (targetHeight) {
-        pokemonSprite.style.height = `${targetHeight}px`;
-        pokemonSprite.style.width = 'auto';
-    } else {
-        pokemonSprite.style.height = '';
-        pokemonSprite.style.width = '';
+    const targetHeight = getTargetSpriteHeight(pokemonId, state.config?.spriteSizes);
+    pokemonSprite.style.height = `${targetHeight}px`;
+    pokemonSprite.style.width = 'auto';
+
+    pokemonSprite.classList.toggle('is-player', Boolean(isPlayer));
+    pokemonSprite.style.transform = '';
+
+    const types = Array.isArray(pokemon.types) ? pokemon.types : [];
+    const isFlying = types.includes('Flying') || types.includes('Wind');
+    const isWater = types.includes('Water');
+
+    const motionEl = spriteWrapper.querySelector('.battle-sprite-motion');
+    if (motionEl) {
+        motionEl.classList.toggle('is-flying', isFlying);
     }
 
-    const isFlying = pokemon.types && (pokemon.types.includes('Flying') || pokemon.types.includes('Wind'));
-    spriteWrapper.style.justifyContent = isFlying ? 'flex-start' : 'flex-end';
-    spriteWrapper.style.alignItems = isPlayer ? 'flex-end' : 'flex-start';
-    pokemonSprite.style.transform = isPlayer ? 'scaleX(-1)' : 'none';
+    const waterEffectEl = spriteWrapper.querySelector('.battle-water-effect');
+    if (waterEffectEl) {
+        waterEffectEl.classList.toggle('is-active', isWater);
+    }
 
     const animClass = isPlayer ? 'sliding-idle-anim-flipped' : 'sliding-idle-anim';
+    const otherAnimClass = isPlayer ? 'sliding-idle-anim' : 'sliding-idle-anim-flipped';
+    pokemonSprite.classList.remove(otherAnimClass);
 
     if (shouldAnimateSliding) {
         pokemonSprite.classList.add(animClass);
-        const numCycles = Math.ceil(battleSystem.slideDuration / 500);
-        const newDuration = battleSystem.slideDuration / numCycles;
+        const slideDuration = battleSystem?.slideDuration || 500;
+        const numCycles = Math.max(1, Math.ceil(slideDuration / 500));
+        const newDuration = slideDuration / numCycles;
         pokemonSprite.style.animationDuration = `${newDuration}ms`;
     } else {
         pokemonSprite.classList.remove(animClass);
@@ -561,10 +593,14 @@ function updateEnemyUI(enemy, battleSystem, glassTier, isSearching = false) {
         return;
     }
 
-    if (hpContainerEnemy) hpContainerEnemy.style.display = glassTier >= 1 ? 'flex' : 'none';
+    if (hpContainerEnemy) {
+        hpContainerEnemy.style.display = glassTier >= 1 ? 'flex' : 'none';
+        hpContainerEnemy.style.opacity = '1';
+    }
 
     if (enemyDataModals) {
         enemyDataModals.style.display = glassTier >= 3 ? 'flex' : 'none';
+        enemyDataModals.style.opacity = '1';
 
         const levelEl = document.getElementById('enemy-battle-level');
         if (levelEl) {
@@ -733,43 +769,37 @@ function prepareCloneWrapper(originalSpriteWrapper, elEnemySide) {
     cloneWrapper.removeAttribute('id');
     cloneWrapper.querySelectorAll('[id]').forEach(el => el.removeAttribute('id'));
 
-    cloneWrapper.style.position = 'absolute';
-    cloneWrapper.style.top = '0';
-    cloneWrapper.style.left = '0';
-    cloneWrapper.style.width = '100%';
-    cloneWrapper.style.height = '100%';
+    cloneWrapper.style.position = 'relative';
 
+    const motionTarget = cloneWrapper.querySelector('.battle-sprite-motion') || cloneWrapper;
     const floatingDamages = elEnemySide.querySelectorAll('.floating-damage');
     floatingDamages.forEach(node => {
-        cloneWrapper.appendChild(node);
+        node.dataset.fainting = 'true';
+        motionTarget.appendChild(node);
     });
 
     return cloneWrapper;
 }
 
-function createDefeatContainer(elEnemySide) {
+function createDefeatContainer() {
     const defeatContainer = document.createElement('div');
+    defeatContainer.className = 'battle-actor battle-actor-enemy';
     defeatContainer.style.position = 'absolute';
     defeatContainer.style.bottom = '20%';
     defeatContainer.style.left = '35%';
     defeatContainer.style.display = 'flex';
-    defeatContainer.style.alignItems = 'center';
+    defeatContainer.style.alignItems = 'flex-end';
+    defeatContainer.style.justifyContent = 'center';
     defeatContainer.style.width = 'max-content';
     defeatContainer.style.height = 'max-content';
     defeatContainer.style.zIndex = '10'; // Behind player sprite
-
-    const frameBorder = elEnemySide.querySelector('img[alt="Enemy Frame"]');
-    if (frameBorder) {
-        const frameClone = frameBorder.cloneNode(true);
-        defeatContainer.appendChild(frameClone);
-    }
 
     return defeatContainer;
 }
 
 function setupDefeatClone(originalSpriteWrapper, elEnemySide, arena) {
     const cloneWrapper = prepareCloneWrapper(originalSpriteWrapper, elEnemySide);
-    const defeatContainer = createDefeatContainer(elEnemySide);
+    const defeatContainer = createDefeatContainer();
 
     defeatContainer.appendChild(cloneWrapper);
 
@@ -786,21 +816,26 @@ function setupDefeatClone(originalSpriteWrapper, elEnemySide, arena) {
     return { cloneWrapper, defeatContainer };
 }
 
+let hideEnemyUITimeout = null;
+
 function temporarilyHideEnemyUI() {
     const hpContainerEnemy = document.getElementById('enemy-battle-hp-container');
     const enemyDataModals = document.getElementById('enemy-data-modals');
+    if (hideEnemyUITimeout) {
+        clearTimeout(hideEnemyUITimeout);
+        hideEnemyUITimeout = null;
+    }
     if (hpContainerEnemy) {
         hpContainerEnemy.style.opacity = '0';
-        setTimeout(() => {
-            if (hpContainerEnemy) hpContainerEnemy.style.opacity = '1';
-        }, 500);
     }
     if (enemyDataModals) {
         enemyDataModals.style.opacity = '0';
-        setTimeout(() => {
-            if (enemyDataModals) enemyDataModals.style.opacity = '1';
-        }, 500);
     }
+    hideEnemyUITimeout = setTimeout(() => {
+        if (hpContainerEnemy) hpContainerEnemy.style.opacity = '1';
+        if (enemyDataModals) enemyDataModals.style.opacity = '1';
+        hideEnemyUITimeout = null;
+    }, 500);
 }
 
 function createPokeballAnimation(ballResult, cloneWrapper, ballSizePx) {
@@ -812,30 +847,16 @@ function createPokeballAnimation(ballResult, cloneWrapper, ballSizePx) {
         ball.src = `Assets/Items/Balls/${ballResult.ballName}.png`;
         ball.style.position = 'absolute';
 
-        const innerWrapper = cloneWrapper.querySelector('div');
-        const attachTarget = innerWrapper ? innerWrapper : cloneWrapper;
-
-        if (innerWrapper) {
-            const img = innerWrapper.querySelector('img');
-            if (img) {
-                attachTarget.style.position = 'relative';
-                ball.style.left = '50%';
-                ball.style.top = '50%';
-            } else {
-                ball.style.left = '50%';
-                ball.style.top = '50%';
-            }
-        } else {
-            ball.style.left = '50%';
-            ball.style.top = '50%';
-        }
-
+        const motionTarget = cloneWrapper.querySelector('.battle-sprite-motion') || cloneWrapper;
+        motionTarget.style.position = 'relative';
+        ball.style.left = '50%';
+        ball.style.top = '50%';
         ball.style.transform = 'translate(-50%, -50%)';
         ball.style.width = `${ballSizePx}px`;
         ball.style.height = `${ballSizePx}px`;
         ball.style.objectFit = 'contain';
         ball.style.zIndex = '51';
-        attachTarget.appendChild(ball);
+        motionTarget.appendChild(ball);
 
         let shakeCount = 0;
         shakeInterval = setInterval(() => {
@@ -857,12 +878,19 @@ function animateContainerSlide(defeatContainer, targetLeft, slideDuration) {
 }
 
 function animatePokemonSprite(cloneWrapper) {
-    const pokemonSprite = cloneWrapper.querySelector('img:not([src*="Balls"])');
+    const pokemonSprite = cloneWrapper.querySelector('.battle-pokemon-sprite') || cloneWrapper.querySelector('img:not([src*="Balls"])');
     if (pokemonSprite) {
+        pokemonSprite.classList.remove('sliding-idle-anim', 'sliding-idle-anim-flipped');
         pokemonSprite.style.transition = 'opacity 2000ms linear, transform 2000ms linear';
         pokemonSprite.style.transformOrigin = 'center center';
         pokemonSprite.style.opacity = '0';
-        pokemonSprite.style.transform = 'scale(0.3)';
+        pokemonSprite.style.transform = 'scale(0.25)';
+    }
+
+    const waterEffect = cloneWrapper.querySelector('.battle-water-effect');
+    if (waterEffect) {
+        waterEffect.style.transition = 'opacity 1000ms linear';
+        waterEffect.style.opacity = '0';
     }
 }
 
@@ -886,10 +914,14 @@ function animateModals(cloneWrapper) {
 function animateDamageTexts(cloneWrapper) {
     const clonedDamages = cloneWrapper.querySelectorAll('.floating-damage');
     clonedDamages.forEach(dmg => {
-        dmg.style.transition = 'opacity 2000ms linear, transform 2000ms linear, top 1s ease-out';
+        dmg.dataset.fainting = 'true';
+        void dmg.offsetWidth;
+        dmg.style.transition = 'opacity 2000ms linear, transform 2000ms linear, top 1200ms ease-in, left 1200ms ease-in';
         dmg.style.transformOrigin = 'center center';
+        dmg.style.left = '50%';
+        dmg.style.top = '50%';
         dmg.style.opacity = '0';
-        dmg.style.transform = 'translate(-50%, -50%) scale(0.3)';
+        dmg.style.transform = 'translate(-50%, -50%) scale(0.2)';
     });
 }
 
@@ -1073,8 +1105,9 @@ export function showDamage(target, amount, isCrit, moveName = '', moveType = 'No
 
     img.appendChild(dmgNode);
 
-    // Animate up and fade out
+    // Animate up and fade out (unless pulled inside a fainting Pokemon)
     setTimeout(() => {
+        if (dmgNode.dataset.fainting === 'true') return;
         dmgNode.style.top = '0%'; // Float up relative to the container
     }, 50);
 
@@ -1096,8 +1129,10 @@ function getCombatActors(targetSide, isGym) {
 
     const atkImg = document.getElementById(attackerId);
     const defImg = document.getElementById(defenderId);
+    const atkMotion = atkImg ? (atkImg.querySelector('.battle-sprite-motion') || atkImg) : null;
+    const defMotion = defImg ? (defImg.querySelector('.battle-sprite-motion') || defImg) : null;
 
-    return { attackerId, defenderId, atkImg, defImg };
+    return { attackerId, defenderId, atkImg, defImg, atkMotion, defMotion };
 }
 
 function getAttackerTypes(attackerId, isGym, battleSystem, state) {
@@ -1121,61 +1156,72 @@ function getAttackerTypes(attackerId, isGym, battleSystem, state) {
     return atkTypes;
 }
 
-function initBaseTransforms(atkImg, defImg, attackerId, defenderId) {
-    if (!atkImg.dataset.baseTransform) {
-        atkImg.dataset.baseTransform = atkImg.style.transform || (attackerId.includes('player') ? 'scaleX(-1)' : '');
+function initBaseTransforms(atkMotion, defMotion) {
+    if (atkMotion && atkMotion.dataset.baseTransform === undefined) {
+        atkMotion.dataset.baseTransform = atkMotion.classList.contains('battle-sprite-motion')
+            ? ''
+            : (atkMotion.style.transform || '');
     }
-    if (!defImg.dataset.baseTransform) {
-        defImg.dataset.baseTransform = defImg.style.transform || (defenderId.includes('player') ? 'scaleX(-1)' : '');
+    if (defMotion && defMotion.dataset.baseTransform === undefined) {
+        defMotion.dataset.baseTransform = defMotion.classList.contains('battle-sprite-motion')
+            ? ''
+            : (defMotion.style.transform || '');
     }
 }
 
-function animateAttacker(atkImg, atkTypes, isPlayerAtk, duration) {
-    const xDir = isPlayerAtk ? 15 : -15;
-    const bt = atkImg.dataset.baseTransform || '';
+function animateAttacker(atkMotion, atkTypes, isPlayerAtk, duration) {
+    if (!atkMotion || typeof atkMotion.animate !== 'function') return;
+    const xDir = isPlayerAtk ? 18 : -18;
+    const bt = atkMotion.dataset.baseTransform || '';
 
     let attackKeyframes = [
-        { transform: `${bt}` },
-        { transform: `${bt} translateX(${xDir}px) scale(1.05)` },
-        { transform: `${bt}` }
+        { transform: `${bt}`.trim() || 'none' },
+        { transform: `${bt} translateX(${xDir}px) scale(1.06)`.trim() },
+        { transform: `${bt}`.trim() || 'none' }
     ];
 
     if (atkTypes.includes('Flying') || atkTypes.includes('Wind')) {
         attackKeyframes = [
-            { transform: `${bt}` },
-            { transform: `${bt} translate(${xDir}px, 15px) scale(1.05)` },
-            { transform: `${bt}` }
+            { transform: `${bt}`.trim() || 'none' },
+            { transform: `${bt} translate(${xDir}px, 14px) scale(1.06)`.trim() },
+            { transform: `${bt}`.trim() || 'none' }
         ];
     }
 
-    atkImg.animate(attackKeyframes, {
-        duration: duration * 0.4,
+    atkMotion.animate(attackKeyframes, {
+        duration: Math.max(120, duration * 0.4),
         easing: 'ease-in-out'
     });
 }
 
 function calculateProjectileMetrics(atkImg, defImg) {
-    const atkImgEl = atkImg ? atkImg.querySelector('img:not([src*="FrameBorder"])') : null;
-    const defImgEl = defImg ? defImg.querySelector('img:not([src*="FrameBorder"])') : null;
+    const atkImgEl = atkImg ? (atkImg.querySelector('.battle-pokemon-sprite') || atkImg.querySelector('img')) : null;
+    const defImgEl = defImg ? (defImg.querySelector('.battle-pokemon-sprite') || defImg.querySelector('img')) : null;
 
-    const atkSpriteImg = atkImgEl || atkImg;
-    const defSpriteImg = defImgEl || defImg;
+    const rawAtkRect = atkImgEl ? atkImgEl.getBoundingClientRect() : null;
+    const rawDefRect = defImgEl ? defImgEl.getBoundingClientRect() : null;
 
-    const atkRect = atkSpriteImg.getBoundingClientRect();
-    const defRect = defSpriteImg.getBoundingClientRect();
+    const atkRect = (rawAtkRect && rawAtkRect.width > 0 && rawAtkRect.height > 0)
+        ? rawAtkRect
+        : atkImg.getBoundingClientRect();
+    const defRect = (rawDefRect && rawDefRect.width > 0 && rawDefRect.height > 0)
+        ? rawDefRect
+        : defImg.getBoundingClientRect();
+
     const container = document.getElementById('battle-sprites-container') || document.body;
-
-    let containerRect = container.getBoundingClientRect();
+    const containerRect = container.getBoundingClientRect();
     let scaleX = 1;
     let scaleY = 1;
 
-    if (container.offsetWidth) {
+    if (container.offsetWidth && containerRect.width > 0) {
         scaleX = containerRect.width / container.offsetWidth;
         scaleY = containerRect.height / container.offsetHeight;
     }
 
-    const projHeight = (atkRect.height / scaleY) * 0.07;
-    const projWidth = projHeight * 2;
+    const atkHeight = Math.max(48, atkRect.height / scaleY);
+    const defHeight = Math.max(48, defRect.height / scaleY);
+    const projHeight = Math.max(8, Math.min(20, atkHeight * 0.1));
+    const projWidth = projHeight * 2.4;
 
     const atkCenterX = atkRect.left + atkRect.width / 2;
     const atkCenterY = atkRect.top + atkRect.height / 2;
@@ -1187,105 +1233,147 @@ function calculateProjectileMetrics(atkImg, defImg) {
     const endX = container === document.body ? defCenterX : (defCenterX - containerRect.left) / scaleX;
     const endY = container === document.body ? defCenterY : (defCenterY - containerRect.top) / scaleY;
 
-    return { container, projHeight, projWidth, startX, startY, endX, endY, defRect, scaleY };
+    const angleDeg = Math.atan2(endY - startY, endX - startX) * (180 / Math.PI);
+
+    return { container, projHeight, projWidth, startX, startY, endX, endY, angleDeg, defHeight };
 }
 
-function createAndAnimateProjectile(color, duration, metrics, defImg) {
-    const { container, projHeight, projWidth, startX, startY, endX, endY, defRect, scaleY } = metrics;
+function spawnSplashEffect(container, x, y, defHeight, color, duration) {
+    const posType = container === document.body ? 'fixed' : 'absolute';
+    const splashDuration = Math.max(220, duration * 0.65);
+    const maxRadius = Math.max(32, Math.min(90, defHeight * 0.48));
 
-    // Create projectile
+    const splashHost = document.createElement('div');
+    splashHost.style.position = posType;
+    splashHost.style.left = `${x}px`;
+    splashHost.style.top = `${y}px`;
+    splashHost.style.width = '0px';
+    splashHost.style.height = '0px';
+    splashHost.style.pointerEvents = 'none';
+    splashHost.style.zIndex = '999';
+
+    // Central burst core
+    const core = document.createElement('div');
+    core.style.position = 'absolute';
+    core.style.left = '0';
+    core.style.top = '0';
+    core.style.width = `${maxRadius * 0.45}px`;
+    core.style.height = `${maxRadius * 0.45}px`;
+    core.style.borderRadius = '50%';
+    core.style.background = `radial-gradient(circle, #ffffff 0%, ${color} 55%, transparent 100%)`;
+    core.style.boxShadow = `0 0 ${maxRadius * 0.35}px ${color}`;
+    core.style.transform = 'translate(-50%, -50%) scale(0.4)';
+    core.style.opacity = '1';
+    core.style.transition = `transform ${splashDuration * 0.7}ms ease-out, opacity ${splashDuration * 0.7}ms ease-out`;
+    splashHost.appendChild(core);
+
+    // Expanding shockwave ring
+    const ring = document.createElement('div');
+    ring.style.position = 'absolute';
+    ring.style.left = '0';
+    ring.style.top = '0';
+    ring.style.width = `${maxRadius * 1.3}px`;
+    ring.style.height = `${maxRadius * 1.3}px`;
+    ring.style.borderRadius = '50%';
+    ring.style.border = `3px solid ${color}`;
+    ring.style.boxShadow = `0 0 10px ${color}`;
+    ring.style.transform = 'translate(-50%, -50%) scale(0.2)';
+    ring.style.opacity = '0.95';
+    ring.style.transition = `transform ${splashDuration}ms cubic-bezier(0.15, 0.85, 0.35, 1), opacity ${splashDuration}ms ease-out`;
+    splashHost.appendChild(ring);
+
+    // Radial splash droplets
+    const dropletCount = 8;
+    const droplets = [];
+    for (let i = 0; i < dropletCount; i++) {
+        const angle = (Math.PI * 2 * i) / dropletCount + (i % 2 === 0 ? 0.15 : -0.15);
+        const dist = maxRadius * (0.65 + (i % 3) * 0.2);
+        const dx = Math.cos(angle) * dist;
+        const dy = Math.sin(angle) * dist;
+        const dropSize = Math.max(5, maxRadius * (i % 2 === 0 ? 0.18 : 0.12));
+
+        const drop = document.createElement('div');
+        drop.style.position = 'absolute';
+        drop.style.left = '0';
+        drop.style.top = '0';
+        drop.style.width = `${dropSize}px`;
+        drop.style.height = `${dropSize}px`;
+        drop.style.borderRadius = '50%';
+        drop.style.backgroundColor = color;
+        drop.style.boxShadow = `0 0 6px ${color}`;
+        drop.style.transform = 'translate(-50%, -50%) scale(1)';
+        drop.style.opacity = '1';
+        drop.style.transition = `transform ${splashDuration}ms cubic-bezier(0.1, 0.8, 0.3, 1), opacity ${splashDuration}ms ease-out`;
+        splashHost.appendChild(drop);
+        droplets.push({ drop, dx, dy });
+    }
+
+    container.appendChild(splashHost);
+    void splashHost.offsetWidth;
+
+    core.style.transform = 'translate(-50%, -50%) scale(1.6)';
+    core.style.opacity = '0';
+    ring.style.transform = 'translate(-50%, -50%) scale(1.15)';
+    ring.style.opacity = '0';
+    for (const { drop, dx, dy } of droplets) {
+        drop.style.transform = `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px)) scale(0.35)`;
+        drop.style.opacity = '0';
+    }
+
+    setTimeout(() => {
+        if (splashHost.parentElement) splashHost.parentElement.removeChild(splashHost);
+    }, splashDuration + 40);
+}
+
+function createAndAnimateProjectile(color, duration, metrics, defMotion) {
+    const { container, projHeight, projWidth, startX, startY, endX, endY, angleDeg, defHeight } = metrics;
+
     const proj = document.createElement('div');
     proj.style.position = container === document.body ? 'fixed' : 'absolute';
-    proj.style.width = projWidth + 'px';
-    proj.style.height = projWidth + 'px';
-    proj.style.backgroundColor = color;
-    proj.style.borderRadius = '50%';
-    proj.style.boxShadow = `0 0 ${projHeight}px ${projHeight/2}px ${color}`;
+    proj.style.width = `${projWidth}px`;
+    proj.style.height = `${projHeight}px`;
+    proj.style.background = `linear-gradient(90deg, transparent 0%, ${color} 45%, #ffffff 100%)`;
+    proj.style.borderRadius = '999px';
+    proj.style.boxShadow = `0 0 ${projHeight}px ${projHeight * 0.45}px ${color}`;
     proj.style.zIndex = '999';
     proj.style.pointerEvents = 'none';
-    proj.style.transform = 'translate(-50%, -50%)';
-
-    proj.style.left = startX + 'px';
-    proj.style.top = startY + 'px';
+    proj.style.transform = `translate(-50%, -50%) rotate(${angleDeg}deg)`;
+    proj.style.left = `${startX}px`;
+    proj.style.top = `${startY}px`;
 
     container.appendChild(proj);
 
-    // Animate projectile
-    proj.style.transition = `all ${duration}ms linear`;
-
-    // Trigger reflow
+    proj.style.transition = `left ${duration}ms linear, top ${duration}ms linear`;
     proj.getBoundingClientRect();
 
-    proj.style.left = endX + 'px';
-    proj.style.top = endY + 'px';
+    proj.style.left = `${endX}px`;
+    proj.style.top = `${endY}px`;
 
-    const updateTransform = (img) => {
-        const base = img.dataset.baseTransform || '';
-        const atk = img.dataset.atkTransform || '';
-        const def = img.dataset.defTransform || '';
-        img.style.transform = `${base} ${atk} ${def}`.trim();
+    const updateTransform = (el) => {
+        const base = el.dataset.baseTransform || '';
+        const def = el.dataset.defTransform || '';
+        el.style.transform = `${base} ${def}`.trim();
     };
 
     setTimeout(() => {
         if (proj.parentElement) proj.parentElement.removeChild(proj);
 
-        // Splash Effect
-        const splash = document.createElement('div');
-        splash.style.position = container === document.body ? 'fixed' : 'absolute';
+        spawnSplashEffect(container, endX, endY, defHeight, color, duration);
 
-        // Center the 0x0 div on the target
-        splash.style.left = endX + 'px';
-        splash.style.top = endY + 'px';
-        splash.style.width = '0px';
-        splash.style.height = '0px';
-        splash.style.backgroundColor = color; // 100% solid color
-        splash.style.borderRadius = '50%';
-        splash.style.boxShadow = `0 0 ${projHeight}px ${projHeight/2}px ${color}`;
-        splash.style.zIndex = '999';
-        splash.style.pointerEvents = 'none';
-        splash.style.transform = 'translate(-50%, -50%)';
+        if (defMotion) {
+            defMotion.style.transition = 'transform 50ms ease-in-out';
+            const shakeInterval = setInterval(() => {
+                const shift = (Math.random() - 0.5) * 18;
+                defMotion.dataset.defTransform = `translateX(${shift}px)`;
+                updateTransform(defMotion);
+            }, 50);
 
-        // Phase 1: Grow to 50% of sprite height
-        splash.style.transition = `all ${duration * 0.3}ms linear`;
-
-        container.appendChild(splash);
-
-        // Trigger reflow
-        splash.getBoundingClientRect();
-
-        // Expand to 50% height of sprite from the center
-        const sSize1 = (defRect.height / scaleY) * 0.50;
-        splash.style.width = sSize1 + 'px';
-        splash.style.height = sSize1 + 'px';
-        splash.style.opacity = '1';
-
-        // Phase 2: Grow to 100% height and fade out
-        setTimeout(() => {
-            splash.style.transition = `all ${duration * 0.3}ms linear`;
-            const sSize2 = (defRect.height / scaleY) * 1.0;
-            splash.style.width = sSize2 + 'px';
-            splash.style.height = sSize2 + 'px';
-            splash.style.opacity = '0';
-        }, duration * 0.3);
-
-        setTimeout(() => {
-            if (splash.parentElement) splash.parentElement.removeChild(splash);
-        }, duration * 0.6);
-
-        // Defender Hit Animation (Shake) using transforms safely
-        defImg.style.transition = 'transform 50ms ease-in-out';
-        let shakeInterval = setInterval(() => {
-            const shift = (Math.random() - 0.5) * 20;
-            defImg.dataset.defTransform = `translateX(${shift}px)`;
-            updateTransform(defImg);
-        }, 50);
-
-        setTimeout(() => {
-            clearInterval(shakeInterval);
-            defImg.dataset.defTransform = '';
-            updateTransform(defImg);
-        }, Math.min(500, duration * 0.3));
-
+            setTimeout(() => {
+                clearInterval(shakeInterval);
+                defMotion.dataset.defTransform = '';
+                updateTransform(defMotion);
+            }, Math.min(450, Math.max(150, duration * 0.45)));
+        }
     }, duration);
 }
 
@@ -1293,21 +1381,20 @@ export function playCombatAnimations(targetSide, moveType, duration) {
     const battleSystem = globals.battleSystem;
     const isGym = battleSystem && battleSystem.gymState && battleSystem.gymState.isActive;
 
-    const { attackerId, defenderId, atkImg, defImg } = getCombatActors(targetSide, isGym);
+    const { attackerId, atkImg, defImg, atkMotion, defMotion } = getCombatActors(targetSide, isGym);
     if (!atkImg || !defImg) return;
 
     const color = TYPE_COLORS[moveType] || '#ffffff';
 
-    // We want to combine transforms without them overwriting each other.
-    initBaseTransforms(atkImg, defImg, attackerId, defenderId);
+    initBaseTransforms(atkMotion, defMotion);
 
     const atkTypes = getAttackerTypes(attackerId, isGym, battleSystem, state);
     const isPlayerAtk = attackerId.includes('player');
 
-    animateAttacker(atkImg, atkTypes, isPlayerAtk, duration);
+    animateAttacker(atkMotion, atkTypes, isPlayerAtk, duration);
 
     const metrics = calculateProjectileMetrics(atkImg, defImg);
-    createAndAnimateProjectile(color, duration, metrics, defImg);
+    createAndAnimateProjectile(color, duration, metrics, defMotion);
 }
 
 let levelUpQueue = [];
