@@ -1071,11 +1071,12 @@ export class WindowManager {
             }
         }
 
-        // If width hasn't changed and window is already initialized, restore and skip height recalculation
-        if (currentOriginalWidthStr && !isNaN(parseInt(currentOriginalWidthStr)) && newOriginalWidth === currentOriginalWidth && winElement._originalHeight > 0) {
+        // If width and height haven't changed and window is already initialized, restore and skip recalculation
+        if (currentOriginalWidthStr && !isNaN(parseInt(currentOriginalWidthStr)) && newOriginalWidth === currentOriginalWidth && winElement._originalHeight > 0 && newOriginalHeight === winElement._originalHeight) {
             scalerElement.style.position = oldPosition;
             scalerElement.style.transform = oldScale;
             scalerElement.style.width = currentOriginalWidth + 'px';
+            scalerElement.style.height = oldScalerHeight;
             return;
         }
 

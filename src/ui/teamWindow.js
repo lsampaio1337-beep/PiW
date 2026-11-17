@@ -172,6 +172,12 @@ export function updateTeamWindow() {
     const dayCareContainer = document.getElementById('day-care');
     let dayCareCount = 0;
     if (state.dayCareRef && dayCareContainer) {
+        if (!state.dayCareRef.slot1.pokemon && state.breeding && state.breeding.length > 0) {
+            state.dayCareRef.slot1.pokemon = state.breeding[0];
+        }
+        if (!state.dayCareRef.slot2.pokemon && state.training && state.training.length > 0) {
+            state.dayCareRef.slot2.pokemon = state.training[0];
+        }
         if (state.dayCareRef.slot1.pokemon) dayCareCount++;
         if (state.dayCareRef.slot2.pokemon) dayCareCount++;
 
