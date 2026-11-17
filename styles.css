@@ -539,7 +539,7 @@ input[type="number"] {
     flex-direction: column;
 }
 
-#window-pokemon-stats > .window-content-container > .content-panel {
+#window-pokemon-stats > .window-content-container > .window-content-scaler > .content-panel {
     padding: 0;
 }
 
