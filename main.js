@@ -109,7 +109,14 @@ ipcMain.on('set-main-control-minimized', (_event, minimized) => {
 function applyIconLocation(location) {
     const useTray = location === 'tray';
     if (mainWin && !mainWin.isDestroyed()) {
-        mainWin.setSkipTaskbar(useTray);
+        const wasVisible = mainWin.isVisible();
+        if (process.platform === 'win32' && wasVisible) {
+            mainWin.hide();
+            mainWin.setSkipTaskbar(useTray);
+            mainWin.show();
+        } else {
+            mainWin.setSkipTaskbar(useTray);
+        }
     }
     if (useTray) {
         createTray();
