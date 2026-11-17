@@ -421,12 +421,30 @@ window.showEvolveConfirmModal = function(location, idx, toId) {
     const evo = pData.evolutions.find(e => e.to === toId);
     if (!evo) return;
     const req = getEvolveRequirements(p, evo, state);
+    const toData = getPokemonConfig(toId, state);
+    const isRevealed = toData && ((state.stats?.seenSpecies?.[toData.name]) || (state.stats?.caughtSpecies?.[toData.name]));
+    const toName = isRevealed ? escapeHTML(toData.name) : "???";
+    const isShiny = !!(p.isShiny || p.quality === 'Shiny');
+    const fromImgPath = window.getSpriteUrl(p.id, isShiny);
+    const toImgPath = window.getSpriteUrl(toId, isShiny);
+    const filterStyle = isRevealed ? '' : 'filter: brightness(0);';
 
     const html = `
         <div style="text-align: center; color: white; padding: 10px;">
-            <p style="font-size: 16px; margin-top: 0; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px;">
+            <p style="font-size: 16px; margin-top: 0; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px;">
                 Consume ${req.missingStonesHtml}?
             </p>
+            <div style="display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.5); padding: 10px; border-radius: 5px; margin-bottom: 16px;">
+                <div style="display: flex; flex-direction: column; align-items: center; margin: 5px;">
+                    <img src="${fromImgPath}" style="width: 50px; height: 50px;">
+                    <span style="font-size: 10px;">${escapeHTML(p.name)}</span>
+                </div>
+                <div style="font-size: 10px; color: #aaa; margin: 0 10px;">Lv.${evo.level} ➔</div>
+                <div style="display: flex; flex-direction: column; align-items: center; margin: 5px;">
+                    <img src="${toImgPath}" style="width: 50px; height: 50px; ${filterStyle}">
+                    <span style="font-size: 10px;">${toName}</span>
+                </div>
+            </div>
             <div style="display: flex; justify-content: center; gap: 15px;">
                 <button onclick="window.closeVitaminsInnerWindow(); window.evolvePokemon('${location}', ${idx}, ${toId})" style="background: #2ecc71; color: white; border: none; border-radius: 8px; padding: 8px 25px; font-weight: bold; cursor: pointer; font-size: 14px;">Yes</button>
                 <button onclick="window.closeVitaminsInnerWindow()" style="background: #e74c3c; color: white; border: none; border-radius: 8px; padding: 8px 25px; font-weight: bold; cursor: pointer; font-size: 14px;">No</button>
