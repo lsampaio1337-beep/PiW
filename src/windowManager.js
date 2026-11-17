@@ -486,6 +486,10 @@ export class WindowManager {
                         if (windowId === 'party-window') {
                             delete savedSettings.width;
                             delete savedSettings.height;
+                        } else if (windowId === 'main-control-window') {
+                            delete savedSettings.height;
+                            if (savedSettings.width) winElement.style.width = savedSettings.width;
+                            winElement.style.height = 'auto';
                         } else {
                             if (savedSettings.width) winElement.style.width = savedSettings.width;
                             if (savedSettings.height) winElement.style.height = savedSettings.height;
