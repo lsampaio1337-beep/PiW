@@ -490,6 +490,9 @@ export class WindowManager {
                             delete savedSettings.height;
                             if (savedSettings.width) winElement.style.width = savedSettings.width;
                             winElement.style.height = 'auto';
+                            if (typeof winElement.adjustHeightForNewContent === 'function') {
+                                setTimeout(() => winElement.adjustHeightForNewContent(), 100);
+                            }
                         } else {
                             if (savedSettings.width) winElement.style.width = savedSettings.width;
                             if (savedSettings.height) winElement.style.height = savedSettings.height;
