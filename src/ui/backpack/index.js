@@ -57,8 +57,8 @@ export function showBackpack() {
                         </svg>
                     </div>
 
-                    <div id="backpack-content-overlay" onclick="if(event.target === this) { event.stopPropagation(); window.closeBackpackPocket(); }" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.75); z-index: 5;">
-                        <div id="backpack-content-area" onclick="event.stopPropagation()" class="floating-window" style="position: absolute; bottom: 5%; left: 0%; width: 100%; height: auto; max-height: 90%; flex-direction: column; z-index: 5; display: none; overflow: hidden;">
+                    <div id="backpack-content-overlay" onclick="if(event.target === this) { event.stopPropagation(); window.closeBackpackPocket(); }" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.75); z-index: 5; align-items: center; justify-content: center;">
+                        <div id="backpack-content-area" onclick="event.stopPropagation()" class="floating-window" style="position: relative; width: 90%; height: auto; max-height: 81%; flex-direction: column; display: none; overflow: hidden;">
                             <div class="window-header" style="position: relative; cursor: default;">
                                 <span id="backpack-pocket-title">Pocket</span>
                                 <span onclick="window.closeBackpackPocket()" style="position: absolute; top: 5px; right: 5px; font-size: 12px; font-weight: bold; line-height: 1; padding: 0; cursor: pointer; color: white;">X</span>
@@ -110,7 +110,7 @@ export function renderBackpackTab(tab) {
     const titleSpan = document.getElementById('backpack-pocket-title');
     if (!area || !innerContent || !titleSpan) return;
 
-    if (overlay) overlay.style.display = "block";
+    if (overlay) overlay.style.display = "flex";
     area.style.display = "flex";
 
     if (tab !== 'pokemon') {
