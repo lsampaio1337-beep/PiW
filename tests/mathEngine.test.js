@@ -1,4 +1,4 @@
-import { calculateDamage, calculateReqXP, calculateTotalXP, calculateStat, calculateCatchChance } from '../src/mathEngine.js';
+import { calculateDamage, calculateReqXP, calculateTotalXP, calculateStat, calculateCatchChance, getCurrentCount } from '../src/mathEngine.js';
 
 describe('calculateReqXP', () => {
     test('should calculate required XP correctly for level 1', () => {
@@ -384,5 +384,38 @@ describe('calculateCatchChance', () => {
 
         // 5 candies = 1.50x multiplier
         expect(calculateCatchChance(bst, level, quality, totalIV, ballMultiplier, { blackYellowCandies: 5 })).toBeCloseTo(52.5 * 1.50, 2);
+    });
+});
+
+describe('getCurrentCount', () => {
+    test('counts potions while excluding hidden Max Potion', () => {
+        const mockState = {
+            backpack: {
+                potions: {
+                    'Tiny Potion': 2,
+                    'Small Potion': 3,
+                    'Regular Potion': 0,
+                    'Big Potion': 0,
+                    'Huge Potion': 0,
+                    'Ultra Potion': 0,
+                    'Max Potion': 1000
+                }
+            }
+        };
+
+        expect(getCurrentCount(mockState, 'potions')).toBe(5);
+    });
+
+    test('returns 0 for potions when only Max Potion is present', () => {
+        const mockState = {
+            backpack: {
+                potions: {
+                    'Tiny Potion': 0,
+                    'Max Potion': 1000
+                }
+            }
+        };
+
+        expect(getCurrentCount(mockState, 'potions')).toBe(0);
     });
 });
