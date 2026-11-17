@@ -1288,6 +1288,51 @@ export class WindowManager {
         }
     }
 
+    _isWindowVisible(winElement) {
+        if (!winElement || winElement.style.display === 'none') return false;
+        if (window.getComputedStyle && window.getComputedStyle(winElement).display === 'none') {
+            return false;
+        }
+        if (winElement.id === 'modal-content-box') {
+            const overlay = document.getElementById('modal-overlay');
+            if (!overlay || overlay.style.display === 'none') return false;
+            if (window.getComputedStyle && window.getComputedStyle(overlay).display === 'none') {
+                return false;
+            }
+        }
+        if (winElement.id === 'save-manager-modal') {
+            const splash = document.getElementById('splash-screen');
+            if (!splash || splash.style.display === 'none') return false;
+            if (window.getComputedStyle && window.getComputedStyle(splash).display === 'none') {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Returns the topmost currently visible floating window managed by WindowManager.
+     * @returns {HTMLElement|null}
+     */
+    getTopmostVisibleWindow() {
+        let topmost = null;
+        let maxZ = -1;
+
+        for (const win of this.windows) {
+            if (!this._isWindowVisible(win)) continue;
+            if (win.id === 'modal-content-box') {
+                return win;
+            }
+            const z = parseInt(win.style.zIndex || '0', 10) || 0;
+            if (z >= maxZ) {
+                maxZ = z;
+                topmost = win;
+            }
+        }
+
+        return topmost;
+    }
+
     spawnWindow(windowId) {
         const winElement = document.getElementById(windowId);
         if (!winElement) return;

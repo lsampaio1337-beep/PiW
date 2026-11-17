@@ -21,6 +21,7 @@ document.body.innerHTML = `
 `;
 
 import { WindowManager } from '../src/windowManager.js';
+import { setupWindowToggles } from '../src/init/listeners/windowListeners.js';
 
 describe('WindowManager', () => {
     let windowManager;
@@ -132,5 +133,108 @@ describe('WindowManager', () => {
         );
         div.querySelector('button').click();
         expect(window.changeLocation).toHaveBeenCalledWith('Pokémon League — Mina’s Trial');
+    });
+
+    test('getTopmostVisibleWindow returns visible window with highest zIndex and respects modal-overlay', () => {
+        const winA = document.createElement('div');
+        winA.id = 'main-control-window';
+        winA.className = 'floating-window';
+        winA.style.display = 'flex';
+        const headerA = document.createElement('div');
+        headerA.id = 'main-control-header';
+        winA.appendChild(headerA);
+
+        const winB = document.createElement('div');
+        winB.id = 'party-window';
+        winB.className = 'floating-window';
+        winB.style.display = 'flex';
+        const headerB = document.createElement('div');
+        headerB.id = 'party-header';
+        winB.appendChild(headerB);
+
+        const overlay = document.createElement('div');
+        overlay.id = 'modal-overlay';
+        overlay.style.display = 'none';
+        const modalBox = document.createElement('div');
+        modalBox.id = 'modal-content-box';
+        modalBox.className = 'floating-window';
+        modalBox.style.display = 'flex';
+        const modalHeader = document.createElement('div');
+        modalHeader.id = 'modal-header';
+        modalBox.appendChild(modalHeader);
+        overlay.appendChild(modalBox);
+
+        document.body.append(winA, winB, overlay);
+
+        try {
+            windowManager.registerWindow('main-control-window', 'main-control-header');
+            windowManager.registerWindow('party-window', 'party-header');
+            windowManager.registerWindow('modal-content-box', 'modal-header');
+
+            // party-window was registered after main-control-window, so it has higher zIndex
+            expect(windowManager.getTopmostVisibleWindow()).toBe(winB);
+
+            // Focusing main-control-window brings it to top
+            windowManager.focusWindow(winA);
+            expect(windowManager.getTopmostVisibleWindow()).toBe(winA);
+
+            // Showing modal-overlay makes modal-content-box topmost
+            overlay.style.display = 'flex';
+            expect(windowManager.getTopmostVisibleWindow()).toBe(modalBox);
+
+            // Hiding modal-overlay falls back to winA
+            overlay.style.display = 'none';
+            expect(windowManager.getTopmostVisibleWindow()).toBe(winA);
+        } finally {
+            winA.remove();
+            winB.remove();
+            overlay.remove();
+        }
+    });
+
+    test('Ctrl+W closes topmost window or prompts exit when on main-control-window', () => {
+        const mainCtrl = document.createElement('div');
+        mainCtrl.id = 'main-control-window';
+        mainCtrl.className = 'floating-window';
+        mainCtrl.style.display = 'flex';
+        const mainCtrlHeader = document.createElement('div');
+        mainCtrlHeader.id = 'main-control-header';
+        mainCtrl.appendChild(mainCtrlHeader);
+
+        const partyWin = document.createElement('div');
+        partyWin.id = 'party-window';
+        partyWin.className = 'floating-window';
+        partyWin.style.display = 'flex';
+        const partyHeader = document.createElement('div');
+        partyHeader.id = 'party-header';
+        partyWin.appendChild(partyHeader);
+
+        document.body.append(mainCtrl, partyWin);
+
+        const prevPromptExitGame = window.promptExitGame;
+        window.promptExitGame = jest.fn();
+
+        try {
+            windowManager.registerWindow('main-control-window', 'main-control-header');
+            windowManager.registerWindow('party-window', 'party-header');
+            setupWindowToggles();
+
+            // party-window is topmost -> Ctrl+W closes party-window only
+            const ev1 = new KeyboardEvent('keydown', { key: 'w', ctrlKey: true, cancelable: true });
+            window.dispatchEvent(ev1);
+            expect(ev1.defaultPrevented).toBe(true);
+            expect(partyWin.style.display).toBe('none');
+            expect(window.promptExitGame).not.toHaveBeenCalled();
+
+            // Now main-control-window is the only visible window -> Ctrl+W prompts exit game
+            const ev2 = new KeyboardEvent('keydown', { key: 'w', ctrlKey: true, cancelable: true });
+            window.dispatchEvent(ev2);
+            expect(ev2.defaultPrevented).toBe(true);
+            expect(window.promptExitGame).toHaveBeenCalledTimes(1);
+        } finally {
+            window.promptExitGame = prevPromptExitGame;
+            mainCtrl.remove();
+            partyWin.remove();
+        }
     });
 });

@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, screen } = require('electron');
+const { app, BrowserWindow, ipcMain, screen, Menu } = require('electron');
 const path = require('path');
 const fs = require('fs');
 
@@ -77,6 +77,9 @@ ipcMain.on('set-ignore-mouse-events', (event, ignore, options) => {
 });
 
 app.whenReady().then(() => {
+    // Remove default application menu so Ctrl+W is handled by the renderer instead of closing the whole app
+    Menu.setApplicationMenu(null);
+
     // Delay window creation on Linux to allow the compositor to initialize correctly
     // so transparent windows work without disabling hardware acceleration.
     if (process.platform === 'linux') {
