@@ -458,12 +458,26 @@ export class WindowManager {
     }
 
 
+    _syncNavToggleState(windowId, isVisible) {
+        const navMap = {
+            'party-window': 'btn-toggle-party',
+            'main-view-window': 'btn-toggle-main'
+        };
+        const btnId = navMap[windowId];
+        if (!btnId) return;
+        const btn = document.getElementById(btnId);
+        if (btn && btn.classList) {
+            btn.classList.toggle('is-window-active', Boolean(isVisible));
+        }
+    }
+
     toggleWindow(windowId, forceShow = false) {
         const winElement = document.getElementById(windowId);
         if (winElement) {
             if (forceShow || winElement.style.display === 'none') {
                 winElement.style.display = 'flex';
                 this.focusWindow(winElement);
+                this._syncNavToggleState(windowId, true);
 
                 if (!winElement.dataset.settingsLoaded) {
                     winElement.dataset.settingsLoaded = 'true';
@@ -486,6 +500,7 @@ export class WindowManager {
                 }
             } else {
                 winElement.style.display = 'none';
+                this._syncNavToggleState(windowId, false);
             }
         }
     }
@@ -798,7 +813,8 @@ export class WindowManager {
             if (!isResizing) return;
 
             const dx = e.clientX - startX;
-            let newWidth = Math.max(200, startWidth + dx); // minimum width 200px
+            const minWidth = winElement.id === 'party-window' ? 60 : 200;
+            let newWidth = Math.max(minWidth, startWidth + dx);
 
             if (winElement.id === 'window-map' && winElement._mapAspectRatio) {
                 const headerH = headerElement ? headerElement.offsetHeight : 0;
@@ -1032,10 +1048,28 @@ export class WindowManager {
             }
         }
 
-        // Restore positioning
-        scalerElement.style.position = oldPosition;
-        scalerElement.style.transform = oldScale;
-        scalerElement.style.width = scalerElement.style.getPropertyValue('--original-width');
+        // Restore positioning and lock exact aspect ratio so manual resize scales cleanly
+        const headerElement = winElement.querySelector('.window-header');
+        const headerH = headerElement ? headerElement.offsetHeight : 0;
+        const finalOriginalWidth = winElement._originalWidth || newOriginalWidth;
+        const finalOriginalHeight = newOriginalHeight || winElement._originalHeight;
+        if (finalOriginalHeight > 0) winElement._originalHeight = finalOriginalHeight;
+
+        if (finalOriginalWidth > 0 && finalOriginalHeight > 0) {
+            const currentW = parseFloat(winElement.style.width) || finalOriginalWidth;
+            const scale = currentW / finalOriginalWidth;
+            scalerElement.style.position = 'absolute';
+            scalerElement.style.top = '0px';
+            scalerElement.style.left = '0px';
+            scalerElement.style.width = finalOriginalWidth + 'px';
+            scalerElement.style.height = finalOriginalHeight + 'px';
+            scalerElement.style.transform = `scale(${scale})`;
+            winElement.style.height = (headerH + finalOriginalHeight * scale) + 'px';
+        } else {
+            scalerElement.style.position = oldPosition;
+            scalerElement.style.transform = oldScale;
+            scalerElement.style.width = scalerElement.style.getPropertyValue('--original-width');
+        }
     }
 
     recalculateWindowSize(windowId) {
@@ -1236,16 +1270,12 @@ export class WindowManager {
             this._parseAndSanitizeToElement(title, header);
 
             const closeBtn = document.createElement('span');
+            closeBtn.className = 'window-ctrl-btn is-close';
             closeBtn.textContent = 'X';
             closeBtn.style.position = 'absolute';
-            closeBtn.style.top = '5px';
-            closeBtn.style.right = '5px';
-            closeBtn.style.fontSize = '12px';
-            closeBtn.style.fontWeight = 'bold';
-            closeBtn.style.lineHeight = '1';
-            closeBtn.style.padding = '0';
-            closeBtn.style.cursor = 'pointer';
-            closeBtn.style.color = 'white';
+            closeBtn.style.top = '50%';
+            closeBtn.style.transform = 'translateY(-50%)';
+            closeBtn.style.right = '6px';
             closeBtn.style.zIndex = '10';
             closeBtn.onclick = () => {
                 if (window.windowManager) {
@@ -1285,6 +1315,7 @@ export class WindowManager {
         const winElement = document.getElementById(windowId);
         if (winElement) {
             winElement.style.display = 'none';
+            this._syncNavToggleState(windowId, false);
         }
     }
 

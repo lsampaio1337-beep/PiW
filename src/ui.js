@@ -81,27 +81,9 @@ window.dismissBonusCandyMessage = function() {
     }
 };
 
-export const TYPE_COLORS = {
-    "Bug": "#aead56",
-    "Dark": "#636066",
-    "Dragon": "#648abd",
-    "Electric": "#ebc74a",
-    "Fairy": "#e09bd4",
-    "Fighting": "#d98251",
-    "Fire": "#da6149",
-    "Flying": "#92add3",
-    "Ghost": "#8c769f",
-    "Grass": "#6da862",
-    "Ground": "#b0845f",
-    "Ice": "#76c4c5",
-    "Normal": "#a69b93",
-    "Poison": "#af56a7",
-    "Psychic": "#e48194",
-    "Rock": "#a7a7a7",
-    "Steel": "#869ba7",
-    "Water": "#6391c7",
-};
-import { updateMainControl } from './ui/mainControl.js';
+import { TYPE_COLORS } from './constants.js';
+export { TYPE_COLORS };
+import { updateMainControl, updateMainViewRouteBadge } from './ui/mainControl.js';
 import { updateTeamWindow } from './ui/teamWindow.js';
 import { updateBattleArena, showDamage, playCombatAnimations, triggerDefeatAnimation, showLoot, showLevelUp } from './ui/battle.js';
 import { showCalendar } from './ui/calendar.js';
@@ -138,7 +120,7 @@ window.updateZzZModeUI = function() {
     } else {
         document.querySelectorAll('.nav-icon').forEach(icon => {
             icon.style.pointerEvents = 'auto';
-            icon.style.filter = 'none';
+            icon.style.filter = '';
         });
     }
 };
@@ -1440,6 +1422,7 @@ const MAIN_VIEW_BATTLE_MODE_RATIO = 5.75;
 
 export function switchView(viewName) {
     state.currentView = viewName;
+    if (typeof updateMainViewRouteBadge === 'function') updateMainViewRouteBadge();
     document.querySelectorAll('.game-view').forEach(el => el.style.display = 'none');
 
     const overlay = document.getElementById('main-view-inner-modal-overlay');
@@ -2044,7 +2027,7 @@ async function init() {
     setupClickThrough();
 
     // Register floating windows
-    window.windowManager.registerWindow('main-control-window', 'main-control-header', '10%', '5%');
+    window.windowManager.registerWindow('main-control-window', 'main-control-header', '10%', '3%');
     window.windowManager.registerWindow('party-window', 'party-header', '5%', '15%');
     window.windowManager.registerWindow('main-view-window', 'main-view-header', '30%', '15%');
 

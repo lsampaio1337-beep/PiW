@@ -1,14 +1,31 @@
 import { state } from '../state.js';
+import { TYPE_COLORS } from '../constants.js';
 import * as mathEngine from "../mathEngine.js";
-
-// Ensure global functions that are referenced in HTML exist on window object
-// However, since `window.setLeader` and `window.showPokemonStats` are referenced,
-// they need to be defined elsewhere and attached to window, or attached here.
-// Let's attach them in the main ui.js or where appropriate.
-
 import { escapeHTML } from '../utils/stringUtils.js';
 
 let lastTeamCount = -1;
+
+const QUALITY_META_MAP = {
+    Shiny: { glowClass: 'glow-shiny', tierClass: 'is-qtier-shiny' },
+    Legendary: { glowClass: 'glow-legendary', tierClass: 'is-qtier-legendary' },
+    Epic: { glowClass: 'glow-epic', tierClass: 'is-qtier-epic' },
+    Rare: { glowClass: 'glow-rare', tierClass: 'is-qtier-rare' },
+    Uncommon: { glowClass: 'glow-uncommon', tierClass: 'is-qtier-uncommon' },
+    Regular: { glowClass: 'glow-regular', tierClass: 'is-qtier-regular' },
+};
+
+function getQualityMeta(qualityName) {
+    return QUALITY_META_MAP[qualityName] || { glowClass: 'glow-weak', tierClass: 'is-qtier-weak' };
+}
+
+function getHpFillStyle(hpPct) {
+    if (hpPct <= 0) return 'linear-gradient(90deg, #1f2937, #111827)';
+    if (hpPct < 25) return 'linear-gradient(90deg, #dc2626, #f87171)';
+    if (hpPct < 50) return 'linear-gradient(90deg, #ea580c, #fb923c)';
+    if (hpPct < 75) return 'linear-gradient(90deg, #ca8a04, #facc15)';
+    if (hpPct < 100) return 'linear-gradient(90deg, #16a34a, #4ade80)';
+    return 'linear-gradient(90deg, #0284c7, #38bdf8)';
+}
 
 function renderSanitizedHtml(html, targetElement) {
     if (window.windowManager && typeof window.windowManager._parseAndSanitizeToElement === 'function') {
@@ -19,103 +36,137 @@ function renderSanitizedHtml(html, targetElement) {
     }
 }
 
+function buildTypeDotsHtml(types) {
+    if (!Array.isArray(types) || types.length === 0) return '';
+    const dots = types
+        .slice(0, 2)
+        .map(t => {
+            const safeType = escapeHTML(t);
+            const color = TYPE_COLORS[t] || '#94a3b8';
+            return `<span class="team-type-dot" style="background: ${color};" title="${safeType}"></span>`;
+        })
+        .join('');
+    return `<span class="team-type-dots">${dots}</span>`;
+}
+
+function buildXpBarHtml(p) {
+    if (p.level >= 100) {
+        return `
+            <div class="team-bar-track is-xp is-max">
+                <div class="team-bar-fill is-xp-max" style="width: 100%;"></div>
+                <div class="team-bar-gloss"></div>
+                <div class="team-bar-overlay">
+                    <span class="team-bar-center is-max-label">MAX LV</span>
+                </div>
+            </div>
+        `;
+    }
+
+    const currentLevelXp = mathEngine.calculateTotalXP(p.level);
+    const nextLevelXp = mathEngine.calculateTotalXP(p.level + 1);
+    const xpProgress = Math.max(0, Math.floor(p.xp) - currentLevelXp);
+    const xpRequired = Math.max(1, nextLevelXp - currentLevelXp);
+    const xpPct = Math.min(100, Math.max(0, (xpProgress / xpRequired) * 100));
+
+    return `
+        <div class="team-bar-track is-xp">
+            <div class="team-bar-fill is-xp" style="width: ${xpPct}%;"></div>
+            <div class="team-bar-gloss"></div>
+            <div class="team-bar-overlay">
+                <div class="team-bar-cell">${xpProgress}/${xpRequired}</div>
+                <div class="team-bar-label">XP</div>
+                <div class="team-bar-cell">${Math.floor(xpPct)}%</div>
+            </div>
+        </div>
+    `;
+}
+
+function buildSpritePedestalHtml(p, glowClass, isFainted, allowTransform, topBadgeHtml = '', bottomBadgeHtml = '') {
+    const isShiny = p.qualityName === 'Shiny';
+    const faintClass = isFainted ? 'is-fainted' : '';
+    const spriteMarkup = (allowTransform && p.isTransformed && p.transformedIntoId)
+        ? `<img src="${window.getSpriteUrl(132, isShiny)}" class="team-sprite-ghost ${glowClass}">
+           <img src="${window.getSpriteUrl(p.transformedIntoId, isShiny)}" onload="this.style.display='inline'" onerror="this.style.display='none'" class="team-sprite-img ${glowClass} ${faintClass}">`
+        : `<img src="${window.getSpriteUrl(p.id, isShiny)}" onload="this.style.display='inline'" onerror="this.style.display='none'" class="team-sprite-img ${glowClass} ${faintClass}">`;
+
+    return `
+        <div class="team-sprite-stage">
+            <div class="team-sprite-pedestal"></div>
+            ${spriteMarkup}
+            ${topBadgeHtml}
+            ${bottomBadgeHtml}
+        </div>
+    `;
+}
+
 export function updateTeamWindow() {
     const partyDiv = document.getElementById('party-list');
     if (!partyDiv) return;
     partyDiv.replaceChildren();
+
+    const countPill = document.getElementById('party-count-pill');
+    if (countPill) {
+        countPill.textContent = `${state.party.length}/6`;
+    }
+
+    if (state.party.length === 0) {
+        renderSanitizedHtml(`<div class="team-empty-state">No Pokémon in party</div>`, partyDiv);
+    }
+
     state.party.forEach((p, idx) => {
         const d = document.createElement('div');
-        d.className = 'party-slot';
-        d.style.position = 'relative';
-        d.style.border = '2px solid #3498db';
+        const isLeader = idx === 0;
+        const isFainted = p.currentHp <= 0;
+        const { glowClass, tierClass } = getQualityMeta(p.qualityName);
 
-        // Calculate XP relative to current level
-        const currentLevelXp = mathEngine.calculateTotalXP(p.level);
-        const nextLevelXp = mathEngine.calculateTotalXP(p.level + 1);
-        const xpProgress = Math.floor(p.xp) - currentLevelXp;
-        const xpRequired = nextLevelXp - currentLevelXp;
+        d.className = [
+            'party-slot',
+            'team-card',
+            tierClass,
+            isLeader ? 'is-leader' : '',
+            isFainted ? 'is-fainted' : ''
+        ].filter(Boolean).join(' ');
 
-        const crownColor = idx === 0 ? '#f1c40f' : '#7f8c8d'; // Yellow for leader, Grey for others
-
-        const hpPct = Math.min(100, (p.currentHp / p.maxHp) * 100);
-        let hpColor = '#3498db'; // Blue for 100%
-        if (hpPct <= 0) hpColor = '#000000'; // Black
-        else if (hpPct < 25) hpColor = '#e74c3c'; // Red
-        else if (hpPct < 50) hpColor = '#e67e22'; // Orange
-        else if (hpPct < 75) hpColor = '#f1c40f'; // Yellow
-        else if (hpPct < 100) hpColor = '#2ecc71'; // Green
-
-        let xpPct = Math.min(100, (xpProgress / xpRequired) * 100);
-
-        let xpTextHtml = ``;
-        if (p.level === 100) {
-            xpPct = 100;
-            xpTextHtml = ``; // No text for level 100
-        } else {
-            xpTextHtml = `
-                <div style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center; line-height: 1;">${xpProgress}/${xpRequired}</div>
-                <div style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center; line-height: 1; font-size: 8px; color: white;">XP</div>
-                <div style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center; line-height: 1;">${Math.floor(xpPct)}%</div>
-            `;
-        }
-
-        let glowClass = "glow-weak";
-        if (p.qualityName === "Shiny") glowClass = "glow-shiny";
-        else if (p.qualityName === "Legendary") glowClass = "glow-legendary";
-        else if (p.qualityName === "Epic") glowClass = "glow-epic";
-        else if (p.qualityName === "Rare") glowClass = "glow-rare";
-        else if (p.qualityName === "Uncommon") glowClass = "glow-uncommon";
-        else if (p.qualityName === "Regular") glowClass = "glow-regular";
+        const hpPct = p.maxHp > 0 ? Math.min(100, Math.max(0, (p.currentHp / p.maxHp) * 100)) : 0;
+        const hpFill = getHpFillStyle(hpPct);
+        const hpCriticalClass = (!isFainted && hpPct < 25) ? 'is-critical' : '';
+        const crownClass = isLeader ? 'is-active' : '';
+        const leadTag = isLeader ? `<span class="team-lead-badge team-stage-badge is-top-left">LEAD</span>` : '';
+        const hpLabel = isFainted ? 'FAINT' : 'HP';
 
         renderSanitizedHtml(`
-            <div style="display: flex; width: 100%; align-items: stretch; height: 100%; min-height: 55px;">
-                <!-- Left Column: Sprite -->
-                <div style="flex: 0 0 50px; display: flex; align-items: center; justify-content: center; position: relative;">
-                    ${p.isTransformed && p.transformedIntoId ?
-                        `<img src="${window.getSpriteUrl(132, p.qualityName === 'Shiny')}" class="${glowClass}" style="position: absolute; top: 0; left: 0; max-width: 100%; max-height: 100%; object-fit: contain; pointer-events: none; opacity: 0.5; transform: scale(1.5); z-index: 1;">
-                         <img src="${window.getSpriteUrl(p.transformedIntoId, p.qualityName === 'Shiny')}" onload="this.style.display='inline'" onerror="this.style.display='none'" class="${glowClass}" style="max-width: 100%; max-height: 100%; object-fit: contain; pointer-events: none; opacity: 0.85; transform: scale(1.5); z-index: 2; position: relative;">`
-                        :
-                        `<img src="${window.getSpriteUrl(p.id, p.qualityName === 'Shiny')}" onload="this.style.display='inline'" onerror="this.style.display='none'" class="${glowClass}" style="max-width: 100%; max-height: 100%; object-fit: contain; pointer-events: none; opacity: 0.85; transform: scale(1.5); z-index: 2;">`
-                    }
-                </div>
-
-                <!-- Right Column: 3 Floors -->
-                <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; padding-left: 5px; gap: 2px; min-width: 0;">
-                    <!-- Top Floor: Name/Level and Buttons -->
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <div style="line-height: 1; display: flex; align-items: baseline; gap: 4px;">
-                            <span style="font-weight: bold; font-size: 12px; text-shadow: 1px 1px 1px rgba(0,0,0,0.8); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${escapeHTML(p.name)}</span>
-                            <span style="font-size: 10px; text-shadow: 1px 1px 1px rgba(0,0,0,0.8);">Lv.${p.level}</span>
+            <div class="team-card-accent"></div>
+            <div class="team-card-body">
+                ${buildSpritePedestalHtml(p, glowClass, isFainted, true, leadTag)}
+                <div class="team-card-info">
+                    <div class="team-card-top">
+                        <div class="team-name-group">
+                            <span class="team-poke-name" title="${escapeHTML(p.name)}">${escapeHTML(p.name)}</span>
+                            <span class="team-lv-pill">Lv.${p.level}</span>
+                            ${buildTypeDotsHtml(p.types)}
                         </div>
-                        <div style="display: flex; align-items: center; gap: 4px; pointer-events: auto; position: relative; z-index: 10;">
-                            <div onclick="window.setLeader(${idx})" style="cursor: pointer; color: ${crownColor}; font-size: 14px; line-height: 14px;" title="Set as Leader">👑</div>
-                            <div onclick="event.stopPropagation(); window.showPokemonStats(${idx}, 'party')" style="cursor: pointer; background: #34495e; color: white; border-radius: 50%; width: 14px; height: 14px; text-align: center; line-height: 14px; font-size: 10px; font-weight: bold;" title="View Info">i</div>
+                        <div class="team-actions">
+                            <div onclick="window.setLeader(${idx})" class="team-crown-btn ${crownClass}" title="Set as Leader">👑</div>
+                            <div onclick="event.stopPropagation(); window.showPokemonStats(${idx}, 'party')" class="team-info-btn" title="View Info">i</div>
                         </div>
                     </div>
 
-                    <!-- Middle Floor: HP Bar -->
-                    <div style="width: 100%; height: 14px; background: #222; border: 1px solid #000; border-radius: 8px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: bold; color: white; text-shadow: 1px 1px 1px black, -1px -1px 1px black, 1px -1px 1px black, -1px 1px 1px black; box-shadow: inset 0px 1px 3px rgba(0,0,0,0.5);">
-                        <div style="position: absolute; left: 0; top: 0; width: ${hpPct}%; height: 100%; background: ${hpColor}; z-index: 0; transition: width 0.3s, background 0.3s; border-radius: 8px;"></div>
-                        <div style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; display: flex;">
-                            <div style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center; line-height: 1;">${Math.floor(p.currentHp)}/${p.maxHp}</div>
-                            <div style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center; line-height: 1; font-size: 8px; color: white;">HP</div>
-                            <div style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center; line-height: 1;">${Math.floor(hpPct)}%</div>
+                    <div class="team-bar-track is-hp ${hpCriticalClass}">
+                        <div class="team-bar-fill is-hp" style="width: ${hpPct}%; background: ${hpFill};"></div>
+                        <div class="team-bar-gloss"></div>
+                        <div class="team-bar-overlay">
+                            <div class="team-bar-cell">${Math.floor(p.currentHp)}/${p.maxHp}</div>
+                            <div class="team-bar-label">${hpLabel}</div>
+                            <div class="team-bar-cell">${Math.floor(hpPct)}%</div>
                         </div>
                     </div>
 
-                    <!-- Base Floor: XP Bar -->
-                    <div style="width: 100%; height: 14px; background: #222; border: 1px solid #000; border-radius: 8px; position: relative; overflow: hidden; display: flex; align-items: center; font-size: 9px; font-weight: bold; color: white; text-shadow: 1px 1px 1px black, -1px -1px 1px black, 1px -1px 1px black, -1px 1px 1px black; box-shadow: inset 0px 1px 3px rgba(0,0,0,0.5);">
-                        <div style="position: absolute; left: 0; top: 0; width: ${xpPct}%; height: 100%; background: #9b59b6; z-index: 0; transition: width 0.3s; border-radius: 8px;"></div>
-                        <div style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; display: flex;">
-                            ${xpTextHtml}
-                        </div>
-                    </div>
+                    ${buildXpBarHtml(p)}
                 </div>
             </div>
         `, d);
         partyDiv.appendChild(d);
     });
-
 
     // Day Care UI updates
     const dayCareContainer = document.getElementById('day-care');
@@ -127,12 +178,7 @@ export function updateTeamWindow() {
         renderDayCareSlot(document.getElementById('dc-slot1'), state.dayCareRef.slot1.pokemon, state.dayCareRef.slot1.battles, state.dayCareRef.slot1.requiredBattles, 'breed');
         renderDayCareSlot(document.getElementById('dc-slot2'), state.dayCareRef.slot2.pokemon, state.dayCareRef.slot2.battles, state.dayCareRef.slot2.requiredBattles, 'train');
 
-        // Hide the entire day care container if both slots are empty
-        if (dayCareCount === 0) {
-            dayCareContainer.style.display = 'none';
-        } else {
-            dayCareContainer.style.display = 'block';
-        }
+        dayCareContainer.style.display = dayCareCount === 0 ? 'none' : 'flex';
     }
 
     const currentTeamCount = state.party.length + dayCareCount;
@@ -161,40 +207,17 @@ function renderDayCareSlot(container, p, battles, maxBattles, type) {
     if (!p.uuid) p.uuid = crypto.randomUUID();
     container.style.display = 'block';
 
-    const currentLevelXp = mathEngine.calculateTotalXP(p.level);
-    const nextLevelXp = mathEngine.calculateTotalXP(p.level + 1);
-    const xpProgress = Math.floor(p.xp) - currentLevelXp;
-    const xpRequired = nextLevelXp - currentLevelXp;
-
-    let xpPct = Math.min(100, (xpProgress / xpRequired) * 100);
-    let xpTextHtml = ``;
-    if (p.level === 100) {
-        xpPct = 100;
-        xpTextHtml = ``;
-    } else {
-        xpTextHtml = `
-            <div style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center; line-height: 1;">${xpProgress}/${xpRequired}</div>
-            <div style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center; line-height: 1; font-size: 8px; color: white;">XP</div>
-            <div style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center; line-height: 1;">${Math.floor(xpPct)}%</div>
-        `;
-    }
-
-    let glowClass = "glow-weak";
-    if (p.qualityName === "Shiny") glowClass = "glow-shiny";
-    else if (p.qualityName === "Legendary") glowClass = "glow-legendary";
-    else if (p.qualityName === "Epic") glowClass = "glow-epic";
-    else if (p.qualityName === "Rare") glowClass = "glow-rare";
-    else if (p.qualityName === "Uncommon") glowClass = "glow-uncommon";
-    else if (p.qualityName === "Regular") glowClass = "glow-regular";
-
-    let progPct = Math.min(100, (battles / maxBattles) * 100);
+    const { glowClass, tierClass } = getQualityMeta(p.qualityName);
+    const progPct = maxBattles > 0 ? Math.min(100, (battles / maxBattles) * 100) : 0;
 
     let rightText = '';
     let centerLabel = '';
+    let isReady = battles >= maxBattles;
 
     if (type === 'breed') {
         centerLabel = 'Q';
         if (state.dayCareRef && state.dayCareRef.slot1 && state.dayCareRef.slot1.isFinished) {
+            isReady = true;
             const lastQBonus = p.lastQBonus !== undefined ? p.lastQBonus : 0.00;
             const baseQ = (p.quality - lastQBonus).toFixed(2);
             rightText = `${baseQ}+${lastQBonus.toFixed(2)}`;
@@ -210,45 +233,39 @@ function renderDayCareSlot(container, p, battles, maxBattles, type) {
         rightText = `${initialIV}+${cycles}`;
     }
 
+    const modeClass = type === 'breed' ? 'is-daycare-breed' : 'is-daycare-train';
+    const modeTag = type === 'breed' ? 'BREED' : 'TRAIN';
+    const modeBadge = `<span class="team-mode-badge team-stage-badge is-top-left ${modeClass}">${modeTag}</span>`;
+    const readyTag = isReady ? `<span class="team-ready-badge team-stage-badge is-bottom-right">READY</span>` : '';
+
     renderSanitizedHtml(`
-        <div class="party-slot" style="position: relative; border: 2px solid #3498db;">
-            <div style="display: flex; width: 100%; align-items: stretch; height: 100%; min-height: 55px;">
-            <!-- Left Column: Sprite -->
-            <div style="flex: 0 0 50px; display: flex; align-items: center; justify-content: center; position: relative;">
-                <img src="${window.getSpriteUrl(p.id, p.qualityName === 'Shiny')}" onload="this.style.display='inline'" onerror="this.style.display='none'" class="${glowClass}" style="max-width: 100%; max-height: 100%; object-fit: contain; pointer-events: none; opacity: 0.85; transform: scale(1.5); z-index: 2;">
-            </div>
+        <div class="party-slot team-card ${tierClass} ${modeClass} ${isReady ? 'is-ready' : ''}">
+            <div class="team-card-accent"></div>
+            <div class="team-card-body">
+                ${buildSpritePedestalHtml(p, glowClass, false, false, modeBadge, readyTag)}
+                <div class="team-card-info">
+                    <div class="team-card-top">
+                        <div class="team-name-group">
+                            <span class="team-poke-name" title="${escapeHTML(p.name)}">${escapeHTML(p.name)}</span>
+                            <span class="team-lv-pill">Lv.${p.level}</span>
+                        </div>
+                        <div class="team-actions">
+                            <div onclick="event.stopPropagation(); window.showPokemonStatsByUuid('${escapeHTML(p.uuid)}')" class="team-info-btn" title="View Info">i</div>
+                        </div>
+                    </div>
 
-            <!-- Right Column: 3 Floors -->
-            <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; padding-left: 5px; gap: 2px; min-width: 0;">
-                <!-- Top Floor: Name/Level -->
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <div style="line-height: 1; display: flex; align-items: baseline; gap: 4px;">
-                        <span style="font-weight: bold; font-size: 12px; text-shadow: 1px 1px 1px rgba(0,0,0,0.8); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${escapeHTML(p.name)}</span>
-                        <span style="font-size: 10px; text-shadow: 1px 1px 1px rgba(0,0,0,0.8);">Lv.${p.level}</span>
+                    <div class="team-bar-track is-daycare ${modeClass}">
+                        <div class="team-bar-fill is-daycare ${modeClass}" style="width: ${progPct}%;"></div>
+                        <div class="team-bar-gloss"></div>
+                        <div class="team-bar-overlay">
+                            <div class="team-bar-cell">${battles}/${maxBattles}</div>
+                            <div class="team-bar-label">${centerLabel}</div>
+                            <div class="team-bar-cell">${rightText}</div>
+                        </div>
                     </div>
-                    <div style="display: flex; align-items: center; gap: 4px; pointer-events: auto; position: relative; z-index: 10;">
-                        <div onclick="event.stopPropagation(); window.showPokemonStatsByUuid('${escapeHTML(p.uuid)}')" style="cursor: pointer; background: #34495e; color: white; border-radius: 50%; width: 14px; height: 14px; text-align: center; line-height: 14px; font-size: 10px; font-weight: bold;" title="View Info">i</div>
-                    </div>
-                </div>
 
-                <!-- Middle Floor: Encounter Bar -->
-                <div style="width: 100%; height: 14px; background: #222; border: 1px solid #000; border-radius: 8px; position: relative; overflow: hidden; display: flex; align-items: center; font-size: 9px; font-weight: bold; color: white; text-shadow: 1px 1px 1px black, -1px -1px 1px black, 1px -1px 1px black, -1px 1px 1px black; box-shadow: inset 0px 1px 3px rgba(0,0,0,0.5);">
-                    <div style="position: absolute; left: 0; top: 0; width: ${progPct}%; height: 100%; background: #3498db; z-index: 0; transition: width 0.3s; border-radius: 8px;"></div>
-                    <div style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; display: flex;">
-                        <div style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center; line-height: 1;">${battles}/${maxBattles}</div>
-                        <div style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center; line-height: 1; font-size: 8px; color: white;">${centerLabel}</div>
-                        <div style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center; line-height: 1;">${rightText}</div>
-                    </div>
+                    ${buildXpBarHtml(p)}
                 </div>
-
-                <!-- Base Floor: XP Bar -->
-                <div style="width: 100%; height: 14px; background: #222; border: 1px solid #000; border-radius: 8px; position: relative; overflow: hidden; display: flex; align-items: center; font-size: 9px; font-weight: bold; color: white; text-shadow: 1px 1px 1px black, -1px -1px 1px black, 1px -1px 1px black, -1px 1px 1px black; box-shadow: inset 0px 1px 3px rgba(0,0,0,0.5);">
-                    <div style="position: absolute; left: 0; top: 0; width: ${xpPct}%; height: 100%; background: #9b59b6; z-index: 0; transition: width 0.3s; border-radius: 8px;"></div>
-                    <div style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; display: flex;">
-                        ${xpTextHtml}
-                    </div>
-                </div>
-            </div>
             </div>
         </div>
     `, container);
