@@ -34,7 +34,10 @@ jest.mock('../../src/ui.js', () => ({
 }));
 
 jest.mock('../../src/utils/sprites.js', () => ({
+    getSpriteUrl: jest.fn((id, isShiny) => `mock-sprite/${id}${isShiny ? '_shiny' : ''}.png`),
+    getCachedTrimmedSpriteUrl: jest.fn((id, isShiny) => `mock-trimmed/${id}${isShiny ? '_shiny' : ''}.png`),
     getTrimmedSpriteUrl: jest.fn((id, isShiny) => `mock-sprite/${id}${isShiny ? '_shiny' : ''}.png`),
+    trimAndCacheSprite: jest.fn((url) => Promise.resolve(`trimmed:${url}`)),
     precacheRouteSprites: jest.fn()
 }));
 
@@ -43,6 +46,7 @@ jest.mock('../../src/mathEngine.js', () => ({
 }));
 
 import { state, globals } from '../../src/state.js';
+import { getCachedTrimmedSpriteUrl, trimAndCacheSprite } from '../../src/utils/sprites.js';
 import {
     getTargetSpriteHeight,
     updateBattleArena,
@@ -243,6 +247,92 @@ describe('Battle Main View UI', () => {
             expect(document.getElementById('enemy-battle-level').innerText).toBe('Lv. 36');
             expect(document.getElementById('enemy-battle-qtier').innerText).toBe('Q: 1.25');
             expect(document.getElementById('enemy-battle-sumiv').innerText).toBe('SumIV: 60');
+        });
+
+        test('keeps uncached player and enemy sprites hidden until trimming finishes instead of showing tiny untrimmed sprites', async () => {
+            let resolveEnemyTrim;
+            let resolvePlayerTrim;
+            getCachedTrimmedSpriteUrl.mockReturnValue(null);
+            trimAndCacheSprite
+                .mockImplementationOnce(() => new Promise((res) => { resolveEnemyTrim = res; }))
+                .mockImplementationOnce(() => new Promise((res) => { resolvePlayerTrim = res; }));
+
+            globals.battleSystem.activeEncounter = {
+                id: 6,
+                name: 'Charizard',
+                level: 36,
+                currentHp: 130,
+                maxHp: 130,
+                types: ['Fire', 'Flying'],
+                qualityName: 'Regular'
+            };
+
+            updateBattleArena();
+
+            const enemySprite = document.getElementById('enemy-pokemon-sprite');
+            const playerSprite = document.getElementById('player-pokemon-sprite');
+
+            expect(enemySprite.style.visibility).toBe('hidden');
+            expect(playerSprite.style.visibility).toBe('hidden');
+            expect(enemySprite.getAttribute('src')).toBe('');
+            expect(playerSprite.getAttribute('src')).toBe('');
+
+            resolveEnemyTrim('blob:trimmed-charizard');
+            resolvePlayerTrim('blob:trimmed-pikachu');
+            await Promise.resolve();
+            await Promise.resolve();
+
+            expect(enemySprite.getAttribute('src')).toBe('blob:trimmed-charizard');
+            expect(playerSprite.getAttribute('src')).toBe('blob:trimmed-pikachu');
+            expect(enemySprite.style.visibility).toBe('');
+            expect(playerSprite.style.visibility).toBe('');
+        });
+
+        test('ignores stale trim resolution if active pokemon changes while trimming', async () => {
+            let resolveFirstEnemy;
+            getCachedTrimmedSpriteUrl
+                .mockReturnValueOnce(null) // enemy 6 uncached
+                .mockReturnValueOnce('mock-trimmed/25.png') // player 25 cached
+                .mockReturnValueOnce('mock-trimmed/9.png') // enemy 9 cached
+                .mockReturnValueOnce('mock-trimmed/25.png'); // player 25 cached
+
+            trimAndCacheSprite.mockImplementationOnce(() => new Promise((res) => { resolveFirstEnemy = res; }));
+
+            globals.battleSystem.activeEncounter = {
+                id: 6,
+                name: 'Charizard',
+                level: 36,
+                currentHp: 130,
+                maxHp: 130,
+                types: ['Fire', 'Flying'],
+                qualityName: 'Regular'
+            };
+            updateBattleArena();
+
+            const enemySprite = document.getElementById('enemy-pokemon-sprite');
+            expect(enemySprite.style.visibility).toBe('hidden');
+
+            // Encounter changes to Blastoise before Charizard trim finishes
+            globals.battleSystem.activeEncounter = {
+                id: 9,
+                name: 'Blastoise',
+                level: 36,
+                currentHp: 130,
+                maxHp: 130,
+                types: ['Water'],
+                qualityName: 'Regular'
+            };
+            updateBattleArena();
+
+            expect(enemySprite.getAttribute('src')).toBe('mock-trimmed/9.png');
+            expect(enemySprite.style.visibility).toBe('');
+
+            // Stale Charizard trim resolves later — must not overwrite Blastoise
+            resolveFirstEnemy('blob:stale-charizard');
+            await Promise.resolve();
+            await Promise.resolve();
+
+            expect(enemySprite.getAttribute('src')).toBe('mock-trimmed/9.png');
         });
     });
 

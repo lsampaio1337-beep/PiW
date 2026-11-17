@@ -243,14 +243,24 @@ export function trimAndCacheSprite(naturalUrl, isParty = false) {
     return promise;
 }
 
+function lookupCachedTrimmedUrl(naturalUrl, isParty) {
+    return (isParty ? partyTrimCache.get(naturalUrl) : null)
+        || routeTrimCache.get(naturalUrl)
+        || partyTrimCache.get(naturalUrl)
+        || null;
+}
+
+export function getCachedTrimmedSpriteUrl(id, isShiny = false, isParty = false) {
+    const naturalUrl = getSpriteUrl(id, isShiny);
+    if (!naturalUrl) return null;
+    return lookupCachedTrimmedUrl(naturalUrl, isParty);
+}
+
 export function getTrimmedSpriteUrl(id, isShiny = false, isParty = false) {
     const naturalUrl = getSpriteUrl(id, isShiny);
     if (!naturalUrl) return '';
 
-    const cached = (isParty ? partyTrimCache.get(naturalUrl) : null)
-        || routeTrimCache.get(naturalUrl)
-        || partyTrimCache.get(naturalUrl);
-
+    const cached = lookupCachedTrimmedUrl(naturalUrl, isParty);
     if (cached) return cached;
 
     // Kick off background trim for next render; return naturalUrl safely now
