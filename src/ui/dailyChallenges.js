@@ -282,30 +282,44 @@ export function getDailyChallengesHtml() {
     }
 
     let html = `
-        <div style="margin-top: 20px; border-top: 1px solid #555; padding-top: 20px;">
-            <h2 style="margin-top: 0; color: #fff;">Daily Challenges</h2>
-            <div style="display: flex; flex-direction: column; gap: 10px;">
+        <div class="cal-challenges-section">
+            <div class="cal-section-header">
+                <h2 class="cal-section-title">Daily Challenges</h2>
+            </div>
+            <div class="cal-challenges-list">
     `;
 
     for (let i = 0; i < active.length; i++) {
         let c = active[i];
+        let target = Math.max(1, c.target || 1);
+        let pct = c.completed ? 100 : Math.min(100, Math.round(((c.progress || 0) / target) * 100));
+        let progressText = c.completed ? `${target} / ${target}` : `${c.progress} / ${target}`;
 
-        let progressText = c.completed ? "" : `${c.progress} / ${c.target}`;
-        let color = c.claimed ? "#4CAF50" : "#ccc";
-        let textDec = c.claimed ? "line-through" : "none";
+        let cardClass = 'cal-challenge-card';
+        if (c.claimed) {
+            cardClass += ' cal-challenge-card--claimed';
+        } else if (c.completed) {
+            cardClass += ' cal-challenge-card--ready';
+        }
 
         html += `
-            <div style="background: rgba(0,0,0,0.4); border: 1px solid #444; border-radius: 5px; padding: 10px; display: flex; align-items: center; justify-content: space-between;">
-                <div style="flex: 1; text-align: left; color: ${color}; text-decoration: ${textDec}; font-size: 14px; display: flex; align-items: center; gap: 5px;">
-                    ${c.text}
+            <div class="${cardClass}">
+                <div class="cal-challenge-info">
+                    <div class="cal-challenge-text">
+                        ${c.text}
+                    </div>
+                    <div class="cal-progress-track">
+                        <div class="cal-progress-fill" style="width: ${pct}%;"></div>
+                    </div>
                 </div>
-                <div style="display: flex; align-items: center; gap: 10px;">
-                    <div style="font-weight: bold; color: ${color}; white-space: nowrap; font-size: 14px;">
+                <div class="cal-challenge-actions">
+                    <div class="cal-progress-label">
                         ${progressText}
                     </div>
-                    ${c.completed && !c.claimed ? `<button onclick="window.claimDailyChallengeToken(${i})" style="display: flex; align-items: center; gap: 5px; padding: 5px 10px; font-size: 12px; background: #2ecc71; color: white; border: none; border-radius: 3px; cursor: pointer;">Claim <img src="Assets/Extra/Token.png" style="width: 16px; height: 16px;"></button>` : ''}
-                    ${!c.completed ? `<button onclick="window.cheatCompleteDailyChallenge(${i})" style="padding: 5px 10px; font-size: 12px; background: #666; color: white; border: none; border-radius: 3px; cursor: pointer;">Cheat Complete</button>` : ''}
-                    ${!c.completed ? `<button ${state.stats.dailyChallenges.hasRerolled ? 'disabled' : ''} onclick="window.rerollIndividualDailyChallenge(${i})" style="padding: 5px 10px; font-size: 12px; background: ${state.stats.dailyChallenges.hasRerolled ? '#999' : '#e74c3c'}; color: white; border: none; border-radius: 3px; cursor: ${state.stats.dailyChallenges.hasRerolled ? 'not-allowed' : 'pointer'};">Reroll</button>` : ''}
+                    ${c.claimed ? `<span class="cal-completed-pill">&#10003; Claimed</span>` : ''}
+                    ${c.completed && !c.claimed ? `<button class="cal-btn cal-btn--claim" onclick="window.claimDailyChallengeToken(${i})">Claim <img src="Assets/Extra/Token.png" style="width: 15px; height: 15px;"></button>` : ''}
+                    ${!c.completed ? `<button class="cal-btn cal-btn--cheat" onclick="window.cheatCompleteDailyChallenge(${i})">Cheat</button>` : ''}
+                    ${!c.completed ? `<button class="cal-btn cal-btn--reroll" ${state.stats.dailyChallenges.hasRerolled ? 'disabled' : ''} onclick="window.rerollIndividualDailyChallenge(${i})">Reroll</button>` : ''}
                 </div>
             </div>
         `;

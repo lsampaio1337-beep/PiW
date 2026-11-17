@@ -165,20 +165,293 @@ export function showCalendar(tab = 'activities') {
         window.updateMainControl();
     }
 
-    let html = `<div style="display: flex; flex-direction: column; width: 100%; height: 100%; box-sizing: border-box;">`;
+    const tokenCount = state.trainer?.tokens || 0;
+    const hasClaimableReward = checkDailyRewardAvailable();
+    const hasClaimableChallenge = checkAnyDailyChallengeCompleted();
+    const showActivityDot = hasClaimableReward || hasClaimableChallenge;
+
+    let html = `
+        <style>
+            #window-calendar .cal-root {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                height: 100%;
+                box-sizing: border-box;
+                color: #f1f5f9;
+            }
+            #window-calendar .cal-content {
+                flex: 1;
+                overflow-y: auto;
+                padding: 14px 18px 18px;
+                box-sizing: border-box;
+            }
+            #window-calendar .cal-section-header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-bottom: 12px;
+            }
+            #window-calendar .cal-section-title {
+                margin: 0;
+                font-size: 16px;
+                font-weight: 700;
+                color: #ffffff;
+                letter-spacing: 0.3px;
+            }
+            #window-calendar .cal-week-pill {
+                background: rgba(52, 152, 219, 0.2);
+                border: 1px solid rgba(52, 152, 219, 0.45);
+                color: #7dd3fc;
+                font-size: 12px;
+                font-weight: 600;
+                padding: 3px 10px;
+                border-radius: 999px;
+            }
+            #window-calendar .cal-rewards-grid {
+                display: grid;
+                grid-template-columns: repeat(7, 1fr);
+                gap: 8px;
+                width: 100%;
+                margin-bottom: 6px;
+            }
+            #window-calendar .cal-day-card {
+                position: relative;
+                border: 1px solid rgba(255, 255, 255, 0.12);
+                border-radius: 10px;
+                padding: 10px 6px;
+                background: rgba(15, 23, 42, 0.65);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: space-between;
+                min-height: 124px;
+                transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+                box-sizing: border-box;
+            }
+            #window-calendar .cal-day-card--upcoming:hover {
+                transform: translateY(-2px);
+                border-color: rgba(52, 152, 219, 0.5);
+            }
+            #window-calendar .cal-day-card--claimed {
+                background: rgba(15, 23, 42, 0.35);
+                border-color: rgba(255, 255, 255, 0.06);
+                opacity: 0.68;
+            }
+            #window-calendar .cal-day-card--claimable {
+                border: 1.5px solid #2ecc71;
+                background: linear-gradient(180deg, rgba(46, 204, 113, 0.22) 0%, rgba(15, 23, 42, 0.85) 100%);
+                box-shadow: 0 0 14px rgba(46, 204, 113, 0.35);
+                cursor: pointer;
+            }
+            #window-calendar .cal-day-card--claimable:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 4px 18px rgba(46, 204, 113, 0.5);
+            }
+            #window-calendar .cal-day-card--milestone {
+                border-color: rgba(241, 196, 15, 0.55);
+                background: linear-gradient(180deg, rgba(241, 196, 15, 0.14) 0%, rgba(15, 23, 42, 0.78) 100%);
+            }
+            #window-calendar .cal-day-header {
+                font-weight: 700;
+                font-size: 12px;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                color: #cbd5e1;
+                margin-bottom: 8px;
+            }
+            #window-calendar .cal-day-card--claimable .cal-day-header {
+                color: #6ee7b7;
+            }
+            #window-calendar .cal-day-card--milestone .cal-day-header {
+                color: #fde047;
+            }
+            #window-calendar .cal-day-items {
+                flex-grow: 1;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                gap: 5px;
+                width: 100%;
+            }
+            #window-calendar .cal-item-row {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 5px;
+                font-size: 13px;
+                font-weight: 600;
+                color: #f8fafc;
+            }
+            #window-calendar .cal-item-row img {
+                width: 22px;
+                height: 22px;
+                filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5));
+            }
+            #window-calendar .cal-badge {
+                margin-top: 8px;
+                font-size: 10px;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                padding: 2px 8px;
+                border-radius: 999px;
+            }
+            #window-calendar .cal-badge--claim {
+                background: #2ecc71;
+                color: #052e16;
+                box-shadow: 0 2px 6px rgba(46, 204, 113, 0.4);
+            }
+            #window-calendar .cal-badge--claimed {
+                background: rgba(148, 163, 184, 0.2);
+                color: #94a3b8;
+            }
+            #window-calendar .cal-badge--milestone {
+                background: rgba(241, 196, 15, 0.2);
+                color: #fde047;
+                border: 1px solid rgba(241, 196, 15, 0.35);
+            }
+            #window-calendar .cal-challenges-section {
+                margin-top: 18px;
+                padding-top: 16px;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            #window-calendar .cal-challenges-list {
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+            }
+            #window-calendar .cal-challenge-card {
+                background: rgba(15, 23, 42, 0.6);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 8px;
+                padding: 10px 12px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 12px;
+                transition: border-color 0.15s ease, background 0.15s ease;
+            }
+            #window-calendar .cal-challenge-card--ready {
+                border-color: rgba(46, 204, 113, 0.6);
+                background: rgba(46, 204, 113, 0.1);
+            }
+            #window-calendar .cal-challenge-card--claimed {
+                background: rgba(15, 23, 42, 0.35);
+                border-color: rgba(255, 255, 255, 0.05);
+                opacity: 0.72;
+            }
+            #window-calendar .cal-challenge-info {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                gap: 6px;
+                text-align: left;
+            }
+            #window-calendar .cal-challenge-text {
+                font-size: 13px;
+                font-weight: 500;
+                color: #e2e8f0;
+                display: flex;
+                align-items: center;
+                gap: 6px;
+            }
+            #window-calendar .cal-progress-track {
+                width: 100%;
+                height: 6px;
+                background: rgba(255, 255, 255, 0.1);
+                border-radius: 999px;
+                overflow: hidden;
+            }
+            #window-calendar .cal-progress-fill {
+                height: 100%;
+                background: linear-gradient(90deg, #3498db, #38bdf8);
+                border-radius: 999px;
+                transition: width 0.25s ease;
+            }
+            #window-calendar .cal-challenge-card--ready .cal-progress-fill,
+            #window-calendar .cal-challenge-card--claimed .cal-progress-fill {
+                background: linear-gradient(90deg, #2ecc71, #4ade80);
+            }
+            #window-calendar .cal-challenge-actions {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                flex-shrink: 0;
+            }
+            #window-calendar .cal-progress-label {
+                font-size: 12px;
+                font-weight: 700;
+                color: #94a3b8;
+                min-width: 48px;
+                text-align: right;
+            }
+            #window-calendar .cal-btn {
+                display: inline-flex;
+                align-items: center;
+                gap: 5px;
+                padding: 5px 10px;
+                font-size: 12px;
+                font-weight: 600;
+                color: #ffffff;
+                border: none;
+                border-radius: 6px;
+                cursor: pointer;
+                transition: filter 0.15s ease, transform 0.1s ease;
+            }
+            #window-calendar .cal-btn:hover:not(:disabled) {
+                filter: brightness(1.12);
+            }
+            #window-calendar .cal-btn:active:not(:disabled) {
+                transform: scale(0.97);
+            }
+            #window-calendar .cal-btn--claim {
+                background: linear-gradient(180deg, #2ecc71, #27ae60);
+                box-shadow: 0 2px 6px rgba(46, 204, 113, 0.35);
+            }
+            #window-calendar .cal-btn--reroll {
+                background: rgba(231, 76, 60, 0.85);
+            }
+            #window-calendar .cal-btn--reroll:disabled {
+                background: rgba(148, 163, 184, 0.25);
+                color: #94a3b8;
+                cursor: not-allowed;
+            }
+            #window-calendar .cal-btn--cheat {
+                background: rgba(100, 116, 139, 0.45);
+                color: #cbd5e1;
+            }
+            #window-calendar .cal-completed-pill {
+                font-size: 11px;
+                font-weight: 700;
+                color: #4ade80;
+                background: rgba(46, 204, 113, 0.15);
+                border: 1px solid rgba(46, 204, 113, 0.3);
+                padding: 3px 9px;
+                border-radius: 999px;
+            }
+        </style>
+        <div class="cal-root">
+    `;
 
     let titleHtml = `
-        <div style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
-            <div style="font-weight: bold; font-size: 18px; color: white;">Daily Calendar</div>
-            <div style="display: inline-flex; background: rgba(0, 0, 0, 0.2); border-radius: 20px; padding: 3px; gap: 5px;">
-                <button onclick="window.showCalendar('activities')" style="${tab === 'activities' ? 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2);' : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;'} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;">Activities</button>
-                <button onclick="window.showCalendar('shop')" style="${tab === 'shop' ? 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2);' : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;'} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;">Shop</button>
+        <div style="display: flex; align-items: center; justify-content: space-between; width: 100%; gap: 12px; padding-right: 8px; box-sizing: border-box;">
+            <div style="font-weight: 700; font-size: 18px; color: white; letter-spacing: 0.3px;">Daily Calendar</div>
+            <div style="display: inline-flex; background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255,255,255,0.08); border-radius: 999px; padding: 3px; gap: 4px;">
+                <button onclick="window.showCalendar('activities')" style="${tab === 'activities' ? 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 6px rgba(52,152,219,0.35);' : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;'} border-radius: 999px; padding: 5px 14px; font-weight: 600; cursor: pointer; font-size: 13px; transition: all 0.2s; display: inline-flex; align-items: center; gap: 6px;">
+                    Activities${showActivityDot ? '<span style="width: 7px; height: 7px; border-radius: 50%; background: #2ecc71; display: inline-block;"></span>' : ''}
+                </button>
+                <button onclick="window.showCalendar('shop')" style="${tab === 'shop' ? 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 6px rgba(52,152,219,0.35);' : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;'} border-radius: 999px; padding: 5px 14px; font-weight: 600; cursor: pointer; font-size: 13px; transition: all 0.2s;">Shop</button>
+            </div>
+            <div style="display: inline-flex; align-items: center; gap: 6px; background: rgba(0, 0, 0, 0.35); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 999px; padding: 4px 11px; font-size: 13px; font-weight: 700; color: #fde047;" title="Daily Tokens">
+                <img src="Assets/Extra/Token.png" style="width: 18px; height: 18px;">
+                <span>${tokenCount}</span>
             </div>
         </div>
     `;
 
     html += `
-        <div id="calendar-content-area" style="flex: 1; overflow-y: auto;">
+        <div id="calendar-content-area" class="cal-content">
     `;
 
     if (tab === 'activities') {
@@ -195,36 +468,39 @@ export function showCalendar(tab = 'activities') {
 
         const rewardList = getRewardListForWeek(weekNumber);
 
-        html += `<div style="text-align: center; color: white; padding: 2%; box-sizing: border-box;">`;
-        html += `<h2 style="margin-top: 0;">Daily Rewards - Week ${weekNumber}</h2>`;
-        html += `<div style="display: flex; gap: 1%; justify-content: center; padding-bottom: 10px; width: 100%;">`;
+        html += `<div style="text-align: center; color: white; box-sizing: border-box;">`;
+        html += `
+            <div class="cal-section-header">
+                <h2 class="cal-section-title">Daily Rewards</h2>
+                <span class="cal-week-pill">Week ${weekNumber} &bull; Day ${dayOfWeek + 1} of 7</span>
+            </div>
+        `;
+        html += `<div class="cal-rewards-grid">`;
 
     for (let i = 0; i < 7; i++) {
         const reward = rewardList[i];
-        let cardStyle = `
-            border: 2px solid #555;
-            border-radius: 8px;
-            padding: 10px 5px;
-            flex: 1;
-            background: rgba(0,0,0,0.6);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
-        `;
+        const isMilestone = i === 6;
+        let cardClasses = 'cal-day-card';
         let onClickHtml = '';
+        let statusBadge = '';
 
         if (i < dayOfWeek) {
-            // Already claimed
-            cardStyle += ` opacity: 0.5; border-color: #333; filter: grayscale(100%);`;
+            cardClasses += ' cal-day-card--claimed';
+            statusBadge = `<div class="cal-badge cal-badge--claimed">&#10003; Claimed</div>`;
         } else if (i === dayOfWeek) {
             if (isAvailable) {
-                // Claimable today
-                cardStyle += ` border-color: #4CAF50; cursor: pointer; background: rgba(0,100,0,0.6); box-shadow: 0 0 10px #4CAF50;`;
+                cardClasses += ' cal-day-card--claimable';
                 onClickHtml = `onclick="window.claimDailyReward(${i})"`;
+                statusBadge = `<div class="cal-badge cal-badge--claim">Claim</div>`;
             } else {
-                // Already claimed today, show this slot as collected
-                cardStyle += ` opacity: 0.5; border-color: #333; filter: grayscale(100%);`;
+                cardClasses += ' cal-day-card--claimed';
+                statusBadge = `<div class="cal-badge cal-badge--claimed">&#10003; Claimed</div>`;
+            }
+        } else {
+            cardClasses += ' cal-day-card--upcoming';
+            if (isMilestone) {
+                cardClasses += ' cal-day-card--milestone';
+                statusBadge = `<div class="cal-badge cal-badge--milestone">Milestone</div>`;
             }
         }
 
@@ -232,41 +508,38 @@ export function showCalendar(tab = 'activities') {
         for (let ballName in reward.items) {
             let qty = reward.items[ballName];
             itemsHtml += `
-                <div style="display: flex; align-items: center; gap: 5px; margin-bottom: 5px; justify-content: center;">
-                    <img src="Assets/Items/Balls/${ballName}.png" style="width: 24px; height: 24px;" title="${ballName}">
-                    <span style="font-size: 14px;">x${qty}</span>
+                <div class="cal-item-row">
+                    <img src="Assets/Items/Balls/${ballName}.png" title="${ballName}">
+                    <span>x${qty}</span>
                 </div>
             `;
         }
         for (let potionName in reward.potions) {
             let qty = reward.potions[potionName];
             itemsHtml += `
-                <div style="display: flex; align-items: center; gap: 5px; justify-content: center;">
-                    <img src="Assets/Items/Potions/${potionName}.png" style="width: 24px; height: 24px;" title="${potionName}">
-                    <span style="font-size: 14px;">x${qty}</span>
+                <div class="cal-item-row">
+                    <img src="Assets/Items/Potions/${potionName}.png" title="${potionName}">
+                    <span>x${qty}</span>
                 </div>
             `;
         }
 
         if (reward.tokens) {
-            if (i > dayOfWeek) {
-                cardStyle += ' border-color: #3498db;';
-            }
-            cardStyle += ' color: white;';
             itemsHtml += `
-                <div style="display: flex; align-items: center; gap: 5px; margin-top: 5px; justify-content: center;">
-                    <img src="Assets/Extra/Token.png" style="width: 24px; height: 24px;" title="Token">
-                    <span style="font-size: 14px; color: white;">x${reward.tokens}</span>
+                <div class="cal-item-row">
+                    <img src="Assets/Extra/Token.png" title="Token">
+                    <span>x${reward.tokens}</span>
                 </div>
             `;
         }
 
         html += `
-            <div style="${cardStyle}" ${onClickHtml}>
-                <div style="font-weight: bold; margin-bottom: 10px;">Day ${i+1}</div>
-                <div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center;">
+            <div class="${cardClasses}" ${onClickHtml}>
+                <div class="cal-day-header">Day ${i + 1}</div>
+                <div class="cal-day-items">
                     ${itemsHtml}
                 </div>
+                ${statusBadge}
             </div>
         `;
     }
