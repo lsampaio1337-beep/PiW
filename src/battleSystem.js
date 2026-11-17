@@ -846,13 +846,14 @@ class BattleSystem {
                     parsedName = parsedName.replace(/^Leader\s+/, "");
                 }
                 const buttonText = isLeader ? `Leader ${parsedName}` : `${parsedName}`;
+                const leaderClass = isLeader ? ' is-leader' : '';
 
                 if (index < this.gymState.currentTrainerIndex) {
-                    return `<button disabled class="action-btn" style="opacity: 0.5; width: 100%;">${buttonText} (Defeated)</button>`;
+                    return `<button disabled class="gym-trainer-btn is-defeated${leaderClass}"><span>${buttonText}</span><span class="gym-trainer-badge">Defeated</span></button>`;
                 } else if (index === this.gymState.currentTrainerIndex) {
-                    return `<button id="btn-start-gym-battle" class="action-btn action-btn-primary" onclick="window.battleEngine.startNextGymBattle()" style="width: 100%;">${buttonText}</button>`;
+                    return `<button id="btn-start-gym-battle" class="gym-trainer-btn is-current${leaderClass}" onclick="window.battleEngine.startNextGymBattle()"><span>${buttonText}</span><span class="gym-trainer-badge">Battle</span></button>`;
                 } else {
-                    return `<button disabled class="action-btn" style="opacity: 0.5; width: 100%;">${buttonText}</button>`;
+                    return `<button disabled class="gym-trainer-btn is-upcoming${leaderClass}"><span>${buttonText}</span><span class="gym-trainer-badge">Locked</span></button>`;
                 }
             }).join('');
 
@@ -861,7 +862,7 @@ class BattleSystem {
                 <div id="gym-rest-area">
                     <p>You may organize your party.</p>
                     ${trainerButtonsHtml}
-                    <button class="action-btn action-btn-danger" onclick="window.battleEngine.stopGymBattle()" style="width: 100%;">Flee Gym</button>
+                    <button class="action-btn action-btn-danger gym-flee-btn" onclick="window.battleEngine.stopGymBattle()">Flee Gym</button>
                 </div>
             `;
             const restDoc = new DOMParser().parseFromString(restHtml, 'text/html');

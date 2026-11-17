@@ -432,11 +432,11 @@ export function showMap() {
 
     // Inner modal for gym overlays natively locked to the map
     html += `
-            <div id="map-inner-modal-overlay" onclick="window.handleMapInnerModalBackdropClick(event)" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.75); z-index: 1000; align-items: center; justify-content: center; box-sizing: border-box; padding: 2%; /* Fallback padding */">
+            <div id="map-inner-modal-overlay" onclick="window.handleMapInnerModalBackdropClick(event)" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(2, 6, 23, 0.72); backdrop-filter: blur(3px); z-index: 1000; align-items: center; justify-content: center; box-sizing: border-box; padding: 2%; /* Fallback padding */">
                 <div id="map-inner-modal" class="floating-window" onclick="event.stopPropagation()" onmousedown="event.stopPropagation()" style="box-sizing: border-box; display: flex; flex-direction: column; overflow: hidden; /* Dynamic sizing will be applied via JS */ max-width: 100%; max-height: 100%;">
                     <div class="window-header" style="position: relative; cursor: default;">
                         <span id="map-inner-modal-title">Gym</span>
-                        <span id="btn-close-map-inner-modal" onclick="window.closeMapInnerModal()" style="position: absolute; top: 5px; right: 5px; font-size: 12px; font-weight: bold; line-height: 1; padding: 0; cursor: pointer; color: white;">X</span>
+                        <span id="btn-close-map-inner-modal" class="window-ctrl-btn is-close" onclick="window.closeMapInnerModal()" style="position: absolute; top: 50%; transform: translateY(-50%); right: 8px;">X</span>
                     </div>
                     <div class="window-content-container" style="flex: 1; display: flex; height: 100%; min-height: 0;">
                         <div id="map-inner-modal-content" class="content-panel" style="width: 100%; height: 100%; overflow-y: auto; position: relative;">
@@ -962,12 +962,35 @@ export function navigateToLocation(locationName) {
             requestAnimationFrame ? requestAnimationFrame(updateGymFontSize) : updateGymFontSize();
 
             if (gymConfig && contentArea) {
-                let buttonText = "Enter";
+                const metaRow = document.createElement('div');
+                metaRow.className = 'gym-meta-row';
+                if (gymConfig.leader) {
+                    const leaderPill = document.createElement('span');
+                    leaderPill.className = 'gym-meta-pill';
+                    leaderPill.textContent = `Leader: ${gymConfig.leader}`;
+                    metaRow.appendChild(leaderPill);
+                }
+                if (Array.isArray(gymConfig.trainers)) {
+                    const countPill = document.createElement('span');
+                    countPill.className = 'gym-meta-pill';
+                    countPill.textContent = `${gymConfig.trainers.length} Trainers`;
+                    metaRow.appendChild(countPill);
+                }
+                if (state.stats?.completedChallengeIds?.includes(lookupName)) {
+                    const clearedPill = document.createElement('span');
+                    clearedPill.className = 'gym-meta-pill is-cleared';
+                    clearedPill.textContent = 'Cleared';
+                    metaRow.appendChild(clearedPill);
+                }
+                if (metaRow.children.length > 0) {
+                    contentArea.appendChild(metaRow);
+                }
+
                 const btn = document.createElement('button');
                 btn.id = "btn-enter-gym";
                 btn.className = "action-btn action-btn-primary";
-                btn.style.marginTop = "10px";
-                btn.textContent = buttonText;
+                btn.style.width = "100%";
+                btn.textContent = "Enter";
                 btn.onclick = () => { window.startGymBattle(lookupName); };
                 contentArea.appendChild(btn);
             }
