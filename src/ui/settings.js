@@ -17,6 +17,7 @@ export function showSettings() {
     if (battleSystem && battleSystem.gymState && battleSystem.gymState.isActive) return;
 
     const isLegacy = !!state.settings?.legacySprites;
+    const iconLocation = state.settings?.iconLocation === 'tray' ? 'tray' : 'taskbar';
     const settingsHTML = `
         <div class="settings-container">
             <div class="settings-section">
@@ -31,6 +32,16 @@ export function showSettings() {
                             <input type="checkbox" id="legacy-sprites-checkbox" ${isLegacy ? 'checked' : ''}>
                             <span class="settings-slider"></span>
                         </label>
+                    </div>
+                    <div class="settings-row">
+                        <div class="settings-info">
+                            <div class="settings-label">App Icon Location</div>
+                            <div class="settings-desc">Choose whether PiW appears on the Windows taskbar or in the system tray.</div>
+                        </div>
+                        <select id="icon-location-select" class="settings-select" style="padding: 6px 10px; border-radius: 6px; background: #2c3e50; color: white; border: 1px solid #1abc9c; cursor: pointer;">
+                            <option value="taskbar" ${iconLocation === 'taskbar' ? 'selected' : ''}>Taskbar</option>
+                            <option value="tray" ${iconLocation === 'tray' ? 'selected' : ''}>System Tray</option>
+                        </select>
                     </div>
                 </div>
             </div>
@@ -66,6 +77,18 @@ export function showSettings() {
     const checkboxEl = document.getElementById('legacy-sprites-checkbox');
     if (checkboxEl) {
         checkboxEl.addEventListener('change', (e) => toggleLegacySprites(e.target.checked));
+    }
+    const iconSelectEl = document.getElementById('icon-location-select');
+    if (iconSelectEl) {
+        iconSelectEl.addEventListener('change', (e) => {
+            const value = e.target.value === 'tray' ? 'tray' : 'taskbar';
+            if (!state.settings) state.settings = {};
+            state.settings.iconLocation = value;
+            storage.save(state);
+            if (window.electronAPI) {
+                window.electronAPI.send('set-icon-location', value);
+            }
+        });
     }
 }
 

@@ -106,6 +106,23 @@ ipcMain.on('set-main-control-minimized', (_event, minimized) => {
     isMainControlMinimized = Boolean(minimized);
 });
 
+function applyIconLocation(location) {
+    const useTray = location === 'tray';
+    if (mainWin && !mainWin.isDestroyed()) {
+        mainWin.setSkipTaskbar(useTray);
+    }
+    if (useTray) {
+        createTray();
+    } else if (tray) {
+        tray.destroy();
+        tray = null;
+    }
+}
+
+ipcMain.on('set-icon-location', (_event, location) => {
+    applyIconLocation(location);
+});
+
 app.setName('PiW');
 if (process.platform === 'win32') {
     app.setAppUserModelId('PiW');
@@ -142,7 +159,6 @@ function createTray() {
 app.whenReady().then(() => {
     // Remove default application menu so Ctrl+W is handled by the renderer instead of closing the whole app
     Menu.setApplicationMenu(null);
-    createTray();
 
     // Delay window creation on Linux to allow the compositor to initialize correctly
     // so transparent windows work without disabling hardware acceleration.

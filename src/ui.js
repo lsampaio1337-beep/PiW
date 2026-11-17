@@ -1795,6 +1795,9 @@ function gameClockTick() {
 
 
 function startGame() {
+    if (window.electronAPI) {
+        window.electronAPI.send('set-icon-location', state.settings?.iconLocation === 'tray' ? 'tray' : 'taskbar');
+    }
     if (globals.battleSystem) {
         globals.battleSystem.stop();
     }
