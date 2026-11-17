@@ -2668,8 +2668,8 @@ input[type="number"] {
 
 /* Profile Load Cards */
 #save-manager-modal .content-panel {
-    background: rgba(10, 16, 24, 0.55);
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    background: transparent;
+    border-top: none;
     padding: 14px 18px 18px 18px;
 }
 
