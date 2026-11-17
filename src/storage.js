@@ -94,9 +94,81 @@ export default class Storage {
             });
 
             window.localStorage.setItem(this.currentProfileId, jsonString);
+            return true;
         } catch(e) {
             console.error("Save failed:", e);
+            return false;
         }
+    }
+
+    renameProfile(profileId, newName) {
+        const trimmed = typeof newName === 'string' ? newName.trim() : '';
+        if (!profileId || !trimmed) return false;
+        const data = this.getProfileData(profileId);
+        if (!data) return false;
+        data.profileName = trimmed;
+        try {
+            window.localStorage.setItem(profileId, JSON.stringify(data));
+            return true;
+        } catch (e) {
+            console.error("Failed to rename profile:", e);
+            return false;
+        }
+    }
+
+    loadProfileIntoState(profileId, state) {
+        const pData = this.getProfileData(profileId);
+        if (!pData) return { ok: false, error: 'corrupted' };
+
+        this.setCurrentProfile(profileId);
+
+        const isPlainObject = (val) =>
+            val !== null && typeof val === 'object' && !Array.isArray(val) && Object.getPrototypeOf(val) === Object.prototype;
+
+        const deepMerge = (target, source) => {
+            if (!isPlainObject(source)) return source;
+            for (const key of Object.keys(source)) {
+                if (key === '__proto__' || key === 'constructor' || key === 'prototype') continue;
+                if (isPlainObject(source[key])) {
+                    if (!isPlainObject(target[key])) target[key] = {};
+                    deepMerge(target[key], source[key]);
+                } else {
+                    target[key] = source[key];
+                }
+            }
+            return target;
+        };
+
+        deepMerge(state, pData);
+
+        if (state.stats && state.stats.caughtSpecies) {
+            state.stats.caughtSpeciesCount = Object.keys(state.stats.caughtSpecies).length;
+        } else if (state.stats) {
+            state.stats.caughtSpeciesCount = 0;
+        }
+
+        if (pData.stats) {
+            if (pData.stats.playtime !== undefined) state.globalStats.playtime = pData.stats.playtime;
+            if (pData.stats.hasSeenProfTutorial !== undefined) state.globalStats.hasSeenProfTutorial = pData.stats.hasSeenProfTutorial;
+            if (pData.stats.hasSeenZzZTutorial !== undefined) state.globalStats.hasSeenZzZTutorial = pData.stats.hasSeenZzZTutorial;
+            if (pData.stats.hasSeenMultiplayerIcon !== undefined) state.globalStats.hasSeenMultiplayerIcon = pData.stats.hasSeenMultiplayerIcon;
+            if (pData.stats.hasSeenGiftIcon !== undefined) state.globalStats.hasSeenGiftIcon = pData.stats.hasSeenGiftIcon;
+            if (pData.stats.hasSeenJohtoMap !== undefined) state.globalStats.hasSeenJohtoMap = pData.stats.hasSeenJohtoMap;
+            if (pData.stats.hasSeenDaycare !== undefined) state.stats.hasSeenDaycare = pData.stats.hasSeenDaycare;
+            if (pData.stats.hasSeenBonusCandyModal !== undefined) state.globalStats.hasSeenBonusCandyModal = pData.stats.hasSeenBonusCandyModal;
+        }
+
+        if (!state.currentRegionName) {
+            state.currentRegionName = 'Kanto';
+        }
+        if (!state.regions) {
+            state.regions = {};
+        }
+        if (state.settings && state.settings.autoPotionThreshold === undefined) {
+            state.settings.autoPotionThreshold = 25;
+        }
+
+        return { ok: true, data: pData };
     }
 
     load() {
