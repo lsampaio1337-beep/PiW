@@ -1,8 +1,10 @@
-const { app, BrowserWindow, ipcMain, screen, Menu } = require('electron');
+const { app, BrowserWindow, ipcMain, screen, Menu, Tray, nativeImage } = require('electron');
 const path = require('path');
 const fs = require('fs');
 
 let isMainControlMinimized = false;
+let mainWin = null;
+let tray = null;
 
 // Fix transparency issues conditionally rather than disabling hardware acceleration entirely
 if (process.platform === 'linux') {
@@ -46,6 +48,7 @@ function createWindow() {
         }
     });
 
+    mainWin = win;
     win.setBounds({ x, y, width, height });
 
     win.loadFile('index.html');
@@ -108,9 +111,38 @@ if (process.platform === 'win32') {
     app.setAppUserModelId('PiW');
 }
 
+function createTray() {
+    if (tray) return;
+    const iconPath = path.join(__dirname, 'Assets', 'Items', 'Balls', 'Pokeball.png');
+    const trayIcon = nativeImage.createFromPath(iconPath);
+    tray = new Tray(trayIcon);
+    tray.setToolTip('PiW');
+
+    const restoreAppAndMainControl = () => {
+        if (!mainWin || mainWin.isDestroyed()) return;
+        if (mainWin.isMinimized()) {
+            mainWin.restore();
+        }
+        mainWin.show();
+        mainWin.focus();
+        isMainControlMinimized = false;
+        mainWin.webContents.send('restore-main-control', { fromMinimize: true });
+    };
+
+    const contextMenu = Menu.buildFromTemplate([
+        { label: 'Show Main Control', click: restoreAppAndMainControl },
+        { type: 'separator' },
+        { label: 'Exit', click: () => app.quit() }
+    ]);
+
+    tray.setContextMenu(contextMenu);
+    tray.on('click', restoreAppAndMainControl);
+}
+
 app.whenReady().then(() => {
     // Remove default application menu so Ctrl+W is handled by the renderer instead of closing the whole app
     Menu.setApplicationMenu(null);
+    createTray();
 
     // Delay window creation on Linux to allow the compositor to initialize correctly
     // so transparent windows work without disabling hardware acceleration.
