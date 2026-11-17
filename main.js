@@ -1,10 +1,8 @@
-const { app, BrowserWindow, ipcMain, screen, Menu, Tray, nativeImage } = require('electron');
+const { app, BrowserWindow, ipcMain, screen, Menu } = require('electron');
 const path = require('path');
 const fs = require('fs');
 
 let isMainControlMinimized = false;
-let mainWin = null;
-let tray = null;
 
 // Fix transparency issues conditionally rather than disabling hardware acceleration entirely
 if (process.platform === 'linux') {
@@ -48,7 +46,6 @@ function createWindow() {
         }
     });
 
-    mainWin = win;
     win.setBounds({ x, y, width, height });
 
     win.loadFile('index.html');
@@ -106,65 +103,9 @@ ipcMain.on('set-main-control-minimized', (_event, minimized) => {
     isMainControlMinimized = Boolean(minimized);
 });
 
-function applyIconLocation(location) {
-    const useTray = location === 'tray';
-    if (mainWin && !mainWin.isDestroyed()) {
-        const wasVisible = mainWin.isVisible();
-        if (process.platform === 'win32' && wasVisible) {
-            mainWin.hide();
-            mainWin.setSkipTaskbar(useTray);
-            setTimeout(() => {
-                if (mainWin && !mainWin.isDestroyed()) {
-                    mainWin.show();
-                }
-            }, 50);
-        } else {
-            mainWin.setSkipTaskbar(useTray);
-        }
-    }
-    if (useTray) {
-        createTray();
-    } else if (tray) {
-        tray.destroy();
-        tray = null;
-    }
-}
-
-ipcMain.on('set-icon-location', (_event, location) => {
-    applyIconLocation(location);
-});
-
 app.setName('PiW');
 if (process.platform === 'win32') {
     app.setAppUserModelId('PiW');
-}
-
-function createTray() {
-    if (tray) return;
-    const iconPath = path.join(__dirname, 'Assets', 'Items', 'Balls', 'Pokeball.png');
-    const trayIcon = nativeImage.createFromPath(iconPath);
-    tray = new Tray(trayIcon);
-    tray.setToolTip('PiW');
-
-    const restoreAppAndMainControl = () => {
-        if (!mainWin || mainWin.isDestroyed()) return;
-        if (mainWin.isMinimized()) {
-            mainWin.restore();
-        }
-        mainWin.show();
-        mainWin.focus();
-        isMainControlMinimized = false;
-        mainWin.webContents.send('restore-main-control', { fromMinimize: true });
-    };
-
-    const contextMenu = Menu.buildFromTemplate([
-        { label: 'Show Main Control', click: restoreAppAndMainControl },
-        { type: 'separator' },
-        { label: 'Exit', click: () => app.quit() }
-    ]);
-
-    tray.setContextMenu(contextMenu);
-    tray.on('click', restoreAppAndMainControl);
 }
 
 app.whenReady().then(() => {
