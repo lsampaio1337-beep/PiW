@@ -1291,27 +1291,27 @@ input[type="number"] {
 }
 
 #party-window {
-    width: 75px;
+    width: 224px;
     height: auto;
 }
 
 #party-window #left-col {
-    padding: 6px;
+    padding: 4px;
 }
 
 #party-window #party-list,
 #party-window #day-care {
-    gap: 8px;
+    gap: 4px;
 }
 
 #party-window .party-slot {
-    padding: 6px 5px 6px 7px;
+    padding: 3px 5px 3px 6px;
     border-radius: 8px;
 }
 
 #party-window .team-card-body {
-    gap: 5px;
-    min-height: 52px;
+    gap: 4px;
+    min-height: 36px;
 }
 
 #party-window .team-sprite-stage {

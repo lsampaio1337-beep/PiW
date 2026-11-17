@@ -483,8 +483,13 @@ export class WindowManager {
                     winElement.dataset.settingsLoaded = 'true';
                     if (window.state && window.state.settings && window.state.settings.windowSettings && window.state.settings.windowSettings[windowId]) {
                         const savedSettings = window.state.settings.windowSettings[windowId];
-                        if (savedSettings.width) winElement.style.width = savedSettings.width;
-                        if (savedSettings.height) winElement.style.height = savedSettings.height;
+                        if (windowId === 'party-window') {
+                            delete savedSettings.width;
+                            delete savedSettings.height;
+                        } else {
+                            if (savedSettings.width) winElement.style.width = savedSettings.width;
+                            if (savedSettings.height) winElement.style.height = savedSettings.height;
+                        }
                         if (savedSettings.left) winElement.style.left = savedSettings.left;
                         if (savedSettings.top) winElement.style.top = savedSettings.top;
                     } else if (windowId === 'main-control-window') {
@@ -813,7 +818,7 @@ export class WindowManager {
             if (!isResizing) return;
 
             const dx = e.clientX - startX;
-            const minWidth = winElement.id === 'party-window' ? 60 : 200;
+            const minWidth = winElement.id === 'party-window' ? 50 : 200;
             let newWidth = Math.max(minWidth, startWidth + dx);
 
             if (winElement.id === 'window-map' && winElement._mapAspectRatio) {
