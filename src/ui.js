@@ -898,16 +898,37 @@ export function generateCatchRateHtml(showShiny = false) {
         rowData.sort((a, b) => a.id - b.id);
     }
 
-    let html = `<div style="padding: 2%; box-sizing: border-box;">
-    <div style="max-height: 60vh; overflow-y: auto;">
-        <table style="width: 100%; border-collapse: separate; border-spacing: 0; text-align: center; color: white;">
-            <thead>
-                <tr style="background: rgba(255,255,255,0.1);">
-                    <th style="padding: 8px; border-bottom: 1px solid #475569; border-top-left-radius: 8px;">Pokémon</th>`;
+    // Totals per ball
+    const totals = {};
+    balls.forEach(b => { totals[b] = { caught: 0, thrown: 0 }; });
+    rowData.forEach(row => {
+        balls.forEach(b => {
+            if (row.data[b] && row.data[b].thrown > 0) {
+                totals[b].caught += row.data[b].caught || 0;
+                totals[b].thrown += row.data[b].thrown || 0;
+            }
+        });
+    });
 
-    balls.forEach((b, i) => {
-        const isLast = i === balls.length - 1;
-        html += `<th style="padding: 8px; border-bottom: 1px solid #475569; ${isLast ? 'border-top-right-radius: 8px;' : ''}">
+    const formatRate = (caught, thrown) => {
+        if (!thrown) return '';
+        const pct = (caught / thrown) * 100;
+        const color = pct >= 50 ? '#4ade80' : pct >= 20 ? '#facc15' : '#f87171';
+        return `<div style="font-size: 11px; color: ${color}; font-weight: bold;">${pct.toFixed(1)}%</div>`;
+    };
+
+    let html = `<div style="padding: 2%; box-sizing: border-box;">
+    <div style="margin-bottom: 10px; display: flex; justify-content: center;">
+        <input id="catch-rate-search" type="text" placeholder="Search Pokémon..." style="width: 220px; padding: 6px 10px; border-radius: 6px; border: 1px solid #3498db; background: rgba(0, 0, 0, 0.35); color: white; font-size: 13px; outline: none;">
+    </div>
+    <div style="max-height: 55vh; overflow-y: auto; border-radius: 8px; border: 1px solid #334155;">
+        <table id="catch-rate-table" style="width: 100%; border-collapse: separate; border-spacing: 0; text-align: center; color: white;">
+            <thead style="position: sticky; top: 0; background: #1e293b; z-index: 2;">
+                <tr>
+                    <th style="padding: 8px; border-bottom: 2px solid #3498db;">Pokémon</th>`;
+
+    balls.forEach(b => {
+        html += `<th style="padding: 8px; border-bottom: 2px solid #3498db;">
             <img src="Assets/Items/Balls/${b}.png" style="width: 24px; height: 24px;" alt="${b}" title="${b}"><br>${b}
         </th>`;
     });
@@ -919,14 +940,15 @@ export function generateCatchRateHtml(showShiny = false) {
     if (rowData.length === 0) {
         html += `<tr><td colspan="${balls.length + 1}" style="padding: 20px; font-style: italic; color: #94a3b8;">No ${showShiny ? 'shiny ' : ''}catch attempts recorded yet.</td></tr>`;
     } else {
-        rowData.forEach(row => {
-            html += `<tr style="border-bottom: 1px solid #334155; background: rgba(0,0,0,0.2);">
+        rowData.forEach((row, idx) => {
+            const rowBg = idx % 2 === 0 ? 'rgba(0,0,0,0.2)' : 'rgba(255,255,255,0.03)';
+            html += `<tr class="catch-rate-row" data-name="#${row.id} ${row.name.toLowerCase()}" style="border-bottom: 1px solid #334155; background: ${rowBg};">
                 <td style="padding: 8px; font-weight: bold; text-align: left;">#${row.id} ${row.name}</td>`;
 
             balls.forEach(b => {
                 const bData = row.data[b];
                 if (bData && bData.thrown > 0) {
-                    html += `<td style="padding: 8px;">${bData.caught} / ${bData.thrown}</td>`;
+                    html += `<td style="padding: 8px;"><div>${bData.caught} / ${bData.thrown}</div>${formatRate(bData.caught, bData.thrown)}</td>`;
                 } else {
                     html += `<td style="padding: 8px; color: #64748b;">-</td>`;
                 }
@@ -937,6 +959,19 @@ export function generateCatchRateHtml(showShiny = false) {
     }
 
     html += `   </tbody>
+            <tfoot style="position: sticky; bottom: 0; background: #0f172a; z-index: 2;">
+                <tr>
+                    <td style="padding: 8px; font-weight: bold; text-align: left; border-top: 2px solid #3498db;">Total</td>`;
+    balls.forEach(b => {
+        const t = totals[b];
+        if (t.thrown > 0) {
+            html += `<td style="padding: 8px; border-top: 2px solid #3498db;"><div>${t.caught} / ${t.thrown}</div>${formatRate(t.caught, t.thrown)}</td>`;
+        } else {
+            html += `<td style="padding: 8px; color: #64748b; border-top: 2px solid #3498db;">-</td>`;
+        }
+    });
+    html += `       </tr>
+            </tfoot>
         </table>
     </div>
     </div>`;
@@ -2711,7 +2746,7 @@ async function init() {
     window.showUpgradeDetails = function(typeConfigKey, currentTier) {
         if (!state.config || !state.config.balance || !state.config.balance.expansions || !state.config.balance.expansions[typeConfigKey]) return;
 
-        let htmlContent = '<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; padding: 2%; box-sizing: border-box;">';
+        let htmlContent = '<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; padding: 2%; box-sizing: border-box;">';
 
         for (let t = 1; t <= currentTier; t++) {
             const configItem = state.config.balance.expansions[typeConfigKey][t - 1];
@@ -2829,7 +2864,7 @@ async function init() {
             let filter = hasTier ? 'filter: drop-shadow(0 0 10px rgba(255, 215, 0, 1));' : 'filter: grayscale(100%) opacity(0.5);';
             let extraInfo = hasTier && info ? `
                 <div style="font-size: 14px; color: #a0aec0; margin-top: 5px;">Earned on: ${info.date}</div>
-                <div style="font-size: 14px; color: #a0aec0;">Time on Region: ${info.playtime}</div>
+                <div style="font-size: 14px; color: #a0aec0;">(${info.playtime})</div>
             ` : '';
             return `
                 <div style="text-align: center; flex: 1; padding: 10px;">
@@ -2871,6 +2906,10 @@ async function init() {
     let highestLevel = 0;
     let highestQuality = 0;
     let highestSumIV = 0;
+    let highestStatSum = 0;
+    let highestStatSumName = 'None';
+    let highestDps = 0;
+    let highestDpsName = 'None';
     let backpackMons = [];
     if (state.party) backpackMons = backpackMons.concat(state.party);
     if (state.storage) backpackMons = backpackMons.concat(state.storage);
@@ -2878,11 +2917,42 @@ async function init() {
 
     backpackMons.forEach(p => {
         if (!p) return;
+        const pName = p.displayName || p.name || 'Unknown';
         if (p.level > highestLevel) highestLevel = p.level;
         if (p.quality > highestQuality) highestQuality = p.quality;
         if (p.ivs) {
             const sumIV = (p.ivs.hp || 0) + (p.ivs.atk || 0) + (p.ivs.def || 0) + (p.ivs.spa || 0) + (p.ivs.spd || 0) + (p.ivs.spe || 0);
             if (sumIV > highestSumIV) highestSumIV = sumIV;
+        }
+        if (p.currentStats) {
+            const cs = p.currentStats;
+            const statSum = (cs.hp || 0) + (cs.atk || 0) + (cs.def || 0) + (cs.spa || 0) + (cs.spd || 0) + (cs.spe || 0);
+            if (statSum > highestStatSum) {
+                highestStatSum = statSum;
+                highestStatSumName = pName;
+            }
+            const atk = cs.atk || 0;
+            const spa = cs.spa || 0;
+            const spe = cs.spe || 1;
+            const attacksPerSec = Math.max(0.2, spe / 100);
+            let bestMoveDps = 0;
+            if (Array.isArray(p.moves) && p.moves.length > 0) {
+                p.moves.forEach(m => {
+                    if (!m || !m.power) return;
+                    const cat = (m.category || '').toLowerCase();
+                    const offStat = cat === 'physical' ? atk : cat === 'special' ? spa : Math.max(atk, spa);
+                    const stab = (Array.isArray(p.types) && m.type && p.types.includes(m.type)) ? 1.5 : 1.0;
+                    const dps = m.power * (offStat / 100) * stab * attacksPerSec;
+                    if (dps > bestMoveDps) bestMoveDps = dps;
+                });
+            }
+            if (bestMoveDps === 0) {
+                bestMoveDps = Math.max(atk, spa) * attacksPerSec;
+            }
+            if (bestMoveDps > highestDps) {
+                highestDps = bestMoveDps;
+                highestDpsName = pName;
+            }
         }
     });
 
@@ -2914,69 +2984,103 @@ async function init() {
         uniqueShinySpeciesCaught = Object.keys(state.stats.caughtShiniesSpecies).length;
     }
 
+    const regionKey = (state.currentRegionName || 'Kanto').toLowerCase() + '_id';
+    const totalSpeciesInRegion = state.config.pokemonData.filter(p => Number.isInteger(p.id) && p[regionKey] !== undefined).length;
+    const battlesWon = state.stats.battlesWon || 0;
+    const faints = state.stats.faints || 0;
+    const totalCaught = state.stats.caught || 0;
+    const shiniesCaught = state.stats.shiniesCaught || 0;
+    const breedsCompleted = state.stats.breedsCompleted || 0;
+    let totalBallsThrown = 0;
+    [state.stats.catchAttempts, state.stats.shinyCatchAttempts].forEach(tracker => {
+        if (!tracker) return;
+        Object.values(tracker).forEach(monData => {
+            if (!monData) return;
+            Object.values(monData).forEach(bData => {
+                if (bData && bData.thrown) totalBallsThrown += bData.thrown;
+            });
+        });
+    });
+
+    const renderProgress = (current, max, color = '#3498db') => {
+        const pct = max > 0 ? Math.min(100, Math.round((current / max) * 100)) : 0;
+        return `
+            <div style="width: 100%; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden; margin-top: 3px; margin-bottom: 8px;">
+                <div style="width: ${pct}%; height: 100%; background: ${color}; transition: width 0.3s;"></div>
+            </div>
+        `;
+    };
+
+    const cardStyle = 'background: rgba(0, 0, 0, 0.25); border: 2px solid #3498db; border-radius: 10px; padding: 12px 15px; box-sizing: border-box;';
+    const headerStyle = 'font-size: 13px; font-weight: bold; color: #3498db; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; border-bottom: 1px solid rgba(52, 152, 219, 0.3); padding-bottom: 4px;';
+    const rowStyle = 'display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 5px; color: #e2e8f0;';
+
     return `
         <div style="position: relative; height: 100%; display: flex; flex-direction: column; padding: 2%; box-sizing: border-box;">
-            <div style="text-align: left;">
-                <div style="display: flex; gap: 40px; justify-content: space-between;">
-                    <div style="flex: 1;">
-                        <p><b>Time played:</b> ${playtimeStr}</p>
-                        <p><b>$</b> ${state.trainer.money.toLocaleString()}</p>
-                    </div>
-                    <div style="flex: 1;">
-                        <p><b>Battles Won:</b> ${(state.stats.battlesWon || 0).toLocaleString()}</p>
-                        <p><b>Faints:</b> ${(state.stats.faints || 0).toLocaleString()}</p>
-                    </div>
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; text-align: left;">
+                <div style="${cardStyle}">
+                    <div style="${headerStyle}">General & Combat</div>
+                    <div style="${rowStyle}"><span>Time Played</span><b>${playtimeStr}</b></div>
+                    <div style="${rowStyle}"><span>Money</span><b>$${state.trainer.money.toLocaleString()}</b></div>
+                    <div style="${rowStyle}"><span>Battles Won</span><b>${battlesWon.toLocaleString()}</b></div>
+                    <div style="${rowStyle}"><span>Faints</span><b>${faints.toLocaleString()}</b></div>
+                    <div style="${rowStyle}"><span>Total Breeds Completed</span><b>${breedsCompleted.toLocaleString()}</b></div>
+                    <div style="${rowStyle}"><span>Total Balls Thrown</span><b>${totalBallsThrown.toLocaleString()}</b></div>
                 </div>
-                <hr style="margin: 10px 0;">
-                <div style="display: flex; gap: 40px; justify-content: space-between;">
-                    <div style="flex: 1;">
-                        <p><b>Total Pokémon Captured:</b> ${(state.stats.caught || 0).toLocaleString()}</p>
-                        <p><b>Species Caught:</b> ${uniqueSpeciesCaught} / ${state.config.pokemonData.filter(p => Number.isInteger(p.id) && p[(state.currentRegionName || 'Kanto').toLowerCase() + '_id'] !== undefined).length}</p>
-                    </div>
-                    <div style="flex: 1;">
-                        <p><b>Shinies Caught:</b> ${(state.stats.shiniesCaught || 0).toLocaleString()}</p>
-                        <p><b>Shiny Species Caught:</b> ${uniqueShinySpeciesCaught} / ${state.config.pokemonData.filter(p => Number.isInteger(p.id) && p[(state.currentRegionName || 'Kanto').toLowerCase() + '_id'] !== undefined).length}</p>
-                    </div>
+                <div style="${cardStyle}">
+                    <div style="${headerStyle}">Pokédex Progress</div>
+                    <div style="${rowStyle}"><span>Total Captured</span><b>${totalCaught.toLocaleString()}</b></div>
+                    <div style="${rowStyle}"><span>Shinies Caught</span><b>${shiniesCaught.toLocaleString()}</b></div>
+                    <div style="${rowStyle}"><span>Species Caught</span><b>${uniqueSpeciesCaught} / ${totalSpeciesInRegion}</b></div>
+                    ${renderProgress(uniqueSpeciesCaught, totalSpeciesInRegion, '#3498db')}
+                    <div style="${rowStyle}"><span>Shiny Species</span><b>${uniqueShinySpeciesCaught} / ${totalSpeciesInRegion}</b></div>
+                    ${renderProgress(uniqueShinySpeciesCaught, totalSpeciesInRegion, '#facc15')}
                 </div>
-                <hr style="margin: 10px 0;">
-                <div style="display: flex; gap: 40px; justify-content: space-between;">
-                    <div style="flex: 1;">
-                        <p><b>Jigglypuff Grains Used:</b> ${(state.stats.jigglypuffGrainsUsed || 0).toLocaleString()}</p>
-                        <p><b>Daily Rewards Collected:</b> ${(state.stats.dailyRewards ? state.stats.dailyRewards.daysClaimed : 0).toLocaleString()}</p>
-                        <p><b>Professor Lab Assignments Completed:</b> ${assignmentsCompleted}/${maxAssignments}</p>
-                    </div>
-                    <div style="flex: 1;">
-                        <p><b>White Candies Claimed:</b> ${(whiteCandiesClaimed || 0).toLocaleString()}</p>
-                        <p><b>Daily Tokens Earned:</b> ${(state.stats.tokensEarned || 0).toLocaleString()}</p>
-                        <p><b>Progress Challenge Completed:</b> ${challengesCompleted}/${maxChallenges}</p>
-                    </div>
+                <div style="${cardStyle}">
+                    <div style="${headerStyle}">Activities & Rewards</div>
+                    <div style="${rowStyle}"><span>Jigglypuff Grains Used</span><b>${(state.stats.jigglypuffGrainsUsed || 0).toLocaleString()}</b></div>
+                    <div style="${rowStyle}"><span>White Candies Claimed</span><b>${(whiteCandiesClaimed || 0).toLocaleString()}</b></div>
+                    <div style="${rowStyle}"><span>Daily Rewards</span><b>${(state.stats.dailyRewards ? state.stats.dailyRewards.daysClaimed : 0).toLocaleString()}</b></div>
+                    <div style="${rowStyle}"><span>Daily Tokens Earned</span><b>${(state.stats.tokensEarned || 0).toLocaleString()}</b></div>
+                    <div style="${rowStyle}"><span>Lab Assignments</span><b>${assignmentsCompleted} / ${maxAssignments}</b></div>
+                    ${renderProgress(assignmentsCompleted, maxAssignments, '#4ade80')}
+                    <div style="${rowStyle}"><span>Progress Challenges</span><b>${challengesCompleted} / ${maxChallenges}</b></div>
+                    ${renderProgress(challengesCompleted, maxChallenges, '#a855f7')}
                 </div>
-                <hr style="margin: 10px 0;">
-                <div style="display: flex; gap: 40px; justify-content: space-between;">
-                    <div style="flex: 1;">
-                        <p><b>Highest Level on Backpack:</b> ${highestLevel}</p>
-                        <p><b>Highest Quality on Backpack:</b> ${highestQuality}</p>
-                        <p><b>Highest IV Sum on Backpack:</b> ${highestSumIV}</p>
-                    </div>
-                    <div style="flex: 1;">
-                        <p><b>Highest Level Captured:</b> ${state.stats.highestLevelCaptured || 0}</p>
-                        <p><b>Highest Quality Captured:</b> ${state.stats.highestQualityCaptured || 0}</p>
-                        <p><b>Highest IV Sum Captured:</b> ${state.stats.highestSumIVCaptured || 0}</p>
-                    </div>
+                <div style="${cardStyle}">
+                    <div style="${headerStyle}">Records</div>
+                    <div style="${rowStyle}"><span>Highest Level (Backpack)</span><b>${highestLevel.toLocaleString()}</b></div>
+                    <div style="${rowStyle}"><span>Highest Level (Captured)</span><b>${(state.stats.highestLevelCaptured || 0).toLocaleString()}</b></div>
+                    <div style="${rowStyle}"><span>Highest Quality (Backpack)</span><b>${highestQuality.toLocaleString()}</b></div>
+                    <div style="${rowStyle}"><span>Highest Quality (Captured)</span><b>${(state.stats.highestQualityCaptured || 0).toLocaleString()}</b></div>
+                    <div style="${rowStyle}"><span>Highest IV Sum (Backpack)</span><b>${highestSumIV.toLocaleString()}</b></div>
+                    <div style="${rowStyle}"><span>Highest IV Sum (Captured)</span><b>${(state.stats.highestSumIVCaptured || 0).toLocaleString()}</b></div>
+                    <div style="${rowStyle}"><span>Highest Sum of Stats</span><b>${highestStatSum > 0 ? `${highestStatSumName}: ${Math.round(highestStatSum).toLocaleString()}` : 'None'}</b></div>
+                    <div style="${rowStyle}"><span>Highest DPS</span><b>${highestDps > 0 ? `${highestDpsName}: ${Math.round(highestDps).toLocaleString()}` : 'None'}</b></div>
                 </div>
             </div>
         </div>
     `;
 }
 function generateTrainerBadgesHtml() {
-    let badgesHtml = '<div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; justify-items: center; align-items: center; margin: 0 auto;">';
+    let badgesHtml = '<div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; justify-items: stretch; align-items: stretch; margin: 0 auto;">';
 
     // To be consistent with gift mapping, we map badge icons based on the current region and sequential badge number
     const badgeRegion = state.currentRegionName || 'Kanto';
-    for (let i = 0; i < state.trainer.badges; i++) {
+    const totalBadges = badgeRegion === 'Alola' ? 11 : 8;
+    const earnedBadges = state.trainer.badges || 0;
+
+    for (let i = 0; i < totalBadges; i++) {
         const badgeNum = i + 1;
+        const isEarned = i < earnedBadges;
         const badgeFile = window.getBadgeFileName(badgeRegion, badgeNum);
-        badgesHtml += `<div style="background: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px; padding: 15px; display: flex; justify-content: center; align-items: center; box-sizing: border-box;"><img src="./Assets/Gym/Badges/${badgeFile}" style="width: 100px; height: 100px; object-fit: contain;" title="Badge ${i + 1}"></div>`;
+        const imgFilter = isEarned ? 'filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.6));' : 'filter: grayscale(100%) opacity(0.35);';
+        badgesHtml += `
+            <div style="background: rgba(0, 0, 0, 0.25); border: 2px solid #3498db; border-radius: 10px; padding: 12px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 8px; box-sizing: border-box;">
+                <img src="./Assets/Gym/Badges/${badgeFile}" style="width: 84px; height: 84px; object-fit: contain; ${imgFilter}" title="Badge ${badgeNum}">
+                <div style="font-size: 12px; font-weight: bold; color: ${isEarned ? '#ffffff' : '#64748b'};">Badge ${badgeNum}</div>
+            </div>
+        `;
     }
     badgesHtml += '</div>';
 
@@ -3039,7 +3143,7 @@ function generateTrainerMedalsHtml() {
                 class="medal-item"
                 data-region="${region}" data-caught="${caughtCount}" data-shiny="${shinyCount}" data-total="${totalInRegion}"
                 onclick="if(window.showMedalDetails) window.showMedalDetails('${region}', ${caughtCount}, ${shinyCount}, ${totalInRegion})"
-                style="background: rgba(0, 0, 0, 0.2); border-radius: 10px; padding: 10px 15px; border: 1px solid rgba(255, 255, 255, 0.1); display: flex; justify-content: space-around; align-items: center; box-sizing: border-box; transition: all 0.2s ease-in-out; min-height: 0; cursor: pointer;"
+                style="background: rgba(0, 0, 0, 0.2); border-radius: 10px; padding: 10px 15px; border: 2px solid #3498db; display: flex; justify-content: space-around; align-items: center; box-sizing: border-box; transition: all 0.2s ease-in-out; min-height: 0; cursor: pointer;"
             >
                 <div style="text-align: center; ${!hasFirst ? 'filter: grayscale(100%) opacity(0.5);' : 'filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.5));'}">
                     <img src="Assets/Extra/Medals/${region} First.png" alt="${region} First" style="width: 100%; max-width: 64px; max-height: 100%; object-fit: contain; image-rendering: pixelated;" onerror="this.src='Assets/Extra/Medals/Kanto First.png'">
@@ -3060,8 +3164,8 @@ function generateTrainerMedalsHtml() {
         <style>
             .medal-item:hover {
                 background: rgba(255, 255, 255, 0.1) !important;
-                border-color: rgba(255, 255, 255, 0.5) !important;
-                box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+                border-color: #3498db !important;
+                box-shadow: 0 0 15px rgba(52, 152, 219, 0.6);
             }
         </style>
     `;
@@ -3072,7 +3176,7 @@ function generateTrainerDetailsHtml(tab, options) {
     const headerTitle = tab === 'medal-details' ? `${options.region} Medals` : `${options.title} Upgrades`;
     const backTab = tab === 'medal-details' ? 'medals' : 'upgrades';
     return `
-        <div class="floating-window" style="position: relative; width: 100%; height: 100%; display: flex; flex-direction: column; overflow: hidden;">
+        <div class="floating-window" style="position: relative; width: 100%; height: 100%; box-sizing: border-box; display: flex; flex-direction: column; overflow: hidden;">
             <div class="window-header" style="position: relative; cursor: default;">
                 <span>${headerTitle}</span>
                 <span onclick="window.showTrainerStats('${backTab}')" style="position: absolute; top: 5px; right: 5px; font-size: 12px; font-weight: bold; line-height: 1; padding: 0; cursor: pointer; color: white;">X</span>
@@ -3163,8 +3267,8 @@ function generateTrainerUpgradesHtml() {
         <style>
             .upgrade-item:hover {
                 background: rgba(255, 255, 255, 0.1) !important;
-                border-color: rgba(255, 255, 255, 0.5) !important;
-                box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+                border-color: #3498db !important;
+                box-shadow: 0 0 15px rgba(52, 152, 219, 0.6);
             }
         </style>
     `;
@@ -3176,8 +3280,51 @@ function generateTrainerUpgradesHtml() {
     return contentHtml;
 }
 
+    window.closeTrainerInnerModal = function() {
+        const overlay = document.getElementById('trainer-inner-modal-overlay');
+        if (overlay) {
+            overlay.remove();
+        }
+    };
+
     window.showTrainerStats = function(tab = 'statistics', options = {}) {
         if(checkCombatLock()) return;
+
+        if (tab === 'medal-details' || tab === 'upgrade-details') {
+            const win = document.getElementById('window-trainer');
+            const innerContent = win ? win.querySelector('.window-content-container') : null;
+            if (innerContent) {
+                innerContent.style.position = 'relative';
+                const existingOverlay = document.getElementById('trainer-inner-modal-overlay');
+                if (existingOverlay) existingOverlay.remove();
+
+                const headerTitle = tab === 'medal-details' ? `${options.region} Medals` : `${options.title} Upgrades`;
+                const overlay = document.createElement('div');
+                overlay.id = 'trainer-inner-modal-overlay';
+                overlay.style.cssText = 'position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.75); z-index: 1000; display: flex; align-items: center; justify-content: center; box-sizing: border-box; padding: 20px;';
+                overlay.onclick = (e) => {
+                    if (e.target === overlay) window.closeTrainerInnerModal();
+                };
+
+                const doc = new DOMParser().parseFromString(`
+                    <div class="floating-window" onclick="event.stopPropagation()" onmousedown="event.stopPropagation()" style="position: relative; width: 85%; max-width: 650px; max-height: 85%; box-sizing: border-box; display: flex; flex-direction: column; overflow: hidden;">
+                        <div class="window-header" style="position: relative; cursor: default;">
+                            <span>${headerTitle}</span>
+                            <span onclick="if(window.closeTrainerInnerModal) window.closeTrainerInnerModal()" style="position: absolute; top: 5px; right: 5px; font-size: 12px; font-weight: bold; line-height: 1; padding: 0; cursor: pointer; color: white;">X</span>
+                        </div>
+                        <div class="window-content-container" style="flex: 1; overflow-y: auto; overflow-x: hidden; padding: 15px; box-sizing: border-box;">
+                            ${options.html}
+                        </div>
+                    </div>
+                `, 'text/html');
+                const modalEl = doc.body.firstElementChild;
+                if (modalEl) {
+                    overlay.appendChild(modalEl);
+                    innerContent.appendChild(overlay);
+                }
+                return;
+            }
+        }
 
         const isShiny = options.showShiny || false;
         let titleHtml = '';
@@ -3221,13 +3368,24 @@ function generateTrainerUpgradesHtml() {
             contentHtml = generateTrainerUpgradesHtml();
         }
 
+        const isInnerModal = (tab === 'medal-details' || tab === 'upgrade-details');
+        const existingWin = document.getElementById('window-trainer');
+        const preservedHeight = (isInnerModal && existingWin) ? existingWin.offsetHeight : null;
+
         showModal(titleHtml, contentHtml, "window-trainer");
 
         const win = document.getElementById('window-trainer');
         if (win) {
+            if (preservedHeight) {
+                win.style.height = `${preservedHeight}px`;
+            }
             const innerContent = win.querySelector('.window-content-container');
             if (innerContent) {
                 innerContent.style.setProperty('padding', '0px', 'important');
+                if (isInnerModal) {
+                    innerContent.style.height = '100%';
+                    innerContent.style.overflowX = 'hidden';
+                }
 
                 // Add redundant event listeners (Failsafe for onclick restriction)
                 const medalItems = innerContent.querySelectorAll('.medal-item');
@@ -3249,12 +3407,26 @@ function generateTrainerUpgradesHtml() {
                         if(window.showUpgradeDetails && type && tier > 0) window.showUpgradeDetails(type, tier);
                     });
                 });
-            }
-            setTimeout(() => {
-                if (typeof win.adjustHeightForNewContent === 'function') {
-                    win.adjustHeightForNewContent();
+
+                const catchRateSearch = innerContent.querySelector('#catch-rate-search');
+                if (catchRateSearch) {
+                    catchRateSearch.addEventListener('input', (e) => {
+                        const query = e.target.value.trim().toLowerCase();
+                        const rows = innerContent.querySelectorAll('.catch-rate-row');
+                        rows.forEach(row => {
+                            const name = row.getAttribute('data-name') || '';
+                            row.style.display = name.includes(query) ? '' : 'none';
+                        });
+                    });
                 }
-            }, 50);
+            }
+            if (!isInnerModal) {
+                setTimeout(() => {
+                    if (typeof win.adjustHeightForNewContent === 'function') {
+                        win.adjustHeightForNewContent();
+                    }
+                }, 50);
+            }
         }
     };
 
