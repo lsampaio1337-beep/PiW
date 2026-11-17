@@ -1296,44 +1296,44 @@ input[type="number"] {
 }
 
 #party-window #left-col {
-    padding: 5px;
+    padding: 6px;
 }
 
 #party-window #party-list,
 #party-window #day-care {
-    gap: 5px;
+    gap: 8px;
 }
 
 #party-window .party-slot {
-    padding: 4px 5px 4px 6px;
-    border-radius: 7px;
+    padding: 6px 5px 6px 7px;
+    border-radius: 8px;
 }
 
 #party-window .team-card-body {
     gap: 5px;
-    min-height: 36px;
+    min-height: 52px;
 }
 
 #party-window .team-sprite-stage {
-    flex: 0 0 32px;
-    height: 32px;
-    border-radius: 7px;
+    flex: 0 0 34px;
+    height: 44px;
+    border-radius: 8px;
 }
 
 #party-window .team-sprite-pedestal {
-    width: 22px;
-    height: 5px;
-    bottom: 3px;
+    width: 24px;
+    height: 6px;
+    bottom: 4px;
 }
 
 #party-window .team-sprite-img,
 #party-window .team-sprite-ghost {
-    max-width: 26px;
-    max-height: 26px;
+    max-width: 28px;
+    max-height: 28px;
 }
 
 #party-window .team-card-info {
-    gap: 2px;
+    gap: 4px;
 }
 
 #party-window .team-poke-name {
@@ -1361,11 +1361,11 @@ input[type="number"] {
 }
 
 #party-window .team-bar-track {
-    height: 10px;
+    height: 13px;
 }
 
 #party-window .team-bar-track.is-xp {
-    height: 9px;
+    height: 12px;
 }
 
 #party-window .team-bar-cell {

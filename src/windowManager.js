@@ -1047,10 +1047,27 @@ export class WindowManager {
             }
         }
 
-        // Restore positioning
-        scalerElement.style.position = oldPosition;
-        scalerElement.style.transform = oldScale;
-        scalerElement.style.width = scalerElement.style.getPropertyValue('--original-width');
+        // Restore positioning and lock exact aspect ratio so manual resize scales cleanly
+        const headerElement = winElement.querySelector('.window-header');
+        const headerH = headerElement ? headerElement.offsetHeight : 0;
+        const finalOriginalWidth = winElement._originalWidth || newOriginalWidth;
+        const finalOriginalHeight = winElement._originalHeight || newOriginalHeight;
+
+        if (finalOriginalWidth > 0 && finalOriginalHeight > 0) {
+            const currentW = parseFloat(winElement.style.width) || finalOriginalWidth;
+            const scale = currentW / finalOriginalWidth;
+            scalerElement.style.position = 'absolute';
+            scalerElement.style.top = '0px';
+            scalerElement.style.left = '0px';
+            scalerElement.style.width = finalOriginalWidth + 'px';
+            scalerElement.style.height = finalOriginalHeight + 'px';
+            scalerElement.style.transform = `scale(${scale})`;
+            winElement.style.height = (headerH + finalOriginalHeight * scale) + 'px';
+        } else {
+            scalerElement.style.position = oldPosition;
+            scalerElement.style.transform = oldScale;
+            scalerElement.style.width = scalerElement.style.getPropertyValue('--original-width');
+        }
     }
 
     recalculateWindowSize(windowId) {
