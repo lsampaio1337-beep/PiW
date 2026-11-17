@@ -347,27 +347,41 @@ const helpContent = {
 };
 
 export function showHelp() {
-    let sidebarHTML = '<div id="help-sidebar" style="width: 300px; border-right: 2px solid #1abc9c; padding: 10px; box-sizing: border-box; overflow-y: auto; background-color: #2c3e50; height: 100%;">';
+    let sidebarItemsHTML = '';
     let isFirst = true;
 
     for (const [majorTopic, subCategories] of Object.entries(helpContent)) {
-        sidebarHTML += `<div style="font-weight: bold; color: #f1c40f; margin-top: 15px; margin-bottom: 5px; font-size: 16px; text-transform: uppercase;">${majorTopic}</div>`;
+        sidebarItemsHTML += `<div class="help-major-topic">`;
+        sidebarItemsHTML += `<div class="help-major-header"><span>${majorTopic}</span><span class="help-major-chevron">▾</span></div>`;
+        sidebarItemsHTML += `<div class="help-major-items">`;
 
         for (const [subCategory, groups] of Object.entries(subCategories)) {
-            sidebarHTML += `<div style="font-weight: bold; color: #bdc3c7; margin-top: 5px; margin-bottom: 3px; margin-left: 10px; font-size: 14px;">${subCategory}</div>`;
+            sidebarItemsHTML += `<div class="help-sub-group">`;
+            sidebarItemsHTML += `<div class="help-sub-category">${subCategory}</div>`;
 
-            for (const [groupName, content] of Object.entries(groups)) {
+            for (const [groupName] of Object.entries(groups)) {
                 const targetId = `help_content_${majorTopic.replace(/[^a-zA-Z0-9]/g, '_')}_${subCategory.replace(/[^a-zA-Z0-9]/g, '_')}_${groupName.replace(/[^a-zA-Z0-9]/g, '_')}`;
-
-                const btnBg = isFirst ? '#3498db' : 'transparent';
-                sidebarHTML += `<div class="help-nav-btn" data-target="${targetId}" style="cursor: pointer; padding: 4px; margin-left: 20px; color: white; background-color: ${btnBg}; border-radius: 3px; font-size: 13px; margin-bottom: 2px;">${groupName}</div>`;
+                const activeClass = isFirst ? ' active-help-btn' : '';
+                sidebarItemsHTML += `<div class="help-nav-btn${activeClass}" data-target="${targetId}">${groupName}</div>`;
                 isFirst = false;
             }
+            sidebarItemsHTML += `</div>`;
         }
+        sidebarItemsHTML += `</div></div>`;
     }
-    sidebarHTML += '</div>';
 
-    let contentHTML = '<div id="help-content-area" style="flex: 1; padding: 20px; box-sizing: border-box; overflow-y: auto; background-color: #34495e; height: 100%;">';
+    const sidebarHTML = `
+        <div id="help-sidebar">
+            <div class="help-search-wrap">
+                <input type="text" id="help-search-input" placeholder="Search help topics..." autocomplete="off">
+            </div>
+            <div class="help-nav-list">
+                ${sidebarItemsHTML}
+            </div>
+        </div>
+    `;
+
+    let contentHTML = '<div id="help-content-area">';
     isFirst = true;
 
     for (const [majorTopic, subCategories] of Object.entries(helpContent)) {
@@ -376,9 +390,10 @@ export function showHelp() {
                 const targetId = `help_content_${majorTopic.replace(/[^a-zA-Z0-9]/g, '_')}_${subCategory.replace(/[^a-zA-Z0-9]/g, '_')}_${groupName.replace(/[^a-zA-Z0-9]/g, '_')}`;
 
                 const displayStyle = isFirst ? 'block' : 'none';
-                contentHTML += `<div id="${targetId}" class="help-section" style="display: ${displayStyle}; color: white; line-height: 1.6;">
-                    <h2 style="margin-top: 0; color: #1abc9c; border-bottom: 1px solid #7f8c8d; padding-bottom: 5px;">${majorTopic} &raquo; ${subCategory} &raquo; ${groupName}</h2>
-                    <div style="font-size: 14px;">${content}</div>
+                contentHTML += `<div id="${targetId}" class="help-section" style="display: ${displayStyle};">
+                    <div class="help-breadcrumb">${majorTopic} &rsaquo; ${subCategory}</div>
+                    <h2 class="help-section-title">${groupName}</h2>
+                    <div class="help-article-body">${content}</div>
                 </div>`;
                 isFirst = false;
             }
@@ -387,7 +402,7 @@ export function showHelp() {
     contentHTML += '</div>';
 
     const helpHTML = `
-        <div style="display: flex; flex-direction: row; height: 100%; width: 100%; overflow: hidden;">
+        <div class="help-container">
             ${sidebarHTML}
             ${contentHTML}
         </div>
@@ -403,39 +418,51 @@ export function showHelp() {
 
         const btns = modalContainer.querySelectorAll('.help-nav-btn');
         const sections = modalContainer.querySelectorAll('.help-section');
+        const majorHeaders = modalContainer.querySelectorAll('.help-major-header');
+        const searchInput = modalContainer.querySelector('#help-search-input');
 
-        // Mark first as active purely for the class toggle state
-        if(btns.length > 0) btns[0].classList.add('active-help-btn');
+        majorHeaders.forEach(header => {
+            header.addEventListener('click', function() {
+                this.parentElement.classList.toggle('collapsed');
+            });
+        });
 
         btns.forEach(btn => {
-            btn.addEventListener('mouseenter', function() {
-                if (!this.classList.contains('active-help-btn')) {
-                    this.style.backgroundColor = '#2980b9';
-                }
-            });
-            btn.addEventListener('mouseleave', function() {
-                if (!this.classList.contains('active-help-btn')) {
-                    this.style.backgroundColor = 'transparent';
-                }
-            });
             btn.addEventListener('click', function() {
-                // Reset all buttons
-                btns.forEach(b => {
-                    b.style.backgroundColor = 'transparent';
-                    b.classList.remove('active-help-btn');
-                });
-                // Set clicked button
-                this.style.backgroundColor = '#3498db';
+                btns.forEach(b => b.classList.remove('active-help-btn'));
                 this.classList.add('active-help-btn');
 
-                // Hide all sections
-                sections.forEach(s => s.style.display = 'none');
+                sections.forEach(s => { s.style.display = 'none'; });
 
-                // Show target section
                 const targetId = this.getAttribute('data-target');
                 const targetSection = document.getElementById(targetId);
                 if (targetSection) targetSection.style.display = 'block';
             });
         });
+
+        if (searchInput) {
+            searchInput.addEventListener('input', function() {
+                const query = this.value.trim().toLowerCase();
+                const majorTopics = modalContainer.querySelectorAll('.help-major-topic');
+
+                majorTopics.forEach(topic => {
+                    let topicHasMatch = false;
+                    if (query) topic.classList.remove('collapsed');
+
+                    topic.querySelectorAll('.help-sub-group').forEach(subGroup => {
+                        let subHasMatch = false;
+                        subGroup.querySelectorAll('.help-nav-btn').forEach(btn => {
+                            const matches = !query || btn.textContent.toLowerCase().includes(query);
+                            btn.style.display = matches ? '' : 'none';
+                            if (matches) subHasMatch = true;
+                        });
+                        subGroup.style.display = subHasMatch ? '' : 'none';
+                        if (subHasMatch) topicHasMatch = true;
+                    });
+
+                    topic.style.display = topicHasMatch ? '' : 'none';
+                });
+            });
+        }
     }, 100);
 }
