@@ -129,15 +129,16 @@ export function showDexEntry(id) {
     const evoTreeHtml = buildEvolutionLineHtml(pData, state);
 
     const html = `
-        <div class="content-panel" style="text-align:center; height: 100%; overflow-y: auto;">
-            <h2>#${pData.id} ${pData.name}</h2>
-            <img id="dex-sprite-${pData.id}" src="${window.getSpriteUrl(pData.id, false)}" style="width: 100px; height: 100px;">
-            <div style="margin-bottom: 10px;">
-                <button style="${buttonStyle}" onclick="document.getElementById('dex-sprite-${pData.id}').src = '${window.getSpriteUrl(pData.id, true)}'">Shiny</button>
-                <button style="${buttonStyle}" onclick="document.getElementById('dex-sprite-${pData.id}').src = '${window.getSpriteUrl(pData.id, false)}'">Normal</button>
+        <div class="content-panel" style="text-align:center; height: 100%; overflow-y: auto; padding: 12px; box-sizing: border-box;">
+            <div style="background: rgba(0,0,0,0.45); padding: 14px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08); margin-bottom: 12px; display: flex; flex-direction: column; align-items: center;">
+                <h2 style="margin: 0 0 8px 0;">#${pData.id} ${pData.name}</h2>
+                <img id="dex-sprite-${pData.id}" src="${window.getSpriteUrl(pData.id, false)}" style="width: 100px; height: 100px;">
+                <div style="margin: 8px 0;">
+                    <button style="${buttonStyle}" onclick="document.getElementById('dex-sprite-${pData.id}').src = '${window.getSpriteUrl(pData.id, true)}'">Shiny</button>
+                    <button style="${buttonStyle}" onclick="document.getElementById('dex-sprite-${pData.id}').src = '${window.getSpriteUrl(pData.id, false)}'">Normal</button>
+                </div>
+                <div style="font-size: 14px;"><b>Type:</b> ${pData.types.map(t => formatType(t)).join(' ')}</div>
             </div>
-
-            <p><b>Type:</b> ${pData.types.map(t => formatType(t)).join(' ')}</p>
 
             ${speciesHtml}
             ${evoTreeHtml}
@@ -212,7 +213,7 @@ export function buildEvolutionLineHtml(pData, state) {
     }
 
     let treeHtml = buildTree(baseId);
-    return `<div style="text-align: left; margin: 15px 0; font-size: 14px; background: rgba(0,0,0,0.5); padding: 10px; border-radius: 5px; overflow-x: auto;">
+    return `<div style="text-align: left; margin: 15px 0; font-size: 14px; background: rgba(0,0,0,0.5); padding: 10px; border-radius: 5px; overflow-x: auto; max-height: 220px; overflow-y: auto;">
         <h4 style="margin: 0 0 10px 0;">Evolution Line</h4>
         <div style="display: flex; align-items: center; justify-content: center;">
             ${treeHtml}
@@ -269,47 +270,81 @@ export function getSpeciesDataHtml(pData, state) {
     }
 
     let movesHtml = `
-        <table style="width: 100%; text-align: left; font-size: 14px; border-collapse: collapse;">
-            <tr style="border-bottom: 1px solid #fff;">
-                <th style="padding-bottom: 5px;">Lvl</th>
-                <th style="padding-bottom: 5px;">Move</th>
-                <th style="padding-bottom: 5px;">Type</th>
-                <th style="padding-bottom: 5px;">Pwr</th>
-                <th style="padding-bottom: 5px;">Cat</th>
-            </tr>
+        <div style="background: rgba(0,0,0,0.45); padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08); margin: 12px 0; text-align: left;">
+            <h4 style="margin: 0 0 8px 0; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 4px;">Moveset</h4>
+            <div style="max-height: 240px; overflow-y: auto;">
+                <table style="width: 100%; text-align: left; font-size: 13px; border-collapse: collapse;">
+                    <thead>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.3); color: #ccc;">
+                            <th style="padding: 4px 6px;">Lvl</th>
+                            <th style="padding: 4px 6px;">Move</th>
+                            <th style="padding: 4px 6px;">Type</th>
+                            <th style="padding: 4px 6px;">Pwr</th>
+                            <th style="padding: 4px 6px;">Cat</th>
+                        </tr>
+                    </thead>
+                    <tbody>
     `;
     if (pData.learnset) {
-        pData.learnset.forEach(m => {
+        pData.learnset.forEach((m, idx) => {
             let mData = state.config.moves[m.move];
-            movesHtml += `<tr style="border-bottom: 1px solid #444;">
-                <td>${m.level}</td>
-                <td>${m.move}</td>
-                <td>${mData ? formatType(mData.type) : '?'}</td>
-                <td>${mData ? mData.power : '?'}</td>
-                <td>${mData ? mData.category : '?'}</td>
+            const rowBg = idx % 2 === 0 ? 'rgba(255,255,255,0.03)' : 'transparent';
+            movesHtml += `<tr style="border-bottom: 1px solid rgba(255,255,255,0.08); background: ${rowBg};">
+                <td style="padding: 5px 6px;">${m.level}</td>
+                <td style="padding: 5px 6px; font-weight: bold;">${m.move}</td>
+                <td style="padding: 5px 6px;">${mData ? formatType(mData.type) : '?'}</td>
+                <td style="padding: 5px 6px;">${mData ? mData.power : '?'}</td>
+                <td style="padding: 5px 6px;">${mData ? mData.category : '?'}</td>
             </tr>`;
         });
     }
-    movesHtml += `</table>`;
+    movesHtml += `</tbody></table></div></div>`;
+
+    const statBox = (label, val) => `
+        <div style="background: rgba(255,255,255,0.06); padding: 6px 8px; border-radius: 6px; text-align: center;">
+            <div style="font-size: 11px; color: #bbb;">${label}</div>
+            <div style="font-size: 15px; font-weight: bold;">${val}</div>
+        </div>
+    `;
 
     return `
-        <p><b>BST:</b> ${bst} (HP:${pData.hp} | Speed:${pData.spe} | Atk:${pData.atk} | SpAtk:${pData.spa} | Def:${pData.def} | SpDef:${pData.spd})</p>
-
-        <div style="text-align: left; margin: 15px 0; font-size: 14px; background: rgba(0,0,0,0.5); padding: 10px; border-radius: 5px;">
-            <h4 style="margin: 0 0 5px 0;">Defensive Effectiveness</h4>
-            ${Object.keys(def4x).length ? `<b>Very Weak To (4x):</b> ${formatTypes(def4x)}<br>` : ''}
-            ${Object.keys(def2x).length ? `<b>Weak To (2x):</b> ${formatTypes(def2x)}<br>` : ''}
-            ${Object.keys(def05x).length ? `<b>Resists (0.5x):</b> ${formatTypes(def05x)}<br>` : ''}
-            ${Object.keys(def025x).length ? `<b>Strongly Resists (0.25x):</b> ${formatTypes(def025x)}<br>` : ''}
-            ${Object.keys(def0x).length ? `<b>Immune To (0x):</b> ${formatTypes(def0x)}<br>` : ''}
-
-            <h4 style="margin: 10px 0 5px 0;">Offensive Effectiveness</h4>
-            ${Object.keys(off2x).length ? `<b>Super Effective (2x):</b> ${formatTypes(off2x)}<br>` : ''}
-            ${Object.keys(off05x).length ? `<b>Not Very Effective (0.5x):</b> ${formatTypes(off05x)}<br>` : ''}
-            ${Object.keys(off0x).length ? `<b>No Effect (0x):</b> ${formatTypes(off0x)}<br>` : ''}
+        <div style="background: rgba(0,0,0,0.45); padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08); margin: 12px 0; text-align: left;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 4px;">
+                <h4 style="margin: 0;">Base Stats</h4>
+                <span style="font-size: 13px; font-weight: bold; background: rgba(255,255,255,0.12); padding: 2px 8px; border-radius: 10px;">BST: ${bst}</span>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(70px, 1fr)); gap: 6px;">
+                ${statBox('HP', pData.hp)}
+                ${statBox('Speed', pData.spe)}
+                ${statBox('Atk', pData.atk)}
+                ${statBox('SpAtk', pData.spa)}
+                ${statBox('Def', pData.def)}
+                ${statBox('SpDef', pData.spd)}
+            </div>
         </div>
 
-        <h4 style="text-align: left;">Moveset</h4>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; margin: 12px 0; text-align: left; font-size: 13px;">
+            <div style="background: rgba(0,0,0,0.45); padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08);">
+                <h4 style="margin: 0 0 8px 0; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 4px;">Defensive Effectiveness</h4>
+                <div style="display: flex; flex-direction: column; gap: 4px;">
+                    ${Object.keys(def4x).length ? `<div><b>Very Weak To (4x):</b> ${formatTypes(def4x)}</div>` : ''}
+                    ${Object.keys(def2x).length ? `<div><b>Weak To (2x):</b> ${formatTypes(def2x)}</div>` : ''}
+                    ${Object.keys(def05x).length ? `<div><b>Resists (0.5x):</b> ${formatTypes(def05x)}</div>` : ''}
+                    ${Object.keys(def025x).length ? `<div><b>Strongly Resists (0.25x):</b> ${formatTypes(def025x)}</div>` : ''}
+                    ${Object.keys(def0x).length ? `<div><b>Immune To (0x):</b> ${formatTypes(def0x)}</div>` : ''}
+                </div>
+            </div>
+
+            <div style="background: rgba(0,0,0,0.45); padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08);">
+                <h4 style="margin: 0 0 8px 0; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 4px;">Offensive Effectiveness</h4>
+                <div style="display: flex; flex-direction: column; gap: 4px;">
+                    ${Object.keys(off2x).length ? `<div><b>Super Effective (2x):</b> ${formatTypes(off2x)}</div>` : ''}
+                    ${Object.keys(off05x).length ? `<div><b>Not Very Effective (0.5x):</b> ${formatTypes(off05x)}</div>` : ''}
+                    ${Object.keys(off0x).length ? `<div><b>No Effect (0x):</b> ${formatTypes(off0x)}</div>` : ''}
+                </div>
+            </div>
+        </div>
+
         ${movesHtml}
     `;
 }

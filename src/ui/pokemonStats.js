@@ -107,7 +107,9 @@ function isPokemonInRegion(pd, state) {
 }
 
 function getActionsHtml(p, pData, location, idx) {
-    const btnBaseStyle = 'border: 1px solid transparent; border-radius: 15px; padding: 6px 15px; font-weight: bold; font-size: 13px; line-height: 1.2; transition: all 0.2s; display: inline-flex; align-items: center; justify-content: center; flex-direction: column; text-align: center; width: 240px; height: 52px; box-sizing: border-box;';
+    const btnBaseStyle = 'border: 1px solid rgba(255,255,255,0.2); border-radius: 10px; padding: 8px 18px; font-weight: bold; font-size: 13px; line-height: 1.25; transition: all 0.2s; display: inline-flex; align-items: center; justify-content: center; flex-direction: column; text-align: center; min-width: 200px; min-height: 46px; box-sizing: border-box; box-shadow: 0 2px 6px rgba(0,0,0,0.35);';
+    const activeBg = 'linear-gradient(135deg, #3498db, #2980b9)';
+    const disabledBg = 'linear-gradient(135deg, #6c7a89, #596573)';
     let evolveHtml = "";
     if (!pData) return;
     const validEvolutions = (pData.evolutions || []).filter(evo => isPokemonInRegion(getPokemonConfig(evo.to, state), state));
@@ -115,7 +117,7 @@ function getActionsHtml(p, pData, location, idx) {
         const canAnyEvolve = validEvolutions.some(evo => getEvolveRequirements(p, evo, state).canEvolve);
         evolveHtml = `
             <div>
-                <button ${canAnyEvolve ? '' : 'disabled'} onclick="window.showMultipleEvolveModal('${location}', ${idx})" style="${btnBaseStyle} background: ${canAnyEvolve ? '#3498db' : '#7f8c8d'}; color: white; cursor: ${canAnyEvolve ? 'pointer' : 'not-allowed'}; ${canAnyEvolve ? '' : 'opacity: 0.6;'}">Multiple<br>Evolutions</button>
+                <button ${canAnyEvolve ? '' : 'disabled'} onclick="window.showMultipleEvolveModal('${location}', ${idx})" style="${btnBaseStyle} background: ${canAnyEvolve ? activeBg : disabledBg}; color: white; cursor: ${canAnyEvolve ? 'pointer' : 'not-allowed'}; ${canAnyEvolve ? '' : 'opacity: 0.65;'}">Multiple Evolutions</button>
             </div>
         `;
     } else if (validEvolutions.length === 1) {
@@ -135,15 +137,15 @@ function getActionsHtml(p, pData, location, idx) {
 
         evolveHtml = `
             <div>
-                <button ${req.canEvolve ? '' : 'disabled'} onclick="window.showEvolveConfirmModal('${location}', ${idx}, ${evo.to})" style="${btnBaseStyle} background: ${req.canEvolve ? '#3498db' : '#7f8c8d'}; color: white; cursor: ${req.canEvolve ? 'pointer' : 'not-allowed'}; ${req.canEvolve ? '' : 'opacity: 0.6;'}">${btnText}</button>
+                <button ${req.canEvolve ? '' : 'disabled'} onclick="window.showEvolveConfirmModal('${location}', ${idx}, ${evo.to})" style="${btnBaseStyle} background: ${req.canEvolve ? activeBg : disabledBg}; color: white; cursor: ${req.canEvolve ? 'pointer' : 'not-allowed'}; ${req.canEvolve ? '' : 'opacity: 0.65;'}">${btnText}</button>
             </div>
         `;
     }
 
-    return `<div style="margin-top: 15px; border-top: 2px solid #fff; padding: 15px 0; display: flex; justify-content: center; align-items: center; gap: 15px;">
+    return `<div style="margin-top: 14px; border-top: 1px solid rgba(255,255,255,0.15); padding: 14px 0 4px 0; display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 12px;">
         ${evolveHtml}
         <div>
-            <button onclick="window.showVitaminsModal('${location}', ${idx})" style="${btnBaseStyle} background: #3498db; color: white; cursor: pointer;">Consume<br>Vitamins</button>
+            <button onclick="window.showVitaminsModal('${location}', ${idx})" style="${btnBaseStyle} background: ${activeBg}; color: white; cursor: pointer;">Consume Vitamins</button>
         </div>
     </div>`;
 }
@@ -155,16 +157,22 @@ function getVitHtml(count, imgName) {
 
 function getActualStatsHtml(p) {
     const v = p.vitamins || {};
+    const statItem = (label, val, vitHtml) => `
+        <div style="background: rgba(255,255,255,0.06); padding: 7px 8px; border-radius: 6px; text-align: center;">
+            <div style="font-size: 11px; color: #bbb; margin-bottom: 2px;">${label}</div>
+            <div style="font-size: 15px; font-weight: bold;">${val}${vitHtml}</div>
+        </div>
+    `;
     return `
-        <div style="background: rgba(0,0,0,0.5); padding: 15px; border-radius: 8px; text-align: left; min-width: 150px; flex: 1; display: flex; flex-direction: column;">
-            <h3 style="margin: 0 0 15px 0; text-align: center; border-bottom: 1px solid #555; padding-bottom: 5px;">Actual Stats</h3>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px 10px; font-size: 14px; text-align: center; flex: 1; align-content: center;">
-                <div>HP<br><b>${p.maxHp}</b>${getVitHtml(v.hp, 'HP Up')}</div>
-                <div>Speed<br><b>${p.currentStats ? p.currentStats.spe : '?'}</b>${getVitHtml(v.spe, 'Carbo Speed')}</div>
-                <div>Atk<br><b>${p.currentStats ? p.currentStats.atk : '?'}</b>${getVitHtml(v.atk, 'Protein Atk')}</div>
-                <div>SpAtk<br><b>${p.currentStats ? p.currentStats.spa : '?'}</b>${getVitHtml(v.spa, 'Calcium SpAtk')}</div>
-                <div>Def<br><b>${p.currentStats ? p.currentStats.def : '?'}</b>${getVitHtml(v.def, 'Iron Def')}</div>
-                <div>SpDef<br><b>${p.currentStats ? p.currentStats.spd : '?'}</b>${getVitHtml(v.spd, 'Zinc SpDef')}</div>
+        <div style="background: rgba(0,0,0,0.45); padding: 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08); text-align: left; min-width: 150px; flex: 1; display: flex; flex-direction: column;">
+            <h3 style="margin: 0 0 12px 0; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 6px;">Actual Stats</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; flex: 1; align-content: center;">
+                ${statItem('HP', p.maxHp, getVitHtml(v.hp, 'HP Up'))}
+                ${statItem('Speed', p.currentStats ? p.currentStats.spe : '?', getVitHtml(v.spe, 'Carbo Speed'))}
+                ${statItem('Atk', p.currentStats ? p.currentStats.atk : '?', getVitHtml(v.atk, 'Protein Atk'))}
+                ${statItem('SpAtk', p.currentStats ? p.currentStats.spa : '?', getVitHtml(v.spa, 'Calcium SpAtk'))}
+                ${statItem('Def', p.currentStats ? p.currentStats.def : '?', getVitHtml(v.def, 'Iron Def'))}
+                ${statItem('SpDef', p.currentStats ? p.currentStats.spd : '?', getVitHtml(v.spd, 'Zinc SpDef'))}
             </div>
         </div>
     `;
@@ -172,7 +180,7 @@ function getActualStatsHtml(p) {
 
 function getBasicInfoHtml(p, sumIV) {
     return `
-        <div style="background: rgba(0,0,0,0.5); padding: 15px; border-radius: 8px; text-align: center; flex: 1; font-size: 14px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+        <div style="background: rgba(0,0,0,0.45); padding: 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08); text-align: center; flex: 1; font-size: 14px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
             <img src="${window.getSpriteUrl(p.id, p.qualityName === 'Shiny')}" style="width: 100px; height: 100px;"><br>
             <p style="margin: 5px 0;"><b>Type:</b> ${p.types.map(t => formatType(t)).join(' ')}</p>
             <b>Quality:</b> ${p.qualityName} (Q=${p.quality.toFixed(2)})<br>
@@ -182,22 +190,25 @@ function getBasicInfoHtml(p, sumIV) {
 }
 
 function getIvDistributionHtml(p) {
-    const ivBar = (val) => `
-        <div style="background: #333; width: 100%; height: 16px; border-radius: 8px; overflow: hidden; position: relative;">
-            <div style="background: #3498db; width: ${val}%; height: 100%;"></div>
-            <div style="position: absolute; top: 0; left: 0; width: 100%; text-align: center; font-size: 12px; line-height: 16px; font-weight: bold; color: white; text-shadow: 1px 1px 1px black;">${val}</div>
+    const ivBar = (label, val) => `
+        <div style="background: rgba(255,255,255,0.06); padding: 6px 8px; border-radius: 6px; text-align: center;">
+            <div style="font-size: 11px; color: #bbb; margin-bottom: 4px;">${label}</div>
+            <div style="background: rgba(0,0,0,0.45); width: 100%; height: 16px; border-radius: 8px; overflow: hidden; position: relative;">
+                <div style="background: #3498db; width: ${val}%; height: 100%;"></div>
+                <div style="position: absolute; top: 0; left: 0; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: white; text-shadow: 1px 1px 1px black;">${val}</div>
+            </div>
         </div>
     `;
     return `
-        <div style="background: rgba(0,0,0,0.5); padding: 15px; border-radius: 8px; text-align: left; min-width: 200px; flex: 1; display: flex; flex-direction: column;">
-            <h3 style="margin: 0 0 15px 0; text-align: center; border-bottom: 1px solid #555; padding-bottom: 5px;">IV Distribution</h3>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px 10px; font-size: 14px; text-align: center; flex: 1; align-content: center;">
-                <div>HP<br>${ivBar(p.ivs.hp)}</div>
-                <div>Speed<br>${ivBar(p.ivs.spe)}</div>
-                <div>Atk<br>${ivBar(p.ivs.atk)}</div>
-                <div>SpAtk<br>${ivBar(p.ivs.spa)}</div>
-                <div>Def<br>${ivBar(p.ivs.def)}</div>
-                <div>SpDef<br>${ivBar(p.ivs.spd)}</div>
+        <div style="background: rgba(0,0,0,0.45); padding: 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08); text-align: left; min-width: 200px; flex: 1; display: flex; flex-direction: column;">
+            <h3 style="margin: 0 0 12px 0; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 6px;">IV Distribution</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; flex: 1; align-content: center;">
+                ${ivBar('HP', p.ivs.hp)}
+                ${ivBar('Speed', p.ivs.spe)}
+                ${ivBar('Atk', p.ivs.atk)}
+                ${ivBar('SpAtk', p.ivs.spa)}
+                ${ivBar('Def', p.ivs.def)}
+                ${ivBar('SpDef', p.ivs.spd)}
             </div>
         </div>
     `;
@@ -217,7 +228,7 @@ function getIndividualHtml(p, sumIV, actionsHtml) {
 function getCollectiveHtml(pData, state) {
     const fullEvoTreeHtml = buildEvolutionLineHtml(pData, state);
     return `
-        <div style="margin-top: 0; border-top: 2px solid #fff; padding-top: 15px;">
+        <div style="margin-top: 16px; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 14px;">
             <h3 style="margin-top: 0;">Species Data</h3>
             ${getSpeciesDataHtml(pData, state)}
             ${fullEvoTreeHtml}
@@ -240,7 +251,7 @@ export function showPokemonStats(idx, location) {
 
     let html = `
         <div style="position: relative; width: 100%; height: 100%;">
-            <div class="content-panel" style="max-height: 80vh; overflow-y: auto; overflow-x: hidden; padding: 15px; box-sizing: border-box;">
+            <div class="content-panel" style="padding: 15px; box-sizing: border-box;">
                 ${individualHtml}
                 ${collectiveHtml}
             </div>
