@@ -193,13 +193,14 @@ export function showCalendar(tab = 'activities') {
                 align-items: center;
                 justify-content: space-between;
                 margin-bottom: 12px;
+                border-bottom: 1px solid #f1c40f;
+                padding-bottom: 5px;
             }
             #window-calendar .cal-section-title {
                 margin: 0;
-                font-size: 16px;
-                font-weight: 700;
-                color: #ffffff;
-                letter-spacing: 0.3px;
+                font-size: 18px;
+                font-weight: bold;
+                color: #f1c40f;
             }
             #window-calendar .cal-week-pill {
                 background: rgba(52, 152, 219, 0.2);
