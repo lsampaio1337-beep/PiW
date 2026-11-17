@@ -166,6 +166,9 @@ class DayCare {
 
         // Let UI know it's finished
         this.slot1.isFinished = true;
+        if (this.state.stats) {
+            this.state.stats.breedsCompleted = (this.state.stats.breedsCompleted || 0) + 1;
+        }
         if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') window.trackDailyChallenge('hatch_eggs');
         this.slot1.isBreeding = false;
 
