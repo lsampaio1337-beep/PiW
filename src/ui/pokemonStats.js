@@ -434,7 +434,7 @@ window.showEvolveConfirmModal = function(location, idx, toId) {
             <p style="font-size: 16px; margin-top: 0; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px;">
                 Consume ${req.missingStonesHtml}?
             </p>
-            <div style="display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.5); padding: 10px; border-radius: 5px; margin-bottom: 16px;">
+            <div style="display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.5); border: 1px solid #3498db; padding: 10px 16px; border-radius: 5px; width: fit-content; margin: 0 auto 16px auto;">
                 <div style="display: flex; flex-direction: column; align-items: center; margin: 5px;">
                     <img src="${fromImgPath}" style="width: 50px; height: 50px;">
                     <span style="font-size: 10px;">${escapeHTML(p.name)}</span>
