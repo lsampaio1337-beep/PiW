@@ -462,9 +462,42 @@ export function getChallengeData(unlock) {
 
 function updateMainControlTitle() {
     const mainControlTitle = document.getElementById('main-control-title');
-    if (mainControlTitle) {
-        const regionName = state.currentRegionName || "Kanto";
+    const regionBadge = document.getElementById('main-control-region-badge');
+    const regionName = state.currentRegionName || "Kanto";
+
+    if (regionBadge) {
+        if (mainControlTitle) mainControlTitle.textContent = 'Main Control';
+        regionBadge.textContent = regionName;
+    } else if (mainControlTitle) {
         mainControlTitle.innerText = `Main Control (${regionName})`;
+    }
+}
+
+export function updateMainViewRouteBadge() {
+    const routeBadge = document.getElementById('main-view-route-badge');
+    if (!routeBadge) return;
+    const rawRoute = state.currentRoute || '';
+    const cleanRoute = rawRoute.replace(/\s*\([^)]+\)$/, '').trim();
+    if (cleanRoute) {
+        routeBadge.textContent = cleanRoute;
+        routeBadge.style.display = 'inline-flex';
+    } else {
+        routeBadge.style.display = 'none';
+    }
+}
+
+function syncNavWindowStates() {
+    const pairs = [
+        ['party-window', 'btn-toggle-party'],
+        ['main-view-window', 'btn-toggle-main']
+    ];
+    for (const [winId, btnId] of pairs) {
+        const win = document.getElementById(winId);
+        const btn = document.getElementById(btnId);
+        if (win && btn && btn.classList) {
+            const isVisible = win.style.display !== 'none';
+            btn.classList.toggle('is-window-active', isVisible);
+        }
     }
 }
 
@@ -633,6 +666,8 @@ export function updateMainControl() {
     let isFinalChallengeCompleted = checkFinalChallengeCompleted();
 
     updateMainControlTitle();
+    updateMainViewRouteBadge();
+    syncNavWindowStates();
 
     // Legacy saves might not have hasPickedStarter but will have party/storage
     const isStarterPending = !state.stats.hasPickedStarter && noPokemon;

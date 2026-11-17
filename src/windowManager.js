@@ -458,12 +458,26 @@ export class WindowManager {
     }
 
 
+    _syncNavToggleState(windowId, isVisible) {
+        const navMap = {
+            'party-window': 'btn-toggle-party',
+            'main-view-window': 'btn-toggle-main'
+        };
+        const btnId = navMap[windowId];
+        if (!btnId) return;
+        const btn = document.getElementById(btnId);
+        if (btn && btn.classList) {
+            btn.classList.toggle('is-window-active', Boolean(isVisible));
+        }
+    }
+
     toggleWindow(windowId, forceShow = false) {
         const winElement = document.getElementById(windowId);
         if (winElement) {
             if (forceShow || winElement.style.display === 'none') {
                 winElement.style.display = 'flex';
                 this.focusWindow(winElement);
+                this._syncNavToggleState(windowId, true);
 
                 if (!winElement.dataset.settingsLoaded) {
                     winElement.dataset.settingsLoaded = 'true';
@@ -486,6 +500,7 @@ export class WindowManager {
                 }
             } else {
                 winElement.style.display = 'none';
+                this._syncNavToggleState(windowId, false);
             }
         }
     }
@@ -1236,16 +1251,12 @@ export class WindowManager {
             this._parseAndSanitizeToElement(title, header);
 
             const closeBtn = document.createElement('span');
+            closeBtn.className = 'window-ctrl-btn is-close';
             closeBtn.textContent = 'X';
             closeBtn.style.position = 'absolute';
-            closeBtn.style.top = '5px';
-            closeBtn.style.right = '5px';
-            closeBtn.style.fontSize = '12px';
-            closeBtn.style.fontWeight = 'bold';
-            closeBtn.style.lineHeight = '1';
-            closeBtn.style.padding = '0';
-            closeBtn.style.cursor = 'pointer';
-            closeBtn.style.color = 'white';
+            closeBtn.style.top = '50%';
+            closeBtn.style.transform = 'translateY(-50%)';
+            closeBtn.style.right = '6px';
             closeBtn.style.zIndex = '10';
             closeBtn.onclick = () => {
                 if (window.windowManager) {
@@ -1285,6 +1296,7 @@ export class WindowManager {
         const winElement = document.getElementById(windowId);
         if (winElement) {
             winElement.style.display = 'none';
+            this._syncNavToggleState(windowId, false);
         }
     }
 

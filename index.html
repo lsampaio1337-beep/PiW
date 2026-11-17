@@ -9,25 +9,28 @@
 <body>
   <!-- Top Bar (Icons) -->
 
-  <div id="main-control-window" class="floating-window" style="display: none; width: auto; height: auto; overflow: visible; background-color: #34495e; border: 2px solid #1abc9c; border-radius: 10px; box-sizing: border-box;  min-width: 0;">
-    <div id="main-control-header" class="window-header" style="position: relative;">
-      <span id="main-control-title">Main Control</span>
-      <div style="position: absolute; right: 5px; top: 5px; display: flex; gap: 5px; z-index: 10;">
-        <span id="btn-minimize-all-game" title="Minimize Main Control" style="cursor: pointer; color: white; font-weight: bold; padding: 0 5px; font-size: 12px; line-height: 1;">-</span>
-        <span class="btn-exit-game" style="cursor: pointer; color: white; font-weight: bold; padding: 0 5px; font-size: 12px; line-height: 1;">X</span>
+  <div id="main-control-window" class="floating-window" style="display: none; width: auto; height: auto; overflow: visible; box-sizing: border-box; min-width: 0;">
+    <div id="main-control-header" class="window-header mc-header" style="position: relative;">
+      <div class="mc-header-brand">
+        <span id="main-control-title">Main Control</span>
+        <span id="main-control-region-badge" class="header-pill-badge">Kanto</span>
+      </div>
+      <div class="window-header-actions">
+        <span id="btn-minimize-all-game" class="window-ctrl-btn is-min" title="Minimize Main Control">-</span>
+        <span class="btn-exit-game window-ctrl-btn is-close" title="Exit Game">X</span>
       </div>
     </div>
     <div class="window-content-container" style="padding: 0; margin: 0; display: flex; width: 100%; height: auto;">
         <div class="window-content-scaler" style="display: flex; width: 100%; height: 100%; position: relative; transform-origin: top left;">
-            <div id="main-control" style="display: flex; align-items: center; padding: 20px; gap: 20px; width: 100%; box-sizing: border-box;">
+            <div id="main-control">
                 <img src="Assets/Extra/Icons/IconMainView.png" id="btn-toggle-main" class="nav-icon" title="Main View">
                 <img src="Assets/Extra/Icons/IconTeam.png" id="btn-toggle-party" class="nav-icon" title="Team">
 
                 <span class="nav-divider"></span>
 
-                <div style="position: relative; display: inline-block; height: 100%;">
+                <div class="nav-icon-slot">
                     <img src="Assets/Extra/Icons/IconMap.png" id="btn-map" class="nav-icon" title="Map" style="display: block;">
-                    <img src="Assets/Extra/Icons/ExclamationMark.png" id="map-notification" style="display: none; position: absolute; top: -5px; right: -5px; width: 15px; height: auto; pointer-events: none; z-index: 10;">
+                    <img src="Assets/Extra/Icons/ExclamationMark.png" id="map-notification" class="nav-notif-badge" style="display: none;">
                 </div>
 
                 <img src="Assets/Extra/Icons/IconBackpack.png" id="btn-backpack" class="nav-icon" title="Backpack">
@@ -36,31 +39,31 @@
 
                 <span class="nav-divider"></span>
 
-                <div style="position: relative; display: inline-block; height: 100%;">
+                <div class="nav-icon-slot">
                     <img src="Assets/Extra/Icons/ProgressChallange.png" id="btn-challenges" class="nav-icon" title="Progress Challenges" style="display: block;">
-                    <img src="Assets/Extra/Icons/ExclamationMark.png" id="challenges-notification" style="display: none; position: absolute; top: -5px; right: -5px; width: 15px; height: auto; pointer-events: none; z-index: 10;">
+                    <img src="Assets/Extra/Icons/ExclamationMark.png" id="challenges-notification" class="nav-notif-badge" style="display: none;">
                 </div>
 
-                <div id="gift-container" style="position: relative; display: none; height: 100%;">
+                <div id="gift-container" class="nav-icon-slot" style="display: none;">
                     <img src="Assets/Extra/Icons/IconGift.png" id="btn-gift" class="nav-icon" title="Gift" style="display: block;">
-                    <img src="Assets/Extra/Icons/ExclamationMark.png" id="gift-notification" style="display: none; position: absolute; top: -5px; right: -5px; width: 15px; height: auto; pointer-events: none; z-index: 10;">
+                    <img src="Assets/Extra/Icons/ExclamationMark.png" id="gift-notification" class="nav-notif-badge" style="display: none;">
                 </div>
 
-                <div style="position: relative; display: inline-block; height: 100%;">
+                <div class="nav-icon-slot">
                     <img src="Assets/Extra/Icons/IconCalendar.png" id="btn-calendar" class="nav-icon" title="Daily Calendar" style="display: block;">
-                    <img src="Assets/Extra/Icons/ExclamationMark.png" id="calendar-notification" style="display: none; position: absolute; top: -5px; right: -5px; width: 15px; height: auto; pointer-events: none; z-index: 10;">
+                    <img src="Assets/Extra/Icons/ExclamationMark.png" id="calendar-notification" class="nav-notif-badge" style="display: none;">
                 </div>
 
-                <div id="bonus-candy-container" style="position: relative; display: none; height: 100%;">
+                <div id="bonus-candy-container" class="nav-icon-slot" style="display: none;">
                     <img src="Assets/Extra/Icons/BonusCandy.png" id="btn-bonus-candy" class="nav-icon" title="Bonus Candy">
-                    <img src="Assets/Extra/Icons/ExclamationMark.png" id="bonus-candy-exclamation" style="position: absolute; top: -5px; right: -5px; width: 15px; height: auto; display: none; pointer-events: none; z-index: 10;">
+                    <img src="Assets/Extra/Icons/ExclamationMark.png" id="bonus-candy-exclamation" class="nav-notif-badge" style="display: none;">
                 </div>
 
                 <span class="nav-divider"></span>
 
-                <div id="sleep-container" style="position: relative; display: none; height: 100%;">
+                <div id="sleep-container" class="nav-icon-slot" style="display: none;">
                     <img src="Assets/Extra/Icons/IconSleep.png" id="btn-sleep" class="nav-icon" title="ZzZ Mode" style="display: block;">
-                    <img src="Assets/Extra/Icons/ExclamationMark.png" id="sleep-notification" style="display: none; position: absolute; top: -5px; right: -5px; width: 15px; height: auto; pointer-events: none; z-index: 10;">
+                    <img src="Assets/Extra/Icons/ExclamationMark.png" id="sleep-notification" class="nav-notif-badge" style="display: none;">
                 </div>
 
                 <img src="Assets/Extra/Icons/IconHelp.png" id="btn-help" class="nav-icon" title="Help">
@@ -112,8 +115,16 @@
 
     <!-- Left Column: Party & Day Care -->
 
-  <div id="party-window" class="floating-window" style="display: none; width: 250px; height: auto;">
-    <div id="party-header" class="window-header" style="position: relative;">Team<span id="btn-close-party-window" style="position: absolute; top: 5px; right: 5px; font-size: 12px; font-weight: bold; line-height: 1; padding: 0; cursor: pointer; color: white;">X</span></div>
+  <div id="party-window" class="floating-window" style="display: none; width: 280px; height: auto;">
+    <div id="party-header" class="window-header team-header" style="position: relative;">
+      <div class="team-header-title">
+        <span>Team</span>
+        <span id="party-count-pill" class="header-pill-badge">0/6</span>
+      </div>
+      <div class="window-header-actions">
+        <span id="btn-close-party-window" class="window-ctrl-btn is-close" title="Hide Team">X</span>
+      </div>
+    </div>
     <div class="window-content-container">
         <div class="window-content-scaler">
     <aside id="left-col">
@@ -122,6 +133,7 @@
         <!-- JS will populate 6 slots here -->
       </div>
       <div id="day-care">
+        <div class="team-section-divider"><span>Day Care</span></div>
         <div id="dc-slot1"></div>
         <div id="dc-slot2"></div>
       </div>
@@ -134,18 +146,28 @@
     <!-- Center Column: Dynamic View State -->
 
   <div id="main-view-window" class="floating-window" style="display: none; width: 800px; height: 600px;">
-    <div id="main-view-header" class="window-header" style="position: relative;"><span id="main-view-timer-route" style="position: absolute; top: 5px; left: 10px; color: white; font-weight: bold; font-size: 16px;"></span>Main View<span id="main-view-timer-total" style="position: absolute; top: 5px; right: 40px; color: white; font-weight: bold; font-size: 16px;"></span><span id="btn-close-main-view-window" style="position: absolute; top: 5px; right: 5px; font-size: 12px; font-weight: bold; line-height: 1; padding: 0; cursor: pointer; color: white;">X</span></div>
+    <div id="main-view-header" class="window-header main-view-header-bar" style="position: relative;">
+      <span id="main-view-timer-route" class="mv-timer-pill" title="Time on current route"></span>
+      <div class="mv-header-center">
+        <span id="main-view-title">Main View</span>
+        <span id="main-view-route-badge" class="header-pill-badge" style="display: none;"></span>
+      </div>
+      <div class="mv-header-right">
+        <span id="main-view-timer-total" class="mv-timer-pill" title="Total playtime"></span>
+        <span id="btn-close-main-view-window" class="window-ctrl-btn is-close" title="Hide Main View">X</span>
+      </div>
+    </div>
     <div class="window-content-container">
         <div class="window-content-scaler">
     <main id="center-col" style="position: relative;">
 
       <!-- Inner Modal for Main View (Professor Tasks, Market, etc.) -->
-      <div id="main-view-inner-modal-overlay" onclick="if(event.target === this) { this.style.display = 'none'; const im = document.getElementById('main-view-inner-modal'); if(im) im.classList.remove('prof-lab-inner-modal'); const md = document.getElementById('inner-modal-money-display'); if(md) md.style.display = 'none'; }" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.75); z-index: 100; align-items: flex-start; justify-content: center; padding: 20px 0; box-sizing: border-box;">
+      <div id="main-view-inner-modal-overlay" onclick="if(event.target === this) { this.style.display = 'none'; const im = document.getElementById('main-view-inner-modal'); if(im) im.classList.remove('prof-lab-inner-modal'); const md = document.getElementById('inner-modal-money-display'); if(md) md.style.display = 'none'; }" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(2, 6, 23, 0.72); backdrop-filter: blur(3px); z-index: 100; align-items: flex-start; justify-content: center; padding: 20px 0; box-sizing: border-box;">
           <div id="main-view-inner-modal" class="floating-window">
               <div class="window-header" style="position: relative; cursor: default;">
                   <span id="main-view-inner-modal-title">Modal</span>
-                  <span id="inner-modal-money-display" style="position: absolute; top: 8px; right: 40px; color: white; display: none; font-size: 18px; font-weight: bold; white-space: nowrap;"></span>
-                  <span id="btn-close-inner-modal" style="position: absolute; top: 5px; right: 5px; font-size: 12px; font-weight: bold; line-height: 1; padding: 0; cursor: pointer; color: white;">X</span>
+                  <span id="inner-modal-money-display" style="position: absolute; top: 50%; transform: translateY(-50%); right: 34px; color: #fde68a; display: none; font-size: 14px; font-weight: bold; white-space: nowrap;"></span>
+                  <span id="btn-close-inner-modal" class="window-ctrl-btn is-close" style="position: absolute; top: 50%; transform: translateY(-50%); right: 8px;">X</span>
               </div>
               <div class="window-content-container" style="flex: 1; display: flex;">
                   <div id="main-view-inner-modal-content" class="content-panel" style="width: 100%; height: auto; overflow-y: auto;">
@@ -160,13 +182,13 @@
         <img id="prof-generic-sprite" src="./Assets/Lab/1_Kanto_Professor_Oak.png" style="position: absolute; z-index: 0; pointer-events: none;">
 
         <!-- Professor Tutorial First-Time Overlay -->
-        <div id="prof-tutorial-overlay" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1000; background: rgba(0, 0, 0, 0.7); flex-direction: column; align-items: center; justify-content: center;">
-            <div style="background: #34495e; padding: 20px; border-radius: 10px; border: 2px solid #00ffff; text-align: center; color: white; max-width: 80%;">
-                <div id="prof-tutorial-text" style="margin-top: 0; font-size: 16px; margin-bottom: 20px; white-space: pre-line;"></div>
-                <div>
-                    <button id="btn-prof-tutorial-skip" style="padding: 10px 20px; background: #95a5a6; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; margin-right: 10px; font-size: 16px; width: 150px; box-sizing: border-box;">Skip</button>
-                    <button id="btn-prof-tutorial-proceed" style="padding: 10px 20px; background: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 16px; width: 150px; box-sizing: border-box;">Proceed</button>
-                    <button id="btn-prof-tutorial-conclude" style="display: none; padding: 10px 20px; background: #2ecc71; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 16px;">Conclude Tutorial</button>
+        <div id="prof-tutorial-overlay" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1000; background: rgba(2, 6, 23, 0.74); backdrop-filter: blur(4px); flex-direction: column; align-items: center; justify-content: center;">
+            <div class="mv-overlay-card">
+                <div id="prof-tutorial-text" style="margin-top: 0; font-size: 15px; line-height: 1.5; margin-bottom: 20px; white-space: pre-line;"></div>
+                <div style="display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+                    <button id="btn-prof-tutorial-skip" class="action-btn mv-btn-muted" style="width: 150px;">Skip</button>
+                    <button id="btn-prof-tutorial-proceed" class="action-btn action-btn-primary" style="width: 150px;">Proceed</button>
+                    <button id="btn-prof-tutorial-conclude" class="action-btn mv-btn-emerald" style="display: none;">Conclude Tutorial</button>
                 </div>
             </div>
         </div>
@@ -193,17 +215,19 @@
                   </div>
                   <img id="enemy-pokemon-sprite" class="battle-pokemon-sprite" src="" alt="">
                 </div>
-                <div id="enemy-data-modals" style="position: absolute; left: 100%; top: 50%; transform: translateY(-50%); display: none; flex-direction: column; gap: 4px; margin-left: 8px; z-index: 10;">
-                    <div style="background: rgba(0, 0, 0, 0.5); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 4px; padding: 2px 6px; font-size: 10px; font-weight: bold; color: white; text-shadow: 1px 1px 1px black, -1px -1px 1px black, 1px -1px 1px black, -1px 1px 1px black; white-space: nowrap;" id="enemy-battle-level">Lv. ?</div>
-                    <div style="background: rgba(0, 0, 0, 0.5); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 4px; padding: 2px 6px; font-size: 10px; font-weight: bold; color: white; text-shadow: 1px 1px 1px black, -1px -1px 1px black, 1px -1px 1px black, -1px 1px 1px black; white-space: nowrap;" id="enemy-battle-sumiv">SumIV: ?</div>
-                    <div style="background: rgba(0, 0, 0, 0.5); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 4px; padding: 2px 6px; font-size: 10px; font-weight: bold; color: white; text-shadow: 1px 1px 1px black, -1px -1px 1px black, 1px -1px 1px black, -1px 1px 1px black; white-space: nowrap;" id="enemy-battle-qtier">Q: ?</div>
+                <div class="battle-ground-shadow" aria-hidden="true"></div>
+                <div id="enemy-data-modals" class="battle-scout-stack" style="display: none;">
+                    <div class="battle-scout-pill is-level" id="enemy-battle-level">Lv. ?</div>
+                    <div class="battle-scout-pill is-iv" id="enemy-battle-sumiv">SumIV: ?</div>
+                    <div class="battle-scout-pill is-qtier" id="enemy-battle-qtier">Q: ?</div>
                 </div>
-                <div style="width: 14cqw; height: 1.4cqw; background: #222; border: 1px solid #000; border-radius: 8px; position: absolute; top: 100%; left: 50%; transform: translate(-50%, 6px); overflow: hidden; display: flex; align-items: center; justify-content: center; font-size: 0.93cqw; font-weight: bold; color: white; text-shadow: 1px 1px 1px black, -1px -1px 1px black, 1px -1px 1px black, -1px 1px 1px black; box-shadow: inset 0px 1px 3px rgba(0,0,0,0.5); z-index: 5;" id="enemy-battle-hp-container">
-                    <div id="enemy-battle-hp-bar" style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: #2ecc71; z-index: 0; transition: width 0.3s, background 0.3s; border-radius: 8px;"></div>
-                    <div style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; display: flex;">
-                        <div id="enemy-battle-hp-text" style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center; line-height: 1;">?/?</div>
-                        <div style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center; line-height: 1; font-size: 0.84cqw; color: white;">HP</div>
-                        <div id="enemy-battle-hp-pct" style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center; line-height: 1;">100%</div>
+                <div class="battle-hp-container" id="enemy-battle-hp-container">
+                    <div id="enemy-battle-hp-bar" class="battle-hp-bar"></div>
+                    <div class="battle-hp-gloss"></div>
+                    <div class="battle-hp-overlay">
+                        <div id="enemy-battle-hp-text" class="battle-hp-val">?/?</div>
+                        <div class="battle-hp-tag">HP</div>
+                        <div id="enemy-battle-hp-pct" class="battle-hp-val">100%</div>
                     </div>
                 </div>
               </div>
@@ -222,12 +246,14 @@
                   </div>
                   <img id="player-pokemon-sprite" class="battle-pokemon-sprite is-player" src="" alt="">
                 </div>
-                <div style="width: 14cqw; height: 1.4cqw; background: #222; border: 1px solid #000; border-radius: 8px; position: absolute; top: 100%; left: 50%; transform: translate(-50%, 6px); overflow: hidden; display: flex; align-items: center; justify-content: center; font-size: 0.93cqw; font-weight: bold; color: white; text-shadow: 1px 1px 1px black, -1px -1px 1px black, 1px -1px 1px black, -1px 1px 1px black; box-shadow: inset 0px 1px 3px rgba(0,0,0,0.5); z-index: 5;" id="player-battle-hp-container">
-                    <div id="player-battle-hp-bar" style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: #2ecc71; z-index: 0; transition: width 0.3s, background 0.3s; border-radius: 8px;"></div>
-                    <div style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; display: flex;">
-                        <div id="player-battle-hp-text" style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center; line-height: 1;">?/?</div>
-                        <div style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center; line-height: 1; font-size: 0.84cqw; color: white;">HP</div>
-                        <div id="player-battle-hp-pct" style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center; line-height: 1;">100%</div>
+                <div class="battle-ground-shadow" aria-hidden="true"></div>
+                <div class="battle-hp-container" id="player-battle-hp-container">
+                    <div id="player-battle-hp-bar" class="battle-hp-bar"></div>
+                    <div class="battle-hp-gloss"></div>
+                    <div class="battle-hp-overlay">
+                        <div id="player-battle-hp-text" class="battle-hp-val">?/?</div>
+                        <div class="battle-hp-tag">HP</div>
+                        <div id="player-battle-hp-pct" class="battle-hp-val">100%</div>
                     </div>
                 </div>
               </div>
@@ -235,31 +261,31 @@
           </div>
 
           <!-- Battle Loot Indicators -->
-          <div id="battle-loot-container" style="position: absolute; top: 10px; right: 10px; display: flex; flex-direction: column; align-items: flex-end; gap: 5px; z-index: 20; transition: opacity 0.5s ease-in-out;">
+          <div id="battle-loot-container" class="battle-loot-stack">
               <!-- Dynamically populated loot cards -->
           </div>
 
           <!-- Active Items Indicators -->
-          <div id="smartwatch" style="position: absolute; top: 50%; left: 10px; transform: translateY(-50%); display: flex; flex-direction: column; gap: 10px; z-index: 9999;">
+          <div id="smartwatch" class="smartwatch-dock">
               <!-- Storage Card -->
-              <div id="smartwatch-storage-card" style="width: 30px; height: 30px; background: rgba(0, 0, 0, 0.6); border: 2px solid #3498db; border-radius: 8px; position: relative; display: flex; align-items: center; justify-content: center;">
-                  <img id="smartwatch-storage-img" src="Assets/Items/Upgrades/Storage1.png" style="width: 80%; height: 80%; object-fit: contain;">
-                  <span id="smartwatch-storage-count" style="position: absolute; bottom: 0px; right: 2px; color: white; font-size: 8px; font-weight: bold; text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;">0/0</span>
+              <div id="smartwatch-storage-card" class="smartwatch-card" title="Box Capacity">
+                  <img id="smartwatch-storage-img" src="Assets/Items/Upgrades/Storage1.png" class="smartwatch-card-img">
+                  <span id="smartwatch-storage-count" class="smartwatch-card-count">0/0</span>
                   <img id="smartwatch-storage-full-overlay" src="Assets/Extra/No.png" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; z-index: 2; display: none;">
               </div>
               <!-- Pokeball Card -->
-              <div id="smartwatch-ball-card" onclick="window.showActiveItemSelection('ball')" style="width: 30px; height: 30px; background: rgba(0, 0, 0, 0.6); border: 2px solid #2ecc71; border-radius: 8px; position: relative; display: flex; align-items: center; justify-content: center; cursor: pointer;">
-                  <img id="smartwatch-ball-img" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" style="width: 80%; height: 80%; object-fit: contain;">
-                  <span id="smartwatch-ball-count" style="position: absolute; bottom: 0px; right: 2px; color: white; font-size: 8px; font-weight: bold; text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;"></span>
+              <div id="smartwatch-ball-card" class="smartwatch-card is-interactive" onclick="window.showActiveItemSelection('ball')" title="Active Pokeball">
+                  <img id="smartwatch-ball-img" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" class="smartwatch-card-img">
+                  <span id="smartwatch-ball-count" class="smartwatch-card-count"></span>
               </div>
               <!-- Potion Card -->
-              <div id="smartwatch-potion-card" onclick="window.showActiveItemSelection('potion')" style="width: 30px; height: 30px; background: rgba(0, 0, 0, 0.6); border: 2px solid #3498db; border-radius: 8px; position: relative; display: flex; align-items: center; justify-content: center; cursor: pointer;">
-                  <img id="smartwatch-potion-img" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" style="width: 80%; height: 80%; object-fit: contain;">
-                  <span id="smartwatch-potion-count" style="position: absolute; bottom: 0px; right: 2px; color: white; font-size: 8px; font-weight: bold; text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;"></span>
+              <div id="smartwatch-potion-card" class="smartwatch-card is-interactive" onclick="window.showActiveItemSelection('potion')" title="Auto-Heal Potion">
+                  <img id="smartwatch-potion-img" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" class="smartwatch-card-img">
+                  <span id="smartwatch-potion-count" class="smartwatch-card-count"></span>
               </div>
 
               <!-- Item Selection Popup (Hidden by default) -->
-              <div id="smartwatch-item-selection-popup" style="display: none; position: absolute; left: 40px; top: 50%; transform: translateY(-50%); background: rgba(0, 0, 0, 0.85); border: 1px solid #555; border-radius: 8px; padding: 10px; flex-direction: row; gap: 8px; z-index: 10000; flex-wrap: nowrap; width: max-content; align-items: flex-start; justify-content: flex-start;">
+              <div id="smartwatch-item-selection-popup" class="smartwatch-popup" style="display: none;">
               </div>
           </div>
         </div>
@@ -347,23 +373,27 @@
       <!-- View 7: Daycare Hub -->
       <div id="view-daycare" class="game-view" style="display:none; background-image: url('./Assets/BG/Daycare.png'); background-size: 100% 100%; background-position: center; height: 100%; position: relative;">
         <!-- Daycare First-Time Overlay -->
-        <div id="daycare-first-time-overlay" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1000; background: rgba(0, 0, 0, 0.7); flex-direction: column; align-items: center; justify-content: center;">
-            <div style="background: #34495e; padding: 20px; border-radius: 10px; border: 2px solid #00ffff; text-align: center; color: white; max-width: 80%;">
-                <div id="daycare-intro-text" style="margin-top: 0; font-size: 16px;"></div>
-                <button id="btn-dismiss-daycare" style="padding: 10px 20px; background: #2ecc71; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; margin-top: 10px; font-size: 16px;">Ok.</button>
+        <div id="daycare-first-time-overlay" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1000; background: rgba(2, 6, 23, 0.74); backdrop-filter: blur(4px); flex-direction: column; align-items: center; justify-content: center;">
+            <div class="mv-overlay-card">
+                <div id="daycare-intro-text" style="margin-top: 0; font-size: 15px; line-height: 1.5;"></div>
+                <button id="btn-dismiss-daycare" class="action-btn mv-btn-emerald" style="margin-top: 12px; min-width: 120px;">Ok.</button>
             </div>
         </div>
 
 
-        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: space-between; align-items: flex-start; padding: 5% 10%; box-sizing: border-box;">
+        <div class="daycare-hub-grid">
             <!-- Train Button (Left) -->
-            <div style="background: rgba(0,0,0,0.7); padding: 20px; border-radius: 10px; border: 2px solid #1abc9c; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.65), 0 0 14px rgba(26, 188, 156, 0.25); text-align: center; width: 35%;">
-                <button id="btn-daycare-train" style="padding: 15px 30px; font-size: 18px; cursor: pointer; border-radius: 8px; background: #3498db; color: white; border: none; font-weight: bold; width: 100%; white-space: nowrap;">Train Pokémon</button>
+            <div class="daycare-hub-card is-train">
+                <div class="daycare-hub-badge is-train">IV Training</div>
+                <div class="daycare-hub-desc">Boost random IVs through passive battles</div>
+                <button id="btn-daycare-train" class="daycare-hub-btn is-train">Train Pokémon</button>
             </div>
 
             <!-- Breed Button (Right) -->
-            <div style="background: rgba(0,0,0,0.7); padding: 20px; border-radius: 10px; border: 2px solid #1abc9c; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.65), 0 0 14px rgba(26, 188, 156, 0.25); text-align: center; width: 35%;">
-                <button id="btn-daycare-breed" style="padding: 15px 30px; font-size: 18px; cursor: pointer; border-radius: 8px; background: #3498db; color: white; border: none; font-weight: bold; width: 100%; white-space: nowrap;">Breed Pokémon</button>
+            <div class="daycare-hub-card is-breed">
+                <div class="daycare-hub-badge is-breed">Breeding</div>
+                <div class="daycare-hub-desc">Hatch stronger offspring &amp; raise Quality</div>
+                <button id="btn-daycare-breed" class="daycare-hub-btn is-breed">Breed Pokémon</button>
             </div>
         </div>
       </div>
