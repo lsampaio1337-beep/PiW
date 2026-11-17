@@ -6,36 +6,40 @@ const CANDY_CONFIG = {
     'Green Candy': {
         stateKey: 'greenCandies',
         imageFile: 'LootCandy.png',
-        verticalAlign: 'bottom: 10px;',
-        horizontalAlign: 'right: 10px;',
         hex: '#2ecc71',
+        borderColor: 'rgba(46, 204, 113, 0.38)',
+        glowColor: 'rgba(46, 204, 113, 0.28)',
+        btnGradient: 'linear-gradient(135deg, #22c55e, #15803d)',
         getCost: (owned) => 1 + owned,
         maxOwned: Infinity
     },
     'Purple Candy': {
         stateKey: 'purpleCandies',
         imageFile: 'XPCandy.png',
-        verticalAlign: 'bottom: 10px;',
-        horizontalAlign: 'left: 10px;',
-        hex: '#9b59b6',
+        hex: '#c084fc',
+        borderColor: 'rgba(192, 132, 252, 0.38)',
+        glowColor: 'rgba(168, 85, 247, 0.28)',
+        btnGradient: 'linear-gradient(135deg, #a855f7, #7e22ce)',
         getCost: (owned) => 2 + (owned * 2),
         maxOwned: Infinity
     },
     'Black Yellow Candy': {
         stateKey: 'blackYellowCandies',
         imageFile: 'CatchCandy.png',
-        verticalAlign: 'top: 10px;',
-        horizontalAlign: 'right: 10px;',
-        hex: '#f1c40f',
+        hex: '#facc15',
+        borderColor: 'rgba(250, 204, 21, 0.38)',
+        glowColor: 'rgba(234, 179, 8, 0.25)',
+        btnGradient: 'linear-gradient(135deg, #eab308, #b45309)',
         getCost: (owned) => 3 + (owned * 3),
         maxOwned: Infinity
     },
     'Rainbow Candy': {
         stateKey: 'rainbowCandies',
         imageFile: 'ShinyCandy.png',
-        verticalAlign: 'top: 10px;',
-        horizontalAlign: 'left: 10px;',
-        hex: 'linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet)',
+        hex: 'linear-gradient(to right, #ff595e, #ffca3a, #8ac926, #1982c4, #a855f7)',
+        borderColor: 'rgba(244, 114, 182, 0.42)',
+        glowColor: 'rgba(168, 85, 247, 0.32)',
+        btnGradient: 'linear-gradient(135deg, #ec4899, #8b5cf6, #3b82f6)',
         getCost: (owned) => 4 + (owned * 4),
         maxOwned: 7
     }
@@ -49,38 +53,55 @@ function getCandyCost(color, currentOwned) {
 }
 
 function generateCandyBankHTML(history, unspentWhite) {
+    if (history.length === 0 && unspentWhite === 0) {
+        return `<div class="bc-bank-empty">No candies yet — defeat wild Pokémon to earn your first White Candy!</div>`;
+    }
+
     let candyBankHTML = '';
     for (let i = 0; i < history.length; i++) {
-        let candyImg = 'WhiteCandy.png';
-        if (CANDY_CONFIG[history[i]]) candyImg = CANDY_CONFIG[history[i]].imageFile;
-        candyBankHTML += `<img src="Assets/Extra/Candies/${candyImg}" style="width: 30px; height: 30px; margin: 2px;" title="${history[i]}">`;
+        const candyImg = CANDY_CONFIG[history[i]] ? CANDY_CONFIG[history[i]].imageFile : 'WhiteCandy.png';
+        candyBankHTML += `<img class="bc-bank-item" src="Assets/Extra/Candies/${candyImg}" title="${history[i]}">`;
     }
     for (let i = 0; i < unspentWhite; i++) {
-        candyBankHTML += `<img src="Assets/Extra/Candies/WhiteCandy.png" style="width: 30px; height: 30px; margin: 2px;" title="White Candy">`;
+        candyBankHTML += `<img class="bc-bank-item bc-bank-item--white" src="Assets/Extra/Candies/WhiteCandy.png" title="Unspent White Candy">`;
     }
     return candyBankHTML;
 }
 
-function generateProgressBarHTML(progressPct, progressTextLeft) {
+function generateHeroHeaderHTML(unspentWhite, defeats, progressPct) {
+    const remaining = Math.max(0, WHITE_CANDY_DEFEAT_REQUIREMENT - defeats);
     return `
-        <div style="margin-bottom: 20px;">
-            <div style="position: relative; width: 100%; height: 30px; background-color: #333; border-radius: 15px; border: 2px solid #555; overflow: hidden; cursor: default;">
-                <div style="position: absolute; top: 0; left: 0; height: 100%; width: ${progressPct}%; background-color: #3498db; transition: width 0.3s ease;"></div>
-                <div style="position: absolute; top: 0; left: 0; right: 0; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; text-shadow: 1px 1px 2px black; pointer-events: none;">
-                    <div style="width: 100%; text-align: center;">${progressTextLeft}</div>
+        <div class="bc-hero-header">
+            <div class="bc-wallet">
+                <div class="bc-wallet-icon-wrap">
+                    <img class="bc-wallet-icon" src="Assets/Extra/Candies/WhiteCandy.png" alt="White Candy">
+                </div>
+                <div class="bc-wallet-info">
+                    <span class="bc-wallet-label">White Candies</span>
+                    <span class="bc-wallet-count">${unspentWhite}</span>
+                </div>
+            </div>
+            <div class="bc-progress-wrap">
+                <div class="bc-progress-meta">
+                    <span class="bc-progress-title">Next White Candy Progress</span>
+                    <span class="bc-progress-numbers">${defeats} / ${WHITE_CANDY_DEFEAT_REQUIREMENT}<span class="bc-progress-remaining">(${remaining} left)</span></span>
+                </div>
+                <div class="bc-progress-track">
+                    <div class="bc-progress-fill" style="width: ${progressPct}%;"></div>
+                    <div class="bc-progress-pct">${Math.floor(progressPct)}%</div>
                 </div>
             </div>
         </div>
     `;
 }
 
-function generateCandyOptionsHTML() {
+function generateCandyOptionsHTML(unspentWhite) {
     return `
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px;">
-            ${renderCandyOption('Green Candy', '+0.25% in Loot Probability and<br>Bonus of 1% in Money from Battles', getCandyCost('Green Candy', state.stats.greenCandies), state.stats.greenCandies, `Loot: +${0.25 * (state.stats.greenCandies || 0)}% | Money: +${1 * (state.stats.greenCandies || 0)}%`, 'LootCandy.png')}
-            ${renderCandyOption('Purple Candy', 'XP Bonus of 2%', getCandyCost('Purple Candy', state.stats.purpleCandies), state.stats.purpleCandies, `+${2 * (state.stats.purpleCandies || 0)}%`, 'XPCandy.png')}
-            ${renderCandyOption('Black Yellow Candy', 'Catch Bonus of 20%', getCandyCost('Black Yellow Candy', state.stats.blackYellowCandies), state.stats.blackYellowCandies, `Catch: +${20 * (state.stats.blackYellowCandies || 0)}%`, 'CatchCandy.png')}
-            ${renderCandyOption('Rainbow Candy', 'Shiny +1roll', getCandyCost('Rainbow Candy', state.stats.rainbowCandies), state.stats.rainbowCandies, '+' + (state.stats.rainbowCandies || 0) + ' rolls', 'ShinyCandy.png')}
+        <div class="bc-grid">
+            ${renderCandyOption('Green Candy', '+0.25% Loot Probability &<br>+1% Money from Battles', getCandyCost('Green Candy', state.stats.greenCandies), state.stats.greenCandies, `Loot +${0.25 * (state.stats.greenCandies || 0)}% | Money +${1 * (state.stats.greenCandies || 0)}%`, 'LootCandy.png', unspentWhite)}
+            ${renderCandyOption('Purple Candy', '+2% Experience Gain from Battles', getCandyCost('Purple Candy', state.stats.purpleCandies), state.stats.purpleCandies, `+${2 * (state.stats.purpleCandies || 0)}% XP`, 'XPCandy.png', unspentWhite)}
+            ${renderCandyOption('Black Yellow Candy', '+20% Catch Rate Bonus', getCandyCost('Black Yellow Candy', state.stats.blackYellowCandies), state.stats.blackYellowCandies, `+${20 * (state.stats.blackYellowCandies || 0)}% Catch`, 'CatchCandy.png', unspentWhite)}
+            ${renderCandyOption('Rainbow Candy', '+1 Extra Shiny Roll per Candy', getCandyCost('Rainbow Candy', state.stats.rainbowCandies), state.stats.rainbowCandies, `+${state.stats.rainbowCandies || 0} Shiny Rolls`, 'ShinyCandy.png', unspentWhite)}
         </div>
     `;
 }
@@ -88,34 +109,42 @@ function generateCandyOptionsHTML() {
 function generateFirstTimeOverlayHTML(hasSeenModal) {
     return `
         <!-- Bonus Candy First-Time Overlay (Inner Modal) -->
-        <div id="bonus-candy-first-time-overlay" style="display: ${!hasSeenModal ? 'flex' : 'none'}; position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10000; background: rgba(0, 0, 0, 0.7); flex-direction: column; align-items: center; justify-content: center; border-radius: 8px;">
-            <div style="background: #34495e; padding: 20px; border-radius: 10px; border: 2px solid #00ffff; text-align: center; color: white; max-width: 80%;">
-                <div id="bonus-candy-intro-text" style="margin-top: 0; font-size: 16px;">
-                    <p>Here you can find delicious candies!</p>
-                    <p>In order to earn a white candy you need to defeat ${WHITE_CANDY_DEFEAT_REQUIREMENT} wild Pokémons</p>
-                    <p>When claimed white candies can be trade to different flavors with different effects.</p>
-                    <p>Each time a flavored candy is traded, the next one will have its price increased by its initial value.</p>
+        <div id="bonus-candy-first-time-overlay" class="bc-intro-overlay" style="display: ${!hasSeenModal ? 'flex' : 'none'};">
+            <div class="bc-intro-card">
+                <div class="bc-intro-icons">
+                    <img src="Assets/Extra/Candies/WhiteCandy.png" alt="White Candy">
+                    <img src="Assets/Extra/Candies/LootCandy.png" alt="Green Candy">
+                    <img src="Assets/Extra/Candies/XPCandy.png" alt="Purple Candy">
+                    <img src="Assets/Extra/Candies/CatchCandy.png" alt="Black Yellow Candy">
+                    <img src="Assets/Extra/Candies/ShinyCandy.png" alt="Rainbow Candy">
                 </div>
-                <button id="btn-dismiss-bonus-candy" onclick="window.dismissBonusCandyMessage()" style="padding: 10px 20px; background: #2ecc71; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; margin-top: 10px; font-size: 16px;">Enjoy!</button>
+                <h3 class="bc-intro-title">Welcome to Bonus Candies!</h3>
+                <div id="bonus-candy-intro-text" class="bc-intro-steps">
+                    <div class="bc-intro-step"><strong>1. Earn White Candies:</strong> Defeat <strong>${WHITE_CANDY_DEFEAT_REQUIREMENT}</strong> wild Pokémon to earn a White Candy.</div>
+                    <div class="bc-intro-step"><strong>2. Trade for Permanent Buffs:</strong> Exchange White Candies for flavored candies that grant permanent account-wide bonuses.</div>
+                    <div class="bc-intro-step"><strong>3. Scaling Cost:</strong> Each time you trade for a flavor, its next cost increases by its base price.</div>
+                </div>
+                <button id="btn-dismiss-bonus-candy" class="bc-intro-btn" onclick="window.dismissBonusCandyMessage()">Enjoy!</button>
             </div>
         </div>
     `;
 }
 
-function generateMainModalHTML(unspentWhite, progressPct, progressTextLeft, candyBankHTML, hasSeenModal) {
+function generateMainModalHTML(unspentWhite, defeats, progressPct, candyBankHTML, tradedCount, hasSeenModal) {
     return `
-        <div style="text-align: center; font-family: sans-serif; box-sizing: border-box;">
-            <div style="margin-bottom: 10px;">
-                <h2 style="margin: 0; display: inline-block; vertical-align: middle;">White Candies: ${unspentWhite}</h2>
-                <img src="Assets/Extra/Candies/WhiteCandy.png" style="width: 30px; height: 30px; vertical-align: middle; margin-left: 10px;">
-            </div>
+        <div class="bc-modal-root">
+            ${generateHeroHeaderHTML(unspentWhite, defeats, progressPct)}
+            ${generateCandyOptionsHTML(unspentWhite)}
 
-            ${generateProgressBarHTML(progressPct, progressTextLeft)}
-            ${generateCandyOptionsHTML()}
-
-            <div style="background-color: #222; border: 1px solid #444; border-radius: 8px; padding: 10px; text-align: left; min-height: 50px;">
-                <h4 style="margin-top: 0; margin-bottom: 10px; text-align: center;">Candy Bank</h4>
-                <div style="display: flex; flex-wrap: wrap; justify-content: center;">
+            <div class="bc-bank">
+                <div class="bc-bank-header">
+                    <h4 class="bc-bank-title">Candy Bank</h4>
+                    <div class="bc-bank-badges">
+                        <span class="bc-bank-badge">Traded: ${tradedCount}</span>
+                        <span class="bc-bank-badge">Unspent: ${unspentWhite}</span>
+                    </div>
+                </div>
+                <div class="bc-bank-tray">
                     ${candyBankHTML}
                 </div>
             </div>
@@ -126,7 +155,6 @@ function generateMainModalHTML(unspentWhite, progressPct, progressTextLeft, cand
 
 export function showBonusCandyModal() {
     const defeats = state.stats.bonusCandyDefeats || 0;
-    const progressTextLeft = `${defeats}/${WHITE_CANDY_DEFEAT_REQUIREMENT}`;
     const progressPct = Math.min(100, Math.max(0, (defeats / WHITE_CANDY_DEFEAT_REQUIREMENT) * 100));
 
     if (!state.stats.candyPurchaseHistory) {
@@ -134,13 +162,15 @@ export function showBonusCandyModal() {
     }
 
     const unspentWhite = state.stats.whiteCandies || 0;
+    const tradedCount = state.stats.candyPurchaseHistory.length;
     const candyBankHTML = generateCandyBankHTML(state.stats.candyPurchaseHistory, unspentWhite);
 
     const html = generateMainModalHTML(
         unspentWhite,
+        defeats,
         progressPct,
-        progressTextLeft,
         candyBankHTML,
+        tradedCount,
         state.globalStats?.hasSeenBonusCandyModal
     );
 
@@ -152,31 +182,69 @@ export function showBonusCandyModal() {
     }
 }
 
-function renderCandyOption(color, effectText, cost, currentOwned, currentEffect, imageFile) {
+function renderCandyOption(color, effectText, cost, currentOwned, currentEffect, imageFile, unspentWhite) {
     const owned = currentOwned || 0;
-    const config = CANDY_CONFIG[color] || { verticalAlign: '', horizontalAlign: '' };
-
-    const titleStyle = color === 'Rainbow Candy'
-        ? `background: ${getColorHex(color)}; background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: rainbowShift 3s linear infinite;`
-        : `color: ${getColorHex(color)}; text-shadow: 1px 1px 2px black;`;
-
+    const config = CANDY_CONFIG[color] || {};
+    const isRainbow = color === 'Rainbow Candy';
     const isMaxed = config.maxOwned !== undefined && owned >= config.maxOwned;
+    const canAfford = !isMaxed && unspentWhite >= cost;
+
+    const cardClasses = [
+        'bc-card',
+        isRainbow ? 'bc-card--rainbow' : '',
+        isMaxed ? 'bc-card--maxed' : ''
+    ].filter(Boolean).join(' ');
+
+    const cardVars = `--candy-accent: ${config.hex || '#38bdf8'}; --candy-border: ${config.borderColor || 'rgba(148,163,184,0.25)'}; --candy-glow: ${config.glowColor || 'rgba(56,189,248,0.2)'}; --candy-btn-bg: ${config.btnGradient || 'linear-gradient(135deg, #2563eb, #1d4ed8)'};`;
+
+    const titleClass = isRainbow ? 'bc-card-title bc-card-title--rainbow' : 'bc-card-title';
+    const titleInline = isRainbow ? '' : `style="color: ${config.hex || '#f1f5f9'};"`;
+
+    const ownedText = config.maxOwned !== Infinity ? `${owned} / ${config.maxOwned}` : `${owned}`;
+    const ownedPillClass = isMaxed ? 'bc-owned-pill bc-owned-pill--maxed' : 'bc-owned-pill';
+
+    let buttonHTML;
+    if (isMaxed) {
+        buttonHTML = `<button type="button" class="bc-buy-btn bc-buy-btn--maxed" disabled>MAXED OUT</button>`;
+    } else if (canAfford) {
+        buttonHTML = `
+            <button type="button" class="bc-buy-btn bc-buy-btn--affordable" onclick="window.buyBonusCandy('${color}')" title="Trade ${cost} White Candy for ${color}">
+                <span>Trade for ${cost}</span>
+                <img class="bc-cost-icon" src="Assets/Extra/Candies/WhiteCandy.png" alt="White Candy">
+            </button>
+        `;
+    } else {
+        const missing = cost - unspentWhite;
+        buttonHTML = `
+            <button type="button" class="bc-buy-btn bc-buy-btn--unaffordable" onclick="window.buyBonusCandy('${color}')" title="Need ${missing} more White Candy">
+                <span>Cost: ${cost}</span>
+                <img class="bc-cost-icon" src="Assets/Extra/Candies/WhiteCandy.png" alt="White Candy">
+                <span>(Need ${missing} more)</span>
+            </button>
+        `;
+    }
 
     return `
-        <div style="background-color: #222; border: 1px solid #444; border-radius: 8px; padding: 15px; display: flex; flex-direction: column; align-items: center; position: relative; min-height: 120px; justify-content: center; ${isMaxed ? 'opacity: 0.5;' : ''}">
-            <img src="Assets/Extra/Candies/${imageFile}" ${isMaxed ? '' : `onclick="window.buyBonusCandy('${color}')"`} style="width: 60px; height: 60px; position: absolute; ${config.verticalAlign} ${config.horizontalAlign} ${isMaxed ? '' : 'cursor: pointer;'} border-radius: 5px; box-shadow: 0 0 5px rgba(255,255,255,0.5);" title="${isMaxed ? 'MAXED' : `Click to buy ${color}`}">
-            <div style="font-size: 18px; font-weight: bold; margin-bottom: 5px; ${titleStyle}">${color}</div>
-            <div style="font-size: 14px; margin-bottom: 5px; text-align: center;">Effect: ${effectText}</div>
-            <div style="font-size: 12px; margin-bottom: 5px; text-align: center; color: #88ff88;">Current Bonus: ${currentEffect}</div>
-            <div style="font-size: 14px; margin-bottom: 10px;">${isMaxed ? 'Cost: MAXED' : `Cost: ${cost} White Candy`}</div>
-            <div style="font-size: 14px; color: #aaa;">Owned: ${owned}${config.maxOwned !== Infinity ? ` / ${config.maxOwned}` : ''}</div>
+        <div class="${cardClasses}" style="${cardVars}">
+            <div class="bc-card-header">
+                <div class="bc-icon-pedestal" ${isMaxed ? '' : `onclick="window.buyBonusCandy('${color}')" style="cursor: pointer;"`} title="${isMaxed ? 'MAXED' : `Click to trade for ${color}`}">
+                    <img class="bc-card-icon" src="Assets/Extra/Candies/${imageFile}" alt="${color}">
+                </div>
+                <div class="bc-card-title-group">
+                    <div class="${titleClass}" ${titleInline}>${color}</div>
+                    <span class="${ownedPillClass}">${isMaxed ? `MAXED (${ownedText})` : `Owned: ${ownedText}`}</span>
+                </div>
+            </div>
+            <div class="bc-card-body">
+                <div class="bc-effect-text">${effectText}</div>
+                <div class="bc-current-bonus">
+                    <span class="bc-current-label">Active Bonus</span>
+                    <span class="bc-current-value">${currentEffect}</span>
+                </div>
+            </div>
+            ${buttonHTML}
         </div>
     `;
-}
-
-function getColorHex(colorName) {
-    if (CANDY_CONFIG[colorName]) return CANDY_CONFIG[colorName].hex;
-    return 'white';
 }
 
 window.buyBonusCandy = function(color) {
