@@ -237,4 +237,68 @@ describe('WindowManager', () => {
             partyWin.remove();
         }
     });
+
+    test('autoAdjustWidth updates dimensions on new icons and defers when minimized until restored', () => {
+        const mainCtrl = document.createElement('div');
+        mainCtrl.id = 'main-control-window';
+        mainCtrl.className = 'floating-window';
+        mainCtrl.style.display = 'flex';
+        mainCtrl.style.width = '200px';
+
+        const header = document.createElement('div');
+        header.className = 'window-header';
+        Object.defineProperty(header, 'offsetHeight', { value: 30, configurable: true });
+
+        const scaler = document.createElement('div');
+        scaler.className = 'window-content-scaler';
+        let mockWidth = 200;
+        let mockHeight = 80;
+        scaler.getBoundingClientRect = () => ({ width: mockWidth, height: mockHeight });
+
+        mainCtrl.append(header, scaler);
+        document.body.appendChild(mainCtrl);
+
+        try {
+            windowManager.autoAdjustWidth('main-control-window');
+            expect(mainCtrl._originalWidth).toBe(200);
+            expect(mainCtrl.style.height).toBe('110px');
+
+            // Minimize window and add a new icon (width grows to 300)
+            mainCtrl.dataset.minimized = 'true';
+            mainCtrl.style.display = 'none';
+            mockWidth = 300;
+            windowManager.autoAdjustWidth('main-control-window');
+            expect(mainCtrl.dataset.needsAutoAdjust).toBe('true');
+            expect(mainCtrl._originalWidth).toBe(200);
+
+            // Restore window -> autoAdjustWidth runs and updates width/height
+            delete mainCtrl.dataset.minimized;
+            windowManager.toggleWindow('main-control-window', true);
+            expect(mainCtrl.dataset.needsAutoAdjust).toBeUndefined();
+            expect(mainCtrl._originalWidth).toBe(300);
+            expect(mainCtrl.style.width).toBe('300px');
+            expect(mainCtrl.style.height).toBe('110px');
+        } finally {
+            mainCtrl.remove();
+        }
+    });
+
+    test('toggleWindow adjusts party-window height when opened', () => {
+        jest.useFakeTimers();
+        const partyWin = document.createElement('div');
+        partyWin.id = 'party-window';
+        partyWin.className = 'floating-window';
+        partyWin.style.display = 'none';
+        partyWin.adjustHeightForNewContent = jest.fn();
+        document.body.appendChild(partyWin);
+
+        try {
+            windowManager.toggleWindow('party-window', true);
+            jest.advanceTimersByTime(20);
+            expect(partyWin.adjustHeightForNewContent).toHaveBeenCalledTimes(1);
+        } finally {
+            jest.useRealTimers();
+            partyWin.remove();
+        }
+    });
 });

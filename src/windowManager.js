@@ -503,6 +503,12 @@ export class WindowManager {
                         }, 100);
                     }
                 }
+
+                if (windowId === 'party-window' && typeof winElement.adjustHeightForNewContent === 'function') {
+                    setTimeout(() => winElement.adjustHeightForNewContent(), 10);
+                } else if (windowId === 'main-control-window' && (winElement.dataset.needsAutoAdjust === 'true' || !winElement._originalWidth)) {
+                    this.autoAdjustWidth(windowId);
+                }
             } else {
                 winElement.style.display = 'none';
                 this._syncNavToggleState(windowId, false);
@@ -961,7 +967,12 @@ export class WindowManager {
 
     autoAdjustWidth(windowId) {
         const winElement = document.getElementById(windowId);
-        if (!winElement || winElement.dataset.minimized === 'true') return;
+        if (!winElement) return;
+        if (winElement.dataset.minimized === 'true' || winElement.style.display === 'none') {
+            winElement.dataset.needsAutoAdjust = 'true';
+            return;
+        }
+        delete winElement.dataset.needsAutoAdjust;
 
         const scalerElement = winElement.querySelector('.window-content-scaler');
         if (!scalerElement) return;
@@ -970,13 +981,22 @@ export class WindowManager {
         const oldScale = scalerElement.style.transform;
         const oldWidth = winElement.style.width;
         const oldPosition = scalerElement.style.position;
+        const oldScalerHeight = scalerElement.style.height;
 
         // Temporarily clear constraints to let it flow to natural width
         scalerElement.style.position = 'relative';
         scalerElement.style.transform = 'none';
         scalerElement.style.width = 'max-content';
+        scalerElement.style.height = 'auto';
 
         const newOriginalWidth = Math.ceil(scalerElement.getBoundingClientRect().width);
+        if (newOriginalWidth <= 0) {
+            scalerElement.style.position = oldPosition;
+            scalerElement.style.transform = oldScale;
+            scalerElement.style.width = scalerElement.style.getPropertyValue('--original-width') || 'auto';
+            scalerElement.style.height = oldScalerHeight;
+            return;
+        }
 
         // Check if we need to grow original width
         const currentOriginalWidthStr = scalerElement.style.getPropertyValue('--original-width');
@@ -1043,8 +1063,6 @@ export class WindowManager {
                 winElement.style.width = newOriginalWidth + 'px';
             }
 
-            this.saveWindowData(windowId);
-
             winElement._originalWidth = newOriginalWidth;
             if (newOriginalHeight > 0) winElement._originalHeight = newOriginalHeight;
 
@@ -1078,6 +1096,7 @@ export class WindowManager {
             scalerElement.style.height = finalOriginalHeight + 'px';
             scalerElement.style.transform = `scale(${scale})`;
             winElement.style.height = (headerH + finalOriginalHeight * scale) + 'px';
+            this.saveWindowData(windowId);
         } else {
             scalerElement.style.position = oldPosition;
             scalerElement.style.transform = oldScale;

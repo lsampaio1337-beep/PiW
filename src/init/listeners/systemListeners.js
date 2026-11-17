@@ -15,6 +15,7 @@ export function setupSystemEventListeners() {
             delete mainControlWin.dataset.minimized;
             if (window.windowManager) {
                 window.windowManager.focusWindow(mainControlWin);
+                window.windowManager.autoAdjustWidth('main-control-window');
             }
             if (window.electronAPI) {
                 window.electronAPI.send('set-main-control-minimized', false);

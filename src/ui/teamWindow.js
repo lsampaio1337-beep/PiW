@@ -182,11 +182,11 @@ export function updateTeamWindow() {
     }
 
     const currentTeamCount = state.party.length + dayCareCount;
-    if (lastTeamCount !== -1 && currentTeamCount !== lastTeamCount) {
+    if (lastTeamCount === -1 || currentTeamCount !== lastTeamCount) {
         if (window.windowManager) {
             setTimeout(() => {
                 const win = document.getElementById('party-window');
-                if (win && typeof win.adjustHeightForNewContent === 'function') {
+                if (win && win.style.display !== 'none' && typeof win.adjustHeightForNewContent === 'function') {
                     win.adjustHeightForNewContent();
                 }
             }, 10);
