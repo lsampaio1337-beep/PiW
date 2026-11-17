@@ -571,21 +571,7 @@ if (req.catchSpeciesByQuality) {
         }
 
     }
-    // Auto-collect any pending gym/badge gifts so the challenge can be claimed immediately
-    if (state.stats.pendingGifts && state.stats.pendingGifts.length > 0 && typeof window.claimPendingGift === 'function') {
-        const giftWin = document.getElementById('window-gifts');
-        const wasGiftOpen = giftWin && giftWin.style.display !== 'none';
-        for (let i = state.stats.pendingGifts.length - 1; i >= 0; i--) {
-            if (state.stats.pendingGifts[i] && state.stats.pendingGifts[i].type === 'badge') {
-                window.claimPendingGift(i);
-            }
-        }
-        if (!wasGiftOpen && window.windowManager) {
-            window.windowManager.closeDynamicWindow('window-gifts');
-        }
-    }
-
-    if (window.updateUI) window.updateUI();
+        if (window.updateUI) window.updateUI();
     const challengeWinCheat = document.getElementById('window-challenges');
     if (challengeWinCheat && challengeWinCheat.style.display !== 'none') {
         window.showChallengesModal(); // refresh modal
@@ -597,7 +583,7 @@ if (req.catchSpeciesByQuality) {
     setTimeout(() => {
         const modal = document.getElementById('window-challenges');
         if (modal) {
-            const completeBtns = Array.from(modal.querySelectorAll('button')).filter(btn => btn.classList.contains('pc-btn-complete') || btn.innerText.includes('Claim') || btn.innerText.includes('Complete'));
+            const completeBtns = Array.from(modal.querySelectorAll('button')).filter(btn => btn.innerText.includes('Complete'));
             if (completeBtns.length > 0) {
                 // Find the specific complete button for this area
                 const safeAreaId = targetAreaId.replace(/'/g, "\\'");
@@ -610,221 +596,168 @@ if (req.catchSpeciesByQuality) {
 
 };
 
-function buildRewardPills(unlock) {
-    let pills = [];
-    if (unlock.unlocks && unlock.unlocks.length > 0) {
-        for (let area of unlock.unlocks) {
-            pills.push(`<span class="pc-reward-pill">🗺️ ${area}</span>`);
-        }
-    }
-    if (unlock.gift || unlock.gifts) {
-        pills.push(`<span class="pc-reward-pill is-gift">🎁 Gift</span>`);
-    }
-    if (pills.length === 0) {
-        pills.push(`<span class="pc-reward-pill">🗺️ Next Area</span>`);
-    }
-    return pills.join('');
-}
-
-window.togglePastChallenges = function() {
-    const list = document.getElementById('pc-past-challenges-list');
-    const btn = document.getElementById('pc-past-toggle-btn');
-    if (!list || !btn) return;
-    const isHidden = list.style.display === 'none';
-    list.style.display = isHidden ? 'flex' : 'none';
-    btn.textContent = isHidden ? 'Hide' : 'Show';
-};
-
 window.showChallengesModal = function() {
-    const unlocks = window.getCurrentUnlocks();
-    if (!unlocks) return;
+    if (!window.getCurrentUnlocks()) return;
 
-    const regionName = state.currentRegionName || "Kanto";
-    const activeChallenges = state.stats.activeChallenges || [];
-    const activeChallengesCount = activeChallenges.length;
-
-    let actualCompletedIds = [];
-    if (state.stats.completedChallengeIds) {
-        const unlockSet = new Set(unlocks.map(u => u.areaId));
-        actualCompletedIds = state.stats.completedChallengeIds.filter(id => unlockSet.has(id));
-    }
-    const completedCount = actualCompletedIds.length;
-    const totalCount = unlocks.length;
-    const overallPct = totalCount > 0 ? Math.min(100, Math.round((completedCount / totalCount) * 100)) : 0;
-
-    let readyCount = 0;
-    const activeCardsData = [];
-    for (let activeId of activeChallenges) {
-        let unlock = unlocks.find(u => u.areaId === activeId);
-        if (!unlock) continue;
-        let cData = getChallengeData(unlock);
-        if (cData.isMet) readyCount++;
-        activeCardsData.push({ unlock, cData });
-    }
-
-    let html = `<div id="challenges-content-wrapper" class="content-panel pc-wrapper">`;
-
-    // Regional Summary Banner
-    html += `<div class="pc-summary-bar">
-                <div class="pc-summary-stats">
-                    <span class="pc-summary-title">${regionName} Progress</span>
-                    <span class="pc-summary-pill">🏆 ${completedCount} / ${totalCount} Completed</span>`;
-    if (readyCount > 0) {
-        html += `<span class="pc-summary-pill is-ready">✨ ${readyCount} Claim</span>`;
-    }
-    html += `   </div>
-                <div class="pc-summary-progress">
-                    <div class="pc-summary-progress-label">
-                        <span>Region Completion</span>
-                        <span>${overallPct}%</span>
-                    </div>
-                    <div class="pc-progress-track">
-                        <div class="pc-progress-fill ${overallPct === 100 ? 'is-met' : ''}" style="width: ${overallPct}%;"></div>
-                    </div>
-                </div>
-             </div>`;
+    let html = `<div id="challenges-content-wrapper" class="content-panel" style="display:flex; flex-direction:column; gap:15px; text-align:left;">`;
 
     // Active Challenges Sector
-    html += `<div class="pc-section">
-                <div class="pc-section-header">
-                    <h3 class="pc-section-title">${activeChallengesCount > 1 ? 'Active Challenges' : 'Active Challenge'} <span class="pc-count-badge">${activeChallengesCount}</span></h3>
-                </div>
-                <div class="pc-cards-list">`;
+    let activeChallengesCount = state.stats.activeChallenges ? state.stats.activeChallenges.length : 0;
 
-    if (activeCardsData.length === 0) {
-        html += `<div class="pc-empty-state">
-                    <div class="pc-empty-icon">🏆</div>
-                    <div class="pc-empty-title">All Challenges Completed!</div>
-                    <div class="pc-empty-sub">Your next goal is to earn all regional Medals.</div>
-                 </div>`;
-    } else {
-        for (let { unlock, cData } of activeCardsData) {
+    html += `<div style="border: 1px solid #555; padding: 10px; border-radius: 5px; background-color: rgba(0,0,0,0.5);">
+                <h3 style="margin-top: 0; margin-bottom: 10px; border-bottom: 1px solid #444; padding-bottom: 5px; font-size: 16px;">${activeChallengesCount > 1 ? 'Active Challenges' : 'Active Challenge'}</h3>
+                <div style="display: flex; flex-direction: column; gap: 15px;">`;
+
+    // The 150 Challenge should only appear if the Final Challenge (Pokemon League) has been completed
+
+
+
+    if (activeChallengesCount === 0) {
+        html += `<div style="text-align: center; font-size: 16px; color: #aaa;">No active Challenge</div>`;
+    }
+
+
+
+    if (activeChallengesCount > 0) {
+        for (let activeId of state.stats.activeChallenges) {
+            let unlock = window.getCurrentUnlocks().find(u => u.areaId === activeId);
+            if (!unlock) continue;
+
+            let cData = getChallengeData(unlock);
             let isExtra = unlock.challengeName && unlock.challengeName.includes("Extra");
+            let rewardsStr = "";
+            if (unlock.unlocks && unlock.unlocks.length > 0) {
+                rewardsStr = "Unlocks " + unlock.unlocks.join(" + ");
+            }
+            if (unlock.gift || unlock.gifts) {
+                if (rewardsStr) {
+                    rewardsStr += " + Gift";
+                } else {
+                    rewardsStr = "Gift";
+                }
+            }
+            if (!rewardsStr) rewardsStr = "Unlocks Next Area";
+
             let displayName = unlock.challengeName || (isExtra ? 'Extra Challenge - ' + unlock.areaId : 'Challenge - ' + unlock.areaId);
-            let cardClasses = `pc-card${isExtra ? ' is-extra' : ''}${cData.isMet ? ' is-ready' : ''}`;
+
+            html += `<div style="border: 1px solid #333; padding: 10px; border-radius: 5px; background-color: rgba(255,255,255,0.05);">
+                        <div style="color: ${isExtra ? '#ff9800' : '#4CAF50'}; font-weight: bold; margin-bottom: 5px;">${displayName}</div>`;
+
+            html += `<div style="margin-bottom: 5px;"><b>Requirements:</b></div>
+                     <ul style="margin-top: 0; padding-left: 20px;">`;
+
+            for (let part of cData.textParts) {
+                html += `<li>${part}</li>`;
+            }
+
+            html += `</ul>
+                     <div style="margin-top: 10px; color: #4CAF50;"><b>Rewards:</b> ${rewardsStr}</div>`;
+
             let safeAreaId = unlock.areaId.replace(/'/g, "\\'");
             const attrAreaId = unlock.areaId.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 
-            let headerActions = `<button class="pc-btn-cheat" onclick="window.cheatProgressChallenge('${safeAreaId}')">Cheat</button>`;
+            html += `<div style="text-align: center; margin-top: 15px; display: flex; justify-content: center; gap: 10px;">
+                         <button onclick="window.cheatProgressChallenge('${safeAreaId}')" style="padding: 10px 20px; font-size: 16px; font-weight: bold; background-color: orange; color: white; border: none; border-radius: 5px; cursor: pointer;">Cheat Progress</button>`;
+
             if (cData.isMet) {
-                headerActions += `<button class="pc-btn-complete" data-area-id="${attrAreaId}" onclick="window.completeChallenge('${safeAreaId}')">Claim ✔️</button>`;
-            } else {
-                headerActions += `<span class="pc-status-badge">In Progress</span>`;
+                 html += `<button data-area-id="${attrAreaId}" onclick="window.completeChallenge('${safeAreaId}')" style="padding: 10px 20px; font-size: 16px; font-weight: bold; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;">Complete ✔️</button>`;
             }
-
-            html += `<div class="${cardClasses}">
-                        <div class="pc-card-header">
-                            <div class="pc-card-title-group">
-                                <span class="pc-type-tag">${isExtra ? 'Extra' : 'Main'}</span>
-                                <span class="pc-card-title">${displayName}</span>
-                                <span class="pc-inline-rewards">${buildRewardPills(unlock)}</span>
-                            </div>
-                            <div class="pc-header-actions">
-                                ${headerActions}
-                            </div>
-                        </div>`;
-
-            html += `<ul class="pc-req-list">`;
-            const progressList = cData.progressList || [];
-            for (let idx = 0; idx < cData.textParts.length; idx++) {
-                const part = cData.textParts[idx];
-                const prog = progressList[idx];
-                const isReqMet = prog ? prog.isMet : false;
-                let barHtml = '';
-                if (prog && typeof prog.required === 'number' && prog.required > 0) {
-                    const currentVal = Math.min(prog.current || 0, prog.required);
-                    const pct = Math.min(100, Math.round((currentVal / prog.required) * 100));
-                    barHtml = `<div class="pc-progress-track">
-                                   <div class="pc-progress-fill ${isReqMet ? 'is-met' : ''}" style="width: ${pct}%;"></div>
-                               </div>`;
-                }
-                html += `<li class="pc-req-item ${isReqMet ? 'is-met' : ''}">
-                            <div class="pc-req-top">
-                                <span class="pc-req-text">${part}</span>
-                            </div>
-                            ${barHtml}
-                         </li>`;
-            }
-            html += `</ul></div>`;
+            html += `</div></div>`;
         }
     }
 
     html += `</div></div>`;
 
     // Past Challenges Sector
+    let actualCompletedIds = [];
+    let completedCount = 0;
+    if (state.stats.completedChallengeIds) {
+        const unlocks = window.getCurrentUnlocks();
+        if (unlocks) {
+            const unlockSet = new Set(unlocks.map(u => u.areaId));
+            actualCompletedIds = state.stats.completedChallengeIds.filter(id => unlockSet.has(id));
+        } else {
+            actualCompletedIds = state.stats.completedChallengeIds;
+        }
+        completedCount = actualCompletedIds.length;
+    }
+
+
+
     if (completedCount > 0) {
         let pastTitle = completedCount === 1 ? "Past Challenge" : "Past Challenges";
-        const defaultCollapsed = activeCardsData.length > 0;
-        html += `<div class="pc-section">
-                    <div class="pc-section-header">
-                        <h3 class="pc-section-title">${pastTitle} <span class="pc-count-badge">${completedCount}</span></h3>
-                        <button id="pc-past-toggle-btn" class="pc-toggle-btn" onclick="window.togglePastChallenges()">${defaultCollapsed ? 'Show' : 'Hide'}</button>
-                    </div>
-                    <div id="pc-past-challenges-list" class="pc-cards-list" style="display: ${defaultCollapsed ? 'none' : 'flex'};">`;
+        html += `<div style="border: 1px solid #555; padding: 10px; border-radius: 5px; background-color: rgba(0,0,0,0.5);">
+                    <h3 style="margin-top: 0; margin-bottom: 10px; border-bottom: 1px solid #444; padding-bottom: 5px; font-size: 16px;">${pastTitle}</h3>
+                    <div style="display: flex; flex-direction: column; gap: 10px;">`;
+
+
+
 
         for (let i = actualCompletedIds.length - 1; i >= 0; i--) {
-            let completedId = actualCompletedIds[i];
-            let pUnlock = unlocks.find(u => u.areaId === completedId);
-            if (!pUnlock) continue;
+             let completedId = actualCompletedIds[i];
+             let pUnlock = window.getCurrentUnlocks().find(u => u.areaId === completedId);
+             if (!pUnlock) continue;
 
-            let isExtra = pUnlock.challengeName && pUnlock.challengeName.includes("Extra");
-            let pData = getChallengeData(pUnlock);
-            let displayName = pUnlock.challengeName || (isExtra ? 'Extra Challenge - ' + pUnlock.areaId : 'Challenge - ' + pUnlock.areaId);
+             let isExtra = pUnlock.challengeName && pUnlock.challengeName.includes("Extra");
 
-            html += `<div class="pc-card is-past ${isExtra ? 'is-extra' : ''}">
-                        <div class="pc-card-header">
-                            <div class="pc-card-title-group">
-                                <span class="pc-type-tag">${isExtra ? 'Extra' : 'Main'}</span>
-                                <span class="pc-card-title">${displayName}</span>
-                            </div>
-                            <span class="pc-status-badge is-done">Completed</span>
-                        </div>
-                        <ul class="pc-req-list">`;
-            for (let part of pData.textParts) {
-                part = part.replace(/\(\d+\/(\d+)\)/, (match, p1) => `(${p1}/${p1})`);
-                if (!part.includes("[Complete]")) {
-                    part += ` <span style="color: #4ade80;">[Complete]</span>`;
-                }
-                part = part.replace(/color: red/g, 'color: #4ade80');
-                html += `<li class="pc-req-item is-met">
-                            <div class="pc-req-top">
-                                <span class="pc-req-text">${part}</span>
-                            </div>
-                         </li>`;
-            }
-            html += `</ul>
-                     <div class="pc-rewards-row">
-                        <span class="pc-rewards-label">Rewards</span>
-                        ${buildRewardPills(pUnlock)}
-                     </div>
-                     </div>`;
+             // Fake the data slightly to make it look completed, though getChallengeData will naturally evaluate to true
+             let pData = getChallengeData(pUnlock);
+
+
+             let pRewards = "";
+             if (pUnlock.unlocks && pUnlock.unlocks.length > 0) {
+                 pRewards = "Unlocks " + pUnlock.unlocks.join(" + ");
+             }
+             if (pUnlock.gift || pUnlock.gifts) {
+                 if (pRewards) {
+                     pRewards += " + Gift";
+                 } else {
+                     pRewards = "Gift";
+                 }
+             }
+             if (!pRewards) pRewards = "Unlocks Next Area"; // Fallback if somehow both missing
+
+
+             let displayName = pUnlock.challengeName || (isExtra ? 'Extra Challenge - ' + pUnlock.areaId : 'Challenge - ' + pUnlock.areaId);
+
+             html += `<div style="border: 1px solid #333; padding: 10px; border-radius: 5px; background-color: rgba(255,255,255,0.05);">
+                          <div style="color: ${isExtra ? '#ff9800' : '#4CAF50'}; font-weight: bold; margin-bottom: 5px;">${displayName}</div>
+                          <ul style="margin-top: 0; margin-bottom: 5px; padding-left: 20px; font-size: 14px;">`;
+             for (let part of pData.textParts) {
+                  // Ensure we show them as complete using words
+
+                  // For past challenges, ensure they look complete and numbers match max requirements
+                  // The text might look like "Defeat 25 Pokémon on Route 1 (0/25)"
+                  // We extract the required count and force it to say (25/25) [Complete]
+                  part = part.replace(/\(\d+\/(\d+)\)/, (match, p1) => `(${p1}/${p1})`);
+                  if (!part.includes("[Complete]")) {
+                       part += ` <span style="color: green;">[Complete]</span>`;
+                  }
+                  part = part.replace(/color: red/g, 'color: green');
+
+                  html += `<li>${part}</li>`;
+             }
+             html += `</ul>
+                      <div style="font-size: 14px; color: #4CAF50;"><b>Rewards:</b> ${pRewards}</div>
+                      </div>`;
         }
         html += `</div></div>`;
     }
 
     html += `</div>`;
 
-    showModal("Progress Challenges", html, "window-challenges", "800px");
+    showModal("Progress Challenges", html, "window-challenges", "1000px");
     const win = document.getElementById("window-challenges");
     if (win) {
-        win.style.maxHeight = '80vh';
+        // We handle the max height natively in windowManager now, so remove the strict CSS limit
+        win.style.maxHeight = '';
+
+        if (window.windowManager) window.windowManager.setWindowProportions('window-challenges', 1.0);
+
+        // Ensure the content container scrolls if it overflows
         const contentContainer = win.querySelector('.window-content-container');
         if (contentContainer) {
             contentContainer.style.overflowY = 'auto';
-        }
-        // Clear any corrupted saved dimensions for window-challenges
-        if (state.settings?.windowSettings?.['window-challenges']) {
-            const saved = state.settings.windowSettings['window-challenges'];
-            const sw = parseInt(saved.width, 10);
-            const sh = parseInt(saved.height, 10);
-            if (!sw || sw < 300 || !sh || sh < 200) {
-                delete state.settings.windowSettings['window-challenges'];
-                win.style.width = '800px';
-                win.style.height = 'auto';
-                if (window.windowManager) {
-                    window.windowManager.recalculateWindowSize('window-challenges');
-                }
-            }
         }
     }
 };
@@ -898,37 +831,16 @@ export function generateCatchRateHtml(showShiny = false) {
         rowData.sort((a, b) => a.id - b.id);
     }
 
-    // Totals per ball
-    const totals = {};
-    balls.forEach(b => { totals[b] = { caught: 0, thrown: 0 }; });
-    rowData.forEach(row => {
-        balls.forEach(b => {
-            if (row.data[b] && row.data[b].thrown > 0) {
-                totals[b].caught += row.data[b].caught || 0;
-                totals[b].thrown += row.data[b].thrown || 0;
-            }
-        });
-    });
-
-    const formatRate = (caught, thrown) => {
-        if (!thrown) return '';
-        const pct = (caught / thrown) * 100;
-        const color = pct >= 50 ? '#4ade80' : pct >= 20 ? '#facc15' : '#f87171';
-        return `<div style="font-size: 11px; color: ${color}; font-weight: bold;">${pct.toFixed(1)}%</div>`;
-    };
-
     let html = `<div style="padding: 2%; box-sizing: border-box;">
-    <div style="margin-bottom: 10px; display: flex; justify-content: center;">
-        <input id="catch-rate-search" type="text" placeholder="Search Pokémon..." style="width: 220px; padding: 6px 10px; border-radius: 6px; border: 1px solid #3498db; background: rgba(0, 0, 0, 0.35); color: white; font-size: 13px; outline: none;">
-    </div>
-    <div style="max-height: 55vh; overflow-y: auto; border-radius: 8px; border: 1px solid #334155;">
-        <table id="catch-rate-table" style="width: 100%; border-collapse: separate; border-spacing: 0; text-align: center; color: white;">
-            <thead style="position: sticky; top: 0; background: #1e293b; z-index: 2;">
-                <tr>
-                    <th style="padding: 8px; border-bottom: 2px solid #3498db;">Pokémon</th>`;
+    <div style="max-height: 60vh; overflow-y: auto;">
+        <table style="width: 100%; border-collapse: separate; border-spacing: 0; text-align: center; color: white;">
+            <thead>
+                <tr style="background: rgba(255,255,255,0.1);">
+                    <th style="padding: 8px; border-bottom: 1px solid #475569; border-top-left-radius: 8px;">Pokémon</th>`;
 
-    balls.forEach(b => {
-        html += `<th style="padding: 8px; border-bottom: 2px solid #3498db;">
+    balls.forEach((b, i) => {
+        const isLast = i === balls.length - 1;
+        html += `<th style="padding: 8px; border-bottom: 1px solid #475569; ${isLast ? 'border-top-right-radius: 8px;' : ''}">
             <img src="Assets/Items/Balls/${b}.png" style="width: 24px; height: 24px;" alt="${b}" title="${b}"><br>${b}
         </th>`;
     });
@@ -940,15 +852,14 @@ export function generateCatchRateHtml(showShiny = false) {
     if (rowData.length === 0) {
         html += `<tr><td colspan="${balls.length + 1}" style="padding: 20px; font-style: italic; color: #94a3b8;">No ${showShiny ? 'shiny ' : ''}catch attempts recorded yet.</td></tr>`;
     } else {
-        rowData.forEach((row, idx) => {
-            const rowBg = idx % 2 === 0 ? 'rgba(0,0,0,0.2)' : 'rgba(255,255,255,0.03)';
-            html += `<tr class="catch-rate-row" data-name="#${row.id} ${row.name.toLowerCase()}" style="border-bottom: 1px solid #334155; background: ${rowBg};">
+        rowData.forEach(row => {
+            html += `<tr style="border-bottom: 1px solid #334155; background: rgba(0,0,0,0.2);">
                 <td style="padding: 8px; font-weight: bold; text-align: left;">#${row.id} ${row.name}</td>`;
 
             balls.forEach(b => {
                 const bData = row.data[b];
                 if (bData && bData.thrown > 0) {
-                    html += `<td style="padding: 8px;"><div>${bData.caught} / ${bData.thrown}</div>${formatRate(bData.caught, bData.thrown)}</td>`;
+                    html += `<td style="padding: 8px;">${bData.caught} / ${bData.thrown}</td>`;
                 } else {
                     html += `<td style="padding: 8px; color: #64748b;">-</td>`;
                 }
@@ -959,19 +870,6 @@ export function generateCatchRateHtml(showShiny = false) {
     }
 
     html += `   </tbody>
-            <tfoot style="position: sticky; bottom: 0; background: #0f172a; z-index: 2;">
-                <tr>
-                    <td style="padding: 8px; font-weight: bold; text-align: left; border-top: 2px solid #3498db;">Total</td>`;
-    balls.forEach(b => {
-        const t = totals[b];
-        if (t.thrown > 0) {
-            html += `<td style="padding: 8px; border-top: 2px solid #3498db;"><div>${t.caught} / ${t.thrown}</div>${formatRate(t.caught, t.thrown)}</td>`;
-        } else {
-            html += `<td style="padding: 8px; color: #64748b; border-top: 2px solid #3498db;">-</td>`;
-        }
-    });
-    html += `       </tr>
-            </tfoot>
         </table>
     </div>
     </div>`;
@@ -2062,42 +1960,29 @@ async function init() {
     };
     window.startNewGame = startNewGame;
 
-    const regions = ['Kanto', 'Johto', 'Hoenn', 'Sinnoh', 'Unova', 'Kalos', 'Alola', 'Galar', 'Hisui', 'Paldea'];
-    const regionPokemonMap = new Map();
-    if (typeof state !== 'undefined' && state && state.config && state.config.pokemonData) {
-        regions.forEach(region => {
-            const regionKey = region.toLowerCase() + '_id';
-            regionPokemonMap.set(
-                region,
-                state.config.pokemonData.filter(p => Boolean(p[regionKey])).map(p => p.name)
-            );
-        });
-    }
+    // Filter corrupted/empty profiles and map them to their data
+    let validProfiles = profiles
+        .map(id => ({ id, data: storage.getProfileData(id) }))
+        .filter(p => p.data !== null);
 
-    const renderProfilesList = () => {
-        const currentProfiles = storage.getProfiles();
-        const mappedProfiles = currentProfiles.map(id => ({ id, data: storage.getProfileData(id) }));
+    // Sort descending by lastPlayed so newest is always on top
+    validProfiles.sort((a, b) => {
+        const timeA = a.data.lastPlayed || 0;
+        const timeB = b.data.lastPlayed || 0;
+        return timeB - timeA;
+    });
 
-        // Sort descending by lastPlayed so newest is always on top; corrupted saves at the bottom
-        mappedProfiles.sort((a, b) => {
-            const timeA = a.data ? (a.data.lastPlayed || 0) : -1;
-            const timeB = b.data ? (b.data.lastPlayed || 0) : -1;
-            return timeB - timeA;
-        });
-
-        if (mappedProfiles.length === 0 || !saveManagerModal || !splashScreen) {
-            if (profilesContainer) profilesContainer.innerHTML = '';
-            return;
-        }
-
+    if (validProfiles.length > 0 && saveManagerModal && splashScreen) {
         splashScreen.style.display = 'flex';
-        saveManagerModal.style.display = 'flex';
+        if (saveManagerModal) saveManagerModal.style.display = 'flex';
+
         profilesContainer.innerHTML = ''; // clear
 
         let profileAction = 'load';
 
         // Variables to hold pending rename state
         let pendingRenameId = null;
+        let pendingRenameData = null;
 
         const renameModal = document.getElementById('rename-modal');
         const renameInput = document.getElementById('rename-input');
@@ -2106,11 +1991,10 @@ async function init() {
 
         if (btnRenameSave) {
             btnRenameSave.onclick = () => {
-                if (pendingRenameId && renameInput && renameInput.value.trim() !== "") {
-                    storage.renameProfile(pendingRenameId, renameInput.value.trim());
-                    if (renameModal) renameModal.style.display = 'none';
-                    pendingRenameId = null;
-                    renderProfilesList();
+                if (pendingRenameId && pendingRenameData && renameInput.value.trim() !== "") {
+                    pendingRenameData.profileName = renameInput.value.trim();
+                    window.localStorage.setItem(pendingRenameId, JSON.stringify(pendingRenameData));
+                    window.location.reload();
                 }
             };
         }
@@ -2119,6 +2003,7 @@ async function init() {
             btnRenameCancel.onclick = () => {
                 if (renameModal) renameModal.style.display = 'none';
                 pendingRenameId = null;
+                pendingRenameData = null;
                 profileAction = 'load';
                 updateHeader();
             };
@@ -2140,47 +2025,9 @@ async function init() {
             }
         };
 
-        const formatRelativeTime = (ts) => {
-            if (!ts) return "Unknown";
-            const diffSec = Math.max(0, Math.floor((Date.now() - ts) / 1000));
-            if (diffSec < 60) return "Just now";
-            const diffMin = Math.floor(diffSec / 60);
-            if (diffMin < 60) return `${diffMin}m ago`;
-            const diffHr = Math.floor(diffMin / 60);
-            if (diffHr < 24) return `${diffHr}h ago`;
-            const diffDay = Math.floor(diffHr / 24);
-            if (diffDay === 1) return "Yesterday";
-            if (diffDay < 30) return `${diffDay}d ago`;
-            const diffMo = Math.floor(diffDay / 30);
-            return `${diffMo}mo ago`;
-        };
-
-        mappedProfiles.forEach((profileObj, index) => {
+        validProfiles.forEach((profileObj, index) => {
             const profileId = profileObj.id;
             const pData = profileObj.data;
-
-            if (!pData) {
-                const corruptCard = document.createElement('div');
-                corruptCard.className = 'profile-corrupt-card';
-
-                const label = document.createElement('span');
-                label.textContent = `Corrupted Save (${profileId})`;
-
-                const delBtn = document.createElement('button');
-                delBtn.className = 'profile-corrupt-del-btn';
-                delBtn.textContent = "Delete";
-                delBtn.onclick = () => {
-                    if (confirm(`Delete corrupted save "${profileId}"?`)) {
-                        storage.deleteProfile(profileId);
-                        renderProfilesList();
-                    }
-                };
-
-                corruptCard.appendChild(label);
-                corruptCard.appendChild(delBtn);
-                profilesContainer.appendChild(corruptCard);
-                return;
-            }
 
             // Format playtime
             let playtimeStr = "0h 0m 0s";
@@ -2220,62 +2067,73 @@ async function init() {
             const profileName = pData.profileName || `Profile ${index + 1}`;
 
             const profileCard = document.createElement('div');
-            profileCard.className = 'profile-card';
-
-            const cardRow = document.createElement('div');
-            cardRow.className = 'profile-card-row';
+            profileCard.style.display = "flex";
+            profileCard.style.flexDirection = "column";
+            profileCard.style.alignItems = "center";
+            profileCard.style.width = "max-content";
+            profileCard.style.minWidth = "78%";
 
             const btn = document.createElement('button');
-            btn.className = 'action-btn-pill profile-btn';
+            btn.className = 'action-btn-pill';
+            btn.style.padding = "10px 22px";
+            btn.style.fontSize = "16px";
+            btn.style.cursor = "pointer";
+            btn.style.backgroundColor = "#3498db"; // Blue Pill Button
+            btn.style.color = "white";
+            btn.style.border = "4px solid black";
+            btn.style.borderRadius = "9999px";
+            btn.style.textAlign = "left";
+            btn.style.fontWeight = "bold";
+            btn.style.width = "64%";
+            btn.style.position = "relative";
+            btn.style.zIndex = "1";
+            btn.style.flexDirection = "column";
 
             const textWrapper = document.createElement('div');
-            textWrapper.className = 'profile-text-wrapper';
+            textWrapper.style.display = "flex";
+            textWrapper.style.justifyContent = "space-between";
+            textWrapper.style.alignItems = "center";
+            textWrapper.style.width = "100%";
 
             const leftSide = document.createElement('div');
-            leftSide.className = 'profile-left';
+            leftSide.style.display = "flex";
+            leftSide.style.flexDirection = "column";
+            leftSide.style.alignItems = "flex-start";
 
             const rightSide = document.createElement('div');
-            rightSide.className = 'profile-right';
+            rightSide.style.display = "flex";
+            rightSide.style.flexDirection = "column";
+            rightSide.style.alignItems = "flex-end";
 
-            const titleRow = document.createElement('div');
-            titleRow.className = 'profile-title-row';
+            const formatRelativeTime = (ts) => {
+                if (!ts) return "Unknown";
+                const diffSec = Math.max(0, Math.floor((Date.now() - ts) / 1000));
+                if (diffSec < 60) return "Just now";
+                const diffMin = Math.floor(diffSec / 60);
+                if (diffMin < 60) return `${diffMin}m ago`;
+                const diffHr = Math.floor(diffMin / 60);
+                if (diffHr < 24) return `${diffHr}h ago`;
+                const diffDay = Math.floor(diffHr / 24);
+                if (diffDay === 1) return "Yesterday";
+                if (diffDay < 30) return `${diffDay}d ago`;
+                const diffMo = Math.floor(diffDay / 30);
+                return `${diffMo}mo ago`;
+            };
 
             const titleDiv = document.createElement('div');
-            titleDiv.className = 'profile-title';
+            titleDiv.style.fontSize = "18px";
+            titleDiv.style.marginBottom = "5px";
+            titleDiv.style.fontWeight = "bold";
             titleDiv.textContent = `"${profileName}" - ${playtimeStr}`;
 
-            const regionBadge = document.createElement('span');
-            regionBadge.className = 'profile-region-badge';
-            regionBadge.textContent = pData.currentRegionName || 'Kanto';
-
-            titleRow.appendChild(titleDiv);
-            titleRow.appendChild(regionBadge);
-            leftSide.appendChild(titleRow);
-
-            // Party mini sprites preview
-            if (Array.isArray(pData.party) && pData.party.length > 0) {
-                const partyRow = document.createElement('div');
-                partyRow.className = 'profile-party-row';
-                pData.party.slice(0, 6).forEach(mon => {
-                    if (!mon || !mon.name) return;
-                    const sprite = document.createElement('img');
-                    sprite.className = 'profile-party-sprite';
-                    sprite.alt = mon.name;
-                    sprite.title = `${mon.name} (Lv.${mon.level || 1})`;
-                    const folder = mon.isShiny ? 'Shiny' : 'Normal';
-                    sprite.src = `Assets/Pokemon/${folder}/${mon.name}.png`;
-                    sprite.onerror = () => { sprite.style.display = 'none'; };
-                    partyRow.appendChild(sprite);
-                });
-                if (partyRow.children.length > 0) {
-                    leftSide.appendChild(partyRow);
-                }
-            }
-
             const playedDiv = document.createElement('div');
-            playedDiv.className = 'profile-played';
+            playedDiv.style.fontSize = "18px";
+            playedDiv.style.fontWeight = "bold";
+            playedDiv.style.marginBottom = "5px";
             playedDiv.textContent = pData.lastPlayed ? formatRelativeTime(pData.lastPlayed) : lastPlayedStr;
             playedDiv.title = lastPlayedStr;
+
+            leftSide.appendChild(titleDiv);
 
             rightSide.appendChild(playedDiv);
 
@@ -2285,19 +2143,24 @@ async function init() {
             btn.appendChild(textWrapper);
 
             // Add Medals Container on the second row
+            const regions = ['Kanto', 'Johto', 'Hoenn', 'Sinnoh', 'Unova', 'Kalos', 'Alola', 'Galar', 'Hisui', 'Paldea'];
             const medalsContainer = document.createElement('div');
-            medalsContainer.className = 'profile-medals-container';
+            medalsContainer.style.display = "flex";
+            medalsContainer.style.flexWrap = "nowrap"; // Keep them in a single row
+            medalsContainer.style.justifyContent = "center";
+            medalsContainer.style.alignItems = "center";
+            medalsContainer.style.gap = "2px";
 
             let earnedAnyMedal = false;
 
             regions.forEach(region => {
                 let activeTier = null;
-                const regionSpecies = regionPokemonMap.get(region);
 
-                if (regionSpecies && regionSpecies.length > 0) {
+                // On profile load, state.config is available.
+                if (typeof state !== 'undefined' && state && state.config && state.config.pokemonData) {
                     let caughtCount = 0;
                     let shinyCount = 0;
-                    const totalInRegion = regionSpecies.length;
+                    let totalInRegion = 0;
 
                     let regionalStats;
                     if (pData.currentRegionName === region) {
@@ -2309,16 +2172,20 @@ async function init() {
                         regionalStats = pData.stats;
                     }
 
-                    if (regionalStats) {
-                        for (const speciesName of regionSpecies) {
-                            if (regionalStats.caughtSpecies && regionalStats.caughtSpecies[speciesName]) {
-                                caughtCount++;
-                            }
-                            if (regionalStats.caughtShiniesSpecies && regionalStats.caughtShiniesSpecies[speciesName]) {
-                                shinyCount++;
+                    const regionKey = region.toLowerCase() + '_id';
+                    state.config.pokemonData.forEach(p => {
+                        if (p[regionKey]) {
+                            totalInRegion++;
+                            if (regionalStats) {
+                                if (regionalStats.caughtSpecies && regionalStats.caughtSpecies[p.name]) {
+                                    caughtCount++;
+                                }
+                                if (regionalStats.caughtShiniesSpecies && regionalStats.caughtShiniesSpecies[p.name]) {
+                                    shinyCount++;
+                                }
                             }
                         }
-                    }
+                    });
 
                     const hasFirst = caughtCount > 0;
                     const hasSecond = totalInRegion > 0 && caughtCount >= totalInRegion;
@@ -2336,58 +2203,41 @@ async function init() {
                 if (activeTier) {
                     earnedAnyMedal = true;
                     const medalImg = document.createElement('img');
-                    medalImg.className = 'profile-medal-img';
                     medalImg.src = `Assets/Extra/Medals/${region} ${activeTier}.png`;
                     medalImg.alt = `${region} Medal`;
-                    medalImg.title = `${region} (${activeTier} Medal)`;
+                    medalImg.style.width = "auto";
+                    medalImg.style.height = "96px";
+                    medalImg.style.objectFit = "contain";
+                    medalImg.style.imageRendering = "pixelated";
                     medalImg.onerror = () => { medalImg.src = `Assets/Extra/Medals/Kanto ${activeTier}.png`; };
                     medalsContainer.appendChild(medalImg);
                 }
             });
 
-            const inlineActions = document.createElement('div');
-            inlineActions.className = 'profile-inline-actions';
-
-            const inlineRenameBtn = document.createElement('button');
-            inlineRenameBtn.className = 'profile-icon-btn';
-            inlineRenameBtn.textContent = '✏️';
-            inlineRenameBtn.title = `Rename "${profileName}"`;
-            inlineRenameBtn.onclick = (e) => {
-                e.stopPropagation();
-                if (renameModal && renameInput) {
-                    pendingRenameId = profileId;
-                    renameInput.value = profileName;
-                    renameModal.style.display = 'flex';
-                }
-            };
-
-            const inlineDeleteBtn = document.createElement('button');
-            inlineDeleteBtn.className = 'profile-icon-btn delete';
-            inlineDeleteBtn.textContent = '🗑️';
-            inlineDeleteBtn.title = `Delete "${profileName}"`;
-            inlineDeleteBtn.onclick = (e) => {
-                e.stopPropagation();
-                if (confirm(`Are you sure you want to delete "${profileName}"? This cannot be undone.`)) {
-                    storage.deleteProfile(profileId);
-                    renderProfilesList();
-                }
-            };
-
-            inlineActions.appendChild(inlineRenameBtn);
-            inlineActions.appendChild(inlineDeleteBtn);
-
-            cardRow.appendChild(btn);
-            cardRow.appendChild(inlineActions);
-            profileCard.appendChild(cardRow);
+            profileCard.appendChild(btn);
 
             if (earnedAnyMedal) {
                 const medalBtn = document.createElement('button');
-                medalBtn.className = 'action-btn-pill profile-medal-btn';
+                medalBtn.className = 'action-btn-pill';
+                medalBtn.style.padding = "14px 22px";
+                medalBtn.style.cursor = "pointer";
+                medalBtn.style.backgroundColor = "#3498db";
+                medalBtn.style.border = "4px solid black";
+                medalBtn.style.borderRadius = "9999px";
+                medalBtn.style.marginTop = "-4px";
+                medalBtn.style.width = "auto";
+                medalBtn.style.display = "flex";
+                medalBtn.style.justifyContent = "center";
+                medalBtn.style.alignItems = "center";
                 medalBtn.appendChild(medalsContainer);
                 medalBtn.onclick = () => btn.click();
                 const setPairHover = (hovered) => {
-                    btn.classList.toggle('is-hovered', hovered);
-                    medalBtn.classList.toggle('is-hovered', hovered);
+                    const bg = hovered ? "#2980b9" : "#3498db";
+                    const tf = hovered ? "scale(1.02)" : "";
+                    btn.style.backgroundColor = bg;
+                    btn.style.transform = tf;
+                    medalBtn.style.backgroundColor = bg;
+                    medalBtn.style.transform = tf;
                 };
                 btn.onmouseenter = () => setPairHover(true);
                 btn.onmouseleave = () => setPairHover(false);
@@ -2412,29 +2262,75 @@ async function init() {
                 if (profileAction === 'rename') {
                     if (renameModal && renameInput) {
                         pendingRenameId = profileId;
+                        pendingRenameData = pData;
                         renameInput.value = profileName;
                         renameModal.style.display = 'flex';
                     }
                 } else if (profileAction === 'delete') {
                     if (confirm(`Are you sure you want to delete "${profileName}"? This cannot be undone.`)) {
                         storage.deleteProfile(profileId);
-                        renderProfilesList();
+                        window.location.reload();
                     }
                     profileAction = 'load';
                     updateHeader();
                 } else {
                     // Load Action
-                    const loadResult = storage.loadProfileIntoState(profileId, state);
-                    if (!loadResult.ok) {
-                        alert(`Failed to load "${profileName}". The save data may be corrupted.`);
-                        return;
-                    }
-
                     splashScreen.style.display = 'none';
                     window.windowManager.toggleWindow('save-manager-modal', false);
                     window.windowManager.toggleWindow('main-control-window', true);
                     window.windowManager.toggleWindow('party-window', true);
                     window.windowManager.toggleWindow('main-view-window', true);
+
+                    storage.setCurrentProfile(profileId);
+
+                    // Perform a deep merge to preserve nested object structures (like stats, backpack)
+                    const deepMerge = (target, source) => {
+                        if (typeof source !== 'object' || source === null) return source;
+                        if (Array.isArray(source)) return source;
+                        for (const key of Object.keys(source)) {
+                            if (key === '__proto__' || key === 'constructor' || key === 'prototype') continue;
+                            if (source[key] instanceof Object && !Array.isArray(source[key])) {
+                                if (!target[key]) target[key] = {};
+                                deepMerge(target[key], source[key]);
+                            } else {
+                                target[key] = source[key];
+                            }
+                        }
+                        return target;
+                    };
+                    deepMerge(state, pData);
+
+                    // Initialize caughtSpeciesCount for older saves
+                    if (state.stats && state.stats.caughtSpecies) {
+                        state.stats.caughtSpeciesCount = Object.keys(state.stats.caughtSpecies).length;
+                    } else if (state.stats) {
+                        state.stats.caughtSpeciesCount = 0;
+                    }
+
+                    // Migrate old save data to new globalStats structure
+                    if (pData.stats) {
+                        if (pData.stats.playtime !== undefined) state.globalStats.playtime = pData.stats.playtime;
+                        if (pData.stats.hasSeenProfTutorial !== undefined) state.globalStats.hasSeenProfTutorial = pData.stats.hasSeenProfTutorial;
+                        if (pData.stats.hasSeenZzZTutorial !== undefined) state.globalStats.hasSeenZzZTutorial = pData.stats.hasSeenZzZTutorial;
+                        if (pData.stats.hasSeenMultiplayerIcon !== undefined) state.globalStats.hasSeenMultiplayerIcon = pData.stats.hasSeenMultiplayerIcon;
+                        if (pData.stats.hasSeenGiftIcon !== undefined) state.globalStats.hasSeenGiftIcon = pData.stats.hasSeenGiftIcon;
+                        if (pData.stats.hasSeenJohtoMap !== undefined) state.globalStats.hasSeenJohtoMap = pData.stats.hasSeenJohtoMap;
+                        if (pData.stats.hasSeenDaycare !== undefined) state.stats.hasSeenDaycare = pData.stats.hasSeenDaycare;
+                        if (pData.stats.hasSeenBonusCandyModal !== undefined) state.globalStats.hasSeenBonusCandyModal = pData.stats.hasSeenBonusCandyModal;
+                    }
+
+
+                    if (!state.currentRegionName) {
+                        state.currentRegionName = 'Kanto';
+                    }
+                    if (!state.regions) {
+                        state.regions = {};
+                    }
+
+                    // Fallback for older saves
+                    if (state.settings.autoPotionThreshold === undefined) {
+                        state.settings.autoPotionThreshold = 25;
+                    }
 
                     // Handle backwards compatibility for challenges
                     if (state.stats.completedChallenges !== undefined && (!state.stats.completedChallengeIds || state.stats.completedChallengeIds.length === 0)) {
@@ -2512,8 +2408,10 @@ async function init() {
             updateHeader();
         };
 
-    };
-    renderProfilesList();
+    } else {
+        if (splashScreen) splashScreen.style.display = 'flex';
+        if (saveManagerModal) saveManagerModal.style.display = 'flex';
+    }
 
     // Bind buttons (they might be missing if bypass Professor Lab)
     const btnBulbasaur = document.getElementById('choose-bulbasaur');
@@ -2621,43 +2519,36 @@ async function init() {
 
         window.showZzZConfirmationModal = function() {
             const grains = state.stats.jigglypuffGrains || 0;
-            const hours = Math.floor(grains / 60);
-            const mins = grains % 60;
-            const formattedDuration = hours > 0 ? `${hours}h ${mins}m` : `${mins}m`;
             const showTutorial = !state.globalStats.hasSeenZzZTutorial;
             const htmlContent = `
-                <div class="content-panel zzz-panel">
+                <div class="content-panel" style="display: flex; flex-direction: column; gap: 15px; width: 100%; box-sizing: border-box; position: relative;">
                     ${showTutorial ? `
-                    <div id="zzz-tutorial-overlay-inner" class="zzz-tutorial-overlay">
-                        <div class="zzz-tutorial-card">
-                            <h4>Welcome to ZzZ Mode!</h4>
-                            <p>Earn <strong>1 grain</strong> of Jigglypuff Dust for every minute you play.</p>
-                            <p>Each grain grants <strong>1 minute</strong> of offline farming while you sleep.</p>
-                            <p>Sleep well!</p>
-                            <button id="btn-dismiss-zzz-inner" class="zzz-tutorial-btn">Got it!</button>
+                    <div id="zzz-tutorial-overlay-inner" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1000; background: rgba(0, 0, 0, 0.7); display: flex; flex-direction: column; align-items: center; justify-content: center; border-radius: 8px;">
+                        <div style="background: #34495e; padding: 20px; border-radius: 10px; border: 2px solid #00ffff; text-align: center; color: white; max-width: 80%;">
+                            <div style="margin-top: 0; font-size: 16px;">
+                                <p>Welcome to ZzZ Mode!</p>
+                                <p>You will earn 1 grain of Jigglypuff Dust for every minute you play.</p>
+                                <p>Each grain will grant 1 minute of offline farming.</p>
+                                <p>Sleep well!</p>
+                            </div>
+                            <button id="btn-dismiss-zzz-inner" style="padding: 10px 20px; background: #2ecc71; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; margin-top: 10px; font-size: 16px;">Ok.</button>
                         </div>
                     </div>
                     ` : ''}
-                    <div class="zzz-hero-card">
-                        <span class="zzz-star s1"></span>
-                        <span class="zzz-star s2"></span>
-                        <span class="zzz-star s3"></span>
-                        <span class="zzz-star s4"></span>
-                        <div class="zzz-dust-wrap">
-                            <div class="zzz-dust-aura"></div>
-                            <img src="Assets/Extra/Jigglypuff Dust.png" class="zzz-dust-img" alt="Jigglypuff Dust">
+                    <div style="display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.2); border-radius: 8px; padding: 20px; border: 1px solid #334155; gap: 20px;">
+                        <div style="flex: 1; display: flex; justify-content: flex-end;">
+                            <img src="Assets/Extra/Jigglypuff Dust.png" style="width: 120px; height: auto; filter: drop-shadow(0 0 10px rgba(255, 192, 203, 0.4));">
                         </div>
-                        <div class="zzz-stats-col">
-                            <div class="zzz-badge">Available Grains</div>
-                            <div id="zzz-current-grains" class="zzz-grains-value">${grains}</div>
-                            <div class="zzz-duration-pill">Max Offline Farm: ${formattedDuration}</div>
-                            <div id="zzz-max-offline-time" class="zzz-subtext">${grains > 0 ? '1 grain = 1 min offline farm' : 'Play actively to earn Jigglypuff Dust (1 grain/min)'}</div>
+                        <div style="flex: 1; display: flex; flex-direction: column; align-items: center; text-align: center;">
+                            <div style="font-size: 14px; color: #94a3b8; text-transform: uppercase; letter-spacing: 2px;">Available Grains</div>
+                            <div id="zzz-current-grains" style="font-size: 36px; font-weight: bold; color: #fbcfe8; text-shadow: 0 2px 4px rgba(0,0,0,0.8); margin: 5px 0;">${grains}</div>
+                            <div id="zzz-max-offline-time" style="font-size: 12px; color: #cbd5e1;">(1 grain = 1min offline farm)</div>
                         </div>
                     </div>
 
-                    <div class="zzz-actions">
-                        <button id="btn-zzz-yes" class="zzz-btn zzz-btn-sleep">Go to Sleep</button>
-                        <button id="btn-zzz-no" class="zzz-btn zzz-btn-cancel">Cancel</button>
+                    <div style="display: flex; gap: 10px; justify-content: center; margin-top: 10px; padding-bottom: 5px;">
+                        <button id="btn-zzz-yes" style="padding: 12px; font-size: 16px; font-weight: bold; cursor: pointer; background: linear-gradient(to right, #3b82f6, #2563eb); color: white; border: 1px solid #60a5fa; border-radius: 8px; flex: 1; box-shadow: 0 4px 6px rgba(0,0,0,0.3); text-transform: uppercase; letter-spacing: 1px;">Go to Sleep</button>
+                        <button id="btn-zzz-no" style="padding: 12px; font-size: 16px; font-weight: bold; cursor: pointer; background: linear-gradient(to right, #ef4444, #dc2626); color: white; border: 1px solid #f87171; border-radius: 8px; flex: 1; box-shadow: 0 4px 6px rgba(0,0,0,0.3); text-transform: uppercase; letter-spacing: 1px;">Cancel</button>
                     </div>
                 </div>
             `;
@@ -2733,7 +2624,7 @@ async function init() {
     window.showUpgradeDetails = function(typeConfigKey, currentTier) {
         if (!state.config || !state.config.balance || !state.config.balance.expansions || !state.config.balance.expansions[typeConfigKey]) return;
 
-        let htmlContent = '<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; padding: 2%; box-sizing: border-box;">';
+        let htmlContent = '<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; padding: 2%; box-sizing: border-box;">';
 
         for (let t = 1; t <= currentTier; t++) {
             const configItem = state.config.balance.expansions[typeConfigKey][t - 1];
@@ -2851,7 +2742,7 @@ async function init() {
             let filter = hasTier ? 'filter: drop-shadow(0 0 10px rgba(255, 215, 0, 1));' : 'filter: grayscale(100%) opacity(0.5);';
             let extraInfo = hasTier && info ? `
                 <div style="font-size: 14px; color: #a0aec0; margin-top: 5px;">Earned on: ${info.date}</div>
-                <div style="font-size: 14px; color: #a0aec0;">(${info.playtime})</div>
+                <div style="font-size: 14px; color: #a0aec0;">Time on Region: ${info.playtime}</div>
             ` : '';
             return `
                 <div style="text-align: center; flex: 1; padding: 10px;">
@@ -2893,10 +2784,6 @@ async function init() {
     let highestLevel = 0;
     let highestQuality = 0;
     let highestSumIV = 0;
-    let highestStatSum = 0;
-    let highestStatSumName = 'None';
-    let highestDps = 0;
-    let highestDpsName = 'None';
     let backpackMons = [];
     if (state.party) backpackMons = backpackMons.concat(state.party);
     if (state.storage) backpackMons = backpackMons.concat(state.storage);
@@ -2904,42 +2791,11 @@ async function init() {
 
     backpackMons.forEach(p => {
         if (!p) return;
-        const pName = p.displayName || p.name || 'Unknown';
         if (p.level > highestLevel) highestLevel = p.level;
         if (p.quality > highestQuality) highestQuality = p.quality;
         if (p.ivs) {
             const sumIV = (p.ivs.hp || 0) + (p.ivs.atk || 0) + (p.ivs.def || 0) + (p.ivs.spa || 0) + (p.ivs.spd || 0) + (p.ivs.spe || 0);
             if (sumIV > highestSumIV) highestSumIV = sumIV;
-        }
-        if (p.currentStats) {
-            const cs = p.currentStats;
-            const statSum = (cs.hp || 0) + (cs.atk || 0) + (cs.def || 0) + (cs.spa || 0) + (cs.spd || 0) + (cs.spe || 0);
-            if (statSum > highestStatSum) {
-                highestStatSum = statSum;
-                highestStatSumName = pName;
-            }
-            const atk = cs.atk || 0;
-            const spa = cs.spa || 0;
-            const spe = cs.spe || 1;
-            const attacksPerSec = Math.max(0.2, spe / 100);
-            let bestMoveDps = 0;
-            if (Array.isArray(p.moves) && p.moves.length > 0) {
-                p.moves.forEach(m => {
-                    if (!m || !m.power) return;
-                    const cat = (m.category || '').toLowerCase();
-                    const offStat = cat === 'physical' ? atk : cat === 'special' ? spa : Math.max(atk, spa);
-                    const stab = (Array.isArray(p.types) && m.type && p.types.includes(m.type)) ? 1.5 : 1.0;
-                    const dps = m.power * (offStat / 100) * stab * attacksPerSec;
-                    if (dps > bestMoveDps) bestMoveDps = dps;
-                });
-            }
-            if (bestMoveDps === 0) {
-                bestMoveDps = Math.max(atk, spa) * attacksPerSec;
-            }
-            if (bestMoveDps > highestDps) {
-                highestDps = bestMoveDps;
-                highestDpsName = pName;
-            }
         }
     });
 
@@ -2971,103 +2827,69 @@ async function init() {
         uniqueShinySpeciesCaught = Object.keys(state.stats.caughtShiniesSpecies).length;
     }
 
-    const regionKey = (state.currentRegionName || 'Kanto').toLowerCase() + '_id';
-    const totalSpeciesInRegion = state.config.pokemonData.filter(p => Number.isInteger(p.id) && p[regionKey] !== undefined).length;
-    const battlesWon = state.stats.battlesWon || 0;
-    const faints = state.stats.faints || 0;
-    const totalCaught = state.stats.caught || 0;
-    const shiniesCaught = state.stats.shiniesCaught || 0;
-    const breedsCompleted = state.stats.breedsCompleted || 0;
-    let totalBallsThrown = 0;
-    [state.stats.catchAttempts, state.stats.shinyCatchAttempts].forEach(tracker => {
-        if (!tracker) return;
-        Object.values(tracker).forEach(monData => {
-            if (!monData) return;
-            Object.values(monData).forEach(bData => {
-                if (bData && bData.thrown) totalBallsThrown += bData.thrown;
-            });
-        });
-    });
-
-    const renderProgress = (current, max, color = '#3498db') => {
-        const pct = max > 0 ? Math.min(100, Math.round((current / max) * 100)) : 0;
-        return `
-            <div style="width: 100%; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden; margin-top: 3px; margin-bottom: 8px;">
-                <div style="width: ${pct}%; height: 100%; background: ${color}; transition: width 0.3s;"></div>
-            </div>
-        `;
-    };
-
-    const cardStyle = 'background: rgba(0, 0, 0, 0.25); border: 2px solid #3498db; border-radius: 10px; padding: 12px 15px; box-sizing: border-box;';
-    const headerStyle = 'font-size: 13px; font-weight: bold; color: #3498db; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; border-bottom: 1px solid rgba(52, 152, 219, 0.3); padding-bottom: 4px;';
-    const rowStyle = 'display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 5px; color: #e2e8f0;';
-
     return `
         <div style="position: relative; height: 100%; display: flex; flex-direction: column; padding: 2%; box-sizing: border-box;">
-            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; text-align: left;">
-                <div style="${cardStyle}">
-                    <div style="${headerStyle}">General & Combat</div>
-                    <div style="${rowStyle}"><span>Time Played</span><b>${playtimeStr}</b></div>
-                    <div style="${rowStyle}"><span>Money</span><b>$${state.trainer.money.toLocaleString()}</b></div>
-                    <div style="${rowStyle}"><span>Battles Won</span><b>${battlesWon.toLocaleString()}</b></div>
-                    <div style="${rowStyle}"><span>Faints</span><b>${faints.toLocaleString()}</b></div>
-                    <div style="${rowStyle}"><span>Total Breeds Completed</span><b>${breedsCompleted.toLocaleString()}</b></div>
-                    <div style="${rowStyle}"><span>Total Balls Thrown</span><b>${totalBallsThrown.toLocaleString()}</b></div>
+            <div style="text-align: left;">
+                <div style="display: flex; gap: 40px; justify-content: space-between;">
+                    <div style="flex: 1;">
+                        <p><b>Time played:</b> ${playtimeStr}</p>
+                        <p><b>$</b> ${state.trainer.money.toLocaleString()}</p>
+                    </div>
+                    <div style="flex: 1;">
+                        <p><b>Battles Won:</b> ${(state.stats.battlesWon || 0).toLocaleString()}</p>
+                        <p><b>Faints:</b> ${(state.stats.faints || 0).toLocaleString()}</p>
+                    </div>
                 </div>
-                <div style="${cardStyle}">
-                    <div style="${headerStyle}">Pokédex Progress</div>
-                    <div style="${rowStyle}"><span>Total Captured</span><b>${totalCaught.toLocaleString()}</b></div>
-                    <div style="${rowStyle}"><span>Shinies Caught</span><b>${shiniesCaught.toLocaleString()}</b></div>
-                    <div style="${rowStyle}"><span>Species Caught</span><b>${uniqueSpeciesCaught} / ${totalSpeciesInRegion}</b></div>
-                    ${renderProgress(uniqueSpeciesCaught, totalSpeciesInRegion, '#3498db')}
-                    <div style="${rowStyle}"><span>Shiny Species</span><b>${uniqueShinySpeciesCaught} / ${totalSpeciesInRegion}</b></div>
-                    ${renderProgress(uniqueShinySpeciesCaught, totalSpeciesInRegion, '#facc15')}
+                <hr style="margin: 10px 0;">
+                <div style="display: flex; gap: 40px; justify-content: space-between;">
+                    <div style="flex: 1;">
+                        <p><b>Total Pokémon Captured:</b> ${(state.stats.caught || 0).toLocaleString()}</p>
+                        <p><b>Species Caught:</b> ${uniqueSpeciesCaught} / ${state.config.pokemonData.filter(p => Number.isInteger(p.id) && p[(state.currentRegionName || 'Kanto').toLowerCase() + '_id'] !== undefined).length}</p>
+                    </div>
+                    <div style="flex: 1;">
+                        <p><b>Shinies Caught:</b> ${(state.stats.shiniesCaught || 0).toLocaleString()}</p>
+                        <p><b>Shiny Species Caught:</b> ${uniqueShinySpeciesCaught} / ${state.config.pokemonData.filter(p => Number.isInteger(p.id) && p[(state.currentRegionName || 'Kanto').toLowerCase() + '_id'] !== undefined).length}</p>
+                    </div>
                 </div>
-                <div style="${cardStyle}">
-                    <div style="${headerStyle}">Activities & Rewards</div>
-                    <div style="${rowStyle}"><span>Jigglypuff Grains Used</span><b>${(state.stats.jigglypuffGrainsUsed || 0).toLocaleString()}</b></div>
-                    <div style="${rowStyle}"><span>White Candies Claimed</span><b>${(whiteCandiesClaimed || 0).toLocaleString()}</b></div>
-                    <div style="${rowStyle}"><span>Daily Rewards</span><b>${(state.stats.dailyRewards ? state.stats.dailyRewards.daysClaimed : 0).toLocaleString()}</b></div>
-                    <div style="${rowStyle}"><span>Daily Tokens Earned</span><b>${(state.stats.tokensEarned || 0).toLocaleString()}</b></div>
-                    <div style="${rowStyle}"><span>Lab Assignments</span><b>${assignmentsCompleted} / ${maxAssignments}</b></div>
-                    ${renderProgress(assignmentsCompleted, maxAssignments, '#4ade80')}
-                    <div style="${rowStyle}"><span>Progress Challenges</span><b>${challengesCompleted} / ${maxChallenges}</b></div>
-                    ${renderProgress(challengesCompleted, maxChallenges, '#a855f7')}
+                <hr style="margin: 10px 0;">
+                <div style="display: flex; gap: 40px; justify-content: space-between;">
+                    <div style="flex: 1;">
+                        <p><b>Jigglypuff Grains Used:</b> ${(state.stats.jigglypuffGrainsUsed || 0).toLocaleString()}</p>
+                        <p><b>Daily Rewards Collected:</b> ${(state.stats.dailyRewards ? state.stats.dailyRewards.daysClaimed : 0).toLocaleString()}</p>
+                        <p><b>Professor Lab Assignments Completed:</b> ${assignmentsCompleted}/${maxAssignments}</p>
+                    </div>
+                    <div style="flex: 1;">
+                        <p><b>White Candies Claimed:</b> ${(whiteCandiesClaimed || 0).toLocaleString()}</p>
+                        <p><b>Daily Tokens Earned:</b> ${(state.stats.tokensEarned || 0).toLocaleString()}</p>
+                        <p><b>Progress Challenge Completed:</b> ${challengesCompleted}/${maxChallenges}</p>
+                    </div>
                 </div>
-                <div style="${cardStyle}">
-                    <div style="${headerStyle}">Records</div>
-                    <div style="${rowStyle}"><span>Highest Level (Backpack)</span><b>${highestLevel.toLocaleString()}</b></div>
-                    <div style="${rowStyle}"><span>Highest Level (Captured)</span><b>${(state.stats.highestLevelCaptured || 0).toLocaleString()}</b></div>
-                    <div style="${rowStyle}"><span>Highest Quality (Backpack)</span><b>${highestQuality.toLocaleString()}</b></div>
-                    <div style="${rowStyle}"><span>Highest Quality (Captured)</span><b>${(state.stats.highestQualityCaptured || 0).toLocaleString()}</b></div>
-                    <div style="${rowStyle}"><span>Highest IV Sum (Backpack)</span><b>${highestSumIV.toLocaleString()}</b></div>
-                    <div style="${rowStyle}"><span>Highest IV Sum (Captured)</span><b>${(state.stats.highestSumIVCaptured || 0).toLocaleString()}</b></div>
-                    <div style="${rowStyle}"><span>Highest Sum of Stats</span><b>${highestStatSum > 0 ? `${highestStatSumName}: ${Math.round(highestStatSum).toLocaleString()}` : 'None'}</b></div>
-                    <div style="${rowStyle}"><span>Highest DPS</span><b>${highestDps > 0 ? `${highestDpsName}: ${Math.round(highestDps).toLocaleString()}` : 'None'}</b></div>
+                <hr style="margin: 10px 0;">
+                <div style="display: flex; gap: 40px; justify-content: space-between;">
+                    <div style="flex: 1;">
+                        <p><b>Highest Level on Backpack:</b> ${highestLevel}</p>
+                        <p><b>Highest Quality on Backpack:</b> ${highestQuality}</p>
+                        <p><b>Highest IV Sum on Backpack:</b> ${highestSumIV}</p>
+                    </div>
+                    <div style="flex: 1;">
+                        <p><b>Highest Level Captured:</b> ${state.stats.highestLevelCaptured || 0}</p>
+                        <p><b>Highest Quality Captured:</b> ${state.stats.highestQualityCaptured || 0}</p>
+                        <p><b>Highest IV Sum Captured:</b> ${state.stats.highestSumIVCaptured || 0}</p>
+                    </div>
                 </div>
             </div>
         </div>
     `;
 }
 function generateTrainerBadgesHtml() {
-    let badgesHtml = '<div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; justify-items: stretch; align-items: stretch; margin: 0 auto;">';
+    let badgesHtml = '<div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; justify-items: center; align-items: center; margin: 0 auto;">';
 
     // To be consistent with gift mapping, we map badge icons based on the current region and sequential badge number
     const badgeRegion = state.currentRegionName || 'Kanto';
-    const totalBadges = badgeRegion === 'Alola' ? 11 : 8;
-    const earnedBadges = state.trainer.badges || 0;
-
-    for (let i = 0; i < totalBadges; i++) {
+    for (let i = 0; i < state.trainer.badges; i++) {
         const badgeNum = i + 1;
-        const isEarned = i < earnedBadges;
         const badgeFile = window.getBadgeFileName(badgeRegion, badgeNum);
-        const imgFilter = isEarned ? 'filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.6));' : 'filter: grayscale(100%) opacity(0.35);';
-        badgesHtml += `
-            <div style="background: rgba(0, 0, 0, 0.25); border: 2px solid #3498db; border-radius: 10px; padding: 12px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 8px; box-sizing: border-box;">
-                <img src="./Assets/Gym/Badges/${badgeFile}" style="width: 84px; height: 84px; object-fit: contain; ${imgFilter}" title="Badge ${badgeNum}">
-                <div style="font-size: 12px; font-weight: bold; color: ${isEarned ? '#ffffff' : '#64748b'};">Badge ${badgeNum}</div>
-            </div>
-        `;
+        badgesHtml += `<div style="background: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px; padding: 15px; display: flex; justify-content: center; align-items: center; box-sizing: border-box;"><img src="./Assets/Gym/Badges/${badgeFile}" style="width: 100px; height: 100px; object-fit: contain;" title="Badge ${i + 1}"></div>`;
     }
     badgesHtml += '</div>';
 
@@ -3130,7 +2952,7 @@ function generateTrainerMedalsHtml() {
                 class="medal-item"
                 data-region="${region}" data-caught="${caughtCount}" data-shiny="${shinyCount}" data-total="${totalInRegion}"
                 onclick="if(window.showMedalDetails) window.showMedalDetails('${region}', ${caughtCount}, ${shinyCount}, ${totalInRegion})"
-                style="background: rgba(0, 0, 0, 0.2); border-radius: 10px; padding: 10px 15px; border: 2px solid #3498db; display: flex; justify-content: space-around; align-items: center; box-sizing: border-box; transition: all 0.2s ease-in-out; min-height: 0; cursor: pointer;"
+                style="background: rgba(0, 0, 0, 0.2); border-radius: 10px; padding: 10px 15px; border: 1px solid rgba(255, 255, 255, 0.1); display: flex; justify-content: space-around; align-items: center; box-sizing: border-box; transition: all 0.2s ease-in-out; min-height: 0; cursor: pointer;"
             >
                 <div style="text-align: center; ${!hasFirst ? 'filter: grayscale(100%) opacity(0.5);' : 'filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.5));'}">
                     <img src="Assets/Extra/Medals/${region} First.png" alt="${region} First" style="width: 100%; max-width: 64px; max-height: 100%; object-fit: contain; image-rendering: pixelated;" onerror="this.src='Assets/Extra/Medals/Kanto First.png'">
@@ -3151,8 +2973,8 @@ function generateTrainerMedalsHtml() {
         <style>
             .medal-item:hover {
                 background: rgba(255, 255, 255, 0.1) !important;
-                border-color: #3498db !important;
-                box-shadow: 0 0 15px rgba(52, 152, 219, 0.6);
+                border-color: rgba(255, 255, 255, 0.5) !important;
+                box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
             }
         </style>
     `;
@@ -3163,7 +2985,7 @@ function generateTrainerDetailsHtml(tab, options) {
     const headerTitle = tab === 'medal-details' ? `${options.region} Medals` : `${options.title} Upgrades`;
     const backTab = tab === 'medal-details' ? 'medals' : 'upgrades';
     return `
-        <div class="floating-window" style="position: relative; width: 100%; height: 100%; box-sizing: border-box; display: flex; flex-direction: column; overflow: hidden;">
+        <div class="floating-window" style="position: relative; width: 100%; height: 100%; display: flex; flex-direction: column; overflow: hidden;">
             <div class="window-header" style="position: relative; cursor: default;">
                 <span>${headerTitle}</span>
                 <span onclick="window.showTrainerStats('${backTab}')" style="position: absolute; top: 5px; right: 5px; font-size: 12px; font-weight: bold; line-height: 1; padding: 0; cursor: pointer; color: white;">X</span>
@@ -3254,8 +3076,8 @@ function generateTrainerUpgradesHtml() {
         <style>
             .upgrade-item:hover {
                 background: rgba(255, 255, 255, 0.1) !important;
-                border-color: #3498db !important;
-                box-shadow: 0 0 15px rgba(52, 152, 219, 0.6);
+                border-color: rgba(255, 255, 255, 0.5) !important;
+                box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
             }
         </style>
     `;
@@ -3267,51 +3089,8 @@ function generateTrainerUpgradesHtml() {
     return contentHtml;
 }
 
-    window.closeTrainerInnerModal = function() {
-        const overlay = document.getElementById('trainer-inner-modal-overlay');
-        if (overlay) {
-            overlay.remove();
-        }
-    };
-
     window.showTrainerStats = function(tab = 'statistics', options = {}) {
         if(checkCombatLock()) return;
-
-        if (tab === 'medal-details' || tab === 'upgrade-details') {
-            const win = document.getElementById('window-trainer');
-            const innerContent = win ? win.querySelector('.window-content-container') : null;
-            if (innerContent) {
-                innerContent.style.position = 'relative';
-                const existingOverlay = document.getElementById('trainer-inner-modal-overlay');
-                if (existingOverlay) existingOverlay.remove();
-
-                const headerTitle = tab === 'medal-details' ? `${options.region} Medals` : `${options.title} Upgrades`;
-                const overlay = document.createElement('div');
-                overlay.id = 'trainer-inner-modal-overlay';
-                overlay.style.cssText = 'position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.75); z-index: 1000; display: flex; align-items: center; justify-content: center; box-sizing: border-box; padding: 20px;';
-                overlay.onclick = (e) => {
-                    if (e.target === overlay) window.closeTrainerInnerModal();
-                };
-
-                const doc = new DOMParser().parseFromString(`
-                    <div class="floating-window" onclick="event.stopPropagation()" onmousedown="event.stopPropagation()" style="position: relative; width: 85%; max-width: 650px; max-height: 85%; box-sizing: border-box; display: flex; flex-direction: column; overflow: hidden;">
-                        <div class="window-header" style="position: relative; cursor: default;">
-                            <span>${headerTitle}</span>
-                            <span onclick="if(window.closeTrainerInnerModal) window.closeTrainerInnerModal()" style="position: absolute; top: 5px; right: 5px; font-size: 12px; font-weight: bold; line-height: 1; padding: 0; cursor: pointer; color: white;">X</span>
-                        </div>
-                        <div class="window-content-container" style="flex: 1; overflow-y: auto; overflow-x: hidden; padding: 15px; box-sizing: border-box;">
-                            ${options.html}
-                        </div>
-                    </div>
-                `, 'text/html');
-                const modalEl = doc.body.firstElementChild;
-                if (modalEl) {
-                    overlay.appendChild(modalEl);
-                    innerContent.appendChild(overlay);
-                }
-                return;
-            }
-        }
 
         const isShiny = options.showShiny || false;
         let titleHtml = '';
@@ -3355,24 +3134,13 @@ function generateTrainerUpgradesHtml() {
             contentHtml = generateTrainerUpgradesHtml();
         }
 
-        const isInnerModal = (tab === 'medal-details' || tab === 'upgrade-details');
-        const existingWin = document.getElementById('window-trainer');
-        const preservedHeight = (isInnerModal && existingWin) ? existingWin.offsetHeight : null;
-
         showModal(titleHtml, contentHtml, "window-trainer");
 
         const win = document.getElementById('window-trainer');
         if (win) {
-            if (preservedHeight) {
-                win.style.height = `${preservedHeight}px`;
-            }
             const innerContent = win.querySelector('.window-content-container');
             if (innerContent) {
                 innerContent.style.setProperty('padding', '0px', 'important');
-                if (isInnerModal) {
-                    innerContent.style.height = '100%';
-                    innerContent.style.overflowX = 'hidden';
-                }
 
                 // Add redundant event listeners (Failsafe for onclick restriction)
                 const medalItems = innerContent.querySelectorAll('.medal-item');
@@ -3394,26 +3162,12 @@ function generateTrainerUpgradesHtml() {
                         if(window.showUpgradeDetails && type && tier > 0) window.showUpgradeDetails(type, tier);
                     });
                 });
-
-                const catchRateSearch = innerContent.querySelector('#catch-rate-search');
-                if (catchRateSearch) {
-                    catchRateSearch.addEventListener('input', (e) => {
-                        const query = e.target.value.trim().toLowerCase();
-                        const rows = innerContent.querySelectorAll('.catch-rate-row');
-                        rows.forEach(row => {
-                            const name = row.getAttribute('data-name') || '';
-                            row.style.display = name.includes(query) ? '' : 'none';
-                        });
-                    });
+            }
+            setTimeout(() => {
+                if (typeof win.adjustHeightForNewContent === 'function') {
+                    win.adjustHeightForNewContent();
                 }
-            }
-            if (!isInnerModal) {
-                setTimeout(() => {
-                    if (typeof win.adjustHeightForNewContent === 'function') {
-                        win.adjustHeightForNewContent();
-                    }
-                }, 50);
-            }
+            }, 50);
         }
     };
 
