@@ -87,6 +87,7 @@ export function cheatAction(action) {
         if (!state.backpack.potions) state.backpack.potions = {};
         if (state.config.balance && state.config.balance.items && state.config.balance.items.potions) {
             state.config.balance.items.potions.forEach(potion => {
+                if (potion.name === 'Max Potion') return;
                 const invName = potion.name === 'Big' ? 'Big Potion' : potion.name;
                 state.backpack.potions[invName] = (state.backpack.potions[invName] || 0) + 1000;
             });
