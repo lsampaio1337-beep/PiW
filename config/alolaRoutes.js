@@ -5775,7 +5775,10 @@ export const alolaUnlocks = [
     "challengeName": "Challenge 22",
     "areaId": "Kala'e Bay",
     "unlocks": [
-      "Melemele Sea"
+      "Heahea Beach",
+      "Ten Carat Hill - Inside",
+      "Melemele Sea",
+      "Ruins of Conflict"
     ],
     "requirements": {
       "defeatCountRoute": {
@@ -5786,19 +5789,6 @@ export const alolaUnlocks = [
   },
   {
     "challengeName": "Challenge 23",
-    "areaId": "Melemele Sea",
-    "unlocks": [
-      "Ten Carat Hill - Inside"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Melemele Sea",
-        "count": 10
-      }
-    }
-  },
-  {
-    "challengeName": "Challenge 24",
     "areaId": "Ten Carat Hill - Inside",
     "unlocks": [
       "Ten Carat Hill - Farthest Hollow"
@@ -5811,11 +5801,9 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 25",
+    "challengeName": "Challenge 24",
     "areaId": "Ten Carat Hill - Farthest Hollow",
-    "unlocks": [
-      "Heahea Beach"
-    ],
+    "unlocks": [],
     "requirements": {
       "defeatCountRoute": {
         "route": "Ten Carat Hill - Farthest Hollow",
@@ -5824,7 +5812,24 @@ export const alolaUnlocks = [
     }
   },
   {
+    "challengeName": "Challenge 25",
+    "areaId": "Melemele Sea",
+    "unlocks": [],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Melemele Sea",
+        "count": 10
+      }
+    }
+  },
+  {
     "challengeName": "Challenge 26",
+    "areaId": "Ruins of Conflict",
+    "unlocks": [],
+    "requirements": {}
+  },
+  {
+    "challengeName": "Challenge 27",
     "areaId": "Heahea Beach",
     "unlocks": [
       "Heahea City"
@@ -5832,7 +5837,7 @@ export const alolaUnlocks = [
     "requirements": {}
   },
   {
-    "challengeName": "Challenge 27",
+    "challengeName": "Challenge 28",
     "areaId": "Heahea City",
     "unlocks": [
       "Route 4"
@@ -5840,7 +5845,7 @@ export const alolaUnlocks = [
     "requirements": {}
   },
   {
-    "challengeName": "Challenge 28",
+    "challengeName": "Challenge 29",
     "areaId": "Route 4",
     "unlocks": [
       "Paniola Town"
@@ -5853,7 +5858,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 29",
+    "challengeName": "Challenge 30",
     "areaId": "Paniola Town",
     "unlocks": [
       "Paniola Ranch"
@@ -5866,7 +5871,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 30",
+    "challengeName": "Challenge 31",
     "areaId": "Paniola Ranch",
     "unlocks": [
       "Route 5"
@@ -5879,7 +5884,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 31",
+    "challengeName": "Challenge 32",
     "areaId": "Route 5",
     "unlocks": [
       "Brooklet Hill - North"
@@ -5892,7 +5897,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 32",
+    "challengeName": "Challenge 33",
     "areaId": "Brooklet Hill - North",
     "unlocks": [
       "Brooklet Hill - South"
@@ -5905,7 +5910,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 33",
+    "challengeName": "Challenge 34",
     "areaId": "Brooklet Hill - South",
     "unlocks": [
       "Brooklet Hill - Totem's Den"
@@ -5918,7 +5923,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 34",
+    "challengeName": "Challenge 35",
     "areaId": "Brooklet Hill - Totem's Den",
     "unlocks": [
       "Route 6 - North"
@@ -5931,7 +5936,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 35",
+    "challengeName": "Challenge 36",
     "areaId": "Route 6 - North",
     "unlocks": [
       "Route 6 - South"
@@ -5944,7 +5949,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 36",
+    "challengeName": "Challenge 37",
     "areaId": "Route 6 - South",
     "unlocks": [
       "Royal Avenue"
@@ -5957,7 +5962,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 37",
+    "challengeName": "Challenge 38",
     "areaId": "Royal Avenue",
     "unlocks": [
       "Route 7"
@@ -5965,7 +5970,7 @@ export const alolaUnlocks = [
     "requirements": {}
   },
   {
-    "challengeName": "Challenge 38",
+    "challengeName": "Challenge 39",
     "areaId": "Route 7",
     "unlocks": [
       "Wela Volcano Park"
@@ -5978,7 +5983,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 39",
+    "challengeName": "Challenge 40",
     "areaId": "Wela Volcano Park",
     "unlocks": [
       "Dividing Peak Tunnel"
@@ -5991,7 +5996,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 40",
+    "challengeName": "Challenge 41",
     "areaId": "Dividing Peak Tunnel",
     "unlocks": [
       "Route 8 - Main"
@@ -6004,7 +6009,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 41",
+    "challengeName": "Challenge 42",
     "areaId": "Route 8 - Main",
     "unlocks": [
       "Route 8 - Fossil Restoration Center"
@@ -6017,7 +6022,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 42",
+    "challengeName": "Challenge 43",
     "areaId": "Route 8 - Fossil Restoration Center",
     "unlocks": [
       "Lush Jungle - North"
@@ -6025,7 +6030,7 @@ export const alolaUnlocks = [
     "requirements": {}
   },
   {
-    "challengeName": "Challenge 43",
+    "challengeName": "Challenge 44",
     "areaId": "Lush Jungle - North",
     "unlocks": [
       "Lush Jungle - South"
@@ -6038,7 +6043,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 44",
+    "challengeName": "Challenge 45",
     "areaId": "Lush Jungle - South",
     "unlocks": [
       "Lush Jungle - West"
@@ -6051,7 +6056,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 45",
+    "challengeName": "Challenge 46",
     "areaId": "Lush Jungle - West",
     "unlocks": [
       "Lush Jungle - East Cave"
@@ -6064,7 +6069,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 46",
+    "challengeName": "Challenge 47",
     "areaId": "Lush Jungle - East Cave",
     "unlocks": [
       "Diglett's Tunnel"
@@ -6077,7 +6082,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 47",
+    "challengeName": "Challenge 48",
     "areaId": "Diglett's Tunnel",
     "unlocks": [
       "Route 9 - Main"
@@ -6090,7 +6095,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 48",
+    "challengeName": "Challenge 49",
     "areaId": "Route 9 - Main",
     "unlocks": [
       "Konikoni City"
@@ -6103,7 +6108,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 49",
+    "challengeName": "Challenge 50",
     "areaId": "Konikoni City",
     "unlocks": [
       "Memorial Hill"
@@ -6111,7 +6116,7 @@ export const alolaUnlocks = [
     "requirements": {}
   },
   {
-    "challengeName": "Challenge 50",
+    "challengeName": "Challenge 51",
     "areaId": "Memorial Hill",
     "unlocks": [
       "Akala Outskirts"
@@ -6124,7 +6129,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 51",
+    "challengeName": "Challenge 52",
     "areaId": "Akala Outskirts",
     "unlocks": [
       "Ruins of Life"
@@ -6137,7 +6142,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 52",
+    "challengeName": "Challenge 53",
     "areaId": "Ruins of Life",
     "unlocks": [
       "Hano Beach"
@@ -6145,7 +6150,7 @@ export const alolaUnlocks = [
     "requirements": {}
   },
   {
-    "challengeName": "Challenge 53",
+    "challengeName": "Challenge 54",
     "areaId": "Hano Beach",
     "unlocks": [
       "Hano Grand Resort"
@@ -6158,7 +6163,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 54",
+    "challengeName": "Challenge 55",
     "areaId": "Hano Grand Resort",
     "unlocks": [
       "Aether Paradise"
@@ -6166,7 +6171,7 @@ export const alolaUnlocks = [
     "requirements": {}
   },
   {
-    "challengeName": "Challenge 55",
+    "challengeName": "Challenge 56",
     "areaId": "Aether Paradise",
     "unlocks": [
       "Malie City - Outer Cape"
@@ -6174,7 +6179,7 @@ export const alolaUnlocks = [
     "requirements": {}
   },
   {
-    "challengeName": "Challenge 56",
+    "challengeName": "Challenge 57",
     "areaId": "Malie City - Outer Cape",
     "unlocks": [
       "Malie Garden"
@@ -6187,7 +6192,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 57",
+    "challengeName": "Challenge 58",
     "areaId": "Malie Garden",
     "unlocks": [
       "Route 10"
@@ -6200,7 +6205,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 58",
+    "challengeName": "Challenge 59",
     "areaId": "Route 10",
     "unlocks": [
       "Mount Hokulani - Main"
@@ -6213,7 +6218,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 59",
+    "challengeName": "Challenge 60",
     "areaId": "Mount Hokulani - Main",
     "unlocks": [
       "Mount Hokulani - East"
@@ -6226,7 +6231,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 60",
+    "challengeName": "Challenge 61",
     "areaId": "Mount Hokulani - East",
     "unlocks": [
       "Mount Hokulani - West"
@@ -6239,7 +6244,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 61",
+    "challengeName": "Challenge 62",
     "areaId": "Mount Hokulani - West",
     "unlocks": [
       "Hokulani Observatory"
@@ -6252,7 +6257,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 62",
+    "challengeName": "Challenge 63",
     "areaId": "Hokulani Observatory",
     "unlocks": [
       "Route 11"
@@ -6260,7 +6265,7 @@ export const alolaUnlocks = [
     "requirements": {}
   },
   {
-    "challengeName": "Challenge 63",
+    "challengeName": "Challenge 64",
     "areaId": "Route 11",
     "unlocks": [
       "Route 12"
@@ -6273,7 +6278,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 64",
+    "challengeName": "Challenge 65",
     "areaId": "Route 12",
     "unlocks": [
       "Blush Mountain"
@@ -6286,7 +6291,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 65",
+    "challengeName": "Challenge 66",
     "areaId": "Blush Mountain",
     "unlocks": [
       "Secluded Shore"
@@ -6299,10 +6304,10 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 66",
+    "challengeName": "Challenge 67",
     "areaId": "Secluded Shore",
     "unlocks": [
-      "Route 13"
+      "Ula'ula Beach"
     ],
     "requirements": {
       "defeatCountRoute": {
@@ -6312,7 +6317,20 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 67",
+    "challengeName": "Challenge 68",
+    "areaId": "Ula'ula Beach",
+    "unlocks": [
+      "Route 13"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Ula'ula Beach",
+        "count": 10
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 69",
     "areaId": "Route 13",
     "unlocks": [
       "Tapu Village"
@@ -6325,7 +6343,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 68",
+    "challengeName": "Challenge 70",
     "areaId": "Tapu Village",
     "unlocks": [
       "Route 14"
@@ -6338,7 +6356,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 69",
+    "challengeName": "Challenge 71",
     "areaId": "Route 14",
     "unlocks": [
       "Thrifty Megamart - Abandoned Site"
@@ -6351,10 +6369,10 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 70",
+    "challengeName": "Challenge 72",
     "areaId": "Thrifty Megamart - Abandoned Site",
     "unlocks": [
-      "Haina Desert"
+      "Route 15 - Main"
     ],
     "requirements": {
       "defeatCountRoute": {
@@ -6364,40 +6382,14 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 71",
-    "areaId": "Haina Desert",
-    "unlocks": [
-      "Route 15 - Main"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Haina Desert",
-        "count": 10
-      }
-    }
-  },
-  {
-    "challengeName": "Challenge 72",
-    "areaId": "Route 15 - Main",
-    "unlocks": [
-      "Ula'ula Beach"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Route 15 - Main",
-        "count": 10
-      }
-    }
-  },
-  {
     "challengeName": "Challenge 73",
-    "areaId": "Ula'ula Beach",
+    "areaId": "Route 15 - Main",
     "unlocks": [
       "Route 16 - Main"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "route": "Ula'ula Beach",
+        "route": "Route 15 - Main",
         "count": 10
       }
     }
@@ -6445,7 +6437,7 @@ export const alolaUnlocks = [
     "challengeName": "Challenge 77",
     "areaId": "Ula'ula Meadow",
     "unlocks": [
-      "Lake of the Sunne"
+      "Route 17 - Northeast"
     ],
     "requirements": {
       "defeatCountRoute": {
@@ -6456,14 +6448,6 @@ export const alolaUnlocks = [
   },
   {
     "challengeName": "Challenge 78",
-    "areaId": "Lake of the Sunne",
-    "unlocks": [
-      "Route 17 - Northeast"
-    ],
-    "requirements": {}
-  },
-  {
-    "challengeName": "Challenge 79",
     "areaId": "Route 17 - Northeast",
     "unlocks": [
       "Route 17 - West"
@@ -6476,7 +6460,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 80",
+    "challengeName": "Challenge 79",
     "areaId": "Route 17 - West",
     "unlocks": [
       "Po Town"
@@ -6489,7 +6473,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 81",
+    "challengeName": "Challenge 80",
     "areaId": "Po Town",
     "unlocks": [
       "Shady House"
@@ -6497,15 +6481,34 @@ export const alolaUnlocks = [
     "requirements": {}
   },
   {
-    "challengeName": "Challenge 82",
+    "challengeName": "Challenge 81",
     "areaId": "Shady House",
     "unlocks": [
-      "Seafolk Village - Main"
+      "Seafolk Village - Main",
+      "Lake of the Sunne",
+      "Haina Desert"
     ],
     "requirements": {}
   },
   {
+    "challengeName": "Challenge 82",
+    "areaId": "Lake of the Sunne",
+    "unlocks": [],
+    "requirements": {}
+  },
+  {
     "challengeName": "Challenge 83",
+    "areaId": "Haina Desert",
+    "unlocks": [],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Haina Desert",
+        "count": 10
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 84",
     "areaId": "Seafolk Village - Main",
     "unlocks": [
       "Poni Wilds"
@@ -6518,7 +6521,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 84",
+    "challengeName": "Challenge 85",
     "areaId": "Poni Wilds",
     "unlocks": [
       "Ancient Poni Path"
@@ -6531,7 +6534,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 85",
+    "challengeName": "Challenge 86",
     "areaId": "Ancient Poni Path",
     "unlocks": [
       "Poni Breaker Coast"
@@ -6544,7 +6547,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 86",
+    "challengeName": "Challenge 87",
     "areaId": "Poni Breaker Coast",
     "unlocks": [
       "Ruins of Hope"
@@ -6557,7 +6560,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 87",
+    "challengeName": "Challenge 88",
     "areaId": "Ruins of Hope",
     "unlocks": [
       "Exeggutor Island"
@@ -6565,7 +6568,7 @@ export const alolaUnlocks = [
     "requirements": {}
   },
   {
-    "challengeName": "Challenge 88",
+    "challengeName": "Challenge 89",
     "areaId": "Exeggutor Island",
     "unlocks": [
       "Vast Poni Canyon - Outside"
@@ -6578,7 +6581,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 89",
+    "challengeName": "Challenge 90",
     "areaId": "Vast Poni Canyon - Outside",
     "unlocks": [
       "Vast Poni Canyon - Inside"
@@ -6591,7 +6594,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 90",
+    "challengeName": "Challenge 91",
     "areaId": "Vast Poni Canyon - Inside",
     "unlocks": [
       "Vast Poni Canyon - Northwest"
@@ -6604,7 +6607,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 91",
+    "challengeName": "Challenge 92",
     "areaId": "Vast Poni Canyon - Northwest",
     "unlocks": [
       "Altar of the Sunne"
@@ -6617,7 +6620,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 92",
+    "challengeName": "Challenge 93",
     "areaId": "Altar of the Sunne",
     "unlocks": [
       "Ultra Megalopolis"
@@ -6625,7 +6628,7 @@ export const alolaUnlocks = [
     "requirements": {}
   },
   {
-    "challengeName": "Challenge 93",
+    "challengeName": "Challenge 94",
     "areaId": "Ultra Megalopolis",
     "unlocks": [
       "Mount Lanakila - Base"
@@ -6633,7 +6636,7 @@ export const alolaUnlocks = [
     "requirements": {}
   },
   {
-    "challengeName": "Challenge 94",
+    "challengeName": "Challenge 95",
     "areaId": "Mount Lanakila - Base",
     "unlocks": [
       "Mount Lanakila - Cave"
@@ -6646,7 +6649,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 95",
+    "challengeName": "Challenge 96",
     "areaId": "Mount Lanakila - Cave",
     "unlocks": [
       "Mount Lanakila - Outside"
@@ -6659,7 +6662,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 96",
+    "challengeName": "Challenge 97",
     "areaId": "Mount Lanakila - Outside",
     "unlocks": [
       "Pokémon League"
@@ -6672,26 +6675,25 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 97",
+    "challengeName": "Challenge 98",
     "areaId": "Pokémon League",
     "unlocks": [
-      "Ruins of Conflict"
-    ],
-    "requirements": {}
-  },
-  {
-    "challengeName": "Challenge 98",
-    "areaId": "Ruins of Conflict",
-    "unlocks": [
-      "Poni Grove"
+      "Poni Grove",
+      "Team Rocket's Castle"
     ],
     "requirements": {}
   },
   {
     "challengeName": "Challenge 99",
+    "areaId": "Team Rocket's Castle",
+    "unlocks": [],
+    "requirements": {}
+  },
+  {
+    "challengeName": "Challenge 100",
     "areaId": "Poni Grove",
     "unlocks": [
-      "Team Rocket's Castle"
+      "Poni Plains - Center"
     ],
     "requirements": {
       "defeatCountRoute": {
@@ -6699,14 +6701,6 @@ export const alolaUnlocks = [
         "count": 10
       }
     }
-  },
-  {
-    "challengeName": "Challenge 100",
-    "areaId": "Team Rocket's Castle",
-    "unlocks": [
-      "Poni Plains - Center"
-    ],
-    "requirements": {}
   },
   {
     "challengeName": "Challenge 101",
@@ -6764,6 +6758,7 @@ export const alolaUnlocks = [
     "challengeName": "Challenge 105",
     "areaId": "Poni Meadow",
     "unlocks": [
+      "Poni Coast",
       "Resolution Cave"
     ],
     "requirements": {
@@ -6776,9 +6771,7 @@ export const alolaUnlocks = [
   {
     "challengeName": "Challenge 106",
     "areaId": "Resolution Cave",
-    "unlocks": [
-      "Poni Coast"
-    ],
+    "unlocks": [],
     "requirements": {
       "defeatCountRoute": {
         "route": "Resolution Cave",
