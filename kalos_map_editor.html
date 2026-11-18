@@ -1,0 +1,1706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Region 6 (Kalos) - Map Coordinate Editor</title>
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --bg-panel: #1e293b;
+            --bg-card: #334155;
+            --border-color: #475569;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #3b82f6;
+            --accent-hover: #2563eb;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 360px;
+            background-color: var(--bg-panel);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            z-index: 20;
+            box-shadow: 4px 0 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .sidebar-header {
+            padding: 12px 15px;
+            background: rgba(0, 0, 0, 0.2);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .sidebar-header h2 {
+            font-size: 17px;
+            margin-bottom: 4px;
+            color: #60a5fa;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .sidebar-header p {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .region-select-wrap {
+            margin-bottom: 6px;
+        }
+
+        .region-select {
+            width: 100%;
+            background-color: rgba(15, 23, 42, 0.8);
+            color: #60a5fa;
+            font-weight: 600;
+            border: 1px solid var(--border-color);
+            padding: 5px 8px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .region-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin-top: 6px;
+            padding-top: 6px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        /* Selected Spot Info Panel */
+        .info-panel {
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--border-color);
+            background: rgba(15, 23, 42, 0.5);
+        }
+
+        .info-panel h3 {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .form-group {
+            margin-bottom: 8px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-bottom: 2px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 8px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        input[type="text"], input[type="number"], select {
+            width: 100%;
+            padding: 6px 10px;
+            background-color: var(--bg-dark);
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            color: var(--text-main);
+            font-size: 12px;
+            user-select: text;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .btn {
+            padding: 7px 12px;
+            border: none;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .btn-primary { background-color: var(--accent); color: white; }
+        .btn-primary:hover { background-color: var(--accent-hover); }
+
+        .btn-success { background-color: var(--success); color: white; }
+        .btn-success:hover { background-color: #059669; }
+
+        .btn-danger { background-color: var(--danger); color: white; }
+        .btn-danger:hover { background-color: #dc2626; }
+
+        .btn-secondary {
+            background-color: var(--bg-card);
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+        }
+        .btn-secondary:hover { background-color: #475569; }
+
+        /* Spot List */
+        .list-controls {
+            padding: 10px 15px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .spot-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .spot-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 6px 10px;
+            background-color: rgba(255, 255, 255, 0.03);
+            border: 1px solid transparent;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .spot-item:hover {
+            background-color: rgba(255, 255, 255, 0.08);
+        }
+
+        .spot-item.active {
+            background-color: rgba(59, 130, 246, 0.2);
+            border-color: var(--accent);
+        }
+
+        .spot-item img {
+            width: 22px;
+            height: 22px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 2px #000);
+        }
+
+        .spot-item-details {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .spot-item-name {
+            font-size: 12px;
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .spot-item-key {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .spot-item-coords {
+            font-size: 11px;
+            font-family: monospace;
+            color: #38bdf8;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 2px 5px;
+            border-radius: 4px;
+        }
+
+        /* Sidebar Footer */
+        .sidebar-footer {
+            padding: 12px 15px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        /* Main Viewport */
+        .main-view {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            background: radial-gradient(circle at center, #1e293b 0%, #090d16 100%);
+        }
+
+        /* Top Toolbar */
+        .toolbar {
+            height: 48px;
+            background-color: rgba(30, 41, 59, 0.9);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 16px;
+            z-index: 10;
+        }
+
+        .toolbar-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .zoom-display {
+            font-family: monospace;
+            font-size: 13px;
+            font-weight: bold;
+            min-width: 50px;
+            text-align: center;
+            color: #38bdf8;
+        }
+
+        .cursor-coords {
+            font-family: monospace;
+            font-size: 12px;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 4px 8px;
+            border-radius: 5px;
+            border: 1px solid var(--border-color);
+            color: #a7f3d0;
+        }
+
+        .help-hint {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        /* Map Canvas Container */
+        .viewport {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            cursor: crosshair;
+        }
+
+        .viewport.panning {
+            cursor: grabbing !important;
+        }
+
+        #map-transform-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform-origin: 0 0;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+        }
+
+        #map-container {
+            position: relative;
+            width: 1032px;
+            height: 676px;
+            background-image: url('./Assets/Map/6 Kalos Map.png');
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+        }
+
+        /* Markers on Map */
+        .map-marker {
+            position: absolute;
+            transform: translate(-50%, -50%);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            cursor: grab;
+            z-index: 5;
+            transition: transform 0.1s;
+            filter: drop-shadow(1px 0px 0 #000) drop-shadow(-1px 0px 0 #000) drop-shadow(0px 1px 0 #000) drop-shadow(0px -1px 0 #000) drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.8));
+        }
+
+        .map-marker:hover {
+            z-index: 15;
+            transform: translate(-50%, -50%) scale(1.2);
+        }
+
+        .map-marker.selected {
+            z-index: 16;
+            filter: drop-shadow(0 0 3px #000) drop-shadow(0 0 10px #38bdf8) drop-shadow(0 0 15px #3b82f6);
+            transform: translate(-50%, -50%) scale(1.25);
+        }
+
+        .map-marker.dragging {
+            cursor: grabbing;
+            z-index: 20;
+            transition: none;
+        }
+
+        .marker-label {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-top: 3px;
+            background: rgba(15, 23, 42, 0.9);
+            color: #fff;
+            font-size: 10px;
+            font-weight: 600;
+            padding: 2px 5px;
+            border-radius: 3px;
+            white-space: nowrap;
+            pointer-events: none;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .map-marker.selected .marker-label {
+            background: var(--accent);
+            border-color: #fff;
+        }
+
+        .hide-labels .marker-label {
+            display: none;
+        }
+
+        .map-marker:hover .marker-label {
+            display: block !important;
+        }
+
+        /* Modal for Export */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(4px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            background: var(--bg-panel);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            width: 700px;
+            max-width: 90vw;
+            max-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+        }
+
+        .modal-header {
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-body {
+            padding: 20px;
+            flex: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .modal-body textarea {
+            width: 100%;
+            height: 400px;
+            background: #090d16;
+            color: #e2e8f0;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 12px;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 13px;
+            resize: none;
+            user-select: text;
+        }
+
+        .modal-footer {
+            padding: 15px 20px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--success);
+            color: white;
+            padding: 10px 18px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 14px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.25s;
+            pointer-events: none;
+            z-index: 200;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h2>
+                <span>Region 6: Kalos</span>
+                <span style="font-size: 12px; color: var(--accent); font-weight: normal;">Editor</span>
+            </h2>
+            <p>Click spot to inspect, drag to move, click map to add.</p>
+            <div class="region-select-wrap">
+                <select class="region-select" onchange="window.location.href=this.value">
+                    <option value="kanto_map_editor.html" >Region 1: Kanto</option>
+                    <option value="johto_map_editor.html" >Region 2: Johto</option>
+                    <option value="hoenn_map_editor.html" >Region 3: Hoenn</option>
+                    <option value="sinnoh_map_editor.html" >Region 4: Sinnoh</option>
+                    <option value="unova_map_editor.html" >Region 5: Unova</option>
+                    <option value="kalos_map_editor.html" selected>Region 6: Kalos</option>
+                    <option value="alola_map_editor.html" >Region 7: Alola</option>
+                    <option value="galar_map_editor.html" >Region 8: Galar</option>
+                    <option value="hisui_map_editor.html" >Region 9: Hisui</option>
+                    <option value="paldea_map_editor.html" >Region 10: Paldea</option>
+                </select>
+            </div>
+            <div class="region-nav">
+                <a href="kanto_map_editor.html" style="text-decoration: none; padding: 4px 8px; border-radius: 12px; font-size: 11px; border: 1px solid; transition: all 0.15s; background: rgba(255,255,255,0.06); color: #94a3b8; border-color: rgba(255,255,255,0.1);">1. Kanto</a>
+            <a href="johto_map_editor.html" style="text-decoration: none; padding: 4px 8px; border-radius: 12px; font-size: 11px; border: 1px solid; transition: all 0.15s; background: rgba(255,255,255,0.06); color: #94a3b8; border-color: rgba(255,255,255,0.1);">2. Johto</a>
+            <a href="hoenn_map_editor.html" style="text-decoration: none; padding: 4px 8px; border-radius: 12px; font-size: 11px; border: 1px solid; transition: all 0.15s; background: rgba(255,255,255,0.06); color: #94a3b8; border-color: rgba(255,255,255,0.1);">3. Hoenn</a>
+            <a href="sinnoh_map_editor.html" style="text-decoration: none; padding: 4px 8px; border-radius: 12px; font-size: 11px; border: 1px solid; transition: all 0.15s; background: rgba(255,255,255,0.06); color: #94a3b8; border-color: rgba(255,255,255,0.1);">4. Sinnoh</a>
+            <a href="unova_map_editor.html" style="text-decoration: none; padding: 4px 8px; border-radius: 12px; font-size: 11px; border: 1px solid; transition: all 0.15s; background: rgba(255,255,255,0.06); color: #94a3b8; border-color: rgba(255,255,255,0.1);">5. Unova</a>
+            <a href="kalos_map_editor.html" style="text-decoration: none; padding: 4px 8px; border-radius: 12px; font-size: 11px; border: 1px solid; transition: all 0.15s; background: #3b82f6; color: white; font-weight: bold; border-color: #60a5fa;">6. Kalos</a>
+            <a href="alola_map_editor.html" style="text-decoration: none; padding: 4px 8px; border-radius: 12px; font-size: 11px; border: 1px solid; transition: all 0.15s; background: rgba(255,255,255,0.06); color: #94a3b8; border-color: rgba(255,255,255,0.1);">7. Alola</a>
+            <a href="galar_map_editor.html" style="text-decoration: none; padding: 4px 8px; border-radius: 12px; font-size: 11px; border: 1px solid; transition: all 0.15s; background: rgba(255,255,255,0.06); color: #94a3b8; border-color: rgba(255,255,255,0.1);">8. Galar</a>
+            <a href="hisui_map_editor.html" style="text-decoration: none; padding: 4px 8px; border-radius: 12px; font-size: 11px; border: 1px solid; transition: all 0.15s; background: rgba(255,255,255,0.06); color: #94a3b8; border-color: rgba(255,255,255,0.1);">9. Hisui</a>
+            <a href="paldea_map_editor.html" style="text-decoration: none; padding: 4px 8px; border-radius: 12px; font-size: 11px; border: 1px solid; transition: all 0.15s; background: rgba(255,255,255,0.06); color: #94a3b8; border-color: rgba(255,255,255,0.1);">10. Paldea</a>
+            </div>
+        </div>
+
+        <!-- Selected Spot Inspector -->
+        <div class="info-panel" id="inspector-panel">
+            <h3>
+                <span>Selected Spot Info</span>
+                <span id="spot-count-badge" style="color: #38bdf8;">0 spots</span>
+            </h3>
+            <div class="form-group">
+                <label>Spot Name (Area Name)</label>
+                <input type="text" id="input-name" placeholder="Select or click map to create..." disabled>
+            </div>
+            <div class="form-group">
+                <label>Object Key (ID in kalosMapCoordinates)</label>
+                <input type="text" id="input-key" placeholder="e.g. 101 or gym" disabled>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>X Coordinate (%)</label>
+                    <input type="number" step="0.01" id="input-x" disabled>
+                </div>
+                <div class="form-group">
+                    <label>Y Coordinate (%)</label>
+                    <input type="number" step="0.01" id="input-y" disabled>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Spot Icon Image</label>
+                <select id="input-icon" disabled>
+                    <option value="auto">Auto (Detect by ID / Name)</option>
+                    <option value="./Assets/Map/Spots/Spot.png">Standard Spot (Spot.png)</option>
+                    <option value="./Assets/Map/Spots/Spot_Lab.png">Professor Lab (Spot_Lab.png)</option>
+                    <option value="./Assets/Map/Spots/Spot_PCPM.png">PokeCenter & Market (Spot_PCPM.png)</option>
+                    <option value="./Assets/Map/Spots/Spot_Safariball.png">Safari / Marsh (Spot_Safariball.png)</option>
+                    <option value="./Assets/Map/Spots/Spot_Casino.png">Game Corner / Casino (Spot_Casino.png)</option>
+                    <option value="./Assets/Map/Spots/Spot_Daycare.png">Daycare (Spot_Daycare.png)</option>
+                    <option value="./Assets/Map/Spots/Spot_BattleStadium.png">Battle Stadium / Frontier (Spot_BattleStadium.png)</option>
+                    <option value="./Assets/Map/Spot_Cave.png">Cave (Spot_Cave.png)</option>
+                    <option value="./Assets/Map/Spot_Fishing1.png">Fishing 1 - Tiny/Small (Spot_Fishing1.png)</option>
+                    <option value="./Assets/Map/Spot_Fishing2.png">Fishing 2 - Big (Spot_Fishing2.png)</option>
+                    <option value="./Assets/Map/Spot_Fishing3.png">Fishing 3 - Huge/Deep (Spot_Fishing3.png)</option>
+                    <option value="./Assets/Map/Spot_FossilRevival.png">Fossil Lab (Spot_FossilRevival.png)</option>
+                    <option value="./Assets/Map/Spot_FightingDojo.png">Dojo (Spot_FightingDojo.png)</option>
+                    <option value="./Assets/Map/Spot_PokeMansion.png">Mansion / Chateau (Spot_PokeMansion.png)</option>
+                    <option value="./Assets/Map/Spot_TradeHub.png">Trade Hub (Spot_TradeHub.png)</option>
+                    <option value="./Assets/Gym/Badges/Badge_Kalos_1_BugBadge_Bug.png">Gym 1: Santalune (Bug Badge)</option>
+                    <option value="./Assets/Gym/Badges/Badge_Kalos_2_CliffBadge_Rock.png">Gym 2: Cyllage (Cliff Badge)</option>
+                    <option value="./Assets/Gym/Badges/Badge_Kalos_3_RumbleBadge_Fighting.png">Gym 3: Shalour (Rumble Badge)</option>
+                    <option value="./Assets/Gym/Badges/Badge_Kalos_4_PlantBadge_Grass.png">Gym 4: Coumarine (Plant Badge)</option>
+                    <option value="./Assets/Gym/Badges/Badge_Kalos_5_VoltageBadge_Electric.png">Gym 5: Lumiose (Voltage Badge)</option>
+                    <option value="./Assets/Gym/Badges/Badge_Kalos_6_FairyBadge_Fairy.png">Gym 6: Laverre (Fairy Badge)</option>
+                    <option value="./Assets/Gym/Badges/Badge_Kalos_7_PsychicBadge_Psychic.png">Gym 7: Anistar (Psychic Badge)</option>
+                    <option value="./Assets/Gym/Badges/Badge_Kalos_8_IcebergBadge_Ice.png">Gym 8: Snowbelle (Iceberg Badge)</option>
+                </select>
+            </div>
+            <div class="form-row" style="margin-top: 8px;">
+                <button class="btn btn-danger" id="btn-delete-spot" style="width: 100%;" disabled>Delete Selected Spot</button>
+            </div>
+        </div>
+
+        <!-- Quick Add Unplotted Areas -->
+        <div class="list-controls">
+            <input type="text" id="search-spots" placeholder="Search plotted spots...">
+            <div class="form-row">
+                <select id="unplotted-select" style="flex: 1;">
+                    <option value="">-- Quick Add Unplotted Kalos Area --</option>
+                </select>
+                <button class="btn btn-secondary" id="btn-quick-add" title="Add at center of map">+ Add</button>
+            </div>
+        </div>
+
+        <!-- Plotted Spots List -->
+        <div class="spot-list" id="spot-list"></div>
+
+        <!-- Export Controls -->
+        <div class="sidebar-footer">
+            <button class="btn btn-success" id="btn-export" style="padding: 10px; font-size: 13px;">
+                Export Final Value (kalosMapCoordinates.js)
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Map Area -->
+    <div class="main-view">
+        <div class="toolbar">
+            <div class="toolbar-group">
+                <button class="btn btn-secondary" id="btn-zoom-out" title="Zoom Out">➖</button>
+                <div class="zoom-display" id="zoom-level">100%</div>
+                <button class="btn btn-secondary" id="btn-zoom-in" title="Zoom In">➕</button>
+                <button class="btn btn-secondary" id="btn-zoom-fit">Fit to Screen</button>
+                <button class="btn btn-secondary" id="btn-toggle-labels">Toggle Labels</button>
+            </div>
+            <div class="help-hint">
+                <b>Left Click Map:</b> New Spot | <b>Drag Spot:</b> Move | <b>Right/Middle Drag or Alt+Drag:</b> Pan | <b>Scroll:</b> Zoom
+            </div>
+            <div class="cursor-coords" id="cursor-coords">X: 0.00%, Y: 0.00%</div>
+        </div>
+
+        <div class="viewport" id="viewport">
+            <div id="map-transform-layer">
+                <div id="map-container"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Export Modal -->
+    <div class="modal-overlay" id="export-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>Export Data for config/kalosMapCoordinates.js</h3>
+                <button class="btn btn-secondary" id="btn-close-modal">✕</button>
+            </div>
+            <div class="modal-body">
+                <p style="font-size: 13px; color: var(--text-muted);">
+                    Copy the code below or download the file to directly replace <code>config/kalosMapCoordinates.js</code>:
+                </p>
+                <textarea id="export-textarea" readonly></textarea>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="btn-copy-json">Copy JSON Only</button>
+                <button class="btn btn-primary" id="btn-copy-code">Copy Full JS File</button>
+                <button class="btn btn-success" id="btn-download-file">Download kalosMapCoordinates.js</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast">Copied to clipboard!</div>
+
+    <script>
+        // Initial coordinates from config/kalosMapCoordinates.js
+        const initialMapCoordinates = {
+  "professor_lab": {
+    "name": "Kalos Professor Lab",
+    "x": 50,
+    "y": 50
+  },
+  "route2avancetrail": {
+    "name": "Route 2",
+    "x": 66.5,
+    "y": 65.5
+  },
+  "santaluneforest": {
+    "name": "Santalune Forest",
+    "x": 66.5,
+    "y": 62.5
+  },
+  "route3ouvertway": {
+    "name": "Route 3",
+    "x": 64.5,
+    "y": 58.5
+  },
+  "route22water": {
+    "name": "Route 22 (Water)",
+    "x": 69.0,
+    "y": 53.0
+  },
+  "santalunecitygym": {
+    "name": "Santalune Gym",
+    "x": 62.8,
+    "y": 55.0
+  },
+  "route4parterreway": {
+    "name": "Route 4",
+    "x": 58.2,
+    "y": 45.5
+  },
+  "route5versantroad": {
+    "name": "Route 5",
+    "x": 48.8,
+    "y": 45.5
+  },
+  "route6palaislane": {
+    "name": "Route 6",
+    "x": 38.5,
+    "y": 49.5
+  },
+  "connectingcavezubatroost": {
+    "name": "Connecting Cave",
+    "x": 28.5,
+    "y": 57.0
+  },
+  "route8muraillecoastuppercliffs": {
+    "name": "Route 8",
+    "x": 27.0,
+    "y": 64.5
+  },
+  "route8water": {
+    "name": "Route 8 (Water)",
+    "x": 24.0,
+    "y": 64.5
+  },
+  "route9spikespassage": {
+    "name": "Route 9",
+    "x": 32.5,
+    "y": 71.0
+  },
+  "glitteringcave": {
+    "name": "Glittering Cave",
+    "x": 39.2,
+    "y": 70.0
+  },
+  "cyllagecitywater": {
+    "name": "Cyllage City (Water)",
+    "x": 18.5,
+    "y": 55.5
+  },
+  "route10menhirtrail": {
+    "name": "Route 10",
+    "x": 16.0,
+    "y": 51.0
+  },
+  "route11miroirway": {
+    "name": "Route 11",
+    "x": 15.0,
+    "y": 42.0
+  },
+  "reflectioncave": {
+    "name": "Reflection Cave",
+    "x": 16.5,
+    "y": 39.5
+  },
+  "shalourcitygym": {
+    "name": "Shalour Gym",
+    "x": 18.0,
+    "y": 37.0
+  },
+  "route12fourrageroad": {
+    "name": "Route 12",
+    "x": 27.0,
+    "y": 32.0
+  },
+  "route12water": {
+    "name": "Route 12 (Water)",
+    "x": 25.5,
+    "y": 32.5
+  },
+  "azurebaywater": {
+    "name": "Azure Bay (Water)",
+    "x": 30.5,
+    "y": 21.5
+  },
+  "coumarinecitygym": {
+    "name": "Coumarine Gym",
+    "x": 36.0,
+    "y": 27.5
+  },
+  "route13lumiosebadlands": {
+    "name": "Route 13",
+    "x": 45.0,
+    "y": 31.5
+  },
+  "lumiosecitygym": {
+    "name": "Lumiose Gym",
+    "x": 53.6,
+    "y": 36.0
+  },
+  "route14laverrenaturetrail": {
+    "name": "Route 14",
+    "x": 53.6,
+    "y": 25.5
+  },
+  "laverrecitygym": {
+    "name": "Laverre Gym",
+    "x": 53.6,
+    "y": 14.5
+  },
+  "route15brunway": {
+    "name": "Route 15",
+    "x": 62.0,
+    "y": 21.5
+  },
+  "losthotel": {
+    "name": "Lost Hotel",
+    "x": 67.6,
+    "y": 22.0
+  },
+  "route16mlancoliepath": {
+    "name": "Route 16",
+    "x": 62.0,
+    "y": 32.5
+  },
+  "frostcavern": {
+    "name": "Frost Cavern",
+    "x": 77.5,
+    "y": 17.5
+  },
+  "route17mamoswineroad": {
+    "name": "Route 17",
+    "x": 77.5,
+    "y": 33.5
+  },
+  "anistarcitygym": {
+    "name": "Anistar Gym",
+    "x": 84.8,
+    "y": 38.5
+  },
+  "teamflaresecrethqgeosengetown": {
+    "name": "Team Flare Secret HQ",
+    "x": 12.0,
+    "y": 47.5
+  },
+  "route18valletroiteway": {
+    "name": "Route 18",
+    "x": 89.0,
+    "y": 42.5
+  },
+  "route19water": {
+    "name": "Route 19 (Water)",
+    "x": 88.5,
+    "y": 50.5
+  },
+  "route20windingwoods": {
+    "name": "Route 20",
+    "x": 82.5,
+    "y": 61.5
+  },
+  "snowbellecitygym": {
+    "name": "Snowbelle Gym",
+    "x": 84.0,
+    "y": 54.5
+  },
+  "route21dernireway": {
+    "name": "Route 21",
+    "x": 79.5,
+    "y": 52.0
+  },
+  "route21water": {
+    "name": "Route 21 (Water)",
+    "x": 79.5,
+    "y": 52.0
+  },
+  "victoryroad": {
+    "name": "Victory Road",
+    "x": 75.0,
+    "y": 49.5
+  },
+  "pokmonleague": {
+    "name": "Kalos Pokemon League",
+    "x": 75.0,
+    "y": 40.5
+  },
+  "Route 7": {
+    "name": "Route 7",
+    "x": 36.5,
+    "y": 55.5
+  },
+  "Abandoned Excavation Site": {
+    "name": "Abandoned Excavation Site",
+    "x": 0,
+    "y": 0
+  },
+  "Chambers of Emptiness": {
+    "name": "Chambers of Emptiness",
+    "x": 0,
+    "y": 0
+  },
+  "Path to Secret Chambers": {
+    "name": "Path to Secret Chambers",
+    "x": 0,
+    "y": 0
+  },
+  "Friend Safari Deep Inside": {
+    "name": "Friend Safari Deep Inside",
+    "x": 0,
+    "y": 0
+  },
+  "Path to Dragon Territory": {
+    "name": "Path to Dragon Territory",
+    "x": 0,
+    "y": 0
+  },
+  "Extra Challenge F (Roaming)": {
+    "name": "Extra Challenge F (Roaming)",
+    "x": 0,
+    "y": 0
+  },
+  "Narrow river": {
+    "name": "Narrow river",
+    "x": 0,
+    "y": 0
+  },
+  "Path to Sea Spirit Den": {
+    "name": "Path to Sea Spirit Den",
+    "x": 28.5,
+    "y": 19.5
+  },
+  "Mist Shore": {
+    "name": "Mist Shore",
+    "x": 0,
+    "y": 0
+  },
+  "Extra Challenge G (Roaming)": {
+    "name": "Extra Challenge G (Roaming)",
+    "x": 0,
+    "y": 0
+  },
+  "Route 22": {
+    "name": "Route 22",
+    "x": 69.0,
+    "y": 53.0
+  },
+  "Ultimate Chamber": {
+    "name": "Ultimate Chamber",
+    "x": 0,
+    "y": 0
+  },
+  "Quiet Marsh": {
+    "name": "Quiet Marsh",
+    "x": 0,
+    "y": 0
+  },
+  "Forsaken Dragon Territory": {
+    "name": "Forsaken Dragon Territory",
+    "x": 0,
+    "y": 0
+  },
+  "Sea Spirit Den Hall": {
+    "name": "Sea Spirit Den Hall",
+    "x": 27.2,
+    "y": 17.5
+  },
+  "Fierce Riverhead": {
+    "name": "Fierce Riverhead",
+    "x": 0,
+    "y": 0
+  },
+  "Cyllage Gym": {
+    "name": "Cyllage Gym",
+    "x": 20.0,
+    "y": 55.0
+  },
+  "Farm Road": {
+    "name": "Farm Road",
+    "x": 0,
+    "y": 0
+  },
+  "Starter Evolved Depot": {
+    "name": "Starter Evolved Depot",
+    "x": 0,
+    "y": 0
+  },
+  "Friend Safari Main Field": {
+    "name": "Friend Safari Main Field",
+    "x": 0,
+    "y": 0
+  },
+  "Friend Safari Nursery": {
+    "name": "Friend Safari Nursery",
+    "x": 0,
+    "y": 0
+  },
+  "Friend Safari Surroundings": {
+    "name": "Friend Safari Surroundings",
+    "x": 0,
+    "y": 0
+  },
+  "Sea Spirit Den Outer Depths": {
+    "name": "Sea Spirit Den Outer Depths",
+    "x": 27.2,
+    "y": 17.5
+  },
+  "Underground Chambers": {
+    "name": "Underground Chambers",
+    "x": 0,
+    "y": 0
+  },
+  "Starter Depot": {
+    "name": "Starter Depot",
+    "x": 0,
+    "y": 0
+  },
+  "Sanctum of Order": {
+    "name": "Sanctum of Order",
+    "x": 0,
+    "y": 0
+  },
+  "Sea Spirit Den Tunnels": {
+    "name": "Sea Spirit Den Tunnels",
+    "x": 27.2,
+    "y": 17.5
+  },
+  "Sea Spirit Den Entrance": {
+    "name": "Sea Spirit Den Entrance",
+    "x": 27.2,
+    "y": 17.5
+  },
+  "Lone Mountain": {
+    "name": "Lone Mountain",
+    "x": 0,
+    "y": 0
+  },
+  "Path to Team Flare Secret HQ": {
+    "name": "Path to Team Flare Secret HQ",
+    "x": 12.0,
+    "y": 47.5
+  },
+  "Team Flare Secret HQ Gate": {
+    "name": "Team Flare Secret HQ Gate",
+    "x": 12.0,
+    "y": 47.5
+  },
+  "Team Flare Secret HQ Entrance": {
+    "name": "Team Flare Secret HQ Entrance",
+    "x": 12.0,
+    "y": 47.5
+  },
+  "Team Flare Secret HQ Hall": {
+    "name": "Team Flare Secret HQ Hall",
+    "x": 12.0,
+    "y": 47.5
+  },
+  "Team Flare Battle (4 mix fighters)": {
+    "name": "Team Flare Battle (4 mix fighters)",
+    "x": 12.0,
+    "y": 47.5
+  }
+};
+
+        // All known areas from config/kalosRoutes.js
+        const allKnownAreas = [
+  "Professor Lab",
+  "PokeCenter & PokeMarket",
+  "Daycare",
+  "Battle Stadium",
+  "Trade With Friends Hub",
+  "Aquacorde Town",
+  "Route 2",
+  "Santalune Forest",
+  "Route 3",
+  "Santalune City",
+  "Santalune City Gym",
+  "Route 22",
+  "Route 4",
+  "Lumiose City (South)",
+  "Route 5",
+  "Camphrier Town",
+  "Parfum Palace",
+  "Route 6",
+  "Route 7",
+  "Connecting Cave",
+  "Ambrette Town",
+  "Ambrette Town (Fishing)",
+  "Route 8",
+  "Route 9",
+  "Glittering Cave",
+  "Cyllage City",
+  "Cyllage City Gym",
+  "Route 10",
+  "Geosenge Town",
+  "Route 11",
+  "Shalour City",
+  "Shalour City Gym",
+  "Route 12",
+  "Azure Bay",
+  "Azure Bay (Fishing)",
+  "Coumarine City Gym",
+  "Coumarine City (Fishing)",
+  "Route 13",
+  "Lumiose City (North)",
+  "Lumiose City Gym",
+  "Route 14",
+  "Laverre City",
+  "Laverre City Gym",
+  "Route 15",
+  "Lost Hotel",
+  "Dendemille Town",
+  "Route 16",
+  "Frost Cavern",
+  "Anistar City",
+  "Anistar City Gym",
+  "Route 17",
+  "Couriway Town",
+  "Route 18",
+  "Terminus Cave (Surface)",
+  "Route 19",
+  "Route 19 (Fishing)",
+  "Snowbelle City",
+  "Snowbelle City Gym",
+  "Route 20",
+  "Pokémon Village",
+  "Pokémon Village (Fishing)",
+  "Route 21",
+  "Victory Road",
+  "Cyllage City (Fishing)",
+  "Reflection Cave",
+  "Tower of Mastery",
+  "Coumarine City",
+  "Starter Depot",
+  "Starter Evolved Depot",
+  "Kiloude City",
+  "Friend Safari",
+  "Battle Maison",
+  "Path to Sea Spirit Den",
+  "Sea Spirit Den Outer Depths",
+  "Sea Spirit Den Entrance",
+  "Sea Spirit Den Tunnels",
+  "Sea Spirit Den Hall",
+  "Path to Secret Chambers",
+  "Chambers of Emptiness",
+  "Ultimate Chamber",
+  "Path to Team Flare Secret HQ",
+  "Team Flare Secret HQ Gate",
+  "Team Flare Secret HQ Entrance",
+  "Team Flare Secret HQ Hall",
+  "Secret Forest North",
+  "Underground Chambers (Crystal Cave Tunnels)",
+  "Garden Chambers (Secret Forest North)",
+  "Keys to Eternal Fight",
+  "The Eternal Fight",
+  "Kalos Pokemon League",
+  "Mystic Tower Entrance",
+  "Crystal Cave Tunnels",
+  "Path to Secret Ruins",
+  "2nd spot for Extra Challenge E"
+];
+
+        // State
+        let spots = [];
+        let selectedSpotId = null;
+        let zoom = 1;
+        let panX = 0;
+        let panY = 0;
+        let isPanning = false;
+        let panStartX = 0;
+        let panStartY = 0;
+        let draggingSpot = null;
+        let hasDragged = false;
+
+        const MAP_WIDTH = 1032;
+        const MAP_HEIGHT = 676;
+
+        // DOM Elements
+        const viewport = document.getElementById('viewport');
+        const transformLayer = document.getElementById('map-transform-layer');
+        const mapContainer = document.getElementById('map-container');
+        const spotListEl = document.getElementById('spot-list');
+        const spotCountBadge = document.getElementById('spot-count-badge');
+        const inputName = document.getElementById('input-name');
+        const inputKey = document.getElementById('input-key');
+        const inputX = document.getElementById('input-x');
+        const inputY = document.getElementById('input-y');
+        const inputIcon = document.getElementById('input-icon');
+        const btnDeleteSpot = document.getElementById('btn-delete-spot');
+        const searchInput = document.getElementById('search-spots');
+        const unplottedSelect = document.getElementById('unplotted-select');
+        const cursorCoordsEl = document.getElementById('cursor-coords');
+        const zoomLevelEl = document.getElementById('zoom-level');
+
+        function nameToKey(name) {
+            const routeMatch = name.match(/^Route\s+(\d+[a-zA-Z]?)$/i);
+            if (routeMatch) {
+                return routeMatch[1].toLowerCase();
+            }
+            return name
+                .toLowerCase()
+                .replace(/&/g, '')
+                .replace(/[^a-z0-9]+/g, '_')
+                .replace(/^_+|_+$/g, '');
+        }
+
+        function resolveSpotAppearance(spot) {
+            const id = (spot.key || '').toLowerCase();
+            const name = (spot.name || '').toLowerCase();
+            let img = './Assets/Map/Spots/Spot.png';
+            let size = 24;
+
+            if (spot.customIcon && spot.customIcon !== 'auto') {
+                img = spot.customIcon;
+                if (img.includes('Spot_PCPM')) size = 32;
+                else if (img.includes('Spot_') && !img.endsWith('/Spot.png')) size = 28;
+                return { img, size };
+            }
+
+            if (id.includes('professor') || name.includes('professor lab') || id === 'professor_lab') {
+                img = './Assets/Map/Spots/Spot_Lab.png';
+                size = 28;
+            } else if (id.includes('pokecenter') || id.includes('pokemon_center') || name.includes('pokecenter')) {
+                img = './Assets/Map/Spots/Spot_PCPM.png';
+                size = 32;
+            } else if (id.includes('safari') || id.includes('marsh') || name.includes('safari') || name.includes('marsh')) {
+                img = './Assets/Map/Spots/Spot_Safariball.png';
+                size = 28;
+            } else if (id.includes('casino') || id.includes('game_corner') || name.includes('game corner')) {
+                img = './Assets/Map/Spots/Spot_Casino.png';
+                size = 28;
+            } else if (id.includes('daycare') || name.includes('daycare')) {
+                img = './Assets/Map/Spots/Spot_Daycare.png';
+                size = 28;
+            } else if (id.includes('battle_stadium') || id.includes('battle_frontier') || name.includes('battle stadium') || name.includes('battle frontier')) {
+                img = './Assets/Map/Spots/Spot_BattleStadium.png';
+                size = 28;
+            } else if (id.includes('santalune') || name.includes('santalune') || id.includes('bug') || name.includes('bug')) {
+                img = './Assets/Gym/Badges/Badge_Kalos_1_BugBadge_Bug.png';
+            } else if (id.includes('cyllage') || name.includes('cyllage') || id.includes('cliff') || name.includes('cliff')) {
+                img = './Assets/Gym/Badges/Badge_Kalos_2_CliffBadge_Rock.png';
+            } else if (id.includes('shalour') || name.includes('shalour') || id.includes('rumble') || name.includes('rumble')) {
+                img = './Assets/Gym/Badges/Badge_Kalos_3_RumbleBadge_Fighting.png';
+            } else if (id.includes('coumarine') || name.includes('coumarine') || id.includes('plant') || name.includes('plant')) {
+                img = './Assets/Gym/Badges/Badge_Kalos_4_PlantBadge_Grass.png';
+            } else if (id.includes('lumiose') || name.includes('lumiose') || id.includes('voltage') || name.includes('voltage')) {
+                img = './Assets/Gym/Badges/Badge_Kalos_5_VoltageBadge_Electric.png';
+            } else if (id.includes('laverre') || name.includes('laverre') || id.includes('fairy') || name.includes('fairy')) {
+                img = './Assets/Gym/Badges/Badge_Kalos_6_FairyBadge_Fairy.png';
+            } else if (id.includes('anistar') || name.includes('anistar') || id.includes('psychic') || name.includes('psychic')) {
+                img = './Assets/Gym/Badges/Badge_Kalos_7_PsychicBadge_Psychic.png';
+            } else if (id.includes('snowbelle') || name.includes('snowbelle') || id.includes('iceberg') || name.includes('iceberg')) {
+                img = './Assets/Gym/Badges/Badge_Kalos_8_IcebergBadge_Ice.png';
+            } else if (id.includes('fossil') || name.includes('fossil')) {
+                img = './Assets/Map/Spot_FossilRevival.png';
+                size = 26;
+            } else if (id.includes('dojo') || name.includes('dojo')) {
+                img = './Assets/Map/Spot_FightingDojo.png';
+                size = 26;
+            } else if (id.includes('huge_fishing') || id.includes('underwater') || id.includes('diving') || id.includes('surfing')) {
+                img = './Assets/Map/Spot_Fishing3.png';
+                size = 26;
+            } else if (id.includes('big_fishing') || name.includes('big fishing')) {
+                img = './Assets/Map/Spot_Fishing2.png';
+                size = 26;
+            } else if (id.includes('fishing') || name.includes('fishing')) {
+                img = './Assets/Map/Spot_Fishing1.png';
+                size = 26;
+            } else if (id.includes('chateau') || name.includes('chateau') || id.includes('mansion') || name.includes('mansion')) {
+                img = './Assets/Map/Spot_PokeMansion.png';
+                size = 26;
+            } else if (id.includes('trade') || name.includes('trade')) {
+                img = './Assets/Map/Spot_TradeHub.png';
+                size = 26;
+            } else if (id.includes('cave') || name.includes('cave') || id.includes('cavern') || id.includes('tunnel') || id.includes('mine') || id.includes('gate') || id.includes('path') || id.includes('mountain')) {
+                img = './Assets/Map/Spot_Cave.png';
+                size = 26;
+            }
+
+            return { img, size };
+        }
+
+        function init() {
+            let uid = 1;
+            for (const [key, data] of Object.entries(initialMapCoordinates)) {
+                spots.push({
+                    uid: 'spot_' + (uid++),
+                    key: key,
+                    name: data.name || key,
+                    x: Number(data.x) || 0,
+                    y: Number(data.y) || 0,
+                    customIcon: 'auto'
+                });
+            }
+
+            fitMapToScreen();
+            renderAll();
+        }
+
+        function fitMapToScreen() {
+            const rect = viewport.getBoundingClientRect();
+            const scaleX = (rect.width - 60) / MAP_WIDTH;
+            const scaleY = (rect.height - 60) / MAP_HEIGHT;
+            zoom = Math.min(scaleX, scaleY, 1.5);
+            panX = (rect.width - MAP_WIDTH * zoom) / 2;
+            panY = (rect.height - MAP_HEIGHT * zoom) / 2;
+            updateTransform();
+        }
+
+        function updateTransform() {
+            transformLayer.style.transform = `translate(${panX}px, ${panY}px) scale(${zoom})`;
+            zoomLevelEl.textContent = `${Math.round(zoom * 100)}%`;
+        }
+
+        function renderAll() {
+            renderMarkers();
+            renderSidebarList();
+            updateUnplottedDropdown();
+            updateInspector();
+        }
+
+        function renderMarkers() {
+            mapContainer.innerHTML = '';
+            spots.forEach(spot => {
+                const { img, size } = resolveSpotAppearance(spot);
+                const el = document.createElement('div');
+                el.className = 'map-marker' + (spot.uid === selectedSpotId ? ' selected' : '');
+                el.dataset.uid = spot.uid;
+                el.style.left = `${spot.x}%`;
+                el.style.top = `${spot.y}%`;
+                el.style.width = `${size}px`;
+                el.style.height = `${size}px`;
+                el.style.backgroundImage = `url('${img}')`;
+                el.title = `${spot.name} (${spot.x}%, ${spot.y}%)`;
+
+                const label = document.createElement('div');
+                label.className = 'marker-label';
+                label.textContent = `${spot.name} (${spot.x}, ${spot.y})`;
+                el.appendChild(label);
+
+                el.addEventListener('mousedown', (e) => {
+                    if (e.button !== 0) return;
+                    e.stopPropagation();
+                    selectSpot(spot.uid);
+                    draggingSpot = spot;
+                    hasDragged = false;
+                    el.classList.add('dragging');
+                });
+
+                el.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                });
+
+                mapContainer.appendChild(el);
+            });
+
+            spotCountBadge.textContent = `${spots.length} spots`;
+        }
+
+        function renderSidebarList() {
+            const filter = searchInput.value.trim().toLowerCase();
+            spotListEl.innerHTML = '';
+
+            spots.forEach(spot => {
+                if (filter && !spot.name.toLowerCase().includes(filter) && !spot.key.toLowerCase().includes(filter)) {
+                    return;
+                }
+
+                const { img } = resolveSpotAppearance(spot);
+                const item = document.createElement('div');
+                item.className = 'spot-item' + (spot.uid === selectedSpotId ? ' active' : '');
+                item.dataset.uid = spot.uid;
+
+                const iconEl = document.createElement('img');
+                iconEl.src = img;
+                iconEl.alt = spot.name;
+
+                const detailsEl = document.createElement('div');
+                detailsEl.className = 'spot-item-details';
+
+                const nameEl = document.createElement('div');
+                nameEl.className = 'spot-item-name';
+                nameEl.textContent = spot.name;
+
+                const keyEl = document.createElement('div');
+                keyEl.className = 'spot-item-key';
+                keyEl.textContent = `Key: "${spot.key}"`;
+
+                detailsEl.appendChild(nameEl);
+                detailsEl.appendChild(keyEl);
+
+                const coordsEl = document.createElement('div');
+                coordsEl.className = 'spot-item-coords';
+                coordsEl.textContent = `${spot.x}, ${spot.y}`;
+
+                item.appendChild(iconEl);
+                item.appendChild(detailsEl);
+                item.appendChild(coordsEl);
+
+                item.addEventListener('click', () => {
+                    selectSpot(spot.uid, true);
+                });
+
+                spotListEl.appendChild(item);
+            });
+        }
+
+        function updateUnplottedDropdown() {
+            const plottedNames = new Set(spots.map(s => s.name.toLowerCase()));
+            const unplotted = allKnownAreas.filter(area => !plottedNames.has(area.toLowerCase()));
+
+            unplottedSelect.innerHTML = `<option value="">-- Unplotted ${allKnownAreas.length > 0 ? 'Kalos' : ''} Areas (${unplotted.length}) --</option>`;
+            unplotted.forEach(area => {
+                const opt = document.createElement('option');
+                opt.value = area;
+                opt.textContent = area;
+                unplottedSelect.appendChild(opt);
+            });
+        }
+
+        function selectSpot(uid, scrollIntoList = false) {
+            selectedSpotId = uid;
+
+            document.querySelectorAll('.map-marker').forEach(el => {
+                el.classList.toggle('selected', el.dataset.uid === uid);
+            });
+            document.querySelectorAll('.spot-item').forEach(el => {
+                const isSelected = el.dataset.uid === uid;
+                el.classList.toggle('active', isSelected);
+                if (isSelected && scrollIntoList) {
+                    el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+            });
+
+            updateInspector();
+        }
+
+        function updateInspector() {
+            const spot = spots.find(s => s.uid === selectedSpotId);
+            const hasSpot = Boolean(spot);
+
+            inputName.disabled = !hasSpot;
+            inputKey.disabled = !hasSpot;
+            inputX.disabled = !hasSpot;
+            inputY.disabled = !hasSpot;
+            inputIcon.disabled = !hasSpot;
+            btnDeleteSpot.disabled = !hasSpot;
+
+            if (!spot) {
+                inputName.value = '';
+                inputKey.value = '';
+                inputX.value = '';
+                inputY.value = '';
+                inputIcon.value = 'auto';
+                return;
+            }
+
+            inputName.value = spot.name;
+            inputKey.value = spot.key;
+            inputX.value = spot.x;
+            inputY.value = spot.y;
+            inputIcon.value = spot.customIcon || 'auto';
+        }
+
+        function getRelativeMapCoords(e) {
+            const rect = mapContainer.getBoundingClientRect();
+            const relX = ((e.clientX - rect.left) / rect.width) * 100;
+            const relY = ((e.clientY - rect.top) / rect.height) * 100;
+            return {
+                x: Number(Math.max(0, Math.min(100, relX)).toFixed(2)),
+                y: Number(Math.max(0, Math.min(100, relY)).toFixed(2))
+            };
+        }
+
+        inputName.addEventListener('input', () => {
+            const spot = spots.find(s => s.uid === selectedSpotId);
+            if (!spot) return;
+            spot.name = inputName.value;
+            spot.key = nameToKey(spot.name);
+            inputKey.value = spot.key;
+            renderMarkers();
+            renderSidebarList();
+            updateUnplottedDropdown();
+        });
+
+        inputKey.addEventListener('input', () => {
+            const spot = spots.find(s => s.uid === selectedSpotId);
+            if (!spot) return;
+            spot.key = inputKey.value;
+            renderMarkers();
+            renderSidebarList();
+        });
+
+        inputX.addEventListener('input', () => {
+            const spot = spots.find(s => s.uid === selectedSpotId);
+            if (!spot) return;
+            spot.x = Number(parseFloat(inputX.value || 0).toFixed(2));
+            renderMarkers();
+            renderSidebarList();
+        });
+
+        inputY.addEventListener('input', () => {
+            const spot = spots.find(s => s.uid === selectedSpotId);
+            if (!spot) return;
+            spot.y = Number(parseFloat(inputY.value || 0).toFixed(2));
+            renderMarkers();
+            renderSidebarList();
+        });
+
+        inputIcon.addEventListener('change', () => {
+            const spot = spots.find(s => s.uid === selectedSpotId);
+            if (!spot) return;
+            spot.customIcon = inputIcon.value;
+            renderMarkers();
+            renderSidebarList();
+        });
+
+        btnDeleteSpot.addEventListener('click', () => {
+            if (!selectedSpotId) return;
+            spots = spots.filter(s => s.uid !== selectedSpotId);
+            selectedSpotId = null;
+            renderAll();
+        });
+
+        searchInput.addEventListener('input', renderSidebarList);
+
+        document.getElementById('btn-quick-add').addEventListener('click', () => {
+            const areaName = unplottedSelect.value;
+            if (!areaName) return;
+            addNewSpot(areaName, 50, 50);
+        });
+
+        function addNewSpot(name, x, y) {
+            const key = nameToKey(name);
+            const newSpot = {
+                uid: 'spot_' + Date.now() + '_' + Math.floor(Math.random() * 1000),
+                key: key,
+                name: name,
+                x: x,
+                y: y,
+                customIcon: 'auto'
+            };
+            spots.push(newSpot);
+            selectedSpotId = newSpot.uid;
+            renderAll();
+            selectSpot(newSpot.uid, true);
+        }
+
+        viewport.addEventListener('mousedown', (e) => {
+            if (e.button === 1 || e.button === 2 || (e.button === 0 && (e.altKey || e.shiftKey))) {
+                e.preventDefault();
+                isPanning = true;
+                panStartX = e.clientX - panX;
+                panStartY = e.clientY - panY;
+                viewport.classList.add('panning');
+            }
+        });
+
+        window.addEventListener('mousemove', (e) => {
+            const coords = getRelativeMapCoords(e);
+            cursorCoordsEl.textContent = `X: ${coords.x.toFixed(2)}%, Y: ${coords.y.toFixed(2)}%`;
+
+            if (isPanning) {
+                panX = e.clientX - panStartX;
+                panY = e.clientY - panStartY;
+                updateTransform();
+                return;
+            }
+
+            if (draggingSpot) {
+                hasDragged = true;
+                draggingSpot.x = coords.x;
+                draggingSpot.y = coords.y;
+
+                const markerEl = mapContainer.querySelector(`.map-marker[data-uid="${draggingSpot.uid}"]`);
+                if (markerEl) {
+                    markerEl.style.left = `${coords.x}%`;
+                    markerEl.style.top = `${coords.y}%`;
+                    const labelEl = markerEl.querySelector('.marker-label');
+                    if (labelEl) {
+                        labelEl.textContent = `${draggingSpot.name} (${coords.x}, ${coords.y})`;
+                    }
+                }
+
+                inputX.value = coords.x;
+                inputY.value = coords.y;
+            }
+        });
+
+        window.addEventListener('mouseup', () => {
+            if (isPanning) {
+                isPanning = false;
+                viewport.classList.remove('panning');
+            }
+            if (draggingSpot) {
+                const markerEl = mapContainer.querySelector(`.map-marker[data-uid="${draggingSpot.uid}"]`);
+                if (markerEl) markerEl.classList.remove('dragging');
+                draggingSpot = null;
+                renderSidebarList();
+            }
+        });
+
+        mapContainer.addEventListener('click', (e) => {
+            if (hasDragged || isPanning || e.altKey || e.shiftKey) {
+                hasDragged = false;
+                return;
+            }
+            if (e.target !== mapContainer) return;
+
+            const coords = getRelativeMapCoords(e);
+            const defaultName = unplottedSelect.value || "New Spot";
+            const spotName = prompt(`Enter name for new spot at (X: ${coords.x}%, Y: ${coords.y}%):`, defaultName);
+            if (spotName && spotName.trim()) {
+                addNewSpot(spotName.trim(), coords.x, coords.y);
+            }
+        });
+
+        viewport.addEventListener('contextmenu', e => e.preventDefault());
+
+        viewport.addEventListener('wheel', (e) => {
+            e.preventDefault();
+            const zoomFactor = e.deltaY < 0 ? 1.15 : 0.87;
+            const newZoom = Math.max(0.2, Math.min(6, zoom * zoomFactor));
+
+            const rect = viewport.getBoundingClientRect();
+            const mouseX = e.clientX - rect.left;
+            const mouseY = e.clientY - rect.top;
+
+            panX = mouseX - (mouseX - panX) * (newZoom / zoom);
+            panY = mouseY - (mouseY - panY) * (newZoom / zoom);
+            zoom = newZoom;
+
+            updateTransform();
+        }, { passive: false });
+
+        document.getElementById('btn-zoom-in').addEventListener('click', () => {
+            zoom = Math.min(6, zoom * 1.25);
+            updateTransform();
+        });
+
+        document.getElementById('btn-zoom-out').addEventListener('click', () => {
+            zoom = Math.max(0.2, zoom * 0.8);
+            updateTransform();
+        });
+
+        document.getElementById('btn-zoom-fit').addEventListener('click', fitMapToScreen);
+
+        document.getElementById('btn-toggle-labels').addEventListener('click', () => {
+            mapContainer.classList.toggle('hide-labels');
+        });
+
+        const exportModal = document.getElementById('export-modal');
+        const exportTextarea = document.getElementById('export-textarea');
+
+        function generateExportObject() {
+            const obj = {};
+            spots.forEach(spot => {
+                let finalKey = spot.key || nameToKey(spot.name);
+                if (obj[finalKey]) {
+                    let counter = 2;
+                    while (obj[`${finalKey}_${counter}`]) counter++;
+                    finalKey = `${finalKey}_${counter}`;
+                }
+                obj[finalKey] = {
+                    name: spot.name,
+                    x: Number(spot.x),
+                    y: Number(spot.y)
+                };
+            });
+            return obj;
+        }
+
+        function generateExportJS() {
+            const obj = generateExportObject();
+            return `const kalosMapCoordinates = ${JSON.stringify(obj, null, 2)};\nexport default kalosMapCoordinates;\n`;
+        }
+
+        document.getElementById('btn-export').addEventListener('click', () => {
+            exportTextarea.value = generateExportJS();
+            exportModal.classList.add('active');
+        });
+
+        document.getElementById('btn-close-modal').addEventListener('click', () => {
+            exportModal.classList.remove('active');
+        });
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2200);
+        }
+
+        document.getElementById('btn-copy-code').addEventListener('click', () => {
+            exportTextarea.value = generateExportJS();
+            navigator.clipboard.writeText(exportTextarea.value);
+            showToast('Copied full JS code to clipboard!');
+        });
+
+        document.getElementById('btn-copy-json').addEventListener('click', () => {
+            const jsonStr = JSON.stringify(generateExportObject(), null, 2);
+            exportTextarea.value = jsonStr;
+            navigator.clipboard.writeText(jsonStr);
+            showToast('Copied JSON object to clipboard!');
+        });
+
+        document.getElementById('btn-download-file').addEventListener('click', () => {
+            const content = generateExportJS();
+            const blob = new Blob([content], { type: 'application/javascript' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'kalosMapCoordinates.js';
+            a.click();
+            URL.revokeObjectURL(url);
+            showToast('Downloaded kalosMapCoordinates.js!');
+        });
+
+        init();
+    </script>
+</body>
+</html>
