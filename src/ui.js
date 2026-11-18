@@ -1,7 +1,7 @@
 import { getCapacity } from "./mathEngine.js";
 import { WindowManager } from './windowManager.js';
 import { setupClickThrough } from './clickThrough.js';
-import { getChallengeData } from './ui/mainControl.js';
+import { getChallengeData, updateTimers } from './ui/mainControl.js';
 
 import * as mathEngine from "./mathEngine.js";
 import BattleSystem from "./battleSystem.js";
@@ -910,18 +910,18 @@ export function generateCatchRateHtml(showShiny = false) {
         return `<div style="font-size: 11px; color: ${color}; font-weight: bold;">${pct.toFixed(1)}%</div>`;
     };
 
-    let html = `<div style="padding: 2%; box-sizing: border-box;">
+    let html = `<div style="padding: 14px; box-sizing: border-box;">
     <div style="margin-bottom: 10px; display: flex; justify-content: center;">
-        <input id="catch-rate-search" type="text" placeholder="Search Pokémon..." style="width: 220px; padding: 6px 10px; border-radius: 6px; border: 1px solid #3498db; background: rgba(0, 0, 0, 0.35); color: white; font-size: 13px; outline: none;">
+        <input id="catch-rate-search" class="piw-input" type="text" placeholder="Search Pokémon..." style="width: 240px;">
     </div>
-    <div style="max-height: 55vh; overflow-y: auto; border-radius: 8px; border: 1px solid #334155;">
+    <div style="max-height: 55vh; overflow-y: auto; border-radius: 10px; border: 1px solid rgba(148, 163, 184, 0.22); background: var(--piw-bg-panel);">
         <table id="catch-rate-table" style="width: 100%; border-collapse: separate; border-spacing: 0; text-align: center; color: white;">
-            <thead style="position: sticky; top: 0; background: #1e293b; z-index: 2;">
+            <thead style="position: sticky; top: 0; background: #0f172a; z-index: 2;">
                 <tr>
-                    <th style="padding: 8px; border-bottom: 2px solid #3498db;">Pokémon</th>`;
+                    <th style="padding: 8px; border-bottom: 1.5px solid rgba(45, 212, 191, 0.45);">Pokémon</th>`;
 
     balls.forEach(b => {
-        html += `<th style="padding: 8px; border-bottom: 2px solid #3498db;">
+        html += `<th style="padding: 8px; border-bottom: 1.5px solid rgba(45, 212, 191, 0.45);">
             <img src="Assets/Items/Balls/${b}.png" style="width: 24px; height: 24px;" alt="${b}" title="${b}"><br>${b}
         </th>`;
     });
@@ -1194,27 +1194,27 @@ window.showProfLabModal = function() {
         let barHtml = "";
         if (isComplete) {
             barHtml = `
-                <div onclick="window.claimProfTaskReward('${type}')" style="width: 100%; box-sizing: border-box; background-color: #4CAF50; border-radius: 4px; padding: 5px; text-align: center; cursor: pointer; color: white; font-weight: bold; margin-top: 5px;">
-                    ${task.reward}
-                </div>
+                <button class="piw-btn piw-btn-success" onclick="window.claimProfTaskReward('${type}')" style="width: 100%; margin-top: 6px; padding: 7px 10px; font-size: 12px;">
+                    Claim: ${task.reward}
+                </button>
             `;
         } else {
             let pct = Math.min(100, Math.floor((currentVal / task.req) * 100));
             barHtml = `
-                <div style="width: 100%; background-color: #333; border-radius: 4px; overflow: hidden; height: 20px; border: 1px solid #555; position: relative; margin-top: 5px; display: flex; align-items: center;">
-                    <div style="width: ${pct}%; background-color: #4CAF50; height: 100%;"></div>
-                    <span style="position: absolute; width: 100%; text-align: center; color: white; font-size: 9px; font-weight: bold; line-height: 20px;">
-                        ${currentVal} / ${task.req}
+                <div class="piw-progress-track" style="height: 20px; position: relative; margin-top: 6px; display: flex; align-items: center;">
+                    <div class="piw-progress-fill is-green" style="width: ${pct}%; height: 100%;"></div>
+                    <span style="position: absolute; width: 100%; text-align: center; color: #f8fafc; font-size: 10.5px; font-weight: 800; text-shadow: 0 1px 2px rgba(0,0,0,0.85); pointer-events: none;">
+                        ${currentVal.toLocaleString('en-US')} / ${task.req.toLocaleString('en-US')}
                     </span>
                 </div>
             `;
         }
 
         return `
-            <div style="margin-bottom: 10px; font-size: 12px;">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <span>${task.text}</span>
-                    <button onclick="window.cheatCompleteProfTask('${type}')" style="padding: 2px 5px; font-size: 8px; cursor: pointer; background: #d9534f; color: white; border: none; border-radius: 3px;">Cheat Complete</button>
+            <div style="margin-bottom: 10px; font-size: 12.5px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+                    <span style="color: var(--piw-text-primary); font-weight: 600;">${task.text}</span>
+                    <button class="piw-btn piw-btn-danger piw-btn-sm" onclick="window.cheatCompleteProfTask('${type}')" style="font-size: 10px; padding: 2px 7px;">Cheat</button>
                 </div>
                 ${barHtml}
             </div>
@@ -1230,28 +1230,26 @@ window.showProfLabModal = function() {
         let rewardsHtml = "";
         if (tierIdx > 0) {
             if (keepAllRewards) {
-                // Shiny style - keep all
                 for (let i = 0; i < tierIdx; i++) {
                     rewardsHtml += `
-                        <div style="font-size: 9px; margin-top: 5px; padding-left: 5px; border-left: 2px solid #4CAF50;">
-                            <b>${taskList[i].reward}</b>: <span style="color: #4CAF50;">${taskList[i].effect}</span>
+                        <div style="font-size: 11px; margin-top: 6px; padding-left: 8px; border-left: 2px solid #22c55e; color: var(--piw-text-secondary);">
+                            <b>${taskList[i].reward}</b>: <span style="color: #4ade80;">${taskList[i].effect}</span>
                         </div>
                     `;
                 }
             } else {
-                // Normal style - only show highest tier
                 let topReward = taskList[tierIdx - 1];
                 rewardsHtml += `
-                    <div style="font-size: 9px; margin-top: 5px; padding-left: 5px; border-left: 2px solid #4CAF50;">
-                        <b>${topReward.reward}</b>: <span style="color: #4CAF50;">${topReward.effect}</span>
+                    <div style="font-size: 11px; margin-top: 6px; padding-left: 8px; border-left: 2px solid #22c55e; color: var(--piw-text-secondary);">
+                        <b>${topReward.reward}</b>: <span style="color: #4ade80;">${topReward.effect}</span>
                     </div>
                 `;
             }
         }
 
         return `
-            <div style="border: 1px solid #555; padding: 8px; border-radius: 5px; background-color: rgba(0,0,0,0.5);">
-                <h3 style="margin-top: 0; margin-bottom: 10px; border-bottom: 1px solid #444; padding-bottom: 5px; font-size: 12px;">${title}</h3>
+            <div class="piw-card" style="padding: 12px 14px;">
+                <h3 style="margin: 0 0 10px 0; border-bottom: var(--piw-border-subtle); padding-bottom: 6px; font-size: 13px; font-weight: 800; color: var(--piw-accent-teal); text-transform: uppercase; letter-spacing: 0.4px;">${title}</h3>
                 ${taskHtml}
                 ${rewardsHtml}
             </div>
@@ -1340,8 +1338,8 @@ window.showProfLabModal = function() {
         if (seenTier > 1 && i === 0) continue;
 
         shinyRewardsHtml += `
-            <div style="font-size: 9px; margin-top: 5px; padding-left: 5px; border-left: 2px solid #4CAF50;">
-                <b>${rewardName}</b>: <span style="color: #4CAF50;">${profTasks.shinySeen[i].effect}</span>
+            <div style="font-size: 11px; margin-top: 6px; padding-left: 8px; border-left: 2px solid #22c55e; color: var(--piw-text-secondary);">
+                <b>${rewardName}</b>: <span style="color: #4ade80;">${profTasks.shinySeen[i].effect}</span>
             </div>
         `;
     }
@@ -1349,8 +1347,8 @@ window.showProfLabModal = function() {
     // Shiny Caught rewards logic
     for (let i = 0; i < caughtTier; i++) {
         shinyRewardsHtml += `
-            <div style="font-size: 9px; margin-top: 5px; padding-left: 5px; border-left: 2px solid #4CAF50;">
-                <b>${profTasks.shinyCaught[i].reward}</b>: <span style="color: #4CAF50;">${profTasks.shinyCaught[i].effect}</span>
+            <div style="font-size: 11px; margin-top: 6px; padding-left: 8px; border-left: 2px solid #22c55e; color: var(--piw-text-secondary);">
+                <b>${profTasks.shinyCaught[i].reward}</b>: <span style="color: #4ade80;">${profTasks.shinyCaught[i].effect}</span>
             </div>
         `;
     }
@@ -1358,11 +1356,11 @@ window.showProfLabModal = function() {
     // Final Task Rewards logic
     for (let i = 0; i < finalTier; i++) {
         if (profTasks.final && profTasks.final[i]) {
-            shinyRewardsHtml += `<div style="font-size: 9px; margin-top: 5px; padding-left: 5px; border-left: 2px solid #4CAF50;"><b>${profTasks.final[i].reward}</b>: <span style="color: #4CAF50;">${profTasks.final[i].effect}</span></div>`;
+            shinyRewardsHtml += `<div style="font-size: 11px; margin-top: 6px; padding-left: 8px; border-left: 2px solid #22c55e; color: var(--piw-text-secondary);"><b>${profTasks.final[i].reward}</b>: <span style="color: #4ade80;">${profTasks.final[i].effect}</span></div>`;
         }
     }
 
-    html += `<div style="border: 1px solid #555; padding: 8px; border-radius: 5px; background-color: rgba(0,0,0,0.5);"><h3 style="margin-top: 0; margin-bottom: 10px; border-bottom: 1px solid #444; padding-bottom: 5px; font-size: 12px;">${shinyTitle}</h3>${shinySeenTaskHtml}${shinyCaughtTaskHtml}${finalTaskHtml}${shinyRewardsHtml}</div></div>`;
+    html += `<div class="piw-card" style="padding: 12px 14px;"><h3 style="margin: 0 0 10px 0; border-bottom: var(--piw-border-subtle); padding-bottom: 6px; font-size: 13px; font-weight: 800; color: var(--piw-accent-teal); text-transform: uppercase; letter-spacing: 0.4px;">${shinyTitle}</h3>${shinySeenTaskHtml}${shinyCaughtTaskHtml}${finalTaskHtml}${shinyRewardsHtml}</div></div>`;
 
     const overlay = document.getElementById('main-view-inner-modal-overlay');
     const title = document.getElementById('main-view-inner-modal-title');
@@ -1769,13 +1767,23 @@ window.restartGameClock = function() {
     gameClockTimeout = setTimeout(gameClockTick, delay);
 };
 
+let _battleTimerTickCount = 0;
 function _updateBattleTimer() {
     if (state.currentView === "BATTLE_ARENA") {
         state.stats.battleModeTimer = (state.stats.battleModeTimer || 0) + 1;
-        updateMainControl();
+        _battleTimerTickCount++;
+        updateTimers();
+        if (_battleTimerTickCount % 5 === 0) {
+            updateMainControl();
+        }
     } else {
+        const hadTimer = (state.stats.battleModeTimer || 0) > 0;
         state.stats.battleModeTimer = 0;
-        updateMainControl();
+        _battleTimerTickCount = 0;
+        updateTimers();
+        if (hadTimer) {
+            updateMainControl();
+        }
     }
 }
 
@@ -2584,6 +2592,22 @@ async function init() {
                 ? (hours > 0 ? `${hours}h ${mins}m` : `${mins}m`)
                 : '1h 0m';
             const showTutorial = !state.globalStats.hasSeenZzZTutorial;
+
+            const routeClean = (state.currentRoute || 'None').replace(/\s*\([^)]+\)$/, '');
+            const activeBallTier = state.settings?.activeBallTier ?? -1;
+            const activeBallCfg = activeBallTier >= 0 ? state.config?.balance?.items?.pokeballs?.[activeBallTier] : null;
+            const activeBallName = activeBallCfg ? activeBallCfg.name : 'None';
+            const activeBallQty = activeBallCfg ? (state.backpack?.pokeballs?.[activeBallName] || 0) : 0;
+
+            const activePotTier = state.settings?.activePotionTier ?? -1;
+            const activePotCfg = activePotTier >= 0 ? state.config?.balance?.items?.potions?.[activePotTier] : null;
+            const activePotName = activePotCfg ? (activePotCfg.name === 'Big' ? 'Big Potion' : activePotCfg.name) : 'None';
+            const activePotQty = activePotCfg ? (state.backpack?.potions?.[activePotName] || 0) : 0;
+
+            const boxUsed = mathEngine.getCurrentCount(state, 'box');
+            const boxCap = getCapacity(state, 'box');
+            const boxColor = boxUsed >= boxCap ? '#f87171' : '#5eead4';
+
             const htmlContent = `
                 <div class="content-panel zzz-panel">
                     ${showTutorial ? `
@@ -2612,6 +2636,14 @@ async function init() {
                             <div class="zzz-duration-pill">Max Offline Farm: ${formattedDuration}</div>
                             <div id="zzz-max-offline-time" class="zzz-subtext">${ZZZ_CONFIG.useGrainBased ? (grains > 0 ? '1 grain = 1 min offline farm' : 'Play actively to earn Jigglypuff Dust (1 grain/min)') : 'Fixed 1 hour offline hunt per ZzZ session'}</div>
                         </div>
+                    </div>
+
+                    <div class="zzz-section-card" style="text-align: left; font-size: 11.5px; display: flex; flex-direction: column; gap: 5px;">
+                        <div class="zzz-section-title" style="margin-bottom: 2px;">Hunt Readiness</div>
+                        <div style="display: flex; justify-content: space-between;"><span>Route</span><b>${routeClean}</b></div>
+                        <div style="display: flex; justify-content: space-between;"><span>Active Ball</span><b style="color: ${activeBallCfg && activeBallQty > 0 ? '#4ade80' : '#fbbf24'};">${activeBallCfg ? `${activeBallName} (${activeBallQty})` : 'Disabled'}</b></div>
+                        <div style="display: flex; justify-content: space-between;"><span>Auto-Potion</span><b style="color: ${activePotCfg && activePotQty > 0 ? '#4ade80' : '#fbbf24'};">${activePotCfg ? `${activePotName} (${activePotQty})` : 'Disabled'}</b></div>
+                        <div style="display: flex; justify-content: space-between;"><span>Box Space</span><b style="color: ${boxColor};">${boxUsed} / ${boxCap}</b></div>
                     </div>
 
                     <div class="zzz-actions">
@@ -2949,61 +2981,60 @@ async function init() {
         });
     });
 
-    const renderProgress = (current, max, color = '#3498db') => {
+    const renderProgress = (current, max, fillClass = '') => {
         const pct = max > 0 ? Math.min(100, Math.round((current / max) * 100)) : 0;
         return `
-            <div style="width: 100%; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden; margin-top: 3px; margin-bottom: 8px;">
-                <div style="width: ${pct}%; height: 100%; background: ${color}; transition: width 0.3s;"></div>
+            <div class="piw-progress-track" style="height: 6px; margin-top: 3px; margin-bottom: 8px;">
+                <div class="piw-progress-fill ${fillClass}" style="width: ${pct}%;"></div>
             </div>
         `;
     };
 
-    const cardStyle = 'background: rgba(0, 0, 0, 0.25); border: 2px solid #3498db; border-radius: 10px; padding: 12px 15px; box-sizing: border-box;';
-    const headerStyle = 'font-size: 13px; font-weight: bold; color: #3498db; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; border-bottom: 1px solid rgba(52, 152, 219, 0.3); padding-bottom: 4px;';
-    const rowStyle = 'display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 5px; color: #e2e8f0;';
+    const headerStyle = 'font-size: 12.5px; font-weight: 800; color: var(--piw-accent-teal); text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 10px; border-bottom: var(--piw-border-subtle); padding-bottom: 6px;';
+    const rowStyle = 'display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 6px; color: var(--piw-text-secondary);';
 
     return `
-        <div style="position: relative; height: 100%; display: flex; flex-direction: column; padding: 2%; box-sizing: border-box;">
+        <div style="position: relative; height: 100%; display: flex; flex-direction: column; padding: 14px; box-sizing: border-box;">
             <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; text-align: left;">
-                <div style="${cardStyle}">
+                <div class="piw-card">
                     <div style="${headerStyle}">General & Combat</div>
                     <div style="${rowStyle}"><span>Time Played</span><b>${playtimeStr}</b></div>
-                    <div style="${rowStyle}"><span>Money</span><b>$${state.trainer.money.toLocaleString()}</b></div>
-                    <div style="${rowStyle}"><span>Battles Won</span><b>${battlesWon.toLocaleString()}</b></div>
-                    <div style="${rowStyle}"><span>Faints</span><b>${faints.toLocaleString()}</b></div>
-                    <div style="${rowStyle}"><span>Total Breeds Completed</span><b>${breedsCompleted.toLocaleString()}</b></div>
-                    <div style="${rowStyle}"><span>Total Balls Thrown</span><b>${totalBallsThrown.toLocaleString()}</b></div>
+                    <div style="${rowStyle}"><span>Money</span><b>$${state.trainer.money.toLocaleString('en-US')}</b></div>
+                    <div style="${rowStyle}"><span>Battles Won</span><b>${battlesWon.toLocaleString('en-US')}</b></div>
+                    <div style="${rowStyle}"><span>Faints</span><b>${faints.toLocaleString('en-US')}</b></div>
+                    <div style="${rowStyle}"><span>Total Breeds Completed</span><b>${breedsCompleted.toLocaleString('en-US')}</b></div>
+                    <div style="${rowStyle}"><span>Total Balls Thrown</span><b>${totalBallsThrown.toLocaleString('en-US')}</b></div>
                 </div>
-                <div style="${cardStyle}">
+                <div class="piw-card">
                     <div style="${headerStyle}">Pokédex Progress</div>
-                    <div style="${rowStyle}"><span>Total Captured</span><b>${totalCaught.toLocaleString()}</b></div>
-                    <div style="${rowStyle}"><span>Shinies Caught</span><b>${shiniesCaught.toLocaleString()}</b></div>
+                    <div style="${rowStyle}"><span>Total Captured</span><b>${totalCaught.toLocaleString('en-US')}</b></div>
+                    <div style="${rowStyle}"><span>Shinies Caught</span><b>${shiniesCaught.toLocaleString('en-US')}</b></div>
                     <div style="${rowStyle}"><span>Species Caught</span><b>${uniqueSpeciesCaught} / ${totalSpeciesInRegion}</b></div>
-                    ${renderProgress(uniqueSpeciesCaught, totalSpeciesInRegion, '#3498db')}
+                    ${renderProgress(uniqueSpeciesCaught, totalSpeciesInRegion, '')}
                     <div style="${rowStyle}"><span>Shiny Species</span><b>${uniqueShinySpeciesCaught} / ${totalSpeciesInRegion}</b></div>
-                    ${renderProgress(uniqueShinySpeciesCaught, totalSpeciesInRegion, '#facc15')}
+                    ${renderProgress(uniqueShinySpeciesCaught, totalSpeciesInRegion, 'is-amber')}
                 </div>
-                <div style="${cardStyle}">
+                <div class="piw-card">
                     <div style="${headerStyle}">Activities & Rewards</div>
-                    <div style="${rowStyle}"><span>Jigglypuff Grains Used</span><b>${(state.stats.jigglypuffGrainsUsed || 0).toLocaleString()}</b></div>
-                    <div style="${rowStyle}"><span>White Candies Claimed</span><b>${(whiteCandiesClaimed || 0).toLocaleString()}</b></div>
-                    <div style="${rowStyle}"><span>Daily Rewards</span><b>${(state.stats.dailyRewards ? state.stats.dailyRewards.daysClaimed : 0).toLocaleString()}</b></div>
-                    <div style="${rowStyle}"><span>Daily Tokens Earned</span><b>${(state.stats.tokensEarned || 0).toLocaleString()}</b></div>
+                    <div style="${rowStyle}"><span>Jigglypuff Grains Used</span><b>${(state.stats.jigglypuffGrainsUsed || 0).toLocaleString('en-US')}</b></div>
+                    <div style="${rowStyle}"><span>White Candies Claimed</span><b>${(whiteCandiesClaimed || 0).toLocaleString('en-US')}</b></div>
+                    <div style="${rowStyle}"><span>Daily Rewards</span><b>${(state.stats.dailyRewards ? state.stats.dailyRewards.daysClaimed : 0).toLocaleString('en-US')}</b></div>
+                    <div style="${rowStyle}"><span>Daily Tokens Earned</span><b>${(state.stats.tokensEarned || 0).toLocaleString('en-US')}</b></div>
                     <div style="${rowStyle}"><span>Lab Assignments</span><b>${assignmentsCompleted} / ${maxAssignments}</b></div>
-                    ${renderProgress(assignmentsCompleted, maxAssignments, '#4ade80')}
+                    ${renderProgress(assignmentsCompleted, maxAssignments, 'is-green')}
                     <div style="${rowStyle}"><span>Progress Challenges</span><b>${challengesCompleted} / ${maxChallenges}</b></div>
-                    ${renderProgress(challengesCompleted, maxChallenges, '#a855f7')}
+                    ${renderProgress(challengesCompleted, maxChallenges, 'is-purple')}
                 </div>
-                <div style="${cardStyle}">
+                <div class="piw-card">
                     <div style="${headerStyle}">Records</div>
-                    <div style="${rowStyle}"><span>Highest Level (Backpack)</span><b>${highestLevel.toLocaleString()}</b></div>
-                    <div style="${rowStyle}"><span>Highest Level (Captured)</span><b>${(state.stats.highestLevelCaptured || 0).toLocaleString()}</b></div>
-                    <div style="${rowStyle}"><span>Highest Quality (Backpack)</span><b>${highestQuality.toLocaleString()}</b></div>
-                    <div style="${rowStyle}"><span>Highest Quality (Captured)</span><b>${(state.stats.highestQualityCaptured || 0).toLocaleString()}</b></div>
-                    <div style="${rowStyle}"><span>Highest IV Sum (Backpack)</span><b>${highestSumIV.toLocaleString()}</b></div>
-                    <div style="${rowStyle}"><span>Highest IV Sum (Captured)</span><b>${(state.stats.highestSumIVCaptured || 0).toLocaleString()}</b></div>
-                    <div style="${rowStyle}"><span>Highest Sum of Stats</span><b>${highestStatSum > 0 ? `${highestStatSumName}: ${Math.round(highestStatSum).toLocaleString()}` : 'None'}</b></div>
-                    <div style="${rowStyle}"><span>Highest DPS</span><b>${highestDps > 0 ? `${highestDpsName}: ${Math.round(highestDps).toLocaleString()}` : 'None'}</b></div>
+                    <div style="${rowStyle}"><span>Highest Level (Backpack)</span><b>${highestLevel.toLocaleString('en-US')}</b></div>
+                    <div style="${rowStyle}"><span>Highest Level (Captured)</span><b>${(state.stats.highestLevelCaptured || 0).toLocaleString('en-US')}</b></div>
+                    <div style="${rowStyle}"><span>Highest Quality (Backpack)</span><b>${highestQuality.toLocaleString('en-US')}</b></div>
+                    <div style="${rowStyle}"><span>Highest Quality (Captured)</span><b>${(state.stats.highestQualityCaptured || 0).toLocaleString('en-US')}</b></div>
+                    <div style="${rowStyle}"><span>Highest IV Sum (Backpack)</span><b>${highestSumIV.toLocaleString('en-US')}</b></div>
+                    <div style="${rowStyle}"><span>Highest IV Sum (Captured)</span><b>${(state.stats.highestSumIVCaptured || 0).toLocaleString('en-US')}</b></div>
+                    <div style="${rowStyle}"><span>Highest Sum of Stats</span><b>${highestStatSum > 0 ? `${highestStatSumName}: ${Math.round(highestStatSum).toLocaleString('en-US')}` : 'None'}</b></div>
+                    <div style="${rowStyle}"><span>Highest DPS</span><b>${highestDps > 0 ? `${highestDpsName}: ${Math.round(highestDps).toLocaleString('en-US')}` : 'None'}</b></div>
                 </div>
             </div>
         </div>
@@ -3023,16 +3054,16 @@ function generateTrainerBadgesHtml() {
         const badgeFile = window.getBadgeFileName(badgeRegion, badgeNum);
         const imgFilter = isEarned ? 'filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.6));' : 'filter: grayscale(100%) opacity(0.35);';
         badgesHtml += `
-            <div style="background: rgba(0, 0, 0, 0.25); border: 2px solid #3498db; border-radius: 10px; padding: 12px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 8px; box-sizing: border-box;">
+            <div class="piw-card" style="display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 8px; ${isEarned ? 'border-color: rgba(250, 204, 21, 0.45);' : 'opacity: 0.72;'}">
                 <img src="./Assets/Gym/Badges/${badgeFile}" style="width: 84px; height: 84px; object-fit: contain; ${imgFilter}" title="Badge ${badgeNum}">
-                <div style="font-size: 12px; font-weight: bold; color: ${isEarned ? '#ffffff' : '#64748b'};">Badge ${badgeNum}</div>
+                <div style="font-size: 12px; font-weight: 700; color: ${isEarned ? '#fde68a' : '#64748b'};">Badge ${badgeNum}</div>
             </div>
         `;
     }
     badgesHtml += '</div>';
 
     return `
-        <div style="text-align: center; padding: 2%; box-sizing: border-box;">
+        <div style="text-align: center; padding: 14px; box-sizing: border-box;">
             ${badgesHtml}
         </div>
     `;
@@ -3040,7 +3071,7 @@ function generateTrainerBadgesHtml() {
 function generateTrainerMedalsHtml() {
     const regions = ['Kanto', 'Johto', 'Hoenn', 'Sinnoh', 'Unova', 'Kalos', 'Alola', 'Galar', 'Hisui', 'Paldea'];
 
-    let medalsHtml = '<div style="display: grid; grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(5, 1fr); gap: 10px; height: 100%; padding: 2%; overflow: hidden; box-sizing: border-box;">';
+    let medalsHtml = '<div style="display: grid; grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(5, 1fr); gap: 10px; height: 100%; padding: 14px; overflow: hidden; box-sizing: border-box;">';
 
     regions.forEach(region => {
         let caughtCount = 0;
@@ -3087,10 +3118,10 @@ function generateTrainerMedalsHtml() {
 
         medalsHtml += `
             <div
-                class="medal-item"
+                class="piw-card is-interactive medal-item"
                 data-region="${region}" data-caught="${caughtCount}" data-shiny="${shinyCount}" data-total="${totalInRegion}"
                 onclick="if(window.showMedalDetails) window.showMedalDetails('${region}', ${caughtCount}, ${shinyCount}, ${totalInRegion})"
-                style="background: rgba(0, 0, 0, 0.2); border-radius: 10px; padding: 10px 15px; border: 2px solid #3498db; display: flex; justify-content: space-around; align-items: center; box-sizing: border-box; transition: all 0.2s ease-in-out; min-height: 0; cursor: pointer;"
+                style="padding: 10px 15px; display: flex; justify-content: space-around; align-items: center; min-height: 0;"
             >
                 <div style="text-align: center; ${!hasFirst ? 'filter: grayscale(100%) opacity(0.5);' : 'filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.5));'}">
                     <img src="Assets/Extra/Medals/${region} First.png" alt="${region} First" style="width: 100%; max-width: 64px; max-height: 100%; object-fit: contain; image-rendering: pixelated;" onerror="this.src='Assets/Extra/Medals/Kanto First.png'">
@@ -3107,16 +3138,6 @@ function generateTrainerMedalsHtml() {
 
     medalsHtml += '</div>';
 
-    medalsHtml += `
-        <style>
-            .medal-item:hover {
-                background: rgba(255, 255, 255, 0.1) !important;
-                border-color: #3498db !important;
-                box-shadow: 0 0 15px rgba(52, 152, 219, 0.6);
-            }
-        </style>
-    `;
-
     return medalsHtml;
 }
 function generateTrainerDetailsHtml(tab, options) {
@@ -3126,7 +3147,9 @@ function generateTrainerDetailsHtml(tab, options) {
         <div class="floating-window" style="position: relative; width: 100%; height: 100%; box-sizing: border-box; display: flex; flex-direction: column; overflow: hidden;">
             <div class="window-header" style="position: relative; cursor: default;">
                 <span>${headerTitle}</span>
-                <span onclick="window.showTrainerStats('${backTab}')" style="position: absolute; top: 5px; right: 5px; font-size: 12px; font-weight: bold; line-height: 1; padding: 0; cursor: pointer; color: white;">X</span>
+                <div class="window-header-actions">
+                    <span class="window-ctrl-btn is-close" onclick="window.showTrainerStats('${backTab}')" title="Close">X</span>
+                </div>
             </div>
             <div class="window-content-container" style="flex: 1; overflow-y: auto; overflow-x: hidden;">
                 <div style="padding: 15px; box-sizing: border-box; width: 100%; height: 100%;">
@@ -3137,7 +3160,7 @@ function generateTrainerDetailsHtml(tab, options) {
     `;
 }
 function generateTrainerUpgradesHtml() {
-    let contentHtml = '<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; padding: 2%; box-sizing: border-box;">';
+    let contentHtml = '<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; padding: 14px; box-sizing: border-box;">';
     let hasAnyUpgrade = false;
 
     if (state.stats.upgrades) {
@@ -3168,11 +3191,11 @@ function generateTrainerUpgradesHtml() {
                     }
                     let description = configItem.description || '';
                     if (type.configKey === 'ballPocket') {
-                        description = `Ball capacity: ${getCapacity(state, 'balls').toLocaleString('pt-BR')}`;
+                        description = `Ball capacity: ${getCapacity(state, 'balls').toLocaleString('en-US')}`;
                     } else if (type.configKey === 'potionSatchel') {
-                        description = `Potion capacity: ${getCapacity(state, 'potions').toLocaleString('pt-BR')}`;
+                        description = `Potion capacity: ${getCapacity(state, 'potions').toLocaleString('en-US')}`;
                     } else if (type.configKey === 'pokemonBox') {
-                        description = `Storage capacity: ${getCapacity(state, 'box').toLocaleString('pt-BR')}`;
+                        description = `Storage capacity: ${getCapacity(state, 'box').toLocaleString('en-US')}`;
                     } else if (type.configKey === 'speed') {
                         if (tier === 1) description = "Encounter time decreased by 10%";
                         else if (tier === 2) description = "Encounter time decreased by 20%";
@@ -3197,10 +3220,10 @@ function generateTrainerUpgradesHtml() {
                     }
 
                     contentHtml += `
-                        <div class="upgrade-item" data-type="${type.configKey}" data-tier="${tier}" onclick="if(window.showUpgradeDetails) window.showUpgradeDetails('${type.configKey}', ${tier})" style="background: #2c3e50; border: 2px solid #3498db; border-radius: 10px; padding: 15px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 10px; transition: all 0.2s ease-in-out; cursor: pointer;">
-                            <div style="font-size: 14px; font-weight: bold; color: white;">${displayName}</div>
+                        <div class="piw-card is-interactive upgrade-item" data-type="${type.configKey}" data-tier="${tier}" onclick="if(window.showUpgradeDetails) window.showUpgradeDetails('${type.configKey}', ${tier})" style="padding: 14px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 10px;">
+                            <div style="font-size: 14px; font-weight: 700; color: var(--piw-text-primary);">${displayName}</div>
                             <img src="./Assets/Items/Upgrades/${configItem.name}.png" style="width: 50px; height: 50px; object-fit: contain;" alt="${displayName}">
-                            <div style="font-size: 12px; color: #cbd5e1; line-height: 1.3;">${description}</div>
+                            <div style="font-size: 12px; color: var(--piw-text-secondary); line-height: 1.3;">${description}</div>
                         </div>
                     `;
                 }
@@ -3210,18 +3233,8 @@ function generateTrainerUpgradesHtml() {
 
     contentHtml += '</div>';
 
-    contentHtml += `
-        <style>
-            .upgrade-item:hover {
-                background: rgba(255, 255, 255, 0.1) !important;
-                border-color: #3498db !important;
-                box-shadow: 0 0 15px rgba(52, 152, 219, 0.6);
-            }
-        </style>
-    `;
-
     if (!hasAnyUpgrade) {
-        contentHtml = '<div style="text-align: center; font-style: italic; color: #ccc;">No upgrades purchased yet.</div>';
+        contentHtml = '<div style="text-align: center; font-style: italic; color: var(--piw-text-muted); padding: 28px;">No upgrades purchased yet.</div>';
     }
 
     return contentHtml;
@@ -3248,7 +3261,7 @@ function generateTrainerUpgradesHtml() {
                 const headerTitle = tab === 'medal-details' ? `${options.region} Medals` : `${options.title} Upgrades`;
                 const overlay = document.createElement('div');
                 overlay.id = 'trainer-inner-modal-overlay';
-                overlay.style.cssText = 'position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.75); z-index: 1000; display: flex; align-items: center; justify-content: center; box-sizing: border-box; padding: 20px;';
+                overlay.className = 'piw-inner-overlay';
                 overlay.onclick = (e) => {
                     if (e.target === overlay) window.closeTrainerInnerModal();
                 };
@@ -3257,7 +3270,9 @@ function generateTrainerUpgradesHtml() {
                     <div class="floating-window" onclick="event.stopPropagation()" onmousedown="event.stopPropagation()" style="position: relative; width: 85%; max-width: 650px; max-height: 85%; box-sizing: border-box; display: flex; flex-direction: column; overflow: hidden;">
                         <div class="window-header" style="position: relative; cursor: default;">
                             <span>${headerTitle}</span>
-                            <span onclick="if(window.closeTrainerInnerModal) window.closeTrainerInnerModal()" style="position: absolute; top: 5px; right: 5px; font-size: 12px; font-weight: bold; line-height: 1; padding: 0; cursor: pointer; color: white;">X</span>
+                            <div class="window-header-actions">
+                                <span class="window-ctrl-btn is-close" onclick="if(window.closeTrainerInnerModal) window.closeTrainerInnerModal()" title="Close">X</span>
+                            </div>
                         </div>
                         <div class="window-content-container" style="flex: 1; overflow-y: auto; overflow-x: hidden; padding: 15px; box-sizing: border-box;">
                             ${options.html}
@@ -3280,19 +3295,19 @@ function generateTrainerUpgradesHtml() {
         const activeTab = (tab === 'medal-details') ? 'medals' : (tab === 'upgrade-details') ? 'upgrades' : tab;
 
         titleHtml = `
-            <div style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
-                <div style="font-weight: bold; font-size: 18px; color: white;">Trainer</div>
-                <div style="display: inline-flex; background: rgba(0, 0, 0, 0.2); border-radius: 20px; padding: 3px; gap: 5px;">
-                    <button onclick="window.showTrainerStats('statistics')" style="${activeTab === 'statistics' ? 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2);' : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;'} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;" onmousedown="event.stopPropagation()">Statistics</button>
-                    <button onclick="window.showTrainerStats('badges')" style="${activeTab === 'badges' ? 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2);' : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;'} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;" onmousedown="event.stopPropagation()">Badges</button>
-                    <button onclick="window.showTrainerStats('catch-rate', { showShiny: false })" style="${activeTab === 'catch-rate' ? 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2);' : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;'} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;" onmousedown="event.stopPropagation()">Catch Rate</button>
-                    <button onclick="window.showTrainerStats('upgrades')" style="${activeTab === 'upgrades' ? 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2);' : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;'} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;" onmousedown="event.stopPropagation()">Upgrades</button>
-                    <button onclick="window.showTrainerStats('medals')" style="${activeTab === 'medals' ? 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2);' : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;'} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;" onmousedown="event.stopPropagation()">Medals</button>
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 6px; width: 100%;">
+                <div style="font-weight: 700; font-size: 18px; color: white; letter-spacing: 0.3px;">Trainer</div>
+                <div class="piw-tab-bar" onmousedown="event.stopPropagation()">
+                    <button class="piw-tab-btn ${activeTab === 'statistics' ? 'is-active' : ''}" onclick="window.showTrainerStats('statistics')">Statistics</button>
+                    <button class="piw-tab-btn ${activeTab === 'badges' ? 'is-active' : ''}" onclick="window.showTrainerStats('badges')">Badges</button>
+                    <button class="piw-tab-btn ${activeTab === 'catch-rate' ? 'is-active' : ''}" onclick="window.showTrainerStats('catch-rate', { showShiny: false })">Catch Rate</button>
+                    <button class="piw-tab-btn ${activeTab === 'upgrades' ? 'is-active' : ''}" onclick="window.showTrainerStats('upgrades')">Upgrades</button>
+                    <button class="piw-tab-btn ${activeTab === 'medals' ? 'is-active' : ''}" onclick="window.showTrainerStats('medals')">Medals</button>
                 </div>
                 ${activeTab === 'catch-rate' ? `
-                <div style="display: inline-flex; background: rgba(0, 0, 0, 0.2); border-radius: 20px; padding: 3px; gap: 5px; margin-top: 5px;">
-                    <button onclick="window.showTrainerStats('catch-rate', { showShiny: false })" style="${!isShiny ? 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2);' : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;'} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 12px; transition: all 0.2s;" onmousedown="event.stopPropagation()">Normal</button>
-                    <button onclick="window.showTrainerStats('catch-rate', { showShiny: true })" style="${isShiny ? 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2);' : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;'} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 12px; transition: all 0.2s;" onmousedown="event.stopPropagation()">Shiny</button>
+                <div class="piw-tab-bar" onmousedown="event.stopPropagation()" style="margin-top: 2px;">
+                    <button class="piw-tab-btn ${!isShiny ? 'is-active' : ''}" style="font-size: 12px; padding: 4px 12px;" onclick="window.showTrainerStats('catch-rate', { showShiny: false })">Normal</button>
+                    <button class="piw-tab-btn ${isShiny ? 'is-active' : ''}" style="font-size: 12px; padding: 4px 12px;" onclick="window.showTrainerStats('catch-rate', { showShiny: true })">Shiny</button>
                 </div>
                 ` : ''}
             </div>

@@ -139,23 +139,23 @@ const helpContent = {
                 <p>Potions restore missing HP to your active or benched Pokémon. They can be bought at the Market or found as loot.</p>
                 <ul>
                     <li><strong>Tiny Potion ($3)</strong>: Restores 25 HP.</li>
-                    <li><strong>Small Potion ($25)</strong>: Restores 100 HP.</li>
-                    <li><strong>Potion ($150)</strong>: Restores 500 HP.</li>
-                    <li><strong>Medium Potion ($1,000)</strong>: Restores 2,500 HP.</li>
-                    <li><strong>Large Potion ($12,000)</strong>: Restores 10,000 HP.</li>
-                    <li><strong>Huge Potion ($80,000)</strong>: Restores 50,000 HP.</li>
-                    <li><strong>Max Potion ($300,000)</strong>: Restores 100% of maximum HP.</li>
+                    <li><strong>Small Potion ($12)</strong>: Restores 50 HP.</li>
+                    <li><strong>Regular Potion ($35)</strong>: Restores 100 HP.</li>
+                    <li><strong>Big Potion ($90)</strong>: Restores 250 HP.</li>
+                    <li><strong>Huge Potion ($220)</strong>: Restores 1,000 HP.</li>
+                    <li><strong>Ultra Potion ($9,000)</strong>: Restores 5,000 HP.</li>
+                    <li><strong>Max Potion ($300,000)</strong>: Restores full HP (999,999 HP).</li>
                 </ul>
             `,
             "Candies": `
                 <h3>Permanent Passive Boosts</h3>
                 <p>Candies provide global, permanent account buffs when consumed. They are accessed via the Bonus Candy icon.</p>
                 <ul>
-                    <li><strong>White Candy</strong>: A currency candy earned passively every 250 wild defeats. Can be traded to the Professor for other colored candies.</li>
-                    <li><strong>Green Candy</strong>: Boosts Wealth/Loot Probability by +3% per candy.</li>
-                    <li><strong>Purple Candy</strong>: Boosts EVXP gain by +2% per candy.</li>
-                    <li><strong>Black Yellow Candy</strong>: Increases base Catch Chance by +4% per candy.</li>
-                    <li><strong>Rainbow Candy</strong>: Grants +1 bonus Shiny Roll chance per candy.</li>
+                    <li><strong>White Candy</strong>: Earned passively every 100 wild defeats. Trade White Candies in Bonus Candy for permanent colored candies.</li>
+                    <li><strong>Green Candy</strong>: Boosts Loot Probability by +0.25% and Money from battles by +1% per candy.</li>
+                    <li><strong>Purple Candy</strong>: Boosts Experience Gain from battles by +2% per candy.</li>
+                    <li><strong>Black Yellow Candy</strong>: Increases Catch Rate Bonus by +20% per candy.</li>
+                    <li><strong>Rainbow Candy</strong>: Grants +1 Extra Shiny Roll per candy.</li>
                 </ul>
             `
         }
@@ -185,17 +185,25 @@ const helpContent = {
                 <h3>Mechanics</h3>
                 <p>The Safari Zone (Kanto/Johto) is a high-risk, high-reward catching hub.</p>
                 <ul>
-                    <li><strong>Entry Fee</strong>: $5,000 EVM per entry session.</li>
+                    <li><strong>Entry / Encounter Fee</strong>: $500 EVM per encounter/entry session.</li>
                     <li><strong>Infinite Balls</strong>: You are granted infinite Safari Balls while inside.</li>
                     <li><strong>Ejection</strong>: You are forcefully removed from the Safari Zone (Kanto/Johto) if your total funds drop below $0.</li>
                 </ul>
             `,
             "Celadon Casino": `
                 <h3>Gambling Hub</h3>
-                <p>The Casino forces you to pay EVM per individual encounter for a chance at extreme quality.</p>
+                <p>The Casino (and Johto's Goldenrod Game Corner) lets you pay EVM per encounter for a shot at rare Pokémon and higher Shiny odds.</p>
                 <ul>
-                    <li><strong>Standard Route</strong>: $5,000 per encounter.</li>
-                    <li><strong>Double Shiny Route</strong>: $10,000 per encounter, but naturally doubles the base Shiny probability.</li>
+                    <li><strong>Standard Route</strong>: $75 per encounter.</li>
+                    <li><strong>Double Shiny Route</strong>: $200 per encounter, doubling the Shiny roll bonus.</li>
+                </ul>
+            `,
+            "Daycare (Training & Breeding)": `
+                <h3>Passive Training &amp; Breeding</h3>
+                <p>Drop Pokémon in the Daycare (accessible from the Team Window's Training / Breeding tab or regional Daycare hub) to strengthen them while you battle elsewhere.</p>
+                <ul>
+                    <li><strong>Training</strong>: Builds Quality and random IVs passively over battle cycles up to their caps (tracks cumulative IVs gained).</li>
+                    <li><strong>Breeding</strong>: Pair compatible Pokémon to hatch new eggs that inherit potential IVs and Quality from their parents.</li>
                 </ul>
             `
         }
@@ -294,12 +302,12 @@ const helpContent = {
                 </ul>
             `,
             "Calendar <img src='Assets/Extra/Icons/IconCalendar.png' style='height: 20px; vertical-align: middle;'>": `
-                <h3>Daily Calendar</h3>
-                <p>Login rewards and daily bonuses.</p>
+                <h3>Daily Calendar, Challenges &amp; Token Shop</h3>
+                <p>Collect cumulative login rewards, complete Daily Challenges, and spend Tokens in the Token Shop.</p>
                 <ul>
-                    <li>Claim a new reward every real-world day you open the game.</li>
-                    <li>Rewards scale in value the longer your consecutive streak is.</li>
-                    <li>Missing a day resets the streak.</li>
+                    <li><strong>Cumulative Login Calendar</strong>: Progresses cumulatively by total days claimed (your count never resets if you miss a day) and awards 1 Token alongside daily cash/item bonuses.</li>
+                    <li><strong>Daily Challenges</strong>: Complete rotating daily goals for extra Token rewards (rerollable via the reroll allowance).</li>
+                    <li><strong>Token Shop</strong>: Spend Tokens on Masterballs, Vitamins, and Evolution Stones directly from the Calendar window.</li>
                 </ul>
             `,
             "Progress Challenges <img src='Assets/Extra/Icons/ProgressChallange.png' style='height: 20px; vertical-align: middle;'>": `
@@ -328,11 +336,12 @@ const helpContent = {
             `,
             "Settings <img src='Assets/Extra/Icons/IconSettings.png' style='height: 20px; vertical-align: middle;'>": `
                 <h3>Settings</h3>
-                <p>Customize your game experience.</p>
+                <p>Customize graphics, window layout, and profile save data.</p>
                 <ul>
-                    <li>Adjust audio volumes (Music, SFX, Cries).</li>
-                    <li>Toggle visual effects and performance options.</li>
-                    <li>Access Save/Load functions or perform a Hard Reset (deletes all data).</li>
+                    <li><strong>Legacy Sprites</strong>: Switch between modern and classic pixel sprites across battles and menus.</li>
+                    <li><strong>Window Layout Reset</strong>: Restore saved floating window positions and sizes back to defaults.</li>
+                    <li><strong>Save Management</strong>: Download encrypted profile backups or restore an exported save file.</li>
+                    <li><strong>Cheat &amp; Debug Tools</strong>: Open developer controls for testing encounters, game speed, and offline simulation.</li>
                 </ul>
             `,
             "Exit <img src='Assets/Extra/Icons/IconExit.png' style='height: 20px; vertical-align: middle;'>": `
@@ -359,10 +368,11 @@ export function showHelp() {
             sidebarItemsHTML += `<div class="help-sub-group">`;
             sidebarItemsHTML += `<div class="help-sub-category">${subCategory}</div>`;
 
-            for (const [groupName] of Object.entries(groups)) {
+            for (const [groupName, articleHtml] of Object.entries(groups)) {
                 const targetId = `help_content_${majorTopic.replace(/[^a-zA-Z0-9]/g, '_')}_${subCategory.replace(/[^a-zA-Z0-9]/g, '_')}_${groupName.replace(/[^a-zA-Z0-9]/g, '_')}`;
                 const activeClass = isFirst ? ' active-help-btn' : '';
-                sidebarItemsHTML += `<div class="help-nav-btn${activeClass}" data-target="${targetId}">${groupName}</div>`;
+                const plainText = `${majorTopic} ${subCategory} ${groupName} ${articleHtml.replace(/<[^>]+>/g, ' ')}`.replace(/\s+/g, ' ').replace(/"/g, '&quot;').trim().toLowerCase();
+                sidebarItemsHTML += `<div class="help-nav-btn${activeClass}" data-target="${targetId}" data-search-text="${plainText}">${groupName}</div>`;
                 isFirst = false;
             }
             sidebarItemsHTML += `</div>`;
@@ -452,7 +462,8 @@ export function showHelp() {
                     topic.querySelectorAll('.help-sub-group').forEach(subGroup => {
                         let subHasMatch = false;
                         subGroup.querySelectorAll('.help-nav-btn').forEach(btn => {
-                            const matches = !query || btn.textContent.toLowerCase().includes(query);
+                            const searchText = (btn.getAttribute('data-search-text') || btn.textContent || '').toLowerCase();
+                            const matches = !query || searchText.includes(query);
                             btn.style.display = matches ? '' : 'none';
                             if (matches) subHasMatch = true;
                         });
@@ -462,6 +473,14 @@ export function showHelp() {
 
                     topic.style.display = topicHasMatch ? '' : 'none';
                 });
+
+                const activeBtn = modalContainer.querySelector('.help-nav-btn.active-help-btn');
+                if (!activeBtn || activeBtn.style.display === 'none') {
+                    const firstVisible = Array.from(btns).find(b => b.style.display !== 'none');
+                    if (firstVisible) {
+                        firstVisible.click();
+                    }
+                }
             });
         }
     }, 100);

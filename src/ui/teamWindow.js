@@ -70,15 +70,66 @@ function buildXpBarHtml(p) {
 
     return `
         <div class="team-bar-track is-xp">
-            <div class="team-bar-fill is-xp" style="width: ${xpPct}%;"></div>
+            <div class="team-bar-fill is-xp js-xp-fill" style="width: ${xpPct}%;"></div>
             <div class="team-bar-gloss"></div>
             <div class="team-bar-overlay">
-                <div class="team-bar-cell">${xpProgress}/${xpRequired}</div>
+                <div class="team-bar-cell js-xp-text">${xpProgress}/${xpRequired}</div>
                 <div class="team-bar-label">XP</div>
-                <div class="team-bar-cell">${Math.floor(xpPct)}%</div>
+                <div class="team-bar-cell js-xp-pct">${Math.floor(xpPct)}%</div>
             </div>
         </div>
     `;
+}
+
+function getSlotSignature(p, idx, isLeader, isFainted) {
+    return `${p.uuid || idx}|${p.id}|${p.transformedIntoId || ''}|${p.isTransformed ? 1 : 0}|${p.qualityName || ''}|${isLeader ? 1 : 0}|${isFainted ? 1 : 0}|${p.level}`;
+}
+
+function canUpdatePartyInPlace(partyDiv, party) {
+    if (!party || party.length === 0) return false;
+    const children = partyDiv.children;
+    if (!children || children.length !== party.length) return false;
+    for (let i = 0; i < party.length; i++) {
+        const p = party[i];
+        const sig = getSlotSignature(p, i, i === 0, p.currentHp <= 0);
+        if (!children[i] || !children[i].dataset || children[i].dataset.slotSig !== sig) {
+            return false;
+        }
+    }
+    return true;
+}
+
+function updatePartySlotInPlace(slotEl, p) {
+    const hpPct = p.maxHp > 0 ? Math.min(100, Math.max(0, (p.currentHp / p.maxHp) * 100)) : 0;
+    const hpFill = getHpFillStyle(hpPct);
+    const hpTrack = slotEl.querySelector('.team-bar-track.is-hp');
+    if (hpTrack) {
+        if (p.currentHp > 0 && hpPct < 25) hpTrack.classList.add('is-critical');
+        else hpTrack.classList.remove('is-critical');
+    }
+    const hpFillEl = slotEl.querySelector('.js-hp-fill');
+    if (hpFillEl) {
+        hpFillEl.style.width = `${hpPct}%`;
+        hpFillEl.style.background = hpFill;
+    }
+    const hpTextEl = slotEl.querySelector('.js-hp-text');
+    if (hpTextEl) hpTextEl.textContent = `${Math.floor(p.currentHp)}/${p.maxHp}`;
+    const hpPctEl = slotEl.querySelector('.js-hp-pct');
+    if (hpPctEl) hpPctEl.textContent = `${Math.floor(hpPct)}%`;
+
+    if (p.level < 100) {
+        const currentLevelXp = mathEngine.calculateTotalXP(p.level);
+        const nextLevelXp = mathEngine.calculateTotalXP(p.level + 1);
+        const xpProgress = Math.max(0, Math.floor(p.xp) - currentLevelXp);
+        const xpRequired = Math.max(1, nextLevelXp - currentLevelXp);
+        const xpPct = Math.min(100, Math.max(0, (xpProgress / xpRequired) * 100));
+        const xpFillEl = slotEl.querySelector('.js-xp-fill');
+        if (xpFillEl) xpFillEl.style.width = `${xpPct}%`;
+        const xpTextEl = slotEl.querySelector('.js-xp-text');
+        if (xpTextEl) xpTextEl.textContent = `${xpProgress}/${xpRequired}`;
+        const xpPctEl = slotEl.querySelector('.js-xp-pct');
+        if (xpPctEl) xpPctEl.textContent = `${Math.floor(xpPct)}%`;
+    }
 }
 
 function buildSpritePedestalHtml(p, glowClass, isFainted, allowTransform, topBadgeHtml = '', bottomBadgeHtml = '') {
@@ -102,71 +153,79 @@ function buildSpritePedestalHtml(p, glowClass, isFainted, allowTransform, topBad
 export function updateTeamWindow() {
     const partyDiv = document.getElementById('party-list');
     if (!partyDiv) return;
-    partyDiv.replaceChildren();
 
     const countPill = document.getElementById('party-count-pill');
     if (countPill) {
         countPill.textContent = `${state.party.length}/6`;
     }
 
-    if (state.party.length === 0) {
-        renderSanitizedHtml(`<div class="team-empty-state">No Pokémon in party</div>`, partyDiv);
-    }
+    if (canUpdatePartyInPlace(partyDiv, state.party)) {
+        for (let i = 0; i < state.party.length; i++) {
+            updatePartySlotInPlace(partyDiv.children[i], state.party[i]);
+        }
+    } else {
+        partyDiv.replaceChildren();
 
-    state.party.forEach((p, idx) => {
-        const d = document.createElement('div');
-        const isLeader = idx === 0;
-        const isFainted = p.currentHp <= 0;
-        const { glowClass, tierClass } = getQualityMeta(p.qualityName);
+        if (state.party.length === 0) {
+            renderSanitizedHtml(`<div class="team-empty-state">No Pokémon in party</div>`, partyDiv);
+        }
 
-        d.className = [
-            'party-slot',
-            'team-card',
-            tierClass,
-            isLeader ? 'is-leader' : '',
-            isFainted ? 'is-fainted' : ''
-        ].filter(Boolean).join(' ');
+        state.party.forEach((p, idx) => {
+            const d = document.createElement('div');
+            const isLeader = idx === 0;
+            const isFainted = p.currentHp <= 0;
+            const { glowClass, tierClass } = getQualityMeta(p.qualityName);
 
-        const hpPct = p.maxHp > 0 ? Math.min(100, Math.max(0, (p.currentHp / p.maxHp) * 100)) : 0;
-        const hpFill = getHpFillStyle(hpPct);
-        const hpCriticalClass = (!isFainted && hpPct < 25) ? 'is-critical' : '';
-        const crownClass = isLeader ? 'is-active' : '';
-        const leadTag = isLeader ? `<span class="team-lead-badge team-stage-badge is-top-left">LEAD</span>` : '';
-        const hpLabel = isFainted ? 'FAINT' : 'HP';
+            d.className = [
+                'party-slot',
+                'team-card',
+                tierClass,
+                isLeader ? 'is-leader' : '',
+                isFainted ? 'is-fainted' : ''
+            ].filter(Boolean).join(' ');
+            d.dataset.slotSig = getSlotSignature(p, idx, isLeader, isFainted);
 
-        renderSanitizedHtml(`
-            <div class="team-card-accent"></div>
-            <div class="team-card-body">
-                ${buildSpritePedestalHtml(p, glowClass, isFainted, true, leadTag)}
-                <div class="team-card-info">
-                    <div class="team-card-top">
-                        <div class="team-name-group">
-                            <span class="team-poke-name" title="${escapeHTML(p.name)}">${escapeHTML(p.name)}</span>
-                            <span class="team-lv-pill">Lv.${p.level}</span>
-                            ${buildTypeDotsHtml(p.types)}
+            const hpPct = p.maxHp > 0 ? Math.min(100, Math.max(0, (p.currentHp / p.maxHp) * 100)) : 0;
+            const hpFill = getHpFillStyle(hpPct);
+            const hpCriticalClass = (!isFainted && hpPct < 25) ? 'is-critical' : '';
+            const crownClass = isLeader ? 'is-active' : '';
+            const leadTag = isLeader ? `<span class="team-lead-badge team-stage-badge is-top-left">LEAD</span>` : '';
+            const hpLabel = isFainted ? 'FAINT' : 'HP';
+
+            renderSanitizedHtml(`
+                <div class="team-card-accent"></div>
+                <div class="team-card-body">
+                    ${buildSpritePedestalHtml(p, glowClass, isFainted, true, leadTag)}
+                    <div class="team-card-info">
+                        <div class="team-card-top">
+                            <div class="team-name-group">
+                                <span class="team-poke-name" title="${escapeHTML(p.name)}">${escapeHTML(p.name)}</span>
+                                <span class="team-lv-pill">Lv.${p.level}</span>
+                                ${buildTypeDotsHtml(p.types)}
+                            </div>
+                            <div class="team-actions">
+                                <div onclick="window.setLeader(${idx})" class="team-crown-btn ${crownClass}" title="Set as Leader">👑</div>
+                                <div onclick="event.stopPropagation(); window.showPokemonStats(${idx}, 'party')" class="team-info-btn" title="View Info">i</div>
+                            </div>
                         </div>
-                        <div class="team-actions">
-                            <div onclick="window.setLeader(${idx})" class="team-crown-btn ${crownClass}" title="Set as Leader">👑</div>
-                            <div onclick="event.stopPropagation(); window.showPokemonStats(${idx}, 'party')" class="team-info-btn" title="View Info">i</div>
+
+                        <div class="team-bar-track is-hp ${hpCriticalClass}">
+                            <div class="team-bar-fill is-hp js-hp-fill" style="width: ${hpPct}%; background: ${hpFill};"></div>
+                            <div class="team-bar-gloss"></div>
+                            <div class="team-bar-overlay">
+                                <div class="team-bar-cell js-hp-text">${Math.floor(p.currentHp)}/${p.maxHp}</div>
+                                <div class="team-bar-label">${hpLabel}</div>
+                                <div class="team-bar-cell js-hp-pct">${Math.floor(hpPct)}%</div>
+                            </div>
                         </div>
+
+                        ${buildXpBarHtml(p)}
                     </div>
-
-                    <div class="team-bar-track is-hp ${hpCriticalClass}">
-                        <div class="team-bar-fill is-hp" style="width: ${hpPct}%; background: ${hpFill};"></div>
-                        <div class="team-bar-gloss"></div>
-                        <div class="team-bar-overlay">
-                            <div class="team-bar-cell">${Math.floor(p.currentHp)}/${p.maxHp}</div>
-                            <div class="team-bar-label">${hpLabel}</div>
-                            <div class="team-bar-cell">${Math.floor(hpPct)}%</div>
-                        </div>
-                    </div>
-
-                    ${buildXpBarHtml(p)}
                 </div>
-            </div>
-        `, d);
-        partyDiv.appendChild(d);
-    });
+            `, d);
+            partyDiv.appendChild(d);
+        });
+    }
 
     // Day Care UI updates
     const dayCareContainer = document.getElementById('day-care');
@@ -187,6 +246,8 @@ export function updateTeamWindow() {
         dayCareContainer.style.display = dayCareCount === 0 ? 'none' : 'flex';
     }
 
+    updateDayCareHubStatus();
+
     const currentTeamCount = state.party.length + dayCareCount;
     if (lastTeamCount === -1 || currentTeamCount !== lastTeamCount) {
         if (window.windowManager) {
@@ -199,6 +260,35 @@ export function updateTeamWindow() {
         }
     }
     lastTeamCount = currentTeamCount;
+}
+
+function updateDayCareHubStatus() {
+    const trainEl = document.getElementById('dc-hub-train-status');
+    const breedEl = document.getElementById('dc-hub-breed-status');
+    if (!trainEl && !breedEl) return;
+
+    const dc = state.dayCareRef;
+    if (trainEl) {
+        const p2 = dc?.slot2?.pokemon;
+        if (p2) {
+            const totalIV = p2.ivs ? (p2.ivs.hp + p2.ivs.atk + p2.ivs.def + p2.ivs.spa + p2.ivs.spd + p2.ivs.spe) : 0;
+            trainEl.textContent = totalIV >= 600
+                ? `${p2.name} • MAX IV (600)`
+                : `${p2.name} (${dc.slot2.battles}/${dc.slot2.requiredBattles}) • ${totalIV} IV`;
+        } else {
+            trainEl.textContent = 'Slot: Empty';
+        }
+    }
+    if (breedEl) {
+        const p1 = dc?.slot1?.pokemon;
+        if (p1) {
+            breedEl.textContent = dc.slot1.isFinished
+                ? `${p1.name} • READY (Q=${p1.quality.toFixed(2)})`
+                : `${p1.name} (${dc.slot1.battles}/${dc.slot1.requiredBattles}) • Q=${p1.quality.toFixed(2)}`;
+        } else {
+            breedEl.textContent = 'Slot: Empty';
+        }
+    }
 }
 
 
@@ -222,11 +312,16 @@ function renderDayCareSlot(container, p, battles, maxBattles, type) {
 
     if (type === 'breed') {
         centerLabel = 'Q';
+        const hasAdvancedBreeder = state.stats?.upgrades?.daycareTier >= 3;
+        const maxQuality = hasAdvancedBreeder ? 1.99 : 1.80;
         if (state.dayCareRef && state.dayCareRef.slot1 && state.dayCareRef.slot1.isFinished) {
             isReady = true;
             const lastQBonus = p.lastQBonus !== undefined ? p.lastQBonus : 0.00;
             const baseQ = (p.quality - lastQBonus).toFixed(2);
             rightText = `${baseQ}+${lastQBonus.toFixed(2)}`;
+        } else if (p.quality >= maxQuality) {
+            centerLabel = 'MAX Q';
+            rightText = p.quality.toFixed(2);
         } else {
             const baseQ = p.quality.toFixed(2);
             rightText = `${baseQ}+0.00`;
@@ -234,9 +329,14 @@ function renderDayCareSlot(container, p, battles, maxBattles, type) {
     } else if (type === 'train') {
         centerLabel = 'SumIV';
         const totalIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
-        const cycles = p.trainingCyclesCompleted || 0;
-        const initialIV = totalIV - cycles;
-        rightText = `${initialIV}+${cycles}`;
+        const gained = p.trainingIVsGained !== undefined ? p.trainingIVsGained : (p.trainingCyclesCompleted || 0);
+        const initialIV = totalIV - gained;
+        if (totalIV >= 600) {
+            centerLabel = 'MAX IV';
+            rightText = `${totalIV}`;
+        } else {
+            rightText = `${initialIV}+${gained}`;
+        }
     }
 
     const modeClass = type === 'breed' ? 'is-daycare-breed' : 'is-daycare-train';

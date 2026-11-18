@@ -185,6 +185,7 @@ class DayCare {
             }
         }
 
+        let actualGained = 0;
         for (let i = 0; i < ivsToGain; i++) {
             const currentTotalIV = this._getTotalIV(pkmn);
             if (currentTotalIV >= 600) break;
@@ -198,8 +199,10 @@ class DayCare {
                 const randomVal = typeof crypto !== 'undefined' ? (crypto.getRandomValues(new Uint32Array(1))[0] / (0xFFFFFFFF + 1)) : Math.random();
                 const randStat = sub100Stats[Math.floor(randomVal * sub100Stats.length)];
                 pkmn.ivs[randStat]++;
+                actualGained++;
             }
         }
+        return actualGained;
     }
 
     completeTrainingCycle() {
@@ -207,17 +210,22 @@ class DayCare {
         if (!pkmn) return;
         const totalIV = this._getTotalIV(pkmn);
 
+        let gained = 0;
         if (totalIV < 600) {
-            this._gainTrainingIVs(pkmn);
+            gained = this._gainTrainingIVs(pkmn);
             this._recalculatePokemonStats(pkmn);
         }
 
-        // Track how many times this pokemon has completed a training cycle
+        // Track how many times this pokemon has completed a training cycle & actual IVs gained
         if (!pkmn.trainingCyclesCompleted) {
             pkmn.trainingCyclesCompleted = 0;
         }
         pkmn.trainingCyclesCompleted++;
-        if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') window.trackDailyChallenge('daycare_iv', { amount: 1 });
+        pkmn.trainingIVsGained = (pkmn.trainingIVsGained || 0) + gained;
+
+        if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') {
+            window.trackDailyChallenge('daycare_iv', { amount: gained > 0 ? gained : 1 });
+        }
 
         // Reset progress only if we are still under the cap
         const newTotalIV = this._getTotalIV(pkmn);

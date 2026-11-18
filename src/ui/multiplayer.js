@@ -82,10 +82,42 @@ const rtcConfig = {
     iceServers: [{ urls: 'stun:stun.l.google.com:19302' }]
 };
 
+function showMpAlert(msg) {
+    if (typeof window !== 'undefined' && typeof window.showGameAlert === 'function') {
+        window.showGameAlert(msg, 'view-battle-stadium');
+    } else if (typeof alert === 'function') {
+        alert(msg);
+    }
+}
+
+function setMpActionGenerating(btnId, inputId, isGenerating, defaultLabel, defaultPlaceholder) {
+    const btn = document.getElementById(btnId);
+    if (btn) {
+        if (isGenerating && !btn.dataset.defaultLabel) {
+            btn.dataset.defaultLabel = btn.innerText || defaultLabel;
+        }
+        btn.disabled = isGenerating;
+        btn.innerText = isGenerating ? 'Generating...' : (btn.dataset.defaultLabel || defaultLabel);
+    }
+    const inputEl = document.getElementById(inputId);
+    if (inputEl) {
+        if (isGenerating) {
+            if (!inputEl.dataset.defaultPlaceholder) {
+                inputEl.dataset.defaultPlaceholder = inputEl.placeholder || defaultPlaceholder;
+            }
+            inputEl.value = '';
+            inputEl.placeholder = 'Generating code...';
+        } else if (inputEl.dataset.defaultPlaceholder) {
+            inputEl.placeholder = inputEl.dataset.defaultPlaceholder;
+        }
+    }
+}
+
 export async function hostGame() {
     initMultiplayer();
     isHost = true;
     originalParty = [...state.party];
+    setMpActionGenerating('btn-mp-host', 'multiplayer-host-id', true, 'Create Host Code', 'Click button to generate Host Code');
 
     try {
         peerConnection = new window.RTCPeerConnection(rtcConfig);
@@ -96,8 +128,8 @@ export async function hostGame() {
         peerConnection.onicecandidate = (event) => {
             if (event.candidate === null && peerConnection && peerConnection.localDescription) {
                 // Trickle ICE finished, now SDP contains all ICE candidates.
-
                 const encodedOffer = safeEncode(peerConnection.localDescription);
+                setMpActionGenerating('btn-mp-host', 'multiplayer-host-id', false, 'Create Host Code', 'Click button to generate Host Code');
                 const el = document.getElementById('multiplayer-host-id');
                 if (el) el.value = encodedOffer;
             }
@@ -107,7 +139,8 @@ export async function hostGame() {
         await peerConnection.setLocalDescription(offer);
     } catch (e) {
         console.error('Failed to host multiplayer game:', e);
-        alert("Failed to host multiplayer game.");
+        setMpActionGenerating('btn-mp-host', 'multiplayer-host-id', false, 'Create Host Code', 'Click button to generate Host Code');
+        showMpAlert("Failed to host multiplayer game.");
         disconnectAndResetUI();
     }
 }
@@ -116,6 +149,7 @@ export async function joinGame(encodedOffer) {
     initMultiplayer();
     isHost = false;
     originalParty = [...state.party];
+    setMpActionGenerating('btn-mp-join', 'multiplayer-client-id', true, 'Generate Answer Code', 'Generated Answer Code appears here');
 
     peerConnection = new window.RTCPeerConnection(rtcConfig);
 
@@ -125,10 +159,10 @@ export async function joinGame(encodedOffer) {
     };
 
     peerConnection.onicecandidate = (event) => {
-        if (event.candidate === null) {
+        if (event.candidate === null && peerConnection && peerConnection.localDescription) {
             // Trickle ICE finished
-
             const encodedAnswer = safeEncode(peerConnection.localDescription);
+            setMpActionGenerating('btn-mp-join', 'multiplayer-client-id', false, 'Generate Answer Code', 'Generated Answer Code appears here');
             const el = document.getElementById('multiplayer-client-id');
             if (el) el.value = encodedAnswer;
         }
@@ -141,7 +175,8 @@ export async function joinGame(encodedOffer) {
         const answer = await peerConnection.createAnswer();
         await peerConnection.setLocalDescription(answer);
     } catch (e) {
-        alert("Invalid Host Code.");
+        setMpActionGenerating('btn-mp-join', 'multiplayer-client-id', false, 'Generate Answer Code', 'Generated Answer Code appears here');
+        showMpAlert("Invalid Host Code.");
         console.error(e);
     }
 }
@@ -152,17 +187,21 @@ export async function completeConnection(encodedAnswer) {
         const answerDesc = new window.RTCSessionDescription(safeDecode(encodedAnswer));
         await peerConnection.setRemoteDescription(answerDesc);
     } catch (e) {
-        alert("Invalid Answer Code.");
+        showMpAlert("Invalid Answer Code.");
         console.error(e);
     }
 }
 
 export function disconnectAndResetUI() {
     initMultiplayer();
+    setMpActionGenerating('btn-mp-host', 'multiplayer-host-id', false, 'Create Host Code', 'Click button to generate Host Code');
+    setMpActionGenerating('btn-mp-join', 'multiplayer-client-id', false, 'Generate Answer Code', 'Generated Answer Code appears here');
 
     const connBtn = document.getElementById('btn-mp-connection-status');
     if (connBtn) {
-        connBtn.style.background = '#e74c3c';
+        connBtn.style.background = '';
+        connBtn.classList.remove('piw-btn-success');
+        connBtn.classList.add('piw-btn-danger');
         connBtn.innerText = 'Not Connected';
         connBtn.disabled = true;
         connBtn.style.cursor = 'default';
@@ -177,17 +216,20 @@ function updateBattleButtonUI() {
     const btn = document.getElementById('btn-mp-battle');
     if (!btn) return;
 
+    btn.style.background = '';
     if (!dataChannel || dataChannel.readyState !== 'open') {
         btn.disabled = true;
-        btn.style.background = '#95a5a6';
+        btn.classList.remove('piw-btn-success');
+        btn.classList.add('piw-btn-secondary');
         btn.style.cursor = 'not-allowed';
         btn.innerText = 'Battle';
         return;
     }
 
     btn.disabled = false;
+    btn.classList.remove('piw-btn-secondary');
+    btn.classList.add('piw-btn-success');
     btn.style.cursor = 'pointer';
-    btn.style.background = '#2ecc71'; // Green
 
     if (isMultiplayerReady.local) {
         btn.innerText = 'Starting Battle...';
@@ -199,7 +241,9 @@ function updateBattleButtonUI() {
 function handleDataChannelOpen(channel) {
     const connBtn = document.getElementById('btn-mp-connection-status');
     if (connBtn) {
-        connBtn.style.background = '#2ecc71';
+        connBtn.style.background = '';
+        connBtn.classList.remove('piw-btn-danger');
+        connBtn.classList.add('piw-btn-success');
         connBtn.innerText = 'Connected';
         connBtn.disabled = false;
         connBtn.style.cursor = 'pointer';
@@ -209,11 +253,13 @@ function handleDataChannelOpen(channel) {
 
         // Hover effect
         connBtn.onmouseenter = () => {
-            connBtn.style.background = '#e74c3c';
+            connBtn.classList.remove('piw-btn-success');
+            connBtn.classList.add('piw-btn-danger');
             connBtn.innerText = 'Disconnect';
         };
         connBtn.onmouseleave = () => {
-            connBtn.style.background = '#2ecc71';
+            connBtn.classList.remove('piw-btn-danger');
+            connBtn.classList.add('piw-btn-success');
             connBtn.innerText = 'Connected';
         };
     }
@@ -224,7 +270,7 @@ function handleDataChannelOpen(channel) {
 }
 
 function handleDataChannelClose() {
-    alert("Connection closed.");
+    showMpAlert("Connection closed.");
     if (globals.battleSystem && globals.battleSystem.multiplayerState?.isActive) {
          globals.battleSystem.stopMultiplayerBattle();
     }
@@ -280,7 +326,7 @@ function handlePartyMessage(data) {
         return;
     }
     if (data.region !== state.currentRegionName) {
-        alert("Cannot connect! You must be in the same region as your opponent.");
+        showMpAlert("Cannot connect! You must be in the same region as your opponent.");
         disconnectAndResetUI();
         return;
     }
@@ -350,29 +396,11 @@ window.switchMultiplayerTab = function(tab) {
     const joinBtn = document.getElementById('btn-tab-join');
     if (!hostContainer || !joinContainer || !hostBtn || !joinBtn) return;
 
-    if (tab === 'host') {
-        hostContainer.style.display = 'block';
-        joinContainer.style.display = 'none';
-        hostBtn.style.background = 'linear-gradient(to bottom, #3498db, #2980b9)';
-        hostBtn.style.color = 'white';
-        hostBtn.style.border = '1px solid #3498db';
-        hostBtn.style.boxShadow = '0 2px 4px rgba(0,0,0,0.2)';
-        joinBtn.style.background = 'transparent';
-        joinBtn.style.color = 'rgba(255, 255, 255, 0.7)';
-        joinBtn.style.border = '1px solid transparent';
-        joinBtn.style.boxShadow = 'none';
-    } else {
-        hostContainer.style.display = 'none';
-        joinContainer.style.display = 'block';
-        joinBtn.style.background = 'linear-gradient(to bottom, #3498db, #2980b9)';
-        joinBtn.style.color = 'white';
-        joinBtn.style.border = '1px solid #3498db';
-        joinBtn.style.boxShadow = '0 2px 4px rgba(0,0,0,0.2)';
-        hostBtn.style.background = 'transparent';
-        hostBtn.style.color = 'rgba(255, 255, 255, 0.7)';
-        hostBtn.style.border = '1px solid transparent';
-        hostBtn.style.boxShadow = 'none';
-    }
+    const isHostTab = tab === 'host';
+    hostContainer.style.display = isHostTab ? 'block' : 'none';
+    joinContainer.style.display = isHostTab ? 'none' : 'block';
+    hostBtn.classList.toggle('is-active', isHostTab);
+    joinBtn.classList.toggle('is-active', !isHostTab);
 };
 
 function copyToClipboard(inputEl, btnEl) {
@@ -401,7 +429,7 @@ function fallbackCopy(inputEl, btnEl) {
         setTimeout(() => btnEl.innerText = 'Copy', 2000);
     } catch (err) {
         console.error('Fallback copy failed:', err);
-        alert("Copy failed. Please manually copy the code.");
+        showMpAlert("Copy failed. Please manually copy the code.");
     }
 }
 
@@ -419,13 +447,13 @@ async function pasteFromClipboard(inputEl, btnEl) {
                  btnEl.innerText = 'Pasted!';
                  setTimeout(() => btnEl.innerText = 'Paste', 2000);
             } else {
-                 alert("Please use Ctrl+V or Right-Click -> Paste.");
+                 showMpAlert("Please use Ctrl+V or Right-Click -> Paste.");
             }
         }
     } catch (err) {
         console.error('Paste failed:', err);
         inputEl.focus();
-        alert("Please use Ctrl+V or Right-Click -> Paste.");
+        showMpAlert("Please use Ctrl+V or Right-Click -> Paste.");
     }
 }
 

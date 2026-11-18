@@ -96,12 +96,16 @@ function generateHeroHeaderHTML(unspentWhite, defeats, progressPct) {
 }
 
 function generateCandyOptionsHTML(unspentWhite) {
+    const g = state.stats.greenCandies || 0;
+    const p = state.stats.purpleCandies || 0;
+    const by = state.stats.blackYellowCandies || 0;
+    const r = state.stats.rainbowCandies || 0;
     return `
         <div class="bc-grid">
-            ${renderCandyOption('Green Candy', '+0.25% Loot Probability &<br>+1% Money from Battles', getCandyCost('Green Candy', state.stats.greenCandies), state.stats.greenCandies, `Loot +${0.25 * (state.stats.greenCandies || 0)}% | Money +${1 * (state.stats.greenCandies || 0)}%`, 'LootCandy.png', unspentWhite)}
-            ${renderCandyOption('Purple Candy', '+2% Experience Gain from Battles', getCandyCost('Purple Candy', state.stats.purpleCandies), state.stats.purpleCandies, `+${2 * (state.stats.purpleCandies || 0)}% XP`, 'XPCandy.png', unspentWhite)}
-            ${renderCandyOption('Black Yellow Candy', '+20% Catch Rate Bonus', getCandyCost('Black Yellow Candy', state.stats.blackYellowCandies), state.stats.blackYellowCandies, `+${20 * (state.stats.blackYellowCandies || 0)}% Catch`, 'CatchCandy.png', unspentWhite)}
-            ${renderCandyOption('Rainbow Candy', '+1 Extra Shiny Roll per Candy', getCandyCost('Rainbow Candy', state.stats.rainbowCandies), state.stats.rainbowCandies, `+${state.stats.rainbowCandies || 0} Shiny Rolls`, 'ShinyCandy.png', unspentWhite)}
+            ${renderCandyOption('Green Candy', '+0.25% Loot Probability &<br>+1% Money from Battles', getCandyCost('Green Candy', state.stats.greenCandies), g, `Loot +${(0.25 * g).toFixed(2)}% (+0.25%) | Money +${g}% (+1%)`, 'LootCandy.png', unspentWhite)}
+            ${renderCandyOption('Purple Candy', '+2% Experience Gain from Battles', getCandyCost('Purple Candy', state.stats.purpleCandies), p, `+${2 * p}% XP ➔ +${2 * (p + 1)}%`, 'XPCandy.png', unspentWhite)}
+            ${renderCandyOption('Black Yellow Candy', '+20% Catch Rate Bonus', getCandyCost('Black Yellow Candy', state.stats.blackYellowCandies), by, `+${20 * by}% Catch ➔ +${20 * (by + 1)}%`, 'CatchCandy.png', unspentWhite)}
+            ${renderCandyOption('Rainbow Candy', '+1 Extra Shiny Roll per Candy', getCandyCost('Rainbow Candy', state.stats.rainbowCandies), r, r >= 7 ? `+${r} Shiny Rolls (MAX)` : `+${r} ➔ +${r + 1} Shiny Rolls`, 'ShinyCandy.png', unspentWhite)}
         </div>
     `;
 }

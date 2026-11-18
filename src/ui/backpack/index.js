@@ -22,19 +22,6 @@ window.closeBackpackModal = function() {
 export function showBackpack() {
     let html = `
         <div class="backpack-stage">
-            <style>
-                .backpack-pocket {
-                    cursor: pointer;
-                    fill: transparent;
-                    stroke: transparent;
-                    stroke-width: 6;
-                    transition: fill 0.2s ease-in-out, stroke 0.2s ease-in-out;
-                }
-                .backpack-pocket:hover {
-                    stroke: rgba(56, 189, 248, 0.7);
-                    fill: rgba(56, 189, 248, 0.14);
-                }
-            </style>
 
             <div onclick="window.closeBackpackModal()" style="position: absolute; inset: 0; z-index: 1;"></div>
 

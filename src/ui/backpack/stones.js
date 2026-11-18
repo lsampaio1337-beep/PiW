@@ -25,6 +25,7 @@ export function renderStonesTab(area) {
             <div class="backpack-item-card">
                 <div class="backpack-item-name">${displayName}</div>
                 <img src="${imagePath}" class="backpack-item-img" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='">
+                <div class="backpack-item-attr">Evolution Stone</div>
                 <div class="backpack-item-stock">Stock: ${formatQuantity(qty)}</div>
             </div>
         `;

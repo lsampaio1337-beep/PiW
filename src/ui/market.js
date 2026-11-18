@@ -332,9 +332,7 @@ function generateMarketItemCard(item, category, stock) {
                 ${category !== 'upgrades' ? `
                 <div class="market-qty-row">
                     <input type="text" id="buy-qty-${safeId}" value="1" oninput="if(window.updateBuyItemPrice) window.updateBuyItemPrice('${safeItemNameJS}', '${safeCategoryJS}', ${item.price})" class="market-qty-input">
-                    ${(category === 'pokeballs' || category === 'potions') ? `
                     <button onclick="if(window.buySetMax) window.buySetMax('${safeItemNameJS}', '${safeCategoryJS}', ${item.price})" class="market-max-btn">Max</button>
-                    ` : ''}
                 </div>
                 ` : ''}
                 <button id="buy-btn-${safeId}" onclick="${buyAction}" class="market-final-price market-action-btn">$${formatMarketNumber(item.price)}</button>
@@ -383,7 +381,24 @@ export function renderPokeMarketTab(category) {
     content.dataset.category = category;
 
     let items = getMarketItems(category);
-    let html = generateMarketItemsHTML(items, category);
+    let capacityBanner = '';
+    if (category === 'pokeballs' || category === 'potions') {
+        const type = category === 'pokeballs' ? 'balls' : 'potions';
+        const used = getCurrentCount(state, type);
+        const cap = getCapacity(state, type);
+        const pct = cap > 0 ? Math.min(100, Math.round((used / cap) * 100)) : 0;
+        const label = category === 'pokeballs' ? 'Ball Pocket' : 'Potion Satchel';
+        const isFull = used >= cap;
+        capacityBanner = `
+            <div class="bp-capacity-banner">
+                <span style="font-size: 12px; font-weight: 700; color: var(--piw-text-primary);">${label}: <span class="piw-badge ${isFull ? 'is-red' : 'is-blue'}">${used.toLocaleString('en-US')} / ${cap.toLocaleString('en-US')}</span></span>
+                <div class="piw-progress-track" style="flex: 1; max-width: 240px; height: 7px;">
+                    <div class="piw-progress-fill ${isFull ? 'is-amber' : 'is-green'}" style="width: ${pct}%;"></div>
+                </div>
+            </div>
+        `;
+    }
+    let html = capacityBanner + generateMarketItemsHTML(items, category);
 
     safeSetHTML(content, html);
 }
@@ -432,15 +447,20 @@ export function buySetMax(itemId, category, basePrice) {
     const input = document.getElementById(`buy-qty-${safeId}`);
     if (!input) return;
 
+    const money = state.trainer?.money || 0;
+    const maxAffordable = basePrice > 0 ? Math.floor(money / basePrice) : 1000000;
+
     if ((category === 'pokeballs' && itemId !== 'Masterball') || category === 'potions') {
         const type = category === 'pokeballs' ? 'balls' : 'potions';
         const currentCount = getCurrentCount(state, type);
         const capacity = getCapacity(state, type);
         const spaceLeft = Math.max(0, capacity - currentCount);
+        const bestQty = spaceLeft > 0 ? Math.max(1, Math.min(spaceLeft, maxAffordable || 1)) : 0;
 
-        input.value = formatMarketNumberDown(spaceLeft);
+        input.value = formatMarketNumberDown(bestQty);
     } else {
-        input.value = (1000000).toLocaleString('en-US');
+        const bestQty = Math.min(1000000, Math.max(1, maxAffordable));
+        input.value = formatMarketNumberDown(bestQty);
     }
 
     updateBuyItemPrice(itemId, category, basePrice);
@@ -533,6 +553,14 @@ function getMarketSellHtml() {
                         <span style="color: #4ade80;">Total: $<span id="market-pokemon-sell-total">0</span></span>
                     </div>
                     <div class="market-sell-btns">
+                        <select id="market-filter-sort" class="piw-select" style="padding: 4px 8px; font-size: 12px;" onchange="if(window.setMarketPokemonSort) window.setMarketPokemonSort(this.value)">
+                            <option value="default">Sort: Default</option>
+                            <option value="price-desc">Price: High ↓</option>
+                            <option value="price-asc">Price: Low ↑</option>
+                            <option value="q-asc">Quality: Low ↑</option>
+                            <option value="level-asc">Level: Low ↑</option>
+                            <option value="iv-asc">Sum IV: Low ↑</option>
+                        </select>
                         <button onclick="if(window.toggleMarketPokemonFilters) window.toggleMarketPokemonFilters()" class="market-ctrl-btn" style="background: #334155;">🔍 Filters</button>
                         <button onclick="if(window.marketSelectAllPokemonForSale) window.marketSelectAllPokemonForSale()" class="market-ctrl-btn" style="background: #2563eb;">Select Visible</button>
                         <button onclick="if(window.marketDeselectAllPokemonForSale) window.marketDeselectAllPokemonForSale()" class="market-ctrl-btn" style="background: #475569;">Deselect All</button>
@@ -756,8 +784,10 @@ function renderMarketSellPokemonList(content) {
     const filterQMax = parseFloat(document.getElementById('market-filter-q-max')?.value);
     const filterSumIVMin = parseFloat(document.getElementById('market-filter-sumiv-min')?.value);
     const filterSumIVMax = parseFloat(document.getElementById('market-filter-sumiv-max')?.value);
+    const sortMode = window.marketPokemonSortMode || 'default';
 
     const map = getPokemonDataMap();
+    const candidates = [];
 
     state.storage.forEach(p => {
         if (!p.uuid) p.uuid = crypto.randomUUID();
@@ -767,7 +797,7 @@ function renderMarketSellPokemonList(content) {
         if (p.bst === undefined && pd) {
             p.bst = pd.hp + pd.atk + pd.def + pd.spa + pd.spd + pd.spe;
         }
-        let pEv = calculatePP(p.bst || 300, p.level, p.quality, sumIV); // Fallback to 300 if bst still missing
+        let pEv = calculatePP(p.bst || 300, p.level, p.quality, sumIV);
 
         let pName = p.name || p.id;
         if (pd) {
@@ -781,6 +811,21 @@ function renderMarketSellPokemonList(content) {
         if (!isNaN(filterSumIVMin) && sumIV < filterSumIVMin) return;
         if (!isNaN(filterSumIVMax) && sumIV > filterSumIVMax) return;
 
+        candidates.push({ p, sumIV, pEv, pName });
+    });
+
+    if (sortMode !== 'default') {
+        candidates.sort((a, b) => {
+            if (sortMode === 'price-desc') return b.pEv - a.pEv;
+            if (sortMode === 'price-asc') return a.pEv - b.pEv;
+            if (sortMode === 'q-asc') return a.p.quality - b.p.quality;
+            if (sortMode === 'level-asc') return a.p.level - b.p.level;
+            if (sortMode === 'iv-asc') return a.sumIV - b.sumIV;
+            return 0;
+        });
+    }
+
+    candidates.forEach(({ p, sumIV, pEv, pName }) => {
         let imgSrc = window.getSpriteUrl(p.id, p.qualityName === 'Shiny');
 
         let glowClass = "glow-weak";
@@ -794,9 +839,10 @@ function renderMarketSellPokemonList(content) {
         let isSelected = window.marketSelectedPokemonForSale && window.marketSelectedPokemonForSale.has(p.uuid);
 
         html += `
-            <div onclick="if(window.toggleMarketPokemonSaleSelection) window.toggleMarketPokemonSaleSelection('${p.uuid}')"
+            <div data-uuid="${escapeHTML(p.uuid)}" onclick="if(window.toggleMarketPokemonSaleSelection) window.toggleMarketPokemonSaleSelection('${escapeHTML(p.uuid)}')"
                 class="market-pokemon-card ${isSelected ? 'is-selected' : ''}">
-                <div style="font-size: 13px; font-weight: bold; margin-bottom: 4px; line-height: 1.15; color: white;">${escapeHTML(String(pName))}</div>
+                <div onclick="event.stopPropagation(); if(window.showPokemonStatsByUuid) window.showPokemonStatsByUuid('${escapeHTML(p.uuid)}')" style="position: absolute; top: 4px; right: 4px; width: 17px; height: 17px; border-radius: 50%; background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(148, 163, 184, 0.45); color: #e2e8f0; font-size: 10px; font-weight: 800; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 2;" title="Inspect Pokémon">i</div>
+                <div style="font-size: 13px; font-weight: bold; margin-bottom: 4px; line-height: 1.15; color: white; padding-right: 14px;">${escapeHTML(String(pName))}</div>
                 <div style="flex: 1; width: 100%; display: flex; align-items: center; justify-content: center; position: relative; height: 54px; margin-bottom: 4px;">
                     <img src="${escapeHTML(imgSrc)}" class="${glowClass}" style="max-height: 100%; max-width: 100%; object-fit: contain; z-index: 1;" onerror="this.style.display='none'">
                 </div>
@@ -927,15 +973,27 @@ window.updateSellItemPrice = updateSellItemPrice;
 window.sellSetMax = sellSetMax;
 window.sellMarketItem = sellMarketItem;
 
+window.setMarketPokemonSort = function(sortMode) {
+    window.marketPokemonSortMode = sortMode || 'default';
+    if (window.renderPokeMarketSellTab) window.renderPokeMarketSellTab('pokemon');
+};
+
 window.toggleMarketPokemonSaleSelection = function(uuid) {
     if (!window.marketSelectedPokemonForSale) return;
+    let isNowSelected = false;
     if (window.marketSelectedPokemonForSale.has(uuid)) {
         window.marketSelectedPokemonForSale.delete(uuid);
     } else {
         window.marketSelectedPokemonForSale.add(uuid);
+        isNowSelected = true;
     }
     updateMarketPokemonSellCount();
-    if (window.renderPokeMarketSellTab) window.renderPokeMarketSellTab('pokemon');
+    const card = document.querySelector(`.market-pokemon-card[data-uuid="${uuid}"]`);
+    if (card) {
+        card.classList.toggle('is-selected', isNowSelected);
+    } else if (window.renderPokeMarketSellTab) {
+        window.renderPokeMarketSellTab('pokemon');
+    }
 };
 
 window.marketDeselectAllPokemonForSale = function() {
@@ -943,7 +1001,7 @@ window.marketDeselectAllPokemonForSale = function() {
         window.marketSelectedPokemonForSale.clear();
     }
     updateMarketPokemonSellCount();
-    if (window.renderPokeMarketSellTab) window.renderPokeMarketSellTab('pokemon');
+    document.querySelectorAll('.market-pokemon-card.is-selected').forEach(c => c.classList.remove('is-selected'));
 };
 
 window.toggleMarketPokemonFilters = function() {

@@ -67,6 +67,8 @@ export function hasCaughtSpecies(id, state) {
 }
 
 let activePokedexFilter = 'all';
+let activePokedexTypeFilter = 'all';
+let activePokedexSort = 'num';
 
 window.setPokedexFilter = function(filter) {
     activePokedexFilter = filter || 'all';
@@ -77,15 +79,46 @@ window.setPokedexFilter = function(filter) {
     window.applyPokedexFilters();
 };
 
+window.setPokedexTypeFilter = function(type) {
+    activePokedexTypeFilter = (type || 'all').toLowerCase();
+    window.applyPokedexFilters();
+};
+
+window.setPokedexSort = function(sortBy) {
+    activePokedexSort = sortBy || 'num';
+    window.applyPokedexFilters();
+};
+
 window.applyPokedexFilters = function() {
     const searchEl = document.getElementById('pokedex-search-input');
     const query = (searchEl ? searchEl.value : '').trim().toLowerCase();
+    const grid = document.getElementById('pokedex-grid');
     const cards = document.querySelectorAll('#pokedex-grid .pokedex-card');
-    cards.forEach(card => {
+    const cardList = Array.from(cards);
+
+    if (grid && cardList.length > 0) {
+        cardList.sort((a, b) => {
+            if (activePokedexSort === 'name') {
+                const nA = (a.dataset.name || 'zzz').toLowerCase();
+                const nB = (b.dataset.name || 'zzz').toLowerCase();
+                return nA.localeCompare(nB) || (Number(a.dataset.num) - Number(b.dataset.num));
+            }
+            if (activePokedexSort === 'bst') {
+                const bA = a.dataset.status === 'caught' ? Number(a.dataset.bst || 0) : -1;
+                const bB = b.dataset.status === 'caught' ? Number(b.dataset.bst || 0) : -1;
+                return (bB - bA) || (Number(a.dataset.num) - Number(b.dataset.num));
+            }
+            return Number(a.dataset.num) - Number(b.dataset.num);
+        });
+        cardList.forEach(card => grid.appendChild(card));
+    }
+
+    cardList.forEach(card => {
         const name = (card.dataset.name || '').toLowerCase();
         const num = (card.dataset.num || '').toLowerCase();
         const status = card.dataset.status || 'unseen';
         const isShiny = card.dataset.shiny === '1';
+        const types = (card.dataset.types || '').toLowerCase();
 
         const matchesQuery = !query || name.includes(query) || num.includes(query) || (`#${num}`).includes(query);
         let matchesFilter = true;
@@ -94,12 +127,16 @@ window.applyPokedexFilters = function() {
         else if (activePokedexFilter === 'unseen') matchesFilter = status === 'unseen';
         else if (activePokedexFilter === 'shiny') matchesFilter = isShiny;
 
-        card.style.display = (matchesQuery && matchesFilter) ? 'flex' : 'none';
+        const matchesType = activePokedexTypeFilter === 'all' || (types && types.split(',').includes(activePokedexTypeFilter));
+
+        card.style.display = (matchesQuery && matchesFilter && matchesType) ? 'flex' : 'none';
     });
 };
 
 export function showPokedex() {
     activePokedexFilter = 'all';
+    activePokedexTypeFilter = 'all';
+    activePokedexSort = 'num';
     const regionName = state.currentRegionName || 'Kanto';
     let html = `<div class="pokedex-container">`;
 
@@ -115,6 +152,7 @@ export function showPokedex() {
         let caughtCount = 0;
         let shinyCount = 0;
         let cardsHtml = '';
+        const typeSet = new Set();
 
         for (const pData of regionalDex) {
             const isSeen = Boolean(state.stats.seenSpecies && state.stats.seenSpecies[pData.name]);
@@ -131,6 +169,9 @@ export function showPokedex() {
             const onClick = isRevealed ? `onclick="window.showDexEntry(${pData.id})"` : "";
             const displayName = isRevealed ? pData.name : "???";
             const status = isCaught ? 'caught' : (isSeen ? 'seen' : 'unseen');
+            const pTypes = Array.isArray(pData.types) ? pData.types : [];
+            if (isRevealed) pTypes.forEach(t => typeSet.add(t));
+            const bst = (pData.hp || 0) + (pData.atk || 0) + (pData.def || 0) + (pData.spa || 0) + (pData.spd || 0) + (pData.spe || 0);
 
             let cardClass = "pokedex-card";
             if (isRevealed) cardClass += " is-clickable";
@@ -149,7 +190,7 @@ export function showPokedex() {
                 }
             }
 
-            cardsHtml += `<div class="${cardClass}" data-name="${isRevealed ? pData.name : ''}" data-num="${pData[regionIdField]}" data-status="${status}" data-shiny="${hasCaughtShiny ? '1' : '0'}" ${onClick}>
+            cardsHtml += `<div class="${cardClass}" data-name="${isRevealed ? pData.name : ''}" data-num="${pData[regionIdField]}" data-status="${status}" data-shiny="${hasCaughtShiny ? '1' : '0'}" data-types="${isRevealed ? pTypes.join(',').toLowerCase() : ''}" data-bst="${bst}" ${onClick}>
                 <div class="pokedex-card-num">#${pData[regionIdField]}</div>
                 <div class="pokedex-card-name" title="${displayName}">${displayName}</div>
                 <img class="pokedex-card-img" src="${window.getSpriteUrl(pData.id, false)}" style="filter: ${filter};">
@@ -158,6 +199,7 @@ export function showPokedex() {
 
         const total = regionalDex.length;
         const pct = total > 0 ? Math.round((caughtCount / total) * 100) : 0;
+        const typeOptions = Array.from(typeSet).sort().map(t => `<option value="${t.toLowerCase()}">${t}</option>`).join('');
 
         html += `
             <div class="pokedex-header">
@@ -167,15 +209,27 @@ export function showPokedex() {
                         <span class="pokedex-stat-pill">Seen: ${seenCount}/${total}</span>
                         <span class="pokedex-stat-pill is-shiny">Shiny: ${shinyCount}/${total}</span>
                     </div>
+                    <div class="pokedex-progress-wrap" title="Pokedex Completion: ${pct}%">
+                        <div class="pokedex-progress-bar" style="width: ${pct}%;"></div>
+                    </div>
                 </div>
                 <div class="pokedex-controls-row">
-                    <input id="pokedex-search-input" class="pokedex-search" type="text" placeholder="Search by name or #...">
+                    <input id="pokedex-search-input" class="pokedex-search" type="text" placeholder="Search by name or #..." oninput="window.applyPokedexFilters()">
+                    <select id="pokedex-type-select" class="piw-select" style="padding: 4px 8px; font-size: 11.5px;" onchange="window.setPokedexTypeFilter(this.value)">
+                        <option value="all">All Types</option>
+                        ${typeOptions}
+                    </select>
+                    <select id="pokedex-sort-select" class="piw-select" style="padding: 4px 8px; font-size: 11.5px;" onchange="window.setPokedexSort(this.value)">
+                        <option value="num">Sort: #</option>
+                        <option value="name">Sort: A-Z</option>
+                        <option value="bst">Sort: BST</option>
+                    </select>
                     <div id="pokedex-filter-group" class="pokedex-filter-group">
-                        <button class="pokedex-filter-btn is-active" data-filter="all">All</button>
-                        <button class="pokedex-filter-btn" data-filter="caught">Caught</button>
-                        <button class="pokedex-filter-btn" data-filter="seen">Seen</button>
-                        <button class="pokedex-filter-btn" data-filter="unseen">Unseen</button>
-                        <button class="pokedex-filter-btn" data-filter="shiny">Shiny</button>
+                        <button class="pokedex-filter-btn is-active" data-filter="all" onclick="window.setPokedexFilter('all')">All</button>
+                        <button class="pokedex-filter-btn" data-filter="caught" onclick="window.setPokedexFilter('caught')">Caught</button>
+                        <button class="pokedex-filter-btn" data-filter="seen" onclick="window.setPokedexFilter('seen')">Seen</button>
+                        <button class="pokedex-filter-btn" data-filter="unseen" onclick="window.setPokedexFilter('unseen')">Unseen</button>
+                        <button class="pokedex-filter-btn" data-filter="shiny" onclick="window.setPokedexFilter('shiny')">Shiny</button>
                     </div>
                 </div>
             </div>
@@ -189,12 +243,14 @@ export function showPokedex() {
     showModal(`${regionName} Pokedex`, html, "window-pokedex");
 
     const searchInput = document.getElementById('pokedex-search-input');
-    if (searchInput) {
+    if (searchInput && typeof searchInput.addEventListener === 'function') {
         searchInput.addEventListener('input', () => window.applyPokedexFilters());
     }
     const filterBtns = document.querySelectorAll('#pokedex-filter-group .pokedex-filter-btn');
     filterBtns.forEach(btn => {
-        btn.addEventListener('click', () => window.setPokedexFilter(btn.dataset.filter));
+        if (typeof btn.addEventListener === 'function') {
+            btn.addEventListener('click', () => window.setPokedexFilter(btn.dataset.filter));
+        }
     });
 }
 
@@ -209,13 +265,13 @@ export function showDexEntry(id) {
     const evoTreeHtml = buildEvolutionLineHtml(pData, state);
 
     const html = `
-        <div class="content-panel" style="text-align:center; height: 100%; overflow-y: auto; padding: 12px; box-sizing: border-box;">
-            <div style="background: linear-gradient(180deg, #27374d 0%, #1d2a3a 100%); padding: 14px; border-radius: 10px; border: 2px solid #3498db; margin-bottom: 12px; display: flex; flex-direction: column; align-items: center;">
-                <h2 style="margin: 0 0 8px 0;">#${pData.id} ${pData.name}</h2>
-                <img id="dex-sprite-${pData.id}" src="${window.getSpriteUrl(pData.id, false)}" style="width: 100px; height: 100px;">
-                <div style="margin: 8px 0;">
-                    <button style="${buttonStyle}" onclick="document.getElementById('dex-sprite-${pData.id}').src = '${window.getSpriteUrl(pData.id, true)}'">Shiny</button>
-                    <button style="${buttonStyle}" onclick="document.getElementById('dex-sprite-${pData.id}').src = '${window.getSpriteUrl(pData.id, false)}'">Normal</button>
+        <div class="content-panel" style="text-align:center; height: 100%; overflow-y: auto; padding: 14px; box-sizing: border-box;">
+            <div class="pstats-card" style="margin-bottom: 12px; display: flex; flex-direction: column; align-items: center;">
+                <h2 style="margin: 0 0 8px 0; color: var(--piw-text-primary);">#${pData.id} ${pData.name}</h2>
+                <img id="dex-sprite-${pData.id}" src="${window.getSpriteUrl(pData.id, false)}" style="width: 100px; height: 100px; object-fit: contain;">
+                <div style="margin: 8px 0; display: flex; gap: 8px;">
+                    <button class="piw-btn piw-btn-warning piw-btn-sm" style="${buttonStyle}" onclick="document.getElementById('dex-sprite-${pData.id}').src = '${window.getSpriteUrl(pData.id, true)}'">Shiny</button>
+                    <button class="piw-btn piw-btn-secondary piw-btn-sm" style="${buttonStyle}" onclick="document.getElementById('dex-sprite-${pData.id}').src = '${window.getSpriteUrl(pData.id, false)}'">Normal</button>
                 </div>
                 <div style="font-size: 14px;"><b>Type:</b> ${pData.types.map(t => formatType(t)).join(' ')}</div>
             </div>
@@ -297,8 +353,8 @@ export function buildEvolutionLineHtml(pData, state) {
     }
 
     let treeHtml = buildTree(baseId);
-    return `<div style="text-align: left; margin: 15px 0; font-size: 14px; background: linear-gradient(180deg, #27374d 0%, #1d2a3a 100%); border: 2px solid #3498db; padding: 10px; border-radius: 10px; overflow-x: auto; max-height: 220px; overflow-y: auto;">
-        <h4 style="margin: 0 0 10px 0;">Evolution Line</h4>
+    return `<div class="pstats-card" style="text-align: left; margin: 12px 0; font-size: 14px; overflow-x: auto; max-height: 220px; overflow-y: auto;">
+        <h4 style="margin: 0 0 10px 0; color: var(--piw-accent-teal); text-transform: uppercase; font-size: 12.5px; letter-spacing: 0.4px;">Evolution Line</h4>
         <div style="display: flex; align-items: center; justify-content: center;">
             ${treeHtml}
         </div>
@@ -354,12 +410,12 @@ export function getSpeciesDataHtml(pData, state) {
     }
 
     let movesHtml = `
-        <div style="background: linear-gradient(180deg, #27374d 0%, #1d2a3a 100%); padding: 12px; border-radius: 10px; border: 2px solid #3498db; margin: 12px 0; text-align: left;">
-            <h4 style="margin: 0 0 8px 0; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 4px;">Moveset</h4>
+        <div class="pstats-card" style="margin: 12px 0; text-align: left;">
+            <h4 style="margin: 0 0 8px 0; border-bottom: var(--piw-border-subtle); padding-bottom: 6px; color: var(--piw-accent-teal); text-transform: uppercase; font-size: 12.5px; letter-spacing: 0.4px;">Moveset</h4>
             <div style="max-height: 240px; overflow-y: auto;">
                 <table style="width: 100%; text-align: left; font-size: 13px; border-collapse: collapse;">
                     <thead>
-                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.3); color: #ccc;">
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.2); color: var(--piw-text-muted);">
                             <th style="padding: 4px 6px;">Lvl</th>
                             <th style="padding: 4px 6px;">Move</th>
                             <th style="padding: 4px 6px;">Type</th>
@@ -373,7 +429,7 @@ export function getSpeciesDataHtml(pData, state) {
         pData.learnset.forEach((m, idx) => {
             let mData = state.config.moves[m.move];
             const rowBg = idx % 2 === 0 ? 'rgba(255,255,255,0.03)' : 'transparent';
-            movesHtml += `<tr style="border-bottom: 1px solid rgba(255,255,255,0.08); background: ${rowBg};">
+            movesHtml += `<tr style="border-bottom: 1px solid rgba(255,255,255,0.06); background: ${rowBg};">
                 <td style="padding: 5px 6px;">${m.level}</td>
                 <td style="padding: 5px 6px; font-weight: bold;">${m.move}</td>
                 <td style="padding: 5px 6px;">${mData ? formatType(mData.type) : '?'}</td>
@@ -384,32 +440,39 @@ export function getSpeciesDataHtml(pData, state) {
     }
     movesHtml += `</tbody></table></div></div>`;
 
-    const statBox = (label, val) => `
-        <div style="background: rgba(255,255,255,0.06); padding: 6px 8px; border-radius: 6px; text-align: center;">
-            <div style="font-size: 11px; color: #bbb;">${label}</div>
-            <div style="font-size: 15px; font-weight: bold;">${val}</div>
-        </div>
-    `;
+    const statBar = (label, val) => {
+        const pct = Math.min(100, Math.round((val / 180) * 100));
+        const fillColor = val >= 120 ? '#22c55e' : val >= 85 ? '#38bdf8' : val >= 55 ? '#f59e0b' : '#ef4444';
+        return `
+            <div style="background: rgba(15,23,42,0.55); padding: 7px 10px; border-radius: 7px; border: 1px solid rgba(255,255,255,0.07);">
+                <div style="display: flex; justify-content: space-between; font-size: 11.5px; margin-bottom: 4px;">
+                    <span style="color: var(--piw-text-muted); font-weight: 600;">${label}</span>
+                    <span style="font-weight: 800; color: var(--piw-text-primary);">${val}</span>
+                </div>
+                <div class="pstats-stat-track"><div class="pstats-stat-fill" style="width: ${pct}%; background: ${fillColor};"></div></div>
+            </div>
+        `;
+    };
 
     return `
-        <div style="background: linear-gradient(180deg, #27374d 0%, #1d2a3a 100%); padding: 12px; border-radius: 10px; border: 2px solid #3498db; margin: 12px 0; text-align: left;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 4px;">
-                <h4 style="margin: 0;">Base Stats</h4>
-                <span style="font-size: 13px; font-weight: bold; background: rgba(255,255,255,0.12); padding: 2px 8px; border-radius: 10px;">BST: ${bst}</span>
+        <div class="pstats-card" style="margin: 12px 0; text-align: left;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; border-bottom: var(--piw-border-subtle); padding-bottom: 6px;">
+                <h4 style="margin: 0; color: var(--piw-accent-teal); text-transform: uppercase; font-size: 12.5px; letter-spacing: 0.4px;">Base Stats</h4>
+                <span class="piw-badge is-blue">BST: ${bst}</span>
             </div>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(70px, 1fr)); gap: 6px;">
-                ${statBox('HP', pData.hp)}
-                ${statBox('Speed', pData.spe)}
-                ${statBox('Atk', pData.atk)}
-                ${statBox('SpAtk', pData.spa)}
-                ${statBox('Def', pData.def)}
-                ${statBox('SpDef', pData.spd)}
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(95px, 1fr)); gap: 8px;">
+                ${statBar('HP', pData.hp)}
+                ${statBar('Speed', pData.spe)}
+                ${statBar('Atk', pData.atk)}
+                ${statBar('SpAtk', pData.spa)}
+                ${statBar('Def', pData.def)}
+                ${statBar('SpDef', pData.spd)}
             </div>
         </div>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; margin: 12px 0; text-align: left; font-size: 13px;">
-            <div style="background: linear-gradient(180deg, #27374d 0%, #1d2a3a 100%); padding: 12px; border-radius: 10px; border: 2px solid #3498db;">
-                <h4 style="margin: 0 0 8px 0; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 4px;">Defensive Effectiveness</h4>
+            <div class="pstats-card">
+                <h4 style="margin: 0 0 8px 0; border-bottom: var(--piw-border-subtle); padding-bottom: 6px; color: var(--piw-accent-teal); text-transform: uppercase; font-size: 12.5px; letter-spacing: 0.4px;">Defensive Effectiveness</h4>
                 <div style="display: flex; flex-direction: column; gap: 4px;">
                     ${Object.keys(def4x).length ? `<div><b>Very Weak To (4x):</b> ${formatTypes(def4x)}</div>` : ''}
                     ${Object.keys(def2x).length ? `<div><b>Weak To (2x):</b> ${formatTypes(def2x)}</div>` : ''}
@@ -419,8 +482,8 @@ export function getSpeciesDataHtml(pData, state) {
                 </div>
             </div>
 
-            <div style="background: linear-gradient(180deg, #27374d 0%, #1d2a3a 100%); padding: 12px; border-radius: 10px; border: 2px solid #3498db;">
-                <h4 style="margin: 0 0 8px 0; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 4px;">Offensive Effectiveness</h4>
+            <div class="pstats-card">
+                <h4 style="margin: 0 0 8px 0; border-bottom: var(--piw-border-subtle); padding-bottom: 6px; color: var(--piw-accent-teal); text-transform: uppercase; font-size: 12.5px; letter-spacing: 0.4px;">Offensive Effectiveness</h4>
                 <div style="display: flex; flex-direction: column; gap: 4px;">
                     ${Object.keys(off2x).length ? `<div><b>Super Effective (2x):</b> ${formatTypes(off2x)}</div>` : ''}
                     ${Object.keys(off05x).length ? `<div><b>Not Very Effective (0.5x):</b> ${formatTypes(off05x)}</div>` : ''}
@@ -435,6 +498,37 @@ export function getSpeciesDataHtml(pData, state) {
 
 let isSmartCaptureShinyMode = false;
 let isSmartCaptureGlobalMode = false;
+let activeSmartCaptureFilter = 'all';
+
+window.setSmartCaptureFilter = function(filter) {
+    activeSmartCaptureFilter = filter || 'all';
+    if (typeof document.querySelectorAll === 'function') {
+        document.querySelectorAll('#smart-capture-filter-group .pokedex-filter-btn').forEach(btn => {
+            btn.classList.toggle('is-active', btn.dataset?.filter === activeSmartCaptureFilter);
+        });
+    }
+    window.applySmartCaptureFilters();
+};
+
+window.applySmartCaptureFilters = function() {
+    const searchEl = document.getElementById('smart-capture-search-input');
+    const query = String(searchEl && searchEl.value ? searchEl.value : '').trim().toLowerCase();
+    if (typeof document.querySelectorAll !== 'function') return;
+    document.querySelectorAll('#smart-capture-grid .sc-poke-card').forEach(card => {
+        const name = (card.dataset?.name || '').toLowerCase();
+        const num = (card.dataset?.num || '').toLowerCase();
+        const caught = card.dataset?.caught === '1';
+        const custom = card.dataset?.custom === '1';
+
+        const matchesQuery = !query || name.includes(query) || num.includes(query) || (`#${num}`).includes(query);
+        let matchesFilter = true;
+        if (activeSmartCaptureFilter === 'caught') matchesFilter = caught;
+        else if (activeSmartCaptureFilter === 'uncaught') matchesFilter = !caught;
+        else if (activeSmartCaptureFilter === 'custom') matchesFilter = custom;
+
+        card.style.display = (matchesQuery && matchesFilter) ? 'flex' : 'none';
+    });
+};
 
 export function showSmartCaptureMode() {
     // Preserve scroll position if window is already open
@@ -442,17 +536,29 @@ export function showSmartCaptureMode() {
     const savedScrollTop = gridEl ? gridEl.scrollTop : 0;
 
     let titleHtml = `
-        <div style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
-            <div style="font-weight: bold; font-size: 18px; color: white;">Smart Capture Mode</div>
-            <div style="display: inline-flex; background: rgba(0, 0, 0, 0.2); border-radius: 20px; padding: 3px; gap: 5px;">
-                <button onclick="window.setSmartCaptureShinyMode(false)" style="${!isSmartCaptureShinyMode && !isSmartCaptureGlobalMode ? 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2);' : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;'} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;" onmousedown="event.stopPropagation()">Normal</button>
-                <button onclick="window.setSmartCaptureGlobalMode()" style="${isSmartCaptureGlobalMode ? 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2);' : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;'} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;" onmousedown="event.stopPropagation()">Global</button>
-                <button onclick="window.setSmartCaptureShinyMode(true)" style="${isSmartCaptureShinyMode && !isSmartCaptureGlobalMode ? 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2);' : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;'} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;" onmousedown="event.stopPropagation()">Shiny</button>
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 6px; width: 100%;">
+            <div style="font-weight: 700; font-size: 18px; color: white; letter-spacing: 0.3px;">Smart Capture Mode</div>
+            <div class="piw-tab-bar" onmousedown="event.stopPropagation()">
+                <button class="piw-tab-btn ${!isSmartCaptureShinyMode && !isSmartCaptureGlobalMode ? 'is-active' : ''}" onclick="window.setSmartCaptureShinyMode(false)">Normal</button>
+                <button class="piw-tab-btn ${isSmartCaptureGlobalMode ? 'is-active' : ''}" onclick="window.setSmartCaptureGlobalMode()">Global</button>
+                <button class="piw-tab-btn ${isSmartCaptureShinyMode && !isSmartCaptureGlobalMode ? 'is-active' : ''}" onclick="window.setSmartCaptureShinyMode(true)">Shiny</button>
             </div>
         </div>
     `;
 
-    let html = `<div id="smart-capture-grid" style="display:flex; flex-wrap:wrap; justify-content:center; max-height:400px; overflow-y:auto; gap:10px; margin-top: 15px;">`;
+    const controlsHtml = isSmartCaptureGlobalMode ? '' : `
+        <div class="pokedex-controls-row" style="margin-bottom: 10px;">
+            <input id="smart-capture-search-input" class="pokedex-search" type="text" placeholder="Search species or #..." oninput="window.applySmartCaptureFilters()">
+            <div id="smart-capture-filter-group" class="pokedex-filter-group">
+                <button class="pokedex-filter-btn ${activeSmartCaptureFilter === 'all' ? 'is-active' : ''}" data-filter="all" onclick="window.setSmartCaptureFilter('all')">All</button>
+                <button class="pokedex-filter-btn ${activeSmartCaptureFilter === 'caught' ? 'is-active' : ''}" data-filter="caught" onclick="window.setSmartCaptureFilter('caught')">Caught</button>
+                <button class="pokedex-filter-btn ${activeSmartCaptureFilter === 'uncaught' ? 'is-active' : ''}" data-filter="uncaught" onclick="window.setSmartCaptureFilter('uncaught')">Uncaught</button>
+                <button class="pokedex-filter-btn ${activeSmartCaptureFilter === 'custom' ? 'is-active' : ''}" data-filter="custom" onclick="window.setSmartCaptureFilter('custom')">Custom</button>
+            </div>
+        </div>
+    `;
+
+    let html = `${controlsHtml}<div id="smart-capture-grid" style="display:flex; flex-wrap:wrap; justify-content:center; max-height:400px; overflow-y:auto; gap:10px; margin-top: 6px;">`;
 
     if (isSmartCaptureGlobalMode) {
         const balls = state.config.balance.items.pokeballs;
@@ -545,7 +651,7 @@ export function showSmartCaptureMode() {
                 let onClick = `onclick="window.showSmartCaptureBallSelection(${pData.id})"`;
                 let displayName = (isSeen || hasSeenShiny || isCaught || hasCaughtShiny) ? pData.name : "???";
 
-                let cardClass = "pokedex-card";
+                let cardClass = "pokedex-card sc-poke-card";
                 // Set width dynamically assuming a ~10px gap to fit exactly 9 items per row
                 let cardStyle = "width: calc((100% / 9) - 10px); text-align: center; font-size: 10px; box-sizing: border-box; position: relative; cursor: pointer;";
 
@@ -554,10 +660,10 @@ export function showSmartCaptureMode() {
                 } else if (hasSeenShiny) {
                     cardClass += " pokedex-card-shiny";
                 } else if (isCaught) {
-                    // Keep default blue border from 'pokedex-card'
+                    // Keep default border from 'pokedex-card'
                 } else {
-                    // Not captured -> no border
-                    cardStyle += " border: 2px solid transparent; background: transparent;";
+                    // Not captured -> dashed muted border
+                    cardStyle += " border: 1px dashed rgba(255,255,255,0.12); background: rgba(255,255,255,0.025);";
                 }
 
                 // Which ball is selected?
@@ -572,8 +678,9 @@ export function showSmartCaptureMode() {
 
                 // Sprite based on shiny mode
                 let spriteUrl = isSmartCaptureShinyMode ? window.getSpriteUrl(pData.id, true) : window.getSpriteUrl(pData.id, false);
+                const isCustom = selectedBallTier !== undefined ? '1' : '0';
 
-                html += `<div class="${cardClass}" style="${cardStyle}" ${onClick}>
+                html += `<div class="${cardClass}" data-name="${(isSeen || hasSeenShiny || isCaught || hasCaughtShiny) ? pData.name : ''}" data-num="${pData[regionIdField]}" data-caught="${isCaught ? '1' : '0'}" data-custom="${isCustom}" style="${cardStyle}" ${onClick}>
                     ${ballIconHtml}
                     <div style="font-weight:bold;">#${pData[regionIdField]}</div>
                     <div style="font-size: 9px; margin-bottom: 2px;">${displayName}</div>
@@ -586,11 +693,13 @@ export function showSmartCaptureMode() {
 
     // Add the inner modal structure for ball selections/global settings
     html += `
-        <div id="smart-capture-inner-modal-overlay" onclick="if(event.target === this) { this.style.display = 'none'; }" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.75); z-index: 10; align-items: flex-start; justify-content: center; padding: 20px 0; box-sizing: border-box;">
+        <div id="smart-capture-inner-modal-overlay" class="piw-inner-overlay" onclick="if(event.target === this) { this.style.display = 'none'; }" style="display: none;">
             <div id="smart-capture-inner-modal" class="floating-window" style="width: 90%; height: auto; max-height: calc(100% - 40px); display: flex; flex-direction: column; overflow: hidden; pointer-events: auto;">
                 <div class="window-header" style="position: relative; cursor: default;">
                     <span id="smart-capture-inner-modal-title">Modal</span>
-                    <span id="btn-close-smart-capture-inner-modal" onclick="document.getElementById('smart-capture-inner-modal-overlay').style.display = 'none';" style="position: absolute; top: 5px; right: 5px; font-size: 12px; font-weight: bold; line-height: 1; padding: 0; cursor: pointer; color: white;">X</span>
+                    <div class="window-header-actions">
+                        <span id="btn-close-smart-capture-inner-modal" class="window-ctrl-btn is-close" onclick="document.getElementById('smart-capture-inner-modal-overlay').style.display = 'none';" title="Close">X</span>
+                    </div>
                 </div>
                 <div class="window-content-container" style="flex: 1; display: flex;">
                     <div id="smart-capture-inner-modal-content" class="content-panel" style="width: 100%; height: auto; overflow-y: auto;">
@@ -601,6 +710,9 @@ export function showSmartCaptureMode() {
     `;
 
     showModal(titleHtml, html, "window-smart-capture");
+    if (!isSmartCaptureGlobalMode) {
+        window.applySmartCaptureFilters();
+    }
 
     const innerOverlay = document.getElementById('smart-capture-inner-modal-overlay');
     if (innerOverlay) {

@@ -3,7 +3,7 @@ import { state } from '../state.js';
 import { updateUI, showModal } from '../ui.js';
 import { getCapacity, getCurrentCount } from '../mathEngine.js';
 
-function claimItemGift(gift) {
+function claimItemGift(gift, silent = false) {
     if (!state.backpack) state.backpack = {};
     let qty = gift.count || 1;
 
@@ -13,17 +13,17 @@ function claimItemGift(gift) {
     if (isBall && gift.item !== 'Masterball') {
         let currentBalls = getCurrentCount(state, 'balls');
         let maxBalls = getCapacity(state, 'balls');
-        let spaceLeft = maxBalls - currentBalls;
+        let spaceLeft = Math.max(0, maxBalls - currentBalls);
         if (qty > spaceLeft) {
-            if (window.showGameAlert) window.showGameAlert("Can't collect Ball due to its maximum capacity", "window-gifts");
+            if (!silent && window.showGameAlert) window.showGameAlert(`Can't collect ${gift.item}: need ${qty} free Ball space, have ${spaceLeft}.`, "window-gifts");
             return false;
         }
     } else if (isPotion) {
         let currentPotions = getCurrentCount(state, 'potions');
         let maxPotions = getCapacity(state, 'potions');
-        let spaceLeft = maxPotions - currentPotions;
+        let spaceLeft = Math.max(0, maxPotions - currentPotions);
         if (qty > spaceLeft) {
-            if (window.showGameAlert) window.showGameAlert("Can't collect Potion due to its maximum capacity", "window-gifts");
+            if (!silent && window.showGameAlert) window.showGameAlert(`Can't collect ${gift.item}: need ${qty} free Potion space, have ${spaceLeft}.`, "window-gifts");
             return false;
         }
     }
@@ -90,6 +90,45 @@ window.claimPendingGift = function(index) {
     if (win && win.adjustHeightForNewContent) {
         win.adjustHeightForNewContent();
     }
+};
+
+window.claimAllPendingGifts = function() {
+    if (!state.stats.pendingGifts || state.stats.pendingGifts.length === 0) return;
+    let claimedAny = 0;
+    let skipped = 0;
+    const remaining = [];
+
+    for (const gift of state.stats.pendingGifts) {
+        if (gift.type === 'item') {
+            if (!claimItemGift(gift, true)) {
+                skipped++;
+                remaining.push(gift);
+                continue;
+            }
+        } else if (gift.type === 'badge') {
+            claimBadgeGift();
+        }
+        ensureClaimedGiftsHistory(gift.type);
+        state.stats.claimedGifts.push(gift);
+        claimedAny++;
+    }
+
+    state.stats.pendingGifts = remaining;
+    showGiftModal();
+    updateUI();
+    const win = document.getElementById("window-gifts");
+    if (win && win.adjustHeightForNewContent) {
+        win.adjustHeightForNewContent();
+    }
+    if (skipped > 0 && window.showGameAlert) {
+        window.showGameAlert(`Claimed ${claimedAny} gift(s). ${skipped} skipped due to pocket capacity.`, "window-gifts");
+    }
+};
+
+let showCollectedGiftsExpanded = false;
+window.toggleCollectedGiftsSection = function() {
+    showCollectedGiftsExpanded = !showCollectedGiftsExpanded;
+    showGiftModal();
 };
 
 
@@ -167,8 +206,10 @@ function generatePendingGiftsHTML(pending) {
 
     let html = `<div class="gift-section is-pending-section">`;
     html += `<div class="gift-section-header">`;
-    html += `<h3 class="gift-section-title">Pending Gifts</h3>`;
-    html += `<span class="gift-count-badge is-pending">${pending.length}</span>`;
+    html += `<div style="display: flex; align-items: center; gap: 8px;"><h3 class="gift-section-title">Pending Gifts</h3><span class="gift-count-badge is-pending">${pending.length}</span></div>`;
+    if (pending.length > 1) {
+        html += `<button class="piw-btn piw-btn-warning piw-btn-sm" onclick="window.claimAllPendingGifts()">Claim All</button>`;
+    }
     html += `</div>`;
     html += `<div class="gift-grid">`;
 
@@ -183,14 +224,20 @@ function generatePendingGiftsHTML(pending) {
 function generateClaimedGiftsHTML(claimed) {
     if (!claimed || claimed.length === 0) return '';
 
+    const canCollapse = claimed.length > 12;
+    const isCollapsed = canCollapse && !showCollectedGiftsExpanded;
+    const displayList = isCollapsed ? claimed.slice(-12) : claimed;
+
     let html = `<div class="gift-section">`;
     html += `<div class="gift-section-header">`;
-    html += `<h3 class="gift-section-title">Collected Gifts</h3>`;
-    html += `<span class="gift-count-badge">${claimed.length}</span>`;
+    html += `<div style="display: flex; align-items: center; gap: 8px;"><h3 class="gift-section-title">Collected Gifts</h3><span class="gift-count-badge">${claimed.length}</span></div>`;
+    if (canCollapse) {
+        html += `<button class="piw-btn piw-btn-secondary piw-btn-sm" onclick="window.toggleCollectedGiftsSection()">${isCollapsed ? `Show All (${claimed.length})` : 'Collapse'}</button>`;
+    }
     html += `</div>`;
     html += `<div class="gift-grid">`;
 
-    claimed.forEach((gift) => {
+    displayList.forEach((gift) => {
         html += generateGiftHTML(gift, false);
     });
 

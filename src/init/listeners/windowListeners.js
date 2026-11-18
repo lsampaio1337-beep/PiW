@@ -34,39 +34,78 @@ export function setupWindowToggles() {
         });
     }
 
+    const closeTopmostWindow = (promptExitOnRoot = true) => {
+        const wm = window.windowManager;
+        const topmost = wm ? wm.getTopmostVisibleWindow() : null;
+
+        if (!topmost || topmost.id === 'main-control-window' || topmost.id === 'save-manager-modal') {
+            if (promptExitOnRoot && typeof window.promptExitGame === 'function') {
+                window.promptExitGame();
+            }
+            return;
+        }
+
+        if (topmost.id === 'modal-content-box') {
+            if (typeof window.closeModal === 'function') {
+                window.closeModal();
+            }
+            return;
+        }
+
+        if (topmost.id === 'main-view-window') {
+            const innerOverlay = document.getElementById('main-view-inner-modal-overlay');
+            if (innerOverlay && innerOverlay.style.display !== 'none' && window.getComputedStyle(innerOverlay).display !== 'none') {
+                const closeInner = document.getElementById('btn-close-inner-modal');
+                if (closeInner) {
+                    closeInner.click();
+                    return;
+                }
+            }
+        }
+
+        if (wm) wm.closeDynamicWindow(topmost.id);
+    };
+
     window.addEventListener('keydown', (event) => {
-        if ((event.ctrlKey || event.metaKey) && !event.altKey && !event.shiftKey && event.key.toLowerCase() === 'w') {
+        const key = (event.key || '').toLowerCase();
+
+        if ((event.ctrlKey || event.metaKey) && !event.altKey && !event.shiftKey && key === 'w') {
             event.preventDefault();
+            closeTopmostWindow(true);
+            return;
+        }
 
-            const wm = window.windowManager;
-            const topmost = wm ? wm.getTopmostVisibleWindow() : null;
+        // Ignore shortcuts while typing in inputs, textareas, selects, or editable fields
+        const activeTag = document.activeElement && document.activeElement.tagName ? document.activeElement.tagName.toUpperCase() : '';
+        if (activeTag === 'INPUT' || activeTag === 'TEXTAREA' || activeTag === 'SELECT' || document.activeElement?.isContentEditable) {
+            return;
+        }
+        if (event.ctrlKey || event.metaKey || event.altKey) return;
 
-            if (!topmost || topmost.id === 'main-control-window' || topmost.id === 'save-manager-modal') {
-                if (typeof window.promptExitGame === 'function') {
-                    window.promptExitGame();
-                }
-                return;
+        if (key === 'escape') {
+            event.preventDefault();
+            closeTopmostWindow(false);
+            return;
+        }
+
+        // Only trigger navigation hotkeys when Main Control is visible (profile loaded)
+        const mainCtrl = document.getElementById('main-control-window');
+        if (!mainCtrl || mainCtrl.style.display === 'none') return;
+
+        const shortcutMap = {
+            m: 'btn-map',
+            b: 'btn-backpack',
+            p: 'btn-dex',
+            c: 'btn-calendar',
+            t: 'btn-toggle-party',
+            h: 'btn-help'
+        };
+        const targetId = shortcutMap[key];
+        if (targetId) {
+            const btn = document.getElementById(targetId);
+            if (btn && typeof btn.click === 'function' && btn.style.pointerEvents !== 'none') {
+                btn.click();
             }
-
-            if (topmost.id === 'modal-content-box') {
-                if (typeof window.closeModal === 'function') {
-                    window.closeModal();
-                }
-                return;
-            }
-
-            if (topmost.id === 'main-view-window') {
-                const innerOverlay = document.getElementById('main-view-inner-modal-overlay');
-                if (innerOverlay && innerOverlay.style.display !== 'none' && window.getComputedStyle(innerOverlay).display !== 'none') {
-                    const closeInnerBtn = document.getElementById('btn-close-inner-modal');
-                    if (closeInnerBtn) {
-                        closeInnerBtn.click();
-                        return;
-                    }
-                }
-            }
-
-            wm.closeDynamicWindow(topmost.id);
         }
     });
 }

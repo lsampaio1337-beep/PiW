@@ -1282,7 +1282,7 @@ class BattleSystem {
             ivs = mathEngine.generateIVs(this.state.stats, q.name === "Shiny");
 
             // Route 1 Level Cap
-            if (this.state.currentRoute === "Route 1") {
+            if (this.state.currentRoute === "Route 1" || this.state.currentRoute === "Route 1 (Kanto)") {
                 const playerLevel = this.state.party[0] ? this.state.party[0].level : 1;
                 level = Math.min(level, playerLevel);
             }
@@ -1869,8 +1869,9 @@ class BattleSystem {
         }
 
         let lootedItemsThisBattle = {};
+        const lootTier = this.getLootTier();
 
-        // Loot drops for Stones
+        // Loot drops for Stones (requires lootTier >= 3)
         let dropRate = 0;
         const evoStage = this.getEvolutionStage(this.activeEncounter.id);
 
@@ -1881,7 +1882,7 @@ class BattleSystem {
             dropRate = 1.0;
         }
 
-        if (Math.random() < (dropRate * lootMultiplier) && this.activeEncounter.types && this.activeEncounter.types.length > 0) {
+        if (lootTier >= 3 && Math.random() < (dropRate * lootMultiplier) && this.activeEncounter.types && this.activeEncounter.types.length > 0) {
             const types = this.activeEncounter.types;
             const randomType = types[Math.floor(Math.random() * types.length)];
             const stoneName = `${randomType} Stone`;
@@ -1894,15 +1895,15 @@ class BattleSystem {
             lootedItemsThisBattle[stoneName] = (lootedItemsThisBattle[stoneName] || 0) + dropQuantity;
         }
 
-        // Loot drops for Balls and Potions
+        // Loot drops for Balls, Potions, and Vitamins
         let sumIV = 0;
         if (this.activeEncounter.ivs) {
             sumIV = this.activeEncounter.ivs.hp + this.activeEncounter.ivs.atk + this.activeEncounter.ivs.def +
                     this.activeEncounter.ivs.spa + this.activeEncounter.ivs.spd + this.activeEncounter.ivs.spe;
         }
 
-        // Vitamin drops
-        if (sumIV > 500 && this.activeEncounter?.quality > 1.6 && Math.random() < (0.05 * lootMultiplier)) {
+        // Vitamin drops (requires lootTier >= 4)
+        if (lootTier >= 4 && sumIV > 500 && this.activeEncounter?.quality > 1.6 && Math.random() < (0.05 * lootMultiplier)) {
             const vitamins = VITAMINS;
             const randomVitamin = vitamins[Math.floor(Math.random() * vitamins.length)];
 
@@ -1912,58 +1913,6 @@ class BattleSystem {
             if (!this.state.backpack.stones) this.state.backpack.stones = {};
             this.state.backpack.stones[randomVitamin] = (this.state.backpack.stones[randomVitamin] || 0) + dropQuantity;
             lootedItemsThisBattle[randomVitamin] = (lootedItemsThisBattle[randomVitamin] || 0) + dropQuantity;
-        }
-
-        let customDropChance = (2.0 * (sumIV / 600.0)) / 100.0;
-
-        if (Math.random() < (customDropChance * lootMultiplier)) {
-            let ballDrop = "Pokeball";
-            let potionDrop = "Tiny Potion";
-            let level = this.activeEncounter.level;
-
-            if (level >= 76) { ballDrop = "Ultraball"; potionDrop = "Huge Potion"; }
-            else if (level >= 56) { ballDrop = "Greatball"; potionDrop = "Big Potion"; }
-            else if (level >= 36) { ballDrop = "Greatball"; potionDrop = "Regular Potion"; }
-            else if (level >= 16) { ballDrop = "Pokeball"; potionDrop = "Small Potion"; }
-
-            let dropQuantity = Math.floor(lootMultiplier);
-            if (Math.random() < (lootMultiplier % 1)) dropQuantity += 1;
-
-            if (Math.random() < 0.5) {
-                const currentBalls = mathEngine.getCurrentCount(this.state, 'balls');
-                const maxBalls = mathEngine.getCapacity(this.state, 'balls');
-                if (currentBalls + dropQuantity > maxBalls && ballDrop !== 'Masterball') {
-                    const spaceLeft = maxBalls - currentBalls;
-                    if (spaceLeft > 0) {
-                        if (!this.state.backpack.pokeballs[ballDrop]) this.state.backpack.pokeballs[ballDrop] = 0;
-                        this.state.backpack.pokeballs[ballDrop] += spaceLeft;
-                        lootedItemsThisBattle[ballDrop] = (lootedItemsThisBattle[ballDrop] || 0) + spaceLeft;
-                    }
-                    lootedItemsThisBattle[ballDrop + '_missed'] = 'missed';
-                    if (typeof window !== 'undefined' && typeof window.showGameAlert === 'function' && !this.state.isTimeLapsing) window.showGameAlert("Can't collect Ball due to its maximum capacity", "view-battle-arena");
-                } else {
-                    if (!this.state.backpack.pokeballs[ballDrop]) this.state.backpack.pokeballs[ballDrop] = 0;
-                    this.state.backpack.pokeballs[ballDrop] += dropQuantity;
-                    lootedItemsThisBattle[ballDrop] = (lootedItemsThisBattle[ballDrop] || 0) + dropQuantity;
-                }
-            } else {
-                const currentPotions = mathEngine.getCurrentCount(this.state, 'potions');
-                const maxPotions = mathEngine.getCapacity(this.state, 'potions');
-                if (currentPotions + dropQuantity > maxPotions) {
-                    const spaceLeft = maxPotions - currentPotions;
-                    if (spaceLeft > 0) {
-                        if (!this.state.backpack.potions[potionDrop]) this.state.backpack.potions[potionDrop] = 0;
-                        this.state.backpack.potions[potionDrop] += spaceLeft;
-                        lootedItemsThisBattle[potionDrop] = (lootedItemsThisBattle[potionDrop] || 0) + spaceLeft;
-                    }
-                    lootedItemsThisBattle[potionDrop + '_missed'] = 'missed';
-                    if (typeof window !== 'undefined' && typeof window.showGameAlert === 'function' && !this.state.isTimeLapsing) window.showGameAlert("Can't collect Potion due to its maximum capacity", "view-battle-arena");
-                } else {
-                    if (!this.state.backpack.potions[potionDrop]) this.state.backpack.potions[potionDrop] = 0;
-                    this.state.backpack.potions[potionDrop] += dropQuantity;
-                    lootedItemsThisBattle[potionDrop] = (lootedItemsThisBattle[potionDrop] || 0) + dropQuantity;
-                }
-            }
         }
 
         let itemDropChance = (2.0 * (sumIV / 600)) / 100.0;
@@ -1983,15 +1932,14 @@ class BattleSystem {
             potionTierName = "Regular Potion";
         } else if (level <= 75) {
             ballTierName = "Greatball";
-            // Potion is "Big" in config
             potionTierName = "Big Potion";
         } else {
             ballTierName = "Ultraball";
             potionTierName = "Huge Potion";
         }
 
-        // Roll for Ball drop
-        if (Math.random() < itemDropChance) {
+        // Roll for Ball drop (requires lootTier >= 2)
+        if (lootTier >= 2 && Math.random() < (itemDropChance * lootMultiplier)) {
             let ballDropQty = Math.floor(lootMultiplier);
             if (Math.random() < (lootMultiplier % 1)) ballDropQty += 1;
 
@@ -2013,8 +1961,8 @@ class BattleSystem {
             }
         }
 
-        // Roll for Potion drop
-        if (Math.random() < itemDropChance) {
+        // Roll for Potion drop (requires lootTier >= 1)
+        if (lootTier >= 1 && Math.random() < (itemDropChance * lootMultiplier)) {
             let potionDropQty = Math.floor(lootMultiplier);
             if (Math.random() < (lootMultiplier % 1)) potionDropQty += 1;
 
@@ -2471,7 +2419,7 @@ class BattleSystem {
             pokemonBase = this.getPokemonBase(selectedSpawn.pokemonId);
             level = Math.floor(Math.random() * (selectedSpawn.maxLevel - selectedSpawn.minLevel + 1)) + selectedSpawn.minLevel;
 
-            if (this.state.currentRoute === "Route 1") {
+            if (this.state.currentRoute === "Route 1" || this.state.currentRoute === "Route 1 (Kanto)") {
                 const playerLevel = leader.level || 1;
                 level = Math.min(level, playerLevel);
             }
@@ -2532,7 +2480,7 @@ class BattleSystem {
             let enemySpe = this.activeEncounter.currentStats ? this.activeEncounter.currentStats.spe : 10;
 
             // Accurate search time to mimic Natural play at 1x speed
-            let searchTime = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpe));
+            let searchTime = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpe)) * this.getSpeedMultiplier();
             searchTime = Math.max(300, searchTime);
 
             // Add slide-in animation delay that occurs in Natural play (1000ms at 1x speed)
@@ -2731,6 +2679,12 @@ class BattleSystem {
                             this.state.stats.caughtShiniesSpecies[trackingName] = true;
                         }
                     }
+                }
+
+                // Daycare progression during ZzZ / TimeLapse
+                if (this.state.dayCareRef) {
+                    this.state.dayCareRef.tickBattle();
+                    this.state.dayCareRef.grantPassiveXP(evxp, (pkmn, amt) => this.grantXP(pkmn, amt, true));
                 }
 
                 const lootMultiplier = 1 + (0.0025 * (this.state.stats.greenCandies || 0));

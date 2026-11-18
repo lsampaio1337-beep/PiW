@@ -8,21 +8,23 @@ const STONE_TYPES = [
 ];
 
 export function renderTokenShopHtml() {
-    let html = `
-        <div style="display: flex; flex-direction: column; align-items: center; padding: 20px; color: white; box-sizing: border-box; width: 100%;">
-            <div style="display: flex; justify-content: center; width: 100%; margin-bottom: 20px;">
-                <div style="display: flex; align-items: center; gap: 10px; background: rgba(0,0,0,0.5); padding: 10px 20px; border-radius: 10px; border: 2px solid #3498db;">
-                    <img src="Assets/Extra/Token.png" style="width: 48px; height: 48px; object-fit: contain;">
-                    <span style="font-size: 24px; font-weight: bold; color: #ffffff; display: flex; align-items: center;">Daily Tokens: ${state.trainer.tokens || 0}</span>
+    const tokens = state.trainer.tokens || 0;
+    return `
+        <div class="tshop-root">
+            <div class="tshop-wallet">
+                <div class="tshop-wallet-left">
+                    <img src="Assets/Extra/Token.png" class="tshop-wallet-icon" alt="Token">
+                    <div>
+                        <div class="tshop-wallet-label">Available Balance</div>
+                        <div class="tshop-wallet-amount">${tokens.toLocaleString('en-US')} Daily Tokens</div>
+                    </div>
                 </div>
+                <span class="piw-badge is-teal">Earn tokens from Daily Rewards &amp; Challenges</span>
             </div>
 
-            <div style="display: flex; flex-direction: column; gap: 20px; width: 100%;">
-                ${getTokenShopCategoriesHtml()}
-            </div>
+            ${getTokenShopCategoriesHtml()}
         </div>
     `;
-    return html;
 }
 
 const TOKEN_SHOP_ITEMS = [
@@ -125,26 +127,37 @@ const TOKEN_SHOP_ITEMS = [
 ];
 
 function renderSelectableItemActions(item) {
+    const tokens = state.trainer.tokens || 0;
+    const canRand = tokens >= item.randomPrice;
+    const canChoose = tokens >= item.selectPrice;
     return `
-        <div style="display: flex; gap: 5px; width: 100%;">
-            <button onclick="window.buyTokenItemRandom('${item.id}')" style="flex: 1; padding: 5px; background: #2ecc71; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 12px;">Random<br><img src="Assets/Extra/Token.png" style="width:12px;vertical-align:middle;"> ${item.randomPrice}</button>
-            <button onclick="window.showTokenItemSelect('${item.id}')" style="flex: 1; padding: 5px; background: #2ecc71; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 12px;">Choose<br><img src="Assets/Extra/Token.png" style="width:12px;vertical-align:middle;"> ${item.selectPrice}</button>
+        <div class="tshop-card-actions">
+            <button class="piw-btn piw-btn-success piw-btn-sm ${canRand ? '' : 'is-disabled'}" onclick="window.buyTokenItemRandom('${item.id}')" style="flex: 1; flex-direction: column; gap: 2px;">
+                <span>Random</span>
+                <span style="display: inline-flex; align-items: center; gap: 3px;"><img src="Assets/Extra/Token.png" style="width:12px;"> ${item.randomPrice}</span>
+            </button>
+            <button class="piw-btn piw-btn-primary piw-btn-sm ${canChoose ? '' : 'is-disabled'}" onclick="window.showTokenItemSelect('${item.id}')" style="flex: 1; flex-direction: column; gap: 2px;">
+                <span>Choose</span>
+                <span style="display: inline-flex; align-items: center; gap: 3px;"><img src="Assets/Extra/Token.png" style="width:12px;"> ${item.selectPrice}</span>
+            </button>
         </div>
     `;
 }
 
 function renderLockedItemActions() {
     return `
-        <button disabled style="width: 100%; padding: 8px; background: #95a5a6; color: white; border: none; border-radius: 5px; cursor: not-allowed; font-weight: bold; font-size: 12px;">
+        <button disabled class="piw-btn piw-btn-secondary piw-btn-sm is-disabled" style="width: 100%;">
             Need to unlock Daycare
         </button>
     `;
 }
 
 function renderBuyableItemActions(item) {
+    const tokens = state.trainer.tokens || 0;
+    const canAfford = tokens >= item.price;
     return `
-        <button onclick='${item.action}' style="width: 100%; padding: 8px; background: #2ecc71; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 12px;">
-            Buy for <img src="Assets/Extra/Token.png" style="width:14px;vertical-align:middle;"> ${item.price}
+        <button onclick='${item.action}' class="piw-btn piw-btn-success piw-btn-sm ${canAfford ? '' : 'is-disabled'}" style="width: 100%;">
+            Buy for <img src="Assets/Extra/Token.png" style="width:13px;"> ${item.price}
         </button>
     `;
 }
@@ -155,11 +168,18 @@ function renderTokenShopItem(item) {
         isLocked = true;
     }
 
+    let ownedBadge = '';
+    if (item.id === 'masterball') {
+        const owned = state.backpack?.pokeballs?.Masterball || 0;
+        ownedBadge = `<span class="piw-badge is-blue" style="font-size: 10px; padding: 1px 7px;">Owned: ${owned}</span>`;
+    }
+
     let html = `
-        <div style="background: #2c3e50; border: 2px solid #3498db; border-radius: 8px; padding: 8px; display: flex; flex-direction: column; align-items: center; text-align: center; justify-content: space-between; box-sizing: border-box; width: 100%;">
-            <div style="font-weight: bold; font-size: 12px; margin-bottom: 5px; height: 30px; display: flex; align-items: center; color: white;">${item.name}</div>
-            <img src="${item.img}" style="width: 40px; height: 40px; object-fit: contain; margin-bottom: 5px;">
-            <div style="font-size: 10px; color: #bdc3c7; margin-bottom: 10px; flex-grow: 1;">${item.desc}</div>
+        <div class="tshop-card">
+            <div class="tshop-card-title">${item.name}</div>
+            <img src="${item.img}" class="tshop-card-icon" alt="${item.name}">
+            ${ownedBadge}
+            <div class="tshop-card-desc">${item.desc}</div>
     `;
 
     if (item.isSelectable) {
@@ -179,9 +199,11 @@ function renderTokenShopItem(item) {
 function renderCategory(title, items) {
     if (items.length === 0) return '';
     let html = `
-        <div style="display: flex; flex-direction: column; width: 100%; margin-bottom: 20px;">
-            <div style="font-size: 18px; font-weight: bold; color: #ffffff; margin-bottom: 10px; border-bottom: 1px solid rgba(255, 255, 255, 0.35); padding-bottom: 5px;">${title}</div>
-            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; justify-content: center; width: 100%;">
+        <div style="display: flex; flex-direction: column; width: 100%;">
+            <div class="cal-section-header">
+                <h2 class="cal-section-title">${title}</h2>
+            </div>
+            <div class="tshop-grid">
     `;
     items.forEach(item => {
         html += renderTokenShopItem(item);
@@ -312,29 +334,46 @@ window.showTokenItemSelect = function(itemType) {
 
     const overlay = document.createElement('div');
     overlay.id = 'token-inner-modal';
-    overlay.style.cssText = 'position: absolute; inset: 0; background: rgba(15, 23, 42, 0.94); z-index: 50; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 16px; box-sizing: border-box; border-radius: 6px;';
+    overlay.className = 'piw-inner-overlay';
+    overlay.style.zIndex = '50';
 
     let gridHtml = `
-        <div style="font-size: 18px; font-weight: bold; color: #ffffff; margin-bottom: 4px;">${title}</div>
-        <div style="font-size: 13px; color: #cbd5e1; margin-bottom: 14px;">Cost: 2 Tokens</div>
-        <div style="display: grid; grid-template-columns: repeat(${gridCols}, 1fr); gap: 8px; width: 100%; max-width: ${gridCols === 6 ? '700px' : '420px'};">
+        <div class="floating-window" style="position: relative; width: 100%; max-width: ${gridCols === 6 ? '740px' : '460px'}; max-height: 90%; display: flex; flex-direction: column; overflow: hidden;">
+            <div class="window-header" style="position: relative; cursor: default;">
+                <span>${title}</span>
+                <div class="window-header-actions">
+                    <span class="window-ctrl-btn is-close" onclick="window.closeTokenInnerModal()" title="Close">X</span>
+                </div>
+            </div>
+            <div style="padding: 16px; display: flex; flex-direction: column; align-items: center; gap: 12px; overflow-y: auto;">
+                <span class="piw-badge is-amber"><img src="Assets/Extra/Token.png" style="width:14px;"> Cost: 2 Tokens</span>
+                <div class="tshop-select-grid" style="grid-template-columns: repeat(${gridCols}, 1fr); width: 100%;">
     `;
 
     itemsToSelect.forEach(item => {
+        const owned = (state.backpack?.stones?.[item.name]) || 0;
         gridHtml += `
-            <div onclick="window.confirmTokenItemSelect('${item.name}')" style="background: #1e293b; border: 1.5px solid #3498db; border-radius: 8px; padding: 8px 6px; text-align: center; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; box-sizing: border-box;">
-                <img src="${item.img}" style="width: 38px; height: 38px; object-fit: contain;">
-                <div style="font-size: 11px; font-weight: 600; color: #f8fafc; line-height: 1.2;">${item.name}</div>
+            <div class="piw-card is-interactive" onclick="window.confirmTokenItemSelect('${item.name}')" style="padding: 8px 6px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;">
+                <img src="${item.img}" style="width: 36px; height: 36px; object-fit: contain;">
+                <div style="font-size: 11px; font-weight: 700; color: var(--piw-text-primary); line-height: 1.2;">${item.name}</div>
+                <div style="font-size: 10px; color: var(--piw-text-muted);">Owned: ${owned}</div>
             </div>
         `;
     });
 
     gridHtml += `
+                </div>
+                <button class="piw-btn piw-btn-danger" onclick="window.closeTokenInnerModal()">Cancel</button>
+            </div>
         </div>
-        <button onclick="window.closeTokenInnerModal()" style="margin-top: 16px; padding: 7px 20px; background: #e74c3c; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 13px;">Cancel</button>
     `;
 
-    overlay.innerHTML = gridHtml;
+    if (window.windowManager && typeof window.windowManager._parseAndSanitizeToElement === 'function') {
+        window.windowManager._parseAndSanitizeToElement(gridHtml, overlay);
+    } else {
+        const doc = new DOMParser().parseFromString(gridHtml, 'text/html');
+        overlay.replaceChildren(...doc.body.childNodes);
+    }
     container.appendChild(overlay);
 };
 

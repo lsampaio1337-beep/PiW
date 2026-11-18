@@ -115,23 +115,23 @@ function renderSlotUI(p, listName, origIndex, isDraggable) {
     let imageHtml = `<img src="${finalImgSrc}" class="${glowClass}" style="height: 100%; width: 100%; object-fit: contain; z-index: 1;" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='">`;
 
     const listKey = listName.toLowerCase();
-    const cardBorderColor = listKey === 'storage'
-        ? 'rgba(255, 255, 255, 0.35)'
-        : (listKey === 'safe' ? 'rgba(241, 196, 15, 0.75)' : 'rgba(52, 152, 219, 0.75)');
+    const listClass = listKey === 'storage' ? 'is-storage' : (listKey === 'safe' ? 'is-safe' : 'is-party');
+    const qLower = (p.qualityName || 'weak').toLowerCase();
+    const qClass = `is-qtier-${qLower}`;
 
     return `
-        <div class="${slotClass}" ${dataAttr} style="background: #2c3e50; border: 2px solid ${cardBorderColor}; border-radius: 10px; aspect-ratio: 1 / 1.5; display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 4%; box-sizing: border-box; position: relative; container-type: inline-size; overflow: hidden; ${cursorStyle}; width: 100%; ${selectionStyle}" title="Q=${p.quality.toFixed(2)} & ∑IV=${sumIV}" ${dragAttr} ${clickHandler}>
-            <div onclick="event.stopPropagation(); window.showPokemonStatsByUuid('${safeUuid}')" style="position: absolute; top: 2cqw; right: 2cqw; cursor: pointer; background: #34495e; color: white; border-radius: 50%; width: 20cqw; height: 20cqw; text-align: center; display: flex; align-items: center; justify-content: center; font-size: 14cqw; font-weight: bold; z-index: 3;" title="View Info">i</div>
+        <div class="bp-poke-card ${listClass} ${qClass} ${slotClass}" ${dataAttr} style="aspect-ratio: 1 / 1.5; container-type: inline-size; overflow: hidden; ${cursorStyle}; width: 100%; ${selectionStyle}" title="Q=${p.quality.toFixed(2)} & ∑IV=${sumIV}" ${dragAttr} ${clickHandler}>
+            <div onclick="event.stopPropagation(); window.showPokemonStatsByUuid('${safeUuid}')" style="position: absolute; top: 2cqw; right: 2cqw; cursor: pointer; background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(148, 163, 184, 0.45); color: white; border-radius: 50%; width: 20cqw; height: 20cqw; text-align: center; display: flex; align-items: center; justify-content: center; font-size: 14cqw; font-weight: bold; z-index: 3;" title="View Info">i</div>
 
-            <div style="font-size: 16cqw; font-weight: bold; margin-top: 10cqw; margin-bottom: 1cqw; display: flex; align-items: center; justify-content: center; text-align: center; line-height: 1.1; z-index: 1; color: white;">${escapeHTML(p.name)}</div>
+            <div style="font-size: 16cqw; font-weight: bold; margin-top: 10cqw; margin-bottom: 1cqw; display: flex; align-items: center; justify-content: center; text-align: center; line-height: 1.1; z-index: 1; color: var(--piw-text-primary);">${escapeHTML(p.name)}</div>
 
             <div style="flex: 1; min-height: 0; width: 100%; display: flex; align-items: center; justify-content: center; position: relative; margin-bottom: 1cqw;">
                 ${imageHtml}
             </div>
 
-            <div style="font-size: 13cqw; color: #bdc3c7; line-height: 1.1; z-index: 1;">Lv. ${p.level}</div>
-            <div style="font-size: 13cqw; color: #f1c40f; line-height: 1.1; z-index: 1;">Q: ${p.quality.toFixed(2)}</div>
-            <div style="font-size: 13cqw; color: #3498db; line-height: 1.1; z-index: 1; margin-bottom: 1cqw;">∑IV: ${sumIV}</div>
+            <div style="font-size: 13cqw; color: #cbd5e1; line-height: 1.1; z-index: 1;">Lv. ${p.level}</div>
+            <div style="font-size: 13cqw; color: #fbbf24; line-height: 1.1; z-index: 1;">Q: ${p.quality.toFixed(2)}</div>
+            <div style="font-size: 13cqw; color: #38bdf8; line-height: 1.1; z-index: 1; margin-bottom: 1cqw;">∑IV: ${sumIV}</div>
             ${transformBtn}
         </div>
     `;
@@ -150,9 +150,31 @@ window.toggleSaleSelection = function(uuid) {
 window.pokemonFilters = window.pokemonFilters || {
     name: '', minLvl: '', maxLvl: '', minQ: '', maxQ: '', minIV: '', maxIV: '', breedableOnly: false
 };
+window.pokemonStorageSort = window.pokemonStorageSort || 'default';
 window.showPokemonFilters = window.showPokemonFilters || false;
 if (typeof window.showSafeSpots === 'undefined') {
     window.showSafeSpots = true;
+}
+
+window.setPokemonStorageSort = function(sortBy) {
+    window.pokemonStorageSort = sortBy || 'default';
+    renderBackpackTab('pokemon');
+};
+
+function getSortedPokemonEntries(list) {
+    const entries = (list || []).map((p, idx) => ({ p, idx }));
+    const mode = window.pokemonStorageSort || 'default';
+    if (mode === 'default') return entries;
+    const sumIV = (p) => p.ivs ? (p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe) : 0;
+    entries.sort((a, b) => {
+        if (mode === 'level') return (b.p.level - a.p.level) || (b.p.quality - a.p.quality);
+        if (mode === 'quality') return (b.p.quality - a.p.quality) || (b.p.level - a.p.level);
+        if (mode === 'sumiv') return (sumIV(b.p) - sumIV(a.p)) || (b.p.quality - a.p.quality);
+        if (mode === 'name') return String(a.p.name).localeCompare(String(b.p.name));
+        if (mode === 'id') return (Number(a.p.id) - Number(b.p.id)) || (b.p.quality - a.p.quality);
+        return a.idx - b.idx;
+    });
+    return entries;
 }
 
 window.togglePokemonFilters = function() {
@@ -198,11 +220,19 @@ export function renderPokemonTab(area) {
 
     let content = `
         <div style="display: flex; flex-direction: column; height: 100%; min-height: 0; gap: 8px;">
-        <div style="display: flex; justify-content: center; flex-shrink: 0;">
+        <div style="display: flex; justify-content: center; align-items: center; gap: 10px; flex-wrap: wrap; flex-shrink: 0;">
             <div class="piw-tab-bar">
                 <button onclick="window.togglePokemonFilters()" class="piw-tab-btn ${window.showPokemonFilters ? 'is-active' : ''}">🔍 Filters</button>
                 <button onclick="window.toggleSafeSpots()" class="piw-tab-btn ${window.showSafeSpots ? 'is-active' : ''}">🔒 Safe</button>
             </div>
+            <select id="pfilter-sort" class="piw-select" style="padding: 4px 10px; font-size: 12px;" onchange="window.setPokemonStorageSort(this.value)">
+                <option value="default" ${window.pokemonStorageSort === 'default' ? 'selected' : ''}>Sort: Default</option>
+                <option value="level" ${window.pokemonStorageSort === 'level' ? 'selected' : ''}>Sort: Level ↓</option>
+                <option value="quality" ${window.pokemonStorageSort === 'quality' ? 'selected' : ''}>Sort: Quality ↓</option>
+                <option value="sumiv" ${window.pokemonStorageSort === 'sumiv' ? 'selected' : ''}>Sort: Sum IV ↓</option>
+                <option value="name" ${window.pokemonStorageSort === 'name' ? 'selected' : ''}>Sort: Name A-Z</option>
+                <option value="id" ${window.pokemonStorageSort === 'id' ? 'selected' : ''}>Sort: Dex #</option>
+            </select>
         </div>
         <div id="pokemon-filters" class="piw-filter-bar" style="display: ${window.showPokemonFilters ? 'flex' : 'none'}; flex-shrink: 0;">
             <div class="piw-filter-group">
@@ -317,9 +347,8 @@ export function renderPokemonTab(area) {
                 <div id="storage-scroll-container" style="display: grid; grid-template-columns: repeat(${storageCols}, 1fr); grid-auto-rows: max-content; gap: 5px; overflow-y: auto; overflow-x: hidden; align-content: start; flex-grow: 1; min-height: 0;">
     `;
 
-    for (let i = 0; i < state.storage.length; i++) {
-        let p = state.storage[i];
-        content += renderSlotUI(p, 'storage', i, true);
+    for (const { p, idx } of getSortedPokemonEntries(state.storage)) {
+        content += renderSlotUI(p, 'storage', idx, true);
     }
     content += `<div style="border: 1px dashed rgba(255, 255, 255, 0.35); border-radius: 6px; aspect-ratio: 1 / 1.5; display: flex; align-items: center; justify-content: center; text-align: center; font-size: 14px; color: #aaa; box-sizing: border-box;" title="Empty Slot">Storage<br>+</div>`;
 
@@ -338,9 +367,8 @@ export function renderPokemonTab(area) {
                 <div id="safe-scroll-container" style="display: grid; grid-template-columns: repeat(2, 1fr); grid-auto-rows: max-content; gap: 5px; overflow-y: auto; overflow-x: hidden; align-content: start; flex-grow: 1; min-height: 0;">
         `;
 
-        for (let i = 0; i < state.safe.length; i++) {
-            let p = state.safe[i];
-            content += renderSlotUI(p, 'safe', i, true);
+        for (const { p, idx } of getSortedPokemonEntries(state.safe)) {
+            content += renderSlotUI(p, 'safe', idx, true);
         }
         content += `<div style="border: 1px dashed rgba(241, 196, 15, 0.75); border-radius: 6px; aspect-ratio: 1 / 1.5; display: flex; align-items: center; justify-content: center; text-align: center; font-size: 14px; color: #aaa; cursor: pointer; box-sizing: border-box;" title="Empty Slot">Safe<br>+</div>`;
 
@@ -945,24 +973,24 @@ window.openDittoTransformModal = function(uuid) {
         let imgSrc = window.getSpriteUrl(id, p.qualityName === 'Shiny');
         const safeId = escapeHTML(id);
         allPokemonHtml += `
-            <div id="ditto-transform-option-${safeId}" class="ditto-transform-option" onclick="window.selectDittoTransformTarget('${safeId}')" style="cursor: pointer; background: #2c3e50; border: 2px solid #3498db; border-radius: 10px; padding: 10px; text-align: center; transition: all 0.1s;">
+            <div id="ditto-transform-option-${safeId}" class="piw-card is-interactive ditto-transform-option" onclick="window.selectDittoTransformTarget('${safeId}')" style="padding: 10px; text-align: center;">
                 <img src="${imgSrc}" style="width: 50px; height: 50px; object-fit: contain;">
-                <div style="color: white; font-size: 12px; margin-top: 5px;">${escapeHTML(pd.name)}</div>
+                <div style="color: var(--piw-text-primary); font-size: 12px; font-weight: 600; margin-top: 5px;">${escapeHTML(pd.name)}</div>
             </div>
         `;
     });
 
     const safeDittoUuid = escapeHTML(uuid);
     const html = `
-        <div style="text-align: center; color: white;">
-            <h3>Select a Pokemon to Transform into</h3>
-            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 10px; max-height: 60vh; overflow-y: auto; padding: 10px;">
+        <div style="text-align: center; color: white; padding: 10px;">
+            <h3 style="margin-top: 0; font-size: 15px; color: var(--piw-accent-teal);">Select a Pokemon to Transform into</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(85px, 1fr)); gap: 10px; max-height: 55vh; overflow-y: auto; padding: 8px;">
                 ${allPokemonHtml}
             </div>
-            <div style="margin-top: 20px; display: flex; justify-content: center; gap: 10px;">
-                <button onclick="window.transformDitto('${safeDittoUuid}')" style="padding: 10px 20px; background: #2ecc71; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">Choose</button>
-                <button onclick="if(window.windowManager) window.windowManager.closeDynamicWindow('window-ditto-transform')" style="padding: 10px 20px; background: #e74c3c; color: white; border: none; border-radius: 4px; cursor: pointer;">Cancel</button>
-                <button onclick="window.transformDitto('${safeDittoUuid}', 132)" style="padding: 10px 20px; background: #f39c12; color: white; border: none; border-radius: 4px; cursor: pointer;">Restore</button>
+            <div style="margin-top: 14px; display: flex; justify-content: center; gap: 10px;">
+                <button class="piw-btn piw-btn-success" onclick="window.transformDitto('${safeDittoUuid}')">Choose</button>
+                <button class="piw-btn piw-btn-danger" onclick="if(window.windowManager) window.windowManager.closeDynamicWindow('window-ditto-transform')">Cancel</button>
+                <button class="piw-btn piw-btn-warning" onclick="window.transformDitto('${safeDittoUuid}', 132)">Restore</button>
             </div>
         </div>
     `;
