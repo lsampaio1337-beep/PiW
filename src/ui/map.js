@@ -100,7 +100,7 @@ function generateMarkerHtml(locationId, locationName, coords, isUnlocked, hasNew
         markerImg = './Assets/Map/Spots/Spot_Lab.png';
     } else if (locationId === 'pokemon_center___market' || locationId === 'pokecenter_pokemarket') {
         markerImg = './Assets/Map/Spots/Spot_PCPM.png';
-    } else if (locationId === 'safari_zone' || locationId === 'kanto_safari_zone' || locationId.includes('safari') || isSafariLocation(locationName)) {
+    } else if ((locationId === 'safari_zone' || locationId === 'kanto_safari_zone' || locationId.includes('safari') || isSafariLocation(locationName)) && locationName !== 'Friend Safari Surroundings') {
         markerImg = './Assets/Map/Spots/Spot_Safariball.png';
     } else if (locationId === 'casino' || locationId === 'goldenrod_game_corner') {
         markerImg = './Assets/Map/Spots/Spot_Casino.png';
