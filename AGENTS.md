@@ -29,6 +29,7 @@
 * **Gym Configurations:** In `config/gyms.js`, the Pokemon League and Champion are sequential in the same array as gyms. Use generic numbered names for regular gym members (e.g., 'Gym Trainer #1'). The gym's `name` must exactly match the `areaId` in route configs and the `name` in map coordinates.
 * **Route Encounters:** When processing route encounter data, filter out routes identical to or with only 1 different Pokémon from ANY previously listed route across the entire region. Required columns in spreadsheets: `Route / Place`, `Pokemon Name`, `Level`, `BST`, `Method`, `% of appearance`, and `1st?`.
 * **Challenges:** In challenge config objects, unlock strings must perfectly match the `areaId` of the target challenge. `requireCompletedChallenges` relies on checking `state.stats.completedChallengeIds` via `getChallengeData`. Champion defeat requirements should use region-specific flags (e.g., `defeatJohtoChampion`). Map route sequence must strictly match chronological main storyline progression.
+* **Pokémon Variations / Alternate Forms:** Whenever implementing a Pokémon with variations or alternate forms, ensure it is implemented in-game AND reflected in `xlsx.md` (and `scripts/generate_region_xlsx.js`) with its form-specific **name**, **type(s)**, and **BST**.
 
 ## Region Specific Progression
 * **Johto (Region 2):** Canonical gym order: Violet, Azalea, Goldenrod, Ecruteak, Cianwood, Olivine, Mahogany, Blackthorn. Route sequence: Cianwood Gym -> Safari Zone -> Olivine Gym -> Mount Mortar -> Mahogany Gym -> Ice Path.
