@@ -105,6 +105,11 @@ function loadDataFile(filename, varNames = null) {
 const _pokemonDataArr = require('../data/pokemon.json');
 const pokemonData = {};
 _pokemonDataArr.forEach((p) => { pokemonData[p.id] = p; });
+if (pokemonData[718]) {
+    pokemonData[718] = { ...pokemonData[718], name: 'Zygarde 50%' };
+    pokemonData[10118] = { ...pokemonData[718], id: 10118, name: 'Zygarde 10%', types: ['Dragon', 'Ground'], bst: 486, stats: { hp: 54, atk: 100, def: 71, spa: 61, spd: 85, spe: 115 } };
+    pokemonData[10120] = { ...pokemonData[718], id: 10120, name: 'Zygarde Complete', types: ['Dragon', 'Ground'], bst: 708, stats: { hp: 216, atk: 100, def: 121, spa: 91, spd: 95, spe: 85 } };
+}
 
 const { pokedexIndexes } = loadDataFile('config/pokedexIndexes.js', ['pokedexIndexes']);
 const { types } = loadDataFile('config/types.js', ['types']);
