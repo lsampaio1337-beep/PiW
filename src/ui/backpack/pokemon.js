@@ -51,7 +51,9 @@ function applyDittoBaseStats(p, baseData) {
     p.bst = baseData.hp + baseData.atk + baseData.def + baseData.spa + baseData.spd + baseData.spe;
 
     const v = p.vitamins || {};
-    p.maxHp = calculateHP(baseData.hp, p.ivs.hp, p.level, p.quality, v.hp || 0);
+    const dittoBase = baseData.id === 132 ? baseData : getPokemonConfig(132);
+    const hpBase = dittoBase ? dittoBase.hp : baseData.hp;
+    p.maxHp = calculateHP(hpBase, p.ivs.hp, p.level, p.quality, v.hp || 0);
     p.currentStats.hp = p.maxHp;
     p.currentStats.atk = calculateStat(baseData.atk, p.ivs.atk, p.level, p.quality, v.atk || 0);
     p.currentStats.def = calculateStat(baseData.def, p.ivs.def, p.level, p.quality, v.def || 0);
