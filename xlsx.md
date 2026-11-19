@@ -16,12 +16,12 @@ This sheet analyzes the spawn encounters, level scaling, and statistical balance
 *   **Challenge:** The name of the Challenge that is completed at this route (or unlocked along with this route).
 *   **Route:** The primary name of the route (e.g., "Route 1").
 *   **Route (Secondary):** A secondary identifier for the route, if applicable (often blank; column is removed if entirely blank across the sheet).
-*   **Pokemon Name:** The name of the Pokémon spawning on the route.
+*   **Pokemon Name:** The name of the Pokémon spawning on the route. Alternate forms/variations (e.g., `Zygarde 10%`, `Zygarde Complete`) are displayed with their form-specific name rather than being skipped.
 *   **First?:** Indicates if this is the first time the player can encounter this Pokémon in the region.
     *   *Blank*: This is the first time the Pokémon appears.
     *   `NO $`: The Pokémon has already appeared in a previous route, where `$` is the previous number of times it has appeared (e.g., "NO 1" on its second appearance).
     *   *Chronology Logic:* Main Challenges (1 to N) are checked first. Extra Challenges (A1, A2... B1, B2...) branch off from a specific Main Challenge. The "First?" check for an Extra Challenge only looks at the preceding Extra Challenges in its chain and the Main Challenges up to the point where the Extra chain branched off.
-*   **Type 1** / **Type 2:** The elemental types of the Pokémon. If a Pokémon only has one type, it is duplicated in both columns.
+*   **Type 1** / **Type 2:** The elemental types of the Pokémon (using form-specific types for alternate variations). If a Pokémon only has one type, it is duplicated in both columns.
 *   **LvlMin** / **LvlMax:** The natural level bounds of the Pokémon on the route.
     *   *Scaling:* Base levels scale linearly from 1 to 80 across the Main Challenges before the Pokémon League. Post-league Extra Challenges scale up to 100.
     *   *Interval size:* If `min < 12`, interval is 2. If `12 <= min < 30`, interval is 3. If `min >= 30`, interval is 10% of the minimum level rounded down (capped at a max interval of 8).
@@ -37,7 +37,7 @@ This sheet analyzes the spawn encounters, level scaling, and statistical balance
 *   **% Appearance:** The frequency or chance of encountering the Pokémon (formatted as a percentage, e.g., `25%`).
 *   **% Appearance Ok?:** Analyzes if the appearance rate is balanced relative to the Pokémon's rarity and route counterparts. Blank if acceptable; contains a suggested percentage if it needs rebalancing.
 *   **Pokemon/Type Ok?:** Checks if the Pokémon thematically belongs on the route. "Yes" if acceptable, "Legacy" if it appears there in the official games, or "NONONO" if it feels out of place (e.g., a Fire type in a "Sea Route").
-*   **BST:** The Base Stat Total of the Pokémon.
+*   **BST:** The Base Stat Total of the Pokémon (using form-specific BST for alternate variations).
 *   **Pokemon/BST Ok?:** Verifies that the Pokémon's power level matches the game's progression. The Main Challenges are divided into four quarters:
     *   1st Quarter: BST should not exceed 400.
     *   2nd Quarter: BST should not exceed 500.
