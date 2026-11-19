@@ -27,10 +27,6 @@ export const alolaMapCoordinates = {
     "x": 350,
     "y": 50
   },
-  "Hau'oli City - Main": {
-    "x": 400,
-    "y": 50
-  },
   "Hau'oli City - Shopping District": {
     "x": 450,
     "y": 50
@@ -41,10 +37,6 @@ export const alolaMapCoordinates = {
   },
   "Route 2 - South": {
     "x": 550,
-    "y": 50
-  },
-  "Route 2 - Main": {
-    "x": 600,
     "y": 50
   },
   "Route 2 - North": {
@@ -161,10 +153,6 @@ export const alolaMapCoordinates = {
   },
   "Route 8 - Main": {
     "x": 250,
-    "y": 150
-  },
-  "Route 8 - Fossil Restoration Center": {
-    "x": 300,
     "y": 150
   },
   "Lush Jungle - North": {

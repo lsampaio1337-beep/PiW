@@ -308,13 +308,6 @@ export const alolaRoutes = [
     ]
   },
   {
-    "name": "Hau'oli City - Main",
-    "primaryName": "Hau'oli City",
-    "secondaryName": "Main",
-    "pokeapiArea": "hauoli-city-main",
-    "spawns": []
-  },
-  {
     "name": "Hau'oli City - Shopping District",
     "primaryName": "Hau'oli City",
     "secondaryName": "Shopping District",
@@ -523,13 +516,6 @@ export const alolaRoutes = [
         "chance": 0.18
       }
     ]
-  },
-  {
-    "name": "Route 2 - Main",
-    "primaryName": "Route 2",
-    "secondaryName": "Main",
-    "pokeapiArea": "alola-route-2-main",
-    "spawns": []
   },
   {
     "name": "Route 2 - North",
@@ -1970,13 +1956,6 @@ export const alolaRoutes = [
         "chance": 0.1579
       }
     ]
-  },
-  {
-    "name": "Route 8 - Fossil Restoration Center",
-    "primaryName": "Route 8",
-    "secondaryName": "Fossil Restoration Center",
-    "pokeapiArea": "alola-route-8-fossil-restoration-center",
-    "spawns": []
   },
   {
     "name": "Lush Jungle - North",
@@ -5590,7 +5569,7 @@ export const alolaUnlocks = [
     "challengeName": "Challenge 07",
     "areaId": "Route 1 - Trainers' School",
     "unlocks": [
-      "Hau'oli City - Main"
+      "Hau'oli City - Shopping District"
     ],
     "requirements": {
       "defeatCountRoute": {
@@ -5598,14 +5577,6 @@ export const alolaUnlocks = [
         "count": 10
       }
     }
-  },
-  {
-    "challengeName": "Challenge 08",
-    "areaId": "Hau'oli City - Main",
-    "unlocks": [
-      "Hau'oli City - Shopping District"
-    ],
-    "requirements": {}
   },
   {
     "challengeName": "Challenge 09",
@@ -5637,7 +5608,7 @@ export const alolaUnlocks = [
     "challengeName": "Challenge 11",
     "areaId": "Route 2 - South",
     "unlocks": [
-      "Route 2 - Main"
+      "Route 2 - North"
     ],
     "requirements": {
       "defeatCountRoute": {
@@ -5645,14 +5616,6 @@ export const alolaUnlocks = [
         "count": 10
       }
     }
-  },
-  {
-    "challengeName": "Challenge 12",
-    "areaId": "Route 2 - Main",
-    "unlocks": [
-      "Route 2 - North"
-    ],
-    "requirements": {}
   },
   {
     "challengeName": "Challenge 13",
@@ -6012,7 +5975,7 @@ export const alolaUnlocks = [
     "challengeName": "Challenge 42",
     "areaId": "Route 8 - Main",
     "unlocks": [
-      "Route 8 - Fossil Restoration Center"
+      "Lush Jungle - North"
     ],
     "requirements": {
       "defeatCountRoute": {
@@ -6020,14 +5983,6 @@ export const alolaUnlocks = [
         "count": 10
       }
     }
-  },
-  {
-    "challengeName": "Challenge 43",
-    "areaId": "Route 8 - Fossil Restoration Center",
-    "unlocks": [
-      "Lush Jungle - North"
-    ],
-    "requirements": {}
   },
   {
     "challengeName": "Challenge 44",
