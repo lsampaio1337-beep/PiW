@@ -35,14 +35,6 @@ export const alolaMapCoordinates = {
     "x": 700,
     "y": 50
   },
-  "Alola Berry Fields": {
-    "x": 750,
-    "y": 50
-  },
-  "Verdant Cavern - Trial Site": {
-    "x": 850,
-    "y": 50
-  },
   "Route 3 - North": {
     "x": 900,
     "y": 50
@@ -87,7 +79,7 @@ export const alolaMapCoordinates = {
     "x": 650,
     "y": 100
   },
-  "Brooklet Hill - North": {
+  "Brooklet Hill": {
     "x": 700,
     "y": 100
   },
@@ -103,7 +95,7 @@ export const alolaMapCoordinates = {
     "x": 200,
     "y": 150
   },
-  "Route 8 - Main": {
+  "Route 8": {
     "x": 250,
     "y": 150
   },
@@ -119,7 +111,7 @@ export const alolaMapCoordinates = {
     "x": 550,
     "y": 150
   },
-  "Route 9 - Main": {
+  "Route 9": {
     "x": 600,
     "y": 150
   },
@@ -135,7 +127,7 @@ export const alolaMapCoordinates = {
     "x": 850,
     "y": 150
   },
-  "Malie City - Outer Cape": {
+  "Malie City": {
     "x": 100,
     "y": 200
   },
@@ -149,10 +141,6 @@ export const alolaMapCoordinates = {
   },
   "Mount Hokulani - Main": {
     "x": 250,
-    "y": 200
-  },
-  "Mount Hokulani - East": {
-    "x": 300,
     "y": 200
   },
   "Mount Hokulani - West": {
@@ -183,7 +171,7 @@ export const alolaMapCoordinates = {
     "x": 750,
     "y": 200
   },
-  "Thrifty Megamart - Abandoned Site": {
+  "Thrifty Megamart": {
     "x": 800,
     "y": 200
   },
@@ -191,7 +179,7 @@ export const alolaMapCoordinates = {
     "x": 850,
     "y": 200
   },
-  "Route 15 - Main": {
+  "Route 15": {
     "x": 900,
     "y": 200
   },
@@ -199,11 +187,11 @@ export const alolaMapCoordinates = {
     "x": 250,
     "y": 250
   },
-  "Route 17 - Northeast": {
+  "Route 17": {
     "x": 350,
     "y": 250
   },
-  "Seafolk Village - Main": {
+  "Seafolk Village": {
     "x": 550,
     "y": 250
   },
@@ -223,7 +211,7 @@ export const alolaMapCoordinates = {
     "x": 50,
     "y": 300
   },
-  "Mount Lanakila - Cave": {
+  "Mount Lanakila": {
     "x": 250,
     "y": 300
   },
@@ -254,5 +242,9 @@ export const alolaMapCoordinates = {
   "Poni Gauntlet": {
     "x": 900,
     "y": 300
+  },
+  "Verdant Cavern": {
+    "x": 850,
+    "y": 50
   }
 };
