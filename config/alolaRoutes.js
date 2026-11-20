@@ -772,7 +772,7 @@ export const alolaRoutes = [
         "chance": 0.15
       },
       {
-        "pokemonId": 506,
+        "pokemonId": 228,
         "minLevel": 32,
         "maxLevel": 35,
         "chance": 0.15
@@ -3428,11 +3428,11 @@ export const alolaUnlocks = [
     "requirements": {
       "catchSpecies": [
         {
-          "species": "Trumbeak",
+          "species": "Pikipek",
           "count": 1
         },
         {
-          "species": "Gumshoos",
+          "species": "Yungoos",
           "count": 1
         }
       ]
@@ -3801,7 +3801,7 @@ export const alolaUnlocks = [
     "requirements": {
       "catchSpeciesByQualityOrHigher": [
         {
-          "species": "Golisopod",
+          "species": "Kecleon",
           "quality": "Epic",
           "count": 1
         }
@@ -4018,10 +4018,10 @@ export const alolaUnlocks = [
       "Blush Mountain"
     ],
     "requirements": {
-      "catchSpecies": [
+      "defeatMultipleSpecific": [
         {
-          "species": "Turtonator",
-          "count": 1
+          "species": "Toucannon",
+          "count": 3
         }
       ]
     }
@@ -4059,11 +4059,17 @@ export const alolaUnlocks = [
       "Route 14"
     ],
     "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Drampa",
-          "count": 1
-        }
+      "catchSpeciesAnyOf": [
+        [
+          {
+            "species": "Absol",
+            "count": 1
+          },
+          {
+            "species": "Dewgong",
+            "count": 1
+          }
+        ]
       ]
     },
     "rewards": "Ice Stone x1"
@@ -4073,6 +4079,21 @@ export const alolaUnlocks = [
     "areaId": "Route 14",
     "unlocks": [
       "Thrifty Megamart"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Frillish",
+          "count": 1
+        }
+      ]
+    }
+  },
+  {
+    "challengeName": "Challenge 44",
+    "areaId": "Thrifty Megamart",
+    "unlocks": [
+      "Route 15"
     ],
     "requirements": {
       "catchSpeciesAnyOf": [
@@ -4087,19 +4108,6 @@ export const alolaUnlocks = [
           }
         ]
       ]
-    }
-  },
-  {
-    "challengeName": "Challenge 44",
-    "areaId": "Thrifty Megamart",
-    "unlocks": [
-      "Route 15"
-    ],
-    "requirements": {
-      "defeatSpecific": {
-        "name": "Gengar",
-        "count": 2
-      }
     },
     "rewards": "Ghost Stone x1"
   },
