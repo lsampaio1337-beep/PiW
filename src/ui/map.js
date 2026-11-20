@@ -605,19 +605,28 @@ export function navigateToLocation(locationName) {
 
         const vGym = document.getElementById("map-inner-modal-content");
         const vGymTitle = document.getElementById("map-inner-modal-title");
+        const overlay = document.getElementById('map-inner-modal-overlay');
+        const modal = document.getElementById('map-inner-modal');
         if (vGymTitle) vGymTitle.innerText = locationName;
         if (vGym) {
-            vGym.replaceChildren();
+            if (typeof vGym.replaceChildren === 'function') vGym.replaceChildren();
             vGym.style.position = "relative";
+            vGym.style.width = "100%";
             vGym.style.height = "100%";
+            vGym.style.display = "flex";
+            vGym.style.alignItems = "center";
+            vGym.style.justifyContent = "center";
+            vGym.style.padding = "14px";
+            vGym.style.boxSizing = "border-box";
+            vGym.style.overflowY = "auto";
             vGym.style.backgroundImage = "url('./Assets/BG/SafariZone.png')";
             vGym.style.backgroundSize = "cover";
             vGym.style.backgroundPosition = "center";
 
             let html = `
-                <div class="piw-card" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; color: white; padding: 22px 26px; width: min(72%, 480px); backdrop-filter: blur(6px); border-color: rgba(45, 212, 191, 0.65); box-shadow: var(--piw-shadow-window);">
-                  <p id="safari-welcome-msg" style="margin: 0; font-size: 16px; line-height: 1.5; color: var(--piw-text-primary);">Welcome to ${locationName}! Here we charge a fee per battle you have and you can use our SafariBalls at will.<br><br>Do you wanna enter ${locationName}?</p>
-                  <button id="btn-enter-safari" class="piw-btn piw-btn-warning" style="margin-top: 18px; padding: 10px 22px; font-size: 16px;">Enter ($${state.config.balance.safariZonePrice || 500})</button>
+                <div class="piw-card safari-welcome-card">
+                  <p id="safari-welcome-msg" class="safari-welcome-msg">Welcome to ${locationName}! Here we charge a fee per battle you have and you can use our SafariBalls at will.<br><br>Do you wanna enter ${locationName}?</p>
+                  <button id="btn-enter-safari" class="piw-btn piw-btn-warning safari-enter-btn">Enter ($${state.config.balance.safariZonePrice || 500})</button>
                 </div>
             `;
             setSafeHTML(vGym, html);
@@ -628,29 +637,16 @@ export function navigateToLocation(locationName) {
             }
         }
 
-        const overlay = document.getElementById('map-inner-modal-overlay');
-        const modal = document.getElementById('map-inner-modal');
         if (overlay && modal) {
             overlay.style.display = 'flex';
+            overlay.style.padding = '12px';
 
-            const mapWin = document.getElementById('interactive-map');
-            if (mapWin) {
-                const applyPaddingAndAspect = (aspectRatio) => {
-                    const mapW = mapWin.offsetWidth;
-                    const mapH = mapWin.offsetHeight;
-                    const maxDim = Math.max(mapW, mapH);
-                    const padding = maxDim * 0.02;
-                    overlay.style.padding = `${padding}px`;
-
-                    modal.style.aspectRatio = aspectRatio ? aspectRatio.toString() : 'auto';
-                    modal.style.maxHeight = '100%';
-                    modal.style.maxWidth = '100%';
-                };
-
-                const img = new Image();
-                img.onload = () => applyPaddingAndAspect(img.naturalWidth / img.naturalHeight);
-                img.src = './Assets/BG/SafariZone.png';
-            }
+            // Stable proportion-independent Safari inner window so the message never clips on any region map
+            modal.style.aspectRatio = 'auto';
+            modal.style.width = 'clamp(280px, 78%, 540px)';
+            modal.style.height = 'clamp(220px, 74%, 380px)';
+            modal.style.maxWidth = '96%';
+            modal.style.maxHeight = '94%';
         }
     } else if (locationName === "Celadon Casino" || locationName === "Goldenrod Game Corner") {
         window.currentCasinoHub = locationName;
@@ -663,10 +659,20 @@ export function navigateToLocation(locationName) {
 
         const vGym = document.getElementById("map-inner-modal-content");
         const vGymTitle = document.getElementById("map-inner-modal-title");
+        const casinoModal = document.getElementById('map-inner-modal');
+        if (casinoModal) {
+            casinoModal.style.width = '';
+            casinoModal.style.height = '';
+        }
         if (vGymTitle) vGymTitle.innerText = locationName;
 
         if (vGym) {
             vGym.replaceChildren();
+            vGym.style.display = '';
+            vGym.style.alignItems = '';
+            vGym.style.justifyContent = '';
+            vGym.style.padding = '';
+            vGym.style.overflowY = '';
             vGym.style.position = "relative";
             vGym.style.height = "100%";
             vGym.style.backgroundImage = "url('./Assets/BG/Casino.png')";
@@ -901,6 +907,11 @@ export function navigateToLocation(locationName) {
 
         const vGym = document.getElementById("map-inner-modal-content");
         const vGymTitle = document.getElementById("map-inner-modal-title");
+        const gymModal = document.getElementById('map-inner-modal');
+        if (gymModal) {
+            gymModal.style.width = '';
+            gymModal.style.height = '';
+        }
         const gymConfig = state.config.gyms ? state.config.gyms.find(g => g.name === lookupName) : null;
 
         if (vGymTitle) {
@@ -911,6 +922,11 @@ export function navigateToLocation(locationName) {
             if (typeof vGym.replaceChildren === 'function') {
                 vGym.replaceChildren();
             }
+            vGym.style.display = '';
+            vGym.style.alignItems = '';
+            vGym.style.justifyContent = '';
+            vGym.style.padding = '';
+            vGym.style.overflowY = '';
 
             if (gymConfig && state.config.gymAssets && state.config.gymAssets[gymConfig.leader]) {
                 const assetConfig = state.config.gymAssets[gymConfig.leader];

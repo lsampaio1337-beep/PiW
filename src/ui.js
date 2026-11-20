@@ -800,7 +800,8 @@ window.showChallengesModal = function() {
     showModal("Progress Challenges", html, "window-challenges", "800px");
     const win = document.getElementById("window-challenges");
     if (win) {
-        win.style.maxHeight = '80vh';
+        const maxModalHeight = Math.max(360, Math.round((window.innerHeight || 900) * 0.8));
+        win.style.maxHeight = `${maxModalHeight}px`;
         const contentContainer = win.querySelector('.window-content-container');
         if (contentContainer) {
             contentContainer.style.overflowY = 'auto';

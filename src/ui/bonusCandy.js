@@ -60,10 +60,10 @@ function generateCandyBankHTML(history, unspentWhite) {
     let candyBankHTML = '';
     for (let i = 0; i < history.length; i++) {
         const candyImg = CANDY_CONFIG[history[i]] ? CANDY_CONFIG[history[i]].imageFile : 'WhiteCandy.png';
-        candyBankHTML += `<img class="bc-bank-item" src="Assets/Extra/Candies/${candyImg}" title="${history[i]}">`;
+        candyBankHTML += `<img class="bc-bank-item" width="28" height="28" src="Assets/Extra/Candies/${candyImg}" title="${history[i]}">`;
     }
     for (let i = 0; i < unspentWhite; i++) {
-        candyBankHTML += `<img class="bc-bank-item bc-bank-item--white" src="Assets/Extra/Candies/WhiteCandy.png" title="Unspent White Candy">`;
+        candyBankHTML += `<img class="bc-bank-item bc-bank-item--white" width="28" height="28" src="Assets/Extra/Candies/WhiteCandy.png" title="Unspent White Candy">`;
     }
     return candyBankHTML;
 }
@@ -74,7 +74,7 @@ function generateHeroHeaderHTML(unspentWhite, defeats, progressPct) {
         <div class="bc-hero-header">
             <div class="bc-wallet">
                 <div class="bc-wallet-icon-wrap">
-                    <img class="bc-wallet-icon" src="Assets/Extra/Candies/WhiteCandy.png" alt="White Candy">
+                    <img class="bc-wallet-icon" width="34" height="34" src="Assets/Extra/Candies/WhiteCandy.png" alt="White Candy">
                 </div>
                 <div class="bc-wallet-info">
                     <span class="bc-wallet-label">White Candies</span>
@@ -116,11 +116,11 @@ function generateFirstTimeOverlayHTML(hasSeenModal) {
         <div id="bonus-candy-first-time-overlay" class="bc-intro-overlay" style="display: ${!hasSeenModal ? 'flex' : 'none'};">
             <div class="bc-intro-card">
                 <div class="bc-intro-icons">
-                    <img src="Assets/Extra/Candies/WhiteCandy.png" alt="White Candy">
-                    <img src="Assets/Extra/Candies/LootCandy.png" alt="Green Candy">
-                    <img src="Assets/Extra/Candies/XPCandy.png" alt="Purple Candy">
-                    <img src="Assets/Extra/Candies/CatchCandy.png" alt="Black Yellow Candy">
-                    <img src="Assets/Extra/Candies/ShinyCandy.png" alt="Rainbow Candy">
+                    <img width="36" height="36" src="Assets/Extra/Candies/WhiteCandy.png" alt="White Candy">
+                    <img width="36" height="36" src="Assets/Extra/Candies/LootCandy.png" alt="Green Candy">
+                    <img width="36" height="36" src="Assets/Extra/Candies/XPCandy.png" alt="Purple Candy">
+                    <img width="36" height="36" src="Assets/Extra/Candies/CatchCandy.png" alt="Black Yellow Candy">
+                    <img width="36" height="36" src="Assets/Extra/Candies/ShinyCandy.png" alt="Rainbow Candy">
                 </div>
                 <h3 class="bc-intro-title">Welcome to Bonus Candies!</h3>
                 <div id="bonus-candy-intro-text" class="bc-intro-steps">
@@ -214,7 +214,7 @@ function renderCandyOption(color, effectText, cost, currentOwned, currentEffect,
         buttonHTML = `
             <button type="button" class="bc-buy-btn bc-buy-btn--affordable" onclick="window.buyBonusCandy('${color}')" title="Trade ${cost} White Candy for ${color}">
                 <span>Trade for ${cost}</span>
-                <img class="bc-cost-icon" src="Assets/Extra/Candies/WhiteCandy.png" alt="White Candy">
+                <img class="bc-cost-icon" width="18" height="18" src="Assets/Extra/Candies/WhiteCandy.png" alt="White Candy">
             </button>
         `;
     } else {
@@ -222,7 +222,7 @@ function renderCandyOption(color, effectText, cost, currentOwned, currentEffect,
         buttonHTML = `
             <button type="button" class="bc-buy-btn bc-buy-btn--unaffordable" onclick="window.buyBonusCandy('${color}')" title="Need ${missing} more White Candy">
                 <span>Cost: ${cost}</span>
-                <img class="bc-cost-icon" src="Assets/Extra/Candies/WhiteCandy.png" alt="White Candy">
+                <img class="bc-cost-icon" width="18" height="18" src="Assets/Extra/Candies/WhiteCandy.png" alt="White Candy">
                 <span>(Need ${missing} more)</span>
             </button>
         `;
@@ -232,7 +232,7 @@ function renderCandyOption(color, effectText, cost, currentOwned, currentEffect,
         <div class="${cardClasses}" style="${cardVars}">
             <div class="bc-card-header">
                 <div class="bc-icon-pedestal" ${isMaxed ? '' : `onclick="window.buyBonusCandy('${color}')" style="cursor: pointer;"`} title="${isMaxed ? 'MAXED' : `Click to trade for ${color}`}">
-                    <img class="bc-card-icon" src="Assets/Extra/Candies/${imageFile}" alt="${color}">
+                    <img class="bc-card-icon" width="38" height="38" src="Assets/Extra/Candies/${imageFile}" alt="${color}">
                 </div>
                 <div class="bc-card-title-group">
                     <div class="${titleClass}" ${titleInline}>${color}</div>

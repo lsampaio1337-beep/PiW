@@ -319,65 +319,86 @@
       </div>
 
       <!-- View 6: Battle Stadium -->
-      <div id="view-battle-stadium" class="game-view" style="display:none; background-image: url('./Assets/BG/BattleMode/Test.png'); background-size: 100% 100%; height: 100%; position: relative; align-items: center; justify-content: flex-start; flex-direction: column; overflow-y: auto; box-sizing: border-box; padding: 14px 12px;">
-          <div style="display: flex; flex-direction: column; align-items: center; gap: 6px; margin-bottom: 8px; flex-shrink: 0;">
-              <div style="font-weight: 800; font-size: 20px; color: white; text-shadow: 0 2px 6px rgba(0,0,0,0.85);">Multiplayer</div>
-              <div class="piw-tab-bar">
-                  <button id="btn-tab-host" class="piw-tab-btn is-active" onclick="window.switchMultiplayerTab('host')">Host</button>
-                  <button id="btn-tab-join" class="piw-tab-btn" onclick="window.switchMultiplayerTab('join')">Join</button>
+      <div id="view-battle-stadium" class="game-view mp-view" style="display:none; background-image: url('./Assets/BG/BattleMode/Test.png');">
+          <div class="mp-shell">
+              <div class="mp-header-card">
+                  <div class="mp-header-top">
+                      <div class="mp-title-block">
+                          <h2 class="mp-title">Battle Stadium</h2>
+                          <span class="mp-subtitle">Peer-to-Peer Arena • Same Region Required</span>
+                      </div>
+                      <div class="piw-tab-bar">
+                          <button id="btn-tab-host" class="piw-tab-btn is-active" onclick="window.switchMultiplayerTab('host')">Host Match</button>
+                          <button id="btn-tab-join" class="piw-tab-btn" onclick="window.switchMultiplayerTab('join')">Join Match</button>
+                      </div>
+                  </div>
               </div>
-          </div>
 
-          <div class="mp-shell" style="text-align: center; flex-shrink: 0;">
-              <p class="piw-badge is-teal" style="margin: 0; font-size: 11px; white-space: normal;">Connect with a friend to battle using your current active party!</p>
+              <div id="mp-host-container" class="mp-panel" style="display: block;">
+                  <div class="mp-panel-action-row">
+                      <button id="btn-mp-host" class="piw-btn piw-btn-success mp-primary-btn">Create Host Code</button>
+                  </div>
 
-              <div style="display: flex; justify-content: center; width: 100%;">
-                  <div id="mp-host-container" class="mp-panel" style="display: block;">
-                      <button id="btn-mp-host" class="piw-btn piw-btn-success" style="width: 100%; font-size: 12.5px;">Generate Code</button>
-
+                  <div class="mp-steps-grid">
                       <div class="mp-step-box">
-                          <p class="mp-step-label">1. Send this code to your friend:</p>
+                          <div class="mp-step-header">
+                              <span class="mp-step-num">1</span>
+                              <p class="mp-step-label">Share this Host Code with your friend</p>
+                          </div>
                           <div class="mp-code-row">
-                              <input type="text" id="multiplayer-host-id" class="mp-code-input" readonly placeholder="Waiting...">
+                              <input type="text" id="multiplayer-host-id" class="mp-code-input" readonly placeholder="Click Create Host Code first...">
                               <button id="btn-copy-host" class="piw-btn piw-btn-secondary piw-btn-sm">Copy</button>
                           </div>
                       </div>
 
                       <div class="mp-step-box">
-                          <p class="mp-step-label">2. Paste your friend's Answer Code here:</p>
+                          <div class="mp-step-header">
+                              <span class="mp-step-num">2</span>
+                              <p class="mp-step-label">Paste your friend's Answer Code here</p>
+                          </div>
                           <div class="mp-code-row">
-                              <input type="text" id="mp-host-answer-input" class="mp-code-input" style="color: #f8fafc;" placeholder="Paste Answer Code">
+                              <input type="text" id="mp-host-answer-input" class="mp-code-input is-editable" placeholder="Paste Answer Code">
                               <button id="btn-paste-host" class="piw-btn piw-btn-secondary piw-btn-sm">Paste</button>
                           </div>
                       </div>
-
-                      <button id="btn-mp-complete" class="piw-btn piw-btn-purple" style="margin-top: 8px; width: 100%; font-size: 12.5px;">Connect</button>
                   </div>
 
-                  <div id="mp-join-container" class="mp-panel" style="display: none;">
-                      <div class="mp-step-box" style="margin-top: 0;">
-                          <p class="mp-step-label">1. Paste Host's Offer Code here:</p>
+                  <button id="btn-mp-complete" class="piw-btn piw-btn-purple mp-connect-btn">Connect &amp; Sync Party</button>
+              </div>
+
+              <div id="mp-join-container" class="mp-panel" style="display: none;">
+                  <div class="mp-steps-grid">
+                      <div class="mp-step-box">
+                          <div class="mp-step-header">
+                              <span class="mp-step-num">1</span>
+                              <p class="mp-step-label">Paste the Host's Offer Code here</p>
+                          </div>
                           <div class="mp-code-row">
-                              <input type="text" id="mp-join-input" class="mp-code-input" style="color: #f8fafc;" placeholder="Paste Code Here">
+                              <input type="text" id="mp-join-input" class="mp-code-input is-editable" placeholder="Paste Host Offer Code">
                               <button id="btn-paste-join" class="piw-btn piw-btn-secondary piw-btn-sm">Paste</button>
                           </div>
                       </div>
 
-                      <button id="btn-mp-join" class="piw-btn piw-btn-success" style="margin-top: 8px; width: 100%; font-size: 12.5px;">Generate Code</button>
+                      <div class="mp-panel-action-row">
+                          <button id="btn-mp-join" class="piw-btn piw-btn-success mp-primary-btn">Generate Answer Code</button>
+                      </div>
 
                       <div class="mp-step-box">
-                          <p class="mp-step-label">2. Send this Answer Code back to Host:</p>
+                          <div class="mp-step-header">
+                              <span class="mp-step-num">2</span>
+                              <p class="mp-step-label">Send this Answer Code back to the Host</p>
+                          </div>
                           <div class="mp-code-row">
-                              <input type="text" id="multiplayer-client-id" class="mp-code-input" readonly placeholder="Waiting...">
+                              <input type="text" id="multiplayer-client-id" class="mp-code-input" readonly placeholder="Generated Answer Code appears here...">
                               <button id="btn-copy-client" class="piw-btn piw-btn-secondary piw-btn-sm">Copy</button>
                           </div>
                       </div>
                   </div>
               </div>
 
-              <div style="display: flex; justify-content: space-between; gap: 10px; width: 100%;">
-                  <button id="btn-mp-connection-status" disabled class="piw-btn piw-btn-danger" style="flex: 1; opacity: 1; cursor: default;">Not Connected</button>
-                  <button id="btn-mp-battle" disabled class="piw-btn piw-btn-secondary" style="flex: 1; cursor: not-allowed;">Battle</button>
+              <div class="mp-footer-bar">
+                  <button id="btn-mp-connection-status" disabled class="piw-btn piw-btn-danger mp-status-btn">Not Connected</button>
+                  <button id="btn-mp-battle" disabled class="piw-btn piw-btn-secondary mp-battle-btn">Battle</button>
               </div>
           </div>
       </div>
