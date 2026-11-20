@@ -3,7 +3,7 @@ import { checkDailyRewardAvailable, checkAnyDailyChallengeCompleted } from './ca
 import { escapeHTML } from '../utils/stringUtils.js';
 
 function getStatusHtml(isMet) {
-    return isMet ? ` <span style="color: green;">[Complete]</span>` : "";
+    return isMet ? ` <span style="color: #4ade80; font-weight: 700;">[Complete]</span>` : "";
 }
 
 function countDisplay(current, required) {
@@ -510,7 +510,7 @@ function updateNavButtons(inGym, noPokemon, isStarterPending) {
     }
 }
 
-function updateTimers() {
+export function updateTimers() {
     const timerRoute = document.getElementById('main-view-timer-route');
     const timerTotal = document.getElementById('main-view-timer-total');
     if (timerRoute && timerTotal) {
@@ -540,6 +540,11 @@ function updateChallengeTextUI() {
 function updateBonusCandy() {
     const bonusCandyContainer = document.getElementById('bonus-candy-container');
     const exclamation = document.getElementById('bonus-candy-exclamation');
+    const btn = document.getElementById('btn-bonus-candy');
+    if (btn) {
+        const white = state.stats.whiteCandies || 0;
+        btn.title = white > 0 ? `Bonus Candy (${white} White ${white === 1 ? 'Candy' : 'Candies'} Ready)` : 'Bonus Candy';
+    }
     if (exclamation && bonusCandyContainer) {
         if (state.stats.whiteCandies > 0) {
             bonusCandyContainer.style.display = 'inline-block';
@@ -561,8 +566,13 @@ function updateBonusCandy() {
 function updateGifts() {
     const giftContainer = document.getElementById('gift-container');
     const giftNotification = document.getElementById('gift-notification');
+    const btn = document.getElementById('btn-gift');
+    const pendingLen = state.stats.pendingGifts ? state.stats.pendingGifts.length : 0;
+    if (btn) {
+        btn.title = pendingLen > 0 ? `Gifts (${pendingLen} Pending)` : 'Gifts';
+    }
     if (giftContainer && giftNotification) {
-        if (state.stats.pendingGifts && state.stats.pendingGifts.length > 0) {
+        if (pendingLen > 0) {
             giftContainer.style.display = 'inline-block';
             if (!state.globalStats.hasSeenGiftIcon) {
                 giftNotification.style.display = 'block';
@@ -581,8 +591,13 @@ function updateGifts() {
 
 function updateCalendar() {
     const calendarNotification = document.getElementById('calendar-notification');
+    const btn = document.getElementById('btn-calendar');
+    const ready = checkDailyRewardAvailable() || checkAnyDailyChallengeCompleted();
+    if (btn) {
+        btn.title = ready ? 'Daily Calendar (Reward Ready!)' : 'Daily Calendar';
+    }
     if (calendarNotification) {
-        if (checkDailyRewardAvailable() || checkAnyDailyChallengeCompleted()) {
+        if (ready) {
             calendarNotification.style.display = 'block';
         } else {
             calendarNotification.style.display = 'none';
@@ -619,28 +634,36 @@ function updateMapNotification(isFinalChallengeCompleted) {
 
 function updateChallengesNotification() {
     const challengesNotification = document.getElementById('challenges-notification');
-    if (challengesNotification) {
-        let anyMet = false;
-        const currentUnlocks = typeof window.getCurrentUnlocks === 'function' ? window.getCurrentUnlocks() : null;
-        if (state.config && currentUnlocks && state.stats.activeChallenges) {
-            for (let activeId of state.stats.activeChallenges) {
-                let unlock = currentUnlocks.find(u => u.areaId === activeId);
-                if (unlock) {
-                    let cData = getChallengeData(unlock);
-                    if (cData.isMet) {
-                        anyMet = true;
-                        break;
-                    }
+    const btn = document.getElementById('btn-challenges');
+    let metCount = 0;
+    const currentUnlocks = typeof window.getCurrentUnlocks === 'function' ? window.getCurrentUnlocks() : null;
+    if (state.config && currentUnlocks && state.stats.activeChallenges) {
+        for (let activeId of state.stats.activeChallenges) {
+            let unlock = currentUnlocks.find(u => u.areaId === activeId);
+            if (unlock) {
+                let cData = getChallengeData(unlock);
+                if (cData.isMet) {
+                    metCount++;
                 }
             }
         }
-        challengesNotification.style.display = anyMet ? 'block' : 'none';
+    }
+    if (btn) {
+        btn.title = metCount > 0 ? `Progress Challenges (${metCount} Ready to Claim!)` : 'Progress Challenges';
+    }
+    if (challengesNotification) {
+        challengesNotification.style.display = metCount > 0 ? 'block' : 'none';
     }
 }
 
 function updateSleepNotification() {
     const sleepContainer = document.getElementById('sleep-container');
     const sleepNotification = document.getElementById('sleep-notification');
+    const btn = document.getElementById('btn-sleep');
+    if (btn) {
+        const grains = state.stats.jigglypuffGrains || 0;
+        btn.title = `ZzZ Mode (${grains} ${grains === 1 ? 'Grain' : 'Grains'})`;
+    }
 
     if (sleepContainer && sleepNotification) {
         if (state.globalStats.playtime && state.globalStats.playtime >= 3600) {
@@ -683,9 +706,16 @@ export function updateMainControl() {
     updateChallengesNotification();
     updateSleepNotification();
 
-    // Auto-adjust width of the Main Control window if new icons appeared
+    // Auto-adjust width of the Main Control window only when dynamic icon visibility changes
     if (window.windowManager) {
-        window.windowManager.autoAdjustWidth('main-control-window');
+        const gEl = document.getElementById('gift-container');
+        const bEl = document.getElementById('bonus-candy-container');
+        const sEl = document.getElementById('sleep-container');
+        const visKey = `${gEl ? gEl.style.display : ''}|${bEl ? bEl.style.display : ''}|${sEl ? sEl.style.display : ''}`;
+        if (window._lastMainControlVisKey !== visKey) {
+            window._lastMainControlVisKey = visKey;
+            window.windowManager.autoAdjustWidth('main-control-window');
+        }
     }
 }
 

@@ -6,49 +6,55 @@ import { VITAMINS } from '../constants.js';
 
 export function showCheatControlModal() {
     const html = `
-        <div style="display: flex; flex-direction: column; gap: 20px; padding-bottom: 10px;">
+        <div style="display: flex; flex-direction: column; gap: 14px; padding-bottom: 6px;">
 
             <!-- Category: Resources & Wealth -->
-            <div>
-                <h3 style="margin: 0 0 10px 0; border-bottom: 1px solid #555; padding-bottom: 5px; color: #ddd; font-size: 16px;">Resources & Wealth</h3>
+            <div class="piw-section">
+                <div class="piw-section-header">
+                    <div class="piw-section-title">Resources &amp; Wealth</div>
+                </div>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                    <button onclick="window.cheatAction('Money')" style="padding: 10px; font-size: 14px; background: #2ecc71; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Money</button>
-                    <button onclick="window.cheatAction('NoMoney')" style="padding: 10px; font-size: 14px; background: #e74c3c; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">No Money</button>
-                    <button onclick="window.cheatAction('JigglypuffDust')" style="padding: 10px; font-size: 14px; background: #ffb6c1; color: black; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Jigglypuff Dust</button>
-                    <button onclick="window.cheatAction('BonusCandy')" style="padding: 10px; font-size: 14px; background: #ecf0f1; color: black; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Bonus Candy</button>
-                    <button onclick="window.cheatAction('InfiniteItems')" id="cheat-infinite-items-btn" style="padding: 10px; font-size: 14px; background: ${state.settings.infiniteItems ? '#9b59b6' : '#95a5a6'}; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Infinite items: ${state.settings.infiniteItems ? 'ON' : 'OFF'}</button>
-                    <button onclick="window.giveFreeTokens()" style="padding: 10px; font-size: 14px; background: #bdc3c7; color: black; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">+ Token</button>
-                    <button onclick="window.cheatAction('GodMode')" style="padding: 10px; font-size: 14px; background: linear-gradient(45deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3); color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; text-shadow: 1px 1px 2px black;">God Mode</button>
+                    <button type="button" class="piw-btn piw-btn-success" onclick="window.cheatAction('Money')">Money</button>
+                    <button type="button" class="piw-btn piw-btn-danger" onclick="window.cheatAction('NoMoney')">No Money</button>
+                    <button type="button" class="piw-btn" onclick="window.cheatAction('JigglypuffDust')" style="background: linear-gradient(180deg, #f9a8d4, #ec4899); color: #2b0618;">Jigglypuff Dust</button>
+                    <button type="button" class="piw-btn piw-btn-secondary" onclick="window.cheatAction('BonusCandy')">Bonus Candy</button>
+                    <button type="button" class="piw-btn ${state.settings.infiniteItems ? 'piw-btn-purple' : 'piw-btn-secondary'}" onclick="window.cheatAction('InfiniteItems')" id="cheat-infinite-items-btn">Infinite items: ${state.settings.infiniteItems ? 'ON' : 'OFF'}</button>
+                    <button type="button" class="piw-btn piw-btn-warning" onclick="window.giveFreeTokens()">+ Token</button>
+                    <button type="button" class="piw-btn" onclick="window.cheatAction('GodMode')" style="grid-column: 1 / -1; background: linear-gradient(90deg, #ef4444, #f59e0b, #10b981, #3b82f6, #8b5cf6); color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,0.85);">God Mode</button>
                 </div>
             </div>
 
             <!-- Category: Progression & Pokémon -->
-            <div>
-                <h3 style="margin: 0 0 10px 0; border-bottom: 1px solid #555; padding-bottom: 5px; color: #ddd; font-size: 16px;">Progression & Pokémon</h3>
+            <div class="piw-section">
+                <div class="piw-section-header">
+                    <div class="piw-section-title">Progression &amp; Pokémon</div>
+                </div>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                    <button onclick="window.cheatAction('XP')" style="padding: 10px; font-size: 14px; background: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">XP</button>
-                    <button onclick="window.cheatAction('Upgrades')" style="padding: 10px; font-size: 14px; background: #f1c40f; color: black; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Upgrades</button>
-                    <button onclick="window.cheatAction('Map')" style="padding: 10px; font-size: 14px; background: #e67e22; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Complete Progress Challenge</button>
-                    <button onclick="window.showAddPokemonModal()" style="padding: 10px; font-size: 14px; background: #16a085; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Specific Pokemon</button>
-                    <button onclick="window.cheatAction('Pokedex')" style="padding: 10px; font-size: 14px; background: #34495e; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Complete Pokedex</button>
-                    <button onclick="window.cheatAction('PokedexShiny')" style="padding: 10px; font-size: 14px; background: linear-gradient(45deg, #f39c12, #e74c3c, #8e44ad); color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Shiny Pokedex</button>
+                    <button type="button" class="piw-btn piw-btn-primary" onclick="window.cheatAction('XP')">XP</button>
+                    <button type="button" class="piw-btn piw-btn-warning" onclick="window.cheatAction('Upgrades')">Upgrades</button>
+                    <button type="button" class="piw-btn" onclick="window.cheatAction('Map')" style="background: linear-gradient(180deg, #fb923c, #ea580c); color: #fff;">Complete Progress Challenge</button>
+                    <button type="button" class="piw-btn piw-btn-teal" onclick="window.showAddPokemonModal()">Specific Pokemon</button>
+                    <button type="button" class="piw-btn piw-btn-secondary" onclick="window.cheatAction('Pokedex')">Complete Pokedex</button>
+                    <button type="button" class="piw-btn" onclick="window.cheatAction('PokedexShiny')" style="background: linear-gradient(135deg, #f59e0b, #ef4444, #9333ea); color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,0.6);">Shiny Pokedex</button>
                 </div>
             </div>
 
             <!-- Category: Time & Dailies -->
-            <div>
-                <h3 style="margin: 0 0 10px 0; border-bottom: 1px solid #555; padding-bottom: 5px; color: #ddd; font-size: 16px;">Time & Dailies</h3>
+            <div class="piw-section">
+                <div class="piw-section-header">
+                    <div class="piw-section-title">Time &amp; Dailies</div>
+                </div>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                    <button onclick="window.cheatAction('GameSpeed')" style="padding: 10px; font-size: 14px; background: #9b59b6; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Game Speed</button>
-                    <button onclick="window.showTimeLapseModal()" style="padding: 10px; font-size: 14px; background: #8e44ad; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Time Lapse</button>
-                    <button onclick="window.cheatAction('RerollDailyChallenges')" style="padding: 10px; font-size: 14px; background: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Reroll Daily Challenges</button>
-                    <button onclick="window.cheatAction('NextDailyReward')" style="padding: 10px; font-size: 14px; background: #f1c40f; color: black; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Unlock Next Daily Reward</button>
+                    <button type="button" class="piw-btn piw-btn-purple" onclick="window.cheatAction('GameSpeed')">Game Speed</button>
+                    <button type="button" class="piw-btn piw-btn-purple" onclick="window.showTimeLapseModal()">Time Lapse</button>
+                    <button type="button" class="piw-btn piw-btn-primary" onclick="window.cheatAction('RerollDailyChallenges')">Reroll Daily Challenges</button>
+                    <button type="button" class="piw-btn piw-btn-warning" onclick="window.cheatAction('NextDailyReward')">Unlock Next Daily Reward</button>
                 </div>
             </div>
 
         </div>
     `;
-    showModal("Cheat Control", html, "window-cheat-control", "600px");
+    showModal("Cheat Control", html, "window-cheat-control", "580px");
 }
 
 
@@ -202,7 +208,8 @@ export function cheatAction(action) {
         state.settings.infiniteItems = !state.settings.infiniteItems;
         const btn = document.getElementById('cheat-infinite-items-btn');
         if (btn) {
-            btn.style.background = state.settings.infiniteItems ? '#9b59b6' : '#95a5a6';
+            btn.classList.toggle('piw-btn-purple', !!state.settings.infiniteItems);
+            btn.classList.toggle('piw-btn-secondary', !state.settings.infiniteItems);
             btn.innerText = `Infinite items: ${state.settings.infiniteItems ? 'ON' : 'OFF'}`;
         }
         alertMessage = `Infinite items turned ${state.settings.infiniteItems ? 'ON' : 'OFF'}!`;
@@ -371,11 +378,16 @@ export function cheatAction(action) {
         const startIndex = currentIndex !== -1 ? currentIndex : 2; // Default to index 2 (1x)
 
         let speedHtml = `
-            <div style="display: flex; flex-direction: column; gap: 15px; text-align: center; color: white;">
-                <div style="font-size: 14px; font-weight: bold;">Current Speed: <span id="game-speed-display" style="color: #4CAF50;">${speeds[startIndex]}x</span></div>
-                <input type="range" id="game-speed-slider" min="0" max="${speeds.length - 1}" step="1" value="${startIndex}" style="width: 100%; cursor: pointer;" oninput="window.handleGameSpeedSlider(this.value)">
-                <div style="display: flex; justify-content: space-between; font-size: 10px; color: #aaa;">
+            <div class="piw-card" style="display: flex; flex-direction: column; gap: 14px; text-align: center;">
+                <div style="font-size: 0.92rem; font-weight: 600; color: var(--piw-text-muted);">
+                    Current Speed: <span id="game-speed-display" class="piw-badge is-green" style="font-size: 0.95rem; margin-left: 4px;">${speeds[startIndex]}x</span>
+                </div>
+                <input type="range" id="game-speed-slider" min="0" max="${speeds.length - 1}" step="1" value="${startIndex}" style="width: 100%; accent-color: var(--piw-accent-light); cursor: pointer;" oninput="window.handleGameSpeedSlider(this.value)">
+                <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--piw-text-dim); font-weight: 600;">
                     <span>0.25x</span>
+                    <span>1x</span>
+                    <span>10x</span>
+                    <span>100x</span>
                     <span>1000x</span>
                 </div>
             </div>

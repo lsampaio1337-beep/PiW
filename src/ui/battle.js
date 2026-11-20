@@ -28,11 +28,12 @@ function updateActiveItemsUI() {
             ? state.config?.balance?.items?.potions?.[state.settings.activePotionTier]
             : null;
         if (potionCfg) {
-            setSmartwatchCardState(potionCard, 'is-status-ok');
             const rawName = potionCfg.name;
             const potionName = rawName === 'Big' ? 'Big Potion' : rawName;
+            const qty = state.backpack?.potions?.[potionName] || 0;
+            setSmartwatchCardState(potionCard, qty > 0 ? 'is-status-ok' : 'is-status-warn');
             potionImg.src = `./Assets/Items/Potions/${potionName}.png`;
-            potionCount.textContent = formatActiveItemQuantity(state.backpack?.potions?.[potionName] || 0);
+            potionCount.textContent = formatActiveItemQuantity(qty);
             potionImg.style.display = 'block';
             potionCount.style.display = 'block';
         } else {
@@ -86,10 +87,11 @@ function updateActiveItemsUI() {
             ? state.config?.balance?.items?.pokeballs?.[state.settings.activeBallTier]
             : null;
         if (ballCfg) {
-            setSmartwatchCardState(ballCard, 'is-status-ok');
             const ballName = ballCfg.name;
+            const qty = state.backpack?.pokeballs?.[ballName] || 0;
+            setSmartwatchCardState(ballCard, qty > 0 ? 'is-status-ok' : 'is-status-warn');
             ballImg.src = `./Assets/Items/Balls/${ballName}.png`;
-            ballCount.textContent = formatActiveItemQuantity(state.backpack?.pokeballs?.[ballName] || 0);
+            ballCount.textContent = formatActiveItemQuantity(qty);
             ballImg.style.display = 'block';
             ballCount.style.display = 'block';
         } else {
@@ -363,30 +365,28 @@ function updateGymBackground(combatArena, state, battleSystem) {
     }
 }
 
+function classifyRouteBiome(route) {
+    if (!route) return 'test';
+    const clean = route.replace(/\s*\([^)]+\)$/, '');
+    const lower = clean.toLowerCase();
+
+    if (lower.includes('safari')) return 'safari';
+    if (clean.startsWith('Celadon Casino') || clean.startsWith('Goldenrod')) return 'casino';
+    if (clean === 'Viridian Forest' || /\b(forest|woods|jungle|grove|park|swamp|marsh)\b/i.test(clean)) return 'forest';
+    if (WATER_ROUTES.includes(clean) || /\b(sea|ocean|bay|lake|river|canal|falls|beach|island|islands|water|fishing|whirl|surf)\b/i.test(clean)) return 'water';
+    if (CAVE_ROUTES.includes(clean) || /\b(cave|cavern|tunnel|mt\.?|mount|mountain|tower|ruins|chasm|pit|sanctuary|mansion|crypt|mine)\b/i.test(clean)) return 'cave';
+    if (PLAINS_ROUTES.includes(clean) || /\b(route|road|path|way|bridge|meadow|garden|valley|desert|cliff|cape|ridge|field)\b/i.test(clean)) return 'plains';
+    return 'test';
+}
+
 function getRouteBackgroundImage(route) {
-    if (!route) return 'url(\'./Assets/BG/BattleMode/Test.png\')';
-    route = route.replace(/\s*\([^)]+\)$/, '');
-
-    if (route.toLowerCase().includes('safari')) {
-        return `url('./Assets/BG/SafariZone.png')`;
-    }
-    if (route.startsWith('Celadon Casino')) {
-        return `url('./Assets/BG/Casino.png')`;
-    }
-    if (route === 'Viridian Forest') {
-        return `url('./Assets/BG/BattleMode/Forest.png')`;
-    }
-    if (PLAINS_ROUTES.includes(route)) {
-        return `url('./Assets/BG/BattleMode/Plains.png')`;
-    }
-    if (WATER_ROUTES.includes(route)) {
-        return `url('./Assets/BG/BattleMode/Water.png')`;
-    }
-    if (CAVE_ROUTES.includes(route)) {
-        return `url('./Assets/BG/BattleMode/Cave.png')`;
-    }
-
-    // Determine region-specific or time-of-day logic here in the future
+    const biome = classifyRouteBiome(route);
+    if (biome === 'safari') return `url('./Assets/BG/SafariZone.png')`;
+    if (biome === 'casino') return `url('./Assets/BG/Casino.png')`;
+    if (biome === 'forest') return `url('./Assets/BG/BattleMode/Forest.png')`;
+    if (biome === 'water') return `url('./Assets/BG/BattleMode/Water.png')`;
+    if (biome === 'cave') return `url('./Assets/BG/BattleMode/Cave.png')`;
+    if (biome === 'plains') return `url('./Assets/BG/BattleMode/Plains.png')`;
     return `url('./Assets/BG/BattleMode/Test.png')`;
 }
 
@@ -410,7 +410,9 @@ function updateBattleBackground(combatArena, state, battleSystem, inGymCombat, i
 function updateBackgroundSliding(combatArena, state, battleSystem, inGymCombat) {
 
     let displayRoute = (state.currentRoute || '').replace(/\s*\([^)]+\)$/, '');
-    if (SCROLLING_ROUTES.includes(displayRoute) && !inGymCombat) {
+    const biome = classifyRouteBiome(displayRoute);
+    const shouldScroll = SCROLLING_ROUTES.includes(displayRoute) || ['forest', 'water', 'cave', 'plains'].includes(biome);
+    if (shouldScroll && !inGymCombat) {
         combatArena.style.backgroundSize = 'auto 100%';
         combatArena.style.backgroundRepeat = 'repeat-x';
 
@@ -1460,7 +1462,10 @@ function processLevelUpQueue() {
     }
 
     const lvlUpNode = document.createElement('div');
-    const msgText = isDaycare ? `Level Up in Daycare! Lv. ${newLvl}` : `Level Up! Lv. ${newLvl}`;
+    const namePrefix = pokemonName ? `${pokemonName} ` : '';
+    const msgText = isDaycare
+        ? `${namePrefix}Level Up in Daycare! Lv. ${newLvl}`
+        : `${namePrefix}Level Up! Lv. ${newLvl}`;
 
     lvlUpNode.innerText = msgText;
     lvlUpNode.classList.add('level-up-text-anim');

@@ -90,7 +90,7 @@ export function isSafariLocation(locationName) {
     return locationName.toLowerCase().includes('safari');
 }
 
-function generateMarkerHtml(locationId, locationName, coords, isUnlocked, hasNewNotification, showCheckmark) {
+function generateMarkerHtml(locationId, locationName, coords, isUnlocked, hasNewNotification, showCheckmark, isCurrentLocation = false) {
     if (!isUnlocked) return '';
 
     let markerImg = './Assets/Map/Spots/Spot.png';
@@ -131,7 +131,11 @@ function generateMarkerHtml(locationId, locationName, coords, isUnlocked, hasNew
         dropShadow = "drop-shadow(1px 0px 0 #000) drop-shadow(-1px 0px 0 #000) drop-shadow(0px 1px 0 #000) drop-shadow(0px -1px 0 #000) drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.8))";
     }
 
-    let markerClass = hasNewNotification ? 'map-marker pulse-marker' : 'map-marker';
+    let markerClass = [
+        'map-marker',
+        hasNewNotification ? 'pulse-marker' : '',
+        isCurrentLocation ? 'map-marker-current' : ''
+    ].filter(Boolean).join(' ');
     let displayLocationName = locationName.replace(/\s*\([^)]+\)$/, '');
     let safeLocationName = displayLocationName.replace(/'/g, "&#39;");
     let jsLocationName = locationName.replace(/'/g, "\\'");
@@ -139,12 +143,12 @@ function generateMarkerHtml(locationId, locationName, coords, isUnlocked, hasNew
     return `
         <div class="${markerClass}"
              data-location="${safeLocationName}"
-             title="${safeLocationName}"
+             title="${safeLocationName}${isCurrentLocation ? ' (Current)' : ''}"
              style="position: absolute; left: ${coords.x}%; top: ${coords.y}%; width: ${markerWidth}; height: ${markerHeight}; background-image: url('${markerImg}'); background-size: contain; background-repeat: no-repeat; transform: translate(-50%, -50%); filter: ${dropShadow}; cursor: ${isClickable ? 'pointer' : 'default'};"
              ${isClickable ? `onclick="window.navigateToLocation('${jsLocationName}')"` : ''}
              onmousemove="window.showMapTooltip(event, '${jsLocationName}')"
              onmouseout="window.hideMapTooltip()">
-             ${showCheckmark ? '<div style="position:absolute; top:-5px; right:-5px; background:green; color:white; border-radius:50%; width:15px; height:15px; font-size:10px; line-height:15px; text-align:center;">✓</div>' : ''}
+             ${showCheckmark ? '<div style="position:absolute; top:-5px; right:-5px; background:linear-gradient(135deg, #16a34a, #22c55e); border:1px solid rgba(255,255,255,0.75); color:white; border-radius:50%; width:15px; height:15px; font-size:10px; font-weight:800; line-height:13px; text-align:center; box-shadow:0 1px 4px rgba(0,0,0,0.6);">✓</div>' : ''}
         </div>
     `;
 }
@@ -156,14 +160,12 @@ function generateRegionButtonsHtml(unlockedRegions, allRegions) {
 
     let buttonsHtml = unlockedRegions.map(rName => {
         let extra = rName === 'Johto' ? exclamationHtml : '';
-        let style = window.currentMapRegion === rName
-            ? 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2);'
-            : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;';
-        return `<button onclick="window.switchMapRegion('${rName}')" style="${style} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s; position: relative;" onmousedown="event.stopPropagation()">${rName}${extra}</button>`;
+        const isActive = window.currentMapRegion === rName;
+        return `<button class="piw-tab-btn ${isActive ? 'is-active' : ''}" onclick="window.switchMapRegion('${rName}')" style="position: relative;" onmousedown="event.stopPropagation()">${rName}${extra}</button>`;
     }).join('');
 
     return `
-        <div style="display: flex; flex-wrap: wrap; justify-content: center; background: rgba(0, 0, 0, 0.2); border-radius: 20px; padding: 3px; gap: 5px;">
+        <div class="piw-tab-bar" onmousedown="event.stopPropagation()">
             ${buttonsHtml}
         </div>
     `;
@@ -340,17 +342,22 @@ function generateMarkersForRegion(region, unlockedAreas) {
     const badgeCount = targetTrainer.badges || 0;
     const gymBadgeReqs = REGION_GYM_BADGE_REQUIREMENTS[region] || {};
 
+    // Pre-expand newRoutes once instead of inside the marker loop
+    const newRoutesSet = new Set();
+    if (Array.isArray(targetStats.newRoutes)) {
+        for (const r of targetStats.newRoutes) {
+            parseAreaNames(r).forEach(area => newRoutesSet.add(area));
+        }
+    }
+
     for (const [locationId, locationData] of Object.entries(coordsMap)) {
         const locationName = locationData.name;
         const coords = locationData;
         if (!unlockedAreas.has(locationName)) continue;
 
-        let hasNewNotification = false;
+        let hasNewNotification = newRoutesSet.has(locationName);
         let showCheckmark = false;
 
-        if (targetStats.newRoutes && targetStats.newRoutes.some(r => parseAreaNames(r).includes(locationName))) {
-            hasNewNotification = true;
-        }
         if (region === 'Kanto' && locationId === 'professor_lab' && targetStats.showProfMarkerPulse) {
             hasNewNotification = true;
         }
@@ -360,7 +367,8 @@ function generateMarkersForRegion(region, unlockedAreas) {
             showCheckmark = true;
         }
 
-        html += generateMarkerHtml(locationId, locationName, coords, true, hasNewNotification, showCheckmark);
+        const isCurrentLocation = (region === state.currentRegionName && locationName === state.currentRoute);
+        html += generateMarkerHtml(locationId, locationName, coords, true, hasNewNotification, showCheckmark, isCurrentLocation);
     }
     return html;
 }
@@ -414,7 +422,12 @@ export function showMap() {
         { name: 'Paldea', mapFile: '10 Paldea Map.png', width: 1280, height: 905 }
     ];
 
-    let unlockedRegions = regions.map(r => r.name);
+    let unlockedRegions = regions
+        .filter(r => {
+            const coords = getRegionCoordinatesMap(r.name);
+            return r.name === state.currentRegionName || (coords && Object.keys(coords).length > 0);
+        })
+        .map(r => r.name);
 
     if (unlockedRegions.includes('Johto')) { state.globalStats.hasSeenJohtoMap = true; }
 
@@ -592,19 +605,28 @@ export function navigateToLocation(locationName) {
 
         const vGym = document.getElementById("map-inner-modal-content");
         const vGymTitle = document.getElementById("map-inner-modal-title");
+        const overlay = document.getElementById('map-inner-modal-overlay');
+        const modal = document.getElementById('map-inner-modal');
         if (vGymTitle) vGymTitle.innerText = locationName;
         if (vGym) {
-            vGym.replaceChildren();
+            if (typeof vGym.replaceChildren === 'function') vGym.replaceChildren();
             vGym.style.position = "relative";
+            vGym.style.width = "100%";
             vGym.style.height = "100%";
+            vGym.style.display = "flex";
+            vGym.style.alignItems = "center";
+            vGym.style.justifyContent = "center";
+            vGym.style.padding = "14px";
+            vGym.style.boxSizing = "border-box";
+            vGym.style.overflowY = "auto";
             vGym.style.backgroundImage = "url('./Assets/BG/SafariZone.png')";
             vGym.style.backgroundSize = "cover";
             vGym.style.backgroundPosition = "center";
 
             let html = `
-                <div style="position: absolute; top: 30%; left: 50%; transform: translateX(-50%); text-align: center; color: white; background: rgba(0,0,0,0.8); padding: 20px; border-radius: 10px; border: 2px solid #1abc9c; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.65), 0 0 14px rgba(26, 188, 156, 0.25); font-size: 20px; width: 60%; font-family: monospace;">
-                  <p id="safari-welcome-msg">Welcome to ${locationName}! Here we charge a fee per battle you have and you can use our SafariBalls at will.<br><br>Do you wanna enter ${locationName}?</p>
-                  <button id="btn-enter-safari" style="margin-top: 20px; padding: 10px 20px; font-size: 18px; cursor: pointer; background: #ffcc00; border: none; border-radius: 5px; color: black; font-weight: bold;">Enter ($${state.config.balance.safariZonePrice || 500})</button>
+                <div class="piw-card safari-welcome-card">
+                  <p id="safari-welcome-msg" class="safari-welcome-msg">Welcome to ${locationName}! Here we charge a fee per battle you have and you can use our SafariBalls at will.<br><br>Do you wanna enter ${locationName}?</p>
+                  <button id="btn-enter-safari" class="piw-btn piw-btn-warning safari-enter-btn">Enter ($${state.config.balance.safariZonePrice || 500})</button>
                 </div>
             `;
             setSafeHTML(vGym, html);
@@ -615,29 +637,16 @@ export function navigateToLocation(locationName) {
             }
         }
 
-        const overlay = document.getElementById('map-inner-modal-overlay');
-        const modal = document.getElementById('map-inner-modal');
         if (overlay && modal) {
             overlay.style.display = 'flex';
+            overlay.style.padding = '12px';
 
-            const mapWin = document.getElementById('interactive-map');
-            if (mapWin) {
-                const applyPaddingAndAspect = (aspectRatio) => {
-                    const mapW = mapWin.offsetWidth;
-                    const mapH = mapWin.offsetHeight;
-                    const maxDim = Math.max(mapW, mapH);
-                    const padding = maxDim * 0.02;
-                    overlay.style.padding = `${padding}px`;
-
-                    modal.style.aspectRatio = aspectRatio ? aspectRatio.toString() : 'auto';
-                    modal.style.maxHeight = '100%';
-                    modal.style.maxWidth = '100%';
-                };
-
-                const img = new Image();
-                img.onload = () => applyPaddingAndAspect(img.naturalWidth / img.naturalHeight);
-                img.src = './Assets/BG/SafariZone.png';
-            }
+            // Stable proportion-independent Safari inner window so the message never clips on any region map
+            modal.style.aspectRatio = 'auto';
+            modal.style.width = 'clamp(280px, 78%, 540px)';
+            modal.style.height = 'clamp(220px, 74%, 380px)';
+            modal.style.maxWidth = '96%';
+            modal.style.maxHeight = '94%';
         }
     } else if (locationName === "Celadon Casino" || locationName === "Goldenrod Game Corner") {
         window.currentCasinoHub = locationName;
@@ -650,10 +659,20 @@ export function navigateToLocation(locationName) {
 
         const vGym = document.getElementById("map-inner-modal-content");
         const vGymTitle = document.getElementById("map-inner-modal-title");
+        const casinoModal = document.getElementById('map-inner-modal');
+        if (casinoModal) {
+            casinoModal.style.width = '';
+            casinoModal.style.height = '';
+        }
         if (vGymTitle) vGymTitle.innerText = locationName;
 
         if (vGym) {
             vGym.replaceChildren();
+            vGym.style.display = '';
+            vGym.style.alignItems = '';
+            vGym.style.justifyContent = '';
+            vGym.style.padding = '';
+            vGym.style.overflowY = '';
             vGym.style.position = "relative";
             vGym.style.height = "100%";
             vGym.style.backgroundImage = "url('./Assets/BG/Casino.png')";
@@ -812,9 +831,9 @@ export function navigateToLocation(locationName) {
             const shinyWidth = 73.94 - 19.24;
             const shinyHeight = 94.72 - 85.96;
 
-            html += `<div class="casino-overlay-btn" onclick="window.startCasinoEncounter(false, '${locationName}')" style="position: absolute; left: ${stdLeft}%; top: ${stdTop}%; width: ${stdWidth}%; height: ${stdHeight}%; cursor: pointer;" title="Standard Encounter (${state.config.balance.casinoPrices?.standard || 75})"></div>`;
-            html += `<div class="casino-overlay-btn" onclick="window.startCasinoEncounter(true, '${locationName}')" style="position: absolute; left: ${shinyLeft}%; top: ${shinyTop}%; width: ${shinyWidth}%; height: ${shinyHeight}%; cursor: pointer;" title="2x Shiny (${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>`;
-            html += `<button class="casino-overlay-btn" onclick="window.navigateToLocation(window.currentCasinoHub)" style="position: absolute; top: 10px; left: 10px; padding: 10px; cursor: pointer; z-index: 100;">Back to Lobby</button>`;
+            html += `<div class="casino-overlay-btn casino-hotspot" onclick="window.startCasinoEncounter(false, '${locationName}')" style="position: absolute; left: ${stdLeft}%; top: ${stdTop}%; width: ${stdWidth}%; height: ${stdHeight}%; cursor: pointer;" title="Standard Encounter ($${state.config.balance.casinoPrices?.standard || 75})"></div>`;
+            html += `<div class="casino-overlay-btn casino-hotspot" onclick="window.startCasinoEncounter(true, '${locationName}')" style="position: absolute; left: ${shinyLeft}%; top: ${shinyTop}%; width: ${shinyWidth}%; height: ${shinyHeight}%; cursor: pointer;" title="2x Shiny ($${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>`;
+            html += `<button class="casino-overlay-btn piw-btn piw-btn-secondary piw-btn-sm" onclick="window.navigateToLocation(window.currentCasinoHub)" style="position: absolute; top: 10px; left: 10px; z-index: 100;">← Back to Lobby</button>`;
 
             setSafeHTML(vGym, html);
         }
@@ -888,6 +907,11 @@ export function navigateToLocation(locationName) {
 
         const vGym = document.getElementById("map-inner-modal-content");
         const vGymTitle = document.getElementById("map-inner-modal-title");
+        const gymModal = document.getElementById('map-inner-modal');
+        if (gymModal) {
+            gymModal.style.width = '';
+            gymModal.style.height = '';
+        }
         const gymConfig = state.config.gyms ? state.config.gyms.find(g => g.name === lookupName) : null;
 
         if (vGymTitle) {
@@ -898,6 +922,11 @@ export function navigateToLocation(locationName) {
             if (typeof vGym.replaceChildren === 'function') {
                 vGym.replaceChildren();
             }
+            vGym.style.display = '';
+            vGym.style.alignItems = '';
+            vGym.style.justifyContent = '';
+            vGym.style.padding = '';
+            vGym.style.overflowY = '';
 
             if (gymConfig && state.config.gymAssets && state.config.gymAssets[gymConfig.leader]) {
                 const assetConfig = state.config.gymAssets[gymConfig.leader];
@@ -1064,7 +1093,8 @@ export function showMapTooltip(e, locationName) {
     if (!tooltip) {
         tooltip = document.createElement('div');
         tooltip.id = 'map-tooltip';
-        tooltip.style.cssText = 'display:none; position:fixed; background:rgba(0,0,0,0.8); color:white; pointer-events:none; z-index: 99999; line-height: 1.4;';
+        tooltip.className = 'piw-map-tooltip';
+        tooltip.style.display = 'none';
         document.body.appendChild(tooltip);
     }
 
@@ -1074,22 +1104,22 @@ export function showMapTooltip(e, locationName) {
     const mapWindow = document.getElementById('window-map');
     if (mapWindow) {
         const currentWidth = mapWindow.offsetWidth || parseInt(mapWindow.style.width) || 800;
-        scale = currentWidth / 800;
+        scale = Math.max(0.75, currentWidth / 800);
     }
 
-    const fontSize = 14 * scale;
-    const padding = 5 * scale;
-    const borderRadius = 5 * scale;
-    const cursorOffset = 15 * scale;
+    const fontSize = Math.round(12 * scale);
+    const cursorOffset = Math.round(14 * scale);
 
     tooltip.style.fontSize = fontSize + 'px';
-    tooltip.style.padding = padding + 'px';
-    tooltip.style.borderRadius = borderRadius + 'px';
 
     const activeRegion = window.currentMapRegion || '';
-    if (tooltip.dataset.locationName !== locationName || tooltip.dataset.region !== activeRegion) {
+    const tooltipKey = `${activeRegion}|${locationName}|${state.stats?.caughtSpeciesCount || 0}`;
+    if (tooltip.dataset.tooltipKey !== tooltipKey) {
         let displayLocationName = locationName.replace(/\s*\([^)]+\)$/, '');
-        let info = `<strong>${displayLocationName}</strong><br>`;
+        const isCurrent = (activeRegion === state.currentRegionName && locationName === state.currentRoute);
+        let info = `<div class="piw-map-tooltip-title"><span>${displayLocationName}</span>${isCurrent ? '<span class="piw-badge is-teal" style="font-size: 9px; padding: 1px 6px;">Here</span>' : ''}</div>`;
+
+        const regionStats = getRegionStats(activeRegion) || state.stats || {};
 
         // Fetch info to show on tooltip
         if (locationName.includes("Gym") || locationName.includes("Pokemon League")) {
@@ -1098,44 +1128,48 @@ export function showMapTooltip(e, locationName) {
             if (state.config.gyms) {
                 const gym = state.config.gyms.find(g => g.name === lookupName);
                 if (gym) {
-                    info += `Leader: ${gym.leader}<br>`;
-                    info += `Trainers: ${gym.trainers.length}<br>`;
+                    info += `<div class="piw-map-tooltip-row"><span>Leader</span><b>${gym.leader}</b></div>`;
+                    info += `<div class="piw-map-tooltip-row"><span>Trainers</span><b>${gym.trainers.length}</b></div>`;
                 }
             }
         } else if (typeof window.getRoutesForRegion === 'function' && window.getRoutesForRegion(window.currentMapRegion)) {
-            let route = null;
-            route = window.getRoutesForRegion(window.currentMapRegion).find(r => r.name === locationName);
+            let route = window.getRoutesForRegion(window.currentMapRegion).find(r => r.name === locationName);
 
             if (route) {
-                // Find overall min and max level for the route
                 let minLvl = 100;
                 let maxLvl = 1;
                 route.spawns.forEach(s => {
                     if (s.minLevel < minLvl) minLvl = s.minLevel;
                     if (s.maxLevel > maxLvl) maxLvl = s.maxLevel;
                 });
-                info += `Levels: ${minLvl}-${maxLvl}<br>`;
-                info += `Spawns: ${route.spawns.length}<br>`;
+                info += `<div style="font-size: 11px; color: var(--piw-text-muted); margin-bottom: 5px;">Levels ${minLvl}-${maxLvl} • ${route.spawns.length} Spawns</div>`;
 
-                // Show all spawns
                 route.spawns.forEach(s => {
                     let pName = "Unknown";
+                    let baseName = null;
                     if (state.config.pokemonMap || state.config.pokemonData) {
                         const pd = state.config.pokemonMap
                             ? (state.config.pokemonMap.get(Number(s.pokemonId)) || state.config.pokemonMap.get(s.pokemonId))
                             : state.config.pokemonData.find(pd => pd.id === s.pokemonId);
                         if (pd) {
+                            baseName = pd.name;
                             pName = s.forceShiny && pd.name === "Gyarados" ? "Red Gyarados" : pd.name;
                         }
                     }
-                    info += `- ${pName} (Lvl: ${s.minLevel}-${s.maxLevel}, ${Math.round(s.chance * 100)}%)<br>`;
+                    const isCaught = baseName && regionStats.caughtSpecies && regionStats.caughtSpecies[baseName];
+                    const isShinyCaught = baseName && regionStats.caughtShiniesSpecies && regionStats.caughtShiniesSpecies[baseName];
+                    const dexBadge = isShinyCaught
+                        ? '<span title="Shiny Caught" style="color: #facc15;">✨</span>'
+                        : (isCaught ? '<span title="Caught" style="color: #4ade80;">✓</span>' : '<span title="Uncaught" style="color: #64748b;">○</span>');
+                    info += `<div class="piw-map-tooltip-row"><span>${dexBadge} ${pName}</span><span style="color: var(--piw-text-muted);">Lv.${s.minLevel}-${s.maxLevel} (${Math.round(s.chance * 100)}%)</span></div>`;
                 });
             } else {
-                info += `Hub Area<br>`;
+                info += `<div style="color: var(--piw-text-muted); font-size: 11.5px;">Hub Area</div>`;
             }
         }
 
         setSafeHTML(tooltip, info);
+        tooltip.dataset.tooltipKey = tooltipKey;
         tooltip.dataset.locationName = locationName;
         tooltip.dataset.region = activeRegion;
     }

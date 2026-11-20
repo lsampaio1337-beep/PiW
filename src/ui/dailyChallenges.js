@@ -281,10 +281,16 @@ export function getDailyChallengesHtml() {
         active = state.stats.dailyChallenges.active;
     }
 
+    const totalDone = state.stats.dailyChallenges.totalCompleted || 0;
+    const hasRerolled = !!state.stats.dailyChallenges.hasRerolled;
     let html = `
         <div class="cal-challenges-section">
             <div class="cal-section-header">
                 <h2 class="cal-section-title">Daily Challenges</h2>
+                <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                    <span class="piw-badge is-teal">Completed: ${totalDone.toLocaleString('en-US')}</span>
+                    <span class="piw-badge ${hasRerolled ? '' : 'is-amber'}">${hasRerolled ? 'Reroll Used' : '1 Reroll Left'}</span>
+                </div>
             </div>
             <div class="cal-challenges-list">
     `;
@@ -293,7 +299,9 @@ export function getDailyChallengesHtml() {
         let c = active[i];
         let target = Math.max(1, c.target || 1);
         let pct = c.completed ? 100 : Math.min(100, Math.round(((c.progress || 0) / target) * 100));
-        let progressText = c.completed ? `${target} / ${target}` : `${c.progress} / ${target}`;
+        let progressText = c.completed
+            ? `${target.toLocaleString('en-US')} / ${target.toLocaleString('en-US')}`
+            : `${(c.progress || 0).toLocaleString('en-US')} / ${target.toLocaleString('en-US')}`;
 
         let cardClass = 'cal-challenge-card';
         if (c.claimed) {
@@ -303,12 +311,19 @@ export function getDailyChallengesHtml() {
         }
 
         let cleanText = (c.text || '').replace(/^<(?:b|strong)>[^<]*<\/(?:b|strong)>\s*:?\s*/i, '');
+        let formattedTextHtml = cleanText;
+        const colonIdx = cleanText.indexOf(':');
+        if (colonIdx > 0 && colonIdx < 32) {
+            const titlePart = cleanText.slice(0, colonIdx).trim();
+            const descPart = cleanText.slice(colonIdx + 1).trim();
+            formattedTextHtml = `<span class="cal-challenge-title-badge">${titlePart}</span><span>${descPart}</span>`;
+        }
 
         html += `
             <div class="${cardClass}">
                 <div class="cal-challenge-info">
                     <div class="cal-challenge-text">
-                        ${cleanText}
+                        ${formattedTextHtml}
                     </div>
                     <div class="cal-progress-track">
                         <div class="cal-progress-fill" style="width: ${pct}%;"></div>
@@ -321,7 +336,7 @@ export function getDailyChallengesHtml() {
                     ${c.claimed ? `<span class="cal-completed-pill">&#10003; Claimed</span>` : ''}
                     ${c.completed && !c.claimed ? `<button class="cal-btn cal-btn--claim" onclick="window.claimDailyChallengeToken(${i})">Claim <img src="Assets/Extra/Token.png" style="width: 15px; height: 15px;"></button>` : ''}
                     ${!c.completed ? `<button class="cal-btn cal-btn--cheat" onclick="window.cheatCompleteDailyChallenge(${i})">Cheat</button>` : ''}
-                    ${!c.completed ? `<button class="cal-btn cal-btn--reroll" ${state.stats.dailyChallenges.hasRerolled ? 'disabled' : ''} onclick="window.rerollIndividualDailyChallenge(${i})">Reroll</button>` : ''}
+                    ${!c.completed ? `<button class="cal-btn cal-btn--reroll" ${hasRerolled ? 'disabled' : ''} onclick="window.rerollIndividualDailyChallenge(${i})">Reroll</button>` : ''}
                 </div>
             </div>
         `;

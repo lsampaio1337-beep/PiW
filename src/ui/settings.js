@@ -13,6 +13,30 @@ export function toggleLegacySprites(value) {
 }
 window.toggleLegacySprites = toggleLegacySprites;
 
+export function resetWindowLayout() {
+    if (!state.settings) state.settings = {};
+    const prevKeys = state.settings.windowSettings ? Object.keys(state.settings.windowSettings) : [];
+    state.settings.windowSettings = {};
+    prevKeys.forEach((winId) => {
+        const winEl = document.getElementById(winId);
+        if (winEl && winEl.style) {
+            winEl.style.removeProperty('width');
+            winEl.style.removeProperty('height');
+            winEl.style.removeProperty('left');
+            winEl.style.removeProperty('top');
+            winEl.style.removeProperty('transform');
+        }
+    });
+    const storage = state.storageRef || (typeof window !== 'undefined' ? window.storageRef : null);
+    if (storage && typeof storage.save === 'function') {
+        storage.save(state);
+    }
+    if (typeof window !== 'undefined' && typeof window.showGameAlert === 'function') {
+        window.showGameAlert('Window positions and sizes reset to defaults!');
+    }
+}
+window.resetWindowLayout = resetWindowLayout;
+
 export function showSettings() {
     const battleSystem = globals.battleSystem;
     if (battleSystem && battleSystem.gymState && battleSystem.gymState.isActive) return;
@@ -32,6 +56,15 @@ export function showSettings() {
                             <input type="checkbox" id="legacy-sprites-checkbox" ${isLegacy ? 'checked' : ''}>
                             <span class="settings-slider"></span>
                         </label>
+                    </div>
+                </div>
+                <div class="settings-card">
+                    <div class="settings-row">
+                        <div class="settings-info">
+                            <div class="settings-label">Window Layout</div>
+                            <div class="settings-desc">Reset saved positions and dimensions of floating windows back to defaults.</div>
+                        </div>
+                        <button type="button" class="settings-btn settings-btn-primary" onclick="window.resetWindowLayout()">Reset Layout</button>
                     </div>
                 </div>
             </div>
@@ -76,17 +109,22 @@ export function showSettings() {
 
 export function showTimeLapseModal() {
     const html = `
-        <div style="margin-bottom: 15px;">
-            <label for="timelapse-duration-input">How long?:</label>
-            <input type="number" id="timelapse-duration-input" value="1" min="1" style="padding: 5px; width: 80px;">
-            <select id="timelapse-unit-input" style="padding: 5px;">
-                <option value="hours">Hours</option>
-                <option value="minutes">Minutes</option>
-            </select>
+        <div class="piw-card" style="display: flex; flex-direction: column; gap: 12px;">
+            <div style="font-size: 0.9rem; color: var(--piw-text-muted); line-height: 1.45;">
+                Simulate offline hunting, captures, loot drops, and passive EXP at your current route.
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                <label for="timelapse-duration-input" style="font-weight: 600; color: var(--piw-text-main);">Duration:</label>
+                <input type="number" id="timelapse-duration-input" class="piw-input" value="1" min="1" style="width: 90px;">
+                <select id="timelapse-unit-input" class="piw-select" style="flex: 1; min-width: 110px;">
+                    <option value="hours">Hours</option>
+                    <option value="minutes">Minutes</option>
+                </select>
+            </div>
+            <button type="button" class="piw-btn piw-btn-primary" onclick="window.runTimeLapse()" style="width: 100%;">Start TimeLapse</button>
         </div>
-        <button onclick="window.runTimeLapse()" style="padding: 5px 10px; font-size: 14px;">Start</button>
     `;
-    showModal("TimeLapse", html, "window-timelapse");
+    showModal("TimeLapse", html, "window-timelapse", "360px");
 }
 
 export function runTimeLapse() {
@@ -186,14 +224,13 @@ window.showTimeLapseResults = function(results) {
                 basePrice = Math.max(2500, 2500 * badges);
             }
 
-            itemsLootedHtml += `${count}x <img src="Assets/Items/${imgFolder}/${displayItemName}.png" style="width: 20px; height: 20px; vertical-align: middle;" title="${displayItemName}"> / `;
+            itemsLootedHtml += `<span class="zzz-loot-chip"><img src="Assets/Items/${imgFolder}/${displayItemName}.png" class="zzz-loot-icon" title="${displayItemName}"> <b>${count.toLocaleString('en-US')}x</b> ${displayItemName}</span>`;
 
             valItemsLootedBuy += basePrice * count;
             valItemsLootedSold += (imgFolder === "Stones" || imgFolder === "Vitamins") ? Math.floor(basePrice * 0.1) * count : Math.floor(basePrice * 0.5) * count;
         }
     }
-    if (itemsLootedHtml.endsWith(" / ")) itemsLootedHtml = itemsLootedHtml.slice(0, -3);
-    if (!itemsLootedHtml) itemsLootedHtml = "None";
+    if (!itemsLootedHtml) itemsLootedHtml = `<span class="zzz-empty-note">None</span>`;
 
     // Process Items Used
     let itemsUsedHtml = "";
@@ -204,7 +241,7 @@ window.showTimeLapseResults = function(results) {
         if (activeBall) {
             const ballName = activeBall.name;
             const ballPrice = activeBall.price;
-            itemsUsedHtml += `${results.ballsUsed}x <img src="Assets/Items/Balls/${ballName}.png" style="width: 20px; height: 20px; vertical-align: middle;" title="${ballName}"> / `;
+            itemsUsedHtml += `<span class="zzz-loot-chip"><img src="Assets/Items/Balls/${ballName}.png" class="zzz-loot-icon" title="${ballName}"> <b>${results.ballsUsed.toLocaleString('en-US')}x</b> ${ballName}</span>`;
             valItemsUsedBuy += ballPrice * results.ballsUsed;
         }
     }
@@ -213,61 +250,122 @@ window.showTimeLapseResults = function(results) {
         if (activePotion) {
             const potionName = activePotion.name === 'Big' ? 'Big Potion' : activePotion.name;
             const potionPrice = activePotion.price;
-            itemsUsedHtml += `${results.potionsUsed}x <img src="Assets/Items/Potions/${potionName}.png" style="width: 20px; height: 20px; vertical-align: middle;" title="${potionName}"> / `;
+            itemsUsedHtml += `<span class="zzz-loot-chip"><img src="Assets/Items/Potions/${potionName}.png" class="zzz-loot-icon" title="${potionName}"> <b>${results.potionsUsed.toLocaleString('en-US')}x</b> ${potionName}</span>`;
             valItemsUsedBuy += potionPrice * results.potionsUsed;
         }
     }
-    if (itemsUsedHtml.endsWith(" / ")) itemsUsedHtml = itemsUsedHtml.slice(0, -3);
-    if (!itemsUsedHtml) itemsUsedHtml = "None";
+    if (!itemsUsedHtml) itemsUsedHtml = `<span class="zzz-empty-note">None</span>`;
 
     // Profit Calculations
     let profitSell = results.money + valItemsLootedSold + valPokemonsSold + valShiniesSold - valItemsUsedBuy;
     let profitBuy = results.money + valItemsLootedBuy + valPokemonsSold + valShiniesSold - valItemsUsedBuy;
 
     const html = `
-        <div style="text-align: left; padding: 10px; line-height: 1.6;">
-            <div><b>Time on hunt:</b> ${timeStr}</div>
-            <div><b>Battles:</b> ${results.encounters}</div>
-            <div><b>XP earned:</b> ${Math.floor(results.xpEarned).toLocaleString('en-US')}</div>
-            <div><b>Money earned:</b> $${Math.floor(results.money).toLocaleString('en-US')}</div>
-            <div><b>Items used:</b> ${itemsUsedHtml}</div>
-            <div><b>Pokemons caught:</b> ${results.caught}</div>
-            <div><b>Value of Pokemons caught if sold:</b> $${Math.floor(valPokemonsSold).toLocaleString('en-US')}</div>
-            <div><b>Shiny caught:</b> ${results.shinies}</div>
-            <div><b>Value of Shiny Pokemons caught if sold:</b> $${Math.floor(valShiniesSold).toLocaleString('en-US')}</div>
-            <div><b>Items collected:</b> ${itemsLootedHtml}</div>
-            <hr style="border: 1px solid #555; margin: 15px 0;">
-            <div><b>Hunt Profit Sell:</b> <span style="color: ${profitSell >= 0 ? '#2ecc71' : '#e74c3c'};">$${Math.floor(profitSell).toLocaleString('en-US')}</span></div>
-            <div><b>Hunt Profit Buy:</b> <span style="color: ${profitBuy >= 0 ? '#2ecc71' : '#e74c3c'};">$${Math.floor(profitBuy).toLocaleString('en-US')}</span></div>
+        <div class="zzz-results-panel">
+            <div class="zzz-results-header">
+                <span class="zzz-status-pill zzz-status-success">TimeLapse Complete</span>
+                <div class="zzz-meta-row">
+                    <span><b>Time on hunt:</b> ${timeStr}</span>
+                    <span><b>Battles:</b> ${results.encounters.toLocaleString('en-US')}</span>
+                </div>
+            </div>
+            <div class="zzz-kpi-grid">
+                <div class="zzz-kpi-card zzz-kpi-xp">
+                    <div class="zzz-kpi-label">XP earned</div>
+                    <div class="zzz-kpi-value">${Math.floor(results.xpEarned).toLocaleString('en-US')}</div>
+                </div>
+                <div class="zzz-kpi-card zzz-kpi-money">
+                    <div class="zzz-kpi-label">Money earned</div>
+                    <div class="zzz-kpi-value">$${Math.floor(results.money).toLocaleString('en-US')}</div>
+                </div>
+                <div class="zzz-kpi-card zzz-kpi-caught">
+                    <div class="zzz-kpi-label">Pokemons caught</div>
+                    <div class="zzz-kpi-value">${results.caught.toLocaleString('en-US')}</div>
+                    <div class="zzz-kpi-sub">Value if sold: $${Math.floor(valPokemonsSold).toLocaleString('en-US')}</div>
+                </div>
+                <div class="zzz-kpi-card ${results.shinies > 0 ? 'zzz-kpi-shiny zzz-kpi-shiny-hit' : 'zzz-kpi-shiny'}">
+                    <div class="zzz-kpi-label">Shiny caught</div>
+                    <div class="zzz-kpi-value">${results.shinies.toLocaleString('en-US')}</div>
+                    <div class="zzz-kpi-sub">Value if sold: $${Math.floor(valShiniesSold).toLocaleString('en-US')}</div>
+                </div>
+            </div>
+            <div class="zzz-section-card">
+                <div class="zzz-section-title">Items used</div>
+                <div class="zzz-loot-grid">${itemsUsedHtml}</div>
+            </div>
+            <div class="zzz-section-card">
+                <div class="zzz-section-title">Items collected</div>
+                <div class="zzz-loot-grid">${itemsLootedHtml}</div>
+            </div>
+            <div class="zzz-kpi-grid" style="grid-template-columns: repeat(2, 1fr);">
+                <div class="zzz-kpi-card">
+                    <div class="zzz-kpi-label">Hunt Profit Sell</div>
+                    <div class="zzz-kpi-value" style="color: ${profitSell >= 0 ? 'var(--piw-green)' : 'var(--piw-red)'};">$${Math.floor(profitSell).toLocaleString('en-US')}</div>
+                </div>
+                <div class="zzz-kpi-card">
+                    <div class="zzz-kpi-label">Hunt Profit Buy</div>
+                    <div class="zzz-kpi-value" style="color: ${profitBuy >= 0 ? 'var(--piw-green)' : 'var(--piw-red)'};">$${Math.floor(profitBuy).toLocaleString('en-US')}</div>
+                </div>
+            </div>
         </div>
     `;
     showModal("TimeLapse Results", html, "window-timelapse-results", "600px");
 };
 
+export function applyForceEncounterPreset(presetKey) {
+    const presets = {
+        weak: { q: 0.85, iv: 100 },
+        regular: { q: 1.05, iv: 300 },
+        uncommon: { q: 1.25, iv: 400 },
+        rare: { q: 1.45, iv: 480 },
+        epic: { q: 1.65, iv: 540 },
+        legendary: { q: 1.85, iv: 570 },
+        shiny: { q: 2.1, iv: 600 }
+    };
+    const preset = presets[presetKey];
+    if (!preset) return;
+    const qInput = document.getElementById('force-enc-q');
+    const ivInput = document.getElementById('force-enc-sumiv');
+    if (qInput) qInput.value = preset.q;
+    if (ivInput) ivInput.value = preset.iv;
+}
+window.applyForceEncounterPreset = applyForceEncounterPreset;
+
 export function showAddPokemonModal() {
     const html = `
-        <div style="margin-bottom: 10px;">
-            <label style="display:inline-block; width:100px;">Pokemon ID:</label>
-            <input type="number" id="force-enc-id" value="1" min="1" max="151" style="width: 80px;">
-        </div>
-        <div style="margin-bottom: 10px;">
-            <label style="display:inline-block; width:100px;">Level:</label>
-            <input type="number" id="force-enc-level" value="5" min="1" max="100" style="width: 80px;">
-        </div>
-        <div style="margin-bottom: 10px;">
-            <label style="display:inline-block; width:100px;">QValue:</label>
-            <input type="number" id="force-enc-q" value="1.0" step="0.01" style="width: 80px;">
-        </div>
-        <div style="margin-bottom: 10px;">
-            <label style="display:inline-block; width:100px;">SumIV:</label>
-            <input type="number" id="force-enc-sumiv" value="300" min="0" max="600" style="width: 80px;">
-        </div>
-        <div style="display: flex; gap: 10px; margin-top: 15px;">
-            <button onclick="window.forceNextEncounter()" style="padding: 5px 10px; flex: 1; background: #16a085; color: white; border: none; border-radius: 4px; cursor: pointer;">Fight Pokemon</button>
-            <button onclick="window.forceNextCapture()" style="padding: 5px 10px; flex: 1; background: #27ae60; color: white; border: none; border-radius: 4px; cursor: pointer;">Capture Pokemon</button>
+        <div class="piw-card" style="display: flex; flex-direction: column; gap: 10px;">
+            <div style="display: grid; grid-template-columns: 115px 1fr; align-items: center; gap: 8px;">
+                <label for="force-enc-preset" style="font-size: 0.85rem; color: var(--piw-text-muted);">Quality Preset:</label>
+                <select id="force-enc-preset" class="piw-select" onchange="window.applyForceEncounterPreset(this.value)">
+                    <option value="">Custom</option>
+                    <option value="weak">Weak (0.85x / 100 IV)</option>
+                    <option value="regular">Regular (1.05x / 300 IV)</option>
+                    <option value="uncommon">Uncommon (1.25x / 400 IV)</option>
+                    <option value="rare">Rare (1.45x / 480 IV)</option>
+                    <option value="epic">Epic (1.65x / 540 IV)</option>
+                    <option value="legendary">Legendary (1.85x / 570 IV)</option>
+                    <option value="shiny">Shiny (2.10x / 600 IV)</option>
+                </select>
+
+                <label for="force-enc-id" style="font-size: 0.85rem; color: var(--piw-text-muted);">Pokemon ID:</label>
+                <input type="number" id="force-enc-id" class="piw-input" value="1" min="1" max="1025">
+
+                <label for="force-enc-level" style="font-size: 0.85rem; color: var(--piw-text-muted);">Level:</label>
+                <input type="number" id="force-enc-level" class="piw-input" value="5" min="1" max="100">
+
+                <label for="force-enc-q" style="font-size: 0.85rem; color: var(--piw-text-muted);">QValue:</label>
+                <input type="number" id="force-enc-q" class="piw-input" value="1.0" step="0.01" min="0.1">
+
+                <label for="force-enc-sumiv" style="font-size: 0.85rem; color: var(--piw-text-muted);">SumIV:</label>
+                <input type="number" id="force-enc-sumiv" class="piw-input" value="300" min="0" max="600">
+            </div>
+            <div style="display: flex; gap: 10px; margin-top: 6px;">
+                <button type="button" class="piw-btn piw-btn-teal" onclick="window.forceNextEncounter()" style="flex: 1;">Fight Pokemon</button>
+                <button type="button" class="piw-btn piw-btn-success" onclick="window.forceNextCapture()" style="flex: 1;">Capture Pokemon</button>
+            </div>
         </div>
     `;
-    showModal("Fight / Capture Pokemon", html, "window-force-encounter");
+    showModal("Fight / Capture Pokemon", html, "window-force-encounter", "380px");
 }
 
 function getForceEncounterInputs() {

@@ -1,10 +1,24 @@
 import { state } from '../../state.js';
+import { getCapacity, getCurrentCount } from '../../mathEngine.js';
 import { formatQuantity } from './utils.js';
 
 export function renderPotionsTab(area) {
+    const used = getCurrentCount(state, 'potions');
+    const cap = getCapacity(state, 'potions');
+    const capPct = cap > 0 ? Math.min(100, Math.round((used / cap) * 100)) : 0;
+    const isFull = used >= cap;
     let content = `
         <div style="display: flex; flex-direction: column; width: 100%; gap: 12px;">
-            <div style="text-align: center; color: #94a3b8; font-size: 13px; font-weight: 600;">Select a Potion to auto-use during battles.</div>
+            <div class="bp-capacity-banner" style="margin-bottom: 0;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <span style="font-size: 12.5px; font-weight: 700; color: var(--piw-text-primary);">Potion Satchel</span>
+                    <span class="piw-badge ${isFull ? 'is-red' : 'is-green'}">${used.toLocaleString('en-US')} / ${cap.toLocaleString('en-US')}</span>
+                </div>
+                <div class="piw-progress-track" style="flex: 1; max-width: 240px; height: 8px;">
+                    <div class="piw-progress-fill is-green" style="width: ${capPct}%;"></div>
+                </div>
+                <span style="color: var(--piw-text-muted); font-size: 11.5px; font-weight: 600;">Click a potion to auto-use</span>
+            </div>
 
             <div style="width: min(460px, 90%); margin: 0 auto; padding: 10px 14px; background: rgba(23, 33, 45, 0.72); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
                 <label style="color: #e2e8f0; font-size: 13px; font-weight: 600; margin-bottom: 10px;">

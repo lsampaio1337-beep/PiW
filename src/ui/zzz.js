@@ -10,14 +10,15 @@ export const ZZZ_CONFIG = {
     msPerGrain: 60 * 1000, // 1 minute per grain
 };
 
-const QUALITY_ORDER = ['Shiny', 'Epic', 'Rare', 'Uncommon', 'Regular', 'Weak'];
+const QUALITY_ORDER = ['Shiny', 'Legendary', 'Epic', 'Rare', 'Uncommon', 'Regular', 'Weak'];
 
 const QUALITY_COLORS = {
     Shiny: '#facc15',
-    Epic: '#a855f7',
-    Rare: '#3b82f6',
-    Uncommon: '#00ffff',
-    Regular: '#7affff',
+    Legendary: '#FFA500',
+    Epic: '#7A00FF',
+    Rare: '#0000FF',
+    Uncommon: '#00FFFF',
+    Regular: '#7AFFFF',
     Weak: '#94a3b8',
 };
 
@@ -219,7 +220,7 @@ export function buildZzZResultsModalHtml(summary, state) {
     let ballIconHtml = '<span class="zzz-supply-none">—</span>';
     if (activeBallTier >= 0 && state?.config?.balance?.items?.pokeballs?.[activeBallTier]) {
         const ballName = state.config.balance.items.pokeballs[activeBallTier].name;
-        ballUsedStr = `${summary.ballsUsed.toLocaleString('pt-BR')}× ${ballName}`;
+        ballUsedStr = `${summary.ballsUsed.toLocaleString('en-US')}× ${ballName}`;
         ballIconHtml = `<img src="Assets/Items/Balls/${ballName}.png" class="zzz-supply-icon" alt="${ballName}">`;
     }
 
@@ -228,7 +229,7 @@ export function buildZzZResultsModalHtml(summary, state) {
     if (activePotionTier >= 0 && state?.config?.balance?.items?.potions?.[activePotionTier]) {
         const rawPotionName = state.config.balance.items.potions[activePotionTier].name;
         const potionName = rawPotionName === 'Big' ? 'Big Potion' : rawPotionName;
-        potionUsedStr = `${summary.potionsUsed.toLocaleString('pt-BR')}× ${potionName}`;
+        potionUsedStr = `${summary.potionsUsed.toLocaleString('en-US')}× ${potionName}`;
         potionIconHtml = `<img src="Assets/Items/Potions/${potionName}.png" class="zzz-supply-icon" alt="${potionName}">`;
     }
 
@@ -292,13 +293,13 @@ export function buildZzZResultsModalHtml(summary, state) {
             <div class="zzz-kpi-grid">
                 <div class="zzz-kpi-card zzz-kpi-money">
                     <div class="zzz-kpi-label">Money Earned</div>
-                    <div class="zzz-kpi-value">+$${summary.moneyEarned.toLocaleString('pt-BR')}</div>
-                    <div class="zzz-kpi-sub">+$${summary.moneyPerHour.toLocaleString('pt-BR')}/hr</div>
+                    <div class="zzz-kpi-value">+$${summary.moneyEarned.toLocaleString('en-US')}</div>
+                    <div class="zzz-kpi-sub">+$${summary.moneyPerHour.toLocaleString('en-US')}/hr</div>
                 </div>
                 <div class="zzz-kpi-card zzz-kpi-xp">
                     <div class="zzz-kpi-label">XP Earned</div>
-                    <div class="zzz-kpi-value">+${summary.xpEarned.toLocaleString('pt-BR')}</div>
-                    <div class="zzz-kpi-sub">+${summary.xpPerHour.toLocaleString('pt-BR')}/hr</div>
+                    <div class="zzz-kpi-value">+${summary.xpEarned.toLocaleString('en-US')}</div>
+                    <div class="zzz-kpi-sub">+${summary.xpPerHour.toLocaleString('en-US')}/hr</div>
                 </div>
                 <div class="zzz-kpi-card zzz-kpi-caught">
                     <div class="zzz-kpi-label">Pokémon Caught</div>

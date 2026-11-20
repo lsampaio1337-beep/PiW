@@ -71,8 +71,8 @@
                 <img src="Assets/Extra/Icons/IconExit.png" id="btn-exit" class="nav-icon" title="Exit">
             </div>
         </div>
-        <div class="window-resize-handle"></div>
     </div>
+    <div class="window-resize-handle"></div>
   </div>
 
   <!-- Splash Screen / Save Manager -->
@@ -112,13 +112,13 @@
     </div>
 
     <!-- Custom Rename Modal Overlay -->
-    <div id="rename-modal" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(2, 6, 23, 0.8); backdrop-filter: blur(3px); z-index: 1010; justify-content: center; align-items: center;">
-        <div style="background: rgba(15, 23, 34, 0.96); padding: 20px; border-radius: 12px; text-align: center; border: 1px solid rgba(26, 188, 156, 0.45); box-shadow: 0 12px 30px rgba(0,0,0,0.65); display: flex; flex-direction: column; gap: 14px; width: 300px;">
-            <h3 style="color: white; margin: 0; font-size: 16px;">Rename Profile</h3>
-            <input type="text" id="rename-input" style="padding: 10px; font-size: 14px; border-radius: 8px; border: 1px solid rgba(148, 163, 184, 0.35); background: #0f172a; color: #f8fafc; outline: none; width: 100%; box-sizing: border-box;" placeholder="Enter new name...">
+    <div id="rename-modal" class="piw-inner-overlay" style="display: none; pointer-events: auto;">
+        <div class="piw-card" style="width: 310px; padding: 20px; display: flex; flex-direction: column; gap: 14px; text-align: center; border-color: rgba(45, 212, 191, 0.5);">
+            <h3 style="color: var(--piw-text-primary); margin: 0; font-size: 16px;">Rename Profile</h3>
+            <input type="text" id="rename-input" class="piw-input" style="padding: 10px; font-size: 14px; width: 100%;" placeholder="Enter new name...">
             <div style="display: flex; gap: 10px; justify-content: center;">
-                <button id="btn-rename-save" style="padding: 9px; font-size: 14px; font-weight: bold; cursor: pointer; background: linear-gradient(135deg, #16a34a, #22c55e); color: white; border: none; border-radius: 8px; flex: 1;">Save</button>
-                <button id="btn-rename-cancel" style="padding: 9px; font-size: 14px; font-weight: bold; cursor: pointer; background: linear-gradient(135deg, #b91c1c, #ef4444); color: white; border: none; border-radius: 8px; flex: 1;">Cancel</button>
+                <button id="btn-rename-save" class="piw-btn piw-btn-success" style="flex: 1;">Save</button>
+                <button id="btn-rename-cancel" class="piw-btn piw-btn-danger" style="flex: 1;">Cancel</button>
             </div>
         </div>
     </div>
@@ -319,65 +319,86 @@
       </div>
 
       <!-- View 6: Battle Stadium -->
-      <div id="view-battle-stadium" class="game-view" style="display:none; background-image: url('./Assets/BG/BattleMode/Test.png'); background-size: 100% 100%; height: 100%; position: relative; align-items: center; justify-content: flex-start; flex-direction: column; overflow-y: auto; box-sizing: border-box; padding: 15px 10px;">
-          <div style="display: flex; flex-direction: column; align-items: center; gap: 5px; margin-bottom: 5px; flex-shrink: 0;">
-              <div style="font-weight: bold; font-size: 20px; color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.8);">Multiplayer</div>
-              <div style="display: inline-flex; background: rgba(0, 0, 0, 0.6); border-radius: 20px; padding: 3px; gap: 5px; box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);">
-                  <button id="btn-tab-host" onclick="window.switchMultiplayerTab('host')" style="background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2); border-radius: 15px; padding: 4px 15px; font-weight: bold; cursor: pointer; font-size: 12px; transition: all 0.2s;">Host</button>
-                  <button id="btn-tab-join" onclick="window.switchMultiplayerTab('join')" style="background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent; border-radius: 15px; padding: 4px 15px; font-weight: bold; cursor: pointer; font-size: 12px; transition: all 0.2s;">Join</button>
-              </div>
-          </div>
-
-          <div style="text-align: center; color: white; display: flex; flex-direction: column; gap: 5px; width: 100%; max-width: 450px; flex-shrink: 0;">
-              <p style="margin: 0; font-size: 11px; text-shadow: 1px 1px 2px rgba(0,0,0,0.8); background: rgba(0,0,0,0.4); padding: 5px 10px; border-radius: 8px;">Connect with a friend to battle using your current active party!</p>
-
-              <div style="display: flex; justify-content: center; width: 100%;">
-                  <div id="mp-host-container" style="display: block; background: rgba(20, 25, 30, 0.95); padding: 10px; border-radius: 8px; width: 100%; box-sizing: border-box; border: 1px solid #34495e; box-shadow: 0 4px 8px rgba(0,0,0,0.5);">
-                      <button id="btn-mp-host" style="padding: 6px; width: 100%; background: linear-gradient(to bottom, #2ecc71, #27ae60); color: white; border: 1px solid #27ae60; box-shadow: 0 2px 4px rgba(0,0,0,0.2); border-radius: 5px; font-weight: bold; cursor: pointer; font-size: 12px; transition: all 0.2s;">Generate Code</button>
-
-                      <div style="margin-top: 6px; background: rgba(0,0,0,0.4); padding: 6px; border-radius: 6px; border: 1px solid #444;">
-                          <p style="margin: 0 0 3px 0; font-size: 11px; color: #ccc; text-align: left;">1. Send this code to your friend:</p>
-                          <div style="display: flex; gap: 5px; align-items: center;">
-                              <input type="text" id="multiplayer-host-id" readonly placeholder="Waiting..." style="flex: 1; padding: 4px 6px; box-sizing: border-box; font-size: 11px; background: #111; color: #1abc9c; border: 1px solid #555; border-radius: 4px; font-family: monospace;">
-                              <button id="btn-copy-host" style="padding: 4px 8px; font-size: 11px; background: linear-gradient(to bottom, #34495e, #2c3e50); color: white; border: 1px solid #555; border-radius: 4px; font-weight: bold; cursor: pointer; transition: all 0.2s;">Copy</button>
-                          </div>
+      <div id="view-battle-stadium" class="game-view mp-view" style="display:none; background-image: url('./Assets/BG/BattleMode/Test.png');">
+          <div class="mp-shell">
+              <div class="mp-header-card">
+                  <div class="mp-header-top">
+                      <div class="mp-title-block">
+                          <h2 class="mp-title">Battle Stadium</h2>
+                          <span class="mp-subtitle">Peer-to-Peer Arena • Same Region Required</span>
                       </div>
-
-                      <div style="margin-top: 6px; background: rgba(0,0,0,0.4); padding: 6px; border-radius: 6px; border: 1px solid #444;">
-                          <p style="margin: 0 0 3px 0; font-size: 11px; color: #ccc; text-align: left;">2. Paste your friend's Answer Code here:</p>
-                          <div style="display: flex; gap: 5px; align-items: center;">
-                              <input type="text" id="mp-host-answer-input" placeholder="Paste Answer Code" style="flex: 1; padding: 4px 6px; box-sizing: border-box; font-size: 11px; border-radius: 4px; background: #fff; color: #000; border: 1px solid #ccc; font-family: monospace;">
-                              <button id="btn-paste-host" style="padding: 4px 8px; font-size: 11px; background: linear-gradient(to bottom, #34495e, #2c3e50); color: white; border: 1px solid #555; border-radius: 4px; font-weight: bold; cursor: pointer; transition: all 0.2s;">Paste</button>
-                          </div>
-                      </div>
-
-                      <button id="btn-mp-complete" style="padding: 6px; margin-top: 6px; width: 100%; background: linear-gradient(to bottom, #9b59b6, #8e44ad); color: white; border: 1px solid #8e44ad; box-shadow: 0 2px 4px rgba(0,0,0,0.2); border-radius: 5px; font-weight: bold; font-size: 12px; cursor: pointer; transition: all 0.2s;">Connect</button>
-                  </div>
-
-                  <div id="mp-join-container" style="display: none; background: rgba(20, 25, 30, 0.95); padding: 10px; border-radius: 8px; width: 100%; box-sizing: border-box; border: 1px solid #34495e; box-shadow: 0 4px 8px rgba(0,0,0,0.5);">
-                      <div style="background: rgba(0,0,0,0.4); padding: 6px; border-radius: 6px; border: 1px solid #444;">
-                          <p style="margin: 0 0 3px 0; font-size: 11px; color: #ccc; text-align: left;">1. Paste Host's Offer Code here:</p>
-                          <div style="display: flex; gap: 5px; align-items: center;">
-                              <input type="text" id="mp-join-input" placeholder="Paste Code Here" style="flex: 1; padding: 4px 6px; box-sizing: border-box; font-size: 11px; border-radius: 4px; background: #fff; color: #000; border: 1px solid #ccc; font-family: monospace;">
-                              <button id="btn-paste-join" style="padding: 4px 8px; font-size: 11px; background: linear-gradient(to bottom, #34495e, #2c3e50); color: white; border: 1px solid #555; border-radius: 4px; font-weight: bold; cursor: pointer; transition: all 0.2s;">Paste</button>
-                          </div>
-                      </div>
-
-                      <button id="btn-mp-join" style="padding: 6px; margin-top: 6px; width: 100%; background: linear-gradient(to bottom, #2ecc71, #27ae60); color: white; border: 1px solid #27ae60; box-shadow: 0 2px 4px rgba(0,0,0,0.2); border-radius: 5px; font-weight: bold; font-size: 12px; cursor: pointer; transition: all 0.2s;">Generate Code</button>
-
-                      <div style="margin-top: 6px; background: rgba(0,0,0,0.4); padding: 6px; border-radius: 6px; border: 1px solid #444;">
-                          <p style="margin: 0 0 3px 0; font-size: 11px; color: #ccc; text-align: left;">2. Send this Answer Code back to Host:</p>
-                          <div style="display: flex; gap: 5px; align-items: center;">
-                              <input type="text" id="multiplayer-client-id" readonly placeholder="Waiting..." style="flex: 1; padding: 4px 6px; box-sizing: border-box; font-size: 11px; background: #111; color: #1abc9c; border: 1px solid #555; border-radius: 4px; font-family: monospace;">
-                              <button id="btn-copy-client" style="padding: 4px 8px; font-size: 11px; background: linear-gradient(to bottom, #34495e, #2c3e50); color: white; border: 1px solid #555; border-radius: 4px; font-weight: bold; cursor: pointer; transition: all 0.2s;">Copy</button>
-                          </div>
+                      <div class="piw-tab-bar">
+                          <button id="btn-tab-host" class="piw-tab-btn is-active" onclick="window.switchMultiplayerTab('host')">Host Match</button>
+                          <button id="btn-tab-join" class="piw-tab-btn" onclick="window.switchMultiplayerTab('join')">Join Match</button>
                       </div>
                   </div>
               </div>
 
-              <div style="display: flex; justify-content: space-between; gap: 10px; width: 100%; margin-top: 0px;">
-                  <button id="btn-mp-connection-status" disabled style="flex: 1; padding: 6px 0; font-size: 13px; font-weight: bold; background: #e74c3c; color: white; border: 1px solid #c0392b; border-radius: 5px; opacity: 1; cursor: default; box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);">Not Connected</button>
-                  <button id="btn-mp-battle" disabled style="flex: 1; padding: 6px 0; font-size: 13px; font-weight: bold; background: #95a5a6; color: white; border: 1px solid #7f8c8d; border-radius: 5px; cursor: not-allowed; box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);">Battle</button>
+              <div id="mp-host-container" class="mp-panel" style="display: block;">
+                  <div class="mp-panel-action-row">
+                      <button id="btn-mp-host" class="piw-btn piw-btn-success mp-primary-btn">Create Host Code</button>
+                  </div>
+
+                  <div class="mp-steps-grid">
+                      <div class="mp-step-box">
+                          <div class="mp-step-header">
+                              <span class="mp-step-num">1</span>
+                              <p class="mp-step-label">Share this Host Code with your friend</p>
+                          </div>
+                          <div class="mp-code-row">
+                              <input type="text" id="multiplayer-host-id" class="mp-code-input" readonly placeholder="Click Create Host Code first...">
+                              <button id="btn-copy-host" class="piw-btn piw-btn-secondary piw-btn-sm">Copy</button>
+                          </div>
+                      </div>
+
+                      <div class="mp-step-box">
+                          <div class="mp-step-header">
+                              <span class="mp-step-num">2</span>
+                              <p class="mp-step-label">Paste your friend's Answer Code here</p>
+                          </div>
+                          <div class="mp-code-row">
+                              <input type="text" id="mp-host-answer-input" class="mp-code-input is-editable" placeholder="Paste Answer Code">
+                              <button id="btn-paste-host" class="piw-btn piw-btn-secondary piw-btn-sm">Paste</button>
+                          </div>
+                      </div>
+                  </div>
+
+                  <button id="btn-mp-complete" class="piw-btn piw-btn-purple mp-connect-btn">Connect &amp; Sync Party</button>
+              </div>
+
+              <div id="mp-join-container" class="mp-panel" style="display: none;">
+                  <div class="mp-steps-grid">
+                      <div class="mp-step-box">
+                          <div class="mp-step-header">
+                              <span class="mp-step-num">1</span>
+                              <p class="mp-step-label">Paste the Host's Offer Code here</p>
+                          </div>
+                          <div class="mp-code-row">
+                              <input type="text" id="mp-join-input" class="mp-code-input is-editable" placeholder="Paste Host Offer Code">
+                              <button id="btn-paste-join" class="piw-btn piw-btn-secondary piw-btn-sm">Paste</button>
+                          </div>
+                      </div>
+
+                      <div class="mp-panel-action-row">
+                          <button id="btn-mp-join" class="piw-btn piw-btn-success mp-primary-btn">Generate Answer Code</button>
+                      </div>
+
+                      <div class="mp-step-box">
+                          <div class="mp-step-header">
+                              <span class="mp-step-num">2</span>
+                              <p class="mp-step-label">Send this Answer Code back to the Host</p>
+                          </div>
+                          <div class="mp-code-row">
+                              <input type="text" id="multiplayer-client-id" class="mp-code-input" readonly placeholder="Generated Answer Code appears here...">
+                              <button id="btn-copy-client" class="piw-btn piw-btn-secondary piw-btn-sm">Copy</button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="mp-footer-bar">
+                  <button id="btn-mp-connection-status" disabled class="piw-btn piw-btn-danger mp-status-btn">Not Connected</button>
+                  <button id="btn-mp-battle" disabled class="piw-btn piw-btn-secondary mp-battle-btn">Battle</button>
               </div>
           </div>
       </div>
@@ -398,6 +419,7 @@
             <div class="daycare-hub-card is-train">
                 <div class="daycare-hub-badge is-train">IV Training</div>
                 <div class="daycare-hub-desc">Boost random IVs through passive battles</div>
+                <div id="dc-hub-train-status" class="dc-hub-slot-status">Slot: Empty</div>
                 <button id="btn-daycare-train" class="daycare-hub-btn is-train">Train Pokémon</button>
             </div>
 
@@ -405,6 +427,7 @@
             <div class="daycare-hub-card is-breed">
                 <div class="daycare-hub-badge is-breed">Breeding</div>
                 <div class="daycare-hub-desc">Hatch stronger offspring &amp; raise Quality</div>
+                <div id="dc-hub-breed-status" class="dc-hub-slot-status">Slot: Empty</div>
                 <button id="btn-daycare-breed" class="daycare-hub-btn is-breed">Breed Pokémon</button>
             </div>
         </div>

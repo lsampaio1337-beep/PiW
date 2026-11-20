@@ -276,17 +276,20 @@ export class WindowManager {
             'restartGameClock', 'runTimeLapse', 'sanitizeMarketNumberInput', 'sanitizeMarketQInput',
             'selectAllForSale', 'selectBattleActiveItem', 'selectDittoTransformTarget', 'selectGlobalSmartCaptureBall',
             'selectSmartCaptureBall', 'selectStarter', 'sellMarketItem', 'sellSelectedPokemon', 'sellSetMax',
-            'setActiveItem', 'setAutoPotionThreshold', 'setLeader', 'setSmartCaptureGlobalMode',
+            'setActiveItem', 'setAutoPotionThreshold', 'setLeader', 'setMarketPokemonSort',
+            'setPokedexSort', 'setPokedexTypeFilter', 'setPokemonStorageSort',
+            'setSmartCaptureFilter', 'setSmartCaptureGlobalMode',
             'setSmartCaptureShinyMode', 'showActiveItemSelection', 'showAddPokemonModal', 'showBackpackAndFocus',
             'showCalendar', 'showChallengesModal', 'showDexEntry', 'showEvolveConfirmModal', 'showGameAlert', 'showLevelUp',
             'showMapTooltip', 'showModal', 'showMultipleEvolveModal', 'showPokemonStats', 'showPokemonStatsByUuid', 'showProfLabModal',
             'showSmartCaptureBallSelection', 'showSmartCaptureMode', 'showTimeLapseModal', 'showTimeLapseResults',
             'showTokenItemSelect', 'showTrainerStats', 'showVitaminsModal', 'showZzZConfirmationModal',
             'skipProfTutorial', 'startCasinoEncounter', 'startGymBattle', 'startNewGame', 'switchMapRegion', 'promptWakeUpRegion',
-            'switchMultiplayerTab', 'switchView', 'toggleMarketPokemonFilters', 'toggleMarketPokemonSaleSelection',
+            'switchMultiplayerTab', 'switchView', 'toggleCollectedGiftsSection', 'toggleMarketPokemonFilters', 'toggleMarketPokemonSaleSelection',
             'toggleSaleSelection', 'trackDailyChallenge', 'transformDitto', 'updateBuyItemPrice',
             'updateMainControl', 'updatePokemonFilter', 'updateSellItemPrice', 'updateSmartCaptureIcon',
-            'updateUI', 'useVitamin', 'showCatchRateModal'
+            'updateUI', 'useVitamin', 'useVitaminBatch', 'applyForceEncounterPreset', 'applySmartCaptureFilters',
+            'claimAllPendingGifts', 'resetWindowLayout', 'showCatchRateModal'
         ];
 
         // Match balanced arguments (supports Unicode, punctuation, nested parens/objects).
@@ -1420,7 +1423,7 @@ export class WindowManager {
             let left = 50;
             let top = 50;
 
-            const mainView = document.getElementById('top-bar-window');
+            const mainView = document.getElementById('main-control-window') || document.getElementById('top-bar-window');
             if (mainView && mainView.style.display !== 'none') {
                 const rect = mainView.getBoundingClientRect();
                 left = rect.left;
