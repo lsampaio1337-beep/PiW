@@ -876,6 +876,14 @@ if (!Array.isArray(routes)) {
         if (c.gift) {
             return typeof c.gift === 'string' ? c.gift : `${c.gift.item} x${c.gift.count || 1}`;
         }
+        if (c.rewards) {
+            return Array.isArray(c.rewards)
+                ? c.rewards.map(g => (typeof g === 'string' ? g : `${g.item} x${g.count || 1}`)).join(', ')
+                : String(c.rewards);
+        }
+        if (c.reward) {
+            return typeof c.reward === 'string' ? c.reward : `${c.reward.item} x${c.reward.count || 1}`;
+        }
         return '';
     };
 
