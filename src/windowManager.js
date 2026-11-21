@@ -519,6 +519,8 @@ export class WindowManager {
                 } else if (windowId === 'main-control-window' && (winElement.dataset.needsAutoAdjust === 'true' || !winElement._originalWidth)) {
                     this.autoAdjustWidth(windowId);
                 }
+
+                this.constrainWindow(winElement);
             } else {
                 winElement.style.display = 'none';
                 this._syncNavToggleState(windowId, false);
@@ -1231,44 +1233,86 @@ export class WindowManager {
         }
     }
 
+    _resetToOriginalSize(winElement) {
+        if (winElement._originalWidth && winElement._originalHeight) {
+            const scalerElement = winElement.querySelector('.window-content-scaler');
+            const contentContainer = winElement.querySelector('.window-content-container');
+            let horizontalPadding = 0;
+            if (contentContainer) {
+                const style = window.getComputedStyle(contentContainer);
+                horizontalPadding = parseFloat(style.paddingLeft || 0) + parseFloat(style.paddingRight || 0);
+            }
+
+            if (scalerElement) {
+                scalerElement.style.transform = 'none';
+                scalerElement.style.width = winElement._originalWidth + 'px';
+                scalerElement.style.height = 'auto';
+            }
+
+            winElement.style.width = (winElement._originalWidth + horizontalPadding) + 'px';
+            winElement.style.height = 'auto';
+            void winElement.offsetWidth;
+        }
+    }
+
+    constrainWindow(winElement) {
+        if (!winElement || winElement.style.display === 'none') return;
+
+        this.containerWidth = window.innerWidth;
+        this.containerHeight = window.innerHeight;
+
+        const rect = winElement.getBoundingClientRect();
+        let left = parseInt(winElement.style.left) || 0;
+        let top = parseInt(winElement.style.top) || 0;
+
+        let changed = false;
+
+        let hasWeirdProportions = false;
+        if (winElement._originalWidth && winElement._originalHeight && rect.width > 0 && rect.height > 0) {
+            const originalRatio = winElement._originalRatio || (winElement._originalWidth / winElement._originalHeight);
+            const currentRatio = rect.width / rect.height;
+            if (originalRatio > 0 && Math.abs(currentRatio - originalRatio) / originalRatio > 0.25) {
+                hasWeirdProportions = true;
+            }
+        }
+
+        if (rect.width > this.containerWidth || rect.height > this.containerHeight || hasWeirdProportions) {
+            this._resetToOriginalSize(winElement);
+            const resetRect = winElement.getBoundingClientRect();
+            if (resetRect.width > this.containerWidth || resetRect.height > this.containerHeight) {
+                this._shrinkWindow(winElement);
+            }
+            changed = true;
+        }
+
+        const currentRect = winElement.getBoundingClientRect();
+
+        if (left + currentRect.width > this.containerWidth) {
+            left = Math.max(0, this.containerWidth - currentRect.width);
+            changed = true;
+        }
+        if (top + currentRect.height > this.containerHeight) {
+            top = Math.max(0, this.containerHeight - currentRect.height);
+            changed = true;
+        }
+        if (left < 0) {
+            left = 0;
+            changed = true;
+        }
+        if (top < 0) {
+            top = 0;
+            changed = true;
+        }
+
+        if (changed) {
+            winElement.style.left = left + 'px';
+            winElement.style.top = top + 'px';
+        }
+    }
+
     _constrainAllWindows() {
         this.windows.forEach(winElement => {
-            if (winElement.style.display !== 'none') {
-                const rect = winElement.getBoundingClientRect();
-                let left = parseInt(winElement.style.left) || 0;
-                let top = parseInt(winElement.style.top) || 0;
-
-                let changed = false;
-
-                if (rect.width > this.containerWidth || rect.height > this.containerHeight) {
-                    this._shrinkWindow(winElement);
-                    changed = true;
-                }
-
-                const currentRect = winElement.getBoundingClientRect();
-
-                if (left + currentRect.width > this.containerWidth) {
-                    left = Math.max(0, this.containerWidth - currentRect.width);
-                    changed = true;
-                }
-                if (top + currentRect.height > this.containerHeight) {
-                    top = Math.max(0, this.containerHeight - currentRect.height);
-                    changed = true;
-                }
-                if (left < 0) {
-                    left = 0;
-                    changed = true;
-                }
-                if (top < 0) {
-                    top = 0;
-                    changed = true;
-                }
-
-                if (changed) {
-                    winElement.style.left = left + 'px';
-                    winElement.style.top = top + 'px';
-                }
-            }
+            this.constrainWindow(winElement);
         });
     }
 

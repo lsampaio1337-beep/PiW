@@ -301,4 +301,117 @@ describe('WindowManager', () => {
             partyWin.remove();
         }
     });
+
+    test('toggleWindow snaps window inside screen boundaries when opened outside', () => {
+        const originalInnerWidth = window.innerWidth;
+        const originalInnerHeight = window.innerHeight;
+        Object.defineProperty(window, 'innerWidth', { value: 1000, configurable: true });
+        Object.defineProperty(window, 'innerHeight', { value: 800, configurable: true });
+
+        const win = document.createElement('div');
+        win.id = 'snap-test-window';
+        win.className = 'floating-window';
+        win.style.display = 'none';
+        win.style.left = '900px';
+        win.style.top = '-40px';
+        win.getBoundingClientRect = () => ({ width: 300, height: 200 });
+        document.body.appendChild(win);
+
+        try {
+            windowManager.toggleWindow('snap-test-window', true);
+            expect(win.style.left).toBe('700px');
+            expect(win.style.top).toBe('0px');
+        } finally {
+            Object.defineProperty(window, 'innerWidth', { value: originalInnerWidth, configurable: true });
+            Object.defineProperty(window, 'innerHeight', { value: originalInnerHeight, configurable: true });
+            win.remove();
+        }
+    });
+
+    test('toggleWindow resizes oversized window to original size and snaps it into screen', () => {
+        const originalInnerWidth = window.innerWidth;
+        const originalInnerHeight = window.innerHeight;
+        Object.defineProperty(window, 'innerWidth', { value: 1000, configurable: true });
+        Object.defineProperty(window, 'innerHeight', { value: 800, configurable: true });
+
+        const win = document.createElement('div');
+        win.id = 'oversized-test-window';
+        win.className = 'floating-window';
+        win.style.display = 'none';
+        win.style.left = '800px';
+        win.style.top = '600px';
+        win.style.width = '1200px';
+        win.style.height = '900px';
+        win._originalWidth = 400;
+        win._originalHeight = 300;
+        win.innerHTML = `
+            <div class="window-content-container">
+                <div class="window-content-scaler" style="transform: scale(3);"></div>
+            </div>
+        `;
+
+        win.getBoundingClientRect = () => {
+            const w = parseFloat(win.style.width) || 1200;
+            const h = win.style.height === 'auto' ? 300 : (parseFloat(win.style.height) || 900);
+            return { width: w, height: h };
+        };
+        document.body.appendChild(win);
+
+        try {
+            windowManager.toggleWindow('oversized-test-window', true);
+            const scaler = win.querySelector('.window-content-scaler');
+            expect(scaler.style.transform).toBe('none');
+            expect(win.style.width).toBe('400px');
+            expect(win.style.height).toBe('auto');
+            expect(win.style.left).toBe('600px');
+            expect(win.style.top).toBe('500px');
+        } finally {
+            Object.defineProperty(window, 'innerWidth', { value: originalInnerWidth, configurable: true });
+            Object.defineProperty(window, 'innerHeight', { value: originalInnerHeight, configurable: true });
+            win.remove();
+        }
+    });
+
+    test('toggleWindow resets window with distorted aspect ratio to original size and snaps it', () => {
+        const originalInnerWidth = window.innerWidth;
+        const originalInnerHeight = window.innerHeight;
+        Object.defineProperty(window, 'innerWidth', { value: 1000, configurable: true });
+        Object.defineProperty(window, 'innerHeight', { value: 800, configurable: true });
+
+        const win = document.createElement('div');
+        win.id = 'weird-ratio-window';
+        win.className = 'floating-window';
+        win.style.display = 'none';
+        win.style.left = '100px';
+        win.style.top = '50px';
+        win.style.width = '400px';
+        win.style.height = '750px';
+        win._originalWidth = 400;
+        win._originalHeight = 300;
+        win._originalRatio = 400 / 300;
+        win.innerHTML = `
+            <div class="window-content-container">
+                <div class="window-content-scaler" style="transform: scale(1);"></div>
+            </div>
+        `;
+
+        win.getBoundingClientRect = () => {
+            const w = parseFloat(win.style.width) || 400;
+            const h = win.style.height === 'auto' ? 300 : (parseFloat(win.style.height) || 750);
+            return { width: w, height: h };
+        };
+        document.body.appendChild(win);
+
+        try {
+            windowManager.toggleWindow('weird-ratio-window', true);
+            expect(win.style.width).toBe('400px');
+            expect(win.style.height).toBe('auto');
+            expect(win.style.left).toBe('100px');
+            expect(win.style.top).toBe('50px');
+        } finally {
+            Object.defineProperty(window, 'innerWidth', { value: originalInnerWidth, configurable: true });
+            Object.defineProperty(window, 'innerHeight', { value: originalInnerHeight, configurable: true });
+            win.remove();
+        }
+    });
 });
