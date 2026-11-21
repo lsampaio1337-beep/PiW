@@ -190,59 +190,49 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Heartwood 1": {
+  "Heartwood": {
     "pokes": [
       {
         "id": 266,
         "minLevel": 11,
         "maxLevel": 13,
-        "probability": 0.1729
+        "probability": 0.0865
       },
       {
         "id": 268,
         "minLevel": 11,
         "maxLevel": 13,
-        "probability": 0.1729
-      },
-      {
-        "id": 415,
-        "minLevel": 11,
-        "maxLevel": 13,
-        "probability": 0.2906
-      },
-      {
-        "id": 265,
-        "minLevel": 11,
-        "maxLevel": 13,
-        "probability": 0.3636
-      }
-    ]
-  },
-  "Heartwood 2": {
-    "pokes": [
-      {
-        "id": 25,
-        "minLevel": 12,
-        "maxLevel": 15,
-        "probability": 0.212
-      },
-      {
-        "id": 267,
-        "minLevel": 13,
-        "maxLevel": 16,
-        "probability": 0.1145
-      },
-      {
-        "id": 269,
-        "minLevel": 12,
-        "maxLevel": 15,
-        "probability": 0.1175
+        "probability": 0.0865
       },
       {
         "id": 415,
         "minLevel": 11,
         "maxLevel": 14,
-        "probability": 0.556
+        "probability": 0.4231
+      },
+      {
+        "id": 265,
+        "minLevel": 11,
+        "maxLevel": 13,
+        "probability": 0.1818
+      },
+      {
+        "id": 25,
+        "minLevel": 12,
+        "maxLevel": 15,
+        "probability": 0.106
+      },
+      {
+        "id": 267,
+        "minLevel": 13,
+        "maxLevel": 16,
+        "probability": 0.0573
+      },
+      {
+        "id": 269,
+        "minLevel": 12,
+        "maxLevel": 15,
+        "probability": 0.0588
       }
     ]
   },
@@ -296,59 +286,49 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Sandgem Flats 1": {
+  "Sandgem Flats": {
     "pokes": [
       {
         "id": 63,
         "minLevel": 16,
-        "maxLevel": 19,
-        "probability": 0.3469
+        "maxLevel": 21,
+        "probability": 0.3182
       },
       {
         "id": 404,
         "minLevel": 16,
         "maxLevel": 19,
-        "probability": 0.1481
+        "probability": 0.0741
       },
       {
         "id": 439,
         "minLevel": 16,
         "maxLevel": 19,
-        "probability": 0.3469
+        "probability": 0.1735
       },
       {
         "id": 397,
         "minLevel": 16,
         "maxLevel": 19,
-        "probability": 0.1581
-      }
-    ]
-  },
-  "Sandgem Flats 2": {
-    "pokes": [
+        "probability": 0.0791
+      },
       {
         "id": 64,
         "minLevel": 19,
         "maxLevel": 22,
-        "probability": 0.1124
+        "probability": 0.0562
       },
       {
         "id": 422,
         "minLevel": 18,
         "maxLevel": 21,
-        "probability": 0.2766
+        "probability": 0.1383
       },
       {
         "id": 406,
         "minLevel": 18,
         "maxLevel": 21,
-        "probability": 0.3211
-      },
-      {
-        "id": 63,
-        "minLevel": 18,
-        "maxLevel": 21,
-        "probability": 0.2899
+        "probability": 0.1606
       }
     ]
   },
@@ -380,59 +360,49 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Gapejaw Bog 1": {
+  "Gapejaw Bog": {
     "pokes": [
       {
         "id": 387,
         "minLevel": 21,
-        "maxLevel": 24,
-        "probability": 0.2585
+        "maxLevel": 25,
+        "probability": 0.2556
       },
       {
         "id": 453,
         "minLevel": 21,
         "maxLevel": 24,
-        "probability": 0.274
+        "probability": 0.137
       },
       {
         "id": 193,
         "minLevel": 22,
         "maxLevel": 25,
-        "probability": 0.2107
+        "probability": 0.1054
       },
       {
         "id": 54,
         "minLevel": 21,
         "maxLevel": 24,
-        "probability": 0.2568
-      }
-    ]
-  },
-  "Gapejaw Bog 2": {
-    "pokes": [
+        "probability": 0.1284
+      },
       {
         "id": 449,
         "minLevel": 22,
         "maxLevel": 25,
-        "probability": 0.2436
+        "probability": 0.1218
       },
       {
         "id": 434,
         "minLevel": 22,
         "maxLevel": 25,
-        "probability": 0.2443
+        "probability": 0.1222
       },
       {
         "id": 92,
         "minLevel": 22,
         "maxLevel": 25,
-        "probability": 0.2593
-      },
-      {
-        "id": 387,
-        "minLevel": 22,
-        "maxLevel": 25,
-        "probability": 0.2528
+        "probability": 0.1296
       }
     ]
   },
@@ -492,71 +462,67 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Golden Lowlands 1": {
+  "Golden Lowlands": {
     "pokes": [
       {
         "id": 47,
         "minLevel": 27,
         "maxLevel": 30,
-        "probability": 0.1086
+        "probability": 0.0543
       },
       {
         "id": 315,
         "minLevel": 27,
         "maxLevel": 30,
-        "probability": 0.11
+        "probability": 0.055
       },
       {
         "id": 281,
         "minLevel": 25,
         "maxLevel": 28,
-        "probability": 0.1583
+        "probability": 0.0792
       },
       {
         "id": 46,
         "minLevel": 26,
         "maxLevel": 29,
-        "probability": 0.3088
+        "probability": 0.1544
       },
       {
         "id": 406,
         "minLevel": 26,
         "maxLevel": 29,
-        "probability": 0.3143
-      }
-    ]
-  },
-  "Golden Lowlands 2": {
-    "pokes": [
+        "probability": 0.157
+      },
       {
         "id": 455,
         "minLevel": 29,
         "maxLevel": 32,
-        "probability": 0.1701
+        "probability": 0.0851
       },
       {
         "id": 417,
         "minLevel": 28,
         "maxLevel": 31,
-        "probability": 0.1906
+        "probability": 0.0953
       },
       {
         "id": 114,
         "minLevel": 28,
         "maxLevel": 31,
-        "probability": 0.1775
+        "probability": 0.0888
       },
       {
         "id": 427,
         "minLevel": 28,
         "maxLevel": 31,
-        "probability": 0.2206
+        "probability": 0.1103
       },
       {
         "id": 54,
         "minLevel": 27,
         "maxLevel": 30,
-        "probability": 0.2412
+        "probability": 0.1206
       }
     ]
   },
@@ -1390,71 +1356,67 @@ export const hisuiRoutes = {
     },
     "pokes": []
   },
-  "Cloudpool Ridge 1": {
+  "Cloudpool Ridge": {
     "pokes": [
       {
         "id": 26,
         "minLevel": 73,
         "maxLevel": 80,
-        "probability": 0.114
+        "probability": 0.057
       },
       {
         "id": 465,
         "minLevel": 74,
         "maxLevel": 81,
-        "probability": 0.1551
+        "probability": 0.0775
       },
       {
         "id": 470,
         "minLevel": 73,
         "maxLevel": 80,
-        "probability": 0.158
+        "probability": 0.079
       },
       {
         "id": 455,
         "minLevel": 73,
         "maxLevel": 80,
-        "probability": 0.3655
+        "probability": 0.1827
       },
       {
         "id": 315,
         "minLevel": 72,
         "maxLevel": 79,
-        "probability": 0.2074
-      }
-    ]
-  },
-  "Cloudpool Ridge 2": {
-    "pokes": [
+        "probability": 0.1037
+      },
       {
         "id": 78,
         "minLevel": 74,
         "maxLevel": 81,
-        "probability": 0.1233
+        "probability": 0.0617
       },
       {
         "id": 212,
         "minLevel": 74,
         "maxLevel": 81,
-        "probability": 0.1233
+        "probability": 0.0617
       },
       {
         "id": 196,
         "minLevel": 75,
         "maxLevel": 82,
-        "probability": 0.1175
+        "probability": 0.0588
       },
       {
         "id": 114,
         "minLevel": 74,
         "maxLevel": 81,
-        "probability": 0.2835
+        "probability": 0.1417
       },
       {
         "id": 427,
         "minLevel": 72,
         "maxLevel": 79,
-        "probability": 0.3524
+        "probability": 0.1762
       }
     ]
   },
@@ -1492,71 +1454,61 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Bonechill Wastes 1": {
+  "Bonechill Wastes": {
     "pokes": [
       {
         "id": 220,
         "minLevel": 75,
         "maxLevel": 83,
-        "probability": 0.3918
+        "probability": 0.1959
       },
       {
         "id": 221,
         "minLevel": 78,
         "maxLevel": 86,
-        "probability": 0.1088
+        "probability": 0.0544
       },
       {
         "id": 459,
         "minLevel": 76,
-        "maxLevel": 84,
-        "probability": 0.2933
+        "maxLevel": 85,
+        "probability": 0.2863
       },
       {
         "id": 356,
         "minLevel": 78,
         "maxLevel": 86,
-        "probability": 0.1077
+        "probability": 0.0539
       },
       {
         "id": 426,
         "minLevel": 79,
         "maxLevel": 87,
-        "probability": 0.0984
-      }
-    ]
-  },
-  "Bonechill Wastes 2": {
-    "pokes": [
+        "probability": 0.0492
+      },
       {
         "id": 361,
         "minLevel": 76,
         "maxLevel": 84,
-        "probability": 0.3113
+        "probability": 0.1557
       },
       {
         "id": 362,
         "minLevel": 79,
         "maxLevel": 87,
-        "probability": 0.0973
+        "probability": 0.0487
       },
       {
         "id": 460,
         "minLevel": 79,
         "maxLevel": 87,
-        "probability": 0.0945
+        "probability": 0.0473
       },
       {
         "id": 215,
         "minLevel": 78,
         "maxLevel": 86,
-        "probability": 0.2172
-      },
-      {
-        "id": 459,
-        "minLevel": 77,
-        "maxLevel": 85,
-        "probability": 0.2797
+        "probability": 0.1086
       }
     ]
   },
@@ -3458,7 +3410,7 @@ export const hisuiUnlocks = [
     "challengeName": "Challenge 07",
     "areaId": "Obsidian Falls",
     "unlocks": [
-      "Heartwood 1"
+      "Heartwood"
     ],
     "requirements": {
       "defeatCountRoute": {
@@ -3469,32 +3421,19 @@ export const hisuiUnlocks = [
   },
   {
     "challengeName": "Challenge 08",
-    "areaId": "Heartwood 1",
+    "areaId": "Heartwood",
     "unlocks": [
-      "Heartwood 2"
+      "Oreburrow Tunnel"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "routeName": "Heartwood 1",
+        "routeName": "Heartwood",
         "count": 10
       }
     }
   },
   {
     "challengeName": "Challenge 09",
-    "areaId": "Heartwood 2",
-    "unlocks": [
-      "Oreburrow Tunnel"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "routeName": "Heartwood 2",
-        "count": 10
-      }
-    }
-  },
-  {
-    "challengeName": "Challenge 10",
     "areaId": "Oreburrow Tunnel",
     "unlocks": [
       "Worn Bridge"
@@ -3507,10 +3446,10 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 11",
+    "challengeName": "Challenge 10",
     "areaId": "Worn Bridge",
     "unlocks": [
-      "Sandgem Flats 1"
+      "Sandgem Flats"
     ],
     "requirements": {
       "defeatCountRoute": {
@@ -3520,36 +3459,23 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 12",
-    "areaId": "Sandgem Flats 1",
-    "unlocks": [
-      "Sandgem Flats 2"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "routeName": "Sandgem Flats 1",
-        "count": 10
-      }
-    }
-  },
-  {
-    "challengeName": "Challenge 13",
-    "areaId": "Sandgem Flats 2",
+    "challengeName": "Challenge 11",
+    "areaId": "Sandgem Flats",
     "unlocks": [
       "Ramanas Island"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "routeName": "Sandgem Flats 2",
+        "routeName": "Sandgem Flats",
         "count": 10
       }
     }
   },
   {
-    "challengeName": "Challenge 14",
+    "challengeName": "Challenge 12",
     "areaId": "Ramanas Island",
     "unlocks": [
-      "Gapejaw Bog 1"
+      "Gapejaw Bog"
     ],
     "requirements": {
       "defeatCountRoute": {
@@ -3559,33 +3485,20 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 15",
-    "areaId": "Gapejaw Bog 1",
-    "unlocks": [
-      "Gapejaw Bog 2"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "routeName": "Gapejaw Bog 1",
-        "count": 10
-      }
-    }
-  },
-  {
-    "challengeName": "Challenge 16",
-    "areaId": "Gapejaw Bog 2",
+    "challengeName": "Challenge 13",
+    "areaId": "Gapejaw Bog",
     "unlocks": [
       "Sludge Mound"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "routeName": "Gapejaw Bog 2",
+        "routeName": "Gapejaw Bog",
         "count": 10
       }
     }
   },
   {
-    "challengeName": "Challenge 17",
+    "challengeName": "Challenge 14",
     "areaId": "Sludge Mound",
     "unlocks": [
       "Scarlet Bog"
@@ -3598,10 +3511,10 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 18",
+    "challengeName": "Challenge 15",
     "areaId": "Scarlet Bog",
     "unlocks": [
-      "Golden Lowlands 1"
+      "Golden Lowlands"
     ],
     "requirements": {
       "defeatCountRoute": {
@@ -3611,33 +3524,20 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 19",
-    "areaId": "Golden Lowlands 1",
-    "unlocks": [
-      "Golden Lowlands 2"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "routeName": "Golden Lowlands 1",
-        "count": 10
-      }
-    }
-  },
-  {
-    "challengeName": "Challenge 20",
-    "areaId": "Golden Lowlands 2",
+    "challengeName": "Challenge 16",
+    "areaId": "Golden Lowlands",
     "unlocks": [
       "Bolderoll Slope"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "routeName": "Golden Lowlands 2",
+        "routeName": "Golden Lowlands",
         "count": 10
       }
     }
   },
   {
-    "challengeName": "Challenge 21",
+    "challengeName": "Challenge 17",
     "areaId": "Bolderoll Slope",
     "unlocks": [
       "Gym - Lilligant"
@@ -3650,7 +3550,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 22",
+    "challengeName": "Challenge 18",
     "areaId": "Gym - Lilligant",
     "unlocks": [
       "Holm of Trials"
@@ -3663,7 +3563,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 23",
+    "challengeName": "Challenge 19",
     "areaId": "Holm of Trials",
     "unlocks": [
       "Ursa's Ring"
@@ -3676,7 +3576,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 24",
+    "challengeName": "Challenge 20",
     "areaId": "Ursa's Ring",
     "unlocks": [
       "Ginkgo Landing"
@@ -3689,7 +3589,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 25",
+    "challengeName": "Challenge 21",
     "areaId": "Ginkgo Landing",
     "unlocks": [
       "Shrouded Ruins"
@@ -3702,7 +3602,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 26",
+    "challengeName": "Challenge 22",
     "areaId": "Shrouded Ruins",
     "unlocks": [
       "Droning Meadow"
@@ -3715,7 +3615,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 27",
+    "challengeName": "Challenge 23",
     "areaId": "Droning Meadow",
     "unlocks": [
       "Grueling Grove"
@@ -3728,7 +3628,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 28",
+    "challengeName": "Challenge 24",
     "areaId": "Grueling Grove",
     "unlocks": [
       "Bathers' Lagoon"
@@ -3741,7 +3641,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 29",
+    "challengeName": "Challenge 25",
     "areaId": "Bathers' Lagoon",
     "unlocks": [
       "Castaway Shore"
@@ -3754,7 +3654,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 30",
+    "challengeName": "Challenge 26",
     "areaId": "Castaway Shore",
     "unlocks": [
       "Deadwood Haunt"
@@ -3767,7 +3667,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 31",
+    "challengeName": "Challenge 27",
     "areaId": "Deadwood Haunt",
     "unlocks": [
       "Crossing Slope"
@@ -3780,7 +3680,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 32",
+    "challengeName": "Challenge 28",
     "areaId": "Crossing Slope",
     "unlocks": [
       "Veilstone Cape"
@@ -3793,7 +3693,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 33",
+    "challengeName": "Challenge 29",
     "areaId": "Veilstone Cape",
     "unlocks": [
       "Tranquility Cove"
@@ -3806,7 +3706,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 34",
+    "challengeName": "Challenge 30",
     "areaId": "Tranquility Cove",
     "unlocks": [
       "Islespy Shore"
@@ -3819,7 +3719,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 35",
+    "challengeName": "Challenge 31",
     "areaId": "Islespy Shore",
     "unlocks": [
       "Spring Path"
@@ -3832,7 +3732,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 36",
+    "challengeName": "Challenge 32",
     "areaId": "Spring Path",
     "unlocks": [
       "Firespit Island"
@@ -3845,7 +3745,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 37",
+    "challengeName": "Challenge 33",
     "areaId": "Firespit Island",
     "unlocks": [
       "Gym - Arcanine"
@@ -3858,7 +3758,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 38",
+    "challengeName": "Challenge 34",
     "areaId": "Gym - Arcanine",
     "unlocks": [
       "Seagrass Haven"
@@ -3871,7 +3771,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 39",
+    "challengeName": "Challenge 35",
     "areaId": "Seagrass Haven",
     "unlocks": [
       "Wayward Cave"
@@ -3884,7 +3784,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 40",
+    "challengeName": "Challenge 36",
     "areaId": "Wayward Cave",
     "unlocks": [
       "Coronet Highlands"
@@ -3897,7 +3797,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 41",
+    "challengeName": "Challenge 37",
     "areaId": "Coronet Highlands",
     "unlocks": [
       "Clamberclaw Cliffs"
@@ -3910,7 +3810,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 42",
+    "challengeName": "Challenge 38",
     "areaId": "Clamberclaw Cliffs",
     "unlocks": [
       "Celestica Trail"
@@ -3923,7 +3823,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 43",
+    "challengeName": "Challenge 39",
     "areaId": "Celestica Trail",
     "unlocks": [
       "Gym - Warden Ingo"
@@ -3936,7 +3836,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 44",
+    "challengeName": "Challenge 40",
     "areaId": "Gym - Warden Ingo",
     "unlocks": [
       "Celestica Ruins"
@@ -3949,7 +3849,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 45",
+    "challengeName": "Challenge 41",
     "areaId": "Celestica Ruins",
     "unlocks": [
       "Sacred Plaza"
@@ -3962,7 +3862,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 46",
+    "challengeName": "Challenge 42",
     "areaId": "Sacred Plaza",
     "unlocks": [
       "Lonely Spring"
@@ -3975,7 +3875,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 47",
+    "challengeName": "Challenge 43",
     "areaId": "Lonely Spring",
     "unlocks": [
       "Stonetooth Rows"
@@ -3988,7 +3888,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 48",
+    "challengeName": "Challenge 44",
     "areaId": "Stonetooth Rows",
     "unlocks": [
       "Sonorous Path"
@@ -4001,7 +3901,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 49",
+    "challengeName": "Challenge 45",
     "areaId": "Sonorous Path",
     "unlocks": [
       "Primeval Grotto"
@@ -4014,7 +3914,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 50",
+    "challengeName": "Challenge 46",
     "areaId": "Primeval Grotto",
     "unlocks": [
       "Gym - Electrode"
@@ -4027,10 +3927,10 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 51",
+    "challengeName": "Challenge 47",
     "areaId": "Gym - Electrode",
     "unlocks": [
-      "Cloudpool Ridge 1"
+      "Cloudpool Ridge"
     ],
     "requirements": {
       "earnBadge": {
@@ -4040,36 +3940,23 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 52",
-    "areaId": "Cloudpool Ridge 1",
-    "unlocks": [
-      "Cloudpool Ridge 2"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "routeName": "Cloudpool Ridge 1",
-        "count": 10
-      }
-    }
-  },
-  {
-    "challengeName": "Challenge 53",
-    "areaId": "Cloudpool Ridge 2",
+    "challengeName": "Challenge 48",
+    "areaId": "Cloudpool Ridge",
     "unlocks": [
       "Fabled Spring"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "routeName": "Cloudpool Ridge 2",
+        "routeName": "Cloudpool Ridge",
         "count": 10
       }
     }
   },
   {
-    "challengeName": "Challenge 54",
+    "challengeName": "Challenge 49",
     "areaId": "Fabled Spring",
     "unlocks": [
-      "Bonechill Wastes 1"
+      "Bonechill Wastes"
     ],
     "requirements": {
       "defeatCountRoute": {
@@ -4079,33 +3966,20 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 55",
-    "areaId": "Bonechill Wastes 1",
-    "unlocks": [
-      "Bonechill Wastes 2"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "routeName": "Bonechill Wastes 1",
-        "count": 10
-      }
-    }
-  },
-  {
-    "challengeName": "Challenge 56",
-    "areaId": "Bonechill Wastes 2",
+    "challengeName": "Challenge 50",
+    "areaId": "Bonechill Wastes",
     "unlocks": [
       "Glacier Terrace"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "routeName": "Bonechill Wastes 2",
+        "routeName": "Bonechill Wastes",
         "count": 10
       }
     }
   },
   {
-    "challengeName": "Challenge 57",
+    "challengeName": "Challenge 51",
     "areaId": "Glacier Terrace",
     "unlocks": [
       "Avalanche Slopes"
@@ -4118,7 +3992,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 58",
+    "challengeName": "Challenge 52",
     "areaId": "Avalanche Slopes",
     "unlocks": [
       "Heart's Crag"
@@ -4131,7 +4005,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 59",
+    "challengeName": "Challenge 53",
     "areaId": "Heart's Crag",
     "unlocks": [
       "Icepeak Cavern"
@@ -4144,7 +4018,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 60",
+    "challengeName": "Challenge 54",
     "areaId": "Icepeak Cavern",
     "unlocks": [
       "Snowpoint Temple"
@@ -4157,7 +4031,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 61",
+    "challengeName": "Challenge 55",
     "areaId": "Snowpoint Temple",
     "unlocks": [
       "Arena's Approach"
@@ -4170,7 +4044,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 62",
+    "challengeName": "Challenge 56",
     "areaId": "Arena's Approach",
     "unlocks": [
       "Gym - Avalugg"
@@ -4183,7 +4057,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 63",
+    "challengeName": "Challenge 57",
     "areaId": "Gym - Avalugg",
     "unlocks": [
       "Whiteout Valley"
@@ -4196,7 +4070,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 64",
+    "challengeName": "Challenge 58",
     "areaId": "Whiteout Valley",
     "unlocks": [
       "Etertime Storm"
@@ -4209,7 +4083,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 65",
+    "challengeName": "Challenge 59",
     "areaId": "Etertime Storm",
     "unlocks": [
       "Etertime Citadel",

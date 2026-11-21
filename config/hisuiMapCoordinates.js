@@ -27,11 +27,7 @@ export default {
         "x": 0,
         "y": 0
     },
-    "Heartwood 1": {
-        "x": 0,
-        "y": 0
-    },
-    "Heartwood 2": {
+    "Heartwood": {
         "x": 0,
         "y": 0
     },
@@ -43,11 +39,7 @@ export default {
         "x": 0,
         "y": 0
     },
-    "Sandgem Flats 1": {
-        "x": 0,
-        "y": 0
-    },
-    "Sandgem Flats 2": {
+    "Sandgem Flats": {
         "x": 0,
         "y": 0
     },
@@ -55,11 +47,7 @@ export default {
         "x": 0,
         "y": 0
     },
-    "Gapejaw Bog 1": {
-        "x": 0,
-        "y": 0
-    },
-    "Gapejaw Bog 2": {
+    "Gapejaw Bog": {
         "x": 0,
         "y": 0
     },
@@ -71,11 +59,7 @@ export default {
         "x": 0,
         "y": 0
     },
-    "Golden Lowlands 1": {
-        "x": 0,
-        "y": 0
-    },
-    "Golden Lowlands 2": {
+    "Golden Lowlands": {
         "x": 0,
         "y": 0
     },
@@ -195,11 +179,7 @@ export default {
         "x": 0,
         "y": 0
     },
-    "Cloudpool Ridge 1": {
-        "x": 0,
-        "y": 0
-    },
-    "Cloudpool Ridge 2": {
+    "Cloudpool Ridge": {
         "x": 0,
         "y": 0
     },
@@ -207,11 +187,7 @@ export default {
         "x": 0,
         "y": 0
     },
-    "Bonechill Wastes 1": {
-        "x": 0,
-        "y": 0
-    },
-    "Bonechill Wastes 2": {
+    "Bonechill Wastes": {
         "x": 0,
         "y": 0
     },
