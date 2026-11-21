@@ -817,6 +817,80 @@ if (!Array.isArray(routes)) {
                 } catch (e) {}
             }));
         }
+    } else if (region.num === 10) {
+        const paldeaBases = ['/pokearth/paldea/', '/pokearth/kitakami/', '/pokearth/terarium/'];
+        const areaLinks = new Set();
+        await Promise.all(paldeaBases.map(async (base) => {
+            try {
+                const res = await fetch(`https://www.serebii.net${base}`);
+                if (!res.ok) return;
+                const html = await res.text();
+                const opts = [...html.matchAll(/<option[^>]+value="([^"]+)"[^>]*>/gi)].map(m => m[1]);
+                for (const url of opts) {
+                    if (url.startsWith(base) && !url.endsWith('/index.shtml') && url !== base) {
+                        areaLinks.add(url);
+                    }
+                }
+            } catch (e) {}
+        }));
+
+        const pkByIdMap = new Map();
+        for (const p of Object.values(pokemonData)) {
+            if (p && p.id) pkByIdMap.set(p.id, p.name.toLowerCase());
+        }
+
+        const linksArr = [...areaLinks];
+        const batchSize = 15;
+        for (let b = 0; b < linksArr.length; b += batchSize) {
+            const batch = linksArr.slice(b, b + batchSize);
+            await Promise.all(batch.map(async (link) => {
+                try {
+                    const res = await fetch(`https://www.serebii.net${link}`);
+                    if (!res.ok) return;
+                    const html = await res.text();
+                    const areaSlug = decodeURIComponent(link.split('/').pop().replace('.shtml', '')).replace(/[^a-z0-9]/gi, '').toLowerCase();
+                    const matches = [...html.matchAll(/onclick="return pokeToggle\((\d+),this\)"[^>]*><img[^>]+src="\/pokedex-sv\/icon\/(?:new\/)?(\d+)[^"]*"[^>]*><br \/>([^<]+)<\/a>/gi)];
+                    for (const m of matches) {
+                        const natId = Number(m[2]);
+                        const textName = m[3].trim().toLowerCase();
+                        const dbName = pkByIdMap.get(natId);
+                        for (const key of [dbName, textName]) {
+                            if (!key) continue;
+                            if (!encounterCache[key]) encounterCache[key] = [];
+                            if (!encounterCache[key].includes(areaSlug)) encounterCache[key].push(areaSlug);
+                        }
+                    }
+                } catch (e) {}
+            }));
+        }
+
+        // Also fetch Bulbapedia SV wild encounters for Region 10 Legacy validation
+        const bulbaAreaTitles = [
+            ...new Set(routes.map(r => r.primaryName || r.name).filter(Boolean))
+        ].filter(n => !n.includes('Gym') && !n.includes('League'));
+        for (let b = 0; b < bulbaAreaTitles.length; b += batchSize) {
+            const batch = bulbaAreaTitles.slice(b, b + batchSize);
+            await Promise.all(batch.map(async (areaTitle) => {
+                try {
+                    const wikiTitle = areaTitle.replace(/ /g, '_');
+                    const res = await fetch(`https://bulbapedia.bulbagarden.net/w/api.php?action=parse&page=${encodeURIComponent(wikiTitle)}&prop=wikitext&format=json`);
+                    if (!res.ok) return;
+                    const json = await res.json();
+                    const wt = json?.parse?.wikitext?.['*'];
+                    if (!wt) return;
+                    const areaSlug = areaTitle.replace(/[^a-z0-9]/gi, '').toLowerCase();
+                    for (const line of wt.split('\n')) {
+                        if (!/\{\{catch\/entry9/i.test(line)) continue;
+                        const parts = line.replace(/^\{\{|\}\}$/g, '').split('|');
+                        const natId = parseInt(parts[1], 10);
+                        const dbName = pkByIdMap.get(natId);
+                        if (!dbName) continue;
+                        if (!encounterCache[dbName]) encounterCache[dbName] = [];
+                        if (!encounterCache[dbName].includes(areaSlug)) encounterCache[dbName].push(areaSlug);
+                    }
+                } catch (e) {}
+            }));
+        }
     } else {
         for (const pkName of allSpawnsToFetch) {
             try {

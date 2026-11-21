@@ -1,602 +1,1126 @@
 export const paldeaMapCoordinates = {
-  "Poco Path - Main": {
+  "Poco Path - Grass": {
     "x": 10,
     "y": 10
   },
-  "Los Platos - Main": {
-    "x": 20,
+  "Poco Path - Beach": {
+    "x": 19,
     "y": 10
   },
-  "South Province (Area One) - Cave": {
-    "x": 50,
+  "Inlet Grotto": {
+    "x": 28,
+    "y": 10
+  },
+  "South Province (Area One) - Beach": {
+    "x": 37,
     "y": 10
   },
   "South Province (Area One) - Flower Patch": {
-    "x": 60,
+    "x": 46,
     "y": 10
   },
   "South Province (Area One) - Forest": {
-    "x": 70,
+    "x": 55,
     "y": 10
   },
   "South Province (Area One) - Grass": {
-    "x": 80,
+    "x": 64,
     "y": 10
   },
   "South Province (Area One) - Lake": {
-    "x": 90,
+    "x": 73,
     "y": 10
   },
   "South Province (Area One) - Near Town": {
-    "x": 10,
-    "y": 20
+    "x": 82,
+    "y": 10
   },
   "South Province (Area One) - Ocean": {
-    "x": 20,
-    "y": 20
+    "x": 91,
+    "y": 10
   },
   "South Province (Area One) - River": {
-    "x": 30,
-    "y": 20
+    "x": 10,
+    "y": 19
   },
   "South Province (Area One) - Ruins": {
-    "x": 40,
-    "y": 20
+    "x": 19,
+    "y": 19
   },
   "Cortondo Gym": {
-    "x": 50,
-    "y": 20
+    "x": 28,
+    "y": 19
+  },
+  "South Province (Area Two) - Watchtower": {
+    "x": 37,
+    "y": 19
+  },
+  "South Province (Area Two) - Flower Patch": {
+    "x": 46,
+    "y": 19
   },
   "South Province (Area Two) - Forest": {
-    "x": 70,
-    "y": 20
+    "x": 55,
+    "y": 19
   },
   "South Province (Area Two) - Grass": {
-    "x": 80,
-    "y": 20
+    "x": 64,
+    "y": 19
   },
   "South Province (Area Two) - Mountain": {
-    "x": 90,
-    "y": 20
+    "x": 73,
+    "y": 19
   },
   "South Province (Area Two) - Near Town": {
+    "x": 82,
+    "y": 19
+  },
+  "South Province (Area Two) - Olive Grove": {
+    "x": 91,
+    "y": 19
+  },
+  "South Province (Area Two) - River": {
     "x": 10,
-    "y": 30
+    "y": 28
   },
   "South Province (Area Two) - Rocky": {
-    "x": 30,
-    "y": 30
+    "x": 19,
+    "y": 28
+  },
+  "South Province (Area Two) - Ruins": {
+    "x": 28,
+    "y": 28
+  },
+  "South Province (Area Four) - Flower Patch": {
+    "x": 37,
+    "y": 28
+  },
+  "South Province (Area Four) - Forest": {
+    "x": 46,
+    "y": 28
   },
   "South Province (Area Four) - Grass": {
-    "x": 40,
-    "y": 30
+    "x": 55,
+    "y": 28
   },
   "South Province (Area Four) - Lake": {
-    "x": 50,
-    "y": 30
+    "x": 64,
+    "y": 28
   },
   "South Province (Area Four) - Mountain": {
-    "x": 60,
-    "y": 30
-  },
-  "Artazon Gym": {
-    "x": 70,
-    "y": 30
+    "x": 73,
+    "y": 28
   },
   "South Province (Area Four) - Ocean": {
-    "x": 80,
-    "y": 30
+    "x": 82,
+    "y": 28
   },
   "South Province (Area Four) - River": {
-    "x": 90,
-    "y": 30
+    "x": 91,
+    "y": 28
+  },
+  "South Province (Area Four) - Rocky": {
+    "x": 10,
+    "y": 37
+  },
+  "South Province (Area Four) - Ruins": {
+    "x": 19,
+    "y": 37
+  },
+  "South Province (Area Three) - Watchtower": {
+    "x": 28,
+    "y": 37
   },
   "South Province (Area Three) - Grass": {
-    "x": 10,
-    "y": 40
+    "x": 37,
+    "y": 37
+  },
+  "South Province (Area Three) - Near Town": {
+    "x": 46,
+    "y": 37
   },
   "South Province (Area Three) - Rocky": {
-    "x": 20,
-    "y": 40
+    "x": 55,
+    "y": 37
+  },
+  "South Province (Area Three) - Ruins": {
+    "x": 64,
+    "y": 37
+  },
+  "Artazon Gym": {
+    "x": 73,
+    "y": 37
+  },
+  "East Province (Area One) - Watchtower": {
+    "x": 82,
+    "y": 37
   },
   "East Province (Area One) - Beach": {
-    "x": 30,
-    "y": 40
+    "x": 91,
+    "y": 37
+  },
+  "East Province (Area One) - Cave": {
+    "x": 10,
+    "y": 46
   },
   "East Province (Area One) - Forest": {
-    "x": 40,
-    "y": 40
+    "x": 19,
+    "y": 46
   },
   "East Province (Area One) - Grass": {
-    "x": 50,
-    "y": 40
+    "x": 28,
+    "y": 46
+  },
+  "East Province (Area One) - Mountain": {
+    "x": 37,
+    "y": 46
+  },
+  "East Province (Area One) - Near Town": {
+    "x": 46,
+    "y": 46
   },
   "East Province (Area One) - Ocean": {
-    "x": 80,
-    "y": 40
+    "x": 55,
+    "y": 46
   },
-  "Levincia Gym": {
-    "x": 90,
-    "y": 40
+  "East Province (Area One) - River": {
+    "x": 64,
+    "y": 46
   },
   "East Province (Area One) - Rocky": {
-    "x": 10,
-    "y": 50
+    "x": 73,
+    "y": 46
   },
-  "South Province (Area Five) - Beach": {
-    "x": 20,
-    "y": 50
-  },
-  "South Province (Area Five) - Grass": {
-    "x": 30,
-    "y": 50
-  },
-  "South Province (Area Five) - Lake": {
-    "x": 40,
-    "y": 50
-  },
-  "South Province (Area Five) - Mountain": {
-    "x": 50,
-    "y": 50
-  },
-  "South Province (Area Five) - River": {
-    "x": 60,
-    "y": 50
+  "East Province (Area Two) - Beach": {
+    "x": 82,
+    "y": 46
   },
   "East Province (Area Two) - Forest": {
-    "x": 70,
-    "y": 50
+    "x": 91,
+    "y": 46
   },
   "East Province (Area Two) - Grass": {
-    "x": 80,
-    "y": 50
+    "x": 10,
+    "y": 55
   },
   "East Province (Area Two) - Near Town": {
-    "x": 90,
-    "y": 50
+    "x": 19,
+    "y": 55
+  },
+  "East Province (Area Two) - Ocean": {
+    "x": 28,
+    "y": 55
   },
   "East Province (Area Two) - River": {
-    "x": 10,
-    "y": 60
-  },
-  "Cascarrafa Gym": {
-    "x": 20,
-    "y": 60
+    "x": 37,
+    "y": 55
   },
   "East Province (Area Two) - Rocky": {
-    "x": 30,
-    "y": 60
+    "x": 46,
+    "y": 55
   },
-  "East Province (Area Three) - Mine": {
-    "x": 40,
-    "y": 60
+  "East Province (Area Two) - Ruins": {
+    "x": 55,
+    "y": 55
   },
-  "East Province (Area Three) - Near Town": {
-    "x": 50,
-    "y": 60
+  "Levincia Gym": {
+    "x": 64,
+    "y": 55
   },
-  "East Province (Area Three) - Ocean": {
-    "x": 60,
-    "y": 60
+  "South Paldean Sea - Ocean": {
+    "x": 73,
+    "y": 55
+  },
+  "South Paldean Sea - River": {
+    "x": 82,
+    "y": 55
+  },
+  "East Paldean Sea - Beach": {
+    "x": 91,
+    "y": 55
+  },
+  "East Paldean Sea - Flower Patch": {
+    "x": 10,
+    "y": 64
+  },
+  "East Paldean Sea - Ocean": {
+    "x": 19,
+    "y": 64
+  },
+  "West Province (Area One) - Watchtower": {
+    "x": 28,
+    "y": 64
+  },
+  "West Province (Area One) - Beach": {
+    "x": 37,
+    "y": 64
+  },
+  "West Province (Area One) - Cave": {
+    "x": 46,
+    "y": 64
+  },
+  "West Province (Area One) - Flower Patch": {
+    "x": 55,
+    "y": 64
+  },
+  "West Province (Area One) - Grass": {
+    "x": 64,
+    "y": 64
   },
   "West Province (Area One) - Mountain": {
-    "x": 90,
-    "y": 60
+    "x": 73,
+    "y": 64
+  },
+  "West Province (Area One) - Ocean": {
+    "x": 82,
+    "y": 64
+  },
+  "West Province (Area One) - River": {
+    "x": 91,
+    "y": 64
+  },
+  "West Province (Area One) - Rocky": {
+    "x": 10,
+    "y": 73
+  },
+  "West Province (Area One) - Ruins": {
+    "x": 19,
+    "y": 73
   },
   "Asado Desert - Desert": {
-    "x": 20,
-    "y": 70
+    "x": 28,
+    "y": 73
+  },
+  "Asado Desert - Flower Patch": {
+    "x": 37,
+    "y": 73
   },
   "Asado Desert - Grass": {
-    "x": 30,
-    "y": 70
+    "x": 46,
+    "y": 73
   },
-  "Medali Gym": {
-    "x": 40,
-    "y": 70
+  "Asado Desert - River": {
+    "x": 55,
+    "y": 73
   },
-  "West Province (Area Two) - Grass": {
-    "x": 80,
-    "y": 70
+  "Asado Desert - Rocky": {
+    "x": 64,
+    "y": 73
   },
-  "West Province (Area Two) - Near Town": {
-    "x": 90,
-    "y": 70
+  "Asado Desert - Ruins": {
+    "x": 73,
+    "y": 73
   },
-  "West Province (Area Two) - River": {
+  "West Paldean Sea": {
+    "x": 82,
+    "y": 73
+  },
+  "Cascarrafa Gym": {
+    "x": 91,
+    "y": 73
+  },
+  "West Province (Area Two) - Beach": {
     "x": 10,
-    "y": 80
+    "y": 82
   },
-  "West Province (Area Three) - Forest": {
-    "x": 20,
-    "y": 80
+  "West Province (Area Two) - Cave": {
+    "x": 19,
+    "y": 82
   },
   "West Province (Area Two) - Desert": {
-    "x": 50,
-    "y": 80
+    "x": 28,
+    "y": 82
+  },
+  "West Province (Area Two) - Grass": {
+    "x": 37,
+    "y": 82
+  },
+  "West Province (Area Two) - Near Town": {
+    "x": 46,
+    "y": 82
+  },
+  "West Province (Area Two) - Ocean": {
+    "x": 55,
+    "y": 82
+  },
+  "West Province (Area Two) - River": {
+    "x": 64,
+    "y": 82
+  },
+  "West Province (Area Two) - Rocky": {
+    "x": 73,
+    "y": 82
+  },
+  "West Province (Area Three) - Cave": {
+    "x": 82,
+    "y": 82
+  },
+  "West Province (Area Three) - Forest": {
+    "x": 91,
+    "y": 82
+  },
+  "West Province (Area Three) - Grass": {
+    "x": 10,
+    "y": 91
+  },
+  "West Province (Area Three) - Lake": {
+    "x": 19,
+    "y": 91
+  },
+  "West Province (Area Three) - Near Town": {
+    "x": 28,
+    "y": 91
+  },
+  "West Province (Area Three) - River": {
+    "x": 37,
+    "y": 91
+  },
+  "West Province (Area Three) - Rocky": {
+    "x": 46,
+    "y": 91
+  },
+  "West Province (Area Three) - Ruins": {
+    "x": 55,
+    "y": 91
+  },
+  "Medali Gym": {
+    "x": 64,
+    "y": 91
+  },
+  "Tagtree Thicket - Flower Patch": {
+    "x": 73,
+    "y": 91
+  },
+  "Tagtree Thicket - Forest": {
+    "x": 82,
+    "y": 91
+  },
+  "Tagtree Thicket - Lake": {
+    "x": 91,
+    "y": 91
+  },
+  "Tagtree Thicket - River": {
+    "x": 10,
+    "y": 100
+  },
+  "East Province (Area Three) - Watchtower": {
+    "x": 19,
+    "y": 100
+  },
+  "East Province (Area Three) - Cave": {
+    "x": 28,
+    "y": 100
+  },
+  "East Province (Area Three) - Grass": {
+    "x": 37,
+    "y": 100
+  },
+  "East Province (Area Three) - Lake": {
+    "x": 46,
+    "y": 100
+  },
+  "East Province (Area Three) - Mine": {
+    "x": 55,
+    "y": 100
+  },
+  "East Province (Area Three) - Near Town": {
+    "x": 64,
+    "y": 100
+  },
+  "East Province (Area Three) - Ocean": {
+    "x": 73,
+    "y": 100
+  },
+  "East Province (Area Three) - River": {
+    "x": 82,
+    "y": 100
+  },
+  "East Province (Area Three) - Rocky": {
+    "x": 91,
+    "y": 100
+  },
+  "Dalizapa Passage - Mountain": {
+    "x": 10,
+    "y": 109
+  },
+  "Dalizapa Passage - Rocky": {
+    "x": 19,
+    "y": 109
+  },
+  "Dalizapa Passage - Cave": {
+    "x": 28,
+    "y": 109
+  },
+  "Dalizapa Passage - Grass": {
+    "x": 37,
+    "y": 109
+  },
+  "Dalizapa Passage - Near Town": {
+    "x": 46,
+    "y": 109
+  },
+  "Glaseado Mountain - Watchtower": {
+    "x": 55,
+    "y": 109
+  },
+  "Glaseado Mountain - East - Cave": {
+    "x": 64,
+    "y": 109
+  },
+  "Glaseado Mountain - East - Mountain": {
+    "x": 73,
+    "y": 109
+  },
+  "Glaseado Mountain - East - River": {
+    "x": 82,
+    "y": 109
+  },
+  "Glaseado Mountain - East - Rocky": {
+    "x": 91,
+    "y": 109
+  },
+  "Glaseado Mountain - East - Ruins": {
+    "x": 10,
+    "y": 118
+  },
+  "Glaseado Mountain - East - Snow": {
+    "x": 19,
+    "y": 118
+  },
+  "Glaseado Mountain - West - Cave": {
+    "x": 28,
+    "y": 118
+  },
+  "Glaseado Mountain - West - Flower Patch": {
+    "x": 37,
+    "y": 118
+  },
+  "Glaseado Mountain - West - Lake": {
+    "x": 46,
+    "y": 118
+  },
+  "Glaseado Mountain - West - Mountain": {
+    "x": 55,
+    "y": 118
+  },
+  "Glaseado Mountain - West - Near Town": {
+    "x": 64,
+    "y": 118
+  },
+  "Glaseado Mountain - West - Ocean": {
+    "x": 73,
+    "y": 118
+  },
+  "Glaseado Mountain - West - River": {
+    "x": 82,
+    "y": 118
+  },
+  "Glaseado Mountain - West - Rocky": {
+    "x": 91,
+    "y": 118
+  },
+  "Glaseado Mountain - West - Ruins": {
+    "x": 10,
+    "y": 127
+  },
+  "Glaseado Mountain - West - Snow": {
+    "x": 19,
+    "y": 127
   },
   "Montenevera Gym": {
-    "x": 60,
-    "y": 80
+    "x": 28,
+    "y": 127
+  },
+  "South Province (Area Five) - Beach": {
+    "x": 37,
+    "y": 127
+  },
+  "South Province (Area Five) - Flower Patch": {
+    "x": 46,
+    "y": 127
+  },
+  "South Province (Area Five) - Grass": {
+    "x": 55,
+    "y": 127
+  },
+  "South Province (Area Five) - Lake": {
+    "x": 64,
+    "y": 127
+  },
+  "South Province (Area Five) - Mountain": {
+    "x": 73,
+    "y": 127
+  },
+  "South Province (Area Five) - Ocean": {
+    "x": 82,
+    "y": 127
+  },
+  "South Province (Area Five) - River": {
+    "x": 91,
+    "y": 127
+  },
+  "South Province (Area Five) - Rocky": {
+    "x": 10,
+    "y": 136
+  },
+  "South Province (Area Five) - Ruins": {
+    "x": 19,
+    "y": 136
+  },
+  "South Province (Area Five) - Swamp": {
+    "x": 28,
+    "y": 136
+  },
+  "Alfornada Cavern": {
+    "x": 37,
+    "y": 136
+  },
+  "Alfornada Gym": {
+    "x": 46,
+    "y": 136
+  },
+  "South Province (Area Six) - Leaking Tower": {
+    "x": 55,
+    "y": 136
+  },
+  "South Province (Area Six) - Cave": {
+    "x": 64,
+    "y": 136
+  },
+  "South Province (Area Six) - Flower Patch": {
+    "x": 73,
+    "y": 136
+  },
+  "South Province (Area Six) - Lake": {
+    "x": 82,
+    "y": 136
+  },
+  "South Province (Area Six) - Mountain": {
+    "x": 91,
+    "y": 136
+  },
+  "South Province (Area Six) - Near Town": {
+    "x": 10,
+    "y": 145
+  },
+  "South Province (Area Six) - Ocean": {
+    "x": 19,
+    "y": 145
+  },
+  "South Province (Area Six) - River": {
+    "x": 28,
+    "y": 145
+  },
+  "South Province (Area Six) - Rocky": {
+    "x": 37,
+    "y": 145
+  },
+  "South Province (Area Six) - Ruins": {
+    "x": 46,
+    "y": 145
+  },
+  "North Province (Area Three) - Beach": {
+    "x": 55,
+    "y": 145
+  },
+  "North Province (Area Three) - Cave": {
+    "x": 64,
+    "y": 145
+  },
+  "North Province (Area Three) - Flower Patch": {
+    "x": 73,
+    "y": 145
+  },
+  "North Province (Area Three) - Grass": {
+    "x": 82,
+    "y": 145
+  },
+  "North Province (Area Three) - Ocean": {
+    "x": 91,
+    "y": 145
+  },
+  "North Province (Area Three) - River": {
+    "x": 10,
+    "y": 154
+  },
+  "North Province (Area Three) - Rocky": {
+    "x": 19,
+    "y": 154
+  },
+  "North Province (Area Three) - Snow": {
+    "x": 28,
+    "y": 154
+  },
+  "North Paldean Sea": {
+    "x": 37,
+    "y": 154
+  },
+  "Glaseado Gym": {
+    "x": 46,
+    "y": 154
+  },
+  "Casseroya Lake - Watchtower No. 2": {
+    "x": 55,
+    "y": 154
+  },
+  "Casseroya Lake - Beach": {
+    "x": 64,
+    "y": 154
+  },
+  "Casseroya Lake - Forest": {
+    "x": 73,
+    "y": 154
+  },
+  "Casseroya Lake - Lake": {
+    "x": 82,
+    "y": 154
+  },
+  "Casseroya Lake - Ocean": {
+    "x": 91,
+    "y": 154
+  },
+  "Casseroya Lake - River": {
+    "x": 10,
+    "y": 163
+  },
+  "Casseroya Lake - Rocky": {
+    "x": 19,
+    "y": 163
+  },
+  "Casseroya Lake - Ruins": {
+    "x": 28,
+    "y": 163
+  },
+  "Casseroya Lake - Snow": {
+    "x": 37,
+    "y": 163
+  },
+  "Socarrat Trail": {
+    "x": 46,
+    "y": 163
+  },
+  "North Province (Area One) - Watchtower": {
+    "x": 55,
+    "y": 163
+  },
+  "North Province (Area One) - Bamboo Forest": {
+    "x": 64,
+    "y": 163
+  },
+  "North Province (Area One) - Beach": {
+    "x": 73,
+    "y": 163
   },
   "North Province (Area One) - Cave": {
-    "x": 90,
-    "y": 80
+    "x": 82,
+    "y": 163
+  },
+  "North Province (Area One) - Flower Patch": {
+    "x": 91,
+    "y": 163
   },
   "North Province (Area One) - Forest": {
     "x": 10,
-    "y": 90
+    "y": 172
+  },
+  "North Province (Area One) - Lake": {
+    "x": 19,
+    "y": 172
   },
   "North Province (Area One) - Mountain": {
-    "x": 20,
-    "y": 90
+    "x": 28,
+    "y": 172
   },
-  "Tagtree Thicket - Flower Patch": {
-    "x": 30,
-    "y": 90
+  "North Province (Area One) - Ocean": {
+    "x": 37,
+    "y": 172
   },
-  "Tagtree Thicket - Forest": {
-    "x": 40,
-    "y": 90
+  "North Province (Area One) - River": {
+    "x": 46,
+    "y": 172
   },
-  "East Paldean Sea - Beach": {
-    "x": 50,
-    "y": 90
+  "North Province (Area One) - Rocky": {
+    "x": 55,
+    "y": 172
   },
-  "West Paldean Sea - Ocean": {
-    "x": 60,
-    "y": 90
+  "North Province (Area One) - Ruins": {
+    "x": 64,
+    "y": 172
   },
-  "Alfornada Gym": {
-    "x": 70,
-    "y": 90
-  },
-  "West Paldean Sea - Ocean Abyss": {
-    "x": 80,
-    "y": 90
-  },
-  "Casseroya Lake - Forest": {
-    "x": 90,
-    "y": 90
-  },
-  "Casseroya Lake - Lake": {
-    "x": 10,
-    "y": 10
-  },
-  "Casseroya Lake - Snow": {
-    "x": 20,
-    "y": 10
+  "North Province (Area One) - Snow": {
+    "x": 73,
+    "y": 172
   },
   "North Province (Area Two) - Bamboo Forest": {
-    "x": 30,
-    "y": 10
+    "x": 82,
+    "y": 172
+  },
+  "North Province (Area Two) - Cave": {
+    "x": 91,
+    "y": 172
+  },
+  "North Province (Area Two) - Flower Patch": {
+    "x": 10,
+    "y": 181
+  },
+  "North Province (Area Two) - Forest": {
+    "x": 19,
+    "y": 181
   },
   "North Province (Area Two) - Lake": {
-    "x": 50,
-    "y": 10
+    "x": 28,
+    "y": 181
   },
   "North Province (Area Two) - Rocky": {
-    "x": 60,
-    "y": 10
+    "x": 37,
+    "y": 181
   },
-  "North Province (Area Three) - Flower Patch": {
-    "x": 70,
-    "y": 10
+  "Paldea Pokemon League": {
+    "x": 46,
+    "y": 181
   },
-  "Glaseado Gym": {
-    "x": 80,
-    "y": 10
+  "Great Crater of Paldea": {
+    "x": 55,
+    "y": 181
   },
-  "Pokémon League (Paldea)": {
-    "x": 90,
-    "y": 10
+  "Area Zero - Grass": {
+    "x": 64,
+    "y": 181
   },
-  "Apple Hills": {
+  "Area Zero - River": {
+    "x": 73,
+    "y": 181
+  },
+  "Area Zero - Rocky": {
+    "x": 82,
+    "y": 181
+  },
+  "Area Zero - Cave": {
+    "x": 91,
+    "y": 181
+  },
+  "Area Zero - Ruins": {
     "x": 10,
-    "y": 20
+    "y": 190
   },
-  "Loyalty Town": {
-    "x": 20,
-    "y": 20
+  "Area Zero - Underground": {
+    "x": 19,
+    "y": 190
   },
-  "Wistful Fields": {
-    "x": 30,
-    "y": 20
+  "Kitakami Road - Grass": {
+    "x": 28,
+    "y": 190
   },
-  "Mossfell Confluence": {
-    "x": 40,
-    "y": 20
+  "Kitakami Road - Swamp": {
+    "x": 37,
+    "y": 190
   },
-  "Oni Mountain": {
-    "x": 50,
-    "y": 20
+  "Kitakami Road - River": {
+    "x": 46,
+    "y": 190
   },
-  "Dreaded Den": {
-    "x": 60,
-    "y": 20
+  "Kitakami Road - Cave": {
+    "x": 55,
+    "y": 190
   },
-  "Paradise Barrens": {
-    "x": 70,
-    "y": 20
+  "Reveler's Road - Grass": {
+    "x": 64,
+    "y": 190
+  },
+  "Reveler's Road - River": {
+    "x": 73,
+    "y": 190
+  },
+  "Reveler's Road - Rocky": {
+    "x": 82,
+    "y": 190
+  },
+  "Reveler's Road - Bamboo": {
+    "x": 91,
+    "y": 190
+  },
+  "Reveler's Road - Cave": {
+    "x": 10,
+    "y": 199
+  },
+  "Apple Hills - Grass": {
+    "x": 19,
+    "y": 199
+  },
+  "Apple Hills - Rocky": {
+    "x": 28,
+    "y": 199
+  },
+  "Apple Hills - Cave": {
+    "x": 37,
+    "y": 199
+  },
+  "Kitakami Hall": {
+    "x": 46,
+    "y": 199
+  },
+  "Mossfell Confluence - Grass": {
+    "x": 55,
+    "y": 199
+  },
+  "Mossfell Confluence - Lake": {
+    "x": 64,
+    "y": 199
+  },
+  "Mossfell Confluence - River": {
+    "x": 73,
+    "y": 199
+  },
+  "Mossfell Confluence - Rocky": {
+    "x": 82,
+    "y": 199
+  },
+  "Mossfell Confluence - Bamboo": {
+    "x": 91,
+    "y": 199
+  },
+  "Fellhorn Gorge - Grass": {
+    "x": 10,
+    "y": 208
+  },
+  "Fellhorn Gorge - Lake": {
+    "x": 19,
+    "y": 208
+  },
+  "Fellhorn Gorge - River": {
+    "x": 28,
+    "y": 208
+  },
+  "Fellhorn Gorge - Rocky": {
+    "x": 37,
+    "y": 208
+  },
+  "Oni Mountain - Grass": {
+    "x": 46,
+    "y": 208
+  },
+  "Oni Mountain - River": {
+    "x": 55,
+    "y": 208
+  },
+  "Oni Mountain - Rocky": {
+    "x": 64,
+    "y": 208
+  },
+  "Oni Mountain - Cave": {
+    "x": 73,
+    "y": 208
+  },
+  "Oni's Maw - River": {
+    "x": 82,
+    "y": 208
+  },
+  "Oni's Maw - Rocky": {
+    "x": 91,
+    "y": 208
+  },
+  "Oni's Maw - Cave": {
+    "x": 10,
+    "y": 217
+  },
+  "Infernal Pass - River": {
+    "x": 19,
+    "y": 217
+  },
+  "Infernal Pass - Rocky": {
+    "x": 28,
+    "y": 217
+  },
+  "Infernal Pass - Cave": {
+    "x": 37,
+    "y": 217
+  },
+  "Crystal Pool - Lake": {
+    "x": 46,
+    "y": 217
+  },
+  "Crystal Pool - Rocky": {
+    "x": 55,
+    "y": 217
+  },
+  "Crystal Pool - Cave": {
+    "x": 64,
+    "y": 217
+  },
+  "Crystal Pool - Water": {
+    "x": 73,
+    "y": 217
+  },
+  "Wistful Fields - Grass": {
+    "x": 82,
+    "y": 217
+  },
+  "Wistful Fields - Rocky": {
+    "x": 91,
+    "y": 217
+  },
+  "Wistful Fields - Cave": {
+    "x": 10,
+    "y": 226
+  },
+  "Wistful Fields - Lake": {
+    "x": 19,
+    "y": 226
+  },
+  "Wistful Fields - Flower Patch": {
+    "x": 28,
+    "y": 226
+  },
+  "Paradise Barrens - Grass": {
+    "x": 37,
+    "y": 226
+  },
+  "Paradise Barrens - Desert": {
+    "x": 46,
+    "y": 226
+  },
+  "Paradise Barrens - Rocky": {
+    "x": 55,
+    "y": 226
+  },
+  "Kitakami Wilds - Grass": {
+    "x": 64,
+    "y": 226
+  },
+  "Kitakami Wilds - Lake": {
+    "x": 73,
+    "y": 226
+  },
+  "Kitakami Wilds - River": {
+    "x": 82,
+    "y": 226
+  },
+  "Kitakami Wilds - Rocky": {
+    "x": 91,
+    "y": 226
   },
   "Timeless Woods": {
-    "x": 80,
-    "y": 20
-  },
-  "Canyon Biome - Area 1": {
-    "x": 90,
-    "y": 20
-  },
-  "Canyon Biome - Area 2": {
     "x": 10,
-    "y": 30
+    "y": 235
   },
-  "Polar Biome - Area 1": {
-    "x": 20,
-    "y": 30
+  "Chilling Waterhead - Cave": {
+    "x": 19,
+    "y": 235
   },
-  "Polar Biome - Area 2": {
-    "x": 30,
-    "y": 30
+  "Chilling Waterhead - Water": {
+    "x": 28,
+    "y": 235
   },
-  "Coastal Biome - Area 1": {
-    "x": 40,
-    "y": 30
+  "Savanna Biome - Grass": {
+    "x": 37,
+    "y": 235
   },
-  "Coastal Biome - Area 2": {
-    "x": 50,
-    "y": 30
+  "Savanna Biome - Rocky": {
+    "x": 46,
+    "y": 235
   },
-  "Savanna Biome - Area 1": {
-    "x": 60,
-    "y": 30
+  "Savanna Biome - Bamboo": {
+    "x": 55,
+    "y": 235
   },
-  "Savanna Biome - Area 2": {
-    "x": 70,
-    "y": 30
+  "Savanna Biome - Cave": {
+    "x": 64,
+    "y": 235
   },
-  "Terarium Core": {
-    "x": 80,
-    "y": 30
+  "Savanna Biome - Valley": {
+    "x": 73,
+    "y": 235
   },
-  "Poco Path - Main (High Level)": {
+  "Coastal Biome - Grass": {
+    "x": 82,
+    "y": 235
+  },
+  "Coastal Biome - Desert": {
+    "x": 91,
+    "y": 235
+  },
+  "Coastal Biome - Ocean": {
     "x": 10,
-    "y": 20
+    "y": 244
   },
-  "Los Platos - Main (High Level)": {
-    "x": 20,
-    "y": 20
+  "Coastal Biome - Rocky": {
+    "x": 19,
+    "y": 244
   },
-  "Mesagoza - Main (High Level)": {
-    "x": 30,
-    "y": 20
+  "Coastal Biome - Cave": {
+    "x": 28,
+    "y": 244
   },
-  "South Province (Area One) - Beach (High Level)": {
-    "x": 40,
-    "y": 20
+  "Coastal Biome - Flower Patch": {
+    "x": 37,
+    "y": 244
   },
-  "South Province (Area One) - Cave (High Level)": {
-    "x": 50,
-    "y": 20
+  "Coastal Biome - River": {
+    "x": 46,
+    "y": 244
   },
-  "South Province (Area One) - Flower Patch (High Level)": {
-    "x": 60,
-    "y": 20
+  "Coastal Biome - Bamboo": {
+    "x": 55,
+    "y": 244
   },
-  "South Province (Area One) - Forest (High Level)": {
-    "x": 70,
-    "y": 20
+  "Canyon Biome - Grass": {
+    "x": 64,
+    "y": 244
   },
-  "South Province (Area One) - Grass (High Level)": {
-    "x": 80,
-    "y": 20
+  "Canyon Biome - Lake": {
+    "x": 73,
+    "y": 244
   },
-  "South Province (Area One) - Lake (High Level)": {
-    "x": 90,
-    "y": 20
+  "Canyon Biome - River": {
+    "x": 82,
+    "y": 244
   },
-  "South Province (Area One) - Near Town (High Level)": {
+  "Canyon Biome - Rocky": {
+    "x": 91,
+    "y": 244
+  },
+  "Canyon Biome - Cave": {
     "x": 10,
-    "y": 30
+    "y": 253
   },
-  "South Province (Area One) - Ocean (High Level)": {
-    "x": 20,
-    "y": 30
+  "Canyon Biome - Bamboo": {
+    "x": 19,
+    "y": 253
   },
-  "South Province (Area One) - River (High Level)": {
-    "x": 30,
-    "y": 30
+  "Chargestone Cavern - Cave": {
+    "x": 28,
+    "y": 253
   },
-  "South Province (Area One) - Ruins (High Level)": {
-    "x": 40,
-    "y": 30
+  "Chargestone Cavern - Water": {
+    "x": 37,
+    "y": 253
   },
-  "Cortondo Gym (High Level)": {
-    "x": 50,
-    "y": 30
+  "Chargestone Cavern - Valley": {
+    "x": 46,
+    "y": 253
   },
-  "South Province (Area Two) - Flower Patch (High Level)": {
-    "x": 60,
-    "y": 30
+  "Chargestone Cavern - Coast": {
+    "x": 55,
+    "y": 253
   },
-  "South Province (Area Two) - Forest (High Level)": {
-    "x": 70,
-    "y": 30
+  "Polar Biome - Snow": {
+    "x": 64,
+    "y": 253
   },
-  "South Province (Area Two) - Grass (High Level)": {
-    "x": 80,
-    "y": 30
+  "Polar Biome - Lake": {
+    "x": 73,
+    "y": 253
   },
-  "South Province (Area Two) - Mountain (High Level)": {
-    "x": 90,
-    "y": 30
+  "Polar Biome - Ocean": {
+    "x": 82,
+    "y": 253
   },
-  "South Province (Area Two) - Near Town (High Level)": {
+  "Polar Biome - Cave": {
+    "x": 91,
+    "y": 253
+  },
+  "Torchlit Labyrinth": {
     "x": 10,
-    "y": 40
-  },
-  "South Province (Area Two) - Olive Grove (High Level)": {
-    "x": 20,
-    "y": 40
-  },
-  "South Province (Area Two) - Rocky (High Level)": {
-    "x": 30,
-    "y": 40
-  },
-  "South Province (Area Four) - Grass (High Level)": {
-    "x": 40,
-    "y": 40
-  },
-  "South Province (Area Four) - Lake (High Level)": {
-    "x": 50,
-    "y": 40
-  },
-  "South Province (Area Four) - Mountain (High Level)": {
-    "x": 60,
-    "y": 40
-  },
-  "Artazon Gym (High Level)": {
-    "x": 70,
-    "y": 40
-  },
-  "South Province (Area Four) - Ocean (High Level)": {
-    "x": 80,
-    "y": 40
-  },
-  "South Province (Area Four) - River (High Level)": {
-    "x": 90,
-    "y": 40
-  },
-  "South Province (Area Three) - Grass (High Level)": {
-    "x": 10,
-    "y": 50
-  },
-  "South Province (Area Three) - Rocky (High Level)": {
-    "x": 20,
-    "y": 50
-  },
-  "East Province (Area One) - Beach (High Level)": {
-    "x": 30,
-    "y": 50
-  },
-  "East Province (Area One) - Forest (High Level)": {
-    "x": 40,
-    "y": 50
-  },
-  "East Province (Area One) - Grass (High Level)": {
-    "x": 50,
-    "y": 50
-  },
-  "East Province (Area One) - Mountain (High Level)": {
-    "x": 60,
-    "y": 50
-  },
-  "East Province (Area One) - Near Town (High Level)": {
-    "x": 70,
-    "y": 50
-  },
-  "East Province (Area One) - Ocean (High Level)": {
-    "x": 80,
-    "y": 50
-  },
-  "Levincia Gym (High Level)": {
-    "x": 90,
-    "y": 50
-  },
-  "East Province (Area One) - Rocky (High Level)": {
-    "x": 10,
-    "y": 60
-  },
-  "South Province (Area Five) - Beach (High Level)": {
-    "x": 20,
-    "y": 60
-  },
-  "South Province (Area Five) - Grass (High Level)": {
-    "x": 30,
-    "y": 60
-  },
-  "South Province (Area Five) - Lake (High Level)": {
-    "x": 40,
-    "y": 60
-  },
-  "South Province (Area Five) - Mountain (High Level)": {
-    "x": 50,
-    "y": 60
-  },
-  "South Province (Area Five) - River (High Level)": {
-    "x": 60,
-    "y": 60
-  },
-  "East Province (Area Two) - Forest (High Level)": {
-    "x": 70,
-    "y": 60
-  },
-  "East Province (Area Two) - Grass (High Level)": {
-    "x": 80,
-    "y": 60
-  },
-  "East Province (Area Two) - Near Town (High Level)": {
-    "x": 90,
-    "y": 60
-  },
-  "East Province (Area Two) - River (High Level)": {
-    "x": 10,
-    "y": 70
-  },
-  "Cascarrafa Gym (High Level)": {
-    "x": 20,
-    "y": 70
-  },
-  "East Province (Area Two) - Rocky (High Level)": {
-    "x": 30,
-    "y": 70
-  },
-  "Major Legendary Pokémon": {
-    "x": 50,
-    "y": 50
-  },
-  "Treasures of Ruin": {
-    "x": 50,
-    "y": 50
-  },
-  "The Loyal Three": {
-    "x": 50,
-    "y": 50
-  },
-  "Mask Weaver": {
-    "x": 50,
-    "y": 50
-  },
-  "Mythical Pokémon": {
-    "x": 50,
-    "y": 50
-  },
-  "Native Paldean Pseudo-Legendary Line": {
-    "x": 50,
-    "y": 50
-  },
-  "Blueberry Academy Special Line": {
-    "x": 50,
-    "y": 50
-  },
-  "Past Pseudo-Legendary Lines Present in Paldea & DLCs": {
-    "x": 50,
-    "y": 50
-  },
-  "Ancient Paradox Pokémon": {
-    "x": 50,
-    "y": 50
-  },
-  "Future Paradox Pokémon": {
-    "x": 50,
-    "y": 50
-  },
-  "Titan Pokémon": {
-    "x": 50,
-    "y": 50
-  },
-  "Special Unique Form": {
-    "x": 50,
-    "y": 50
+    "y": 262
   }
 };
