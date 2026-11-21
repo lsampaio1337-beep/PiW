@@ -773,20 +773,66 @@ if (!Array.isArray(routes)) {
     });
 
     const encounterCache = {};
-    for (const pkName of allSpawnsToFetch) {
-        try {
-            let res = await fetch(`https://pokeapi.co/api/v2/pokemon/${pkName}/encounters`);
-            if (!res.ok && spawnNameToId.has(pkName)) {
-                res = await fetch(`https://pokeapi.co/api/v2/pokemon/${spawnNameToId.get(pkName)}/encounters`);
-            }
-            if (res.ok) {
-                const data = await res.json();
-                encounterCache[pkName] = data.map(d => d.location_area.name);
-            } else {
+    if (region.num === 9) {
+        const hisuiHubs = [
+            'obsidianfieldlands.shtml',
+            'crimsonmirelands.shtml',
+            'cobaltcoastlands.shtml',
+            'coronethighlands.shtml',
+            'alabastericelands.shtml'
+        ];
+        const subAreaToHub = new Map();
+        await Promise.all(hisuiHubs.map(async (hub) => {
+            try {
+                const res = await fetch(`https://www.serebii.net/pokearth/hisui/${hub}`);
+                if (!res.ok) return;
+                const html = await res.text();
+                const hubSlug = hub.replace('.shtml', '');
+                const links = [...html.matchAll(/href="(\/pokearth\/hisui\/[^"]+\.shtml)"/g)].map(m => m[1]);
+                for (const link of links) {
+                    if (!hisuiHubs.some(h => link.endsWith('/' + h))) {
+                        subAreaToHub.set(link, hubSlug);
+                    }
+                }
+            } catch (e) {}
+        }));
+
+        const subLinks = [...subAreaToHub.keys()];
+        const batchSize = 15;
+        for (let b = 0; b < subLinks.length; b += batchSize) {
+            const batch = subLinks.slice(b, b + batchSize);
+            await Promise.all(batch.map(async (link) => {
+                try {
+                    const res = await fetch(`https://www.serebii.net${link}`);
+                    if (!res.ok) return;
+                    const html = await res.text();
+                    const areaSlug = decodeURIComponent(link.split('/').pop().replace('.shtml', '')).replace(/[^a-z0-9]/gi, '').toLowerCase();
+                    const hubSlug = subAreaToHub.get(link);
+                    const pokes = new Set([...html.matchAll(/href="\/pokedex-swsh\/([a-z0-9-]+)(?:\/|")/gi)].map(m => m[1].toLowerCase()).filter(p => p !== 'type'));
+                    for (const pk of pokes) {
+                        if (!encounterCache[pk]) encounterCache[pk] = [];
+                        if (!encounterCache[pk].includes(areaSlug)) encounterCache[pk].push(areaSlug);
+                        if (hubSlug && !encounterCache[pk].includes(hubSlug)) encounterCache[pk].push(hubSlug);
+                    }
+                } catch (e) {}
+            }));
+        }
+    } else {
+        for (const pkName of allSpawnsToFetch) {
+            try {
+                let res = await fetch(`https://pokeapi.co/api/v2/pokemon/${pkName}/encounters`);
+                if (!res.ok && spawnNameToId.has(pkName)) {
+                    res = await fetch(`https://pokeapi.co/api/v2/pokemon/${spawnNameToId.get(pkName)}/encounters`);
+                }
+                if (res.ok) {
+                    const data = await res.json();
+                    encounterCache[pkName] = data.map(d => d.location_area.name);
+                } else {
+                    encounterCache[pkName] = [];
+                }
+            } catch (e) {
                 encounterCache[pkName] = [];
             }
-        } catch (e) {
-            encounterCache[pkName] = [];
         }
     }
 
@@ -1094,7 +1140,7 @@ const mainSeenSets = [];
                             typeOk = "NONONO";
                         }
 
-                        if (region.num === 9) { typeOk = "Legacy"; } else if (encounterCache[pkName.toLowerCase()]) {
+                        if (encounterCache[pkName.toLowerCase()]) {
                             const locations = encounterCache[pkName.toLowerCase()];
 
                         let matchableRouteName = routeNameLower;
@@ -1384,7 +1430,7 @@ const mainSeenSets = [];
                         typeOk = "NONONO";
                     }
 
-                    if (region.num === 9) { typeOk = "Legacy"; } else if (encounterCache[pkName.toLowerCase()]) {
+                    if (encounterCache[pkName.toLowerCase()]) {
                         const locations = encounterCache[pkName.toLowerCase()];
                         const normalizedRoute = routeNameLower.replace(/[^a-z0-9]/g, '');
                         if (r && r.pokeapiArea && locations.includes(r.pokeapiArea)) {
