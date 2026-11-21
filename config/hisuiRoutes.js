@@ -1,5 +1,5 @@
 export const hisuiRoutes = {
-  "Whiteout Valley (Alabaster Icelands)": {
+  "Whiteout Valley": {
     "pokes": [
       {
         "id": 190,
@@ -33,7 +33,7 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Bonechill Wastes (Alabaster Icelands)": {
+  "Bonechill Wastes": {
     "pokes": [
       {
         "id": 92,
@@ -139,7 +139,7 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Glacier Terrace (Alabaster Icelands)": {
+  "Glacier Terrace": {
     "pokes": [
       {
         "id": 190,
@@ -209,7 +209,7 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Snowpoint Temple (Alabaster Icelands)": {
+  "Snowpoint Temple": {
     "pokes": [
       {
         "id": 41,
@@ -267,7 +267,7 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Avalanche Slopes (Alabaster Icelands)": {
+  "Avalanche Slopes": {
     "pokes": [
       {
         "id": 108,
@@ -379,7 +379,7 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Arena's Approach (Alabaster Icelands)": {
+  "Arena's Approach": {
     "pokes": [
       {
         "id": 66,
@@ -503,7 +503,7 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Pearl Settlement (Alabaster Icelands)": {
+  "Pearl Settlement": {
     "pokes": [
       {
         "id": 361,
@@ -519,7 +519,7 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Heart's Crag (Alabaster Icelands)": {
+  "Heart's Crag": {
     "pokes": [
       {
         "id": 190,
@@ -589,7 +589,7 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Icepeak Cavern (Alabaster Icelands)": {
+  "Icepeak Cavern": {
     "pokes": [
       {
         "id": 200,
@@ -617,7 +617,7 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Secret Hollow (Alabaster Icelands)": {
+  "Secret Hollow": {
     "pokes": [
       {
         "id": 712,
@@ -627,7 +627,7 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Crossing Slope (Cobalt Coastlands)": {
+  "Crossing Slope": {
     "pokes": [
       {
         "id": 74,
@@ -697,7 +697,7 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Ginkgo Landing (Cobalt Coastlands)": {
+  "Ginkgo Landing": {
     "pokes": [
       {
         "id": 74,
@@ -761,7 +761,7 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Deadwood Haunt (Cobalt Coastlands)": {
+  "Deadwood Haunt": {
     "pokes": [
       {
         "id": 74,
@@ -825,7 +825,7 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Bathers' Lagoon (Cobalt Coastlands)": {
+  "Bathers' Lagoon": {
     "pokes": [
       {
         "id": 54,
@@ -925,7 +925,7 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Veilstone Cape (Cobalt Coastlands)": {
+  "Veilstone Cape": {
     "pokes": [
       {
         "id": 37,
@@ -995,7 +995,7 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Seagrass Haven (Cobalt Coastlands)": {
+  "Seagrass Haven": {
     "pokes": [
       {
         "id": 412,
@@ -1023,7 +1023,7 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Firespit Island (Cobalt Coastlands)": {
+  "Firespit Island": {
     "pokes": [
       {
         "id": 75,
@@ -1045,7 +1045,7 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Spring Path (Cobalt Coastlands)": {
+  "Spring Path": {
     "pokes": [
       {
         "id": 75,
@@ -1085,7 +1085,7 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Islespy Shore (Cobalt Coastlands)": {
+  "Islespy Shore": {
     "pokes": [
       {
         "id": 198,
@@ -1107,7 +1107,7 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Castaway Shore (Cobalt Coastlands)": {
+  "Castaway Shore": {
     "pokes": [
       {
         "id": 66,
@@ -1159,7 +1159,7 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Tranquility Cove (Cobalt Coastlands)": {
+  "Tranquility Cove": {
     "pokes": [
       {
         "id": 74,
@@ -1235,7 +1235,7 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Celestica Trail (Coronet Highlands)": {
+  "Celestica Trail": {
     "pokes": [
       {
         "id": 75,
@@ -1281,7 +1281,7 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Lonely Spring (Coronet Highlands)": {
+  "Lonely Spring": {
     "pokes": [
       {
         "id": 54,
@@ -1321,7 +1321,7 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Fabled Spring (Coronet Highlands)": {
+  "Fabled Spring": {
     "pokes": [
       {
         "id": 35,
@@ -1367,7 +1367,7 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Stonetooth Rows (Coronet Highlands)": {
+  "Stonetooth Rows": {
     "pokes": [
       {
         "id": 75,
@@ -1413,7 +1413,7 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Primeval Grotto (Coronet Highlands)": {
+  "Primeval Grotto": {
     "pokes": [
       {
         "id": 299,
@@ -1429,7 +1429,7 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Clamberclaw Cliffs (Coronet Highlands)": {
+  "Clamberclaw Cliffs": {
     "pokes": [
       {
         "id": 74,
@@ -1487,7 +1487,7 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Celestica Ruins (Coronet Highlands)": {
+  "Celestica Ruins": {
     "pokes": [
       {
         "id": 74,
@@ -1557,7 +1557,7 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Wayward Cave (Coronet Highlands)": {
+  "Wayward Cave": {
     "pokes": [
       {
         "id": 41,
@@ -1591,7 +1591,7 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Sacred Plaza (Coronet Highlands)": {
+  "Sacred Plaza": {
     "pokes": [
       {
         "id": 74,
@@ -1697,7 +1697,7 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Sonorous Path (Coronet Highlands)": {
+  "Sonorous Path": {
     "pokes": [
       {
         "id": 214,
@@ -1743,7 +1743,7 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Golden Lowlands (Crimson Mirelands)": {
+  "Golden Lowlands": {
     "pokes": [
       {
         "id": 46,
@@ -1813,7 +1813,7 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Gapejaw Bog (Crimson Mirelands)": {
+  "Gapejaw Bog": {
     "pokes": [
       {
         "id": 54,
@@ -1919,7 +1919,7 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Sludge Mound (Crimson Mirelands)": {
+  "Sludge Mound": {
     "pokes": [
       {
         "id": 74,
@@ -1935,7 +1935,7 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Scarlet Bog (Crimson Mirelands)": {
+  "Scarlet Bog": {
     "pokes": [
       {
         "id": 74,
@@ -1993,7 +1993,7 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Bolderoll Slope (Crimson Mirelands)": {
+  "Bolderoll Slope": {
     "pokes": [
       {
         "id": 41,
@@ -2033,7 +2033,7 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Cloudpool Ridge (Crimson Mirelands)": {
+  "Cloudpool Ridge": {
     "pokes": [
       {
         "id": 41,
@@ -2115,7 +2115,7 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Shrouded Ruins (Crimson Mirelands)": {
+  "Shrouded Ruins": {
     "pokes": [
       {
         "id": 74,
@@ -2185,7 +2185,7 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Holm of Trials (Crimson Mirelands)": {
+  "Holm of Trials": {
     "pokes": [
       {
         "id": 54,
@@ -2267,7 +2267,7 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Droning Meadow (Crimson Mirelands)": {
+  "Droning Meadow": {
     "pokes": [
       {
         "id": 46,
@@ -2343,7 +2343,7 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Ursa's Ring (Crimson Mirelands)": {
+  "Ursa's Ring": {
     "pokes": [
       {
         "id": 74,
@@ -2395,7 +2395,7 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Aspiration Hill (Obsidian Fieldlands)": {
+  "Aspiration Hill": {
     "pokes": [
       {
         "id": 396,
@@ -2417,7 +2417,7 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Horseshoe Plains (Obsidian Fieldlands)": {
+  "Horseshoe Plains": {
     "pokes": [
       {
         "id": 77,
@@ -2475,7 +2475,7 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Deertrack Path (Obsidian Fieldlands)": {
+  "Deertrack Path": {
     "pokes": [
       {
         "id": 41,
@@ -2521,7 +2521,7 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Deertrack Heights (Obsidian Fieldlands)": {
+  "Deertrack Heights": {
     "pokes": [
       {
         "id": 41,
@@ -2585,7 +2585,7 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Obsidian Falls (Obsidian Fieldlands)": {
+  "Obsidian Falls": {
     "pokes": [
       {
         "id": 412,
@@ -2595,7 +2595,7 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Oreburrow Tunnel (Obsidian Fieldlands)": {
+  "Oreburrow Tunnel": {
     "pokes": [
       {
         "id": 41,
@@ -2629,7 +2629,7 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Nature's Pantry (Obsidian Fieldlands)": {
+  "Nature's Pantry": {
     "pokes": [
       {
         "id": 25,
@@ -2699,7 +2699,7 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Heartwood (Obsidian Fieldlands)": {
+  "Heartwood": {
     "pokes": [
       {
         "id": 41,
@@ -2775,7 +2775,7 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Grueling Grove (Obsidian Fieldlands)": {
+  "Grueling Grove": {
     "pokes": [
       {
         "id": 267,
@@ -2815,7 +2815,7 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Sandgem Flats (Obsidian Fieldlands)": {
+  "Sandgem Flats": {
     "pokes": [
       {
         "id": 63,
@@ -2891,7 +2891,7 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Ramanas Island (Obsidian Fieldlands)": {
+  "Ramanas Island": {
     "pokes": [
       {
         "id": 75,
@@ -2961,7 +2961,7 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Worn Bridge (Obsidian Fieldlands)": {
+  "Worn Bridge": {
     "pokes": [
       {
         "id": 41,
@@ -4664,65 +4664,65 @@ export const hisuiRoutes = {
 export const hisuiUnlocks = [
   {
     "challengeName": "Challenge 01",
-    "areaId": "Aspiration Hill (Obsidian Fieldlands)",
+    "areaId": "Aspiration Hill",
     "unlocks": [
-      "Horseshoe Plains (Obsidian Fieldlands)"
+      "Horseshoe Plains"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "routeName": "Aspiration Hill (Obsidian Fieldlands)",
+        "routeName": "Aspiration Hill",
         "count": 10
       }
     }
   },
   {
     "challengeName": "Challenge 02",
-    "areaId": "Horseshoe Plains (Obsidian Fieldlands)",
+    "areaId": "Horseshoe Plains",
     "unlocks": [
-      "Deertrack Path (Obsidian Fieldlands)"
+      "Deertrack Path"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "routeName": "Horseshoe Plains (Obsidian Fieldlands)",
+        "routeName": "Horseshoe Plains",
         "count": 10
       }
     }
   },
   {
     "challengeName": "Challenge 03",
-    "areaId": "Deertrack Path (Obsidian Fieldlands)",
+    "areaId": "Deertrack Path",
     "unlocks": [
-      "Deertrack Heights (Obsidian Fieldlands)"
+      "Deertrack Heights"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "routeName": "Deertrack Path (Obsidian Fieldlands)",
+        "routeName": "Deertrack Path",
         "count": 10
       }
     }
   },
   {
     "challengeName": "Challenge 04",
-    "areaId": "Deertrack Heights (Obsidian Fieldlands)",
+    "areaId": "Deertrack Heights",
     "unlocks": [
-      "Nature's Pantry (Obsidian Fieldlands)"
+      "Nature's Pantry"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "routeName": "Deertrack Heights (Obsidian Fieldlands)",
+        "routeName": "Deertrack Heights",
         "count": 10
       }
     }
   },
   {
     "challengeName": "Challenge 05",
-    "areaId": "Nature's Pantry (Obsidian Fieldlands)",
+    "areaId": "Nature's Pantry",
     "unlocks": [
       "Gym - Kleavor"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "routeName": "Nature's Pantry (Obsidian Fieldlands)",
+        "routeName": "Nature's Pantry",
         "count": 10
       }
     }
@@ -4731,7 +4731,7 @@ export const hisuiUnlocks = [
     "challengeName": "Challenge 06",
     "areaId": "Gym - Kleavor",
     "unlocks": [
-      "Obsidian Falls (Obsidian Fieldlands)"
+      "Obsidian Falls"
     ],
     "requirements": {
       "earnBadge": {
@@ -4742,195 +4742,195 @@ export const hisuiUnlocks = [
   },
   {
     "challengeName": "Challenge 07",
-    "areaId": "Obsidian Falls (Obsidian Fieldlands)",
+    "areaId": "Obsidian Falls",
     "unlocks": [
-      "Heartwood (Obsidian Fieldlands)"
+      "Heartwood"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "routeName": "Obsidian Falls (Obsidian Fieldlands)",
+        "routeName": "Obsidian Falls",
         "count": 10
       }
     }
   },
   {
     "challengeName": "Challenge 08",
-    "areaId": "Heartwood (Obsidian Fieldlands)",
+    "areaId": "Heartwood",
     "unlocks": [
-      "Heartwood (Obsidian Fieldlands)"
+      "Heartwood"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "routeName": "Heartwood (Obsidian Fieldlands)",
+        "routeName": "Heartwood",
         "count": 10
       }
     }
   },
   {
     "challengeName": "Challenge 09",
-    "areaId": "Heartwood (Obsidian Fieldlands)",
+    "areaId": "Heartwood",
     "unlocks": [
-      "Oreburrow Tunnel (Obsidian Fieldlands)"
+      "Oreburrow Tunnel"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "routeName": "Heartwood (Obsidian Fieldlands)",
+        "routeName": "Heartwood",
         "count": 10
       }
     }
   },
   {
     "challengeName": "Challenge 10",
-    "areaId": "Oreburrow Tunnel (Obsidian Fieldlands)",
+    "areaId": "Oreburrow Tunnel",
     "unlocks": [
-      "Worn Bridge (Obsidian Fieldlands)"
+      "Worn Bridge"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "routeName": "Oreburrow Tunnel (Obsidian Fieldlands)",
+        "routeName": "Oreburrow Tunnel",
         "count": 10
       }
     }
   },
   {
     "challengeName": "Challenge 11",
-    "areaId": "Worn Bridge (Obsidian Fieldlands)",
+    "areaId": "Worn Bridge",
     "unlocks": [
-      "Sandgem Flats (Obsidian Fieldlands)"
+      "Sandgem Flats"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "routeName": "Worn Bridge (Obsidian Fieldlands)",
+        "routeName": "Worn Bridge",
         "count": 10
       }
     }
   },
   {
     "challengeName": "Challenge 12",
-    "areaId": "Sandgem Flats (Obsidian Fieldlands)",
+    "areaId": "Sandgem Flats",
     "unlocks": [
-      "Sandgem Flats (Obsidian Fieldlands)"
+      "Sandgem Flats"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "routeName": "Sandgem Flats (Obsidian Fieldlands)",
+        "routeName": "Sandgem Flats",
         "count": 10
       }
     }
   },
   {
     "challengeName": "Challenge 13",
-    "areaId": "Sandgem Flats (Obsidian Fieldlands)",
+    "areaId": "Sandgem Flats",
     "unlocks": [
-      "Ramanas Island (Obsidian Fieldlands)"
+      "Ramanas Island"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "routeName": "Sandgem Flats (Obsidian Fieldlands)",
+        "routeName": "Sandgem Flats",
         "count": 10
       }
     }
   },
   {
     "challengeName": "Challenge 14",
-    "areaId": "Ramanas Island (Obsidian Fieldlands)",
+    "areaId": "Ramanas Island",
     "unlocks": [
-      "Gapejaw Bog (Crimson Mirelands)"
+      "Gapejaw Bog"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "routeName": "Ramanas Island (Obsidian Fieldlands)",
+        "routeName": "Ramanas Island",
         "count": 10
       }
     }
   },
   {
     "challengeName": "Challenge 15",
-    "areaId": "Gapejaw Bog (Crimson Mirelands)",
+    "areaId": "Gapejaw Bog",
     "unlocks": [
-      "Gapejaw Bog (Crimson Mirelands)"
+      "Gapejaw Bog"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "routeName": "Gapejaw Bog (Crimson Mirelands)",
+        "routeName": "Gapejaw Bog",
         "count": 10
       }
     }
   },
   {
     "challengeName": "Challenge 16",
-    "areaId": "Gapejaw Bog (Crimson Mirelands)",
+    "areaId": "Gapejaw Bog",
     "unlocks": [
-      "Sludge Mound (Crimson Mirelands)"
+      "Sludge Mound"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "routeName": "Gapejaw Bog (Crimson Mirelands)",
+        "routeName": "Gapejaw Bog",
         "count": 10
       }
     }
   },
   {
     "challengeName": "Challenge 17",
-    "areaId": "Sludge Mound (Crimson Mirelands)",
+    "areaId": "Sludge Mound",
     "unlocks": [
-      "Scarlet Bog (Crimson Mirelands)"
+      "Scarlet Bog"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "routeName": "Sludge Mound (Crimson Mirelands)",
+        "routeName": "Sludge Mound",
         "count": 10
       }
     }
   },
   {
     "challengeName": "Challenge 18",
-    "areaId": "Scarlet Bog (Crimson Mirelands)",
+    "areaId": "Scarlet Bog",
     "unlocks": [
-      "Golden Lowlands (Crimson Mirelands)"
+      "Golden Lowlands"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "routeName": "Scarlet Bog (Crimson Mirelands)",
+        "routeName": "Scarlet Bog",
         "count": 10
       }
     }
   },
   {
     "challengeName": "Challenge 19",
-    "areaId": "Golden Lowlands (Crimson Mirelands)",
+    "areaId": "Golden Lowlands",
     "unlocks": [
-      "Golden Lowlands (Crimson Mirelands)"
+      "Golden Lowlands"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "routeName": "Golden Lowlands (Crimson Mirelands)",
+        "routeName": "Golden Lowlands",
         "count": 10
       }
     }
   },
   {
     "challengeName": "Challenge 20",
-    "areaId": "Golden Lowlands (Crimson Mirelands)",
+    "areaId": "Golden Lowlands",
     "unlocks": [
-      "Bolderoll Slope (Crimson Mirelands)"
+      "Bolderoll Slope"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "routeName": "Golden Lowlands (Crimson Mirelands)",
+        "routeName": "Golden Lowlands",
         "count": 10
       }
     }
   },
   {
     "challengeName": "Challenge 21",
-    "areaId": "Bolderoll Slope (Crimson Mirelands)",
+    "areaId": "Bolderoll Slope",
     "unlocks": [
       "Gym - Lilligant"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "routeName": "Bolderoll Slope (Crimson Mirelands)",
+        "routeName": "Bolderoll Slope",
         "count": 10
       }
     }
@@ -4939,7 +4939,7 @@ export const hisuiUnlocks = [
     "challengeName": "Challenge 22",
     "areaId": "Gym - Lilligant",
     "unlocks": [
-      "Holm of Trials (Crimson Mirelands)"
+      "Holm of Trials"
     ],
     "requirements": {
       "earnBadge": {
@@ -4950,195 +4950,195 @@ export const hisuiUnlocks = [
   },
   {
     "challengeName": "Challenge 23",
-    "areaId": "Holm of Trials (Crimson Mirelands)",
+    "areaId": "Holm of Trials",
     "unlocks": [
-      "Ursa's Ring (Crimson Mirelands)"
+      "Ursa's Ring"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "routeName": "Holm of Trials (Crimson Mirelands)",
+        "routeName": "Holm of Trials",
         "count": 10
       }
     }
   },
   {
     "challengeName": "Challenge 24",
-    "areaId": "Ursa's Ring (Crimson Mirelands)",
+    "areaId": "Ursa's Ring",
     "unlocks": [
-      "Ginkgo Landing (Cobalt Coastlands)"
+      "Ginkgo Landing"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "routeName": "Ursa's Ring (Crimson Mirelands)",
+        "routeName": "Ursa's Ring",
         "count": 10
       }
     }
   },
   {
     "challengeName": "Challenge 25",
-    "areaId": "Ginkgo Landing (Cobalt Coastlands)",
+    "areaId": "Ginkgo Landing",
     "unlocks": [
-      "Shrouded Ruins (Crimson Mirelands)"
+      "Shrouded Ruins"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "routeName": "Ginkgo Landing (Cobalt Coastlands)",
+        "routeName": "Ginkgo Landing",
         "count": 10
       }
     }
   },
   {
     "challengeName": "Challenge 26",
-    "areaId": "Shrouded Ruins (Crimson Mirelands)",
+    "areaId": "Shrouded Ruins",
     "unlocks": [
-      "Droning Meadow (Crimson Mirelands)"
+      "Droning Meadow"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "routeName": "Shrouded Ruins (Crimson Mirelands)",
+        "routeName": "Shrouded Ruins",
         "count": 10
       }
     }
   },
   {
     "challengeName": "Challenge 27",
-    "areaId": "Droning Meadow (Crimson Mirelands)",
+    "areaId": "Droning Meadow",
     "unlocks": [
-      "Grueling Grove (Obsidian Fieldlands)"
+      "Grueling Grove"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "routeName": "Droning Meadow (Crimson Mirelands)",
+        "routeName": "Droning Meadow",
         "count": 10
       }
     }
   },
   {
     "challengeName": "Challenge 28",
-    "areaId": "Grueling Grove (Obsidian Fieldlands)",
+    "areaId": "Grueling Grove",
     "unlocks": [
-      "Bathers' Lagoon (Cobalt Coastlands)"
+      "Bathers' Lagoon"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "routeName": "Grueling Grove (Obsidian Fieldlands)",
+        "routeName": "Grueling Grove",
         "count": 10
       }
     }
   },
   {
     "challengeName": "Challenge 29",
-    "areaId": "Bathers' Lagoon (Cobalt Coastlands)",
+    "areaId": "Bathers' Lagoon",
     "unlocks": [
-      "Castaway Shore (Cobalt Coastlands)"
+      "Castaway Shore"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "routeName": "Bathers' Lagoon (Cobalt Coastlands)",
+        "routeName": "Bathers' Lagoon",
         "count": 10
       }
     }
   },
   {
     "challengeName": "Challenge 30",
-    "areaId": "Castaway Shore (Cobalt Coastlands)",
+    "areaId": "Castaway Shore",
     "unlocks": [
-      "Deadwood Haunt (Cobalt Coastlands)"
+      "Deadwood Haunt"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "routeName": "Castaway Shore (Cobalt Coastlands)",
+        "routeName": "Castaway Shore",
         "count": 10
       }
     }
   },
   {
     "challengeName": "Challenge 31",
-    "areaId": "Deadwood Haunt (Cobalt Coastlands)",
+    "areaId": "Deadwood Haunt",
     "unlocks": [
-      "Crossing Slope (Cobalt Coastlands)"
+      "Crossing Slope"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "routeName": "Deadwood Haunt (Cobalt Coastlands)",
+        "routeName": "Deadwood Haunt",
         "count": 10
       }
     }
   },
   {
     "challengeName": "Challenge 32",
-    "areaId": "Crossing Slope (Cobalt Coastlands)",
+    "areaId": "Crossing Slope",
     "unlocks": [
-      "Veilstone Cape (Cobalt Coastlands)"
+      "Veilstone Cape"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "routeName": "Crossing Slope (Cobalt Coastlands)",
+        "routeName": "Crossing Slope",
         "count": 10
       }
     }
   },
   {
     "challengeName": "Challenge 33",
-    "areaId": "Veilstone Cape (Cobalt Coastlands)",
+    "areaId": "Veilstone Cape",
     "unlocks": [
-      "Tranquility Cove (Cobalt Coastlands)"
+      "Tranquility Cove"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "routeName": "Veilstone Cape (Cobalt Coastlands)",
+        "routeName": "Veilstone Cape",
         "count": 10
       }
     }
   },
   {
     "challengeName": "Challenge 34",
-    "areaId": "Tranquility Cove (Cobalt Coastlands)",
+    "areaId": "Tranquility Cove",
     "unlocks": [
-      "Islespy Shore (Cobalt Coastlands)"
+      "Islespy Shore"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "routeName": "Tranquility Cove (Cobalt Coastlands)",
+        "routeName": "Tranquility Cove",
         "count": 10
       }
     }
   },
   {
     "challengeName": "Challenge 35",
-    "areaId": "Islespy Shore (Cobalt Coastlands)",
+    "areaId": "Islespy Shore",
     "unlocks": [
-      "Spring Path (Cobalt Coastlands)"
+      "Spring Path"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "routeName": "Islespy Shore (Cobalt Coastlands)",
+        "routeName": "Islespy Shore",
         "count": 10
       }
     }
   },
   {
     "challengeName": "Challenge 36",
-    "areaId": "Spring Path (Cobalt Coastlands)",
+    "areaId": "Spring Path",
     "unlocks": [
-      "Firespit Island (Cobalt Coastlands)"
+      "Firespit Island"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "routeName": "Spring Path (Cobalt Coastlands)",
+        "routeName": "Spring Path",
         "count": 10
       }
     }
   },
   {
     "challengeName": "Challenge 37",
-    "areaId": "Firespit Island (Cobalt Coastlands)",
+    "areaId": "Firespit Island",
     "unlocks": [
       "Gym - Arcanine"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "routeName": "Firespit Island (Cobalt Coastlands)",
+        "routeName": "Firespit Island",
         "count": 10
       }
     }
@@ -5147,7 +5147,7 @@ export const hisuiUnlocks = [
     "challengeName": "Challenge 38",
     "areaId": "Gym - Arcanine",
     "unlocks": [
-      "Seagrass Haven (Cobalt Coastlands)"
+      "Seagrass Haven"
     ],
     "requirements": {
       "earnBadge": {
@@ -5158,26 +5158,26 @@ export const hisuiUnlocks = [
   },
   {
     "challengeName": "Challenge 39",
-    "areaId": "Seagrass Haven (Cobalt Coastlands)",
+    "areaId": "Seagrass Haven",
     "unlocks": [
-      "Wayward Cave (Coronet Highlands)"
+      "Wayward Cave"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "routeName": "Seagrass Haven (Cobalt Coastlands)",
+        "routeName": "Seagrass Haven",
         "count": 10
       }
     }
   },
   {
     "challengeName": "Challenge 40",
-    "areaId": "Wayward Cave (Coronet Highlands)",
+    "areaId": "Wayward Cave",
     "unlocks": [
       "Coronet Highlands"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "routeName": "Wayward Cave (Coronet Highlands)",
+        "routeName": "Wayward Cave",
         "count": 10
       }
     }
@@ -5186,7 +5186,7 @@ export const hisuiUnlocks = [
     "challengeName": "Challenge 41",
     "areaId": "Coronet Highlands",
     "unlocks": [
-      "Clamberclaw Cliffs (Coronet Highlands)"
+      "Clamberclaw Cliffs"
     ],
     "requirements": {
       "defeatCountRoute": {
@@ -5197,26 +5197,26 @@ export const hisuiUnlocks = [
   },
   {
     "challengeName": "Challenge 42",
-    "areaId": "Clamberclaw Cliffs (Coronet Highlands)",
+    "areaId": "Clamberclaw Cliffs",
     "unlocks": [
-      "Celestica Trail (Coronet Highlands)"
+      "Celestica Trail"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "routeName": "Clamberclaw Cliffs (Coronet Highlands)",
+        "routeName": "Clamberclaw Cliffs",
         "count": 10
       }
     }
   },
   {
     "challengeName": "Challenge 43",
-    "areaId": "Celestica Trail (Coronet Highlands)",
+    "areaId": "Celestica Trail",
     "unlocks": [
       "Gym - Warden Ingo"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "routeName": "Celestica Trail (Coronet Highlands)",
+        "routeName": "Celestica Trail",
         "count": 10
       }
     }
@@ -5225,7 +5225,7 @@ export const hisuiUnlocks = [
     "challengeName": "Challenge 44",
     "areaId": "Gym - Warden Ingo",
     "unlocks": [
-      "Celestica Ruins (Coronet Highlands)"
+      "Celestica Ruins"
     ],
     "requirements": {
       "earnBadge": {
@@ -5236,52 +5236,52 @@ export const hisuiUnlocks = [
   },
   {
     "challengeName": "Challenge 45",
-    "areaId": "Celestica Ruins (Coronet Highlands)",
+    "areaId": "Celestica Ruins",
     "unlocks": [
-      "Sacred Plaza (Coronet Highlands)"
+      "Sacred Plaza"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "routeName": "Celestica Ruins (Coronet Highlands)",
+        "routeName": "Celestica Ruins",
         "count": 10
       }
     }
   },
   {
     "challengeName": "Challenge 46",
-    "areaId": "Sacred Plaza (Coronet Highlands)",
+    "areaId": "Sacred Plaza",
     "unlocks": [
-      "Stonetooth Rows (Coronet Highlands)"
+      "Stonetooth Rows"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "routeName": "Sacred Plaza (Coronet Highlands)",
+        "routeName": "Sacred Plaza",
         "count": 10
       }
     }
   },
   {
     "challengeName": "Challenge 47",
-    "areaId": "Stonetooth Rows (Coronet Highlands)",
+    "areaId": "Stonetooth Rows",
     "unlocks": [
-      "Primeval Grotto (Coronet Highlands)"
+      "Primeval Grotto"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "routeName": "Stonetooth Rows (Coronet Highlands)",
+        "routeName": "Stonetooth Rows",
         "count": 10
       }
     }
   },
   {
     "challengeName": "Challenge 48",
-    "areaId": "Primeval Grotto (Coronet Highlands)",
+    "areaId": "Primeval Grotto",
     "unlocks": [
       "Gym - Electrode"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "routeName": "Primeval Grotto (Coronet Highlands)",
+        "routeName": "Primeval Grotto",
         "count": 10
       }
     }
@@ -5290,7 +5290,7 @@ export const hisuiUnlocks = [
     "challengeName": "Challenge 49",
     "areaId": "Gym - Electrode",
     "unlocks": [
-      "Cloudpool Ridge (Crimson Mirelands)"
+      "Cloudpool Ridge"
     ],
     "requirements": {
       "earnBadge": {
@@ -5301,117 +5301,117 @@ export const hisuiUnlocks = [
   },
   {
     "challengeName": "Challenge 50",
-    "areaId": "Cloudpool Ridge (Crimson Mirelands)",
+    "areaId": "Cloudpool Ridge",
     "unlocks": [
-      "Cloudpool Ridge (Crimson Mirelands)"
+      "Cloudpool Ridge"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "routeName": "Cloudpool Ridge (Crimson Mirelands)",
+        "routeName": "Cloudpool Ridge",
         "count": 10
       }
     }
   },
   {
     "challengeName": "Challenge 51",
-    "areaId": "Cloudpool Ridge (Crimson Mirelands)",
+    "areaId": "Cloudpool Ridge",
     "unlocks": [
-      "Fabled Spring (Coronet Highlands)"
+      "Fabled Spring"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "routeName": "Cloudpool Ridge (Crimson Mirelands)",
+        "routeName": "Cloudpool Ridge",
         "count": 10
       }
     }
   },
   {
     "challengeName": "Challenge 52",
-    "areaId": "Fabled Spring (Coronet Highlands)",
+    "areaId": "Fabled Spring",
     "unlocks": [
-      "Bonechill Wastes (Alabaster Icelands)"
+      "Bonechill Wastes"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "routeName": "Fabled Spring (Coronet Highlands)",
+        "routeName": "Fabled Spring",
         "count": 10
       }
     }
   },
   {
     "challengeName": "Challenge 53",
-    "areaId": "Bonechill Wastes (Alabaster Icelands)",
+    "areaId": "Bonechill Wastes",
     "unlocks": [
-      "Bonechill Wastes (Alabaster Icelands)"
+      "Bonechill Wastes"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "routeName": "Bonechill Wastes (Alabaster Icelands)",
+        "routeName": "Bonechill Wastes",
         "count": 10
       }
     }
   },
   {
     "challengeName": "Challenge 54",
-    "areaId": "Bonechill Wastes (Alabaster Icelands)",
+    "areaId": "Bonechill Wastes",
     "unlocks": [
-      "Glacier Terrace (Alabaster Icelands)"
+      "Glacier Terrace"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "routeName": "Bonechill Wastes (Alabaster Icelands)",
+        "routeName": "Bonechill Wastes",
         "count": 10
       }
     }
   },
   {
     "challengeName": "Challenge 55",
-    "areaId": "Glacier Terrace (Alabaster Icelands)",
+    "areaId": "Glacier Terrace",
     "unlocks": [
-      "Heart's Crag (Alabaster Icelands)"
+      "Heart's Crag"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "routeName": "Glacier Terrace (Alabaster Icelands)",
+        "routeName": "Glacier Terrace",
         "count": 10
       }
     }
   },
   {
     "challengeName": "Challenge 56",
-    "areaId": "Heart's Crag (Alabaster Icelands)",
+    "areaId": "Heart's Crag",
     "unlocks": [
-      "Snowpoint Temple (Alabaster Icelands)"
+      "Snowpoint Temple"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "routeName": "Heart's Crag (Alabaster Icelands)",
+        "routeName": "Heart's Crag",
         "count": 10
       }
     }
   },
   {
     "challengeName": "Challenge 57",
-    "areaId": "Snowpoint Temple (Alabaster Icelands)",
+    "areaId": "Snowpoint Temple",
     "unlocks": [
-      "Arena's Approach (Alabaster Icelands)"
+      "Arena's Approach"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "routeName": "Snowpoint Temple (Alabaster Icelands)",
+        "routeName": "Snowpoint Temple",
         "count": 10
       }
     }
   },
   {
     "challengeName": "Challenge 58",
-    "areaId": "Arena's Approach (Alabaster Icelands)",
+    "areaId": "Arena's Approach",
     "unlocks": [
       "Gym - Avalugg"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "routeName": "Arena's Approach (Alabaster Icelands)",
+        "routeName": "Arena's Approach",
         "count": 10
       }
     }
@@ -5420,7 +5420,7 @@ export const hisuiUnlocks = [
     "challengeName": "Challenge 59",
     "areaId": "Gym - Avalugg",
     "unlocks": [
-      "Whiteout Valley (Alabaster Icelands)"
+      "Whiteout Valley"
     ],
     "requirements": {
       "earnBadge": {
@@ -5431,13 +5431,13 @@ export const hisuiUnlocks = [
   },
   {
     "challengeName": "Challenge 60",
-    "areaId": "Whiteout Valley (Alabaster Icelands)",
+    "areaId": "Whiteout Valley",
     "unlocks": [
       "Etertime Storm"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "routeName": "Whiteout Valley (Alabaster Icelands)",
+        "routeName": "Whiteout Valley",
         "count": 10
       }
     }
