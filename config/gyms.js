@@ -5426,7 +5426,7 @@ const gyms = [
   },
   {
     "id": "wyndon",
-    "name": "Wyndon Stadium",
+    "name": "Galar Pokemon League",
     "leader": "Champion",
     "levelRequirement": 220,
     "trainers": [
@@ -6107,31 +6107,6 @@ const gyms = [
           {
             "id": 970,
             "level": 62
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "galarchampion",
-    "name": "Pokemon League",
-    "leader": "Leon",
-    "levelRequirement": 0,
-    "trainers": [
-      {
-        "name": "Galar Champion",
-        "team": [
-          {
-            "id": 812,
-            "level": 70
-          },
-          {
-            "id": 815,
-            "level": 70
-          },
-          {
-            "id": 818,
-            "level": 70
           }
         ]
       }

@@ -894,7 +894,7 @@ export const galarRoutes = [
     ]
   },
   {
-    "name": "Turffield & Turffield Stadium (Gym 1 — Grass)",
+    "name": "Turffield Gym",
     "spawns": []
   },
   {
@@ -939,7 +939,7 @@ export const galarRoutes = [
     ]
   },
   {
-    "name": "Hulbury & Hulbury Stadium (Gym 2 — Water)",
+    "name": "Hulbury Gym",
     "spawns": []
   },
   {
@@ -1025,7 +1025,7 @@ export const galarRoutes = [
     ]
   },
   {
-    "name": "Motostoke Stadium (Gym 3 — Fire)",
+    "name": "Motostoke Gym",
     "spawns": []
   },
   {
@@ -1686,7 +1686,7 @@ export const galarRoutes = [
     ]
   },
   {
-    "name": "Stow-on-Side & Stow-on-Side Stadium (Gym 4 — Fighting/Ghost)",
+    "name": "Stow-on-Side Gym",
     "spawns": []
   },
   {
@@ -1731,7 +1731,7 @@ export const galarRoutes = [
     ]
   },
   {
-    "name": "Ballonlea & Ballonlea Stadium (Gym 5 — Fairy)",
+    "name": "Ballonlea Gym",
     "spawns": []
   },
   {
@@ -1829,7 +1829,7 @@ export const galarRoutes = [
     ]
   },
   {
-    "name": "Circhester & Circhester Stadium (Gym 6 — Rock/Ice)",
+    "name": "Circhester Gym",
     "spawns": []
   },
   {
@@ -1878,6 +1878,55 @@ export const galarRoutes = [
         "chance": 0.129
       }
     ]
+  },
+  {
+    "name": "Route 9 (Outer Spikemuth)",
+    "spawns": [
+      {
+        "pokemonId": 99,
+        "minLevel": 40,
+        "maxLevel": 42,
+        "chance": 0.165
+      },
+      {
+        "pokemonId": 593,
+        "minLevel": 40,
+        "maxLevel": 44,
+        "chance": 0.167
+      },
+      {
+        "pokemonId": 747,
+        "minLevel": 40,
+        "maxLevel": 44,
+        "chance": 0.167
+      },
+      {
+        "pokemonId": 748,
+        "minLevel": 40,
+        "maxLevel": 44,
+        "chance": 0.167
+      },
+      {
+        "pokemonId": 226,
+        "minLevel": 40,
+        "maxLevel": 43,
+        "chance": 0.167
+      },
+      {
+        "pokemonId": 321,
+        "minLevel": 40,
+        "maxLevel": 43,
+        "chance": 0.167
+      }
+    ]
+  },
+  {
+    "name": "Spikemuth Gym",
+    "spawns": []
+  },
+  {
+    "name": "Hammerlocke Gym",
+    "spawns": []
   },
   {
     "name": "Axew's Eye 1",
@@ -2200,55 +2249,6 @@ export const galarRoutes = [
     ]
   },
   {
-    "name": "Route 9 (Outer Spikemuth)",
-    "spawns": [
-      {
-        "pokemonId": 99,
-        "minLevel": 40,
-        "maxLevel": 42,
-        "chance": 0.165
-      },
-      {
-        "pokemonId": 593,
-        "minLevel": 40,
-        "maxLevel": 44,
-        "chance": 0.167
-      },
-      {
-        "pokemonId": 747,
-        "minLevel": 40,
-        "maxLevel": 44,
-        "chance": 0.167
-      },
-      {
-        "pokemonId": 748,
-        "minLevel": 40,
-        "maxLevel": 44,
-        "chance": 0.167
-      },
-      {
-        "pokemonId": 226,
-        "minLevel": 40,
-        "maxLevel": 43,
-        "chance": 0.167
-      },
-      {
-        "pokemonId": 321,
-        "minLevel": 40,
-        "maxLevel": 43,
-        "chance": 0.167
-      }
-    ]
-  },
-  {
-    "name": "Spikemuth & Spikemuth Gym (Gym 7 — Dark)",
-    "spawns": []
-  },
-  {
-    "name": "Hammerlocke Stadium (Gym 8 — Dragon)",
-    "spawns": []
-  },
-  {
     "name": "Route 10 (Galar)",
     "spawns": [
       {
@@ -2302,10 +2302,6 @@ export const galarRoutes = [
     ]
   },
   {
-    "name": "Wyndon & Wyndon Stadium",
-    "spawns": []
-  },
-  {
     "name": "Rose Tower",
     "spawns": []
   },
@@ -2331,6 +2327,10 @@ export const galarRoutes = [
         "chance": 0.33
       }
     ]
+  },
+  {
+    "name": "Galar Pokemon League",
+    "spawns": []
   },
   {
     "name": "Battle Tower (Wyndon)",
@@ -4560,13 +4560,13 @@ export const galarUnlocks = [
   {
     "areaId": "Route 4 (Galar)",
     "unlocks": [
-      "Turffield & Turffield Stadium (Gym 1 — Grass)"
+      "Turffield Gym"
     ],
     "requirements": {},
     "challengeName": "Challenge Base 22"
   },
   {
-    "areaId": "Turffield & Turffield Stadium (Gym 1 — Grass)",
+    "areaId": "Turffield Gym",
     "unlocks": [
       "Route 5 (Galar)"
     ],
@@ -4581,13 +4581,13 @@ export const galarUnlocks = [
   {
     "areaId": "Route 5 (Galar)",
     "unlocks": [
-      "Hulbury & Hulbury Stadium (Gym 2 — Water)"
+      "Hulbury Gym"
     ],
     "requirements": {},
     "challengeName": "Challenge Base 24"
   },
   {
-    "areaId": "Hulbury & Hulbury Stadium (Gym 2 — Water)",
+    "areaId": "Hulbury Gym",
     "unlocks": [
       "Galar Mine No. 2"
     ],
@@ -4610,13 +4610,13 @@ export const galarUnlocks = [
   {
     "areaId": "Motostoke Outskirts",
     "unlocks": [
-      "Motostoke Stadium (Gym 3 — Fire)"
+      "Motostoke Gym"
     ],
     "requirements": {},
     "challengeName": "Challenge Base 27"
   },
   {
-    "areaId": "Motostoke Stadium (Gym 3 — Fire)",
+    "areaId": "Motostoke Gym",
     "unlocks": [
       "Motostoke Riverbank"
     ],
@@ -4735,13 +4735,13 @@ export const galarUnlocks = [
   {
     "areaId": "Route 6 (Galar)",
     "unlocks": [
-      "Stow-on-Side & Stow-on-Side Stadium (Gym 4 — Fighting/Ghost)"
+      "Stow-on-Side Gym"
     ],
     "requirements": {},
     "challengeName": "Challenge Base 42"
   },
   {
-    "areaId": "Stow-on-Side & Stow-on-Side Stadium (Gym 4 — Fighting/Ghost)",
+    "areaId": "Stow-on-Side Gym",
     "unlocks": [
       "Glimwood Tangle"
     ],
@@ -4756,13 +4756,13 @@ export const galarUnlocks = [
   {
     "areaId": "Glimwood Tangle",
     "unlocks": [
-      "Ballonlea & Ballonlea Stadium (Gym 5 — Fairy)"
+      "Ballonlea Gym"
     ],
     "requirements": {},
     "challengeName": "Challenge Base 44"
   },
   {
-    "areaId": "Ballonlea & Ballonlea Stadium (Gym 5 — Fairy)",
+    "areaId": "Ballonlea Gym",
     "unlocks": [
       "Route 7 (Galar)"
     ],
@@ -4785,13 +4785,13 @@ export const galarUnlocks = [
   {
     "areaId": "Route 8 (including Steamdrift Way)",
     "unlocks": [
-      "Circhester & Circhester Stadium (Gym 6 — Rock/Ice)"
+      "Circhester Gym"
     ],
     "requirements": {},
     "challengeName": "Challenge Base 47"
   },
   {
-    "areaId": "Circhester & Circhester Stadium (Gym 6 — Rock/Ice)",
+    "areaId": "Circhester Gym",
     "unlocks": [
       "Route 9 (Circhester Bay)"
     ],
@@ -4806,55 +4806,23 @@ export const galarUnlocks = [
   {
     "areaId": "Route 9 (Circhester Bay)",
     "unlocks": [
-      "Axew's Eye 1"
+      "Route 9 (Outer Spikemuth)"
     ],
     "requirements": {},
     "challengeName": "Challenge Base 49"
   },
   {
-    "areaId": "Axew's Eye 1",
+    "areaId": "Route 9 (Outer Spikemuth)",
     "unlocks": [
-      "Axew's Eye 2"
+      "Spikemuth Gym"
     ],
     "requirements": {},
     "challengeName": "Challenge Base 50"
   },
   {
-    "areaId": "Axew's Eye 2",
+    "areaId": "Spikemuth Gym",
     "unlocks": [
-      "Lake of Outrage 1"
-    ],
-    "requirements": {},
-    "challengeName": "Challenge Base 51"
-  },
-  {
-    "areaId": "Lake of Outrage 1",
-    "unlocks": [
-      "Lake of Outrage 2"
-    ],
-    "requirements": {},
-    "challengeName": "Challenge Base 52"
-  },
-  {
-    "areaId": "Lake of Outrage 2",
-    "unlocks": [
-      "Route 9 (Outer Spikemuth)"
-    ],
-    "requirements": {},
-    "challengeName": "Challenge Base 53"
-  },
-  {
-    "areaId": "Route 9 (Outer Spikemuth)",
-    "unlocks": [
-      "Spikemuth & Spikemuth Gym (Gym 7 — Dark)"
-    ],
-    "requirements": {},
-    "challengeName": "Challenge Base 54"
-  },
-  {
-    "areaId": "Spikemuth & Spikemuth Gym (Gym 7 — Dark)",
-    "unlocks": [
-      "Hammerlocke Stadium (Gym 8 — Dragon)"
+      "Hammerlocke Gym"
     ],
     "requirements": {
       "earnBadge": {
@@ -4862,12 +4830,12 @@ export const galarUnlocks = [
         "name": "Galar Badge 7"
       }
     },
-    "challengeName": "Challenge Base 55"
+    "challengeName": "Challenge Base 51"
   },
   {
-    "areaId": "Hammerlocke Stadium (Gym 8 — Dragon)",
+    "areaId": "Hammerlocke Gym",
     "unlocks": [
-      "Route 10 (Galar)"
+      "Axew's Eye 1"
     ],
     "requirements": {
       "earnBadge": {
@@ -4875,23 +4843,47 @@ export const galarUnlocks = [
         "name": "Galar Badge 8"
       }
     },
+    "challengeName": "Challenge Base 52"
+  },
+  {
+    "areaId": "Axew's Eye 1",
+    "unlocks": [
+      "Axew's Eye 2"
+    ],
+    "requirements": {},
+    "challengeName": "Challenge Base 53"
+  },
+  {
+    "areaId": "Axew's Eye 2",
+    "unlocks": [
+      "Lake of Outrage 1"
+    ],
+    "requirements": {},
+    "challengeName": "Challenge Base 54"
+  },
+  {
+    "areaId": "Lake of Outrage 1",
+    "unlocks": [
+      "Lake of Outrage 2"
+    ],
+    "requirements": {},
+    "challengeName": "Challenge Base 55"
+  },
+  {
+    "areaId": "Lake of Outrage 2",
+    "unlocks": [
+      "Route 10 (Galar)"
+    ],
+    "requirements": {},
     "challengeName": "Challenge Base 56"
   },
   {
     "areaId": "Route 10 (Galar)",
     "unlocks": [
-      "Wyndon & Wyndon Stadium"
-    ],
-    "requirements": {},
-    "challengeName": "Challenge Base 57"
-  },
-  {
-    "areaId": "Wyndon & Wyndon Stadium",
-    "unlocks": [
       "Rose Tower"
     ],
     "requirements": {},
-    "challengeName": "Challenge Base 58"
+    "challengeName": "Challenge Base 57"
   },
   {
     "areaId": "Rose Tower",
@@ -4899,14 +4891,24 @@ export const galarUnlocks = [
       "Energy Plant & Tower Summit (Hammerlocke)"
     ],
     "requirements": {},
-    "challengeName": "Challenge Base 59"
+    "challengeName": "Challenge Base 58"
   },
   {
     "areaId": "Energy Plant & Tower Summit (Hammerlocke)",
     "unlocks": [
-      "Battle Tower (Wyndon)"
+      "Galar Pokemon League"
     ],
     "requirements": {},
+    "challengeName": "Challenge Base 59"
+  },
+  {
+    "areaId": "Galar Pokemon League",
+    "unlocks": [
+      "Battle Tower (Wyndon)"
+    ],
+    "requirements": {
+      "defeatGalarChampion": true
+    },
     "challengeName": "Challenge Base 60"
   },
   {
@@ -5287,9 +5289,7 @@ export const galarUnlocks = [
   },
   {
     "areaId": "Dyna Tree Hill",
-    "unlocks": [
-      "Slumbering Weald"
-    ],
+    "unlocks": [],
     "requirements": {},
     "challengeName": "Extra Challenge ECrown 24"
   }
