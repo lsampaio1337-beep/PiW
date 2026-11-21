@@ -1,505 +1,1755 @@
 export const hisuiRoutes = {
-  "Whiteout Valley": {
+  "Aspiration Hill": {
     "pokes": [
       {
-        "id": 190,
-        "minLevel": 43,
-        "maxLevel": 46,
-        "probability": 0.18
+        "id": 396,
+        "minLevel": 1,
+        "maxLevel": 3,
+        "probability": 0.3726
       },
       {
-        "id": 361,
-        "minLevel": 38,
-        "maxLevel": 41,
-        "probability": 0.22
+        "id": 399,
+        "minLevel": 1,
+        "maxLevel": 3,
+        "probability": 0.3651
+      },
+      {
+        "id": 425,
+        "minLevel": 2,
+        "maxLevel": 4,
+        "probability": 0.2623
+      }
+    ]
+  },
+  "Horseshoe Plains": {
+    "pokes": [
+      {
+        "id": 133,
+        "minLevel": 3,
+        "maxLevel": 5,
+        "probability": 0.1593
+      },
+      {
+        "id": 265,
+        "minLevel": 1,
+        "maxLevel": 3,
+        "probability": 0.2655
+      },
+      {
+        "id": 418,
+        "minLevel": 3,
+        "maxLevel": 5,
+        "probability": 0.1569
+      },
+      {
+        "id": 396,
+        "minLevel": 2,
+        "maxLevel": 4,
+        "probability": 0.2113
+      },
+      {
+        "id": 399,
+        "minLevel": 2,
+        "maxLevel": 4,
+        "probability": 0.207
+      }
+    ]
+  },
+  "Deertrack Path": {
+    "pokes": [
+      {
+        "id": 41,
+        "minLevel": 4,
+        "maxLevel": 6,
+        "probability": 0.209
+      },
+      {
+        "id": 74,
+        "minLevel": 4,
+        "maxLevel": 6,
+        "probability": 0.1707
+      },
+      {
+        "id": 401,
+        "minLevel": 3,
+        "maxLevel": 5,
+        "probability": 0.264
+      },
+      {
+        "id": 425,
+        "minLevel": 5,
+        "maxLevel": 7,
+        "probability": 0.1472
+      },
+      {
+        "id": 396,
+        "minLevel": 4,
+        "maxLevel": 6,
+        "probability": 0.2091
+      }
+    ]
+  },
+  "Deertrack Heights": {
+    "pokes": [
+      {
+        "id": 390,
+        "minLevel": 5,
+        "maxLevel": 7,
+        "probability": 0.2032
+      },
+      {
+        "id": 397,
+        "minLevel": 5,
+        "maxLevel": 7,
+        "probability": 0.0923
+      },
+      {
+        "id": 403,
+        "minLevel": 5,
+        "maxLevel": 7,
+        "probability": 0.2388
+      },
+      {
+        "id": 41,
+        "minLevel": 5,
+        "maxLevel": 7,
+        "probability": 0.2563
+      },
+      {
+        "id": 74,
+        "minLevel": 5,
+        "maxLevel": 7,
+        "probability": 0.2094
+      }
+    ]
+  },
+  "Nature's Pantry": {
+    "pokes": [
+      {
+        "id": 172,
+        "minLevel": 6,
+        "maxLevel": 8,
+        "probability": 0.2578
+      },
+      {
+        "id": 46,
+        "minLevel": 7,
+        "maxLevel": 9,
+        "probability": 0.1854
+      },
+      {
+        "id": 402,
+        "minLevel": 9,
+        "maxLevel": 11,
+        "probability": 0.0688
+      },
+      {
+        "id": 401,
+        "minLevel": 6,
+        "maxLevel": 8,
+        "probability": 0.2724
+      },
+      {
+        "id": 41,
+        "minLevel": 7,
+        "maxLevel": 9,
+        "probability": 0.2156
+      }
+    ]
+  },
+  "Gym - Kleavor": {
+    "type": "gym",
+    "name": "Gym - Kleavor",
+    "requirements": {
+      "earnBadge": {
+        "badgeCount": 65,
+        "name": "Kleavor Badge"
+      }
+    },
+    "pokes": []
+  },
+  "Obsidian Falls": {
+    "pokes": [
+      {
+        "id": 129,
+        "minLevel": 8,
+        "maxLevel": 10,
+        "probability": 0.4002
       },
       {
         "id": 412,
+        "minLevel": 9,
+        "maxLevel": 11,
+        "probability": 0.3573
+      },
+      {
+        "id": 418,
+        "minLevel": 10,
+        "maxLevel": 12,
+        "probability": 0.2425
+      }
+    ]
+  },
+  "Heartwood": {
+    "pokes": [
+      {
+        "id": 266,
+        "minLevel": 11,
+        "maxLevel": 13,
+        "probability": 0.0865
+      },
+      {
+        "id": 268,
+        "minLevel": 11,
+        "maxLevel": 13,
+        "probability": 0.0865
+      },
+      {
+        "id": 415,
+        "minLevel": 11,
+        "maxLevel": 14,
+        "probability": 0.4231
+      },
+      {
+        "id": 265,
+        "minLevel": 11,
+        "maxLevel": 13,
+        "probability": 0.1818
+      },
+      {
+        "id": 25,
+        "minLevel": 12,
+        "maxLevel": 15,
+        "probability": 0.106
+      },
+      {
+        "id": 267,
+        "minLevel": 13,
+        "maxLevel": 16,
+        "probability": 0.0573
+      },
+      {
+        "id": 269,
+        "minLevel": 12,
+        "maxLevel": 15,
+        "probability": 0.0588
+      }
+    ]
+  },
+  "Oreburrow Tunnel": {
+    "pokes": [
+      {
+        "id": 66,
+        "minLevel": 14,
+        "maxLevel": 17,
+        "probability": 0.2636
+      },
+      {
+        "id": 75,
+        "minLevel": 15,
+        "maxLevel": 18,
+        "probability": 0.1031
+      },
+      {
+        "id": 440,
+        "minLevel": 13,
+        "maxLevel": 16,
+        "probability": 0.3654
+      },
+      {
+        "id": 74,
+        "minLevel": 14,
+        "maxLevel": 17,
+        "probability": 0.2679
+      }
+    ]
+  },
+  "Worn Bridge": {
+    "pokes": [
+      {
+        "id": 54,
+        "minLevel": 15,
+        "maxLevel": 18,
+        "probability": 0.2991
+      },
+      {
+        "id": 427,
         "minLevel": 16,
         "maxLevel": 19,
-        "probability": 0.3
+        "probability": 0.2735
+      },
+      {
+        "id": 412,
+        "minLevel": 14,
+        "maxLevel": 17,
+        "probability": 0.4274
+      }
+    ]
+  },
+  "Sandgem Flats": {
+    "pokes": [
+      {
+        "id": 63,
+        "minLevel": 16,
+        "maxLevel": 21,
+        "probability": 0.3182
+      },
+      {
+        "id": 404,
+        "minLevel": 16,
+        "maxLevel": 19,
+        "probability": 0.0741
+      },
+      {
+        "id": 439,
+        "minLevel": 16,
+        "maxLevel": 19,
+        "probability": 0.1735
+      },
+      {
+        "id": 397,
+        "minLevel": 16,
+        "maxLevel": 19,
+        "probability": 0.0791
+      },
+      {
+        "id": 64,
+        "minLevel": 19,
+        "maxLevel": 22,
+        "probability": 0.0562
+      },
+      {
+        "id": 422,
+        "minLevel": 18,
+        "maxLevel": 21,
+        "probability": 0.1383
+      },
+      {
+        "id": 406,
+        "minLevel": 18,
+        "maxLevel": 21,
+        "probability": 0.1606
+      }
+    ]
+  },
+  "Ramanas Island": {
+    "pokes": [
+      {
+        "id": 446,
+        "minLevel": 20,
+        "maxLevel": 23,
+        "probability": 0.1881
+      },
+      {
+        "id": 190,
+        "minLevel": 19,
+        "maxLevel": 22,
+        "probability": 0.2038
+      },
+      {
+        "id": 280,
+        "minLevel": 17,
+        "maxLevel": 20,
+        "probability": 0.3706
+      },
+      {
+        "id": 390,
+        "minLevel": 19,
+        "maxLevel": 22,
+        "probability": 0.2375
+      }
+    ]
+  },
+  "Gapejaw Bog": {
+    "pokes": [
+      {
+        "id": 387,
+        "minLevel": 21,
+        "maxLevel": 25,
+        "probability": 0.2556
+      },
+      {
+        "id": 453,
+        "minLevel": 21,
+        "maxLevel": 24,
+        "probability": 0.137
+      },
+      {
+        "id": 193,
+        "minLevel": 22,
+        "maxLevel": 25,
+        "probability": 0.1054
+      },
+      {
+        "id": 54,
+        "minLevel": 21,
+        "maxLevel": 24,
+        "probability": 0.1284
+      },
+      {
+        "id": 449,
+        "minLevel": 22,
+        "maxLevel": 25,
+        "probability": 0.1218
+      },
+      {
+        "id": 434,
+        "minLevel": 22,
+        "maxLevel": 25,
+        "probability": 0.1222
+      },
+      {
+        "id": 92,
+        "minLevel": 22,
+        "maxLevel": 25,
+        "probability": 0.1296
+      }
+    ]
+  },
+  "Sludge Mound": {
+    "pokes": [
+      {
+        "id": 111,
+        "minLevel": 24,
+        "maxLevel": 27,
+        "probability": 0.4276
+      },
+      {
+        "id": 108,
+        "minLevel": 24,
+        "maxLevel": 27,
+        "probability": 0.3832
+      },
+      {
+        "id": 75,
+        "minLevel": 24,
+        "maxLevel": 27,
+        "probability": 0.1892
+      }
+    ]
+  },
+  "Scarlet Bog": {
+    "pokes": [
+      {
+        "id": 93,
+        "minLevel": 25,
+        "maxLevel": 28,
+        "probability": 0.1252
+      },
+      {
+        "id": 435,
+        "minLevel": 26,
+        "maxLevel": 29,
+        "probability": 0.1058
+      },
+      {
+        "id": 400,
+        "minLevel": 25,
+        "maxLevel": 28,
+        "probability": 0.1237
+      },
+      {
+        "id": 453,
+        "minLevel": 24,
+        "maxLevel": 27,
+        "probability": 0.338
+      },
+      {
+        "id": 449,
+        "minLevel": 24,
+        "maxLevel": 27,
+        "probability": 0.3073
+      }
+    ]
+  },
+  "Golden Lowlands": {
+    "pokes": [
+      {
+        "id": 47,
+        "minLevel": 27,
+        "maxLevel": 30,
+        "probability": 0.0543
+      },
+      {
+        "id": 315,
+        "minLevel": 27,
+        "maxLevel": 30,
+        "probability": 0.055
+      },
+      {
+        "id": 281,
+        "minLevel": 25,
+        "maxLevel": 28,
+        "probability": 0.0792
+      },
+      {
+        "id": 46,
+        "minLevel": 26,
+        "maxLevel": 29,
+        "probability": 0.1544
+      },
+      {
+        "id": 406,
+        "minLevel": 26,
+        "maxLevel": 29,
+        "probability": 0.157
+      },
+      {
+        "id": 455,
+        "minLevel": 29,
+        "maxLevel": 32,
+        "probability": 0.0851
+      },
+      {
+        "id": 417,
+        "minLevel": 28,
+        "maxLevel": 31,
+        "probability": 0.0953
+      },
+      {
+        "id": 114,
+        "minLevel": 28,
+        "maxLevel": 31,
+        "probability": 0.0888
+      },
+      {
+        "id": 427,
+        "minLevel": 28,
+        "maxLevel": 31,
+        "probability": 0.1103
+      },
+      {
+        "id": 54,
+        "minLevel": 27,
+        "maxLevel": 30,
+        "probability": 0.1206
+      }
+    ]
+  },
+  "Bolderoll Slope": {
+    "pokes": [
+      {
+        "id": 42,
+        "minLevel": 30,
+        "maxLevel": 33,
+        "probability": 0.1699
+      },
+      {
+        "id": 67,
+        "minLevel": 29,
+        "maxLevel": 32,
+        "probability": 0.1909
+      },
+      {
+        "id": 391,
+        "minLevel": 29,
+        "maxLevel": 32,
+        "probability": 0.1909
+      },
+      {
+        "id": 111,
+        "minLevel": 28,
+        "maxLevel": 31,
+        "probability": 0.4483
+      }
+    ]
+  },
+  "Gym - Lilligant": {
+    "type": "gym",
+    "name": "Gym - Lilligant",
+    "requirements": {
+      "earnBadge": {
+        "badgeCount": 66,
+        "name": "Lilligant Badge"
+      }
+    },
+    "pokes": []
+  },
+  "Holm of Trials": {
+    "pokes": [
+      {
+        "id": 548,
+        "minLevel": 31,
+        "maxLevel": 34,
+        "probability": 0.2564
+      },
+      {
+        "id": 704,
+        "minLevel": 32,
+        "maxLevel": 35,
+        "probability": 0.2393
+      },
+      {
+        "id": 388,
+        "minLevel": 33,
+        "maxLevel": 36,
+        "probability": 0.0886
+      },
+      {
+        "id": 92,
+        "minLevel": 32,
+        "maxLevel": 35,
+        "probability": 0.2316
+      },
+      {
+        "id": 193,
+        "minLevel": 33,
+        "maxLevel": 36,
+        "probability": 0.1841
+      }
+    ]
+  },
+  "Ursa's Ring": {
+    "pokes": [
+      {
+        "id": 216,
+        "minLevel": 32,
+        "maxLevel": 35,
+        "probability": 0.3004
+      },
+      {
+        "id": 77,
+        "minLevel": 33,
+        "maxLevel": 36,
+        "probability": 0.2418
+      },
+      {
+        "id": 234,
+        "minLevel": 34,
+        "maxLevel": 37,
+        "probability": 0.2132
+      },
+      {
+        "id": 417,
+        "minLevel": 33,
+        "maxLevel": 36,
+        "probability": 0.2446
+      }
+    ]
+  },
+  "Ginkgo Landing": {
+    "pokes": [
+      {
+        "id": 198,
+        "minLevel": 36,
+        "maxLevel": 39,
+        "probability": 0.164
+      },
+      {
+        "id": 363,
+        "minLevel": 35,
+        "maxLevel": 38,
+        "probability": 0.229
+      },
+      {
+        "id": 451,
+        "minLevel": 35,
+        "maxLevel": 38,
+        "probability": 0.2013
+      },
+      {
+        "id": 422,
+        "minLevel": 35,
+        "maxLevel": 38,
+        "probability": 0.2044
+      },
+      {
+        "id": 418,
+        "minLevel": 35,
+        "maxLevel": 38,
+        "probability": 0.2013
+      }
+    ]
+  },
+  "Shrouded Ruins": {
+    "pokes": [
+      {
+        "id": 201,
+        "minLevel": 36,
+        "maxLevel": 39,
+        "probability": 0.2683
+      },
+      {
+        "id": 442,
+        "minLevel": 38,
+        "maxLevel": 41,
+        "probability": 0.1859
+      },
+      {
+        "id": 426,
+        "minLevel": 38,
+        "maxLevel": 41,
+        "probability": 0.0905
+      },
+      {
+        "id": 280,
+        "minLevel": 32,
+        "maxLevel": 35,
+        "probability": 0.4553
+      }
+    ]
+  },
+  "Droning Meadow": {
+    "pokes": [
+      {
+        "id": 416,
+        "minLevel": 40,
+        "maxLevel": 43,
+        "probability": 0.0916
       },
       {
         "id": 413,
-        "minLevel": 43,
-        "maxLevel": 46,
-        "probability": 0.08
+        "minLevel": 39,
+        "maxLevel": 42,
+        "probability": 0.1024
       },
       {
-        "id": 712,
-        "minLevel": 33,
-        "maxLevel": 36,
-        "probability": 0.22
+        "id": 414,
+        "minLevel": 39,
+        "maxLevel": 42,
+        "probability": 0.1024
+      },
+      {
+        "id": 415,
+        "minLevel": 36,
+        "maxLevel": 39,
+        "probability": 0.356
+      },
+      {
+        "id": 399,
+        "minLevel": 36,
+        "maxLevel": 39,
+        "probability": 0.3476
+      }
+    ]
+  },
+  "Grueling Grove": {
+    "pokes": [
+      {
+        "id": 123,
+        "minLevel": 41,
+        "maxLevel": 45,
+        "probability": 0.1815
+      },
+      {
+        "id": 175,
+        "minLevel": 37,
+        "maxLevel": 41,
+        "probability": 0.3705
+      },
+      {
+        "id": 431,
+        "minLevel": 38,
+        "maxLevel": 42,
+        "probability": 0.2928
+      },
+      {
+        "id": 267,
+        "minLevel": 39,
+        "maxLevel": 43,
+        "probability": 0.0766
+      },
+      {
+        "id": 269,
+        "minLevel": 39,
+        "maxLevel": 43,
+        "probability": 0.0786
+      }
+    ]
+  },
+  "Bathers' Lagoon": {
+    "pokes": [
+      {
+        "id": 393,
+        "minLevel": 40,
+        "maxLevel": 44,
+        "probability": 0.216
+      },
+      {
+        "id": 72,
+        "minLevel": 40,
+        "maxLevel": 44,
+        "probability": 0.2025
+      },
+      {
+        "id": 419,
+        "minLevel": 42,
+        "maxLevel": 46,
+        "probability": 0.0685
+      },
+      {
+        "id": 129,
+        "minLevel": 38,
+        "maxLevel": 42,
+        "probability": 0.3391
+      },
+      {
+        "id": 446,
+        "minLevel": 40,
+        "maxLevel": 44,
+        "probability": 0.1739
+      }
+    ]
+  },
+  "Castaway Shore": {
+    "pokes": [
+      {
+        "id": 456,
+        "minLevel": 42,
+        "maxLevel": 46,
+        "probability": 0.2463
+      },
+      {
+        "id": 458,
+        "minLevel": 42,
+        "maxLevel": 46,
+        "probability": 0.2356
+      },
+      {
+        "id": 37,
+        "minLevel": 42,
+        "maxLevel": 46,
+        "probability": 0.2718
+      },
+      {
+        "id": 451,
+        "minLevel": 42,
+        "maxLevel": 46,
+        "probability": 0.2463
+      }
+    ]
+  },
+  "Deadwood Haunt": {
+    "pokes": [
+      {
+        "id": 355,
+        "minLevel": 42,
+        "maxLevel": 46,
+        "probability": 0.3612
+      },
+      {
+        "id": 441,
+        "minLevel": 43,
+        "maxLevel": 47,
+        "probability": 0.2593
+      },
+      {
+        "id": 398,
+        "minLevel": 45,
+        "maxLevel": 49,
+        "probability": 0.0732
+      },
+      {
+        "id": 425,
+        "minLevel": 43,
+        "maxLevel": 47,
+        "probability": 0.3063
+      }
+    ]
+  },
+  "Crossing Slope": {
+    "pokes": [
+      {
+        "id": 432,
+        "minLevel": 46,
+        "maxLevel": 50,
+        "probability": 0.1029
+      },
+      {
+        "id": 122,
+        "minLevel": 46,
+        "maxLevel": 50,
+        "probability": 0.1012
+      },
+      {
+        "id": 58,
+        "minLevel": 45,
+        "maxLevel": 49,
+        "probability": 0.2659
+      },
+      {
+        "id": 431,
+        "minLevel": 44,
+        "maxLevel": 48,
+        "probability": 0.3002
+      },
+      {
+        "id": 198,
+        "minLevel": 45,
+        "maxLevel": 49,
+        "probability": 0.2298
+      }
+    ]
+  },
+  "Veilstone Cape": {
+    "pokes": [
+      {
+        "id": 173,
+        "minLevel": 44,
+        "maxLevel": 48,
+        "probability": 0.338
+      },
+      {
+        "id": 35,
+        "minLevel": 46,
+        "maxLevel": 50,
+        "probability": 0.1141
+      },
+      {
+        "id": 176,
+        "minLevel": 47,
+        "maxLevel": 51,
+        "probability": 0.091
+      },
+      {
+        "id": 37,
+        "minLevel": 46,
+        "maxLevel": 50,
+        "probability": 0.2464
+      },
+      {
+        "id": 58,
+        "minLevel": 46,
+        "maxLevel": 50,
+        "probability": 0.2105
+      }
+    ]
+  },
+  "Tranquility Cove": {
+    "pokes": [
+      {
+        "id": 223,
+        "minLevel": 46,
+        "maxLevel": 50,
+        "probability": 0.2653
+      },
+      {
+        "id": 211,
+        "minLevel": 48,
+        "maxLevel": 52,
+        "probability": 0.1809
+      },
+      {
+        "id": 226,
+        "minLevel": 49,
+        "maxLevel": 53,
+        "probability": 0.082
+      },
+      {
+        "id": 456,
+        "minLevel": 46,
+        "maxLevel": 50,
+        "probability": 0.2412
+      },
+      {
+        "id": 458,
+        "minLevel": 47,
+        "maxLevel": 51,
+        "probability": 0.2306
+      }
+    ]
+  },
+  "Islespy Shore": {
+    "pokes": [
+      {
+        "id": 364,
+        "minLevel": 49,
+        "maxLevel": 54,
+        "probability": 0.2221
+      },
+      {
+        "id": 457,
+        "minLevel": 50,
+        "maxLevel": 55,
+        "probability": 0.1979
+      },
+      {
+        "id": 393,
+        "minLevel": 48,
+        "maxLevel": 53,
+        "probability": 0.58
+      }
+    ]
+  },
+  "Spring Path": {
+    "pokes": [
+      {
+        "id": 240,
+        "minLevel": 50,
+        "maxLevel": 55,
+        "probability": 0.3473
+      },
+      {
+        "id": 454,
+        "minLevel": 51,
+        "maxLevel": 56,
+        "probability": 0.1293
+      },
+      {
+        "id": 423,
+        "minLevel": 51,
+        "maxLevel": 56,
+        "probability": 0.1334
+      },
+      {
+        "id": 422,
+        "minLevel": 49,
+        "maxLevel": 54,
+        "probability": 0.39
+      }
+    ]
+  },
+  "Firespit Island": {
+    "pokes": [
+      {
+        "id": 485,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 1
+      }
+    ]
+  },
+  "Gym - Arcanine": {
+    "type": "gym",
+    "name": "Gym - Arcanine",
+    "requirements": {
+      "earnBadge": {
+        "badgeCount": 67,
+        "name": "Arcanine Badge"
+      }
+    },
+    "pokes": []
+  },
+  "Seagrass Haven": {
+    "pokes": [
+      {
+        "id": 73,
+        "minLevel": 56,
+        "maxLevel": 61,
+        "probability": 0.1178
+      },
+      {
+        "id": 501,
+        "minLevel": 52,
+        "maxLevel": 57,
+        "probability": 0.3938
+      },
+      {
+        "id": 224,
+        "minLevel": 55,
+        "maxLevel": 60,
+        "probability": 0.1263
+      },
+      {
+        "id": 72,
+        "minLevel": 53,
+        "maxLevel": 58,
+        "probability": 0.3621
+      }
+    ]
+  },
+  "Wayward Cave": {
+    "pokes": [
+      {
+        "id": 339,
+        "minLevel": 55,
+        "maxLevel": 60,
+        "probability": 0.387
+      },
+      {
+        "id": 340,
+        "minLevel": 57,
+        "maxLevel": 62,
+        "probability": 0.1191
+      },
+      {
+        "id": 443,
+        "minLevel": 55,
+        "maxLevel": 60,
+        "probability": 0.3715
+      },
+      {
+        "id": 42,
+        "minLevel": 57,
+        "maxLevel": 62,
+        "probability": 0.1224
+      }
+    ]
+  },
+  "Coronet Highlands": {
+    "pokes": [
+      {
+        "id": 101.1,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 1
+      }
+    ]
+  },
+  "Clamberclaw Cliffs": {
+    "pokes": [
+      {
+        "id": 436,
+        "minLevel": 58,
+        "maxLevel": 64,
+        "probability": 0.229
+      },
+      {
+        "id": 207,
+        "minLevel": 60,
+        "maxLevel": 66,
+        "probability": 0.1598
+      },
+      {
+        "id": 299,
+        "minLevel": 59,
+        "maxLevel": 65,
+        "probability": 0.1832
+      },
+      {
+        "id": 111,
+        "minLevel": 59,
+        "maxLevel": 65,
+        "probability": 0.1991
+      },
+      {
+        "id": 443,
+        "minLevel": 58,
+        "maxLevel": 64,
+        "probability": 0.2289
+      }
+    ]
+  },
+  "Celestica Trail": {
+    "pokes": [
+      {
+        "id": 95,
+        "minLevel": 59,
+        "maxLevel": 65,
+        "probability": 0.4467
+      },
+      {
+        "id": 112,
+        "minLevel": 60,
+        "maxLevel": 66,
+        "probability": 0.1773
+      },
+      {
+        "id": 450,
+        "minLevel": 61,
+        "maxLevel": 67,
+        "probability": 0.1638
+      },
+      {
+        "id": 67,
+        "minLevel": 60,
+        "maxLevel": 66,
+        "probability": 0.2122
+      }
+    ]
+  },
+  "Gym - Warden Ingo": {
+    "type": "gym",
+    "name": "Gym - Warden Ingo",
+    "requirements": {
+      "earnBadge": {
+        "badgeCount": 68,
+        "name": "Warden Ingo Badge"
+      }
+    },
+    "pokes": []
+  },
+  "Celestica Ruins": {
+    "pokes": [
+      {
+        "id": 185,
+        "minLevel": 64,
+        "maxLevel": 70,
+        "probability": 0.0937
+      },
+      {
+        "id": 438,
+        "minLevel": 62,
+        "maxLevel": 68,
+        "probability": 0.2648
+      },
+      {
+        "id": 81,
+        "minLevel": 63,
+        "maxLevel": 69,
+        "probability": 0.2363
+      },
+      {
+        "id": 200,
+        "minLevel": 64,
+        "maxLevel": 70,
+        "probability": 0.1766
+      },
+      {
+        "id": 201,
+        "minLevel": 63,
+        "maxLevel": 69,
+        "probability": 0.2286
+      }
+    ]
+  },
+  "Sacred Plaza": {
+    "pokes": [
+      {
+        "id": 100,
+        "minLevel": 64,
+        "maxLevel": 70,
+        "probability": 0.2956
+      },
+      {
+        "id": 433,
+        "minLevel": 63,
+        "maxLevel": 69,
+        "probability": 0.3423
+      },
+      {
+        "id": 358,
+        "minLevel": 65,
+        "maxLevel": 71,
+        "probability": 0.1072
+      },
+      {
+        "id": 404,
+        "minLevel": 64,
+        "maxLevel": 70,
+        "probability": 0.1344
+      },
+      {
+        "id": 93,
+        "minLevel": 64,
+        "maxLevel": 70,
+        "probability": 0.1205
+      }
+    ]
+  },
+  "Lonely Spring": {
+    "pokes": [
+      {
+        "id": 130,
+        "minLevel": 67,
+        "maxLevel": 73,
+        "probability": 0.1197
+      },
+      {
+        "id": 550,
+        "minLevel": 66,
+        "maxLevel": 72,
+        "probability": 0.281
+      },
+      {
+        "id": 420,
+        "minLevel": 62,
+        "maxLevel": 68,
+        "probability": 0.47
+      },
+      {
+        "id": 55,
+        "minLevel": 67,
+        "maxLevel": 73,
+        "probability": 0.1293
+      }
+    ]
+  },
+  "Stonetooth Rows": {
+    "pokes": [
+      {
+        "id": 479,
+        "minLevel": 67,
+        "maxLevel": 74,
+        "probability": 0.2431
+      },
+      {
+        "id": 437,
+        "minLevel": 68,
+        "maxLevel": 75,
+        "probability": 0.107
+      },
+      {
+        "id": 421,
+        "minLevel": 67,
+        "maxLevel": 74,
+        "probability": 0.1188
+      },
+      {
+        "id": 200,
+        "minLevel": 67,
+        "maxLevel": 74,
+        "probability": 0.2459
+      },
+      {
+        "id": 299,
+        "minLevel": 66,
+        "maxLevel": 73,
+        "probability": 0.2852
+      }
+    ]
+  },
+  "Sonorous Path": {
+    "pokes": [
+      {
+        "id": 214,
+        "minLevel": 70,
+        "maxLevel": 77,
+        "probability": 0.2
+      },
+      {
+        "id": 217,
+        "minLevel": 70,
+        "maxLevel": 77,
+        "probability": 0.1
+      },
+      {
+        "id": 405,
+        "minLevel": 70,
+        "maxLevel": 77,
+        "probability": 0.0637
+      },
+      {
+        "id": 216,
+        "minLevel": 67,
+        "maxLevel": 74,
+        "probability": 0.303
+      },
+      {
+        "id": 436,
+        "minLevel": 67,
+        "maxLevel": 74,
+        "probability": 0.3333
+      }
+    ]
+  },
+  "Primeval Grotto": {
+    "pokes": [
+      {
+        "id": 208,
+        "minLevel": 70,
+        "maxLevel": 77,
+        "probability": 0.2495
+      },
+      {
+        "id": 462,
+        "minLevel": 70,
+        "maxLevel": 77,
+        "probability": 0.1586
+      },
+      {
+        "id": 207,
+        "minLevel": 69,
+        "maxLevel": 76,
+        "probability": 0.5919
+      }
+    ]
+  },
+  "Gym - Electrode": {
+    "type": "gym",
+    "name": "Gym - Electrode",
+    "requirements": {
+      "earnBadge": {
+        "badgeCount": 69,
+        "name": "Electrode Badge"
+      }
+    },
+    "pokes": []
+  },
+  "Cloudpool Ridge": {
+    "pokes": [
+      {
+        "id": 26,
+        "minLevel": 73,
+        "maxLevel": 80,
+        "probability": 0.057
+      },
+      {
+        "id": 465,
+        "minLevel": 74,
+        "maxLevel": 81,
+        "probability": 0.0775
+      },
+      {
+        "id": 470,
+        "minLevel": 73,
+        "maxLevel": 80,
+        "probability": 0.079
+      },
+      {
+        "id": 455,
+        "minLevel": 73,
+        "maxLevel": 80,
+        "probability": 0.1827
+      },
+      {
+        "id": 315,
+        "minLevel": 72,
+        "maxLevel": 79,
+        "probability": 0.1037
+      },
+      {
+        "id": 78,
+        "minLevel": 74,
+        "maxLevel": 81,
+        "probability": 0.0617
+      },
+      {
+        "id": 212,
+        "minLevel": 74,
+        "maxLevel": 81,
+        "probability": 0.0617
+      },
+      {
+        "id": 196,
+        "minLevel": 75,
+        "maxLevel": 82,
+        "probability": 0.0588
+      },
+      {
+        "id": 114,
+        "minLevel": 74,
+        "maxLevel": 81,
+        "probability": 0.1417
+      },
+      {
+        "id": 427,
+        "minLevel": 72,
+        "maxLevel": 79,
+        "probability": 0.1762
+      }
+    ]
+  },
+  "Fabled Spring": {
+    "pokes": [
+      {
+        "id": 428,
+        "minLevel": 76,
+        "maxLevel": 83,
+        "probability": 0.1686
+      },
+      {
+        "id": 113,
+        "minLevel": 76,
+        "maxLevel": 83,
+        "probability": 0.1798
+      },
+      {
+        "id": 242,
+        "minLevel": 77,
+        "maxLevel": 84,
+        "probability": 0.0999
+      },
+      {
+        "id": 550,
+        "minLevel": 76,
+        "maxLevel": 83,
+        "probability": 0.3518
+      },
+      {
+        "id": 176,
+        "minLevel": 75,
+        "maxLevel": 82,
+        "probability": 0.1999
       }
     ]
   },
   "Bonechill Wastes": {
     "pokes": [
       {
-        "id": 92,
-        "minLevel": 21,
-        "maxLevel": 24,
-        "probability": 0.0793
-      },
-      {
-        "id": 93,
-        "minLevel": 43,
-        "maxLevel": 56,
-        "probability": 0.0594
-      },
-      {
-        "id": 190,
-        "minLevel": 43,
-        "maxLevel": 46,
-        "probability": 0.0693
-      },
-      {
         "id": 220,
-        "minLevel": 29,
-        "maxLevel": 32,
-        "probability": 0.099
+        "minLevel": 75,
+        "maxLevel": 83,
+        "probability": 0.1959
       },
       {
         "id": 221,
-        "minLevel": 43,
-        "maxLevel": 46,
-        "probability": 0.0297
-      },
-      {
-        "id": 361,
-        "minLevel": 38,
-        "maxLevel": 41,
-        "probability": 0.0792
-      },
-      {
-        "id": 362,
-        "minLevel": 43,
-        "maxLevel": 56,
-        "probability": 0.0594
-      },
-      {
-        "id": 412,
-        "minLevel": 16,
-        "maxLevel": 19,
-        "probability": 0.1089
-      },
-      {
-        "id": 413,
-        "minLevel": 43,
-        "maxLevel": 46,
-        "probability": 0.0297
-      },
-      {
-        "id": 425,
-        "minLevel": 24,
-        "maxLevel": 27,
-        "probability": 0.0693
-      },
-      {
-        "id": 426,
-        "minLevel": 49,
-        "maxLevel": 52,
-        "probability": 0.0198
-      },
-      {
-        "id": 427,
-        "minLevel": 43,
-        "maxLevel": 46,
-        "probability": 0.0693
-      },
-      {
-        "id": 428,
-        "minLevel": 43,
-        "maxLevel": 46,
-        "probability": 0.0297
+        "minLevel": 78,
+        "maxLevel": 86,
+        "probability": 0.0544
       },
       {
         "id": 459,
-        "minLevel": 36,
-        "maxLevel": 39,
-        "probability": 0.0693
+        "minLevel": 76,
+        "maxLevel": 85,
+        "probability": 0.2863
+      },
+      {
+        "id": 356,
+        "minLevel": 78,
+        "maxLevel": 86,
+        "probability": 0.0539
+      },
+      {
+        "id": 426,
+        "minLevel": 79,
+        "maxLevel": 87,
+        "probability": 0.0492
+      },
+      {
+        "id": 361,
+        "minLevel": 76,
+        "maxLevel": 84,
+        "probability": 0.1557
+      },
+      {
+        "id": 362,
+        "minLevel": 79,
+        "maxLevel": 87,
+        "probability": 0.0487
       },
       {
         "id": 460,
-        "minLevel": 49,
-        "maxLevel": 52,
-        "probability": 0.0198
+        "minLevel": 79,
+        "maxLevel": 87,
+        "probability": 0.0473
       },
       {
-        "id": 478,
-        "minLevel": 53,
-        "maxLevel": 56,
-        "probability": 0.0297
-      },
-      {
-        "id": 712,
-        "minLevel": 33,
-        "maxLevel": 36,
-        "probability": 0.0792
+        "id": 215,
+        "minLevel": 78,
+        "maxLevel": 86,
+        "probability": 0.1086
       }
     ]
   },
   "Glacier Terrace": {
     "pokes": [
       {
-        "id": 190,
-        "minLevel": 49,
-        "maxLevel": 52,
-        "probability": 0.11
+        "id": 471,
+        "minLevel": 80,
+        "maxLevel": 88,
+        "probability": 0.1994
       },
       {
-        "id": 207,
-        "minLevel": 49,
-        "maxLevel": 52,
-        "probability": 0.09
-      },
-      {
-        "id": 215,
-        "minLevel": 49,
-        "maxLevel": 52,
-        "probability": 0.09
-      },
-      {
-        "id": 361,
-        "minLevel": 38,
-        "maxLevel": 41,
-        "probability": 0.13
-      },
-      {
-        "id": 362,
-        "minLevel": 49,
-        "maxLevel": 52,
-        "probability": 0.04
-      },
-      {
-        "id": 412,
-        "minLevel": 16,
-        "maxLevel": 19,
-        "probability": 0.18
-      },
-      {
-        "id": 413,
-        "minLevel": 49,
-        "maxLevel": 52,
-        "probability": 0.05
-      },
-      {
-        "id": 425,
-        "minLevel": 24,
-        "maxLevel": 27,
-        "probability": 0.11
-      },
-      {
-        "id": 426,
-        "minLevel": 49,
-        "maxLevel": 52,
-        "probability": 0.04
-      },
-      {
-        "id": 459,
-        "minLevel": 36,
-        "maxLevel": 39,
-        "probability": 0.12
-      },
-      {
-        "id": 460,
-        "minLevel": 49,
-        "maxLevel": 52,
-        "probability": 0.04
-      }
-    ]
-  },
-  "Snowpoint Temple": {
-    "pokes": [
-      {
-        "id": 41,
-        "minLevel": 18,
-        "maxLevel": 21,
-        "probability": 0.21
-      },
-      {
-        "id": 42,
-        "minLevel": 18,
-        "maxLevel": 54,
-        "probability": 0.06
-      },
-      {
-        "id": 75,
-        "minLevel": 59,
-        "maxLevel": 62,
-        "probability": 0.06
-      },
-      {
-        "id": 280,
-        "minLevel": 16,
-        "maxLevel": 19,
-        "probability": 0.26
-      },
-      {
-        "id": 281,
-        "minLevel": 26,
-        "maxLevel": 29,
-        "probability": 0.09
-      },
-      {
-        "id": 362,
-        "minLevel": 53,
-        "maxLevel": 56,
-        "probability": 0.05
-      },
-      {
-        "id": 436,
-        "minLevel": 29,
-        "maxLevel": 32,
-        "probability": 0.17
-      },
-      {
-        "id": 437,
-        "minLevel": 51,
-        "maxLevel": 54,
-        "probability": 0.05
+        "id": 365,
+        "minLevel": 80,
+        "maxLevel": 88,
+        "probability": 0.1317
       },
       {
         "id": 478,
-        "minLevel": 53,
-        "maxLevel": 56,
-        "probability": 0.05
+        "minLevel": 80,
+        "maxLevel": 88,
+        "probability": 0.2181
+      },
+      {
+        "id": 221,
+        "minLevel": 80,
+        "maxLevel": 88,
+        "probability": 0.2327
+      },
+      {
+        "id": 362,
+        "minLevel": 80,
+        "maxLevel": 88,
+        "probability": 0.2181
       }
     ]
   },
   "Avalanche Slopes": {
     "pokes": [
       {
-        "id": 108,
-        "minLevel": 59,
-        "maxLevel": 62,
-        "probability": 0.062
-      },
-      {
-        "id": 113,
-        "minLevel": 59,
-        "maxLevel": 62,
-        "probability": 0.0206
-      },
-      {
-        "id": 190,
-        "minLevel": 50,
-        "maxLevel": 62,
-        "probability": 0.1237
-      },
-      {
-        "id": 220,
-        "minLevel": 29,
-        "maxLevel": 32,
-        "probability": 0.0825
-      },
-      {
-        "id": 221,
-        "minLevel": 59,
-        "maxLevel": 62,
-        "probability": 0.0206
-      },
-      {
-        "id": 242,
-        "minLevel": 59,
-        "maxLevel": 62,
-        "probability": 0.0103
-      },
-      {
-        "id": 355,
-        "minLevel": 33,
-        "maxLevel": 52,
-        "probability": 0.1443
-      },
-      {
-        "id": 356,
-        "minLevel": 50,
-        "maxLevel": 62,
-        "probability": 0.0412
-      },
-      {
-        "id": 361,
-        "minLevel": 38,
-        "maxLevel": 41,
-        "probability": 0.0722
-      },
-      {
-        "id": 362,
-        "minLevel": 59,
-        "maxLevel": 62,
-        "probability": 0.0206
-      },
-      {
-        "id": 412,
-        "minLevel": 16,
-        "maxLevel": 19,
-        "probability": 0.0928
-      },
-      {
-        "id": 413,
-        "minLevel": 59,
-        "maxLevel": 62,
-        "probability": 0.0206
-      },
-      {
-        "id": 424,
-        "minLevel": 50,
-        "maxLevel": 62,
-        "probability": 0.0412
-      },
-      {
-        "id": 440,
-        "minLevel": 59,
-        "maxLevel": 62,
-        "probability": 0.1031
-      },
-      {
-        "id": 443,
-        "minLevel": 20,
-        "maxLevel": 23,
-        "probability": 0.0722
-      },
-      {
         "id": 444,
-        "minLevel": 44,
-        "maxLevel": 47,
-        "probability": 0.0309
+        "minLevel": 81,
+        "maxLevel": 89,
+        "probability": 0.1418
       },
       {
         "id": 463,
-        "minLevel": 59,
-        "maxLevel": 62,
-        "probability": 0.0206
+        "minLevel": 82,
+        "maxLevel": 90,
+        "probability": 0.1129
+      },
+      {
+        "id": 424,
+        "minLevel": 82,
+        "maxLevel": 90,
+        "probability": 0.1206
+      },
+      {
+        "id": 108,
+        "minLevel": 81,
+        "maxLevel": 89,
+        "probability": 0.3019
+      },
+      {
+        "id": 190,
+        "minLevel": 80,
+        "maxLevel": 88,
+        "probability": 0.3228
+      }
+    ]
+  },
+  "Heart's Crag": {
+    "pokes": [
+      {
+        "id": 627,
+        "minLevel": 82,
+        "maxLevel": 90,
+        "probability": 0.3348
+      },
+      {
+        "id": 477,
+        "minLevel": 84,
+        "maxLevel": 92,
+        "probability": 0.0744
+      },
+      {
+        "id": 94,
+        "minLevel": 84,
+        "maxLevel": 92,
+        "probability": 0.0781
+      },
+      {
+        "id": 361,
+        "minLevel": 81,
+        "maxLevel": 89,
+        "probability": 0.3906
       },
       {
         "id": 478,
-        "minLevel": 59,
-        "maxLevel": 62,
-        "probability": 0.0206
+        "minLevel": 83,
+        "maxLevel": 91,
+        "probability": 0.1221
+      }
+    ]
+  },
+  "Icepeak Cavern": {
+    "pokes": [
+      {
+        "id": 570,
+        "minLevel": 83,
+        "maxLevel": 91,
+        "probability": 0.4151
+      },
+      {
+        "id": 571,
+        "minLevel": 86,
+        "maxLevel": 94,
+        "probability": 0.1343
+      },
+      {
+        "id": 712,
+        "minLevel": 83,
+        "maxLevel": 91,
+        "probability": 0.4506
+      }
+    ]
+  },
+  "Snowpoint Temple": {
+    "pokes": [
+      {
+        "id": 486,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "probability": 1
       }
     ]
   },
   "Arena's Approach": {
     "pokes": [
       {
-        "id": 66,
-        "minLevel": 24,
-        "maxLevel": 27,
-        "probability": 0.0708
-      },
-      {
-        "id": 67,
-        "minLevel": 47,
-        "maxLevel": 50,
-        "probability": 0.0303
-      },
-      {
-        "id": 108,
-        "minLevel": 47,
-        "maxLevel": 50,
-        "probability": 0.0606
+        "id": 239,
+        "minLevel": 86,
+        "maxLevel": 94,
+        "probability": 0.3129
       },
       {
         "id": 125,
-        "minLevel": 47,
-        "maxLevel": 50,
-        "probability": 0.0202
+        "minLevel": 88,
+        "maxLevel": 96,
+        "probability": 0.115
       },
       {
-        "id": 143,
-        "minLevel": 47,
-        "maxLevel": 50,
-        "probability": 0.0202
-      },
-      {
-        "id": 190,
-        "minLevel": 47,
-        "maxLevel": 50,
-        "probability": 0.0606
-      },
-      {
-        "id": 207,
-        "minLevel": 47,
-        "maxLevel": 50,
-        "probability": 0.0505
-      },
-      {
-        "id": 239,
-        "minLevel": 26,
-        "maxLevel": 29,
-        "probability": 0.0606
-      },
-      {
-        "id": 355,
-        "minLevel": 33,
-        "maxLevel": 36,
-        "probability": 0.0707
-      },
-      {
-        "id": 356,
-        "minLevel": 47,
-        "maxLevel": 50,
-        "probability": 0.0202
-      },
-      {
-        "id": 361,
-        "minLevel": 38,
-        "maxLevel": 41,
-        "probability": 0.0707
-      },
-      {
-        "id": 362,
-        "minLevel": 47,
-        "maxLevel": 50,
-        "probability": 0.0202
-      },
-      {
-        "id": 412,
-        "minLevel": 16,
-        "maxLevel": 19,
-        "probability": 0.101
-      },
-      {
-        "id": 413,
-        "minLevel": 47,
-        "maxLevel": 50,
-        "probability": 0.0303
-      },
-      {
-        "id": 427,
-        "minLevel": 47,
-        "maxLevel": 50,
-        "probability": 0.0606
-      },
-      {
-        "id": 428,
-        "minLevel": 47,
-        "maxLevel": 50,
-        "probability": 0.0202
-      },
-      {
-        "id": 446,
-        "minLevel": 47,
-        "maxLevel": 50,
-        "probability": 0.0606
+        "id": 466,
+        "minLevel": 89,
+        "maxLevel": 97,
+        "probability": 0.0695
       },
       {
         "id": 447,
-        "minLevel": 47,
-        "maxLevel": 50,
-        "probability": 0.0808
+        "minLevel": 83,
+        "maxLevel": 91,
+        "probability": 0.3953
       },
       {
         "id": 448,
-        "minLevel": 47,
-        "maxLevel": 50,
-        "probability": 0.0202
+        "minLevel": 88,
+        "maxLevel": 96,
+        "probability": 0.1073
+      }
+    ]
+  },
+  "Gym - Avalugg": {
+    "type": "gym",
+    "name": "Gym - Avalugg",
+    "requirements": {
+      "earnBadge": {
+        "badgeCount": 70,
+        "name": "Avalugg Badge"
+      }
+    },
+    "pokes": []
+  },
+  "Whiteout Valley": {
+    "pokes": [
+      {
+        "id": 143,
+        "minLevel": 91,
+        "maxLevel": 99,
+        "probability": 0.1529
+      },
+      {
+        "id": 502,
+        "minLevel": 90,
+        "maxLevel": 98,
+        "probability": 0.1999
+      },
+      {
+        "id": 503,
+        "minLevel": 91,
+        "maxLevel": 99,
+        "probability": 0.1042
       },
       {
         "id": 712,
-        "minLevel": 33,
-        "maxLevel": 36,
-        "probability": 0.0707
+        "minLevel": 88,
+        "maxLevel": 96,
+        "probability": 0.543
+      }
+    ]
+  },
+  "Etertime Storm": {
+    "pokes": [
+      {
+        "id": 155,
+        "minLevel": 89,
+        "maxLevel": 97,
+        "probability": 0.4641
+      },
+      {
+        "id": 156,
+        "minLevel": 91,
+        "maxLevel": 99,
+        "probability": 0.1771
+      },
+      {
+        "id": 157,
+        "minLevel": 93,
+        "maxLevel": 101,
+        "probability": 0.0895
+      },
+      {
+        "id": 723,
+        "minLevel": 91,
+        "maxLevel": 99,
+        "probability": 0.1707
+      },
+      {
+        "id": 398,
+        "minLevel": 92,
+        "maxLevel": 100,
+        "probability": 0.0986
       }
     ]
   },
@@ -519,104 +1769,6 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Heart's Crag": {
-    "pokes": [
-      {
-        "id": 190,
-        "minLevel": 43,
-        "maxLevel": 56,
-        "probability": 0.16
-      },
-      {
-        "id": 280,
-        "minLevel": 16,
-        "maxLevel": 19,
-        "probability": 0.15
-      },
-      {
-        "id": 281,
-        "minLevel": 26,
-        "maxLevel": 29,
-        "probability": 0.05
-      },
-      {
-        "id": 361,
-        "minLevel": 38,
-        "maxLevel": 41,
-        "probability": 0.1
-      },
-      {
-        "id": 362,
-        "minLevel": 53,
-        "maxLevel": 56,
-        "probability": 0.03
-      },
-      {
-        "id": 412,
-        "minLevel": 16,
-        "maxLevel": 19,
-        "probability": 0.14
-      },
-      {
-        "id": 413,
-        "minLevel": 53,
-        "maxLevel": 56,
-        "probability": 0.04
-      },
-      {
-        "id": 424,
-        "minLevel": 53,
-        "maxLevel": 56,
-        "probability": 0.03
-      },
-      {
-        "id": 425,
-        "minLevel": 16,
-        "maxLevel": 27,
-        "probability": 0.18
-      },
-      {
-        "id": 426,
-        "minLevel": 49,
-        "maxLevel": 56,
-        "probability": 0.03
-      },
-      {
-        "id": 627,
-        "minLevel": 50,
-        "maxLevel": 53,
-        "probability": 0.09
-      }
-    ]
-  },
-  "Icepeak Cavern": {
-    "pokes": [
-      {
-        "id": 200,
-        "minLevel": 49,
-        "maxLevel": 52,
-        "probability": 0.24
-      },
-      {
-        "id": 570,
-        "minLevel": 26,
-        "maxLevel": 29,
-        "probability": 0.32
-      },
-      {
-        "id": 571,
-        "minLevel": 49,
-        "maxLevel": 52,
-        "probability": 0.1
-      },
-      {
-        "id": 712,
-        "minLevel": 33,
-        "maxLevel": 36,
-        "probability": 0.34
-      }
-    ]
-  },
   "Secret Hollow": {
     "pokes": [
       {
@@ -624,2472 +1776,6 @@ export const hisuiRoutes = {
         "minLevel": 33,
         "maxLevel": 36,
         "probability": 1
-      }
-    ]
-  },
-  "Crossing Slope": {
-    "pokes": [
-      {
-        "id": 74,
-        "minLevel": 21,
-        "maxLevel": 24,
-        "probability": 0.091
-      },
-      {
-        "id": 75,
-        "minLevel": 27,
-        "maxLevel": 30,
-        "probability": 0.0909
-      },
-      {
-        "id": 198,
-        "minLevel": 27,
-        "maxLevel": 30,
-        "probability": 0.0909
-      },
-      {
-        "id": 396,
-        "minLevel": 10,
-        "maxLevel": 13,
-        "probability": 0.0909
-      },
-      {
-        "id": 397,
-        "minLevel": 27,
-        "maxLevel": 30,
-        "probability": 0.0909
-      },
-      {
-        "id": 412,
-        "minLevel": 16,
-        "maxLevel": 19,
-        "probability": 0.0909
-      },
-      {
-        "id": 413,
-        "minLevel": 27,
-        "maxLevel": 30,
-        "probability": 0.0909
-      },
-      {
-        "id": 425,
-        "minLevel": 24,
-        "maxLevel": 27,
-        "probability": 0.0909
-      },
-      {
-        "id": 426,
-        "minLevel": 28,
-        "maxLevel": 31,
-        "probability": 0.0909
-      },
-      {
-        "id": 431,
-        "minLevel": 27,
-        "maxLevel": 30,
-        "probability": 0.0909
-      },
-      {
-        "id": 432,
-        "minLevel": 38,
-        "maxLevel": 41,
-        "probability": 0.0909
-      }
-    ]
-  },
-  "Ginkgo Landing": {
-    "pokes": [
-      {
-        "id": 74,
-        "minLevel": 21,
-        "maxLevel": 24,
-        "probability": 0.1288
-      },
-      {
-        "id": 75,
-        "minLevel": 27,
-        "maxLevel": 34,
-        "probability": 0.0495
-      },
-      {
-        "id": 198,
-        "minLevel": 27,
-        "maxLevel": 30,
-        "probability": 0.0891
-      },
-      {
-        "id": 363,
-        "minLevel": 27,
-        "maxLevel": 30,
-        "probability": 0.1287
-      },
-      {
-        "id": 412,
-        "minLevel": 16,
-        "maxLevel": 19,
-        "probability": 0.1683
-      },
-      {
-        "id": 413,
-        "minLevel": 27,
-        "maxLevel": 30,
-        "probability": 0.0495
-      },
-      {
-        "id": 418,
-        "minLevel": 22,
-        "maxLevel": 25,
-        "probability": 0.1188
-      },
-      {
-        "id": 419,
-        "minLevel": 29,
-        "maxLevel": 32,
-        "probability": 0.0396
-      },
-      {
-        "id": 425,
-        "minLevel": 24,
-        "maxLevel": 27,
-        "probability": 0.1089
-      },
-      {
-        "id": 451,
-        "minLevel": 27,
-        "maxLevel": 30,
-        "probability": 0.1188
-      }
-    ]
-  },
-  "Deadwood Haunt": {
-    "pokes": [
-      {
-        "id": 74,
-        "minLevel": 21,
-        "maxLevel": 24,
-        "probability": 0.15
-      },
-      {
-        "id": 75,
-        "minLevel": 29,
-        "maxLevel": 32,
-        "probability": 0.06
-      },
-      {
-        "id": 355,
-        "minLevel": 29,
-        "maxLevel": 32,
-        "probability": 0.16
-      },
-      {
-        "id": 356,
-        "minLevel": 37,
-        "maxLevel": 40,
-        "probability": 0.05
-      },
-      {
-        "id": 396,
-        "minLevel": 10,
-        "maxLevel": 13,
-        "probability": 0.19
-      },
-      {
-        "id": 397,
-        "minLevel": 29,
-        "maxLevel": 32,
-        "probability": 0.07
-      },
-      {
-        "id": 398,
-        "minLevel": 34,
-        "maxLevel": 37,
-        "probability": 0.03
-      },
-      {
-        "id": 425,
-        "minLevel": 24,
-        "maxLevel": 27,
-        "probability": 0.13
-      },
-      {
-        "id": 426,
-        "minLevel": 29,
-        "maxLevel": 32,
-        "probability": 0.05
-      },
-      {
-        "id": 441,
-        "minLevel": 29,
-        "maxLevel": 32,
-        "probability": 0.11
-      }
-    ]
-  },
-  "Bathers' Lagoon": {
-    "pokes": [
-      {
-        "id": 54,
-        "minLevel": 29,
-        "maxLevel": 32,
-        "probability": 0.091
-      },
-      {
-        "id": 55,
-        "minLevel": 33,
-        "maxLevel": 36,
-        "probability": 0.0303
-      },
-      {
-        "id": 74,
-        "minLevel": 21,
-        "maxLevel": 24,
-        "probability": 0.0909
-      },
-      {
-        "id": 75,
-        "minLevel": 29,
-        "maxLevel": 32,
-        "probability": 0.0404
-      },
-      {
-        "id": 175,
-        "minLevel": 29,
-        "maxLevel": 34,
-        "probability": 0.1111
-      },
-      {
-        "id": 198,
-        "minLevel": 33,
-        "maxLevel": 36,
-        "probability": 0.0707
-      },
-      {
-        "id": 267,
-        "minLevel": 29,
-        "maxLevel": 32,
-        "probability": 0.0202
-      },
-      {
-        "id": 269,
-        "minLevel": 29,
-        "maxLevel": 32,
-        "probability": 0.0202
-      },
-      {
-        "id": 396,
-        "minLevel": 10,
-        "maxLevel": 13,
-        "probability": 0.1111
-      },
-      {
-        "id": 397,
-        "minLevel": 29,
-        "maxLevel": 32,
-        "probability": 0.0404
-      },
-      {
-        "id": 412,
-        "minLevel": 16,
-        "maxLevel": 19,
-        "probability": 0.1212
-      },
-      {
-        "id": 413,
-        "minLevel": 28,
-        "maxLevel": 32,
-        "probability": 0.0303
-      },
-      {
-        "id": 418,
-        "minLevel": 22,
-        "maxLevel": 25,
-        "probability": 0.0808
-      },
-      {
-        "id": 419,
-        "minLevel": 29,
-        "maxLevel": 32,
-        "probability": 0.0303
-      },
-      {
-        "id": 425,
-        "minLevel": 24,
-        "maxLevel": 27,
-        "probability": 0.0808
-      },
-      {
-        "id": 426,
-        "minLevel": 29,
-        "maxLevel": 32,
-        "probability": 0.0303
-      }
-    ]
-  },
-  "Veilstone Cape": {
-    "pokes": [
-      {
-        "id": 37,
-        "minLevel": 29,
-        "maxLevel": 32,
-        "probability": 0.1314
-      },
-      {
-        "id": 58,
-        "minLevel": 29,
-        "maxLevel": 32,
-        "probability": 0.1111
-      },
-      {
-        "id": 74,
-        "minLevel": 21,
-        "maxLevel": 24,
-        "probability": 0.1313
-      },
-      {
-        "id": 75,
-        "minLevel": 29,
-        "maxLevel": 32,
-        "probability": 0.0505
-      },
-      {
-        "id": 198,
-        "minLevel": 29,
-        "maxLevel": 32,
-        "probability": 0.101
-      },
-      {
-        "id": 267,
-        "minLevel": 29,
-        "maxLevel": 32,
-        "probability": 0.0303
-      },
-      {
-        "id": 269,
-        "minLevel": 29,
-        "maxLevel": 32,
-        "probability": 0.0303
-      },
-      {
-        "id": 412,
-        "minLevel": 16,
-        "maxLevel": 19,
-        "probability": 0.1818
-      },
-      {
-        "id": 413,
-        "minLevel": 28,
-        "maxLevel": 32,
-        "probability": 0.0505
-      },
-      {
-        "id": 414,
-        "minLevel": 29,
-        "maxLevel": 32,
-        "probability": 0.0505
-      },
-      {
-        "id": 431,
-        "minLevel": 29,
-        "maxLevel": 32,
-        "probability": 0.1313
-      }
-    ]
-  },
-  "Seagrass Haven": {
-    "pokes": [
-      {
-        "id": 412,
-        "minLevel": 16,
-        "maxLevel": 19,
-        "probability": 0.46
-      },
-      {
-        "id": 413,
-        "minLevel": 31,
-        "maxLevel": 40,
-        "probability": 0.12
-      },
-      {
-        "id": 422,
-        "minLevel": 26,
-        "maxLevel": 29,
-        "probability": 0.31
-      },
-      {
-        "id": 423,
-        "minLevel": 30,
-        "maxLevel": 33,
-        "probability": 0.11
-      }
-    ]
-  },
-  "Firespit Island": {
-    "pokes": [
-      {
-        "id": 75,
-        "minLevel": 31,
-        "maxLevel": 34,
-        "probability": 0.2525
-      },
-      {
-        "id": 126,
-        "minLevel": 31,
-        "maxLevel": 34,
-        "probability": 0.202
-      },
-      {
-        "id": 240,
-        "minLevel": 26,
-        "maxLevel": 29,
-        "probability": 0.5455
-      }
-    ]
-  },
-  "Spring Path": {
-    "pokes": [
-      {
-        "id": 75,
-        "minLevel": 41,
-        "maxLevel": 44,
-        "probability": 0.1213
-      },
-      {
-        "id": 400,
-        "minLevel": 41,
-        "maxLevel": 44,
-        "probability": 0.1212
-      },
-      {
-        "id": 412,
-        "minLevel": 16,
-        "maxLevel": 19,
-        "probability": 0.4343
-      },
-      {
-        "id": 413,
-        "minLevel": 41,
-        "maxLevel": 44,
-        "probability": 0.1111
-      },
-      {
-        "id": 414,
-        "minLevel": 41,
-        "maxLevel": 44,
-        "probability": 0.1111
-      },
-      {
-        "id": 454,
-        "minLevel": 41,
-        "maxLevel": 44,
-        "probability": 0.101
-      }
-    ]
-  },
-  "Islespy Shore": {
-    "pokes": [
-      {
-        "id": 198,
-        "minLevel": 41,
-        "maxLevel": 44,
-        "probability": 0.57
-      },
-      {
-        "id": 364,
-        "minLevel": 40,
-        "maxLevel": 43,
-        "probability": 0.28
-      },
-      {
-        "id": 365,
-        "minLevel": 44,
-        "maxLevel": 47,
-        "probability": 0.15
-      }
-    ]
-  },
-  "Castaway Shore": {
-    "pokes": [
-      {
-        "id": 66,
-        "minLevel": 24,
-        "maxLevel": 27,
-        "probability": 0.1617
-      },
-      {
-        "id": 67,
-        "minLevel": 31,
-        "maxLevel": 34,
-        "probability": 0.0606
-      },
-      {
-        "id": 74,
-        "minLevel": 21,
-        "maxLevel": 24,
-        "probability": 0.1616
-      },
-      {
-        "id": 75,
-        "minLevel": 31,
-        "maxLevel": 34,
-        "probability": 0.0606
-      },
-      {
-        "id": 198,
-        "minLevel": 24,
-        "maxLevel": 34,
-        "probability": 0.1212
-      },
-      {
-        "id": 412,
-        "minLevel": 16,
-        "maxLevel": 19,
-        "probability": 0.2222
-      },
-      {
-        "id": 413,
-        "minLevel": 31,
-        "maxLevel": 34,
-        "probability": 0.0606
-      },
-      {
-        "id": 451,
-        "minLevel": 31,
-        "maxLevel": 34,
-        "probability": 0.1515
-      }
-    ]
-  },
-  "Tranquility Cove": {
-    "pokes": [
-      {
-        "id": 74,
-        "minLevel": 21,
-        "maxLevel": 24,
-        "probability": 0.1213
-      },
-      {
-        "id": 75,
-        "minLevel": 31,
-        "maxLevel": 34,
-        "probability": 0.0404
-      },
-      {
-        "id": 175,
-        "minLevel": 31,
-        "maxLevel": 34,
-        "probability": 0.1414
-      },
-      {
-        "id": 176,
-        "minLevel": 31,
-        "maxLevel": 34,
-        "probability": 0.0404
-      },
-      {
-        "id": 396,
-        "minLevel": 10,
-        "maxLevel": 13,
-        "probability": 0.1414
-      },
-      {
-        "id": 397,
-        "minLevel": 29,
-        "maxLevel": 33,
-        "probability": 0.0505
-      },
-      {
-        "id": 398,
-        "minLevel": 33,
-        "maxLevel": 37,
-        "probability": 0.0202
-      },
-      {
-        "id": 412,
-        "minLevel": 16,
-        "maxLevel": 19,
-        "probability": 0.1616
-      },
-      {
-        "id": 413,
-        "minLevel": 31,
-        "maxLevel": 34,
-        "probability": 0.0404
-      },
-      {
-        "id": 422,
-        "minLevel": 31,
-        "maxLevel": 34,
-        "probability": 0.1111
-      },
-      {
-        "id": 425,
-        "minLevel": 24,
-        "maxLevel": 27,
-        "probability": 0.101
-      },
-      {
-        "id": 426,
-        "minLevel": 31,
-        "maxLevel": 34,
-        "probability": 0.0303
-      }
-    ]
-  },
-  "Celestica Trail": {
-    "pokes": [
-      {
-        "id": 75,
-        "minLevel": 43,
-        "maxLevel": 46,
-        "probability": 0.1
-      },
-      {
-        "id": 95,
-        "minLevel": 43,
-        "maxLevel": 46,
-        "probability": 0.2
-      },
-      {
-        "id": 111,
-        "minLevel": 38,
-        "maxLevel": 41,
-        "probability": 0.22
-      },
-      {
-        "id": 112,
-        "minLevel": 43,
-        "maxLevel": 46,
-        "probability": 0.08
-      },
-      {
-        "id": 358,
-        "minLevel": 43,
-        "maxLevel": 46,
-        "probability": 0.09
-      },
-      {
-        "id": 449,
-        "minLevel": 30,
-        "maxLevel": 33,
-        "probability": 0.24
-      },
-      {
-        "id": 450,
-        "minLevel": 43,
-        "maxLevel": 46,
-        "probability": 0.07
-      }
-    ]
-  },
-  "Lonely Spring": {
-    "pokes": [
-      {
-        "id": 54,
-        "minLevel": 29,
-        "maxLevel": 32,
-        "probability": 0.22
-      },
-      {
-        "id": 55,
-        "minLevel": 37,
-        "maxLevel": 40,
-        "probability": 0.07
-      },
-      {
-        "id": 420,
-        "minLevel": 21,
-        "maxLevel": 24,
-        "probability": 0.25
-      },
-      {
-        "id": 421,
-        "minLevel": 37,
-        "maxLevel": 40,
-        "probability": 0.08
-      },
-      {
-        "id": 436,
-        "minLevel": 29,
-        "maxLevel": 32,
-        "probability": 0.23
-      },
-      {
-        "id": 455,
-        "minLevel": 37,
-        "maxLevel": 40,
-        "probability": 0.15
-      }
-    ]
-  },
-  "Fabled Spring": {
-    "pokes": [
-      {
-        "id": 35,
-        "minLevel": 43,
-        "maxLevel": 46,
-        "probability": 0.0892
-      },
-      {
-        "id": 75,
-        "minLevel": 43,
-        "maxLevel": 46,
-        "probability": 0.0693
-      },
-      {
-        "id": 173,
-        "minLevel": 43,
-        "maxLevel": 46,
-        "probability": 0.2574
-      },
-      {
-        "id": 315,
-        "minLevel": 43,
-        "maxLevel": 46,
-        "probability": 0.0693
-      },
-      {
-        "id": 406,
-        "minLevel": 43,
-        "maxLevel": 46,
-        "probability": 0.198
-      },
-      {
-        "id": 412,
-        "minLevel": 16,
-        "maxLevel": 19,
-        "probability": 0.2475
-      },
-      {
-        "id": 413,
-        "minLevel": 43,
-        "maxLevel": 46,
-        "probability": 0.0693
-      }
-    ]
-  },
-  "Stonetooth Rows": {
-    "pokes": [
-      {
-        "id": 75,
-        "minLevel": 43,
-        "maxLevel": 56,
-        "probability": 0.1428
-      },
-      {
-        "id": 200,
-        "minLevel": 43,
-        "maxLevel": 46,
-        "probability": 0.1327
-      },
-      {
-        "id": 412,
-        "minLevel": 16,
-        "maxLevel": 19,
-        "probability": 0.2653
-      },
-      {
-        "id": 413,
-        "minLevel": 43,
-        "maxLevel": 46,
-        "probability": 0.0714
-      },
-      {
-        "id": 436,
-        "minLevel": 29,
-        "maxLevel": 32,
-        "probability": 0.1939
-      },
-      {
-        "id": 437,
-        "minLevel": 43,
-        "maxLevel": 46,
-        "probability": 0.0612
-      },
-      {
-        "id": 479,
-        "minLevel": 43,
-        "maxLevel": 46,
-        "probability": 0.1327
-      }
-    ]
-  },
-  "Primeval Grotto": {
-    "pokes": [
-      {
-        "id": 299,
-        "minLevel": 53,
-        "maxLevel": 56,
-        "probability": 0.44
-      },
-      {
-        "id": 436,
-        "minLevel": 29,
-        "maxLevel": 32,
-        "probability": 0.56
-      }
-    ]
-  },
-  "Clamberclaw Cliffs": {
-    "pokes": [
-      {
-        "id": 74,
-        "minLevel": 21,
-        "maxLevel": 24,
-        "probability": 0.14
-      },
-      {
-        "id": 75,
-        "minLevel": 39,
-        "maxLevel": 42,
-        "probability": 0.05
-      },
-      {
-        "id": 92,
-        "minLevel": 21,
-        "maxLevel": 24,
-        "probability": 0.14
-      },
-      {
-        "id": 93,
-        "minLevel": 39,
-        "maxLevel": 42,
-        "probability": 0.05
-      },
-      {
-        "id": 207,
-        "minLevel": 39,
-        "maxLevel": 42,
-        "probability": 0.1
-      },
-      {
-        "id": 412,
-        "minLevel": 16,
-        "maxLevel": 19,
-        "probability": 0.19
-      },
-      {
-        "id": 413,
-        "minLevel": 39,
-        "maxLevel": 42,
-        "probability": 0.05
-      },
-      {
-        "id": 436,
-        "minLevel": 29,
-        "maxLevel": 32,
-        "probability": 0.14
-      },
-      {
-        "id": 443,
-        "minLevel": 20,
-        "maxLevel": 23,
-        "probability": 0.14
-      }
-    ]
-  },
-  "Celestica Ruins": {
-    "pokes": [
-      {
-        "id": 74,
-        "minLevel": 21,
-        "maxLevel": 24,
-        "probability": 0.1189
-      },
-      {
-        "id": 75,
-        "minLevel": 39,
-        "maxLevel": 42,
-        "probability": 0.0495
-      },
-      {
-        "id": 92,
-        "minLevel": 21,
-        "maxLevel": 24,
-        "probability": 0.1188
-      },
-      {
-        "id": 93,
-        "minLevel": 39,
-        "maxLevel": 42,
-        "probability": 0.0495
-      },
-      {
-        "id": 185,
-        "minLevel": 39,
-        "maxLevel": 42,
-        "probability": 0.0495
-      },
-      {
-        "id": 200,
-        "minLevel": 39,
-        "maxLevel": 42,
-        "probability": 0.0891
-      },
-      {
-        "id": 207,
-        "minLevel": 39,
-        "maxLevel": 42,
-        "probability": 0.0891
-      },
-      {
-        "id": 299,
-        "minLevel": 39,
-        "maxLevel": 42,
-        "probability": 0.099
-      },
-      {
-        "id": 412,
-        "minLevel": 16,
-        "maxLevel": 19,
-        "probability": 0.1683
-      },
-      {
-        "id": 413,
-        "minLevel": 39,
-        "maxLevel": 42,
-        "probability": 0.0396
-      },
-      {
-        "id": 438,
-        "minLevel": 39,
-        "maxLevel": 42,
-        "probability": 0.1287
-      }
-    ]
-  },
-  "Wayward Cave": {
-    "pokes": [
-      {
-        "id": 41,
-        "minLevel": 40,
-        "maxLevel": 42,
-        "probability": 0.31
-      },
-      {
-        "id": 42,
-        "minLevel": 40,
-        "maxLevel": 42,
-        "probability": 0.08
-      },
-      {
-        "id": 339,
-        "minLevel": 26,
-        "maxLevel": 29,
-        "probability": 0.27
-      },
-      {
-        "id": 340,
-        "minLevel": 35,
-        "maxLevel": 38,
-        "probability": 0.08
-      },
-      {
-        "id": 443,
-        "minLevel": 20,
-        "maxLevel": 23,
-        "probability": 0.26
-      }
-    ]
-  },
-  "Sacred Plaza": {
-    "pokes": [
-      {
-        "id": 74,
-        "minLevel": 21,
-        "maxLevel": 24,
-        "probability": 0.0708
-      },
-      {
-        "id": 75,
-        "minLevel": 53,
-        "maxLevel": 56,
-        "probability": 0.0303
-      },
-      {
-        "id": 92,
-        "minLevel": 21,
-        "maxLevel": 24,
-        "probability": 0.0707
-      },
-      {
-        "id": 93,
-        "minLevel": 39,
-        "maxLevel": 56,
-        "probability": 0.0606
-      },
-      {
-        "id": 100,
-        "minLevel": 39,
-        "maxLevel": 58,
-        "probability": 0.1414
-      },
-      {
-        "id": 111,
-        "minLevel": 38,
-        "maxLevel": 41,
-        "probability": 0.0606
-      },
-      {
-        "id": 112,
-        "minLevel": 53,
-        "maxLevel": 56,
-        "probability": 0.0202
-      },
-      {
-        "id": 200,
-        "minLevel": 39,
-        "maxLevel": 42,
-        "probability": 0.0505
-      },
-      {
-        "id": 299,
-        "minLevel": 39,
-        "maxLevel": 42,
-        "probability": 0.0606
-      },
-      {
-        "id": 358,
-        "minLevel": 53,
-        "maxLevel": 56,
-        "probability": 0.0202
-      },
-      {
-        "id": 403,
-        "minLevel": 11,
-        "maxLevel": 14,
-        "probability": 0.0808
-      },
-      {
-        "id": 404,
-        "minLevel": 26,
-        "maxLevel": 29,
-        "probability": 0.0303
-      },
-      {
-        "id": 405,
-        "minLevel": 35,
-        "maxLevel": 38,
-        "probability": 0.0101
-      },
-      {
-        "id": 412,
-        "minLevel": 16,
-        "maxLevel": 19,
-        "probability": 0.101
-      },
-      {
-        "id": 413,
-        "minLevel": 39,
-        "maxLevel": 56,
-        "probability": 0.0606
-      },
-      {
-        "id": 433,
-        "minLevel": 53,
-        "maxLevel": 56,
-        "probability": 0.0808
-      },
-      {
-        "id": 479,
-        "minLevel": 39,
-        "maxLevel": 42,
-        "probability": 0.0505
-      }
-    ]
-  },
-  "Sonorous Path": {
-    "pokes": [
-      {
-        "id": 214,
-        "minLevel": 37,
-        "maxLevel": 40,
-        "probability": 0.13
-      },
-      {
-        "id": 216,
-        "minLevel": 26,
-        "maxLevel": 29,
-        "probability": 0.2
-      },
-      {
-        "id": 217,
-        "minLevel": 37,
-        "maxLevel": 40,
-        "probability": 0.07
-      },
-      {
-        "id": 403,
-        "minLevel": 11,
-        "maxLevel": 14,
-        "probability": 0.25
-      },
-      {
-        "id": 404,
-        "minLevel": 26,
-        "maxLevel": 29,
-        "probability": 0.09
-      },
-      {
-        "id": 405,
-        "minLevel": 37,
-        "maxLevel": 40,
-        "probability": 0.04
-      },
-      {
-        "id": 436,
-        "minLevel": 29,
-        "maxLevel": 32,
-        "probability": 0.22
-      }
-    ]
-  },
-  "Golden Lowlands": {
-    "pokes": [
-      {
-        "id": 46,
-        "minLevel": 17,
-        "maxLevel": 20,
-        "probability": 0.109
-      },
-      {
-        "id": 47,
-        "minLevel": 24,
-        "maxLevel": 27,
-        "probability": 0.0396
-      },
-      {
-        "id": 54,
-        "minLevel": 17,
-        "maxLevel": 20,
-        "probability": 0.099
-      },
-      {
-        "id": 74,
-        "minLevel": 21,
-        "maxLevel": 24,
-        "probability": 0.099
-      },
-      {
-        "id": 75,
-        "minLevel": 25,
-        "maxLevel": 28,
-        "probability": 0.0396
-      },
-      {
-        "id": 92,
-        "minLevel": 17,
-        "maxLevel": 20,
-        "probability": 0.099
-      },
-      {
-        "id": 401,
-        "minLevel": 6,
-        "maxLevel": 9,
-        "probability": 0.1584
-      },
-      {
-        "id": 402,
-        "minLevel": 17,
-        "maxLevel": 20,
-        "probability": 0.0396
-      },
-      {
-        "id": 406,
-        "minLevel": 17,
-        "maxLevel": 20,
-        "probability": 0.1089
-      },
-      {
-        "id": 412,
-        "minLevel": 16,
-        "maxLevel": 19,
-        "probability": 0.1386
-      },
-      {
-        "id": 455,
-        "minLevel": 17,
-        "maxLevel": 20,
-        "probability": 0.0693
-      }
-    ]
-  },
-  "Gapejaw Bog": {
-    "pokes": [
-      {
-        "id": 54,
-        "minLevel": 19,
-        "maxLevel": 22,
-        "probability": 0.0694
-      },
-      {
-        "id": 74,
-        "minLevel": 21,
-        "maxLevel": 24,
-        "probability": 0.0693
-      },
-      {
-        "id": 75,
-        "minLevel": 25,
-        "maxLevel": 28,
-        "probability": 0.0297
-      },
-      {
-        "id": 92,
-        "minLevel": 19,
-        "maxLevel": 24,
-        "probability": 0.0693
-      },
-      {
-        "id": 93,
-        "minLevel": 25,
-        "maxLevel": 28,
-        "probability": 0.0297
-      },
-      {
-        "id": 114,
-        "minLevel": 19,
-        "maxLevel": 22,
-        "probability": 0.0495
-      },
-      {
-        "id": 193,
-        "minLevel": 21,
-        "maxLevel": 24,
-        "probability": 0.0495
-      },
-      {
-        "id": 280,
-        "minLevel": 19,
-        "maxLevel": 22,
-        "probability": 0.1089
-      },
-      {
-        "id": 315,
-        "minLevel": 19,
-        "maxLevel": 22,
-        "probability": 0.0297
-      },
-      {
-        "id": 399,
-        "minLevel": 11,
-        "maxLevel": 14,
-        "probability": 0.0792
-      },
-      {
-        "id": 400,
-        "minLevel": 19,
-        "maxLevel": 22,
-        "probability": 0.0297
-      },
-      {
-        "id": 406,
-        "minLevel": 19,
-        "maxLevel": 22,
-        "probability": 0.0693
-      },
-      {
-        "id": 412,
-        "minLevel": 16,
-        "maxLevel": 19,
-        "probability": 0.0891
-      },
-      {
-        "id": 417,
-        "minLevel": 19,
-        "maxLevel": 22,
-        "probability": 0.0495
-      },
-      {
-        "id": 449,
-        "minLevel": 21,
-        "maxLevel": 23,
-        "probability": 0.0594
-      },
-      {
-        "id": 453,
-        "minLevel": 19,
-        "maxLevel": 24,
-        "probability": 0.0693
-      },
-      {
-        "id": 455,
-        "minLevel": 17,
-        "maxLevel": 22,
-        "probability": 0.0495
-      }
-    ]
-  },
-  "Sludge Mound": {
-    "pokes": [
-      {
-        "id": 74,
-        "minLevel": 21,
-        "maxLevel": 24,
-        "probability": 0.72
-      },
-      {
-        "id": 75,
-        "minLevel": 25,
-        "maxLevel": 30,
-        "probability": 0.28
-      }
-    ]
-  },
-  "Scarlet Bog": {
-    "pokes": [
-      {
-        "id": 74,
-        "minLevel": 21,
-        "maxLevel": 24,
-        "probability": 0.15
-      },
-      {
-        "id": 75,
-        "minLevel": 25,
-        "maxLevel": 37,
-        "probability": 0.12
-      },
-      {
-        "id": 92,
-        "minLevel": 21,
-        "maxLevel": 24,
-        "probability": 0.15
-      },
-      {
-        "id": 93,
-        "minLevel": 25,
-        "maxLevel": 28,
-        "probability": 0.06
-      },
-      {
-        "id": 434,
-        "minLevel": 21,
-        "maxLevel": 24,
-        "probability": 0.14
-      },
-      {
-        "id": 435,
-        "minLevel": 34,
-        "maxLevel": 37,
-        "probability": 0.05
-      },
-      {
-        "id": 449,
-        "minLevel": 21,
-        "maxLevel": 24,
-        "probability": 0.14
-      },
-      {
-        "id": 450,
-        "minLevel": 34,
-        "maxLevel": 37,
-        "probability": 0.04
-      },
-      {
-        "id": 453,
-        "minLevel": 21,
-        "maxLevel": 24,
-        "probability": 0.15
-      }
-    ]
-  },
-  "Bolderoll Slope": {
-    "pokes": [
-      {
-        "id": 41,
-        "minLevel": 18,
-        "maxLevel": 21,
-        "probability": 0.2425
-      },
-      {
-        "id": 42,
-        "minLevel": 23,
-        "maxLevel": 26,
-        "probability": 0.0606
-      },
-      {
-        "id": 74,
-        "minLevel": 18,
-        "maxLevel": 24,
-        "probability": 0.1919
-      },
-      {
-        "id": 75,
-        "minLevel": 25,
-        "maxLevel": 28,
-        "probability": 0.0707
-      },
-      {
-        "id": 111,
-        "minLevel": 23,
-        "maxLevel": 26,
-        "probability": 0.1717
-      },
-      {
-        "id": 412,
-        "minLevel": 16,
-        "maxLevel": 19,
-        "probability": 0.2626
-      }
-    ]
-  },
-  "Cloudpool Ridge": {
-    "pokes": [
-      {
-        "id": 41,
-        "minLevel": 17,
-        "maxLevel": 21,
-        "probability": 0.1178
-      },
-      {
-        "id": 42,
-        "minLevel": 25,
-        "maxLevel": 28,
-        "probability": 0.0294
-      },
-      {
-        "id": 46,
-        "minLevel": 20,
-        "maxLevel": 23,
-        "probability": 0.098
-      },
-      {
-        "id": 47,
-        "minLevel": 25,
-        "maxLevel": 28,
-        "probability": 0.0294
-      },
-      {
-        "id": 74,
-        "minLevel": 21,
-        "maxLevel": 24,
-        "probability": 0.0882
-      },
-      {
-        "id": 75,
-        "minLevel": 25,
-        "maxLevel": 28,
-        "probability": 0.0392
-      },
-      {
-        "id": 198,
-        "minLevel": 23,
-        "maxLevel": 25,
-        "probability": 0.0686
-      },
-      {
-        "id": 315,
-        "minLevel": 25,
-        "maxLevel": 28,
-        "probability": 0.0392
-      },
-      {
-        "id": 401,
-        "minLevel": 6,
-        "maxLevel": 9,
-        "probability": 0.1471
-      },
-      {
-        "id": 402,
-        "minLevel": 25,
-        "maxLevel": 28,
-        "probability": 0.0392
-      },
-      {
-        "id": 412,
-        "minLevel": 16,
-        "maxLevel": 19,
-        "probability": 0.1275
-      },
-      {
-        "id": 415,
-        "minLevel": 17,
-        "maxLevel": 20,
-        "probability": 0.1176
-      },
-      {
-        "id": 455,
-        "minLevel": 25,
-        "maxLevel": 28,
-        "probability": 0.0588
-      }
-    ]
-  },
-  "Shrouded Ruins": {
-    "pokes": [
-      {
-        "id": 74,
-        "minLevel": 21,
-        "maxLevel": 24,
-        "probability": 0.109
-      },
-      {
-        "id": 75,
-        "minLevel": 25,
-        "maxLevel": 28,
-        "probability": 0.0396
-      },
-      {
-        "id": 92,
-        "minLevel": 17,
-        "maxLevel": 24,
-        "probability": 0.1089
-      },
-      {
-        "id": 93,
-        "minLevel": 25,
-        "maxLevel": 30,
-        "probability": 0.0396
-      },
-      {
-        "id": 108,
-        "minLevel": 25,
-        "maxLevel": 28,
-        "probability": 0.0891
-      },
-      {
-        "id": 111,
-        "minLevel": 25,
-        "maxLevel": 28,
-        "probability": 0.099
-      },
-      {
-        "id": 280,
-        "minLevel": 16,
-        "maxLevel": 19,
-        "probability": 0.1683
-      },
-      {
-        "id": 281,
-        "minLevel": 23,
-        "maxLevel": 28,
-        "probability": 0.0594
-      },
-      {
-        "id": 412,
-        "minLevel": 16,
-        "maxLevel": 19,
-        "probability": 0.1485
-      },
-      {
-        "id": 442,
-        "minLevel": 60,
-        "maxLevel": 60,
-        "probability": 0.0693
-      },
-      {
-        "id": 455,
-        "minLevel": 25,
-        "maxLevel": 28,
-        "probability": 0.0693
-      }
-    ]
-  },
-  "Holm of Trials": {
-    "pokes": [
-      {
-        "id": 54,
-        "minLevel": 29,
-        "maxLevel": 32,
-        "probability": 0.0892
-      },
-      {
-        "id": 55,
-        "minLevel": 33,
-        "maxLevel": 36,
-        "probability": 0.0297
-      },
-      {
-        "id": 74,
-        "minLevel": 21,
-        "maxLevel": 24,
-        "probability": 0.099
-      },
-      {
-        "id": 75,
-        "minLevel": 33,
-        "maxLevel": 36,
-        "probability": 0.0396
-      },
-      {
-        "id": 92,
-        "minLevel": 21,
-        "maxLevel": 24,
-        "probability": 0.099
-      },
-      {
-        "id": 93,
-        "minLevel": 33,
-        "maxLevel": 36,
-        "probability": 0.0396
-      },
-      {
-        "id": 412,
-        "minLevel": 16,
-        "maxLevel": 19,
-        "probability": 0.1287
-      },
-      {
-        "id": 417,
-        "minLevel": 33,
-        "maxLevel": 36,
-        "probability": 0.0693
-      },
-      {
-        "id": 453,
-        "minLevel": 33,
-        "maxLevel": 36,
-        "probability": 0.099
-      },
-      {
-        "id": 454,
-        "minLevel": 37,
-        "maxLevel": 40,
-        "probability": 0.0297
-      },
-      {
-        "id": 455,
-        "minLevel": 33,
-        "maxLevel": 36,
-        "probability": 0.0693
-      },
-      {
-        "id": 548,
-        "minLevel": 33,
-        "maxLevel": 36,
-        "probability": 0.1089
-      },
-      {
-        "id": 704,
-        "minLevel": 30,
-        "maxLevel": 32,
-        "probability": 0.099
-      }
-    ]
-  },
-  "Droning Meadow": {
-    "pokes": [
-      {
-        "id": 46,
-        "minLevel": 20,
-        "maxLevel": 23,
-        "probability": 0.1213
-      },
-      {
-        "id": 47,
-        "minLevel": 33,
-        "maxLevel": 36,
-        "probability": 0.0404
-      },
-      {
-        "id": 74,
-        "minLevel": 21,
-        "maxLevel": 24,
-        "probability": 0.1111
-      },
-      {
-        "id": 75,
-        "minLevel": 33,
-        "maxLevel": 36,
-        "probability": 0.0404
-      },
-      {
-        "id": 92,
-        "minLevel": 21,
-        "maxLevel": 24,
-        "probability": 0.1111
-      },
-      {
-        "id": 93,
-        "minLevel": 33,
-        "maxLevel": 36,
-        "probability": 0.0404
-      },
-      {
-        "id": 193,
-        "minLevel": 22,
-        "maxLevel": 24,
-        "probability": 0.0909
-      },
-      {
-        "id": 399,
-        "minLevel": 11,
-        "maxLevel": 14,
-        "probability": 0.1414
-      },
-      {
-        "id": 400,
-        "minLevel": 33,
-        "maxLevel": 36,
-        "probability": 0.0404
-      },
-      {
-        "id": 415,
-        "minLevel": 17,
-        "maxLevel": 20,
-        "probability": 0.1414
-      },
-      {
-        "id": 416,
-        "minLevel": 33,
-        "maxLevel": 36,
-        "probability": 0.0404
-      },
-      {
-        "id": 417,
-        "minLevel": 33,
-        "maxLevel": 36,
-        "probability": 0.0808
-      }
-    ]
-  },
-  "Ursa's Ring": {
-    "pokes": [
-      {
-        "id": 74,
-        "minLevel": 21,
-        "maxLevel": 24,
-        "probability": 0.15
-      },
-      {
-        "id": 75,
-        "minLevel": 27,
-        "maxLevel": 30,
-        "probability": 0.06
-      },
-      {
-        "id": 92,
-        "minLevel": 21,
-        "maxLevel": 24,
-        "probability": 0.15
-      },
-      {
-        "id": 93,
-        "minLevel": 27,
-        "maxLevel": 30,
-        "probability": 0.06
-      },
-      {
-        "id": 193,
-        "minLevel": 27,
-        "maxLevel": 30,
-        "probability": 0.12
-      },
-      {
-        "id": 216,
-        "minLevel": 20,
-        "maxLevel": 22,
-        "probability": 0.14
-      },
-      {
-        "id": 412,
-        "minLevel": 16,
-        "maxLevel": 19,
-        "probability": 0.21
-      },
-      {
-        "id": 417,
-        "minLevel": 27,
-        "maxLevel": 30,
-        "probability": 0.11
-      }
-    ]
-  },
-  "Aspiration Hill": {
-    "pokes": [
-      {
-        "id": 396,
-        "minLevel": 2,
-        "maxLevel": 4,
-        "probability": 0.37
-      },
-      {
-        "id": 399,
-        "minLevel": 2,
-        "maxLevel": 4,
-        "probability": 0.37
-      },
-      {
-        "id": 425,
-        "minLevel": 2,
-        "maxLevel": 4,
-        "probability": 0.26
-      }
-    ]
-  },
-  "Horseshoe Plains": {
-    "pokes": [
-      {
-        "id": 77,
-        "minLevel": 3,
-        "maxLevel": 6,
-        "probability": 0.0809
-      },
-      {
-        "id": 133,
-        "minLevel": 2,
-        "maxLevel": 6,
-        "probability": 0.101
-      },
-      {
-        "id": 265,
-        "minLevel": 2,
-        "maxLevel": 6,
-        "probability": 0.1717
-      },
-      {
-        "id": 268,
-        "minLevel": 7,
-        "maxLevel": 9,
-        "probability": 0.0808
-      },
-      {
-        "id": 396,
-        "minLevel": 2,
-        "maxLevel": 4,
-        "probability": 0.1313
-      },
-      {
-        "id": 399,
-        "minLevel": 2,
-        "maxLevel": 6,
-        "probability": 0.1313
-      },
-      {
-        "id": 418,
-        "minLevel": 2,
-        "maxLevel": 4,
-        "probability": 0.101
-      },
-      {
-        "id": 425,
-        "minLevel": 2,
-        "maxLevel": 6,
-        "probability": 0.0909
-      },
-      {
-        "id": 439,
-        "minLevel": 3,
-        "maxLevel": 6,
-        "probability": 0.1111
-      }
-    ]
-  },
-  "Deertrack Path": {
-    "pokes": [
-      {
-        "id": 41,
-        "minLevel": 7,
-        "maxLevel": 10,
-        "probability": 0.15
-      },
-      {
-        "id": 74,
-        "minLevel": 7,
-        "maxLevel": 10,
-        "probability": 0.13
-      },
-      {
-        "id": 396,
-        "minLevel": 7,
-        "maxLevel": 10,
-        "probability": 0.15
-      },
-      {
-        "id": 401,
-        "minLevel": 6,
-        "maxLevel": 9,
-        "probability": 0.19
-      },
-      {
-        "id": 412,
-        "minLevel": 7,
-        "maxLevel": 10,
-        "probability": 0.17
-      },
-      {
-        "id": 425,
-        "minLevel": 7,
-        "maxLevel": 10,
-        "probability": 0.11
-      },
-      {
-        "id": 446,
-        "minLevel": 7,
-        "maxLevel": 10,
-        "probability": 0.1
-      }
-    ]
-  },
-  "Deertrack Heights": {
-    "pokes": [
-      {
-        "id": 41,
-        "minLevel": 7,
-        "maxLevel": 14,
-        "probability": 0.1415
-      },
-      {
-        "id": 42,
-        "minLevel": 22,
-        "maxLevel": 25,
-        "probability": 0.0404
-      },
-      {
-        "id": 74,
-        "minLevel": 7,
-        "maxLevel": 14,
-        "probability": 0.1212
-      },
-      {
-        "id": 234,
-        "minLevel": 9,
-        "maxLevel": 14,
-        "probability": 0.0707
-      },
-      {
-        "id": 390,
-        "minLevel": 10,
-        "maxLevel": 13,
-        "probability": 0.1111
-      },
-      {
-        "id": 391,
-        "minLevel": 14,
-        "maxLevel": 17,
-        "probability": 0.0404
-      },
-      {
-        "id": 396,
-        "minLevel": 10,
-        "maxLevel": 13,
-        "probability": 0.1414
-      },
-      {
-        "id": 397,
-        "minLevel": 14,
-        "maxLevel": 17,
-        "probability": 0.0505
-      },
-      {
-        "id": 403,
-        "minLevel": 9,
-        "maxLevel": 12,
-        "probability": 0.1313
-      },
-      {
-        "id": 412,
-        "minLevel": 9,
-        "maxLevel": 14,
-        "probability": 0.1515
-      }
-    ]
-  },
-  "Obsidian Falls": {
-    "pokes": [
-      {
-        "id": 412,
-        "minLevel": 11,
-        "maxLevel": 14,
-        "probability": 1
-      }
-    ]
-  },
-  "Oreburrow Tunnel": {
-    "pokes": [
-      {
-        "id": 41,
-        "minLevel": 13,
-        "maxLevel": 16,
-        "probability": 0.2476
-      },
-      {
-        "id": 66,
-        "minLevel": 13,
-        "maxLevel": 16,
-        "probability": 0.198
-      },
-      {
-        "id": 74,
-        "minLevel": 13,
-        "maxLevel": 16,
-        "probability": 0.198
-      },
-      {
-        "id": 75,
-        "minLevel": 25,
-        "maxLevel": 28,
-        "probability": 0.0792
-      },
-      {
-        "id": 440,
-        "minLevel": 13,
-        "maxLevel": 16,
-        "probability": 0.2772
-      }
-    ]
-  },
-  "Nature's Pantry": {
-    "pokes": [
-      {
-        "id": 25,
-        "minLevel": 9,
-        "maxLevel": 12,
-        "probability": 0.0397
-      },
-      {
-        "id": 41,
-        "minLevel": 9,
-        "maxLevel": 13,
-        "probability": 0.1188
-      },
-      {
-        "id": 42,
-        "minLevel": 22,
-        "maxLevel": 25,
-        "probability": 0.0297
-      },
-      {
-        "id": 46,
-        "minLevel": 9,
-        "maxLevel": 12,
-        "probability": 0.099
-      },
-      {
-        "id": 74,
-        "minLevel": 9,
-        "maxLevel": 12,
-        "probability": 0.099
-      },
-      {
-        "id": 172,
-        "minLevel": 9,
-        "maxLevel": 12,
-        "probability": 0.1386
-      },
-      {
-        "id": 396,
-        "minLevel": 9,
-        "maxLevel": 13,
-        "probability": 0.1188
-      },
-      {
-        "id": 397,
-        "minLevel": 14,
-        "maxLevel": 17,
-        "probability": 0.0396
-      },
-      {
-        "id": 401,
-        "minLevel": 6,
-        "maxLevel": 9,
-        "probability": 0.1485
-      },
-      {
-        "id": 402,
-        "minLevel": 10,
-        "maxLevel": 13,
-        "probability": 0.0396
-      },
-      {
-        "id": 412,
-        "minLevel": 9,
-        "maxLevel": 12,
-        "probability": 0.1287
-      }
-    ]
-  },
-  "Heartwood": {
-    "pokes": [
-      {
-        "id": 41,
-        "minLevel": 13,
-        "maxLevel": 16,
-        "probability": 0.1276
-      },
-      {
-        "id": 42,
-        "minLevel": 22,
-        "maxLevel": 25,
-        "probability": 0.0294
-      },
-      {
-        "id": 54,
-        "minLevel": 13,
-        "maxLevel": 16,
-        "probability": 0.098
-      },
-      {
-        "id": 74,
-        "minLevel": 13,
-        "maxLevel": 16,
-        "probability": 0.098
-      },
-      {
-        "id": 123,
-        "minLevel": 13,
-        "maxLevel": 16,
-        "probability": 0.0588
-      },
-      {
-        "id": 265,
-        "minLevel": 3,
-        "maxLevel": 6,
-        "probability": 0.1569
-      },
-      {
-        "id": 266,
-        "minLevel": 7,
-        "maxLevel": 9,
-        "probability": 0.0784
-      },
-      {
-        "id": 267,
-        "minLevel": 13,
-        "maxLevel": 16,
-        "probability": 0.0294
-      },
-      {
-        "id": 268,
-        "minLevel": 7,
-        "maxLevel": 9,
-        "probability": 0.0784
-      },
-      {
-        "id": 269,
-        "minLevel": 13,
-        "maxLevel": 16,
-        "probability": 0.0294
-      },
-      {
-        "id": 415,
-        "minLevel": 13,
-        "maxLevel": 16,
-        "probability": 0.1275
-      },
-      {
-        "id": 427,
-        "minLevel": 13,
-        "maxLevel": 16,
-        "probability": 0.0882
-      }
-    ]
-  },
-  "Grueling Grove": {
-    "pokes": [
-      {
-        "id": 267,
-        "minLevel": 15,
-        "maxLevel": 18,
-        "probability": 0.0708
-      },
-      {
-        "id": 269,
-        "minLevel": 15,
-        "maxLevel": 18,
-        "probability": 0.0707
-      },
-      {
-        "id": 412,
-        "minLevel": 15,
-        "maxLevel": 18,
-        "probability": 0.3535
-      },
-      {
-        "id": 413,
-        "minLevel": 20,
-        "maxLevel": 23,
-        "probability": 0.0909
-      },
-      {
-        "id": 414,
-        "minLevel": 20,
-        "maxLevel": 23,
-        "probability": 0.0909
-      },
-      {
-        "id": 415,
-        "minLevel": 6,
-        "maxLevel": 9,
-        "probability": 0.3232
-      }
-    ]
-  },
-  "Sandgem Flats": {
-    "pokes": [
-      {
-        "id": 63,
-        "minLevel": 12,
-        "maxLevel": 15,
-        "probability": 0.165
-      },
-      {
-        "id": 64,
-        "minLevel": 16,
-        "maxLevel": 19,
-        "probability": 0.0619
-      },
-      {
-        "id": 75,
-        "minLevel": 25,
-        "maxLevel": 28,
-        "probability": 0.0619
-      },
-      {
-        "id": 122,
-        "minLevel": 15,
-        "maxLevel": 18,
-        "probability": 0.0515
-      },
-      {
-        "id": 397,
-        "minLevel": 15,
-        "maxLevel": 18,
-        "probability": 0.0722
-      },
-      {
-        "id": 404,
-        "minLevel": 15,
-        "maxLevel": 18,
-        "probability": 0.0722
-      },
-      {
-        "id": 405,
-        "minLevel": 30,
-        "maxLevel": 33,
-        "probability": 0.0309
-      },
-      {
-        "id": 413,
-        "minLevel": 20,
-        "maxLevel": 23,
-        "probability": 0.0619
-      },
-      {
-        "id": 422,
-        "minLevel": 15,
-        "maxLevel": 18,
-        "probability": 0.1546
-      },
-      {
-        "id": 423,
-        "minLevel": 30,
-        "maxLevel": 33,
-        "probability": 0.0515
-      },
-      {
-        "id": 426,
-        "minLevel": 28,
-        "maxLevel": 31,
-        "probability": 0.0515
-      },
-      {
-        "id": 439,
-        "minLevel": 15,
-        "maxLevel": 18,
-        "probability": 0.1649
-      }
-    ]
-  },
-  "Ramanas Island": {
-    "pokes": [
-      {
-        "id": 75,
-        "minLevel": 33,
-        "maxLevel": 36,
-        "probability": 0.0492
-      },
-      {
-        "id": 190,
-        "minLevel": 24,
-        "maxLevel": 27,
-        "probability": 0.1078
-      },
-      {
-        "id": 390,
-        "minLevel": 10,
-        "maxLevel": 13,
-        "probability": 0.1176
-      },
-      {
-        "id": 391,
-        "minLevel": 32,
-        "maxLevel": 35,
-        "probability": 0.049
-      },
-      {
-        "id": 396,
-        "minLevel": 10,
-        "maxLevel": 13,
-        "probability": 0.1569
-      },
-      {
-        "id": 397,
-        "minLevel": 30,
-        "maxLevel": 33,
-        "probability": 0.0588
-      },
-      {
-        "id": 415,
-        "minLevel": 17,
-        "maxLevel": 20,
-        "probability": 0.1569
-      },
-      {
-        "id": 422,
-        "minLevel": 26,
-        "maxLevel": 29,
-        "probability": 0.1176
-      },
-      {
-        "id": 423,
-        "minLevel": 33,
-        "maxLevel": 36,
-        "probability": 0.0392
-      },
-      {
-        "id": 425,
-        "minLevel": 24,
-        "maxLevel": 27,
-        "probability": 0.1078
-      },
-      {
-        "id": 426,
-        "minLevel": 33,
-        "maxLevel": 36,
-        "probability": 0.0392
-      }
-    ]
-  },
-  "Worn Bridge": {
-    "pokes": [
-      {
-        "id": 41,
-        "minLevel": 9,
-        "maxLevel": 12,
-        "probability": 0.34
-      },
-      {
-        "id": 74,
-        "minLevel": 9,
-        "maxLevel": 12,
-        "probability": 0.28
-      },
-      {
-        "id": 412,
-        "minLevel": 9,
-        "maxLevel": 12,
-        "probability": 0.38
-      }
-    ]
-  },
-  "Gym - Kleavor": {
-    "type": "gym",
-    "name": "Gym - Kleavor",
-    "requirements": {
-      "earnBadge": {
-        "badgeCount": 65,
-        "name": "Kleavor Badge"
-      }
-    },
-    "pokes": []
-  },
-  "Gym - Lilligant": {
-    "type": "gym",
-    "name": "Gym - Lilligant",
-    "requirements": {
-      "earnBadge": {
-        "badgeCount": 66,
-        "name": "Lilligant Badge"
-      }
-    },
-    "pokes": []
-  },
-  "Gym - Arcanine": {
-    "type": "gym",
-    "name": "Gym - Arcanine",
-    "requirements": {
-      "earnBadge": {
-        "badgeCount": 67,
-        "name": "Arcanine Badge"
-      }
-    },
-    "pokes": []
-  },
-  "Coronet Highlands": {
-    "pokes": [
-      {
-        "id": 101.1,
-        "minLevel": 110,
-        "maxLevel": 110,
-        "probability": 1
-      }
-    ]
-  },
-  "Gym - Warden Ingo": {
-    "type": "gym",
-    "name": "Gym - Warden Ingo",
-    "requirements": {
-      "earnBadge": {
-        "badgeCount": 68,
-        "name": "Warden Ingo Badge"
-      }
-    },
-    "pokes": []
-  },
-  "Gym - Electrode": {
-    "type": "gym",
-    "name": "Gym - Electrode",
-    "requirements": {
-      "earnBadge": {
-        "badgeCount": 69,
-        "name": "Electrode Badge"
-      }
-    },
-    "pokes": []
-  },
-  "Gym - Avalugg": {
-    "type": "gym",
-    "name": "Gym - Avalugg",
-    "requirements": {
-      "earnBadge": {
-        "badgeCount": 70,
-        "name": "Avalugg Badge"
-      }
-    },
-    "pokes": []
-  },
-  "Etertime Storm": {
-    "pokes": [
-      {
-        "id": 155,
-        "minLevel": 80,
-        "maxLevel": 82,
-        "probability": 0.2179
-      },
-      {
-        "id": 265,
-        "minLevel": 80,
-        "maxLevel": 82,
-        "probability": 0.3366
-      },
-      {
-        "id": 397,
-        "minLevel": 80,
-        "maxLevel": 82,
-        "probability": 0.099
-      },
-      {
-        "id": 399,
-        "minLevel": 80,
-        "maxLevel": 82,
-        "probability": 0.2673
-      },
-      {
-        "id": 723,
-        "minLevel": 80,
-        "maxLevel": 82,
-        "probability": 0.0792
       }
     ]
   },
@@ -4515,26 +3201,6 @@ export const hisuiRoutes = {
       }
     ]
   },
-  "Snowpoint Temple": {
-    "pokes": [
-      {
-        "id": 486,
-        "minLevel": 110,
-        "maxLevel": 110,
-        "probability": 1
-      }
-    ]
-  },
-  "Firespit Island": {
-    "pokes": [
-      {
-        "id": 485,
-        "minLevel": 110,
-        "maxLevel": 110,
-        "probability": 1
-      }
-    ]
-  },
   "??????": {
     "pokes": [
       {
@@ -4757,19 +3423,6 @@ export const hisuiUnlocks = [
     "challengeName": "Challenge 08",
     "areaId": "Heartwood",
     "unlocks": [
-      "Heartwood"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "routeName": "Heartwood",
-        "count": 10
-      }
-    }
-  },
-  {
-    "challengeName": "Challenge 09",
-    "areaId": "Heartwood",
-    "unlocks": [
       "Oreburrow Tunnel"
     ],
     "requirements": {
@@ -4780,7 +3433,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 10",
+    "challengeName": "Challenge 09",
     "areaId": "Oreburrow Tunnel",
     "unlocks": [
       "Worn Bridge"
@@ -4793,7 +3446,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 11",
+    "challengeName": "Challenge 10",
     "areaId": "Worn Bridge",
     "unlocks": [
       "Sandgem Flats"
@@ -4806,20 +3459,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 12",
-    "areaId": "Sandgem Flats",
-    "unlocks": [
-      "Sandgem Flats"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "routeName": "Sandgem Flats",
-        "count": 10
-      }
-    }
-  },
-  {
-    "challengeName": "Challenge 13",
+    "challengeName": "Challenge 11",
     "areaId": "Sandgem Flats",
     "unlocks": [
       "Ramanas Island"
@@ -4832,7 +3472,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 14",
+    "challengeName": "Challenge 12",
     "areaId": "Ramanas Island",
     "unlocks": [
       "Gapejaw Bog"
@@ -4845,20 +3485,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 15",
-    "areaId": "Gapejaw Bog",
-    "unlocks": [
-      "Gapejaw Bog"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "routeName": "Gapejaw Bog",
-        "count": 10
-      }
-    }
-  },
-  {
-    "challengeName": "Challenge 16",
+    "challengeName": "Challenge 13",
     "areaId": "Gapejaw Bog",
     "unlocks": [
       "Sludge Mound"
@@ -4871,7 +3498,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 17",
+    "challengeName": "Challenge 14",
     "areaId": "Sludge Mound",
     "unlocks": [
       "Scarlet Bog"
@@ -4884,7 +3511,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 18",
+    "challengeName": "Challenge 15",
     "areaId": "Scarlet Bog",
     "unlocks": [
       "Golden Lowlands"
@@ -4897,20 +3524,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 19",
-    "areaId": "Golden Lowlands",
-    "unlocks": [
-      "Golden Lowlands"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "routeName": "Golden Lowlands",
-        "count": 10
-      }
-    }
-  },
-  {
-    "challengeName": "Challenge 20",
+    "challengeName": "Challenge 16",
     "areaId": "Golden Lowlands",
     "unlocks": [
       "Bolderoll Slope"
@@ -4923,7 +3537,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 21",
+    "challengeName": "Challenge 17",
     "areaId": "Bolderoll Slope",
     "unlocks": [
       "Gym - Lilligant"
@@ -4936,7 +3550,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 22",
+    "challengeName": "Challenge 18",
     "areaId": "Gym - Lilligant",
     "unlocks": [
       "Holm of Trials"
@@ -4949,7 +3563,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 23",
+    "challengeName": "Challenge 19",
     "areaId": "Holm of Trials",
     "unlocks": [
       "Ursa's Ring"
@@ -4962,7 +3576,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 24",
+    "challengeName": "Challenge 20",
     "areaId": "Ursa's Ring",
     "unlocks": [
       "Ginkgo Landing"
@@ -4975,7 +3589,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 25",
+    "challengeName": "Challenge 21",
     "areaId": "Ginkgo Landing",
     "unlocks": [
       "Shrouded Ruins"
@@ -4988,7 +3602,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 26",
+    "challengeName": "Challenge 22",
     "areaId": "Shrouded Ruins",
     "unlocks": [
       "Droning Meadow"
@@ -5001,7 +3615,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 27",
+    "challengeName": "Challenge 23",
     "areaId": "Droning Meadow",
     "unlocks": [
       "Grueling Grove"
@@ -5014,7 +3628,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 28",
+    "challengeName": "Challenge 24",
     "areaId": "Grueling Grove",
     "unlocks": [
       "Bathers' Lagoon"
@@ -5027,7 +3641,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 29",
+    "challengeName": "Challenge 25",
     "areaId": "Bathers' Lagoon",
     "unlocks": [
       "Castaway Shore"
@@ -5040,7 +3654,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 30",
+    "challengeName": "Challenge 26",
     "areaId": "Castaway Shore",
     "unlocks": [
       "Deadwood Haunt"
@@ -5053,7 +3667,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 31",
+    "challengeName": "Challenge 27",
     "areaId": "Deadwood Haunt",
     "unlocks": [
       "Crossing Slope"
@@ -5066,7 +3680,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 32",
+    "challengeName": "Challenge 28",
     "areaId": "Crossing Slope",
     "unlocks": [
       "Veilstone Cape"
@@ -5079,7 +3693,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 33",
+    "challengeName": "Challenge 29",
     "areaId": "Veilstone Cape",
     "unlocks": [
       "Tranquility Cove"
@@ -5092,7 +3706,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 34",
+    "challengeName": "Challenge 30",
     "areaId": "Tranquility Cove",
     "unlocks": [
       "Islespy Shore"
@@ -5105,7 +3719,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 35",
+    "challengeName": "Challenge 31",
     "areaId": "Islespy Shore",
     "unlocks": [
       "Spring Path"
@@ -5118,7 +3732,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 36",
+    "challengeName": "Challenge 32",
     "areaId": "Spring Path",
     "unlocks": [
       "Firespit Island"
@@ -5131,7 +3745,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 37",
+    "challengeName": "Challenge 33",
     "areaId": "Firespit Island",
     "unlocks": [
       "Gym - Arcanine"
@@ -5144,7 +3758,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 38",
+    "challengeName": "Challenge 34",
     "areaId": "Gym - Arcanine",
     "unlocks": [
       "Seagrass Haven"
@@ -5157,7 +3771,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 39",
+    "challengeName": "Challenge 35",
     "areaId": "Seagrass Haven",
     "unlocks": [
       "Wayward Cave"
@@ -5170,7 +3784,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 40",
+    "challengeName": "Challenge 36",
     "areaId": "Wayward Cave",
     "unlocks": [
       "Coronet Highlands"
@@ -5183,7 +3797,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 41",
+    "challengeName": "Challenge 37",
     "areaId": "Coronet Highlands",
     "unlocks": [
       "Clamberclaw Cliffs"
@@ -5196,7 +3810,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 42",
+    "challengeName": "Challenge 38",
     "areaId": "Clamberclaw Cliffs",
     "unlocks": [
       "Celestica Trail"
@@ -5209,7 +3823,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 43",
+    "challengeName": "Challenge 39",
     "areaId": "Celestica Trail",
     "unlocks": [
       "Gym - Warden Ingo"
@@ -5222,7 +3836,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 44",
+    "challengeName": "Challenge 40",
     "areaId": "Gym - Warden Ingo",
     "unlocks": [
       "Celestica Ruins"
@@ -5235,7 +3849,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 45",
+    "challengeName": "Challenge 41",
     "areaId": "Celestica Ruins",
     "unlocks": [
       "Sacred Plaza"
@@ -5248,10 +3862,10 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 46",
+    "challengeName": "Challenge 42",
     "areaId": "Sacred Plaza",
     "unlocks": [
-      "Stonetooth Rows"
+      "Lonely Spring"
     ],
     "requirements": {
       "defeatCountRoute": {
@@ -5261,10 +3875,23 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 47",
+    "challengeName": "Challenge 43",
+    "areaId": "Lonely Spring",
+    "unlocks": [
+      "Stonetooth Rows"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "routeName": "Lonely Spring",
+        "count": 10
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 44",
     "areaId": "Stonetooth Rows",
     "unlocks": [
-      "Primeval Grotto"
+      "Sonorous Path"
     ],
     "requirements": {
       "defeatCountRoute": {
@@ -5274,7 +3901,20 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 48",
+    "challengeName": "Challenge 45",
+    "areaId": "Sonorous Path",
+    "unlocks": [
+      "Primeval Grotto"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "routeName": "Sonorous Path",
+        "count": 10
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 46",
     "areaId": "Primeval Grotto",
     "unlocks": [
       "Gym - Electrode"
@@ -5287,7 +3927,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 49",
+    "challengeName": "Challenge 47",
     "areaId": "Gym - Electrode",
     "unlocks": [
       "Cloudpool Ridge"
@@ -5300,20 +3940,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 50",
-    "areaId": "Cloudpool Ridge",
-    "unlocks": [
-      "Cloudpool Ridge"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "routeName": "Cloudpool Ridge",
-        "count": 10
-      }
-    }
-  },
-  {
-    "challengeName": "Challenge 51",
+    "challengeName": "Challenge 48",
     "areaId": "Cloudpool Ridge",
     "unlocks": [
       "Fabled Spring"
@@ -5326,7 +3953,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 52",
+    "challengeName": "Challenge 49",
     "areaId": "Fabled Spring",
     "unlocks": [
       "Bonechill Wastes"
@@ -5339,20 +3966,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 53",
-    "areaId": "Bonechill Wastes",
-    "unlocks": [
-      "Bonechill Wastes"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "routeName": "Bonechill Wastes",
-        "count": 10
-      }
-    }
-  },
-  {
-    "challengeName": "Challenge 54",
+    "challengeName": "Challenge 50",
     "areaId": "Bonechill Wastes",
     "unlocks": [
       "Glacier Terrace"
@@ -5365,10 +3979,10 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 55",
+    "challengeName": "Challenge 51",
     "areaId": "Glacier Terrace",
     "unlocks": [
-      "Heart's Crag"
+      "Avalanche Slopes"
     ],
     "requirements": {
       "defeatCountRoute": {
@@ -5378,10 +3992,23 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 56",
+    "challengeName": "Challenge 52",
+    "areaId": "Avalanche Slopes",
+    "unlocks": [
+      "Heart's Crag"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "routeName": "Avalanche Slopes",
+        "count": 10
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 53",
     "areaId": "Heart's Crag",
     "unlocks": [
-      "Snowpoint Temple"
+      "Icepeak Cavern"
     ],
     "requirements": {
       "defeatCountRoute": {
@@ -5391,7 +4018,20 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 57",
+    "challengeName": "Challenge 54",
+    "areaId": "Icepeak Cavern",
+    "unlocks": [
+      "Snowpoint Temple"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "routeName": "Icepeak Cavern",
+        "count": 10
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 55",
     "areaId": "Snowpoint Temple",
     "unlocks": [
       "Arena's Approach"
@@ -5404,7 +4044,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 58",
+    "challengeName": "Challenge 56",
     "areaId": "Arena's Approach",
     "unlocks": [
       "Gym - Avalugg"
@@ -5417,7 +4057,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 59",
+    "challengeName": "Challenge 57",
     "areaId": "Gym - Avalugg",
     "unlocks": [
       "Whiteout Valley"
@@ -5430,7 +4070,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 60",
+    "challengeName": "Challenge 58",
     "areaId": "Whiteout Valley",
     "unlocks": [
       "Etertime Storm"
@@ -5443,7 +4083,7 @@ export const hisuiUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 61",
+    "challengeName": "Challenge 59",
     "areaId": "Etertime Storm",
     "unlocks": [
       "Etertime Citadel",
