@@ -296,6 +296,32 @@ export function cheatAction(action) {
                     }
                 }
 
+                if (unlock.requirements) {
+                    const bossFlags = {
+                        defeatJohtoChampion: 'Johto Champion',
+                        defeatHoennChampion: 'Hoenn Champion',
+                        defeatSinnohChampion: 'Sinnoh Champion',
+                        defeatUnovaChampion: 'Unova Champion',
+                        defeatKalosChampion: 'Kalos Champion',
+                        defeatAlolaChampion: 'Alola Champion',
+                        defeatHisuiChampion: 'Hisui Champion',
+                        defeatGalarChampion: 'Galar Champion',
+                        defeatPaldeaChampion: 'Paldea Champion',
+                        defeatRed: 'Red'
+                    };
+                    for (const [reqKey, bossName] of Object.entries(bossFlags)) {
+                        if (unlock.requirements[reqKey]) {
+                            if (!state.stats.defeatedBosses) state.stats.defeatedBosses = {};
+                            state.stats.defeatedBosses[bossName] = true;
+                        }
+                    }
+                    if (unlock.requirements.defeatEliteFourAndChampion) {
+                        if (!state.stats.defeatedBosses) state.stats.defeatedBosses = {};
+                        state.stats.defeatedBosses['Pokemon League Lorelei'] = true;
+                        state.stats.defeatedBosses['Champion Rival'] = true;
+                    }
+                }
+
                 if (unlock.unlocks) {
                      unlock.unlocks.forEach(newRoute => unlockArea(newRoute));
                 }
@@ -334,6 +360,9 @@ export function cheatAction(action) {
         state.stats.activeChallenges = [];
         state.stats.hasUnseenMap = true;
         updateUI();
+        if (typeof window !== 'undefined' && typeof window.showMap === 'function' && document.getElementById('interactive-map')) {
+            window.showMap();
+        }
         alertMessage = "Map challenges completed and areas unlocked!";
     } else if (action === 'Pokedex') {
         generatePokedex(false);

@@ -229,7 +229,8 @@ function getRegionCoordinatesMap(region) {
         Johto: 'johtoMapCoordinates',
         Hoenn: 'hoennMapCoordinates',
         Kalos: 'kalosMapCoordinates',
-        Unova: 'unovaMapCoordinates'
+        Unova: 'unovaMapCoordinates',
+        Alola: 'alolaMapCoordinates'
     };
     const key = configKeyByRegion[region];
     return key ? (state.config?.[key] || {}) : null;
@@ -243,6 +244,7 @@ function getUnlockedAreas() {
     unlockedAreas.add("Sinnoh Professor Lab");
     unlockedAreas.add("Unova Professor Lab");
     unlockedAreas.add("Kalos Professor Lab");
+    unlockedAreas.add("Alola Professor Lab");
 
     let targetStats = getRegionStats(window.currentMapRegion);
 
@@ -261,7 +263,8 @@ function getUnlockedAreas() {
     }
 
     const noPokemon = targetParty.length === 0 && targetStorage.length === 0;
-    const isStarterPending = !targetStats.hasPickedStarter && noPokemon;
+    const hasCompletedProgress = Array.isArray(targetStats.completedChallengeIds) && targetStats.completedChallengeIds.length > 0;
+    const isStarterPending = !targetStats.hasPickedStarter && noPokemon && !hasCompletedProgress;
 
     if (isStarterPending) {
         return unlockedAreas;
@@ -286,6 +289,9 @@ function getUnlockedAreas() {
     }
     if (window.currentMapRegion === "Kalos") {
         unlockedAreas.add("Route 2");
+    }
+    if (window.currentMapRegion === "Alola") {
+        unlockedAreas.add("Route 1 - South");
     }
 
     if (targetStats.completed150Challenge || (targetStats.completedChallengeIds && targetStats.completedChallengeIds.includes("Extra Challenge B"))) {
@@ -540,7 +546,7 @@ export function showMap() {
         { name: 'Sinnoh', mapFile: '4 Sinnoh Map.png', width: 1024, height: 724 },
         { name: 'Unova', mapFile: '5 Unova Map.png', width: 1280, height: 837 },
         { name: 'Kalos', mapFile: '6 Kalos Map.png', width: 1032, height: 676 },
-        { name: 'Alola', mapFile: '7 1 Alola Map.png', width: 1280, height: 905 },
+        { name: 'Alola', mapFile: getRegionStats('Alola')?.defeatedBosses?.["Alola Champion"] ? '7 2 Alola Map.png' : '7 1 Alola Map.png', width: 1280, height: 905 },
         { name: 'Galar', mapFile: '8 Galar Map.png', width: 1554, height: 2198 },
         { name: 'Hisui', mapFile: '9 Hisui Map.png', width: 1280, height: 711 },
         { name: 'Paldea', mapFile: '10 Paldea Map.png', width: 1280, height: 905 }
