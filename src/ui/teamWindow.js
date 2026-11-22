@@ -1,5 +1,5 @@
 import { state } from '../state.js';
-import { TYPE_COLORS } from '../constants.js';
+import { TYPE_COLORS, getRegionLevelCap } from '../constants.js';
 import * as mathEngine from "../mathEngine.js";
 import { escapeHTML } from '../utils/stringUtils.js';
 
@@ -50,7 +50,8 @@ function buildTypeDotsHtml(types) {
 }
 
 function buildXpBarHtml(p) {
-    if (p.level >= 100) {
+    const maxLevel = getRegionLevelCap(state.currentRegionName);
+    if (p.level >= maxLevel) {
         return `
             <div class="team-bar-track is-xp is-max">
                 <div class="team-bar-fill is-xp-max" style="width: 100%;"></div>
@@ -117,7 +118,8 @@ function updatePartySlotInPlace(slotEl, p) {
     const hpPctEl = slotEl.querySelector('.js-hp-pct');
     if (hpPctEl) hpPctEl.textContent = `${Math.floor(hpPct)}%`;
 
-    if (p.level < 100) {
+    const maxLevel = getRegionLevelCap(state.currentRegionName);
+    if (p.level < maxLevel) {
         const currentLevelXp = mathEngine.calculateTotalXP(p.level);
         const nextLevelXp = mathEngine.calculateTotalXP(p.level + 1);
         const xpProgress = Math.max(0, Math.floor(p.xp) - currentLevelXp);

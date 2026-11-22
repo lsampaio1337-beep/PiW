@@ -1,4 +1,5 @@
 import { getCapacity } from "./mathEngine.js";
+import { getRegionNumber } from "./constants.js";
 import { WindowManager } from './windowManager.js';
 import { setupClickThrough } from './clickThrough.js';
 import { getChallengeData, updateTimers } from './ui/mainControl.js';
@@ -1288,14 +1289,24 @@ window.showProfLabModal = function() {
     html += renderCard("IV Assignment", 'iv', ivCurrentVal, ivTier, profTasks.iv, false);
 
     // Level Card
+    const regionNum = getRegionNumber(state.currentRegionName);
+    const levelThresholds = [15, 30, 45, 60, 75];
+    const scaledLevelTasks = profTasks.level.map((t, idx) => {
+        const lvl = (levelThresholds[idx] || 15) * regionNum;
+        return {
+            ...t,
+            text: `Catch ${t.req} Pokemons with level >= ${lvl}`,
+            effect: `+50% XP for level < ${lvl}`
+        };
+    });
     let levelTier = state.stats.levelTaskTier || 0;
     let levelCurrentVal = 0;
-    if (levelTier < profTasks.level.length) {
-        levelCurrentVal = state.stats[profTasks.level[levelTier].stat] || 0;
-    } else if (profTasks.level.length > 0) {
-        levelCurrentVal = state.stats[profTasks.level[profTasks.level.length - 1].stat] || 0; // fallback if completed
+    if (levelTier < scaledLevelTasks.length) {
+        levelCurrentVal = state.stats[scaledLevelTasks[levelTier].stat] || 0;
+    } else if (scaledLevelTasks.length > 0) {
+        levelCurrentVal = state.stats[scaledLevelTasks[scaledLevelTasks.length - 1].stat] || 0; // fallback if completed
     }
-    html += renderCard("Level Assignment", 'level', levelCurrentVal, levelTier, profTasks.level, true);
+    html += renderCard("Level Assignment", 'level', levelCurrentVal, levelTier, scaledLevelTasks, true);
 
     // Shiny Card (Combined seen and caught, keeps all rewards but obsolete regular seen shiny is removed by good shiny)
     let seenTier = state.stats.shinySeenTaskTier || 0;

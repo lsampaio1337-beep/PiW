@@ -1,4 +1,4 @@
-import { calculateDamage, calculateReqXP, calculateTotalXP, calculateStat, calculateCatchChance, getCurrentCount } from '../src/mathEngine.js';
+import { calculateDamage, calculateReqXP, calculateTotalXP, getLevelFromXP, calculateStat, calculateCatchChance, getCurrentCount } from '../src/mathEngine.js';
 
 describe('calculateReqXP', () => {
     test('should calculate required XP correctly for level 1', () => {
@@ -417,5 +417,31 @@ describe('getCurrentCount', () => {
         };
 
         expect(getCurrentCount(mockState, 'potions')).toBe(0);
+    });
+});
+
+describe('Prestige XP Scaling (> Lv 100)', () => {
+    test('uses 5 * L * (5 + 8 * L) for levels above 100', () => {
+        expect(calculateReqXP(101)).toBe(5 * 101 * (5 + 8 * 101));
+        expect(calculateReqXP(200)).toBe(5 * 200 * (5 + 8 * 200));
+        expect(calculateReqXP(500)).toBe(5 * 500 * (5 + 8 * 500));
+        expect(calculateReqXP(1000)).toBe(5 * 1000 * (5 + 8 * 1000));
+    });
+
+    test('computes monotonic non-overflowing total XP up to level 1000', () => {
+        const xp200 = calculateTotalXP(200);
+        const xp500 = calculateTotalXP(500);
+        const xp1000 = calculateTotalXP(1000);
+        expect(xp200).toBeGreaterThan(calculateTotalXP(100));
+        expect(xp500).toBeGreaterThan(xp200);
+        expect(xp1000).toBeGreaterThan(xp500);
+        expect(Number.isSafeInteger(xp1000)).toBe(true);
+    });
+
+    test('getLevelFromXP respects custom region maxLevel caps', () => {
+        const xpFor200 = calculateTotalXP(200);
+        expect(getLevelFromXP(xpFor200, 100)).toBe(100);
+        expect(getLevelFromXP(xpFor200, 200)).toBe(200);
+        expect(getLevelFromXP(calculateTotalXP(250), 200)).toBe(200);
     });
 });
