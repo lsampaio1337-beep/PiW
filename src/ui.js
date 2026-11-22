@@ -3540,7 +3540,10 @@ window.showGameAlert = function(message, attachToElementId = null) {
         alertBox.style.position = 'fixed';
     }
 
-    if (isAbsolute) {
+    const isBattleArenaAlert = isAbsolute && attachToElementId === 'view-battle-arena';
+    if (isBattleArenaAlert) {
+        alertBox.style.top = '8px';
+    } else if (isAbsolute) {
         // Place it just below the typical header height for standardized floating window alerts
         alertBox.style.top = '40px';
     } else {
@@ -3548,14 +3551,18 @@ window.showGameAlert = function(message, attachToElementId = null) {
     }
     alertBox.style.left = '50%';
     alertBox.style.transform = 'translateX(-50%)';
+    alertBox.style.width = 'max-content';
+    alertBox.style.maxWidth = isBattleArenaAlert ? 'calc(100% - 16px)' : 'calc(100% - 24px)';
+    alertBox.style.boxSizing = 'border-box';
     alertBox.style.backgroundColor = 'rgba(0, 0, 0, 0.85)';
     alertBox.style.color = '#fff';
-    alertBox.style.padding = '15px 30px';
-    alertBox.style.borderRadius = '10px';
+    alertBox.style.padding = isBattleArenaAlert ? '7px 14px' : '15px 30px';
+    alertBox.style.borderRadius = isBattleArenaAlert ? '8px' : '10px';
     alertBox.style.border = '2px solid #3498db';
     alertBox.style.boxShadow = '0 4px 15px rgba(0,0,0,0.5)';
     alertBox.style.zIndex = '999999';
-    alertBox.style.fontSize = '18px';
+    alertBox.style.fontSize = isBattleArenaAlert ? '12px' : '18px';
+    alertBox.style.lineHeight = isBattleArenaAlert ? '1.25' : '';
     alertBox.style.fontWeight = 'bold';
     alertBox.style.textAlign = 'center';
     alertBox.style.pointerEvents = 'none';

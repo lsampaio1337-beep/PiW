@@ -193,4 +193,26 @@ describe('updateUI', () => {
         expect(teamWindowModule.updateTeamWindow).toHaveBeenCalled();
         expect(battleModule.updateBattleArena).toHaveBeenCalled();
     });
+
+    test('showGameAlert uses compact non-cropped sizing when attached to view-battle-arena', () => {
+        const origGetElementById = document.getElementById;
+        document.getElementById = (id) => document.querySelector(`[id="${id}"]`);
+        const arena = document.createElement('div');
+        arena.id = 'view-battle-arena';
+        document.body.appendChild(arena);
+
+        try {
+            window.showGameAlert("Can't collect Ball due to its maximum capacity", "view-battle-arena");
+            const toast = arena.querySelector('.game-alert-toast');
+            expect(toast).not.toBeNull();
+            expect(toast.style.top).toBe('8px');
+            expect(toast.style.fontSize).toBe('12px');
+            expect(toast.style.padding).toBe('7px 14px');
+            expect(toast.style.width).toBe('max-content');
+            expect(toast.style.maxWidth).toBe('calc(100% - 16px)');
+        } finally {
+            document.getElementById = origGetElementById;
+            arena.remove();
+        }
+    });
 });
