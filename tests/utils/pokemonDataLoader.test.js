@@ -67,4 +67,40 @@ describe('pokemonDataLoader & runtime pokemon_info.json integration', () => {
             expect(fs.existsSync(path.join(REPO_ROOT, url))).toBe(true);
         }
     });
+
+    it('resolves Reg5 (Unova) movesets and BW2 sprites for Wormadam, Rotom, Therian Trio, and Kyurem', () => {
+        const wormadamPlantMoves = getLearnsetForRegion(pokemonMap.get('0413.1'), 'Unova', moves).map(m => m.move);
+        expect(wormadamPlantMoves).toContain('Razor Leaf');
+        expect(wormadamPlantMoves).toContain('Leaf Storm');
+
+        const rotomBaseMoves = getLearnsetForRegion(pokemonMap.get('0479'), 'Unova', moves).map(m => m.move);
+        expect(rotomBaseMoves).toContain('Discharge');
+        expect(getLearnsetForRegion(pokemonMap.get('0479.1'), 'Unova', moves).map(m => m.move)).toContain('Air Slash');
+        expect(getLearnsetForRegion(pokemonMap.get('0479.2'), 'Unova', moves).map(m => m.move)).toContain('Blizzard');
+        expect(getLearnsetForRegion(pokemonMap.get('0479.3'), 'Unova', moves).map(m => m.move)).toContain('Overheat');
+        expect(getLearnsetForRegion(pokemonMap.get('0479.4'), 'Unova', moves).map(m => m.move)).toContain('Leaf Storm');
+        expect(getLearnsetForRegion(pokemonMap.get('0479.5'), 'Unova', moves).map(m => m.move)).toContain('Hydro Pump');
+
+        const thundurusTMoves = getLearnsetForRegion(pokemonMap.get('0642.2'), 'Unova', moves).map(m => m.move);
+        expect(thundurusTMoves).toContain('Thunder');
+        expect(thundurusTMoves).not.toContain('Hurricane');
+
+        const landorusTMoves = getLearnsetForRegion(pokemonMap.get('0645.2'), 'Unova', moves).map(m => m.move);
+        expect(landorusTMoves).toContain('Earthquake');
+        expect(landorusTMoves).not.toContain('Hurricane');
+
+        const kyuremMoves = getLearnsetForRegion(pokemonMap.get('0646'), 'Unova', moves).map(m => m.move);
+        expect(kyuremMoves).toContain('Glaciate');
+        expect(kyuremMoves).toContain('Ice Beam');
+
+        state.settings.legacySprites = false;
+        state.currentRegionName = 'Unova';
+        for (const id of ['0641.2', '0642.2', '0645.2', '0646.1', '0646.2']) {
+            for (const shiny of [false, true]) {
+                const url = getSpriteUrl(id, shiny);
+                expect(url).toContain('Reg5 BW/');
+                expect(fs.existsSync(path.join(REPO_ROOT, url))).toBe(true);
+            }
+        }
+    });
 });

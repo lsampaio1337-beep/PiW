@@ -7,7 +7,7 @@ import { pokedexIndexes } from '../config/pokedexIndexes.js';
 const REPO_ROOT = path.resolve(__dirname, '..');
 const SPRITES_DIR = path.join(REPO_ROOT, 'Assets', 'Pokemon Sprites');
 const POKEMON_JSON_PATH = path.join(REPO_ROOT, 'data', 'pokemon.json');
-const POKEMON_INFO_PATH = path.resolve(REPO_ROOT, '..', 'Moveset', 'pokemon_info.json');
+const POKEMON_INFO_PATH = path.join(REPO_ROOT, 'data', 'pokemon_info.json');
 
 const VALID_TYPES = new Set([
     'Normal', 'Fire', 'Water', 'Electric', 'Grass', 'Ice', 'Fighting', 'Poison',
@@ -105,7 +105,7 @@ describe('Pokemon Data & Sprite Sync Integrity', () => {
             }
         }
 
-        expect(totalPngs).toBe(13068);
+        expect(totalPngs).toBe(13078);
 
         const conflicts = Array.from(varFormIds.entries()).filter(([, ids]) => ids.size > 1);
         expect(conflicts).toEqual([]);
@@ -115,10 +115,10 @@ describe('Pokemon Data & Sprite Sync Integrity', () => {
         expect(Array.isArray(pokemonInfo.folders)).toBe(true);
         expect(pokemonInfo.folders.length).toBe(11);
         expect(pokemonInfo.moves && typeof pokemonInfo.moves).toBe('object');
-        expect(Object.keys(pokemonInfo.moves).length).toBe(619);
+        expect(Object.keys(pokemonInfo.moves).length).toBe(620);
 
         const entries = Object.entries(pokemonInfo.pokemon);
-        expect(entries.length).toBe(1552);
+        expect(entries.length).toBe(1554);
 
         const linkedRelPaths = new Set();
         const seenNames = new Set();

@@ -585,7 +585,7 @@ describe('Unown Variations Pokedex & Modal', () => {
         showPokedex();
         const html = showModal.mock.calls[0][1];
         expect(html).toContain('pokedex-variation-mark');
-        expect(html).toContain('window.showUnownVariationsModal(event)');
+        expect(html).toContain('window.showVariationsModal(201, event)');
         expect(html).toContain('Unown');
     });
 
@@ -653,6 +653,89 @@ describe('Unown Variations Pokedex & Modal', () => {
         const html = showModal.mock.calls[0][1];
         expect(html).toContain('Unown (J)');
         expect(html).toContain('dex-sprite-0201-10');
+    });
+});
+
+describe('Region 5 Variations Pokedex & Modal', () => {
+    beforeEach(() => {
+        jest.clearAllMocks();
+        state.currentRegionName = 'Unova';
+        state.stats = { seenSpecies: {}, caughtSpecies: {}, seenShiniesSpecies: {}, caughtShiniesSpecies: {} };
+        state.party = [];
+        state.storage = [];
+        state.safe = [];
+        state.breeding = [];
+        state.training = [];
+        state.config.pokemonData = [
+            { id: 550, canonId: '0550', unova_id: 56, name: 'Basculin', types: ['Water'], hp: 70, atk: 92, def: 65, spa: 80, spd: 55, spe: 98 },
+            { id: 550.1, canonId: '0550.1', name: 'Basculin (Blue-Striped Form)', types: ['Water'], hp: 70, atk: 92, def: 65, spa: 80, spd: 55, spe: 98 },
+            { id: 550.2, canonId: '0550.2', name: 'Basculin (Red-Striped Form)', types: ['Water'], hp: 70, atk: 92, def: 65, spa: 80, spd: 55, spe: 98 },
+            { id: 550.3, canonId: '0550.3', name: 'Basculin (White-Striped Form)', types: ['Water'], hp: 70, atk: 92, def: 65, spa: 80, spd: 55, spe: 98 },
+            { id: 555, canonId: '0555', unova_id: 61, name: 'Darmanitan', types: ['Fire'], hp: 105, atk: 140, def: 55, spa: 30, spd: 55, spe: 95 },
+            { id: 555.1, canonId: '0555.1', name: 'Darmanitan (Galarian Standard Mode)', types: ['Ice'], hp: 105, atk: 140, def: 55, spa: 30, spd: 55, spe: 95 },
+            { id: 555.2, canonId: '0555.2', name: 'Darmanitan (Galarian Zen Mode)', types: ['Ice', 'Fire'], hp: 105, atk: 160, def: 55, spa: 30, spd: 55, spe: 135 },
+            { id: 555.3, canonId: '0555.3', name: 'Darmanitan (Standard Mode)', types: ['Fire'], hp: 105, atk: 140, def: 55, spa: 30, spd: 55, spe: 95 },
+            { id: 555.4, canonId: '0555.4', name: 'Darmanitan (Zen Mode)', types: ['Fire', 'Psychic'], hp: 105, atk: 30, def: 105, spa: 140, spd: 105, spe: 55 },
+            { id: 641, canonId: '0641', unova_id: 147, name: 'Tornadus', types: ['Flying'], hp: 79, atk: 115, def: 70, spa: 125, spd: 80, spe: 111 },
+            { id: 641.1, canonId: '0641.1', name: 'Tornadus (Incarnate Forme)', types: ['Flying'], hp: 79, atk: 115, def: 70, spa: 125, spd: 80, spe: 111 },
+            { id: 641.2, canonId: '0641.2', name: 'Tornadus (Therian Forme)', types: ['Flying'], hp: 79, atk: 100, def: 80, spa: 110, spd: 90, spe: 121 },
+            { id: 642, canonId: '0642', unova_id: 148, name: 'Thundurus', types: ['Electric', 'Flying'], hp: 79, atk: 115, def: 70, spa: 125, spd: 80, spe: 111 },
+            { id: 642.1, canonId: '0642.1', name: 'Thundurus (Incarnate Forme)', types: ['Electric', 'Flying'], hp: 79, atk: 115, def: 70, spa: 125, spd: 80, spe: 111 },
+            { id: 642.2, canonId: '0642.2', name: 'Thundurus (Therian Forme)', types: ['Electric', 'Flying'], hp: 79, atk: 105, def: 70, spa: 145, spd: 80, spe: 101 },
+            { id: 645, canonId: '0645', unova_id: 151, name: 'Landorus', types: ['Ground', 'Flying'], hp: 89, atk: 125, def: 90, spa: 115, spd: 80, spe: 101 },
+            { id: 645.1, canonId: '0645.1', name: 'Landorus (Incarnate Forme)', types: ['Ground', 'Flying'], hp: 89, atk: 125, def: 90, spa: 115, spd: 80, spe: 101 },
+            { id: 645.2, canonId: '0645.2', name: 'Landorus (Therian Forme)', types: ['Ground', 'Flying'], hp: 89, atk: 145, def: 90, spa: 105, spd: 80, spe: 91 },
+            { id: 646, canonId: '0646', unova_id: 152, name: 'Kyurem', types: ['Dragon', 'Ice'], hp: 125, atk: 130, def: 90, spa: 130, spd: 90, spe: 95 },
+            { id: 646.1, canonId: '0646.1', name: 'Kyurem (Black Kyurem)', types: ['Dragon', 'Ice'], hp: 125, atk: 170, def: 100, spa: 120, spd: 90, spe: 95 },
+            { id: 646.2, canonId: '0646.2', name: 'Kyurem (White Kyurem)', types: ['Dragon', 'Ice'], hp: 125, atk: 120, def: 90, spa: 170, spd: 100, spe: 95 },
+            { id: 648, canonId: '0648', unova_id: 154, name: 'Meloetta', types: ['Normal', 'Psychic'], hp: 100, atk: 77, def: 77, spa: 128, spd: 128, spe: 90 },
+            { id: 648.1, canonId: '0648.1', name: 'Meloetta (Aria Forme)', types: ['Normal', 'Psychic'], hp: 100, atk: 77, def: 77, spa: 128, spd: 128, spe: 90 },
+            { id: 648.2, canonId: '0648.2', name: 'Meloetta (Pirouette Forme)', types: ['Normal', 'Fighting'], hp: 100, atk: 128, def: 90, spa: 77, spd: 77, spe: 128 },
+        ];
+    });
+
+    it('renders variation marks for all Region 5 variation species when any form is caught and excludes non-Unova forms', () => {
+        const { showVariationsModal } = require('../../src/ui/pokedex.js');
+        state.stats.caughtSpecies['Basculin (Blue-Striped Form)'] = 1;
+        state.stats.caughtSpecies['Darmanitan (Zen Mode)'] = 1;
+        state.stats.caughtSpecies['Tornadus (Therian Forme)'] = 1;
+        state.stats.caughtSpecies['Thundurus (Incarnate Forme)'] = 1;
+        state.stats.caughtSpecies['Landorus (Therian Forme)'] = 1;
+        state.stats.caughtSpecies['Kyurem (Black Kyurem)'] = 1;
+        state.stats.caughtSpecies['Meloetta (Pirouette Forme)'] = 1;
+
+        showPokedex();
+        const html = showModal.mock.calls[0][1];
+        for (const [id, title] of [
+            [550, 'Basculin Variations (1/2)'],
+            [555, 'Darmanitan Variations (1/2)'],
+            [641, 'Tornadus Variations (1/2)'],
+            [642, 'Thundurus Variations (1/2)'],
+            [645, 'Landorus Variations (1/2)'],
+            [646, 'Kyurem Variations (1/3)'],
+            [648, 'Meloetta Variations (1/2)'],
+        ]) {
+            expect(html).toContain(`title="${title}"`);
+            expect(html).toContain(`window.showVariationsModal(${id}, event)`);
+        }
+
+        jest.clearAllMocks();
+        showVariationsModal(550, { stopPropagation: jest.fn() });
+        const basculinHtml = showModal.mock.calls[0][1];
+        expect(basculinHtml).toContain('Basculin (Blue-Striped Form)');
+        expect(basculinHtml).not.toContain('White-Striped');
+
+        jest.clearAllMocks();
+        showVariationsModal(555, { stopPropagation: jest.fn() });
+        const darmanitanHtml = showModal.mock.calls[0][1];
+        expect(darmanitanHtml).toContain('Darmanitan (Zen Mode)');
+        expect(darmanitanHtml).not.toContain('Galarian');
+
+        jest.clearAllMocks();
+        showVariationsModal(646, { stopPropagation: jest.fn() });
+        const kyuremHtml = showModal.mock.calls[0][1];
+        expect(kyuremHtml).toContain('Kyurem (Black Kyurem)');
+        expect(kyuremHtml).toContain('Caught: 1/3');
     });
 });
 });

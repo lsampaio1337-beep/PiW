@@ -3162,6 +3162,11 @@
       "type": "Normal",
       "cat": "Special",
       "power": 120
+    },
+    "Glaciate": {
+      "type": "Ice",
+      "cat": "Special",
+      "power": 65
     }
   },
   "pokemon": {
@@ -123782,6 +123787,54 @@
           [
             1,
             "Tackle"
+          ],
+          [
+            10,
+            "Protect"
+          ],
+          [
+            15,
+            "Bug Bite"
+          ],
+          [
+            20,
+            "Hidden Power"
+          ],
+          [
+            23,
+            "Confusion"
+          ],
+          [
+            26,
+            "Razor Leaf"
+          ],
+          [
+            29,
+            "Growth"
+          ],
+          [
+            32,
+            "Psybeam"
+          ],
+          [
+            35,
+            "Captivate"
+          ],
+          [
+            38,
+            "Flail"
+          ],
+          [
+            41,
+            "Attract"
+          ],
+          [
+            44,
+            "Psychic"
+          ],
+          [
+            47,
+            "Leaf Storm"
           ]
         ],
         "Reg6": [
@@ -142319,6 +142372,64 @@
             55,
             "Uproar"
           ]
+        ],
+        "Reg5": [
+          [
+            1,
+            "Thunder Shock"
+          ],
+          [
+            1,
+            "Thunder Wave"
+          ],
+          [
+            1,
+            "Confuse Ray"
+          ],
+          [
+            1,
+            "Trick"
+          ],
+          [
+            1,
+            "Astonish"
+          ],
+          [
+            8,
+            "Uproar"
+          ],
+          [
+            15,
+            "Double Team"
+          ],
+          [
+            22,
+            "Shock Wave"
+          ],
+          [
+            29,
+            "Ominous Wind"
+          ],
+          [
+            36,
+            "Substitute"
+          ],
+          [
+            43,
+            "Electro Ball"
+          ],
+          [
+            50,
+            "Hex"
+          ],
+          [
+            57,
+            "Charge"
+          ],
+          [
+            64,
+            "Discharge"
+          ]
         ]
       }
     },
@@ -142398,6 +142509,10 @@
           ]
         ],
         "Reg5": [
+          [
+            1,
+            "Air Slash"
+          ],
           [
             1,
             "Thunder Shock"
@@ -142759,6 +142874,10 @@
         "Reg5": [
           [
             1,
+            "Blizzard"
+          ],
+          [
+            1,
             "Thunder Shock"
           ],
           [
@@ -143116,6 +143235,10 @@
           ]
         ],
         "Reg5": [
+          [
+            1,
+            "Overheat"
+          ],
           [
             1,
             "Thunder Shock"
@@ -143477,6 +143600,10 @@
         "Reg5": [
           [
             1,
+            "Leaf Storm"
+          ],
+          [
+            1,
             "Thunder Shock"
           ],
           [
@@ -143834,6 +143961,10 @@
           ]
         ],
         "Reg5": [
+          [
+            1,
+            "Hydro Pump"
+          ],
           [
             1,
             "Thunder Shock"
@@ -182454,6 +182585,7 @@
       ],
       "sprite": "Tornadus_Therian",
       "folders": [
+        4,
         5,
         7,
         8,
@@ -183150,359 +183282,12 @@
       ],
       "sprite": "Thundurus_Therian",
       "folders": [
+        4,
         5,
         7,
         8,
         10
-      ],
-      "moveset": {
-        "Reg5": [
-          [
-            1,
-            "Gust"
-          ],
-          [
-            1,
-            "Uproar"
-          ],
-          [
-            1,
-            "Astonish"
-          ],
-          [
-            7,
-            "Swagger"
-          ],
-          [
-            13,
-            "Bite"
-          ],
-          [
-            19,
-            "Revenge"
-          ],
-          [
-            25,
-            "Air Cutter"
-          ],
-          [
-            31,
-            "Extrasensory"
-          ],
-          [
-            37,
-            "Agility"
-          ],
-          [
-            43,
-            "Air Slash"
-          ],
-          [
-            49,
-            "Crunch"
-          ],
-          [
-            55,
-            "Tailwind"
-          ],
-          [
-            61,
-            "Rain Dance"
-          ],
-          [
-            67,
-            "Hurricane"
-          ],
-          [
-            73,
-            "Dark Pulse"
-          ],
-          [
-            79,
-            "Hammer Arm"
-          ],
-          [
-            85,
-            "Thrash"
-          ]
-        ],
-        "Reg6": [
-          [
-            1,
-            "Gust"
-          ],
-          [
-            1,
-            "Thrash"
-          ],
-          [
-            1,
-            "Uproar"
-          ],
-          [
-            1,
-            "Astonish"
-          ],
-          [
-            1,
-            "Hammer Arm"
-          ],
-          [
-            1,
-            "Tailwind"
-          ],
-          [
-            1,
-            "Hurricane"
-          ],
-          [
-            7,
-            "Swagger"
-          ],
-          [
-            13,
-            "Bite"
-          ],
-          [
-            19,
-            "Revenge"
-          ],
-          [
-            25,
-            "Air Cutter"
-          ],
-          [
-            31,
-            "Extrasensory"
-          ],
-          [
-            37,
-            "Agility"
-          ],
-          [
-            43,
-            "Air Slash"
-          ],
-          [
-            49,
-            "Crunch"
-          ],
-          [
-            61,
-            "Rain Dance"
-          ],
-          [
-            73,
-            "Dark Pulse"
-          ]
-        ],
-        "Reg7": [
-          [
-            1,
-            "Gust"
-          ],
-          [
-            1,
-            "Thrash"
-          ],
-          [
-            1,
-            "Swagger"
-          ],
-          [
-            1,
-            "Uproar"
-          ],
-          [
-            1,
-            "Astonish"
-          ],
-          [
-            1,
-            "Hammer Arm"
-          ],
-          [
-            1,
-            "Hurricane"
-          ],
-          [
-            7,
-            "Bite"
-          ],
-          [
-            13,
-            "Revenge"
-          ],
-          [
-            19,
-            "Air Cutter"
-          ],
-          [
-            25,
-            "Extrasensory"
-          ],
-          [
-            31,
-            "Agility"
-          ],
-          [
-            37,
-            "Air Slash"
-          ],
-          [
-            43,
-            "Crunch"
-          ],
-          [
-            49,
-            "Tailwind"
-          ],
-          [
-            55,
-            "Rain Dance"
-          ],
-          [
-            67,
-            "Dark Pulse"
-          ]
-        ],
-        "Reg8": [
-          [
-            1,
-            "Gust"
-          ],
-          [
-            1,
-            "Astonish"
-          ],
-          [
-            5,
-            "Leer"
-          ],
-          [
-            10,
-            "Swagger"
-          ],
-          [
-            15,
-            "Bite"
-          ],
-          [
-            20,
-            "Air Cutter"
-          ],
-          [
-            25,
-            "Agility"
-          ],
-          [
-            30,
-            "Tailwind"
-          ],
-          [
-            35,
-            "Air Slash"
-          ],
-          [
-            40,
-            "Crunch"
-          ],
-          [
-            45,
-            "Extrasensory"
-          ],
-          [
-            50,
-            "Uproar"
-          ],
-          [
-            55,
-            "Hammer Arm"
-          ],
-          [
-            60,
-            "Rain Dance"
-          ],
-          [
-            65,
-            "Hurricane"
-          ],
-          [
-            70,
-            "Thrash"
-          ]
-        ],
-        "Reg10": [
-          [
-            1,
-            "Gust"
-          ],
-          [
-            1,
-            "Astonish"
-          ],
-          [
-            5,
-            "Leer"
-          ],
-          [
-            10,
-            "Swagger"
-          ],
-          [
-            15,
-            "Bite"
-          ],
-          [
-            20,
-            "Air Cutter"
-          ],
-          [
-            25,
-            "Agility"
-          ],
-          [
-            30,
-            "Tailwind"
-          ],
-          [
-            35,
-            "Air Slash"
-          ],
-          [
-            40,
-            "Crunch"
-          ],
-          [
-            45,
-            "Extrasensory"
-          ],
-          [
-            50,
-            "Uproar"
-          ],
-          [
-            55,
-            "Hammer Arm"
-          ],
-          [
-            60,
-            "Rain Dance"
-          ],
-          [
-            65,
-            "Hurricane"
-          ],
-          [
-            70,
-            "Thrash"
-          ],
-          [
-            77,
-            "Bleakwind Storm"
-          ]
-        ]
-      }
+      ]
     },
     "0643": {
       "name": "Reshiram",
@@ -184490,359 +184275,12 @@
       ],
       "sprite": "Landorus_Therian",
       "folders": [
+        4,
         5,
         7,
         8,
         10
-      ],
-      "moveset": {
-        "Reg5": [
-          [
-            1,
-            "Gust"
-          ],
-          [
-            1,
-            "Uproar"
-          ],
-          [
-            1,
-            "Astonish"
-          ],
-          [
-            7,
-            "Swagger"
-          ],
-          [
-            13,
-            "Bite"
-          ],
-          [
-            19,
-            "Revenge"
-          ],
-          [
-            25,
-            "Air Cutter"
-          ],
-          [
-            31,
-            "Extrasensory"
-          ],
-          [
-            37,
-            "Agility"
-          ],
-          [
-            43,
-            "Air Slash"
-          ],
-          [
-            49,
-            "Crunch"
-          ],
-          [
-            55,
-            "Tailwind"
-          ],
-          [
-            61,
-            "Rain Dance"
-          ],
-          [
-            67,
-            "Hurricane"
-          ],
-          [
-            73,
-            "Dark Pulse"
-          ],
-          [
-            79,
-            "Hammer Arm"
-          ],
-          [
-            85,
-            "Thrash"
-          ]
-        ],
-        "Reg6": [
-          [
-            1,
-            "Gust"
-          ],
-          [
-            1,
-            "Thrash"
-          ],
-          [
-            1,
-            "Uproar"
-          ],
-          [
-            1,
-            "Astonish"
-          ],
-          [
-            1,
-            "Hammer Arm"
-          ],
-          [
-            1,
-            "Tailwind"
-          ],
-          [
-            1,
-            "Hurricane"
-          ],
-          [
-            7,
-            "Swagger"
-          ],
-          [
-            13,
-            "Bite"
-          ],
-          [
-            19,
-            "Revenge"
-          ],
-          [
-            25,
-            "Air Cutter"
-          ],
-          [
-            31,
-            "Extrasensory"
-          ],
-          [
-            37,
-            "Agility"
-          ],
-          [
-            43,
-            "Air Slash"
-          ],
-          [
-            49,
-            "Crunch"
-          ],
-          [
-            61,
-            "Rain Dance"
-          ],
-          [
-            73,
-            "Dark Pulse"
-          ]
-        ],
-        "Reg7": [
-          [
-            1,
-            "Gust"
-          ],
-          [
-            1,
-            "Thrash"
-          ],
-          [
-            1,
-            "Swagger"
-          ],
-          [
-            1,
-            "Uproar"
-          ],
-          [
-            1,
-            "Astonish"
-          ],
-          [
-            1,
-            "Hammer Arm"
-          ],
-          [
-            1,
-            "Hurricane"
-          ],
-          [
-            7,
-            "Bite"
-          ],
-          [
-            13,
-            "Revenge"
-          ],
-          [
-            19,
-            "Air Cutter"
-          ],
-          [
-            25,
-            "Extrasensory"
-          ],
-          [
-            31,
-            "Agility"
-          ],
-          [
-            37,
-            "Air Slash"
-          ],
-          [
-            43,
-            "Crunch"
-          ],
-          [
-            49,
-            "Tailwind"
-          ],
-          [
-            55,
-            "Rain Dance"
-          ],
-          [
-            67,
-            "Dark Pulse"
-          ]
-        ],
-        "Reg8": [
-          [
-            1,
-            "Gust"
-          ],
-          [
-            1,
-            "Astonish"
-          ],
-          [
-            5,
-            "Leer"
-          ],
-          [
-            10,
-            "Swagger"
-          ],
-          [
-            15,
-            "Bite"
-          ],
-          [
-            20,
-            "Air Cutter"
-          ],
-          [
-            25,
-            "Agility"
-          ],
-          [
-            30,
-            "Tailwind"
-          ],
-          [
-            35,
-            "Air Slash"
-          ],
-          [
-            40,
-            "Crunch"
-          ],
-          [
-            45,
-            "Extrasensory"
-          ],
-          [
-            50,
-            "Uproar"
-          ],
-          [
-            55,
-            "Hammer Arm"
-          ],
-          [
-            60,
-            "Rain Dance"
-          ],
-          [
-            65,
-            "Hurricane"
-          ],
-          [
-            70,
-            "Thrash"
-          ]
-        ],
-        "Reg10": [
-          [
-            1,
-            "Gust"
-          ],
-          [
-            1,
-            "Astonish"
-          ],
-          [
-            5,
-            "Leer"
-          ],
-          [
-            10,
-            "Swagger"
-          ],
-          [
-            15,
-            "Bite"
-          ],
-          [
-            20,
-            "Air Cutter"
-          ],
-          [
-            25,
-            "Agility"
-          ],
-          [
-            30,
-            "Tailwind"
-          ],
-          [
-            35,
-            "Air Slash"
-          ],
-          [
-            40,
-            "Crunch"
-          ],
-          [
-            45,
-            "Extrasensory"
-          ],
-          [
-            50,
-            "Uproar"
-          ],
-          [
-            55,
-            "Hammer Arm"
-          ],
-          [
-            60,
-            "Rain Dance"
-          ],
-          [
-            65,
-            "Hurricane"
-          ],
-          [
-            70,
-            "Thrash"
-          ],
-          [
-            77,
-            "Bleakwind Storm"
-          ]
-        ]
-      }
+      ]
     },
     "0646": {
       "name": "Kyurem",
@@ -184889,7 +184327,55 @@
         "Reg5": [
           [
             1,
-            "Tackle"
+            "Dragon Rage"
+          ],
+          [
+            1,
+            "Icy Wind"
+          ],
+          [
+            15,
+            "AncientPower"
+          ],
+          [
+            22,
+            "Ice Beam"
+          ],
+          [
+            29,
+            "DragonBreath"
+          ],
+          [
+            36,
+            "Slash"
+          ],
+          [
+            43,
+            "Scary Face"
+          ],
+          [
+            50,
+            "Glaciate"
+          ],
+          [
+            57,
+            "Dragon Pulse"
+          ],
+          [
+            71,
+            "Endeavor"
+          ],
+          [
+            78,
+            "Blizzard"
+          ],
+          [
+            85,
+            "Outrage"
+          ],
+          [
+            92,
+            "Hyper Voice"
           ]
         ],
         "Reg6": [
@@ -184937,6 +184423,7 @@
       ],
       "sprite": "Kyurem_Black",
       "folders": [
+        4,
         5,
         7,
         10
@@ -185227,6 +184714,7 @@
       ],
       "sprite": "Kyurem_White",
       "folders": [
+        4,
         5,
         7,
         10

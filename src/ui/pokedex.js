@@ -22,16 +22,16 @@ function getPokemonById(id, state) {
     return state.config.pokemonData?.find(p => p.id === id || p.canonId === id);
 }
 
-const VARIATION_SPECIES_IDS = new Set([201, 351, 386]);
+const VARIATION_SPECIES_IDS = new Set([201, 351, 386, 550, 555, 641, 642, 645, 646, 648]);
 
 function getSpeciesVariations(baseId, state) {
     const padded = String(baseId).padStart(4, '0');
     const all = (state?.config?.pokemonData || []).filter(
         p => p && typeof p.canonId === 'string' && p.canonId.startsWith(`${padded}.`)
     );
+    const regionName = state?.currentRegionName || 'Kanto';
 
     if (baseId === 201) {
-        const regionName = state?.currentRegionName || 'Kanto';
         const filtered = regionName === 'Johto'
             ? all.filter(p => !Array.isArray(p._folders) || p._folders.includes(1))
             : all;
@@ -50,8 +50,16 @@ function getSpeciesVariations(baseId, state) {
         });
     }
 
-    if (baseId === 351) {
-        const baseEntry = getPokemonById(351, state);
+    if (baseId === 550 && !['Hisui', 'Paldea'].includes(regionName)) {
+        return all.filter(p => p.canonId !== '0550.3');
+    }
+
+    if (baseId === 555 && !['Galar', 'Hisui', 'Paldea'].includes(regionName)) {
+        return all.filter(p => p.canonId !== '0555.1' && p.canonId !== '0555.2');
+    }
+
+    if (baseId === 351 || baseId === 646) {
+        const baseEntry = getPokemonById(baseId, state);
         return baseEntry ? [baseEntry, ...all] : all;
     }
 
