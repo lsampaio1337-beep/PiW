@@ -57,9 +57,15 @@ export class WindowManager {
         const left = (playerBounds.minLeft !== null && playerBounds.minLeft > rect.left)
             ? (playerBounds.minLeft - rect.left)
             : 0;
-        const right = (enemyBounds.maxRight !== null && rect.right > enemyBounds.maxRight)
-            ? (rect.right - enemyBounds.maxRight)
-            : 0;
+        const enemySideEl = winElement.querySelector('#enemy-side');
+        const isEnemySliding = Boolean(enemySideEl && enemySideEl.dataset && enemySideEl.dataset.sliding === 'true');
+        let right = 0;
+        if (isEnemySliding) {
+            right = winElement._lastEnemyRightSlack || 0;
+        } else if (enemyBounds.maxRight !== null && rect.right > enemyBounds.maxRight) {
+            right = rect.right - enemyBounds.maxRight;
+            winElement._lastEnemyRightSlack = right;
+        }
         const lowestBottom = (playerBounds.maxBottom !== null && enemyBounds.maxBottom !== null)
             ? Math.max(playerBounds.maxBottom, enemyBounds.maxBottom)
             : (playerBounds.maxBottom ?? enemyBounds.maxBottom);
@@ -736,57 +742,64 @@ export class WindowManager {
 
             const snapDistance = 20;
             const breakDistance = 30; // Distance raw mouse can move away from snap before breaking
+            const isMinimalCombat = Boolean(winElement.classList && winElement.classList.contains('is-minimal-combat'));
 
-            // Check X Snap
-            if (snapLockX !== null) {
-                if (Math.abs(rawLeft - snapLockX.rawAtSnap) > breakDistance) {
-                    snapLockX = null; // Break snap
-                } else {
-                    finalLeft = snapLockX.snappedValue;
-                }
-            }
-
-            if (snapLockX === null) {
-                this.windows.forEach(otherWin => {
-                    if (otherWin === winElement || otherWin.style.display === 'none') return;
-                    const otherRect = otherWin.getBoundingClientRect();
-
-                    if (Math.abs(rawLeft - otherRect.right) < snapDistance) {
-                        snapLockX = { snappedValue: otherRect.right, rawAtSnap: rawLeft };
-                    } else if (Math.abs((rawLeft + rect.width) - otherRect.left) < snapDistance) {
-                        snapLockX = { snappedValue: otherRect.left - rect.width, rawAtSnap: rawLeft };
-                    } else if (Math.abs(rawLeft - otherRect.left) < snapDistance) {
-                        snapLockX = { snappedValue: otherRect.left, rawAtSnap: rawLeft };
+            if (isMinimalCombat) {
+                // Skip window-to-window snapping so minimal combat only has 1 soft border lock at screen edges
+                snapLockX = null;
+                snapLockY = null;
+            } else {
+                // Check X Snap
+                if (snapLockX !== null) {
+                    if (Math.abs(rawLeft - snapLockX.rawAtSnap) > breakDistance) {
+                        snapLockX = null; // Break snap
+                    } else {
+                        finalLeft = snapLockX.snappedValue;
                     }
-                });
-            }
-
-            // Check Y Snap
-            if (snapLockY !== null) {
-                if (Math.abs(rawTop - snapLockY.rawAtSnap) > breakDistance) {
-                    snapLockY = null; // Break snap
-                } else {
-                    finalTop = snapLockY.snappedValue;
                 }
-            }
 
-            if (snapLockY === null) {
-                this.windows.forEach(otherWin => {
-                    if (otherWin === winElement || otherWin.style.display === 'none') return;
-                    const otherRect = otherWin.getBoundingClientRect();
+                if (snapLockX === null) {
+                    this.windows.forEach(otherWin => {
+                        if (otherWin === winElement || otherWin.style.display === 'none') return;
+                        const otherRect = otherWin.getBoundingClientRect();
 
-                    if (Math.abs(rawTop - otherRect.bottom) < snapDistance) {
-                        snapLockY = { snappedValue: otherRect.bottom, rawAtSnap: rawTop };
-                    } else if (Math.abs((rawTop + rect.height) - otherRect.top) < snapDistance) {
-                        snapLockY = { snappedValue: otherRect.top - rect.height, rawAtSnap: rawTop };
-                    } else if (Math.abs(rawTop - otherRect.top) < snapDistance) {
-                        snapLockY = { snappedValue: otherRect.top, rawAtSnap: rawTop };
+                        if (Math.abs(rawLeft - otherRect.right) < snapDistance) {
+                            snapLockX = { snappedValue: otherRect.right, rawAtSnap: rawLeft };
+                        } else if (Math.abs((rawLeft + rect.width) - otherRect.left) < snapDistance) {
+                            snapLockX = { snappedValue: otherRect.left - rect.width, rawAtSnap: rawLeft };
+                        } else if (Math.abs(rawLeft - otherRect.left) < snapDistance) {
+                            snapLockX = { snappedValue: otherRect.left, rawAtSnap: rawLeft };
+                        }
+                    });
+                }
+
+                // Check Y Snap
+                if (snapLockY !== null) {
+                    if (Math.abs(rawTop - snapLockY.rawAtSnap) > breakDistance) {
+                        snapLockY = null; // Break snap
+                    } else {
+                        finalTop = snapLockY.snappedValue;
                     }
-                });
-            }
+                }
 
-            if (snapLockX !== null) finalLeft = snapLockX.snappedValue;
-            if (snapLockY !== null) finalTop = snapLockY.snappedValue;
+                if (snapLockY === null) {
+                    this.windows.forEach(otherWin => {
+                        if (otherWin === winElement || otherWin.style.display === 'none') return;
+                        const otherRect = otherWin.getBoundingClientRect();
+
+                        if (Math.abs(rawTop - otherRect.bottom) < snapDistance) {
+                            snapLockY = { snappedValue: otherRect.bottom, rawAtSnap: rawTop };
+                        } else if (Math.abs((rawTop + rect.height) - otherRect.top) < snapDistance) {
+                            snapLockY = { snappedValue: otherRect.top - rect.height, rawAtSnap: rawTop };
+                        } else if (Math.abs(rawTop - otherRect.top) < snapDistance) {
+                            snapLockY = { snappedValue: otherRect.top, rawAtSnap: rawTop };
+                        }
+                    });
+                }
+
+                if (snapLockX !== null) finalLeft = snapLockX.snappedValue;
+                if (snapLockY !== null) finalTop = snapLockY.snappedValue;
+            }
 
             // Container Boundary constraints (soft lock at normal border; break past to let HP bars touch screen edges)
             const slack = this._getMinimalCombatEdgeSlack(winElement, rect);

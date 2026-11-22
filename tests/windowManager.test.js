@@ -971,6 +971,25 @@ describe('WindowManager', () => {
             document.dispatchEvent(new MouseEvent('mousemove', { clientX: 1850, clientY: 1095, bubbles: true })); // rawTop = 975 (> 940 + 25) -> breaks lock, clamped to 948
             expect(win.style.top).toBe('948px');
             document.dispatchEvent(new MouseEvent('mouseup', { bubbles: true }));
+
+            // 4. Minimal combat skips window-to-window snapping so only the single screen border lock triggers
+            const otherWin = document.createElement('div');
+            otherWin.id = 'party-window';
+            otherWin.style.display = 'flex';
+            otherWin.getBoundingClientRect = () => ({ left: 80, top: 100, width: 120, height: 200, right: 200, bottom: 300 });
+            const otherHeader = document.createElement('div');
+            otherHeader.id = 'party-header';
+            otherWin.appendChild(otherHeader);
+            document.body.appendChild(otherWin);
+            windowManager.registerWindow('party-window', 'party-header', '80px', '100px');
+
+            win.style.left = '250px';
+            win.style.top = '100px';
+            playerHp.dispatchEvent(new MouseEvent('mousedown', { clientX: 300, clientY: 220, bubbles: true }));
+            document.dispatchEvent(new MouseEvent('mousemove', { clientX: 255, clientY: 220, bubbles: true })); // rawLeft = 205 (within 20px of party-window right=200) -> must NOT snap to 200
+            expect(win.style.left).toBe('205px');
+            document.dispatchEvent(new MouseEvent('mouseup', { bubbles: true }));
+            otherWin.remove();
         } finally {
             Object.defineProperty(window, 'innerWidth', { value: originalInnerWidth, configurable: true });
             Object.defineProperty(window, 'innerHeight', { value: originalInnerHeight, configurable: true });
