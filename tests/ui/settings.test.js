@@ -30,7 +30,7 @@ jest.mock('../../src/utils/saveCrypto.js', () => ({
 }));
 
 import { state } from '../../src/state.js';
-import { resetWindowLayout } from '../../src/ui/settings.js';
+import { resetWindowLayout, showSettings, toggleMinimalCombatScreen } from '../../src/ui/settings.js';
 
 describe('resetWindowLayout', () => {
     let origGetElementById;
@@ -78,5 +78,68 @@ describe('resetWindowLayout', () => {
         expect(scaler.style.transform).toBe('none');
         expect(scaler.style.height).toBe('auto');
         expect(window.windowManager.autoAdjustWidth).toHaveBeenCalledWith('main-control-window');
+    });
+});
+
+describe('Minimal combat screen setting', () => {
+    let origGetElementById;
+
+    beforeEach(() => {
+        origGetElementById = document.getElementById;
+        document.getElementById = (id) => document.querySelector(`[id="${id}"]`);
+        state.settings.minimalCombatScreen = false;
+        state.currentView = 'BATTLE_ARENA';
+        state.storageRef = { save: jest.fn() };
+        document.body.innerHTML = `
+            <div id="main-view-window" class="floating-window is-battle-mode"></div>
+            <div id="modal-content-box"></div>
+        `;
+        window.switchView = jest.fn();
+    });
+
+    afterEach(() => {
+        document.getElementById = origGetElementById;
+        delete window.switchView;
+        document.body.innerHTML = '';
+    });
+
+    test('toggleMinimalCombatScreen updates state, toggles is-minimal-combat only in battle mode, refreshes view, and saves', () => {
+        const win = document.getElementById('main-view-window');
+
+        toggleMinimalCombatScreen(true);
+        expect(state.settings.minimalCombatScreen).toBe(true);
+        expect(win.classList.contains('is-minimal-combat')).toBe(true);
+        expect(window.switchView).toHaveBeenCalledWith('BATTLE_ARENA');
+        expect(state.storageRef.save).toHaveBeenCalledWith(state);
+
+        // Outside battle mode, is-minimal-combat stays off even when setting is true
+        win.classList.remove('is-battle-mode');
+        toggleMinimalCombatScreen(true);
+        expect(win.classList.contains('is-minimal-combat')).toBe(false);
+
+        win.classList.add('is-battle-mode');
+        toggleMinimalCombatScreen(false);
+        expect(state.settings.minimalCombatScreen).toBe(false);
+        expect(win.classList.contains('is-minimal-combat')).toBe(false);
+    });
+
+    test('showSettings renders Minimal combat screen switch and binds change handler', async () => {
+        const { showModal } = await import('../../src/ui.js');
+        showModal.mockImplementation((title, html) => {
+            const container = document.getElementById('modal-content-box');
+            container.innerHTML = html;
+        });
+
+        showSettings();
+
+        const checkbox = document.getElementById('minimal-combat-checkbox');
+        expect(checkbox).not.toBeNull();
+        expect(checkbox.checked).toBe(false);
+        expect(document.getElementById('modal-content-box').textContent).toContain('Minimal combat screen');
+
+        checkbox.checked = true;
+        checkbox.dispatchEvent(new Event('change'));
+        expect(state.settings.minimalCombatScreen).toBe(true);
+        expect(document.getElementById('main-view-window').classList.contains('is-minimal-combat')).toBe(true);
     });
 });

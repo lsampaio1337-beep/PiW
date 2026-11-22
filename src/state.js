@@ -112,7 +112,8 @@ export const state = {
         smartCapture: {},
         smartCaptureShiny: {},
         globalSmartCaptureShiny: undefined,
-        legacySprites: false
+        legacySprites: false,
+        minimalCombatScreen: false
     },
     regions: {},
     config: {}

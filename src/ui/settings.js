@@ -13,6 +13,29 @@ export function toggleLegacySprites(value) {
 }
 window.toggleLegacySprites = toggleLegacySprites;
 
+export function applyMinimalCombatScreenClass() {
+    if (typeof document === 'undefined') return;
+    const mainViewWin = document.getElementById('main-view-window');
+    if (mainViewWin && mainViewWin.classList) {
+        const isMinimal = Boolean(state.settings?.minimalCombatScreen) && mainViewWin.classList.contains('is-battle-mode');
+        mainViewWin.classList.toggle('is-minimal-combat', isMinimal);
+    }
+}
+
+export function toggleMinimalCombatScreen(value) {
+    if (!state.settings) state.settings = {};
+    state.settings.minimalCombatScreen = (value === 'true' || value === true);
+    applyMinimalCombatScreenClass();
+    if (typeof window !== 'undefined' && state.currentView === 'BATTLE_ARENA' && typeof window.switchView === 'function') {
+        window.switchView('BATTLE_ARENA');
+    }
+    const storage = state.storageRef || (typeof window !== 'undefined' ? window.storageRef : null);
+    if (storage && typeof storage.save === 'function') {
+        storage.save(state);
+    }
+}
+window.toggleMinimalCombatScreen = toggleMinimalCombatScreen;
+
 export function resetWindowLayout() {
     if (!state.settings) state.settings = {};
     const prevKeys = state.settings.windowSettings ? Object.keys(state.settings.windowSettings) : [];
@@ -36,6 +59,9 @@ export function resetWindowLayout() {
             delete winEl._originalRatio;
             delete winEl._baseOriginalWidth;
             delete winEl._widthMultiplier;
+            if (winEl.classList) {
+                winEl.classList.remove('is-battle-mode', 'is-minimal-combat');
+            }
 
             const scaler = winEl.querySelector('.window-content-scaler');
             if (scaler && scaler.style) {
@@ -76,6 +102,7 @@ export function showSettings() {
     if (battleSystem && battleSystem.gymState && battleSystem.gymState.isActive) return;
 
     const isLegacy = !!state.settings?.legacySprites;
+    const isMinimalCombat = !!state.settings?.minimalCombatScreen;
     const settingsHTML = `
         <div class="settings-container">
             <div class="settings-section">
@@ -88,6 +115,18 @@ export function showSettings() {
                         </div>
                         <label class="settings-switch" for="legacy-sprites-checkbox" title="Toggle Legacy Sprites">
                             <input type="checkbox" id="legacy-sprites-checkbox" ${isLegacy ? 'checked' : ''}>
+                            <span class="settings-slider"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="settings-card">
+                    <div class="settings-row">
+                        <div class="settings-info">
+                            <div class="settings-label">Minimal combat screen</div>
+                            <div class="settings-desc">Hide the window frame, arena background, and extra HUD while in battle mode.</div>
+                        </div>
+                        <label class="settings-switch" for="minimal-combat-checkbox" title="Toggle Minimal combat screen">
+                            <input type="checkbox" id="minimal-combat-checkbox" ${isMinimalCombat ? 'checked' : ''}>
                             <span class="settings-slider"></span>
                         </label>
                     </div>
@@ -138,6 +177,10 @@ export function showSettings() {
     const checkboxEl = document.getElementById('legacy-sprites-checkbox');
     if (checkboxEl) {
         checkboxEl.addEventListener('change', (e) => toggleLegacySprites(e.target.checked));
+    }
+    const minimalCheckboxEl = document.getElementById('minimal-combat-checkbox');
+    if (minimalCheckboxEl) {
+        minimalCheckboxEl.addEventListener('change', (e) => toggleMinimalCombatScreen(e.target.checked));
     }
 }
 

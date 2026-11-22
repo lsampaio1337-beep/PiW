@@ -1457,7 +1457,9 @@ export function switchView(viewName) {
 
     const mainViewWin = document.getElementById('main-view-window');
     if (mainViewWin && mainViewWin.classList) {
-        mainViewWin.classList.toggle('is-battle-mode', viewName === 'BATTLE_ARENA');
+        const isBattleMode = viewName === 'BATTLE_ARENA';
+        mainViewWin.classList.toggle('is-battle-mode', isBattleMode);
+        mainViewWin.classList.toggle('is-minimal-combat', isBattleMode && Boolean(state.settings?.minimalCombatScreen));
     }
 
     if (viewName === 'BATTLE_ARENA') {

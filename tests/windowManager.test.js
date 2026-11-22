@@ -802,6 +802,12 @@ describe('WindowManager', () => {
             expect(win.style.width).toBe('640px');
             expect(scaler.style.width).toBe('800px');
             expect(scaler.style.transform).toBe('scale(0.8)');
+
+            // Minimal combat mode hides header so height excludes headerH (0 instead of 30)
+            win.classList.add('is-battle-mode', 'is-minimal-combat');
+            Object.defineProperty(win, 'offsetWidth', { value: 640, configurable: true });
+            windowManager.setWindowProportions('main-view-window', 2.875, 0.5);
+            expect(parseFloat(win.style.height)).toBeCloseTo((800 / 5.75) * 0.8, 1);
         } finally {
             state.settings.windowSettings = prevWindowSettings;
             win.remove();

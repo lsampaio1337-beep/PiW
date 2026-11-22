@@ -23,6 +23,13 @@ export class WindowManager {
         return false;
     }
 
+    _getVisibleHeaderHeight(winElement, headerElement, fallback = 0) {
+        if (!headerElement || this._isElementHidden(headerElement) || (winElement && winElement.classList && winElement.classList.contains('is-minimal-combat'))) {
+            return 0;
+        }
+        return headerElement.offsetHeight || fallback;
+    }
+
     _getContentPadding(winElement) {
         let horizontalPadding = 0;
         let verticalPadding = 0;
@@ -989,8 +996,8 @@ export class WindowManager {
         const scalerElement = winElement.querySelector('.window-content-scaler');
         if (!scalerElement) return;
 
-        // Force a layout flush to ensure header height is accurate
-        const headerH = headerElement ? headerElement.offsetHeight || 30 : 0;
+        // Force a layout flush to ensure header height is accurate (0 when header is hidden in minimal combat mode)
+        const headerH = this._getVisibleHeaderHeight(winElement, headerElement, 30);
         const { horizontalPadding, verticalPadding } = this._getContentPadding(winElement);
 
         if (!winElement._originalWidth) {
@@ -1188,7 +1195,7 @@ export class WindowManager {
         }
 
         const headerElement = winElement.querySelector('.window-header');
-        const headerH = headerElement ? headerElement.offsetHeight : 0;
+        const headerH = this._getVisibleHeaderHeight(winElement, headerElement, 0);
         const parsedH = parseFloat(winElement.style.height);
         const hasCollapsedExplicitHeight = Boolean(winElement.style.height && winElement.style.height !== 'auto' && (isNaN(parsedH) || parsedH <= headerH));
 
@@ -1408,7 +1415,7 @@ export class WindowManager {
 
         const scalerElement = winElement.querySelector('.window-content-scaler');
         const headerElement = winElement.querySelector('.window-header');
-        const headerH = headerElement ? headerElement.offsetHeight : 0;
+        const headerH = this._getVisibleHeaderHeight(winElement, headerElement, 0);
         const { horizontalPadding, verticalPadding } = this._getContentPadding(winElement);
 
         const parsedExplicitH = parseFloat(winElement.style.height);

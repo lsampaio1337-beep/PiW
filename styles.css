@@ -1534,6 +1534,39 @@ input[type="number"] {
     padding: 1px 5px;
 }
 
+#main-view-window.is-minimal-combat {
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    pointer-events: none !important;
+}
+
+#main-view-window.is-minimal-combat * {
+    pointer-events: none !important;
+}
+
+#main-view-window.is-minimal-combat #main-view-header,
+#main-view-window.is-minimal-combat .window-resize-handle,
+#main-view-window.is-minimal-combat #smartwatch,
+#main-view-window.is-minimal-combat #battle-loot-container,
+#main-view-window.is-minimal-combat #enemy-data-modals,
+#main-view-window.is-minimal-combat #dynamic-gym-bg-arena {
+    display: none !important;
+}
+
+#main-view-window.is-minimal-combat #center-col,
+#main-view-window.is-minimal-combat #view-battle-arena,
+#main-view-window.is-minimal-combat #combat-arena {
+    background: transparent !important;
+    background-image: none !important;
+}
+
+#main-view-window.is-minimal-combat #combat-arena::after {
+    display: none !important;
+}
+
 .main-view-header-bar {
     justify-content: space-between;
     padding: 4px 10px;
