@@ -989,13 +989,17 @@ input[type="number"] {
 
 .pokedex-grid {
     display: grid;
-    grid-template-columns: repeat(9, 1fr);
+    grid-template-columns: repeat(9, minmax(0, 1fr));
     gap: 10px;
     padding: 12px 14px;
     overflow-y: auto;
     flex: 1;
     align-content: start;
     box-sizing: border-box;
+}
+
+#pokedex-inner-modal-content .pokedex-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
 }
 
 .pokedex-card {

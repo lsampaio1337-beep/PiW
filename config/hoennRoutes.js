@@ -1600,16 +1600,10 @@ export const hoennRoutes = [
     "name": "Mauville Game Corner",
     "spawns": [
       {
-        "pokemonId": 287,
-        "minLevel": 80,
-        "maxLevel": 86,
-        "chance": 0.3
-      },
-      {
-        "pokemonId": 63,
-        "minLevel": 80,
-        "maxLevel": 86,
-        "chance": 0.3
+        "pokemonId": 137,
+        "minLevel": 82,
+        "maxLevel": 88,
+        "chance": 0.15
       },
       {
         "pokemonId": 351,
@@ -1618,10 +1612,22 @@ export const hoennRoutes = [
         "chance": 0.25
       },
       {
-        "pokemonId": 137,
-        "minLevel": 82,
-        "maxLevel": 88,
-        "chance": 0.15
+        "pokemonId": 351.3,
+        "minLevel": 80,
+        "maxLevel": 86,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 351.1,
+        "minLevel": 80,
+        "maxLevel": 86,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 351.2,
+        "minLevel": 80,
+        "maxLevel": 86,
+        "chance": 0.2
       }
     ]
   },
@@ -1722,16 +1728,34 @@ export const hoennRoutes = [
     "name": "The Solitary Atoll",
     "spawns": [
       {
-        "pokemonId": 386,
+        "pokemonId": 386.3,
         "minLevel": 105,
         "maxLevel": 110,
-        "chance": 0.5
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 386.1,
+        "minLevel": 105,
+        "maxLevel": 110,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 386.2,
+        "minLevel": 105,
+        "maxLevel": 110,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 386.4,
+        "minLevel": 105,
+        "maxLevel": 110,
+        "chance": 0.2
       },
       {
         "pokemonId": 385,
         "minLevel": 105,
         "maxLevel": 110,
-        "chance": 0.5
+        "chance": 0.2
       }
     ]
   },

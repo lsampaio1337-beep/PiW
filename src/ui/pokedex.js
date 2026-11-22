@@ -22,31 +22,44 @@ function getPokemonById(id, state) {
     return state.config.pokemonData?.find(p => p.id === id || p.canonId === id);
 }
 
-function getUnownVariations(state) {
-    const all = (state?.config?.pokemonData || []).filter(
-        p => p && typeof p.canonId === 'string' && p.canonId.startsWith('0201.')
-    );
-    const regionName = state?.currentRegionName || 'Kanto';
-    const filtered = regionName === 'Johto'
-        ? all.filter(p => !Array.isArray(p._folders) || p._folders.includes(1))
-        : all;
+const VARIATION_SPECIES_IDS = new Set([201, 351, 386]);
 
-    const getFormLabel = (name) => {
-        const m = /\(([^)]+)\)/.exec(name || '');
-        return m ? m[1] : name || '';
-    };
-    return filtered.slice().sort((a, b) => {
-        const la = getFormLabel(a.name);
-        const lb = getFormLabel(b.name);
-        const aIsSpecial = la === 'Em' || la === 'Qm';
-        const bIsSpecial = lb === 'Em' || lb === 'Qm';
-        if (aIsSpecial !== bIsSpecial) return aIsSpecial ? 1 : -1;
-        return la.localeCompare(lb);
-    });
+function getSpeciesVariations(baseId, state) {
+    const padded = String(baseId).padStart(4, '0');
+    const all = (state?.config?.pokemonData || []).filter(
+        p => p && typeof p.canonId === 'string' && p.canonId.startsWith(`${padded}.`)
+    );
+
+    if (baseId === 201) {
+        const regionName = state?.currentRegionName || 'Kanto';
+        const filtered = regionName === 'Johto'
+            ? all.filter(p => !Array.isArray(p._folders) || p._folders.includes(1))
+            : all;
+
+        const getFormLabel = (name) => {
+            const m = /\(([^)]+)\)/.exec(name || '');
+            return m ? m[1] : name || '';
+        };
+        return filtered.slice().sort((a, b) => {
+            const la = getFormLabel(a.name);
+            const lb = getFormLabel(b.name);
+            const aIsSpecial = la === 'Em' || la === 'Qm';
+            const bIsSpecial = lb === 'Em' || lb === 'Qm';
+            if (aIsSpecial !== bIsSpecial) return aIsSpecial ? 1 : -1;
+            return la.localeCompare(lb);
+        });
+    }
+
+    if (baseId === 351) {
+        const baseEntry = getPokemonById(351, state);
+        return baseEntry ? [baseEntry, ...all] : all;
+    }
+
+    return all;
 }
 
-function getUnownAggregateStatus(state, ownedIds) {
-    const variations = getUnownVariations(state);
+function getVariationAggregateStatus(baseId, state, ownedIds) {
+    const variations = getSpeciesVariations(baseId, state);
     let isSeen = false;
     let isCaught = false;
     let hasSeenShiny = false;
@@ -67,7 +80,7 @@ function getUnownAggregateStatus(state, ownedIds) {
         return { seen, caught, seenShiny, caughtShiny };
     };
 
-    const baseEntry = getPokemonById(201, state);
+    const baseEntry = getPokemonById(baseId, state);
     const baseSt = checkEntry(baseEntry);
     if (baseSt.seen) isSeen = true;
     if (baseSt.caught) isCaught = true;
@@ -234,14 +247,14 @@ export function showPokedex() {
             let hasCaughtShiny = Boolean(state.stats.caughtShiniesSpecies && state.stats.caughtShiniesSpecies[pData.name]);
             let variationMarkHtml = '';
 
-            if (pData.id === 201) {
-                const unownAgg = getUnownAggregateStatus(state, ownedIds);
-                isSeen = unownAgg.isSeen;
-                isCaught = unownAgg.isCaught;
-                hasSeenShiny = unownAgg.hasSeenShiny;
-                hasCaughtShiny = unownAgg.hasCaughtShiny;
-                if (isCaught && unownAgg.totalVarCount > 0) {
-                    variationMarkHtml = `<button type="button" class="pokedex-variation-mark" title="Unown Variations (${unownAgg.caughtVarCount}/${unownAgg.totalVarCount})" onclick="window.showUnownVariationsModal(event)">◆</button>`;
+            if (VARIATION_SPECIES_IDS.has(pData.id)) {
+                const varAgg = getVariationAggregateStatus(pData.id, state, ownedIds);
+                isSeen = varAgg.isSeen;
+                isCaught = varAgg.isCaught;
+                hasSeenShiny = varAgg.hasSeenShiny;
+                hasCaughtShiny = varAgg.hasCaughtShiny;
+                if (isCaught && varAgg.totalVarCount > 0) {
+                    variationMarkHtml = `<button type="button" class="pokedex-variation-mark" title="${pData.name} Variations (${varAgg.caughtVarCount}/${varAgg.totalVarCount})" onclick="window.showVariationsModal(${pData.id}, event)">◆</button>`;
                 }
             }
 
@@ -358,11 +371,14 @@ export function closePokedexInnerModal(e) {
 }
 window.closePokedexInnerModal = closePokedexInnerModal;
 
-export function showUnownVariationsModal(e) {
+export function showVariationsModal(baseId, e) {
     if (e && typeof e.stopPropagation === 'function') {
         e.stopPropagation();
     }
-    const variations = getUnownVariations(state);
+    const baseEntry = getPokemonById(baseId, state);
+    const speciesName = baseEntry ? baseEntry.name : `#${baseId}`;
+    const modalTitle = `${speciesName} Variations`;
+    const variations = getSpeciesVariations(baseId, state);
     const ownedIds = getOwnedSpeciesIds(state);
     let seenCount = 0;
     let caughtCount = 0;
@@ -387,8 +403,10 @@ export function showUnownVariationsModal(e) {
         const isRevealed = isCaught || hasCaughtShiny;
         const filter = isRevealed ? 'none' : 'brightness(0)';
         const formMatch = /\(([^)]+)\)/.exec(v.name || '');
-        const formLabel = formMatch ? formMatch[1] : v.name;
-        const displayName = isRevealed ? v.name : '???';
+        const formLabel = formMatch ? formMatch[1] : 'Normal';
+        const resolvedName = (baseId === 351 && v.id === 351) ? 'Castform (Normal Form)' : v.name;
+        const displayName = isRevealed ? resolvedName : '???';
+        const cardNumLabel = baseId === 201 ? `#201 ${formLabel}` : `#${baseId}`;
         const onClick = isRevealed ? `onclick="window.showDexEntry('${varId}')"` : '';
 
         let cardClass = 'pokedex-card';
@@ -404,7 +422,7 @@ export function showUnownVariationsModal(e) {
         }
 
         cardsHtml += `<div class="${cardClass}" ${onClick}>
-            <div class="pokedex-card-num">#201 ${formLabel}</div>
+            <div class="pokedex-card-num">${cardNumLabel}</div>
             <div class="pokedex-card-name" title="${displayName}">${displayName}</div>
             <img class="pokedex-card-img" src="${window.getSpriteUrl(varId, false)}" style="filter: ${filter};">
         </div>`;
@@ -421,7 +439,7 @@ export function showUnownVariationsModal(e) {
                         <span class="pokedex-stat-pill">Seen: ${seenCount}/${total}</span>
                         <span class="pokedex-stat-pill is-shiny">Shiny: ${shinyCount}/${total}</span>
                     </div>
-                    <div class="pokedex-progress-wrap" title="Unown Variations Completion: ${pct}%">
+                    <div class="pokedex-progress-wrap" title="${modalTitle} Completion: ${pct}%">
                         <div class="pokedex-progress-bar" style="width: ${pct}%;"></div>
                     </div>
                 </div>
@@ -439,7 +457,7 @@ export function showUnownVariationsModal(e) {
         (window.windowManager && typeof window.windowManager._parseAndSanitizeToElement === 'function') ||
         (typeof DOMParser !== 'undefined' && typeof contentEl.replaceChildren === 'function')
     )) {
-        if (titleEl) titleEl.textContent = 'Unown Variations';
+        if (titleEl) titleEl.textContent = modalTitle;
         if (window.windowManager && typeof window.windowManager._parseAndSanitizeToElement === 'function') {
             window.windowManager._parseAndSanitizeToElement(html, contentEl);
         } else {
@@ -450,8 +468,12 @@ export function showUnownVariationsModal(e) {
         return;
     }
 
-    showModal('Unown Variations', html, 'window-pokedex-unown-variations');
+    showModal(modalTitle, html, 'window-pokedex-unown-variations');
 }
+export function showUnownVariationsModal(e) {
+    return showVariationsModal(201, e);
+}
+window.showVariationsModal = showVariationsModal;
 window.showUnownVariationsModal = showUnownVariationsModal;
 
 export function showDexEntry(id) {
