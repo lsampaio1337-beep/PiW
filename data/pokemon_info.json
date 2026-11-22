@@ -5958,7 +5958,10 @@
             "Solar Beam"
           ]
         ]
-      }
+      },
+      "megaEvolutions": [
+        "0003.2"
+      ]
     },
     "0003.1": {
       "name": "Venusaur (Gigantamax)",
@@ -7106,7 +7109,11 @@
             "Flare Blitz"
           ]
         ]
-      }
+      },
+      "megaEvolutions": [
+        "0006.2",
+        "0006.3"
+      ]
     },
     "0006.1": {
       "name": "Charizard (Gigantamax)",
@@ -8158,7 +8165,10 @@
             "Wave Crash"
           ]
         ]
-      }
+      },
+      "megaEvolutions": [
+        "0009.2"
+      ]
     },
     "0009.1": {
       "name": "Blastoise (Gigantamax)",
@@ -9008,7 +9018,10 @@
             "Fell Stinger"
           ]
         ]
-      }
+      },
+      "megaEvolutions": [
+        "0015.1"
+      ]
     },
     "0015.1": {
       "name": "Beedrill (Mega Beedrill)",
@@ -9659,7 +9672,10 @@
             "Hurricane"
           ]
         ]
-      }
+      },
+      "megaEvolutions": [
+        "0018.1"
+      ]
     },
     "0018.1": {
       "name": "Pidgeot (Mega Pidgeot)",
@@ -23051,7 +23067,10 @@
             "Psychic"
           ]
         ]
-      }
+      },
+      "megaEvolutions": [
+        "0065.1"
+      ]
     },
     "0065.1": {
       "name": "Alakazam (Mega Alakazam)",
@@ -28116,7 +28135,10 @@
             "Psychic"
           ]
         ]
-      }
+      },
+      "megaEvolutions": [
+        "0080.2"
+      ]
     },
     "0080.1": {
       "name": "Slowbro (Galarian Slowbro)",
@@ -32605,7 +32627,10 @@
             "Dream Eater"
           ]
         ]
-      }
+      },
+      "megaEvolutions": [
+        "0094.2"
+      ]
     },
     "0094.1": {
       "name": "Gengar (Gigantamax)",
@@ -40059,7 +40084,10 @@
             "Last Resort"
           ]
         ]
-      }
+      },
+      "megaEvolutions": [
+        "0115.1"
+      ]
     },
     "0115.1": {
       "name": "Kangaskhan (Mega Kangaskhan)",
@@ -43697,7 +43725,10 @@
             "Superpower"
           ]
         ]
-      }
+      },
+      "megaEvolutions": [
+        "0127.1"
+      ]
     },
     "0127.1": {
       "name": "Pinsir (Mega Pinsir)",
@@ -44765,7 +44796,10 @@
             "Hyper Beam"
           ]
         ]
-      }
+      },
+      "megaEvolutions": [
+        "0130.1"
+      ]
     },
     "0130.1": {
       "name": "Gyarados (Mega Gyarados)",
@@ -48374,7 +48408,10 @@
             "Giga Impact"
           ]
         ]
-      }
+      },
+      "megaEvolutions": [
+        "0142.1"
+      ]
     },
     "0142.1": {
       "name": "Aerodactyl (Mega Aerodactyl)",
@@ -51108,7 +51145,11 @@
             "Future Sight"
           ]
         ]
-      }
+      },
+      "megaEvolutions": [
+        "0150.1",
+        "0150.2"
+      ]
     },
     "0150.1": {
       "name": "Mewtwo (Mega Mewtwo X)",
@@ -59351,7 +59392,10 @@
             "Thunder"
           ]
         ]
-      }
+      },
+      "megaEvolutions": [
+        "0181.1"
+      ]
     },
     "0181.1": {
       "name": "Ampharos (Mega Ampharos)",
@@ -67272,7 +67316,10 @@
             "Iron Tail"
           ]
         ]
-      }
+      },
+      "megaEvolutions": [
+        "0208.1"
+      ]
     },
     "0208.1": {
       "name": "Steelix (Mega Steelix)",
@@ -68817,7 +68864,10 @@
             "X-Scissor"
           ]
         ]
-      }
+      },
+      "megaEvolutions": [
+        "0212.1"
+      ]
     },
     "0212.1": {
       "name": "Scizor (Mega Scizor)",
@@ -69514,7 +69564,10 @@
             "Close Combat"
           ]
         ]
-      }
+      },
+      "megaEvolutions": [
+        "0214.1"
+      ]
     },
     "0214.1": {
       "name": "Heracross (Mega Heracross)",
@@ -74511,7 +74564,10 @@
             "Inferno"
           ]
         ]
-      }
+      },
+      "megaEvolutions": [
+        "0229.1"
+      ]
     },
     "0229.1": {
       "name": "Houndoom (Mega Houndoom)",
@@ -80155,7 +80211,10 @@
             "Giga Impact"
           ]
         ]
-      }
+      },
+      "megaEvolutions": [
+        "0248.1"
+      ]
     },
     "0248.1": {
       "name": "Tyranitar (Mega Tyranitar)",
@@ -82068,7 +82127,10 @@
             "Leaf Storm"
           ]
         ]
-      }
+      },
+      "megaEvolutions": [
+        "0254.1"
+      ]
     },
     "0254.1": {
       "name": "Sceptile (Mega Sceptile)",
@@ -83069,7 +83131,10 @@
             "Brave Bird"
           ]
         ]
-      }
+      },
+      "megaEvolutions": [
+        "0257.1"
+      ]
     },
     "0257.1": {
       "name": "Blaziken (Mega Blaziken)",
@@ -84155,7 +84220,10 @@
             "Hydro Pump"
           ]
         ]
-      }
+      },
+      "megaEvolutions": [
+        "0260.1"
+      ]
     },
     "0260.1": {
       "name": "Swampert (Mega Swampert)",
@@ -88698,7 +88766,10 @@
             "Future Sight"
           ]
         ]
-      }
+      },
+      "megaEvolutions": [
+        "0282.1"
+      ]
     },
     "0282.1": {
       "name": "Gardevoir (Mega Gardevoir)",
@@ -93434,7 +93505,10 @@
             "Foul Play"
           ]
         ]
-      }
+      },
+      "megaEvolutions": [
+        "0302.1"
+      ]
     },
     "0302.1": {
       "name": "Sableye (Mega Sableye)",
@@ -93706,7 +93780,10 @@
             "Play Rough"
           ]
         ]
-      }
+      },
+      "megaEvolutions": [
+        "0303.1"
+      ]
     },
     "0303.1": {
       "name": "Mawile (Mega Mawile)",
@@ -94641,7 +94718,10 @@
             "Metal Burst"
           ]
         ]
-      }
+      },
+      "megaEvolutions": [
+        "0306.1"
+      ]
     },
     "0306.1": {
       "name": "Aggron (Mega Aggron)",
@@ -95183,7 +95263,10 @@
             "Counter"
           ]
         ]
-      }
+      },
+      "megaEvolutions": [
+        "0308.1"
+      ]
     },
     "0308.1": {
       "name": "Medicham (Mega Medicham)",
@@ -95656,7 +95739,10 @@
             "Thunder"
           ]
         ]
-      }
+      },
+      "megaEvolutions": [
+        "0310.1"
+      ]
     },
     "0310.1": {
       "name": "Manectric (Mega Manectric)",
@@ -97588,7 +97674,10 @@
             "Take Down"
           ]
         ]
-      }
+      },
+      "megaEvolutions": [
+        "0319.1"
+      ]
     },
     "0319.1": {
       "name": "Sharpedo (Mega Sharpedo)",
@@ -98826,7 +98915,10 @@
             "Earthquake"
           ]
         ]
-      }
+      },
+      "megaEvolutions": [
+        "0323.1"
+      ]
     },
     "0323.1": {
       "name": "Camerupt (Mega Camerupt)",
@@ -102108,7 +102200,10 @@
             "Sky Attack"
           ]
         ]
-      }
+      },
+      "megaEvolutions": [
+        "0334.1"
+      ]
     },
     "0334.1": {
       "name": "Altaria (Mega Altaria)",
@@ -107487,7 +107582,10 @@
             "Phantom Force"
           ]
         ]
-      }
+      },
+      "megaEvolutions": [
+        "0354.1"
+      ]
     },
     "0354.1": {
       "name": "Banette (Mega Banette)",
@@ -109005,7 +109103,10 @@
             "Future Sight"
           ]
         ]
-      }
+      },
+      "megaEvolutions": [
+        "0359.1"
+      ]
     },
     "0359.1": {
       "name": "Absol (Mega Absol)",
@@ -109844,7 +109945,10 @@
             "Blizzard"
           ]
         ]
-      }
+      },
+      "megaEvolutions": [
+        "0362.1"
+      ]
     },
     "0362.1": {
       "name": "Glalie (Mega Glalie)",
@@ -112762,7 +112866,10 @@
             "Double-Edge"
           ]
         ]
-      }
+      },
+      "megaEvolutions": [
+        "0373.1"
+      ]
     },
     "0373.1": {
       "name": "Salamence (Mega Salamence)",
@@ -113520,7 +113627,10 @@
             "Hyper Beam"
           ]
         ]
-      }
+      },
+      "megaEvolutions": [
+        "0376.1"
+      ]
     },
     "0376.1": {
       "name": "Metagross (Mega Metagross)",
@@ -114817,7 +114927,10 @@
             "Psychic"
           ]
         ]
-      }
+      },
+      "megaEvolutions": [
+        "0380.1"
+      ]
     },
     "0380.1": {
       "name": "Latias (Mega Latias)",
@@ -115052,7 +115165,10 @@
             "Psychic"
           ]
         ]
-      }
+      },
+      "megaEvolutions": [
+        "0381.1"
+      ]
     },
     "0381.1": {
       "name": "Latios (Mega Latios)",
@@ -116193,7 +116309,10 @@
             "Hyper Beam"
           ]
         ]
-      }
+      },
+      "megaEvolutions": [
+        "0384.1"
+      ]
     },
     "0384.1": {
       "name": "Rayquaza (Mega Rayquaza)",
@@ -128030,7 +128149,10 @@
             "Double-Edge"
           ]
         ]
-      }
+      },
+      "megaEvolutions": [
+        "0428.1"
+      ]
     },
     "0428.1": {
       "name": "Lopunny (Mega Lopunny)",
@@ -131905,7 +132027,10 @@
             "Dragon Rush"
           ]
         ]
-      }
+      },
+      "megaEvolutions": [
+        "0445.1"
+      ]
     },
     "0445.1": {
       "name": "Garchomp (Mega Garchomp)",
@@ -132830,7 +132955,10 @@
             "Close Combat"
           ]
         ]
-      }
+      },
+      "megaEvolutions": [
+        "0448.1"
+      ]
     },
     "0448.1": {
       "name": "Lucario (Mega Lucario)",
@@ -136325,7 +136453,10 @@
             "Sheer Cold"
           ]
         ]
-      }
+      },
+      "megaEvolutions": [
+        "0460.1"
+      ]
     },
     "0460.1": {
       "name": "Abomasnow (Mega Abomasnow)",
@@ -141272,7 +141403,10 @@
             "Close Combat"
           ]
         ]
-      }
+      },
+      "megaEvolutions": [
+        "0475.1"
+      ]
     },
     "0475.1": {
       "name": "Gallade (Mega Gallade)",
@@ -157529,7 +157663,10 @@
             "Last Resort"
           ]
         ]
-      }
+      },
+      "megaEvolutions": [
+        "0531.1"
+      ]
     },
     "0531.1": {
       "name": "Audino (Mega Audino)",
@@ -201126,7 +201263,10 @@
             "Stone Edge"
           ]
         ]
-      }
+      },
+      "megaEvolutions": [
+        "0719.1"
+      ]
     },
     "0719.1": {
       "name": "Diancie (Mega Diancie)",

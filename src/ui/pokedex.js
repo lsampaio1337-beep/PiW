@@ -1,5 +1,6 @@
 import { state } from '../state.js';
 import { showModal, TYPE_COLORS } from '../ui.js';
+import { isMegaRegion } from '../utils/megaEvolution.js';
 
 export function formatType(typeStr) {
     if (!typeStr || !TYPE_COLORS[typeStr]) return typeStr;
@@ -61,6 +62,13 @@ function getSpeciesVariations(baseId, state) {
     if (baseId === 351 || baseId === 646) {
         const baseEntry = getPokemonById(baseId, state);
         return baseEntry ? [baseEntry, ...all] : all;
+    }
+
+    if (!VARIATION_SPECIES_IDS.has(baseId) && isMegaRegion(regionName)) {
+        const baseEntry = getPokemonById(baseId, state);
+        if (baseEntry && Array.isArray(baseEntry.megaEvolutions) && baseEntry.megaEvolutions.length > 0) {
+            return baseEntry.megaEvolutions.map(id => getPokemonById(id, state)).filter(Boolean);
+        }
     }
 
     return all;
@@ -255,7 +263,7 @@ export function showPokedex() {
             let hasCaughtShiny = Boolean(state.stats.caughtShiniesSpecies && state.stats.caughtShiniesSpecies[pData.name]);
             let variationMarkHtml = '';
 
-            if (VARIATION_SPECIES_IDS.has(pData.id)) {
+            if (VARIATION_SPECIES_IDS.has(pData.id) || (isMegaRegion(regionName) && Array.isArray(pData.megaEvolutions) && pData.megaEvolutions.length > 0)) {
                 const varAgg = getVariationAggregateStatus(pData.id, state, ownedIds);
                 isSeen = varAgg.isSeen;
                 isCaught = varAgg.isCaught;
@@ -541,6 +549,14 @@ function isPokemonInRegion(pd, state) {
 
 export function buildEvolutionLineHtml(pData, state) {
     let baseId = pData.id;
+    if (String(baseId).includes('.')) {
+        const intId = Math.trunc(Number(baseId));
+        const intPd = getPokemonById(intId, state);
+        const nodeKey = String(pData.canonId || pData.id);
+        if (intPd && Array.isArray(intPd.megaEvolutions) && intPd.megaEvolutions.some(m => String(m) === nodeKey)) {
+            baseId = intId;
+        }
+    }
     const visitedParents = new Set([baseId]);
     while (state.config.evolutionParents && state.config.evolutionParents[baseId] !== undefined) {
         const parentId = state.config.evolutionParents[baseId];
@@ -582,16 +598,26 @@ export function buildEvolutionLineHtml(pData, state) {
             if (isFormChange) return allowFormChanges;
             return isPokemonInRegion(targetPd, state);
         });
-        if (validEvos.length > 0) {
+        const megaBranches = isMegaRegion(state?.currentRegionName) && Array.isArray(pd.megaEvolutions)
+            ? pd.megaEvolutions
+                .map(megaId => getPokemonById(megaId, state))
+                .filter(targetPd => targetPd && !visitedNodes.has(targetPd.canonId || targetPd.id))
+                .map(targetPd => ({ to: targetPd.canonId || targetPd.id, isMega: true }))
+            : [];
+        const allBranches = [...validEvos, ...megaBranches];
+        if (allBranches.length > 0) {
             html = `<div style="display: flex; align-items: center;">` + html;
 
             let evosHtml = `<div style="display: flex; flex-direction: column; justify-content: center; margin-left: 10px;">`;
-            for (const evo of validEvos) {
+            for (const evo of allBranches) {
                 const targetPd = getPokemonById(evo.to, state);
                 const isFormChange = targetPd && Math.trunc(Number(pd.id)) === Math.trunc(Number(targetPd.id));
+                const branchLabelHtml = evo.isMega
+                    ? `<div style="display: flex; align-items: center; gap: 4px; font-size: 12px; color: #aaa; margin-right: 5px; text-align: center; line-height: 1.15;"><span>Mega<br>Evolution</span><span>➔</span></div>`
+                    : `<div style="font-size: 12px; color: #aaa; margin-right: 5px;">Lv.${evo.level} ➔</div>`;
                 evosHtml += `<div style="display: flex; align-items: center; margin: 5px 0;">
-                    <div style="font-size: 12px; color: #aaa; margin-right: 5px;">Lv.${evo.level} ➔</div>
-                    ${buildTree(evo.to, !isFormChange)}
+                    ${branchLabelHtml}
+                    ${buildTree(evo.to, evo.isMega ? false : !isFormChange)}
                 </div>`;
             }
             evosHtml += `</div>`;

@@ -3,36 +3,26 @@ import { getSpeciesDataHtml, buildEvolutionLineHtml, formatType } from "./pokede
 import { state } from '../state.js';
 import { updateUI, showModal } from '../ui.js';
 import { escapeHTML } from '../utils/stringUtils.js';
+import {
+    isMegaRegion,
+    isPokemonMegaEvolved,
+    getMegaRemainingMs,
+    formatMegaCountdown,
+    getMegaTargetIdsForPokemon,
+    getMegaStoneRequirements,
+    applyMegaForm,
+    applyPokemonBaseData,
+    getPokemonConfigById
+} from '../utils/megaEvolution.js';
 
+let activeStatsContext = null;
 
 function getPokemonConfig(id, state) {
-    if (!state?.config) return undefined;
-    if (state.config.pokemonMap) {
-        return state.config.pokemonMap.get(id) || state.config.pokemonMap.get(Number(id));
-    }
-    return state.config.pokemonData?.find(d => d.canonId === id || Number(d.id) === Number(id) || d.id === id);
+    return getPokemonConfigById(id, state);
 }
 
 function applyEvolvedBaseStats(mon, baseData) {
-    mon.id = (baseData.canonId && baseData.canonId.includes('.')) ? baseData.canonId : baseData.id;
-    mon.name = baseData.name;
-    mon.types = [...(baseData.types || [])];
-    mon.bst = baseData.hp + baseData.atk + baseData.def + baseData.spa + baseData.spd + baseData.spe;
-
-    const v = mon.vitamins || {};
-    mon.maxHp = mathEngine.calculateHP(baseData.hp, mon.ivs.hp, mon.level, mon.quality, v.hp || 0);
-    mon.currentStats.hp = mon.maxHp;
-    mon.currentStats.atk = mathEngine.calculateStat(baseData.atk, mon.ivs.atk, mon.level, mon.quality, v.atk || 0);
-    mon.currentStats.def = mathEngine.calculateStat(baseData.def, mon.ivs.def, mon.level, mon.quality, v.def || 0);
-    mon.currentStats.spa = mathEngine.calculateStat(baseData.spa, mon.ivs.spa, mon.level, mon.quality, v.spa || 0);
-    mon.currentStats.spd = mathEngine.calculateStat(baseData.spd, mon.ivs.spd, mon.level, mon.quality, v.spd || 0);
-    mon.currentStats.spe = mathEngine.calculateStat(baseData.spe, mon.ivs.spe, mon.level, mon.quality, v.spe || 0);
-    mon.currentHp = mon.maxHp;
-
-    const totalIV = mon.ivs.hp + mon.ivs.atk + mon.ivs.def + mon.ivs.spa + mon.ivs.spd + mon.ivs.spe;
-    mon.evxp = mathEngine.calculateEVXP(mon.bst, mon.level, mon.quality, totalIV);
-    mon.evm = mathEngine.calculateEVM(mon.bst, mon.level, mon.quality, totalIV);
-    mon.pp = mathEngine.calculatePP(mon.bst, mon.level, mon.quality, totalIV);
+    applyPokemonBaseData(mon, baseData, { healToMax: true });
 }
 
 function markEvolvedSpeciesCaught(speciesName, isShiny) {
@@ -167,8 +157,23 @@ function getActionsHtml(p, pData, location, idx) {
         `;
     }
 
+    const megaTargets = getMegaTargetIdsForPokemon(p, pData, state);
+    let megaHtml = "";
+    if (megaTargets.length > 0) {
+        const isMega = isPokemonMegaEvolved(p);
+        const megaTimerHtml = isMega
+            ? `<span class="js-mega-btn-timer" data-mega-uuid="${escapeHTML(p.uuid || '')}" style="font-size: 11px; opacity: 0.92; font-weight: 600;">Active: ${formatMegaCountdown(getMegaRemainingMs(p))}</span>`
+            : '';
+        megaHtml = `
+            <div>
+                <button class="piw-btn piw-btn-purple" onclick="window.showMegaEvolveModal('${location}', ${idx})" style="min-width: 200px; min-height: 46px; flex-direction: column;"><span>Mega Evolve</span>${megaTimerHtml}</button>
+            </div>
+        `;
+    }
+
     return `<div style="margin-top: 14px; border-top: var(--piw-border-subtle); padding: 14px 0 4px 0; display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 12px;">
         ${evolveHtml}
+        ${megaHtml}
         <div>
             <button class="piw-btn piw-btn-teal" onclick="window.showVitaminsModal('${location}', ${idx})" style="min-width: 200px; min-height: 46px;">Consume Vitamins</button>
         </div>
@@ -216,10 +221,14 @@ function getBasicInfoHtml(p, sumIV, navControlsHtml = '') {
     };
     const qBadgeClass = qBadgeMap[qLower] || '';
     const ppVal = Math.round(p.pp || 0).toLocaleString('en-US');
+    const megaBadgeHtml = isPokemonMegaEvolved(p)
+        ? `<div class="piw-badge is-purple js-mega-stats-timer" data-mega-uuid="${escapeHTML(p.uuid || '')}">Mega: ${formatMegaCountdown(getMegaRemainingMs(p))}</div>`
+        : '';
     return `
         <div class="pstats-card" style="text-align: center; flex: 1; font-size: 13.5px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 6px;">
             ${navControlsHtml}
             <img class="${glowClass}" src="${window.getSpriteUrl(p.id, p.qualityName === 'Shiny')}" style="width: 96px; height: 96px; object-fit: contain;">
+            ${megaBadgeHtml}
             <div style="margin: 2px 0;"><b>Type:</b> ${p.types.map(t => formatType(t)).join(' ')}</div>
             <div class="piw-badge ${qBadgeClass}">${p.qualityName || 'Weak'} (Q=${p.quality.toFixed(2)})</div>
             <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin-top: 2px;">
@@ -335,6 +344,7 @@ export function showPokemonStats(idx, location) {
         </div>
     `;
 
+    activeStatsContext = { location, idx, uuid: p.uuid, innerModal: null };
     showModal(`${escapeHTML(p.name)} (Lv. ${p.level})`, html, "window-pokemon-stats");
     const statsWin = document.getElementById('window-pokemon-stats');
     if (statsWin) {
@@ -453,11 +463,55 @@ export function evolvePokemon(location, idx, toId) {
 }
 
 window.closeVitaminsInnerWindow = function() {
+    if (activeStatsContext) activeStatsContext.innerModal = null;
     const overlay = document.getElementById('pokemon-vitamins-inner-overlay');
     if (overlay) overlay.style.display = 'none';
     const innerWin = document.getElementById('pokemon-vitamins-inner-window');
     if (innerWin) innerWin.style.display = 'none';
 };
+
+function openStatsInnerModal(title, html, fallbackId = null) {
+    const overlay = document.getElementById('pokemon-vitamins-inner-overlay');
+    const innerWin = document.getElementById('pokemon-vitamins-inner-window');
+    const innerTitle = document.getElementById('pokemon-vitamins-inner-title');
+    const innerContent = document.getElementById('pokemon-vitamins-inner-content');
+    if (innerWin && innerTitle && innerContent) {
+        innerTitle.textContent = title;
+        setInnerModalContent(innerContent, html);
+        if (overlay) overlay.style.display = 'flex';
+        innerWin.style.display = 'flex';
+    } else if (fallbackId) {
+        showModal(escapeHTML(title), html, fallbackId, '540px');
+    }
+}
+
+function buildEvolutionCardHtml({ fromImgPath, fromName, badgeHtml, toImgPath, toName, isRevealed, canConfirm, onclickCode, stonesHtml, cardClass = 'pstats-card', cardStyle = '' }) {
+    const btnBg = canConfirm ? 'linear-gradient(180deg, #2ecc71, #27ae60)' : '#7f8c8d';
+    const btnShadow = canConfirm ? 'box-shadow: 0 3px 8px rgba(46, 204, 113, 0.3);' : 'opacity: 0.6;';
+    return `
+        <div class="${cardClass}" style="display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 12px 16px; width: fit-content; ${cardStyle}">
+            <div style="display: flex; align-items: center; justify-content: center; gap: 14px;">
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                    <div style="background: rgba(255, 255, 255, 0.06); border-radius: 50%; padding: 5px; display: flex; align-items: center; justify-content: center;">
+                        <img src="${fromImgPath}" style="width: 48px; height: 48px; object-fit: contain; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));">
+                    </div>
+                    <span style="font-size: 11px; font-weight: 600; color: #ecf0f1; margin-top: 4px;">${escapeHTML(fromName)}</span>
+                </div>
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 2px;">
+                    ${badgeHtml}
+                    <span style="font-size: 15px; color: var(--piw-accent-blue, #3498db); line-height: 1;">➔</span>
+                </div>
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                    <div style="background: rgba(255, 255, 255, 0.06); border-radius: 50%; padding: 5px; display: flex; align-items: center; justify-content: center;">
+                        <img src="${toImgPath}" style="width: 48px; height: 48px; object-fit: contain; filter: ${isRevealed ? 'drop-shadow(0 2px 4px rgba(0,0,0,0.5))' : 'brightness(0)'};">
+                    </div>
+                    <span style="font-size: 11px; font-weight: 600; color: ${isRevealed ? '#ecf0f1' : '#95a5a6'}; margin-top: 4px;">${toName}</span>
+                </div>
+            </div>
+            <button ${canConfirm ? '' : 'disabled'} onclick="${onclickCode}" style="background: ${btnBg}; color: white; border: none; border-radius: 8px; padding: 7px 16px; font-weight: bold; font-size: 13px; cursor: ${canConfirm ? 'pointer' : 'not-allowed'}; ${btnShadow} width: 100%; display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px;">Consume ${stonesHtml}</button>
+        </div>
+    `;
+}
 
 window.showMultipleEvolveModal = function(location, idx) {
     const list = state[location];
@@ -468,7 +522,7 @@ window.showMultipleEvolveModal = function(location, idx) {
     const validEvolutions = (pData.evolutions || []).filter(evo => isEvolutionTargetValid(pData, getPokemonConfig(evo.to, state), state));
     if (validEvolutions.length === 0) return;
 
-    const isShiny = !!(p.isShiny || p.quality === 'Shiny');
+    const isShiny = !!(p.isShiny || p.quality === 'Shiny' || p.qualityName === 'Shiny');
     const fromImgPath = window.getSpriteUrl(p.id, isShiny);
 
     const cardsHtml = validEvolutions.map(evo => {
@@ -477,31 +531,19 @@ window.showMultipleEvolveModal = function(location, idx) {
         const isRevealed = toData && ((state.stats?.seenSpecies?.[toData.name]) || (state.stats?.caughtSpecies?.[toData.name]));
         const toName = isRevealed ? escapeHTML(toData.name) : "???";
         const toImgPath = window.getSpriteUrl(evo.to, isShiny);
-        const btnBg = req.canEvolve ? 'linear-gradient(180deg, #2ecc71, #27ae60)' : '#7f8c8d';
-        const btnShadow = req.canEvolve ? 'box-shadow: 0 3px 8px rgba(46, 204, 113, 0.3);' : 'opacity: 0.6;';
-        return `
-            <div style="display: flex; flex-direction: column; align-items: center; gap: 10px; background: linear-gradient(145deg, rgba(20, 30, 48, 0.9), rgba(36, 59, 85, 0.7)); border: 1px solid #3498db; box-shadow: 0 4px 15px rgba(52, 152, 219, 0.25); padding: 12px 16px; border-radius: 10px; width: fit-content;">
-                <div style="display: flex; align-items: center; justify-content: center; gap: 14px;">
-                    <div style="display: flex; flex-direction: column; align-items: center;">
-                        <div style="background: rgba(255, 255, 255, 0.06); border-radius: 50%; padding: 5px; display: flex; align-items: center; justify-content: center;">
-                            <img src="${fromImgPath}" style="width: 48px; height: 48px; object-fit: contain; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));">
-                        </div>
-                        <span style="font-size: 11px; font-weight: 600; color: #ecf0f1; margin-top: 4px;">${escapeHTML(p.name)}</span>
-                    </div>
-                    <div style="display: flex; flex-direction: column; align-items: center; gap: 2px;">
-                        <span style="background: rgba(52, 152, 219, 0.2); border: 1px solid rgba(52, 152, 219, 0.5); border-radius: 12px; padding: 2px 8px; font-size: 11px; font-weight: bold; color: #74b9ff;">Lv.${evo.level}</span>
-                        <span style="font-size: 15px; color: #3498db; line-height: 1;">➔</span>
-                    </div>
-                    <div style="display: flex; flex-direction: column; align-items: center;">
-                        <div style="background: rgba(255, 255, 255, 0.06); border-radius: 50%; padding: 5px; display: flex; align-items: center; justify-content: center;">
-                            <img src="${toImgPath}" style="width: 48px; height: 48px; object-fit: contain; filter: ${isRevealed ? 'drop-shadow(0 2px 4px rgba(0,0,0,0.5))' : 'brightness(0)'};">
-                        </div>
-                        <span style="font-size: 11px; font-weight: 600; color: ${isRevealed ? '#ecf0f1' : '#95a5a6'}; margin-top: 4px;">${toName}</span>
-                    </div>
-                </div>
-                <button ${req.canEvolve ? '' : 'disabled'} onclick="window.closeVitaminsInnerWindow(); window.evolvePokemon('${location}', ${idx}, '${evo.to}')" style="background: ${btnBg}; color: white; border: none; border-radius: 8px; padding: 7px 16px; font-weight: bold; font-size: 13px; cursor: ${req.canEvolve ? 'pointer' : 'not-allowed'}; ${btnShadow} width: 100%; display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px;">Consume ${req.missingStonesHtml}</button>
-            </div>
-        `;
+        return buildEvolutionCardHtml({
+            fromImgPath,
+            fromName: p.name,
+            badgeHtml: `<span class="piw-badge is-blue">Lv.${evo.level}</span>`,
+            toImgPath,
+            toName,
+            isRevealed,
+            canConfirm: req.canEvolve,
+            onclickCode: `window.closeVitaminsInnerWindow(); window.evolvePokemon('${location}', ${idx}, '${evo.to}')`,
+            stonesHtml: req.missingStonesHtml,
+            cardClass: '',
+            cardStyle: 'background: linear-gradient(145deg, rgba(20, 30, 48, 0.9), rgba(36, 59, 85, 0.7)); border: 1px solid #3498db; box-shadow: 0 4px 15px rgba(52, 152, 219, 0.25); border-radius: 10px;'
+        });
     }).join('');
 
     const html = `
@@ -512,16 +554,8 @@ window.showMultipleEvolveModal = function(location, idx) {
             <button onclick="window.closeVitaminsInnerWindow()" style="background: linear-gradient(180deg, #e74c3c, #c0392b); color: white; border: none; border-radius: 8px; padding: 9px 28px; font-weight: bold; font-size: 14px; cursor: pointer; box-shadow: 0 3px 8px rgba(231, 76, 60, 0.3);">No</button>
         </div>
     `;
-    const overlay = document.getElementById('pokemon-vitamins-inner-overlay');
-    const innerWin = document.getElementById('pokemon-vitamins-inner-window');
-    const innerTitle = document.getElementById('pokemon-vitamins-inner-title');
-    const innerContent = document.getElementById('pokemon-vitamins-inner-content');
-    if (innerWin && innerTitle && innerContent) {
-        innerTitle.textContent = `Evolve ${p.name}`;
-        setInnerModalContent(innerContent, html);
-        if (overlay) overlay.style.display = 'flex';
-        innerWin.style.display = 'flex';
-    }
+    if (activeStatsContext) activeStatsContext.innerModal = 'evolve';
+    openStatsInnerModal(`Evolve ${p.name}`, html);
 };
 
 window.showEvolveConfirmModal = function(location, idx, toId) {
@@ -536,51 +570,145 @@ window.showEvolveConfirmModal = function(location, idx, toId) {
     const toData = getPokemonConfig(toId, state);
     const isRevealed = toData && ((state.stats?.seenSpecies?.[toData.name]) || (state.stats?.caughtSpecies?.[toData.name]));
     const toName = isRevealed ? escapeHTML(toData.name) : "???";
-    const isShiny = !!(p.isShiny || p.quality === 'Shiny');
+    const isShiny = !!(p.isShiny || p.quality === 'Shiny' || p.qualityName === 'Shiny');
     const fromImgPath = window.getSpriteUrl(p.id, isShiny);
     const toImgPath = window.getSpriteUrl(toId, isShiny);
 
-    const btnBg = req.canEvolve ? 'linear-gradient(180deg, #2ecc71, #27ae60)' : '#7f8c8d';
-    const btnShadow = req.canEvolve ? 'box-shadow: 0 3px 8px rgba(46, 204, 113, 0.3);' : 'opacity: 0.6;';
+    const cardHtml = buildEvolutionCardHtml({
+        fromImgPath,
+        fromName: p.name,
+        badgeHtml: `<span class="piw-badge is-blue">Lv.${evo.level}</span>`,
+        toImgPath,
+        toName,
+        isRevealed,
+        canConfirm: req.canEvolve,
+        onclickCode: `window.closeVitaminsInnerWindow(); window.evolvePokemon('${location}', ${idx}, '${toId}')`,
+        stonesHtml: req.missingStonesHtml
+    });
 
     const html = `
         <div style="display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 6px 10px 10px 10px;">
-            <div class="pstats-card" style="display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 12px 16px; width: fit-content;">
-                <div style="display: flex; align-items: center; justify-content: center; gap: 14px;">
-                    <div style="display: flex; flex-direction: column; align-items: center;">
-                        <div style="background: rgba(255, 255, 255, 0.06); border-radius: 50%; padding: 5px; display: flex; align-items: center; justify-content: center;">
-                            <img src="${fromImgPath}" style="width: 48px; height: 48px; object-fit: contain; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));">
-                        </div>
-                        <span style="font-size: 11px; font-weight: 600; color: #ecf0f1; margin-top: 4px;">${escapeHTML(p.name)}</span>
-                    </div>
-                    <div style="display: flex; flex-direction: column; align-items: center; gap: 2px;">
-                        <span class="piw-badge is-blue">Lv.${evo.level}</span>
-                        <span style="font-size: 15px; color: var(--piw-accent-blue); line-height: 1;">➔</span>
-                    </div>
-                    <div style="display: flex; flex-direction: column; align-items: center;">
-                        <div style="background: rgba(255, 255, 255, 0.06); border-radius: 50%; padding: 5px; display: flex; align-items: center; justify-content: center;">
-                            <img src="${toImgPath}" style="width: 48px; height: 48px; object-fit: contain; filter: ${isRevealed ? 'drop-shadow(0 2px 4px rgba(0,0,0,0.5))' : 'brightness(0)'};">
-                        </div>
-                        <span style="font-size: 11px; font-weight: 600; color: ${isRevealed ? '#ecf0f1' : '#95a5a6'}; margin-top: 4px;">${toName}</span>
-                    </div>
-                </div>
-                <button ${req.canEvolve ? '' : 'disabled'} onclick="window.closeVitaminsInnerWindow(); window.evolvePokemon('${location}', ${idx}, '${toId}')" style="background: ${btnBg}; color: white; border: none; border-radius: 8px; padding: 7px 16px; font-weight: bold; font-size: 13px; cursor: ${req.canEvolve ? 'pointer' : 'not-allowed'}; ${btnShadow} width: 100%; display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px;">Consume ${req.missingStonesHtml}</button>
+            ${cardHtml}
+            <button class="piw-btn piw-btn-danger" onclick="window.closeVitaminsInnerWindow()" style="min-width: 96px;">No</button>
+        </div>
+    `;
+    if (activeStatsContext) activeStatsContext.innerModal = 'evolve';
+    openStatsInnerModal(`Evolve ${p.name}`, html);
+};
+
+export function showMegaEvolveModal(location, idx) {
+    const list = state[location];
+    if (!list || !list[idx]) return;
+    const p = list[idx];
+    const pData = getPokemonConfig(p.id, state);
+    if (!pData) return;
+
+    const megaTargets = getMegaTargetIdsForPokemon(p, pData, state);
+    if (megaTargets.length === 0) return;
+
+    const fromData = (p.megaOriginalId !== undefined && p.megaOriginalId !== null)
+        ? (getPokemonConfig(p.megaOriginalId, state) || pData)
+        : pData;
+    const fromId = (fromData.canonId && fromData.canonId.includes('.')) ? fromData.canonId : fromData.id;
+    const isShiny = !!(p.isShiny || p.quality === 'Shiny' || p.qualityName === 'Shiny');
+    const fromImgPath = window.getSpriteUrl(fromId, isShiny);
+
+    const isMega = isPokemonMegaEvolved(p);
+    const remMs = getMegaRemainingMs(p);
+    const timerBannerHtml = isMega
+        ? `<div id="mega-modal-timer" class="piw-badge is-purple" data-mega-uuid="${escapeHTML(p.uuid || '')}">Mega Active: ${formatMegaCountdown(remMs)} (+5:00 per consume)</div>`
+        : `<div id="mega-modal-timer" class="piw-badge is-blue" data-mega-uuid="${escapeHTML(p.uuid || '')}">Duration: 05:00 (+5:00 per consume)</div>`;
+
+    const cardsHtml = megaTargets.map(targetId => {
+        const toData = getPokemonConfig(targetId, state);
+        if (!toData) return '';
+        const req = getMegaStoneRequirements(fromData, toData, state);
+        const isRevealed = Boolean((state.stats?.seenSpecies?.[toData.name]) || (state.stats?.caughtSpecies?.[toData.name]));
+        const toName = isRevealed ? escapeHTML(toData.name) : "???";
+        const toImgPath = window.getSpriteUrl(targetId, isShiny);
+        return buildEvolutionCardHtml({
+            fromImgPath,
+            fromName: fromData.name,
+            badgeHtml: `<span class="piw-badge is-blue" style="text-align: center; line-height: 1.15;">Mega<br>Evolution</span>`,
+            toImgPath,
+            toName,
+            isRevealed,
+            canConfirm: req.canMega,
+            onclickCode: `window.megaEvolvePokemon('${location}', ${idx}, '${targetId}')`,
+            stonesHtml: req.missingStonesHtml
+        });
+    }).join('');
+
+    const html = `
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 6px 10px 10px 10px;">
+            ${timerBannerHtml}
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; max-height: 60vh; overflow-y: auto; width: 100%; padding: 4px;">
+                ${cardsHtml}
             </div>
             <button class="piw-btn piw-btn-danger" onclick="window.closeVitaminsInnerWindow()" style="min-width: 96px;">No</button>
         </div>
     `;
 
-    const overlay = document.getElementById('pokemon-vitamins-inner-overlay');
-    const innerWin = document.getElementById('pokemon-vitamins-inner-window');
-    const innerTitle = document.getElementById('pokemon-vitamins-inner-title');
-    const innerContent = document.getElementById('pokemon-vitamins-inner-content');
-    if (innerWin && innerTitle && innerContent) {
-        innerTitle.textContent = `Evolve ${p.name}`;
-        setInnerModalContent(innerContent, html);
-        if (overlay) overlay.style.display = 'flex';
-        innerWin.style.display = 'flex';
+    if (activeStatsContext) activeStatsContext.innerModal = 'mega';
+    openStatsInnerModal(`Mega Evolve ${fromData.name}`, html, 'window-mega-evolve');
+}
+
+export function megaEvolvePokemon(location, idx, toId) {
+    if (!isMegaRegion(state.currentRegionName)) return;
+    const list = state[location];
+    if (!list || !list[idx]) return;
+
+    const p = list[idx];
+    const currentData = getPokemonConfig(p.id, state);
+    if (!currentData) return;
+
+    const megaTargets = getMegaTargetIdsForPokemon(p, currentData, state);
+    if (!megaTargets.some(id => String(id) === String(toId))) return;
+
+    const targetData = getPokemonConfig(toId, state);
+    if (!targetData) return;
+
+    const sourceData = (p.megaOriginalId !== undefined && p.megaOriginalId !== null)
+        ? (getPokemonConfig(p.megaOriginalId, state) || currentData)
+        : currentData;
+    const req = getMegaStoneRequirements(sourceData, targetData, state);
+    if (!req.canMega) {
+        if (window.showGameAlert) window.showGameAlert("Requirements not met!");
+        return;
     }
-};
+
+    if (!state.backpack) state.backpack = {};
+    if (!state.backpack.stones) state.backpack.stones = {};
+    for (const type of req.stoneTypes) {
+        const stoneName = type + " Stone";
+        state.backpack.stones[stoneName] = (state.backpack.stones[stoneName] || 0) - req.stonesReq;
+    }
+
+    applyMegaForm(p, targetData);
+    markEvolvedSpeciesCaught(targetData.name, p.quality >= 2 || p.qualityName === 'Shiny');
+
+    updateUI();
+    showPokemonStats(idx, location);
+    showMegaEvolveModal(location, idx);
+}
+
+export function refreshPokemonStatsIfMegaReverted(revertedItems) {
+    if (!Array.isArray(revertedItems) || revertedItems.length === 0 || !activeStatsContext) return;
+    const statsWin = document.getElementById('window-pokemon-stats');
+    if (!statsWin || statsWin.style.display === 'none') return;
+
+    const match = revertedItems.find(item => item.pokemon && item.pokemon.uuid === activeStatsContext.uuid);
+    if (!match) return;
+
+    const prevInner = activeStatsContext.innerModal;
+    showPokemonStats(activeStatsContext.idx, activeStatsContext.location);
+    if (prevInner === 'mega' && isMegaRegion(state.currentRegionName)) {
+        showMegaEvolveModal(activeStatsContext.location, activeStatsContext.idx);
+    }
+}
+
+window.showMegaEvolveModal = showMegaEvolveModal;
+window.megaEvolvePokemon = megaEvolvePokemon;
 
 window.showVitaminsModal = function(location, idx) {
     const list = state[location];
