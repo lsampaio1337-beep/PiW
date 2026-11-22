@@ -398,7 +398,7 @@ export class WindowManager {
             'handleGameSpeedSlider', 'handleMapInnerModalBackdropClick', 'hideMapTooltip', 'initMultiplayerView',
             'marketDeselectAllPokemonForSale', 'marketSelectAllPokemonForSale', 'marketSellSelectedPokemon',
             'megaEvolvePokemon',
-            'navigateToLocation', 'openDittoTransformModal', 'openGalarDlcModal', 'openPokeMarketBuy', 'openPokeMarketSell',
+            'navigateToLocation', 'openDittoTransformModal', 'openGalarDlcModal', 'openRegionSubmapModal', 'openPokeMarketBuy', 'openPokeMarketSell',
             'proceedProfTutorial', 'promptExitGame', 'renderBackpackTab', 'renderPokeMarketSellTab',
             'renderPokeMarketTab', 'renderTokenShopHtml', 'rerollIndividualDailyChallenge', 'resetMultiplayerReady',
             'restartGameClock', 'runTimeLapse', 'sanitizeMarketNumberInput', 'sanitizeMarketQInput',

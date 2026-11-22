@@ -402,40 +402,64 @@ function setupMapWindowDimensions(currentRegionObj, targetWidth) {
     }
 }
 
-const GALAR_DLC_MAPS = {
-    ioa: {
-        title: 'The Isle of Armor',
-        iconFile: '8 Galar Isle of Armor Logo.png',
-        mapFile: '8 Galar Isle of Armor.png',
-        positionStyle: 'top: 2%; left: 2%;'
+const REGION_SUBMAPS = {
+    Galar: {
+        ioa: {
+            title: 'The Isle of Armor',
+            iconFile: '8 Galar Isle of Armor Logo.png',
+            mapFile: '8 Galar Isle of Armor.png',
+            buttonStyle: 'top: 2%; left: 2%; width: 22%;'
+        },
+        tct: {
+            title: 'The Crown Tundra',
+            iconFile: '8 Galar The Crown Tundra Logo.png',
+            mapFile: '8 Galar The Crown Tundra.png',
+            buttonStyle: 'top: 2%; right: 2%; width: 22%;'
+        }
     },
-    tct: {
-        title: 'The Crown Tundra',
-        iconFile: '8 Galar The Crown Tundra Logo.png',
-        mapFile: '8 Galar The Crown Tundra.png',
-        positionStyle: 'top: 2%; right: 2%;'
+    Paldea: {
+        indigo_disk: {
+            title: 'The Indigo Disk',
+            iconFile: '10 Paldea The Indigo Disk Logo.png',
+            mapFile: '10 Paldea The Indigo Disk.jpg',
+            buttonStyle: 'top: 2%; left: 2%; width: 21.6%; border-radius: 6px;'
+        },
+        teal_mask: {
+            title: 'The Teal Mask',
+            iconFile: '10 Paldea The Teal Mask Logo.png',
+            mapFile: '10 Paldea The Teal Mask.jpg',
+            buttonStyle: 'top: 2%; right: 2%; width: 21.6%; border-radius: 6px;'
+        },
+        area_zero: {
+            title: 'The Hidden Treasures of Area Zero',
+            iconFile: '10 Paldea The Hidden Treasures of Area Zero Logo.png',
+            mapFile: '10 Paldea The Hidden Treasures of Area Zero.jpg',
+            buttonStyle: 'top: 40%; left: 50%; width: 18%; --submap-transform: translate(-50%, -50%);'
+        }
     }
 };
 
-function generateGalarDlcButtonsHtml(region) {
-    if (region !== 'Galar') return '';
+function generateRegionSubmapButtonsHtml(region) {
+    const submaps = REGION_SUBMAPS[region];
+    if (!submaps) return '';
 
-    return Object.entries(GALAR_DLC_MAPS).map(([key, dlc]) => `
-        <img class="galar-dlc-btn"
-             data-dlc="${key}"
-             src="./Assets/Map/${dlc.iconFile}"
-             alt="${dlc.title}"
-             title="${dlc.title}"
-             onclick="window.openGalarDlcModal('${key}')"
+    return Object.entries(submaps).map(([key, item]) => `
+        <img class="region-submap-btn"
+             data-region="${region}"
+             data-submap="${key}"
+             src="./Assets/Map/${item.iconFile}"
+             alt="${item.title}"
+             title="${item.title}"
+             onclick="window.openRegionSubmapModal('${region}', '${key}')"
              onmousedown="event.stopPropagation()"
-             style="position: absolute; ${dlc.positionStyle} width: 22%; height: auto; cursor: pointer; z-index: 20;" />
+             style="position: absolute; ${item.buttonStyle} height: auto; cursor: pointer; z-index: 20;" />
     `).join('');
 }
 
-/** Open the map inner modal displaying the selected Galar DLC island map. */
-export function openGalarDlcModal(dlcKey) {
-    const dlc = GALAR_DLC_MAPS[dlcKey];
-    if (!dlc) return;
+/** Open the map inner modal displaying a regional submap / DLC image. */
+export function openRegionSubmapModal(region, submapKey) {
+    const item = REGION_SUBMAPS[region]?.[submapKey];
+    if (!item) return;
 
     const overlay = document.getElementById('map-inner-modal-overlay');
     const modal = document.getElementById('map-inner-modal');
@@ -443,7 +467,7 @@ export function openGalarDlcModal(dlcKey) {
     const contentEl = document.getElementById('map-inner-modal-content');
 
     if (titleEl) {
-        titleEl.innerText = dlc.title;
+        titleEl.innerText = item.title;
     }
 
     if (contentEl) {
@@ -463,9 +487,9 @@ export function openGalarDlcModal(dlcKey) {
         contentEl.style.backgroundPosition = '';
 
         const img = document.createElement('img');
-        img.className = 'galar-dlc-modal-img';
-        img.src = `./Assets/Map/${dlc.mapFile}`;
-        img.alt = dlc.title;
+        img.className = 'region-submap-modal-img';
+        img.src = `./Assets/Map/${item.mapFile}`;
+        img.alt = item.title;
         img.style.display = 'block';
         img.style.width = '100%';
         img.style.height = 'auto';
@@ -484,7 +508,7 @@ export function openGalarDlcModal(dlcKey) {
         const maxDim = Math.max(mapW, mapH);
         overlay.style.padding = maxDim > 0 ? `${maxDim * 0.02}px` : '2%';
 
-        modal.style.width = '85%';
+        modal.style.width = '80%';
         modal.style.height = 'auto';
         modal.style.aspectRatio = 'auto';
         modal.style.maxWidth = '100%';
@@ -492,6 +516,12 @@ export function openGalarDlcModal(dlcKey) {
     }
 }
 
+/** Backwards-compatible wrapper for Galar DLC submap modals. */
+export function openGalarDlcModal(dlcKey) {
+    openRegionSubmapModal('Galar', dlcKey);
+}
+
+window.openRegionSubmapModal = openRegionSubmapModal;
 window.openGalarDlcModal = openGalarDlcModal;
 
 export function showMap() {
@@ -531,7 +561,7 @@ export function showMap() {
     `;
 
     html += generateMarkersForRegion(window.currentMapRegion, unlockedAreas);
-    html += generateGalarDlcButtonsHtml(window.currentMapRegion);
+    html += generateRegionSubmapButtonsHtml(window.currentMapRegion);
 
     // Inner modal for gym overlays natively locked to the map
     html += `
