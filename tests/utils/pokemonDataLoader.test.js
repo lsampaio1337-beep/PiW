@@ -31,7 +31,7 @@ describe('pokemonDataLoader & runtime pokemon_info.json integration', () => {
         expect(pokemonData.length).toBe(1554);
         expect(pokemonMap.get(1).name).toBe('Bulbasaur');
         expect(pokemonMap.get(1).kanto_id).toBe(1);
-        expect(pokemonMap.get('0003.2').name).toBe('Venusaur (Mega Venusaur)');
+        expect(pokemonMap.get('0003.2').name).toBe('Mega Venusaur');
         expect(pokemonMap.get('0003.2').types).toEqual(['Grass', 'Poison']);
         expect(pokemonMap.get('0003.2').hp).toBe(80);
         expect(pokemonMap.get('0003.2').atk).toBe(100);

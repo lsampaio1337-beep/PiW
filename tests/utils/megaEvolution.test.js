@@ -66,7 +66,7 @@ describe('Mega Evolution Utilities', () => {
                     expect(mega).toBeDefined();
                     expect(mega.sprite).toBeTruthy();
                     expect(mega.folders.length).toBeGreaterThan(0);
-                    expect(mega.name).toMatch(/\(Mega /i);
+                    expect(mega.name).toMatch(/^Mega /i);
                 }
             }
         }
@@ -121,7 +121,7 @@ describe('Mega Evolution Utilities', () => {
 
         applyMegaForm(charizard, megaX, t0);
         expect(charizard.id).toBe('0006.2');
-        expect(charizard.name).toBe('Charizard (Mega Charizard X)');
+        expect(charizard.name).toBe('Mega Charizard X');
         expect(charizard.types).toEqual(['Fire', 'Dragon']);
         expect(charizard.megaOriginalId).toBe(6);
         expect(charizard.megaExpiresAt).toBe(t0 + MEGA_EVOLUTION_DURATION_MS);

@@ -233,7 +233,7 @@ describe('Pokemon Data & Sprite Sync Integrity', () => {
         const pkm = pokemonInfo.pokemon;
         expect(pkm['0678'].name).toBe('Meowstic');
         expect(pkm['0678.1'].name).toBe('Meowstic (Female)');
-        expect(pkm['0678.2'].name).toBe('Meowstic (Mega Meowstic)');
+        expect(pkm['0678.2'].name).toBe('Mega Meowstic');
         expect(pkm['0678.1'].moveset).toBeDefined();
         expect(pkm['0678.1'].moveset).not.toEqual(pkm['0678'].moveset);
         expect(pkm['0678.1'].sprite).toBe('Meowstic_Female');

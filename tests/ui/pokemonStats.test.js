@@ -274,10 +274,10 @@ describe('Mega Evolution UI & Stacking Timer', () => {
         // First click: consumes 1 Fire + 1 Dragon, starts 5m timer, keeps inner modal open
         megaEvolvePokemon('party', 0, '0006.2');
         expect(charizard.id).toBe('0006.2');
-        expect(charizard.name).toBe('Charizard (Mega Charizard X)');
+        expect(charizard.name).toBe('Mega Charizard X');
         expect(state.backpack.stones['Fire Stone']).toBe(2);
         expect(state.backpack.stones['Dragon Stone']).toBe(2);
-        expect(state.stats.caughtSpecies['Charizard (Mega Charizard X)']).toBe(true);
+        expect(state.stats.caughtSpecies['Mega Charizard X']).toBe(true);
         expect(overlay.style.display).toBe('flex');
         expect(innerWin.style.display).toBe('flex');
         expect(innerContent.innerHTML).toContain('Mega Active:');

@@ -5971,7 +5971,7 @@
       ]
     },
     "0003.2": {
-      "name": "Venusaur (Mega Venusaur)",
+      "name": "Mega Venusaur",
       "stats": [
         80,
         100,
@@ -7123,7 +7123,7 @@
       ]
     },
     "0006.2": {
-      "name": "Charizard (Mega Charizard X)",
+      "name": "Mega Charizard X",
       "types": [
         "Fire",
         "Dragon"
@@ -7144,7 +7144,7 @@
       ]
     },
     "0006.3": {
-      "name": "Charizard (Mega Charizard Y)",
+      "name": "Mega Charizard Y",
       "stats": [
         78,
         104,
@@ -8178,7 +8178,7 @@
       ]
     },
     "0009.2": {
-      "name": "Blastoise (Mega Blastoise)",
+      "name": "Mega Blastoise",
       "stats": [
         79,
         103,
@@ -9024,7 +9024,7 @@
       ]
     },
     "0015.1": {
-      "name": "Beedrill (Mega Beedrill)",
+      "name": "Mega Beedrill",
       "stats": [
         65,
         150,
@@ -9678,7 +9678,7 @@
       ]
     },
     "0018.1": {
-      "name": "Pidgeot (Mega Pidgeot)",
+      "name": "Mega Pidgeot",
       "stats": [
         83,
         80,
@@ -11934,7 +11934,7 @@
       }
     },
     "0026.2": {
-      "name": "Raichu (Mega Raichu X)",
+      "name": "Mega Raichu X",
       "stats": [
         60,
         135,
@@ -11948,7 +11948,7 @@
       "folders": []
     },
     "0026.3": {
-      "name": "Raichu (Mega Raichu Y)",
+      "name": "Mega Raichu Y",
       "stats": [
         60,
         100,
@@ -14516,7 +14516,7 @@
       }
     },
     "0036.1": {
-      "name": "Clefable (Mega Clefable)",
+      "name": "Mega Clefable",
       "types": [
         "Fairy",
         "Flying"
@@ -23073,7 +23073,7 @@
       ]
     },
     "0065.1": {
-      "name": "Alakazam (Mega Alakazam)",
+      "name": "Mega Alakazam",
       "stats": [
         55,
         50,
@@ -24819,7 +24819,7 @@
       }
     },
     "0071.1": {
-      "name": "Victreebel (Mega Victreebel)",
+      "name": "Mega Victreebel",
       "stats": [
         80,
         125,
@@ -28236,7 +28236,7 @@
       }
     },
     "0080.2": {
-      "name": "Slowbro (Mega Slowbro)",
+      "name": "Mega Slowbro",
       "stats": [
         95,
         75,
@@ -32640,7 +32640,7 @@
       ]
     },
     "0094.2": {
-      "name": "Gengar (Mega Gengar)",
+      "name": "Mega Gengar",
       "stats": [
         60,
         65,
@@ -40090,7 +40090,7 @@
       ]
     },
     "0115.1": {
-      "name": "Kangaskhan (Mega Kangaskhan)",
+      "name": "Mega Kangaskhan",
       "stats": [
         105,
         125,
@@ -41602,7 +41602,7 @@
       }
     },
     "0121.1": {
-      "name": "Starmie (Mega Starmie)",
+      "name": "Mega Starmie",
       "stats": [
         60,
         140,
@@ -43731,7 +43731,7 @@
       ]
     },
     "0127.1": {
-      "name": "Pinsir (Mega Pinsir)",
+      "name": "Mega Pinsir",
       "types": [
         "Bug",
         "Flying"
@@ -44802,7 +44802,7 @@
       ]
     },
     "0130.1": {
-      "name": "Gyarados (Mega Gyarados)",
+      "name": "Mega Gyarados",
       "types": [
         "Water",
         "Dark"
@@ -48414,7 +48414,7 @@
       ]
     },
     "0142.1": {
-      "name": "Aerodactyl (Mega Aerodactyl)",
+      "name": "Mega Aerodactyl",
       "stats": [
         80,
         135,
@@ -50881,7 +50881,7 @@
       }
     },
     "0149.1": {
-      "name": "Dragonite (Mega Dragonite)",
+      "name": "Mega Dragonite",
       "stats": [
         91,
         124,
@@ -51152,7 +51152,7 @@
       ]
     },
     "0150.1": {
-      "name": "Mewtwo (Mega Mewtwo X)",
+      "name": "Mega Mewtwo X",
       "types": [
         "Psychic",
         "Fighting"
@@ -51173,7 +51173,7 @@
       ]
     },
     "0150.2": {
-      "name": "Mewtwo (Mega Mewtwo Y)",
+      "name": "Mega Mewtwo Y",
       "stats": [
         106,
         150,
@@ -52057,7 +52057,7 @@
       }
     },
     "0154.1": {
-      "name": "Meganium (Mega Meganium)",
+      "name": "Mega Meganium",
       "types": [
         "Grass",
         "Fairy"
@@ -54305,7 +54305,7 @@
       }
     },
     "0160.1": {
-      "name": "Feraligatr (Mega Feraligatr)",
+      "name": "Mega Feraligatr",
       "types": [
         "Water",
         "Dragon"
@@ -59398,7 +59398,7 @@
       ]
     },
     "0181.1": {
-      "name": "Ampharos (Mega Ampharos)",
+      "name": "Mega Ampharos",
       "types": [
         "Electric",
         "Dragon"
@@ -67322,7 +67322,7 @@
       ]
     },
     "0208.1": {
-      "name": "Steelix (Mega Steelix)",
+      "name": "Mega Steelix",
       "stats": [
         75,
         125,
@@ -68870,7 +68870,7 @@
       ]
     },
     "0212.1": {
-      "name": "Scizor (Mega Scizor)",
+      "name": "Mega Scizor",
       "stats": [
         70,
         150,
@@ -69570,7 +69570,7 @@
       ]
     },
     "0214.1": {
-      "name": "Heracross (Mega Heracross)",
+      "name": "Mega Heracross",
       "stats": [
         80,
         185,
@@ -73927,7 +73927,7 @@
       }
     },
     "0227.1": {
-      "name": "Skarmory (Mega Skarmory)",
+      "name": "Mega Skarmory",
       "stats": [
         65,
         140,
@@ -74570,7 +74570,7 @@
       ]
     },
     "0229.1": {
-      "name": "Houndoom (Mega Houndoom)",
+      "name": "Mega Houndoom",
       "stats": [
         75,
         90,
@@ -80217,7 +80217,7 @@
       ]
     },
     "0248.1": {
-      "name": "Tyranitar (Mega Tyranitar)",
+      "name": "Mega Tyranitar",
       "stats": [
         100,
         164,
@@ -82133,7 +82133,7 @@
       ]
     },
     "0254.1": {
-      "name": "Sceptile (Mega Sceptile)",
+      "name": "Mega Sceptile",
       "types": [
         "Grass",
         "Dragon"
@@ -83137,7 +83137,7 @@
       ]
     },
     "0257.1": {
-      "name": "Blaziken (Mega Blaziken)",
+      "name": "Mega Blaziken",
       "stats": [
         80,
         160,
@@ -84226,7 +84226,7 @@
       ]
     },
     "0260.1": {
-      "name": "Swampert (Mega Swampert)",
+      "name": "Mega Swampert",
       "stats": [
         100,
         150,
@@ -88772,7 +88772,7 @@
       ]
     },
     "0282.1": {
-      "name": "Gardevoir (Mega Gardevoir)",
+      "name": "Mega Gardevoir",
       "stats": [
         68,
         85,
@@ -93511,7 +93511,7 @@
       ]
     },
     "0302.1": {
-      "name": "Sableye (Mega Sableye)",
+      "name": "Mega Sableye",
       "stats": [
         50,
         85,
@@ -93786,7 +93786,7 @@
       ]
     },
     "0303.1": {
-      "name": "Mawile (Mega Mawile)",
+      "name": "Mega Mawile",
       "stats": [
         50,
         105,
@@ -94724,7 +94724,7 @@
       ]
     },
     "0306.1": {
-      "name": "Aggron (Mega Aggron)",
+      "name": "Mega Aggron",
       "types": [
         "Steel"
       ],
@@ -95269,7 +95269,7 @@
       ]
     },
     "0308.1": {
-      "name": "Medicham (Mega Medicham)",
+      "name": "Mega Medicham",
       "stats": [
         60,
         100,
@@ -95745,7 +95745,7 @@
       ]
     },
     "0310.1": {
-      "name": "Manectric (Mega Manectric)",
+      "name": "Mega Manectric",
       "stats": [
         70,
         75,
@@ -97680,7 +97680,7 @@
       ]
     },
     "0319.1": {
-      "name": "Sharpedo (Mega Sharpedo)",
+      "name": "Mega Sharpedo",
       "stats": [
         70,
         140,
@@ -98921,7 +98921,7 @@
       ]
     },
     "0323.1": {
-      "name": "Camerupt (Mega Camerupt)",
+      "name": "Mega Camerupt",
       "stats": [
         70,
         120,
@@ -102206,7 +102206,7 @@
       ]
     },
     "0334.1": {
-      "name": "Altaria (Mega Altaria)",
+      "name": "Mega Altaria",
       "types": [
         "Dragon",
         "Fairy"
@@ -107588,7 +107588,7 @@
       ]
     },
     "0354.1": {
-      "name": "Banette (Mega Banette)",
+      "name": "Mega Banette",
       "stats": [
         64,
         165,
@@ -108813,7 +108813,7 @@
       }
     },
     "0358.1": {
-      "name": "Chimecho (Mega Chimecho)",
+      "name": "Mega Chimecho",
       "types": [
         "Psychic",
         "Steel"
@@ -109109,7 +109109,7 @@
       ]
     },
     "0359.1": {
-      "name": "Absol (Mega Absol)",
+      "name": "Mega Absol",
       "stats": [
         65,
         150,
@@ -109126,7 +109126,7 @@
       ]
     },
     "0359.2": {
-      "name": "Absol (Mega Absol Z)",
+      "name": "Mega Absol Z",
       "types": [
         "Dark",
         "Ghost"
@@ -109951,7 +109951,7 @@
       ]
     },
     "0362.1": {
-      "name": "Glalie (Mega Glalie)",
+      "name": "Mega Glalie",
       "stats": [
         80,
         120,
@@ -112872,7 +112872,7 @@
       ]
     },
     "0373.1": {
-      "name": "Salamence (Mega Salamence)",
+      "name": "Mega Salamence",
       "stats": [
         95,
         145,
@@ -113633,7 +113633,7 @@
       ]
     },
     "0376.1": {
-      "name": "Metagross (Mega Metagross)",
+      "name": "Mega Metagross",
       "stats": [
         80,
         145,
@@ -114933,7 +114933,7 @@
       ]
     },
     "0380.1": {
-      "name": "Latias (Mega Latias)",
+      "name": "Mega Latias",
       "stats": [
         80,
         100,
@@ -115171,7 +115171,7 @@
       ]
     },
     "0381.1": {
-      "name": "Latios (Mega Latios)",
+      "name": "Mega Latios",
       "stats": [
         80,
         130,
@@ -116315,7 +116315,7 @@
       ]
     },
     "0384.1": {
-      "name": "Rayquaza (Mega Rayquaza)",
+      "name": "Mega Rayquaza",
       "stats": [
         105,
         180,
@@ -120709,7 +120709,7 @@
       }
     },
     "0398.1": {
-      "name": "Staraptor (Mega Staraptor)",
+      "name": "Mega Staraptor",
       "types": [
         "Fighting",
         "Flying"
@@ -128155,7 +128155,7 @@
       ]
     },
     "0428.1": {
-      "name": "Lopunny (Mega Lopunny)",
+      "name": "Mega Lopunny",
       "types": [
         "Normal",
         "Fighting"
@@ -132033,7 +132033,7 @@
       ]
     },
     "0445.1": {
-      "name": "Garchomp (Mega Garchomp)",
+      "name": "Mega Garchomp",
       "stats": [
         108,
         170,
@@ -132050,7 +132050,7 @@
       ]
     },
     "0445.2": {
-      "name": "Garchomp (Mega Garchomp Z)",
+      "name": "Mega Garchomp Z",
       "types": [
         "Dragon"
       ],
@@ -132961,7 +132961,7 @@
       ]
     },
     "0448.1": {
-      "name": "Lucario (Mega Lucario)",
+      "name": "Mega Lucario",
       "stats": [
         70,
         145,
@@ -132978,7 +132978,7 @@
       ]
     },
     "0448.2": {
-      "name": "Lucario (Mega Lucario Z)",
+      "name": "Mega Lucario Z",
       "stats": [
         70,
         100,
@@ -136459,7 +136459,7 @@
       ]
     },
     "0460.1": {
-      "name": "Abomasnow (Mega Abomasnow)",
+      "name": "Mega Abomasnow",
       "stats": [
         90,
         132,
@@ -141409,7 +141409,7 @@
       ]
     },
     "0475.1": {
-      "name": "Gallade (Mega Gallade)",
+      "name": "Mega Gallade",
       "stats": [
         68,
         165,
@@ -142382,7 +142382,7 @@
       }
     },
     "0478.1": {
-      "name": "Froslass (Mega Froslass)",
+      "name": "Mega Froslass",
       "stats": [
         70,
         80,
@@ -146860,7 +146860,7 @@
       }
     },
     "0485.1": {
-      "name": "Heatran (Mega Heatran)",
+      "name": "Mega Heatran",
       "stats": [
         91,
         120,
@@ -148544,7 +148544,7 @@
       }
     },
     "0491.1": {
-      "name": "Darkrai (Mega Darkrai)",
+      "name": "Mega Darkrai",
       "stats": [
         70,
         120,
@@ -152305,7 +152305,7 @@
       }
     },
     "0500.1": {
-      "name": "Emboar (Mega Emboar)",
+      "name": "Mega Emboar",
       "stats": [
         110,
         148,
@@ -157500,7 +157500,7 @@
       }
     },
     "0530.1": {
-      "name": "Excadrill (Mega Excadrill)",
+      "name": "Mega Excadrill",
       "stats": [
         110,
         165,
@@ -157669,7 +157669,7 @@
       ]
     },
     "0531.1": {
-      "name": "Audino (Mega Audino)",
+      "name": "Mega Audino",
       "types": [
         "Normal",
         "Fairy"
@@ -160525,7 +160525,7 @@
       }
     },
     "0545.1": {
-      "name": "Scolipede (Mega Scolipede)",
+      "name": "Mega Scolipede",
       "stats": [
         60,
         140,
@@ -164481,7 +164481,7 @@
       }
     },
     "0560.1": {
-      "name": "Scrafty (Mega Scrafty)",
+      "name": "Mega Scrafty",
       "stats": [
         65,
         130,
@@ -173236,7 +173236,7 @@
       }
     },
     "0604.1": {
-      "name": "Eelektross (Mega Eelektross)",
+      "name": "Mega Eelektross",
       "stats": [
         85,
         145,
@@ -174162,7 +174162,7 @@
       }
     },
     "0609.1": {
-      "name": "Chandelure (Mega Chandelure)",
+      "name": "Mega Chandelure",
       "stats": [
         60,
         75,
@@ -178004,7 +178004,7 @@
       }
     },
     "0623.1": {
-      "name": "Golurk (Mega Golurk)",
+      "name": "Mega Golurk",
       "stats": [
         89,
         159,
@@ -186678,7 +186678,7 @@
       }
     },
     "0652.1": {
-      "name": "Chesnaught (Mega Chesnaught)",
+      "name": "Mega Chesnaught",
       "stats": [
         88,
         137,
@@ -187171,7 +187171,7 @@
       }
     },
     "0655.1": {
-      "name": "Delphox (Mega Delphox)",
+      "name": "Mega Delphox",
       "stats": [
         75,
         69,
@@ -187850,7 +187850,7 @@
       }
     },
     "0658.2": {
-      "name": "Greninja (Mega Greninja)",
+      "name": "Mega Greninja",
       "stats": [
         72,
         125,
@@ -189669,7 +189669,7 @@
       }
     },
     "0668.1": {
-      "name": "Pyroar (Mega Pyroar)",
+      "name": "Mega Pyroar",
       "stats": [
         86,
         88,
@@ -190212,7 +190212,7 @@
       ]
     },
     "0670.7": {
-      "name": "Floette (Mega Floette)",
+      "name": "Mega Floette",
       "stats": [
         74,
         85,
@@ -192013,7 +192013,7 @@
       }
     },
     "0678.2": {
-      "name": "Meowstic (Mega Meowstic)",
+      "name": "Mega Meowstic",
       "stats": [
         74,
         48,
@@ -193662,7 +193662,7 @@
       }
     },
     "0687.1": {
-      "name": "Malamar (Mega Malamar)",
+      "name": "Mega Malamar",
       "stats": [
         86,
         102,
@@ -194032,7 +194032,7 @@
       }
     },
     "0689.1": {
-      "name": "Barbaracle (Mega Barbaracle)",
+      "name": "Mega Barbaracle",
       "types": [
         "Rock",
         "Fighting"
@@ -194484,7 +194484,7 @@
       }
     },
     "0691.1": {
-      "name": "Dragalge (Mega Dragalge)",
+      "name": "Mega Dragalge",
       "stats": [
         65,
         85,
@@ -196296,7 +196296,7 @@
       }
     },
     "0701.1": {
-      "name": "Hawlucha (Mega Hawlucha)",
+      "name": "Mega Hawlucha",
       "stats": [
         78,
         137,
@@ -201080,7 +201080,7 @@
       }
     },
     "0718.4": {
-      "name": "Zygarde (Mega Zygarde)",
+      "name": "Mega Zygarde",
       "stats": [
         216,
         70,
@@ -201269,7 +201269,7 @@
       ]
     },
     "0719.1": {
-      "name": "Diancie (Mega Diancie)",
+      "name": "Mega Diancie",
       "stats": [
         50,
         160,
@@ -204625,7 +204625,7 @@
       }
     },
     "0740.1": {
-      "name": "Crabominable (Mega Crabominable)",
+      "name": "Mega Crabominable",
       "stats": [
         97,
         157,
@@ -208727,7 +208727,7 @@
       }
     },
     "0768.1": {
-      "name": "Golisopod (Mega Golisopod)",
+      "name": "Mega Golisopod",
       "types": [
         "Bug",
         "Steel"
@@ -211278,7 +211278,7 @@
       }
     },
     "0780.1": {
-      "name": "Drampa (Mega Drampa)",
+      "name": "Mega Drampa",
       "stats": [
         78,
         85,
@@ -214409,7 +214409,7 @@
       ]
     },
     "0801.2": {
-      "name": "Magearna (Mega Magearna)",
+      "name": "Mega Magearna",
       "stats": [
         80,
         125,
@@ -215089,7 +215089,7 @@
       }
     },
     "0807.1": {
-      "name": "Zeraora (Mega Zeraora)",
+      "name": "Mega Zeraora",
       "stats": [
         88,
         157,
@@ -220860,7 +220860,7 @@
       }
     },
     "0870.1": {
-      "name": "Falinks (Mega Falinks)",
+      "name": "Mega Falinks",
       "stats": [
         65,
         135,
@@ -229681,7 +229681,7 @@
       }
     },
     "0952.1": {
-      "name": "Scovillain (Mega Scovillain)",
+      "name": "Mega Scovillain",
       "stats": [
         65,
         138,
@@ -231166,7 +231166,7 @@
       }
     },
     "0970.1": {
-      "name": "Glimmora (Mega Glimmora)",
+      "name": "Mega Glimmora",
       "stats": [
         83,
         90,
@@ -231773,7 +231773,7 @@
       ]
     },
     "0978.4": {
-      "name": "Tatsugiri (Mega Tatsugiri)",
+      "name": "Mega Tatsugiri",
       "stats": [
         68,
         65,
@@ -233367,7 +233367,7 @@
       }
     },
     "0998.1": {
-      "name": "Baxcalibur (Mega Baxcalibur)",
+      "name": "Mega Baxcalibur",
       "stats": [
         115,
         175,
