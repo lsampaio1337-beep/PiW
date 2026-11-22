@@ -3,7 +3,7 @@ export const alolaMapCoordinates = {
     "x": 50,
     "y": 50
   },
-  "Route 1 - East": {
+  "Route 1 - North": {
     "x": 100,
     "y": 50
   },

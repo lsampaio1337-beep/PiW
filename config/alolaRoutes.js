@@ -25,7 +25,7 @@ export const alolaRoutes = [
     "secondaryName": "South"
   },
   {
-    "name": "Route 1 - East",
+    "name": "Route 1 - North",
     "primaryName": "Route 1",
     "spawns": [
       {
@@ -53,7 +53,7 @@ export const alolaRoutes = [
         "chance": 0.3
       }
     ],
-    "secondaryName": "East"
+    "secondaryName": "North"
   },
   {
     "name": "Route 1 - Hau'oli Outskirts",
@@ -3409,7 +3409,7 @@ export const alolaUnlocks = [
     "challengeName": "Challenge 01",
     "areaId": "Route 1 - South",
     "unlocks": [
-      "Route 1 - East"
+      "Route 1 - North"
     ],
     "requirements": {
       "defeatCountRoute": {
@@ -3421,7 +3421,7 @@ export const alolaUnlocks = [
   },
   {
     "challengeName": "Challenge 02",
-    "areaId": "Route 1 - East",
+    "areaId": "Route 1 - North",
     "unlocks": [
       "Route 1 - Hau'oli Outskirts"
     ],
