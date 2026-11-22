@@ -10,11 +10,11 @@ function getPokemonConfig(id, state) {
     if (state.config.pokemonMap) {
         return state.config.pokemonMap.get(id) || state.config.pokemonMap.get(Number(id));
     }
-    return state.config.pokemonData?.find(d => Number(d.id) === Number(id) || d.id === id);
+    return state.config.pokemonData?.find(d => d.canonId === id || Number(d.id) === Number(id) || d.id === id);
 }
 
 function applyEvolvedBaseStats(mon, baseData) {
-    mon.id = baseData.id;
+    mon.id = (baseData.canonId && baseData.canonId.includes('.')) ? baseData.canonId : baseData.id;
     mon.name = baseData.name;
     mon.types = [...(baseData.types || [])];
     mon.bst = baseData.hp + baseData.atk + baseData.def + baseData.spa + baseData.spd + baseData.spe;
@@ -106,6 +106,24 @@ function isPokemonInRegion(pd, state) {
     return pd[regionIdField] !== undefined;
 }
 
+function isEvolutionTargetValid(pData, targetPd, state) {
+    if (!targetPd) return false;
+    // Same-species form-change evolutions (e.g. Arceus variations) are always valid for an owned Pokémon.
+    if (pData && Math.trunc(Number(pData.id)) === Math.trunc(Number(targetPd.id))) {
+        return true;
+    }
+    return isPokemonInRegion(targetPd, state);
+}
+
+function findMatchingEvolution(evolutions, toId) {
+    if (!Array.isArray(evolutions)) return null;
+    const toStr = String(toId);
+    return evolutions.find(e =>
+        String(e.to) === toStr ||
+        (!String(e.to).includes('.') && !toStr.includes('.') && Number(e.to) === Number(toId))
+    ) || null;
+}
+
 function setInnerModalContent(el, html) {
     if (!el) return;
     if (window.windowManager && typeof window.windowManager._parseAndSanitizeToElement === 'function') {
@@ -119,7 +137,7 @@ function setInnerModalContent(el, html) {
 function getActionsHtml(p, pData, location, idx) {
     let evolveHtml = "";
     if (!pData) return;
-    const validEvolutions = (pData.evolutions || []).filter(evo => isPokemonInRegion(getPokemonConfig(evo.to, state), state));
+    const validEvolutions = (pData.evolutions || []).filter(evo => isEvolutionTargetValid(pData, getPokemonConfig(evo.to, state), state));
     if (validEvolutions.length > 1) {
         const canAnyEvolve = validEvolutions.some(evo => getEvolveRequirements(p, evo, state).canEvolve);
         evolveHtml = `
@@ -144,7 +162,7 @@ function getActionsHtml(p, pData, location, idx) {
 
         evolveHtml = `
             <div>
-                <button ${req.canEvolve ? '' : 'disabled'} class="piw-btn ${req.canEvolve ? 'piw-btn-primary' : 'piw-btn-secondary is-disabled'}" onclick="window.showEvolveConfirmModal('${location}', ${idx}, ${evo.to})" style="min-width: 200px; min-height: 46px; flex-direction: column;">${btnText}</button>
+                <button ${req.canEvolve ? '' : 'disabled'} class="piw-btn ${req.canEvolve ? 'piw-btn-primary' : 'piw-btn-secondary is-disabled'}" onclick="window.showEvolveConfirmModal('${location}', ${idx}, '${evo.to}')" style="min-width: 200px; min-height: 46px; flex-direction: column;">${btnText}</button>
             </div>
         `;
     }
@@ -338,7 +356,7 @@ export function evolvePokemon(location, idx, toId) {
 
     // Re-verify requirements and consume stones
     const oldPData = getPokemonConfig(p.id, state);
-    const evoObj = oldPData ? oldPData.evolutions?.find(e => Number(e.to) === Number(toId)) : null;
+    const evoObj = oldPData ? findMatchingEvolution(oldPData.evolutions, toId) : null;
     if (evoObj) {
         const req = getEvolveRequirements(p, evoObj, state);
         if (!req.canEvolve) {
@@ -447,7 +465,7 @@ window.showMultipleEvolveModal = function(location, idx) {
     const p = list[idx];
     const pData = getPokemonConfig(p.id, state);
     if (!pData) return;
-    const validEvolutions = (pData.evolutions || []).filter(evo => isPokemonInRegion(getPokemonConfig(evo.to, state), state));
+    const validEvolutions = (pData.evolutions || []).filter(evo => isEvolutionTargetValid(pData, getPokemonConfig(evo.to, state), state));
     if (validEvolutions.length === 0) return;
 
     const isShiny = !!(p.isShiny || p.quality === 'Shiny');
@@ -481,14 +499,16 @@ window.showMultipleEvolveModal = function(location, idx) {
                         <span style="font-size: 11px; font-weight: 600; color: ${isRevealed ? '#ecf0f1' : '#95a5a6'}; margin-top: 4px;">${toName}</span>
                     </div>
                 </div>
-                <button ${req.canEvolve ? '' : 'disabled'} onclick="window.closeVitaminsInnerWindow(); window.evolvePokemon('${location}', ${idx}, ${evo.to})" style="background: ${btnBg}; color: white; border: none; border-radius: 8px; padding: 7px 16px; font-weight: bold; font-size: 13px; cursor: ${req.canEvolve ? 'pointer' : 'not-allowed'}; ${btnShadow} width: 100%; display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px;">Consume ${req.missingStonesHtml}</button>
+                <button ${req.canEvolve ? '' : 'disabled'} onclick="window.closeVitaminsInnerWindow(); window.evolvePokemon('${location}', ${idx}, '${evo.to}')" style="background: ${btnBg}; color: white; border: none; border-radius: 8px; padding: 7px 16px; font-weight: bold; font-size: 13px; cursor: ${req.canEvolve ? 'pointer' : 'not-allowed'}; ${btnShadow} width: 100%; display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px;">Consume ${req.missingStonesHtml}</button>
             </div>
         `;
     }).join('');
 
     const html = `
         <div style="display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 6px 10px 10px 10px;">
-            ${cardsHtml}
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; max-height: 60vh; overflow-y: auto; width: 100%; padding: 4px;">
+                ${cardsHtml}
+            </div>
             <button onclick="window.closeVitaminsInnerWindow()" style="background: linear-gradient(180deg, #e74c3c, #c0392b); color: white; border: none; border-radius: 8px; padding: 9px 28px; font-weight: bold; font-size: 14px; cursor: pointer; box-shadow: 0 3px 8px rgba(231, 76, 60, 0.3);">No</button>
         </div>
     `;
@@ -510,7 +530,7 @@ window.showEvolveConfirmModal = function(location, idx, toId) {
     const p = list[idx];
     const pData = getPokemonConfig(p.id, state);
     if (!pData || !pData.evolutions) return;
-    const evo = pData.evolutions.find(e => e.to === toId);
+    const evo = findMatchingEvolution(pData.evolutions, toId);
     if (!evo) return;
     const req = getEvolveRequirements(p, evo, state);
     const toData = getPokemonConfig(toId, state);
@@ -544,7 +564,7 @@ window.showEvolveConfirmModal = function(location, idx, toId) {
                         <span style="font-size: 11px; font-weight: 600; color: ${isRevealed ? '#ecf0f1' : '#95a5a6'}; margin-top: 4px;">${toName}</span>
                     </div>
                 </div>
-                <button ${req.canEvolve ? '' : 'disabled'} onclick="window.closeVitaminsInnerWindow(); window.evolvePokemon('${location}', ${idx}, ${toId})" style="background: ${btnBg}; color: white; border: none; border-radius: 8px; padding: 7px 16px; font-weight: bold; font-size: 13px; cursor: ${req.canEvolve ? 'pointer' : 'not-allowed'}; ${btnShadow} width: 100%; display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px;">Consume ${req.missingStonesHtml}</button>
+                <button ${req.canEvolve ? '' : 'disabled'} onclick="window.closeVitaminsInnerWindow(); window.evolvePokemon('${location}', ${idx}, '${toId}')" style="background: ${btnBg}; color: white; border: none; border-radius: 8px; padding: 7px 16px; font-weight: bold; font-size: 13px; cursor: ${req.canEvolve ? 'pointer' : 'not-allowed'}; ${btnShadow} width: 100%; display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px;">Consume ${req.missingStonesHtml}</button>
             </div>
             <button class="piw-btn piw-btn-danger" onclick="window.closeVitaminsInnerWindow()" style="min-width: 96px;">No</button>
         </div>

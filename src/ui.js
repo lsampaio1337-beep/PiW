@@ -1573,12 +1573,14 @@ async function loadConfigs() {
     state.config.mapCoordinates = mapCoordinates;
     state.config.allPokemonNames = hydrated.pokemonData.map(p => p.name);
 
-    // Precompute evolution parents for O(1) lookups
+    // Precompute evolution parents for O(1) lookups (skip same-species form-change cycles)
     const evolutionParents = {};
     for (const pd of state.config.pokemonData) {
         if (pd.evolutions) {
             for (const evo of pd.evolutions) {
-                evolutionParents[evo.to] = pd.id;
+                if (Math.trunc(Number(evo.to)) !== Math.trunc(Number(pd.id))) {
+                    evolutionParents[evo.to] = pd.id;
+                }
             }
         }
     }

@@ -533,40 +533,57 @@ function isPokemonInRegion(pd, state) {
 
 export function buildEvolutionLineHtml(pData, state) {
     let baseId = pData.id;
+    const visitedParents = new Set([baseId]);
     while (state.config.evolutionParents && state.config.evolutionParents[baseId] !== undefined) {
         const parentId = state.config.evolutionParents[baseId];
-        if (!isPokemonInRegion(getPokemonById(parentId, state), state)) {
+        if (visitedParents.has(parentId) || !isPokemonInRegion(getPokemonById(parentId, state), state)) {
             break;
         }
+        visitedParents.add(parentId);
         baseId = parentId;
     }
 
-    function buildTree(currentId) {
+    const visitedNodes = new Set();
+
+    function buildTree(currentId, allowFormChanges = true) {
         const pd = getPokemonById(currentId, state);
         if (!pd) return "";
+        const nodeKey = pd.canonId || pd.id;
+        if (visitedNodes.has(nodeKey)) return "";
+        visitedNodes.add(nodeKey);
 
         const hasEncountered = hasEncounteredSpecies(currentId, state);
         const hasCaughtShiny = state.stats.caughtShiniesSpecies && state.stats.caughtShiniesSpecies[pd.name];
         const isRevealed = hasEncountered || hasCaughtShiny;
         let filter = isRevealed ? "none" : "brightness(0)";
         let cursor = isRevealed ? "pointer" : "default";
-        let onClick = isRevealed ? `onclick="window.showDexEntry(${pd.id})"` : "";
+        let onClick = isRevealed ? `onclick="window.showDexEntry('${nodeKey}')"` : "";
         let displayName = isRevealed ? pd.name : "???";
 
         let html = `<div style="display: flex; flex-direction: column; align-items: center; margin: 5px;">
-            <img src="${window.getSpriteUrl(pd.id, false)}" style="width: 80px; height: 80px; filter: ${filter}; cursor: ${cursor};" ${onClick} title="${displayName}">
+            <img src="${window.getSpriteUrl(nodeKey, false)}" style="width: 80px; height: 80px; filter: ${filter}; cursor: ${cursor};" ${onClick} title="${displayName}">
             <span style="font-size: 12px; cursor: ${cursor};" ${onClick}>${displayName}</span>
         </div>`;
 
-        const validEvos = (pd.evolutions || []).filter(evo => isPokemonInRegion(getPokemonById(evo.to, state), state));
+        const validEvos = (pd.evolutions || []).filter(evo => {
+            const targetPd = getPokemonById(evo.to, state);
+            if (!targetPd) return false;
+            const targetKey = targetPd.canonId || targetPd.id;
+            if (visitedNodes.has(targetKey)) return false;
+            const isFormChange = Math.trunc(Number(pd.id)) === Math.trunc(Number(targetPd.id));
+            if (isFormChange) return allowFormChanges;
+            return isPokemonInRegion(targetPd, state);
+        });
         if (validEvos.length > 0) {
             html = `<div style="display: flex; align-items: center;">` + html;
 
             let evosHtml = `<div style="display: flex; flex-direction: column; justify-content: center; margin-left: 10px;">`;
             for (const evo of validEvos) {
+                const targetPd = getPokemonById(evo.to, state);
+                const isFormChange = targetPd && Math.trunc(Number(pd.id)) === Math.trunc(Number(targetPd.id));
                 evosHtml += `<div style="display: flex; align-items: center; margin: 5px 0;">
                     <div style="font-size: 12px; color: #aaa; margin-right: 5px;">Lv.${evo.level} ➔</div>
-                    ${buildTree(evo.to)}
+                    ${buildTree(evo.to, !isFormChange)}
                 </div>`;
             }
             evosHtml += `</div>`;

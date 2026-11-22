@@ -226,13 +226,15 @@ class BattleSystem {
             const pokemonData = this.state.config.pokemonData;
             const len = pokemonData.length;
 
-            // First pass: Build the reverse lookup map
+            // First pass: Build the reverse lookup map (skip same-species form-change evolutions)
             for (let i = 0; i < len; i++) {
                 const p = pokemonData[i];
                 if (p.evolutions) {
                     const evos = p.evolutions;
                     for (let j = 0; j < evos.length; j++) {
-                        evolveFromMap[evos[j].to] = p.id;
+                        if (Math.trunc(Number(evos[j].to)) !== Math.trunc(Number(p.id))) {
+                            evolveFromMap[evos[j].to] = p.id;
+                        }
                     }
                 }
             }
@@ -247,9 +249,11 @@ class BattleSystem {
 
                 let stage = 1;
                 const path = [];
+                const visited = new Set();
 
                 // Trace back to the base form or a previously calculated stage
-                while (id && !this.evolutionStageMap[id]) {
+                while (id && !this.evolutionStageMap[id] && !visited.has(id)) {
+                    visited.add(id);
                     path.push(id);
                     id = evolveFromMap[id];
                 }
@@ -2136,10 +2140,13 @@ class BattleSystem {
                 }
 
                 if (req.defeatMultipleSpecific) {
-                    const targetMatch = req.defeatMultipleSpecific.find(t => t.name === this.activeEncounter.name);
+                    const targetMatch = req.defeatMultipleSpecific.find(t =>
+                        t.name === this.activeEncounter.name ||
+                        (t.name === 'Unown' && this.activeEncounter.name.startsWith('Unown ('))
+                    );
                     if (targetMatch) {
                          if (!this.state.stats.challengeSpecificDefeats) this.state.stats.challengeSpecificDefeats = {};
-                         this.state.stats.challengeSpecificDefeats[this.activeEncounter.name] = (this.state.stats.challengeSpecificDefeats[this.activeEncounter.name] || 0) + 1;
+                         this.state.stats.challengeSpecificDefeats[targetMatch.name] = (this.state.stats.challengeSpecificDefeats[targetMatch.name] || 0) + 1;
                     }
                 }
             }
