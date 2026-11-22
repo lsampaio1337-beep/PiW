@@ -21,6 +21,7 @@ document.body.innerHTML = `
 `;
 
 import { WindowManager } from '../src/windowManager.js';
+import { state } from '../src/state.js';
 import { setupWindowToggles } from '../src/init/listeners/windowListeners.js';
 
 describe('WindowManager', () => {
@@ -754,6 +755,55 @@ describe('WindowManager', () => {
         } finally {
             jest.useRealTimers();
             window.state = prevState;
+            win.remove();
+        }
+    });
+
+    test('setWindowProportions halves main-view-window width in battle mode while preserving scale, height, and normalized saved width', () => {
+        const prevWindowSettings = state.settings.windowSettings;
+        state.settings.windowSettings = {};
+
+        const win = document.createElement('div');
+        win.id = 'main-view-window';
+        win.className = 'floating-window';
+        win.style.display = 'flex';
+        win.style.width = '640px'; // 0.8x user scale of 800px Hub Mode
+        win.innerHTML = `
+            <div id="main-view-header" class="window-header">Main View</div>
+            <div class="window-content-container">
+                <div class="window-content-scaler"></div>
+            </div>
+        `;
+        const header = win.querySelector('.window-header');
+        Object.defineProperty(header, 'offsetHeight', { value: 30, configurable: true });
+        Object.defineProperty(win, 'offsetWidth', { value: 640, configurable: true });
+        document.body.appendChild(win);
+
+        try {
+            const scaler = win.querySelector('.window-content-scaler');
+            // Enter Hub Mode first at 0.8x scale
+            windowManager.setWindowProportions('main-view-window', 1.8, 1);
+            expect(win.style.width).toBe('640px');
+            expect(scaler.style.transform).toBe('scale(0.8)');
+
+            // Enter Battle Mode: width halves (400 * 0.8 = 320px), scale stays 0.8, height matches (800/5.75)*0.8 + 30
+            Object.defineProperty(win, 'offsetWidth', { value: 640, configurable: true });
+            windowManager.setWindowProportions('main-view-window', 2.875, 0.5);
+            expect(win.style.width).toBe('320px');
+            expect(scaler.style.width).toBe('400px');
+            expect(scaler.style.transform).toBe('scale(0.8)');
+            expect(parseFloat(win.style.height)).toBeCloseTo(30 + (800 / 5.75) * 0.8, 1);
+            // Saved width stays normalized to 1x Hub width so reloading restores full Hub Mode
+            expect(state.settings.windowSettings['main-view-window'].width).toBe('640px');
+
+            // Return to Hub Mode from Battle Mode
+            Object.defineProperty(win, 'offsetWidth', { value: 320, configurable: true });
+            windowManager.setWindowProportions('main-view-window', 1.8, 1);
+            expect(win.style.width).toBe('640px');
+            expect(scaler.style.width).toBe('800px');
+            expect(scaler.style.transform).toBe('scale(0.8)');
+        } finally {
+            state.settings.windowSettings = prevWindowSettings;
             win.remove();
         }
     });

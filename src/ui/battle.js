@@ -6,6 +6,12 @@ import { getTrimmedSpriteUrl, precacheRouteSprites, getCachedTrimmedSpriteUrl, g
 
 let lastPrecachedRoute = null;
 
+// Battle arena rests at 53% left inside the 50%-width battle mode view
+const ENEMY_REST_LEFT_PCT = 53;
+const ENEMY_SLIDE_DISTANCE_PCT = 100 - ENEMY_REST_LEFT_PCT;
+const DEFEAT_SLIDE_DURATION_MS = 2500;
+const DEFEAT_CAPTURE_CHECK_DELAY_MS = 1500;
+
 
 
 
@@ -430,7 +436,7 @@ function updateBackgroundSliding(combatArena, state, battleSystem, inGymCombat) 
                     // Ensure the slideDelay used here matches what the battle system would use for slideDuration
                     // It uses exactly 1000 / gameSpeed
                     const slideDelay = battleSystem.searchDuration || (1000 / gameSpeed);
-                    const moveDistance = 65;
+                    const moveDistance = ENEMY_SLIDE_DISTANCE_PCT;
                     const ticksPerSlide = slideDelay / 33;
                     const pctPerTick = moveDistance / ticksPerSlide;
                     pos += pctPerTick;
@@ -451,7 +457,7 @@ function updateBackgroundSliding(combatArena, state, battleSystem, inGymCombat) 
                 void combatArena.offsetWidth;
                 requestAnimationFrame(() => {
                     requestAnimationFrame(() => {
-                        combatArena.style.backgroundPositionX = `${pos + 65}%`;
+                        combatArena.style.backgroundPositionX = `${pos + ENEMY_SLIDE_DISTANCE_PCT}%`;
                     });
                 });
             }
@@ -687,14 +693,14 @@ function updateEnemyUI(enemy, battleSystem, glassTier, isSearching = false) {
                 requestAnimationFrame(() => {
                     requestAnimationFrame(() => {
                         elEnemySide.style.transition = `left ${battleSystem.slideDuration}ms linear`;
-                        elEnemySide.style.left = '35%';
+                        elEnemySide.style.left = `${ENEMY_REST_LEFT_PCT}%`;
                     });
                 });
             }
         } else {
             elEnemySide.dataset.sliding = 'false';
             elEnemySide.style.transition = 'none';
-            elEnemySide.style.left = '35%';
+            elEnemySide.style.left = `${ENEMY_REST_LEFT_PCT}%`;
         }
     }
 }
@@ -796,8 +802,8 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
 
     const { ball, shakeInterval } = createPokeballAnimation(ballResult, cloneWrapper, ballSizePx);
 
-    const slideDuration = 5000;
-    const captureCheckDelay = 3000;
+    const slideDuration = DEFEAT_SLIDE_DURATION_MS;
+    const captureCheckDelay = DEFEAT_CAPTURE_CHECK_DELAY_MS;
     const targetLeft = `-${ballSizePx}px`;
 
     startDefeatAnimations(defeatContainer, cloneWrapper, targetLeft, slideDuration);
@@ -835,7 +841,7 @@ function createDefeatContainer() {
     defeatContainer.className = 'battle-actor battle-actor-enemy';
     defeatContainer.style.position = 'absolute';
     defeatContainer.style.bottom = '20%';
-    defeatContainer.style.left = '35%';
+    defeatContainer.style.left = `${ENEMY_REST_LEFT_PCT}%`;
     defeatContainer.style.display = 'flex';
     defeatContainer.style.alignItems = 'flex-end';
     defeatContainer.style.justifyContent = 'center';
@@ -930,7 +936,7 @@ function animatePokemonSprite(cloneWrapper) {
     const pokemonSprite = cloneWrapper.querySelector('.battle-pokemon-sprite') || cloneWrapper.querySelector('img:not([src*="Balls"])');
     if (pokemonSprite) {
         pokemonSprite.classList.remove('sliding-idle-anim', 'sliding-idle-anim-flipped');
-        pokemonSprite.style.transition = 'opacity 2000ms linear, transform 2000ms linear';
+        pokemonSprite.style.transition = 'opacity 1500ms linear, transform 1500ms linear';
         pokemonSprite.style.transformOrigin = 'center center';
         pokemonSprite.style.opacity = '0';
         pokemonSprite.style.transform = 'scale(0.25)';
@@ -946,7 +952,7 @@ function animatePokemonSprite(cloneWrapper) {
 function animateModals(cloneWrapper) {
     const clonedModals = cloneWrapper.querySelector('.cloned-enemy-data-modals');
     if (clonedModals) {
-        clonedModals.style.transition = 'all 2000ms linear';
+        clonedModals.style.transition = 'all 1500ms linear';
         clonedModals.style.transformOrigin = 'center center';
         clonedModals.style.left = '50%';
         clonedModals.style.opacity = '0';
@@ -956,7 +962,7 @@ function animateModals(cloneWrapper) {
             if (clonedModals && clonedModals.parentNode) {
                 clonedModals.parentNode.removeChild(clonedModals);
             }
-        }, 2000);
+        }, 1500);
     }
 }
 

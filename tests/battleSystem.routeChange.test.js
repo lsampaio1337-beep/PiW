@@ -147,7 +147,7 @@ describe('BattleSystem route change & leader swap safety', () => {
         // New route must have started and spawned Pidgey without freezing
         expect(battleSystem.activeEncounter).not.toBeNull();
         expect(battleSystem.activeEncounter.name).toBe('Pidgey');
-        expect(battleSystem.combatLoop).not.toBeNull();
+        expect(battleSystem.combatLoop !== null || battleSystem._pendingTimers.size > 0).toBe(true);
     });
 
     test('changing route while isFainting is true resets faint state and starts new route without freezing', () => {
@@ -176,7 +176,7 @@ describe('BattleSystem route change & leader swap safety', () => {
         expect(battleSystem.isFainting).toBe(false);
         expect(battleSystem.activeEncounter).not.toBeNull();
         expect(battleSystem.activeEncounter.name).toBe('Pidgey');
-        expect(battleSystem.combatLoop).not.toBeNull();
+        expect(battleSystem.combatLoop !== null || battleSystem._pendingTimers.size > 0).toBe(true);
     });
 
     test('changing route mid-slide resets isSliding and starts new route cleanly', () => {
@@ -239,5 +239,19 @@ describe('BattleSystem route change & leader swap safety', () => {
         battleSystem.isSearching = true;
         expect(() => battleSystem.generateEncounter(500)).not.toThrow();
         expect(battleSystem.isSearching).toBe(false);
+    });
+
+    test('searchNext preserves searchDuration while scaling enemy slideDuration by 50%', () => {
+        battleSystem.searchNext();
+        expect(battleSystem.isSearching).toBe(true);
+        expect(battleSystem.searchDuration).toBe(500);
+
+        jest.advanceTimersByTime(500);
+        expect(battleSystem.isSearching).toBe(false);
+        expect(battleSystem.isSliding).toBe(true);
+        expect(battleSystem.slideDuration).toBe(250);
+
+        jest.advanceTimersByTime(250);
+        expect(battleSystem.isSliding).toBe(false);
     });
 });

@@ -79,7 +79,7 @@ function setupBattleDOM() {
                             </div>
                         </div>
                     </div>
-                    <div id="player-side" class="battle-actor battle-actor-player" style="position: absolute; bottom: 20%; left: 26%; transform: translateX(-100%);">
+                    <div id="player-side" class="battle-actor battle-actor-player" style="position: absolute; bottom: 20%; left: 43%; transform: translateX(-100%);">
                         <div id="player-sprite-wrapper" class="battle-sprite-stage">
                             <div class="battle-sprite-motion">
                                 <div id="player-water-effect" class="battle-water-effect"></div>
@@ -212,7 +212,7 @@ describe('Battle Main View UI', () => {
             const enemySide = document.getElementById('enemy-side');
             expect(playerSprite.classList.contains('sliding-idle-anim-flipped')).toBe(true);
             expect(enemySprite.classList.contains('sliding-idle-anim')).toBe(true);
-            expect(enemySide.style.left).toBe('35%');
+            expect(enemySide.style.left).toBe('53%');
         });
 
         test('shows enemy healthbar, lvl, sumiv, and q immediately when sliding in even right after defeat', () => {
@@ -417,11 +417,11 @@ describe('Battle Main View UI', () => {
             expect(pulledDmg.style.left).toBe('50%');
             expect(pulledDmg.style.opacity).toBe('0');
 
-            jest.advanceTimersByTime(2900);
+            jest.advanceTimersByTime(1400);
             expect(callback).toHaveBeenCalledTimes(1);
             expect(ball.getAttribute('src')).toBe('Assets/Items/Balls/PokeballY.png');
 
-            jest.advanceTimersByTime(2000);
+            jest.advanceTimersByTime(1000);
             expect(defeatContainer.parentElement).toBeNull();
         });
     });

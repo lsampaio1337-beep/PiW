@@ -1437,8 +1437,9 @@ window.showProfLabModal = function() {
 // Main View has 2 modes:
 // 1. Hub Mode: The taller one (where you visit places such as casino, market, professor lab, safari, gyms).
 const MAIN_VIEW_HUB_MODE_RATIO = 1.8;
-// 2. Battle Mode: The shorter one (where battle occurs).
-const MAIN_VIEW_BATTLE_MODE_RATIO = 5.75;
+// 2. Battle Mode: 50% narrower width while preserving the same height as before.
+const MAIN_VIEW_BATTLE_MODE_WIDTH_SCALE = 0.5;
+const MAIN_VIEW_BATTLE_MODE_RATIO = 5.75 * MAIN_VIEW_BATTLE_MODE_WIDTH_SCALE;
 
 export function switchView(viewName) {
     state.currentView = viewName;
@@ -1454,10 +1455,15 @@ export function switchView(viewName) {
         if (moneyDisplay) moneyDisplay.style.display = 'none';
     }
 
+    const mainViewWin = document.getElementById('main-view-window');
+    if (mainViewWin && mainViewWin.classList) {
+        mainViewWin.classList.toggle('is-battle-mode', viewName === 'BATTLE_ARENA');
+    }
+
     if (viewName === 'BATTLE_ARENA') {
-        if (window.windowManager) window.windowManager.setWindowProportions('main-view-window', MAIN_VIEW_BATTLE_MODE_RATIO);
+        if (window.windowManager) window.windowManager.setWindowProportions('main-view-window', MAIN_VIEW_BATTLE_MODE_RATIO, MAIN_VIEW_BATTLE_MODE_WIDTH_SCALE);
     } else {
-        if (window.windowManager) window.windowManager.setWindowProportions('main-view-window', MAIN_VIEW_HUB_MODE_RATIO);
+        if (window.windowManager) window.windowManager.setWindowProportions('main-view-window', MAIN_VIEW_HUB_MODE_RATIO, 1);
     }
 
     if (viewName.includes('PROFESSOR_LAB')) {
