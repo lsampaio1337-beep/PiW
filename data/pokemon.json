@@ -57936,7 +57936,7 @@
   },
   {
     "id": 3.2,
-    "name": "Venusaur (Mega Venusaur)",
+    "name": "Mega Venusaur",
     "types": [
       "Grass",
       "Poison"
@@ -58013,7 +58013,7 @@
   },
   {
     "id": 6.2,
-    "name": "Charizard (Mega Charizard X)",
+    "name": "Mega Charizard X",
     "types": [
       "Fire",
       "Dragon"
@@ -58078,7 +58078,7 @@
   },
   {
     "id": 6.3,
-    "name": "Charizard (Mega Charizard Y)",
+    "name": "Mega Charizard Y",
     "types": [
       "Fire",
       "Flying"
@@ -58143,7 +58143,7 @@
   },
   {
     "id": 9.2,
-    "name": "Blastoise (Mega Blastoise)",
+    "name": "Mega Blastoise",
     "types": [
       "Water"
     ],
@@ -58199,7 +58199,7 @@
   },
   {
     "id": 15.1,
-    "name": "Beedrill (Mega Beedrill)",
+    "name": "Mega Beedrill",
     "types": [
       "Bug",
       "Poison"
@@ -58260,7 +58260,7 @@
   },
   {
     "id": 18.1,
-    "name": "Pidgeot (Mega Pidgeot)",
+    "name": "Mega Pidgeot",
     "types": [
       "Normal",
       "Flying"
@@ -58441,7 +58441,7 @@
   },
   {
     "id": 26.2,
-    "name": "Raichu (Mega Raichu X)",
+    "name": "Mega Raichu X",
     "types": [
       "Electric"
     ],
@@ -58509,7 +58509,7 @@
   },
   {
     "id": 26.3,
-    "name": "Raichu (Mega Raichu Y)",
+    "name": "Mega Raichu Y",
     "types": [
       "Electric"
     ],
@@ -58609,7 +58609,7 @@
   },
   {
     "id": 36.1,
-    "name": "Clefable (Mega Clefable)",
+    "name": "Mega Clefable",
     "types": [
       "Fairy",
       "Flying"
@@ -58830,7 +58830,7 @@
   },
   {
     "id": 65.1,
-    "name": "Alakazam (Mega Alakazam)",
+    "name": "Mega Alakazam",
     "types": [
       "Psychic"
     ],
@@ -58886,7 +58886,7 @@
   },
   {
     "id": 71.1,
-    "name": "Victreebel (Mega Victreebel)",
+    "name": "Mega Victreebel",
     "types": [
       "Grass",
       "Poison"
@@ -59061,7 +59061,7 @@
   },
   {
     "id": 80.2,
-    "name": "Slowbro (Mega Slowbro)",
+    "name": "Mega Slowbro",
     "types": [
       "Water",
       "Psychic"
@@ -59140,7 +59140,7 @@
   },
   {
     "id": 94.2,
-    "name": "Gengar (Mega Gengar)",
+    "name": "Mega Gengar",
     "types": [
       "Ghost",
       "Poison"
@@ -59293,7 +59293,7 @@
   },
   {
     "id": 115.1,
-    "name": "Kangaskhan (Mega Kangaskhan)",
+    "name": "Mega Kangaskhan",
     "types": [
       "Normal"
     ],
@@ -59353,7 +59353,7 @@
   },
   {
     "id": 121.1,
-    "name": "Starmie (Mega Starmie)",
+    "name": "Mega Starmie",
     "types": [
       "Water",
       "Psychic"
@@ -59450,7 +59450,7 @@
   },
   {
     "id": 127.1,
-    "name": "Pinsir (Mega Pinsir)",
+    "name": "Mega Pinsir",
     "types": [
       "Bug",
       "Flying"
@@ -59558,7 +59558,7 @@
   },
   {
     "id": 130.1,
-    "name": "Gyarados (Mega Gyarados)",
+    "name": "Mega Gyarados",
     "types": [
       "Water",
       "Dark"
@@ -59683,7 +59683,7 @@
   },
   {
     "id": 142.1,
-    "name": "Aerodactyl (Mega Aerodactyl)",
+    "name": "Mega Aerodactyl",
     "types": [
       "Rock",
       "Flying"
@@ -59800,7 +59800,7 @@
   },
   {
     "id": 149.1,
-    "name": "Dragonite (Mega Dragonite)",
+    "name": "Mega Dragonite",
     "types": [
       "Dragon",
       "Flying"
@@ -59869,7 +59869,7 @@
   },
   {
     "id": 150.1,
-    "name": "Mewtwo (Mega Mewtwo X)",
+    "name": "Mega Mewtwo X",
     "types": [
       "Psychic",
       "Fighting"
@@ -59934,7 +59934,7 @@
   },
   {
     "id": 150.2,
-    "name": "Mewtwo (Mega Mewtwo Y)",
+    "name": "Mega Mewtwo Y",
     "types": [
       "Psychic"
     ],
@@ -59998,7 +59998,7 @@
   },
   {
     "id": 154.1,
-    "name": "Meganium (Mega Meganium)",
+    "name": "Mega Meganium",
     "types": [
       "Grass",
       "Fairy"
@@ -60083,7 +60083,7 @@
   },
   {
     "id": 160.1,
-    "name": "Feraligatr (Mega Feraligatr)",
+    "name": "Mega Feraligatr",
     "types": [
       "Water",
       "Dragon"
@@ -60148,7 +60148,7 @@
   },
   {
     "id": 181.1,
-    "name": "Ampharos (Mega Ampharos)",
+    "name": "Mega Ampharos",
     "types": [
       "Electric",
       "Dragon"
@@ -60249,7 +60249,7 @@
   },
   {
     "id": 208.1,
-    "name": "Steelix (Mega Steelix)",
+    "name": "Mega Steelix",
     "types": [
       "Steel",
       "Ground"
@@ -60346,7 +60346,7 @@
   },
   {
     "id": 212.1,
-    "name": "Scizor (Mega Scizor)",
+    "name": "Mega Scizor",
     "types": [
       "Bug",
       "Steel"
@@ -60423,7 +60423,7 @@
   },
   {
     "id": 214.1,
-    "name": "Heracross (Mega Heracross)",
+    "name": "Mega Heracross",
     "types": [
       "Bug",
       "Fighting"
@@ -60527,7 +60527,7 @@
   },
   {
     "id": 227.1,
-    "name": "Skarmory (Mega Skarmory)",
+    "name": "Mega Skarmory",
     "types": [
       "Steel",
       "Flying"
@@ -60596,7 +60596,7 @@
   },
   {
     "id": 229.1,
-    "name": "Houndoom (Mega Houndoom)",
+    "name": "Mega Houndoom",
     "types": [
       "Dark",
       "Fire"
@@ -60665,7 +60665,7 @@
   },
   {
     "id": 248.1,
-    "name": "Tyranitar (Mega Tyranitar)",
+    "name": "Mega Tyranitar",
     "types": [
       "Rock",
       "Dark"
@@ -60738,7 +60738,7 @@
   },
   {
     "id": 254.1,
-    "name": "Sceptile (Mega Sceptile)",
+    "name": "Mega Sceptile",
     "types": [
       "Grass",
       "Dragon"
@@ -60827,7 +60827,7 @@
   },
   {
     "id": 257.1,
-    "name": "Blaziken (Mega Blaziken)",
+    "name": "Mega Blaziken",
     "types": [
       "Fire",
       "Fighting"
@@ -60908,7 +60908,7 @@
   },
   {
     "id": 260.1,
-    "name": "Swampert (Mega Swampert)",
+    "name": "Mega Swampert",
     "types": [
       "Water",
       "Ground"
@@ -61041,7 +61041,7 @@
   },
   {
     "id": 282.1,
-    "name": "Gardevoir (Mega Gardevoir)",
+    "name": "Mega Gardevoir",
     "types": [
       "Psychic",
       "Fairy"
@@ -61126,7 +61126,7 @@
   },
   {
     "id": 302.1,
-    "name": "Sableye (Mega Sableye)",
+    "name": "Mega Sableye",
     "types": [
       "Dark",
       "Ghost"
@@ -61207,7 +61207,7 @@
   },
   {
     "id": 303.1,
-    "name": "Mawile (Mega Mawile)",
+    "name": "Mega Mawile",
     "types": [
       "Steel",
       "Fairy"
@@ -61272,7 +61272,7 @@
   },
   {
     "id": 306.1,
-    "name": "Aggron (Mega Aggron)",
+    "name": "Mega Aggron",
     "types": [
       "Steel"
     ],
@@ -61356,7 +61356,7 @@
   },
   {
     "id": 308.1,
-    "name": "Medicham (Mega Medicham)",
+    "name": "Mega Medicham",
     "types": [
       "Fighting",
       "Psychic"
@@ -61425,7 +61425,7 @@
   },
   {
     "id": 310.1,
-    "name": "Manectric (Mega Manectric)",
+    "name": "Mega Manectric",
     "types": [
       "Electric"
     ],
@@ -61505,7 +61505,7 @@
   },
   {
     "id": 319.1,
-    "name": "Sharpedo (Mega Sharpedo)",
+    "name": "Mega Sharpedo",
     "types": [
       "Water",
       "Dark"
@@ -61574,7 +61574,7 @@
   },
   {
     "id": 323.1,
-    "name": "Camerupt (Mega Camerupt)",
+    "name": "Mega Camerupt",
     "types": [
       "Fire",
       "Ground"
@@ -61647,7 +61647,7 @@
   },
   {
     "id": 334.1,
-    "name": "Altaria (Mega Altaria)",
+    "name": "Mega Altaria",
     "types": [
       "Dragon",
       "Fairy"
@@ -61765,7 +61765,7 @@
   },
   {
     "id": 354.1,
-    "name": "Banette (Mega Banette)",
+    "name": "Mega Banette",
     "types": [
       "Ghost"
     ],
@@ -61833,7 +61833,7 @@
   },
   {
     "id": 358.1,
-    "name": "Chimecho (Mega Chimecho)",
+    "name": "Mega Chimecho",
     "types": [
       "Psychic",
       "Steel"
@@ -61902,7 +61902,7 @@
   },
   {
     "id": 359.1,
-    "name": "Absol (Mega Absol)",
+    "name": "Mega Absol",
     "types": [
       "Dark"
     ],
@@ -61982,7 +61982,7 @@
   },
   {
     "id": 359.2,
-    "name": "Absol (Mega Absol Z)",
+    "name": "Mega Absol Z",
     "types": [
       "Dark",
       "Ghost"
@@ -62063,7 +62063,7 @@
   },
   {
     "id": 362.1,
-    "name": "Glalie (Mega Glalie)",
+    "name": "Mega Glalie",
     "types": [
       "Ice"
     ],
@@ -62131,7 +62131,7 @@
   },
   {
     "id": 373.1,
-    "name": "Salamence (Mega Salamence)",
+    "name": "Mega Salamence",
     "types": [
       "Dragon",
       "Flying"
@@ -62204,7 +62204,7 @@
   },
   {
     "id": 376.1,
-    "name": "Metagross (Mega Metagross)",
+    "name": "Mega Metagross",
     "types": [
       "Steel",
       "Psychic"
@@ -62273,7 +62273,7 @@
   },
   {
     "id": 380.1,
-    "name": "Latias (Mega Latias)",
+    "name": "Mega Latias",
     "types": [
       "Dragon",
       "Psychic"
@@ -62350,7 +62350,7 @@
   },
   {
     "id": 381.1,
-    "name": "Latios (Mega Latios)",
+    "name": "Mega Latios",
     "types": [
       "Dragon",
       "Psychic"
@@ -62588,7 +62588,7 @@
   },
   {
     "id": 384.1,
-    "name": "Rayquaza (Mega Rayquaza)",
+    "name": "Mega Rayquaza",
     "types": [
       "Dragon",
       "Flying"
@@ -62717,7 +62717,7 @@
   },
   {
     "id": 398.1,
-    "name": "Staraptor (Mega Staraptor)",
+    "name": "Mega Staraptor",
     "types": [
       "Fighting",
       "Flying"
@@ -62883,7 +62883,7 @@
   },
   {
     "id": 428.1,
-    "name": "Lopunny (Mega Lopunny)",
+    "name": "Mega Lopunny",
     "types": [
       "Normal",
       "Fighting"
@@ -62960,7 +62960,7 @@
   },
   {
     "id": 445.1,
-    "name": "Garchomp (Mega Garchomp)",
+    "name": "Mega Garchomp",
     "types": [
       "Dragon",
       "Ground"
@@ -63017,7 +63017,7 @@
   },
   {
     "id": 445.2,
-    "name": "Garchomp (Mega Garchomp Z)",
+    "name": "Mega Garchomp Z",
     "types": [
       "Dragon"
     ],
@@ -63073,7 +63073,7 @@
   },
   {
     "id": 448.1,
-    "name": "Lucario (Mega Lucario)",
+    "name": "Mega Lucario",
     "types": [
       "Fighting",
       "Steel"
@@ -63150,7 +63150,7 @@
   },
   {
     "id": 448.2,
-    "name": "Lucario (Mega Lucario Z)",
+    "name": "Mega Lucario Z",
     "types": [
       "Fighting",
       "Steel"
@@ -63227,7 +63227,7 @@
   },
   {
     "id": 460.1,
-    "name": "Abomasnow (Mega Abomasnow)",
+    "name": "Mega Abomasnow",
     "types": [
       "Grass",
       "Ice"
@@ -63288,7 +63288,7 @@
   },
   {
     "id": 475.1,
-    "name": "Gallade (Mega Gallade)",
+    "name": "Mega Gallade",
     "types": [
       "Psychic",
       "Fighting"
@@ -63357,7 +63357,7 @@
   },
   {
     "id": 478.1,
-    "name": "Froslass (Mega Froslass)",
+    "name": "Mega Froslass",
     "types": [
       "Ice",
       "Ghost"
@@ -63546,7 +63546,7 @@
   },
   {
     "id": 485.1,
-    "name": "Heatran (Mega Heatran)",
+    "name": "Mega Heatran",
     "types": [
       "Fire",
       "Steel"
@@ -63663,7 +63663,7 @@
   },
   {
     "id": 491.1,
-    "name": "Darkrai (Mega Darkrai)",
+    "name": "Mega Darkrai",
     "types": [
       "Dark"
     ],
@@ -63774,7 +63774,7 @@
   },
   {
     "id": 500.1,
-    "name": "Emboar (Mega Emboar)",
+    "name": "Mega Emboar",
     "types": [
       "Fire",
       "Fighting"
@@ -63863,7 +63863,7 @@
   },
   {
     "id": 530.1,
-    "name": "Excadrill (Mega Excadrill)",
+    "name": "Mega Excadrill",
     "types": [
       "Ground",
       "Steel"
@@ -63940,7 +63940,7 @@
   },
   {
     "id": 531.1,
-    "name": "Audino (Mega Audino)",
+    "name": "Mega Audino",
     "types": [
       "Normal",
       "Fairy"
@@ -64001,7 +64001,7 @@
   },
   {
     "id": 545.1,
-    "name": "Scolipede (Mega Scolipede)",
+    "name": "Mega Scolipede",
     "types": [
       "Bug",
       "Poison"
@@ -64220,7 +64220,7 @@
   },
   {
     "id": 560.1,
-    "name": "Scrafty (Mega Scrafty)",
+    "name": "Mega Scrafty",
     "types": [
       "Dark",
       "Fighting"
@@ -64337,7 +64337,7 @@
   },
   {
     "id": 604.1,
-    "name": "Eelektross (Mega Eelektross)",
+    "name": "Mega Eelektross",
     "types": [
       "Electric"
     ],
@@ -64409,7 +64409,7 @@
   },
   {
     "id": 609.1,
-    "name": "Chandelure (Mega Chandelure)",
+    "name": "Mega Chandelure",
     "types": [
       "Ghost",
       "Fire"
@@ -64494,7 +64494,7 @@
   },
   {
     "id": 623.1,
-    "name": "Golurk (Mega Golurk)",
+    "name": "Mega Golurk",
     "types": [
       "Ground",
       "Ghost"
@@ -65001,7 +65001,7 @@
   },
   {
     "id": 652.1,
-    "name": "Chesnaught (Mega Chesnaught)",
+    "name": "Mega Chesnaught",
     "types": [
       "Grass",
       "Fighting"
@@ -65074,7 +65074,7 @@
   },
   {
     "id": 655.1,
-    "name": "Delphox (Mega Delphox)",
+    "name": "Mega Delphox",
     "types": [
       "Fire",
       "Psychic"
@@ -65216,7 +65216,7 @@
   },
   {
     "id": 658.2,
-    "name": "Greninja (Mega Greninja)",
+    "name": "Mega Greninja",
     "types": [
       "Water",
       "Dark"
@@ -65289,7 +65289,7 @@
   },
   {
     "id": 668.1,
-    "name": "Pyroar (Mega Pyroar)",
+    "name": "Mega Pyroar",
     "types": [
       "Fire",
       "Normal"
@@ -65373,7 +65373,7 @@
   },
   {
     "id": 670.7,
-    "name": "Floette (Mega Floette)",
+    "name": "Mega Floette",
     "types": [
       "Fairy"
     ],
@@ -65388,7 +65388,7 @@
   },
   {
     "id": 678.2,
-    "name": "Meowstic (Mega Meowstic)",
+    "name": "Mega Meowstic",
     "types": [
       "Psychic"
     ],
@@ -65533,7 +65533,7 @@
   },
   {
     "id": 687.1,
-    "name": "Malamar (Mega Malamar)",
+    "name": "Mega Malamar",
     "types": [
       "Dark",
       "Psychic"
@@ -65598,7 +65598,7 @@
   },
   {
     "id": 689.1,
-    "name": "Barbaracle (Mega Barbaracle)",
+    "name": "Mega Barbaracle",
     "types": [
       "Rock",
       "Fighting"
@@ -65671,7 +65671,7 @@
   },
   {
     "id": 691.1,
-    "name": "Dragalge (Mega Dragalge)",
+    "name": "Mega Dragalge",
     "types": [
       "Poison",
       "Dragon"
@@ -65744,7 +65744,7 @@
   },
   {
     "id": 701.1,
-    "name": "Hawlucha (Mega Hawlucha)",
+    "name": "Mega Hawlucha",
     "types": [
       "Fighting",
       "Flying"
@@ -66696,7 +66696,7 @@
   },
   {
     "id": 718.4,
-    "name": "Zygarde (Mega Zygarde)",
+    "name": "Mega Zygarde",
     "types": [
       "Dragon",
       "Ground"
@@ -66785,7 +66785,7 @@
   },
   {
     "id": 719.1,
-    "name": "Diancie (Mega Diancie)",
+    "name": "Mega Diancie",
     "types": [
       "Rock",
       "Fairy"
@@ -66902,7 +66902,7 @@
   },
   {
     "id": 740.1,
-    "name": "Crabominable (Mega Crabominable)",
+    "name": "Mega Crabominable",
     "types": [
       "Fighting",
       "Ice"
@@ -67125,7 +67125,7 @@
   },
   {
     "id": 768.1,
-    "name": "Golisopod (Mega Golisopod)",
+    "name": "Mega Golisopod",
     "types": [
       "Bug",
       "Steel"
@@ -67234,7 +67234,7 @@
   },
   {
     "id": 780.1,
-    "name": "Drampa (Mega Drampa)",
+    "name": "Mega Drampa",
     "types": [
       "Normal",
       "Dragon"
@@ -67359,7 +67359,7 @@
   },
   {
     "id": 801.2,
-    "name": "Magearna (Mega Magearna)",
+    "name": "Mega Magearna",
     "types": [
       "Steel",
       "Fairy"
@@ -67440,7 +67440,7 @@
   },
   {
     "id": 807.1,
-    "name": "Zeraora (Mega Zeraora)",
+    "name": "Mega Zeraora",
     "types": [
       "Electric"
     ],
@@ -67552,7 +67552,7 @@
   },
   {
     "id": 870.1,
-    "name": "Falinks (Mega Falinks)",
+    "name": "Mega Falinks",
     "types": [
       "Fighting"
     ],
@@ -68332,7 +68332,7 @@
   },
   {
     "id": 952.1,
-    "name": "Scovillain (Mega Scovillain)",
+    "name": "Mega Scovillain",
     "types": [
       "Grass",
       "Fire"
@@ -68443,7 +68443,7 @@
   },
   {
     "id": 970.1,
-    "name": "Glimmora (Mega Glimmora)",
+    "name": "Mega Glimmora",
     "types": [
       "Rock",
       "Poison"
@@ -68723,7 +68723,7 @@
   },
   {
     "id": 978.4,
-    "name": "Tatsugiri (Mega Tatsugiri)",
+    "name": "Mega Tatsugiri",
     "types": [
       "Dragon",
       "Water"
@@ -68822,7 +68822,7 @@
   },
   {
     "id": 998.1,
-    "name": "Baxcalibur (Mega Baxcalibur)",
+    "name": "Mega Baxcalibur",
     "types": [
       "Dragon",
       "Ice"

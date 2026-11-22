@@ -738,4 +738,78 @@ describe('Region 5 Variations Pokedex & Modal', () => {
         expect(kyuremHtml).toContain('Caught: 1/3');
     });
 });
+
+describe('Mega Evolution Pokedex Variations & Evolution Line', () => {
+    beforeEach(() => {
+        jest.clearAllMocks();
+        state.currentRegionName = 'Kalos';
+        state.stats = { seenSpecies: {}, caughtSpecies: {}, seenShiniesSpecies: {}, caughtShiniesSpecies: {} };
+        state.party = [];
+        state.storage = [];
+        state.safe = [];
+        state.breeding = [];
+        state.training = [];
+        state.config.evolutionParents = { 6: 5, 5: 4 };
+        state.config.pokemonData = [
+            { id: 4, canonId: '0004', kalos_id: 80, kanto_id: 4, name: 'Charmander', types: ['Fire'], hp: 39, atk: 52, def: 43, spa: 60, spd: 50, spe: 65, evolutions: [{ level: 16, to: 5 }] },
+            { id: 5, canonId: '0005', kalos_id: 81, kanto_id: 5, name: 'Charmeleon', types: ['Fire'], hp: 58, atk: 64, def: 58, spa: 80, spd: 65, spe: 80, evolutions: [{ level: 36, to: 6 }] },
+            { id: 6, canonId: '0006', kalos_id: 82, kanto_id: 6, name: 'Charizard', types: ['Fire', 'Flying'], hp: 78, atk: 84, def: 78, spa: 109, spd: 85, spe: 100, evolutions: [], megaEvolutions: ['0006.2', '0006.3'] },
+            { id: 6.1, canonId: '0006.1', name: 'Charizard (Gigantamax)', types: ['Fire', 'Flying'], hp: 78, atk: 84, def: 78, spa: 109, spd: 85, spe: 100 },
+            { id: 6.2, canonId: '0006.2', name: 'Mega Charizard X', types: ['Fire', 'Dragon'], hp: 78, atk: 130, def: 111, spa: 130, spd: 85, spe: 100 },
+            { id: 6.3, canonId: '0006.3', name: 'Mega Charizard Y', types: ['Fire', 'Flying'], hp: 78, atk: 104, def: 78, spa: 159, spd: 115, spe: 100 },
+        ];
+        state.config.pokemonMap = new Map();
+        for (const p of state.config.pokemonData) {
+            state.config.pokemonMap.set(p.canonId, p);
+            state.config.pokemonMap.set(p.id, p);
+        }
+    });
+
+    it('shows variation symbol and Mega variations in Kalos/Alola, excluding Gigantamax and non-Mega regions', () => {
+        const { showVariationsModal } = require('../../src/ui/pokedex.js');
+        state.stats.caughtSpecies['Charizard'] = true;
+        state.stats.caughtSpecies['Mega Charizard X'] = true;
+
+        showPokedex();
+        const kalosHtml = showModal.mock.calls[0][1];
+        expect(kalosHtml).toContain('title="Charizard Variations (1/2)"');
+        expect(kalosHtml).toContain('window.showVariationsModal(6, event)');
+
+        jest.clearAllMocks();
+        showVariationsModal(6, { stopPropagation: jest.fn() });
+        const varModalHtml = showModal.mock.calls[0][1];
+        expect(varModalHtml).toContain('Mega Charizard X');
+        expect(varModalHtml).toContain('Caught: 1/2');
+        expect(varModalHtml).not.toContain('Gigantamax');
+
+        // Kanto should NOT show Mega variations
+        jest.clearAllMocks();
+        state.currentRegionName = 'Kanto';
+        showPokedex();
+        const kantoHtml = showModal.mock.calls[0][1];
+        expect(kantoHtml).not.toContain('pokedex-variation-mark');
+    });
+
+    it('renders Mega<br>Evolution in Evolution Line only in Kalos/Alola and resolves full line from Mega form', () => {
+        state.stats.caughtSpecies['Charmander'] = true;
+        state.stats.caughtSpecies['Charmeleon'] = true;
+        state.stats.caughtSpecies['Charizard'] = true;
+        state.stats.caughtSpecies['Mega Charizard X'] = true;
+
+        const megaXData = state.config.pokemonMap.get('0006.2');
+        const kalosEvoHtml = buildEvolutionLineHtml(megaXData, state);
+        expect(kalosEvoHtml).toContain('Charmander');
+        expect(kalosEvoHtml).toContain('Lv.16 ➔');
+        expect(kalosEvoHtml).toContain('Lv.36 ➔');
+        expect(kalosEvoHtml).toContain('Mega<br>Evolution');
+        expect(kalosEvoHtml).toContain('Mega Charizard X');
+        expect(kalosEvoHtml).toContain('sprite_0006.3_false.png');
+        expect(kalosEvoHtml).not.toContain('Mega Charizard Y');
+
+        state.currentRegionName = 'Kanto';
+        const charizardData = state.config.pokemonMap.get('0006');
+        const kantoEvoHtml = buildEvolutionLineHtml(charizardData, state);
+        expect(kantoEvoHtml).not.toContain('Mega<br>Evolution');
+    });
+});
 });

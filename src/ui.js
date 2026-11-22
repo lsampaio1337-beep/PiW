@@ -92,7 +92,8 @@ import './ui/multiplayer.js';
 import { showGiftModal } from './ui/gift.js';
 import { showMap, navigateToLocation, showMapTooltip, hideMapTooltip } from './ui/map.js';
 import { showPokedex, showDexEntry, showSmartCaptureMode, setSmartCaptureShinyMode, showSmartCaptureBallSelection, selectSmartCaptureBall, selectGlobalSmartCaptureBall } from './ui/pokedex.js';
-import { showPokemonStats, showPokemonStatsByUuid, evolvePokemon } from './ui/pokemonStats.js';
+import { showPokemonStats, showPokemonStatsByUuid, evolvePokemon, showMegaEvolveModal, megaEvolvePokemon, refreshPokemonStatsIfMegaReverted } from './ui/pokemonStats.js';
+import { checkMegaEvolutionTimers, formatMegaCountdown, getMegaRemainingMs, isPokemonMegaEvolved } from './utils/megaEvolution.js';
 import { showBonusCandyModal } from './ui/bonusCandy.js';
 window.showBonusCandyModal = showBonusCandyModal;
 window.showGiftModal = showGiftModal;
@@ -143,6 +144,8 @@ window.selectGlobalSmartCaptureBall = selectGlobalSmartCaptureBall;
 window.showPokemonStats = showPokemonStats;
 window.showPokemonStatsByUuid = showPokemonStatsByUuid;
 window.evolvePokemon = evolvePokemon;
+window.showMegaEvolveModal = showMegaEvolveModal;
+window.megaEvolvePokemon = megaEvolvePokemon;
 window.showSettings = showSettings;
 window.exportLog = exportLog;
 window.exportData = exportData;
@@ -1908,10 +1911,62 @@ function gameClockTick() {
 }
 
 
+let megaTimerInterval = null;
+
+function _findPokemonByUuidInState(uuid) {
+    if (!uuid) return null;
+    for (const loc of ['party', 'storage', 'safe', 'breeding', 'training']) {
+        const list = state[loc];
+        if (Array.isArray(list)) {
+            const match = list.find(p => p && p.uuid === uuid);
+            if (match) return match;
+        }
+    }
+    return null;
+}
+
+function _tickMegaEvolutions() {
+    const reverted = checkMegaEvolutionTimers(state);
+    if (reverted.length > 0) {
+        updateUI();
+        refreshPokemonStatsIfMegaReverted(reverted);
+        const bpWin = document.getElementById('window-backpack');
+        const bpArea = document.getElementById('backpack-content-area');
+        const bpTitle = document.getElementById('backpack-pocket-title');
+        if (
+            bpWin && bpWin.style.display !== 'none' &&
+            bpArea && bpArea.style.display !== 'none' &&
+            (bpTitle?.textContent?.trim() === 'Pokémon' || document.getElementById('storage-scroll-container')) &&
+            typeof window.renderBackpackTab === 'function'
+        ) {
+            window.renderBackpackTab('pokemon');
+        }
+    }
+
+    if (typeof document === 'undefined' || typeof document.querySelectorAll !== 'function') return;
+    const now = Date.now();
+    document.querySelectorAll('[data-mega-uuid]').forEach(el => {
+        const uuid = el.dataset.megaUuid;
+        const p = _findPokemonByUuidInState(uuid);
+        if (!p || !isPokemonMegaEvolved(p, now)) return;
+        const formatted = formatMegaCountdown(getMegaRemainingMs(p, now));
+        if (el.id === 'mega-modal-timer') {
+            el.textContent = `Mega Active: ${formatted} (+5:00 per consume)`;
+        } else if (el.classList.contains('js-mega-btn-timer')) {
+            el.textContent = `Active: ${formatted}`;
+        } else if (el.classList.contains('js-mega-stats-timer')) {
+            el.textContent = `Mega: ${formatted}`;
+        } else if (el.classList.contains('js-mega-timer')) {
+            el.textContent = formatted;
+        }
+    });
+}
+
 function startGame() {
     if (globals.battleSystem) {
         globals.battleSystem.stop();
     }
+    checkMegaEvolutionTimers(state);
     let bs = new BattleSystem(state, updateUI);
     setBattleSystem(bs);
     updateUI();
@@ -1921,6 +1976,11 @@ function startGame() {
 
     // Start playtime tracker
     window.restartGameClock();
+
+    if (megaTimerInterval) {
+        clearInterval(megaTimerInterval);
+    }
+    megaTimerInterval = setInterval(_tickMegaEvolutions, 1000);
 
     setupAutosave();
     setupDragAndDropScrolling();

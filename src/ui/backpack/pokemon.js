@@ -680,6 +680,11 @@ export function handleDrop(event, targetCol) {
                     lastQBonus: 0,
                     trainingCyclesCompleted: 0
                 };
+                if (newPokemon.megaOriginalId !== undefined && newPokemon.megaOriginalId !== null) {
+                    newPokemon.id = newPokemon.megaOriginalId;
+                }
+                delete newPokemon.megaOriginalId;
+                delete newPokemon.megaExpiresAt;
 
                 // Check for pre-evolution based on current region, stepping back to base stage
                 const regionName = state.currentRegionName || 'Kanto';

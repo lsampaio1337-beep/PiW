@@ -2,6 +2,7 @@ import { state } from '../state.js';
 import { TYPE_COLORS } from '../constants.js';
 import * as mathEngine from "../mathEngine.js";
 import { escapeHTML } from '../utils/stringUtils.js';
+import { isPokemonMegaEvolved, getMegaRemainingMs, formatMegaCountdown } from '../utils/megaEvolution.js';
 
 let lastTeamCount = -1;
 
@@ -82,7 +83,8 @@ function buildXpBarHtml(p) {
 }
 
 function getSlotSignature(p, idx, isLeader, isFainted) {
-    return `${p.uuid || idx}|${p.id}|${p.transformedIntoId || ''}|${p.isTransformed ? 1 : 0}|${p.qualityName || ''}|${isLeader ? 1 : 0}|${isFainted ? 1 : 0}|${p.level}`;
+    const isMega = isPokemonMegaEvolved(p) ? 1 : 0;
+    return `${p.uuid || idx}|${p.id}|${p.transformedIntoId || ''}|${p.isTransformed ? 1 : 0}|${p.qualityName || ''}|${isLeader ? 1 : 0}|${isFainted ? 1 : 0}|${p.level}|${isMega}`;
 }
 
 function canUpdatePartyInPlace(partyDiv, party) {
@@ -129,6 +131,11 @@ function updatePartySlotInPlace(slotEl, p) {
         if (xpTextEl) xpTextEl.textContent = `${xpProgress}/${xpRequired}`;
         const xpPctEl = slotEl.querySelector('.js-xp-pct');
         if (xpPctEl) xpPctEl.textContent = `${Math.floor(xpPct)}%`;
+    }
+
+    const megaTimerEl = slotEl.querySelector('.js-mega-timer');
+    if (megaTimerEl && isPokemonMegaEvolved(p)) {
+        megaTimerEl.textContent = formatMegaCountdown(getMegaRemainingMs(p));
     }
 }
 
@@ -190,12 +197,15 @@ export function updateTeamWindow() {
             const hpCriticalClass = (!isFainted && hpPct < 25) ? 'is-critical' : '';
             const crownClass = isLeader ? 'is-active' : '';
             const leadTag = isLeader ? `<span class="team-lead-badge team-stage-badge is-top-left">LEAD</span>` : '';
+            const megaTag = isPokemonMegaEvolved(p)
+                ? `<span class="team-stage-badge is-bottom-right js-mega-timer" data-mega-uuid="${escapeHTML(p.uuid || '')}" style="background: rgba(147, 51, 234, 0.88); color: #f3e8ff; border: 1px solid rgba(216, 180, 254, 0.6);">${formatMegaCountdown(getMegaRemainingMs(p))}</span>`
+                : '';
             const hpLabel = isFainted ? 'FAINT' : 'HP';
 
             renderSanitizedHtml(`
                 <div class="team-card-accent"></div>
                 <div class="team-card-body">
-                    ${buildSpritePedestalHtml(p, glowClass, isFainted, true, leadTag)}
+                    ${buildSpritePedestalHtml(p, glowClass, isFainted, true, leadTag, megaTag)}
                     <div class="team-card-info">
                         <div class="team-card-top">
                             <div class="team-name-group">

@@ -115,6 +115,7 @@ export function hydratePokemonInfo(pokemonInfo, existingMoves = {}, pokedexIndex
         const stats = raw.stats ?? baseRaw?.stats ?? [0, 0, 0, 0, 0, 0, 0];
         const movesetObj = raw.moveset ?? baseRaw?.moveset ?? {};
         const evolutions = raw.evolutions ?? [];
+        const megaEvolutions = raw.megaEvolutions ?? [];
 
         const numId = isVariation ? Number(canonId) : parseInt(canonId, 10);
         const record = {
@@ -129,6 +130,7 @@ export function hydratePokemonInfo(pokemonInfo, existingMoves = {}, pokedexIndex
             spd: stats[4],
             spe: stats[5],
             evolutions,
+            megaEvolutions,
             learnset: pickDefaultLearnset(movesetObj, mergedMoves),
             _moveset: movesetObj,
             _sprite: raw.sprite ?? null,
