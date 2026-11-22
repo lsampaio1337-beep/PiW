@@ -1,24 +1,24 @@
-import { calculateDamage, calculateReqXP, calculateTotalXP, calculateStat, calculateCatchChance, getCurrentCount } from '../src/mathEngine.js';
+import { calculateDamage, calculateReqXP, calculateTotalXP, getLevelFromXP, calculateEVXP, calculateStat, calculateCatchChance, getCurrentCount } from '../src/mathEngine.js';
 
 describe('calculateReqXP', () => {
     test('should calculate required XP correctly for level 1', () => {
-        expect(calculateReqXP(1)).toBe(52);
+        expect(calculateReqXP(1)).toBe(54);
     });
 
     test('should calculate required XP correctly for level 2', () => {
-        expect(calculateReqXP(2)).toBe(90);
+        expect(calculateReqXP(2)).toBe(99);
     });
 
     test('should calculate required XP correctly for level 50', () => {
-        expect(calculateReqXP(50)).toBe(67885);
+        expect(calculateReqXP(50)).toBe(77557);
     });
 
     test('should calculate required XP correctly for level 99', () => {
-        expect(calculateReqXP(99)).toBe(398500);
+        expect(calculateReqXP(99)).toBe(366508);
     });
 
     test('should calculate required XP correctly for level 100', () => {
-        expect(calculateReqXP(100)).toBe(409038);
+        expect(calculateReqXP(100)).toBe(374758);
     });
 });
 
@@ -32,11 +32,11 @@ describe('calculateTotalXP', () => {
     });
 
     test('should calculate total XP correctly for level 50', () => {
-        expect(calculateTotalXP(50)).toBe(920397);
+        expect(calculateTotalXP(50)).toBe(1110317);
     });
 
     test('should calculate total XP correctly for level 100', () => {
-        expect(calculateTotalXP(100)).toBe(11187635);
+        expect(calculateTotalXP(100)).toBe(11294473);
     });
 });
 
@@ -417,5 +417,52 @@ describe('getCurrentCount', () => {
         };
 
         expect(getCurrentCount(mockState, 'potions')).toBe(0);
+    });
+});
+
+describe('Prestige XP Scaling (> Lv 100)', () => {
+    test('uses unified formula floor((4 + 6*L^2/(L+30)) * (5 + 8*L)) above level 100', () => {
+        const expected = (L) => Math.floor((4 + (6 * L * L) / (L + 30)) * (5 + 8 * L));
+        expect(calculateReqXP(101)).toBe(expected(101));
+        expect(calculateReqXP(200)).toBe(expected(200));
+        expect(calculateReqXP(500)).toBe(expected(500));
+        expect(calculateReqXP(1000)).toBe(expected(1000));
+    });
+
+    test('computes monotonic non-overflowing total XP up to level 1000', () => {
+        const xp200 = calculateTotalXP(200);
+        const xp500 = calculateTotalXP(500);
+        const xp1000 = calculateTotalXP(1000);
+        expect(xp200).toBeGreaterThan(calculateTotalXP(100));
+        expect(xp500).toBeGreaterThan(xp200);
+        expect(xp1000).toBeGreaterThan(xp500);
+        expect(Number.isSafeInteger(xp1000)).toBe(true);
+    });
+
+    test('getLevelFromXP respects custom region maxLevel caps', () => {
+        const xpFor200 = calculateTotalXP(200);
+        expect(getLevelFromXP(xpFor200, 100)).toBe(100);
+        expect(getLevelFromXP(xpFor200, 200)).toBe(200);
+        expect(getLevelFromXP(calculateTotalXP(250), 200)).toBe(200);
+    });
+});
+
+describe('calculateEVXP', () => {
+    test('ignores totalIV and applies no Q impact when Q < 1.4', () => {
+        const base = Math.floor((5 + 8 * 20) * (300 / 300) * 1.0);
+        expect(calculateEVXP(300, 20, 0.80, 0)).toBe(base);
+        expect(calculateEVXP(300, 20, 1.00, 600)).toBe(base);
+        expect(calculateEVXP(300, 20, 1.39, 300)).toBe(base);
+    });
+
+    test('grants Q bonus for 1.4 <= Q <= 1.8 and 5x super bonus for Q >= 2.0', () => {
+        const rare = Math.floor((5 + 8 * 20) * (300 / 300) * 1.40);
+        const epic = Math.floor((5 + 8 * 20) * (300 / 300) * 1.80);
+        const shiny = Math.floor((5 + 8 * 20) * (300 / 300) * 5.0);
+
+        expect(calculateEVXP(300, 20, 1.40, 0)).toBe(rare);
+        expect(calculateEVXP(300, 20, 1.80, 600)).toBe(epic);
+        expect(calculateEVXP(300, 20, 2.00, 100)).toBe(shiny);
+        expect(calculateEVXP(300, 20, 2.50, 600)).toBe(shiny);
     });
 });

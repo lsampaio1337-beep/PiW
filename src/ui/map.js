@@ -2,6 +2,7 @@ import { state, globals, swapRegion } from '../state.js';
 import { updateUI, switchView } from '../ui.js';
 import { setupMarket } from './market.js';
 import { getBadgeFileName as fallbackGetBadgeFileName } from '../utils/badges.js';
+import { scaleLevelForRegion } from '../constants.js';
 
 /** Resolve badge filename via window override when present, falling back to module helper. */
 function resolveBadgeFileName(region, number) {
@@ -1131,12 +1132,15 @@ export function showMapTooltip(e, locationName) {
             let route = window.getRoutesForRegion(window.currentMapRegion).find(r => r.name === locationName);
 
             if (route) {
-                let minLvl = 100;
+                let minLvl = Infinity;
                 let maxLvl = 1;
                 route.spawns.forEach(s => {
-                    if (s.minLevel < minLvl) minLvl = s.minLevel;
-                    if (s.maxLevel > maxLvl) maxLvl = s.maxLevel;
+                    const sMin = scaleLevelForRegion(s.minLevel, activeRegion);
+                    const sMax = scaleLevelForRegion(s.maxLevel, activeRegion);
+                    if (sMin < minLvl) minLvl = sMin;
+                    if (sMax > maxLvl) maxLvl = sMax;
                 });
+                if (minLvl === Infinity) minLvl = 1;
                 info += `<div style="font-size: 11px; color: var(--piw-text-muted); margin-bottom: 5px;">Levels ${minLvl}-${maxLvl} • ${route.spawns.length} Spawns</div>`;
 
                 route.spawns.forEach(s => {
@@ -1156,7 +1160,9 @@ export function showMapTooltip(e, locationName) {
                     const dexBadge = isShinyCaught
                         ? '<span title="Shiny Caught" style="color: #facc15;">✨</span>'
                         : (isCaught ? '<span title="Caught" style="color: #4ade80;">✓</span>' : '<span title="Uncaught" style="color: #64748b;">○</span>');
-                    info += `<div class="piw-map-tooltip-row"><span>${dexBadge} ${pName}</span><span style="color: var(--piw-text-muted);">Lv.${s.minLevel}-${s.maxLevel} (${Math.round(s.chance * 100)}%)</span></div>`;
+                    const sMin = scaleLevelForRegion(s.minLevel, activeRegion);
+                    const sMax = scaleLevelForRegion(s.maxLevel, activeRegion);
+                    info += `<div class="piw-map-tooltip-row"><span>${dexBadge} ${pName}</span><span style="color: var(--piw-text-muted);">Lv.${sMin}-${sMax} (${Math.round(s.chance * 100)}%)</span></div>`;
                 });
             } else {
                 info += `<div style="color: var(--piw-text-muted); font-size: 11.5px;">Hub Area</div>`;

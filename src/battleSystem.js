@@ -1,4 +1,12 @@
-import { VITAMINS, WHITE_CANDY_DEFEAT_REQUIREMENT } from "./constants.js";
+import {
+    VITAMINS,
+    WHITE_CANDY_DEFEAT_REQUIREMENT,
+    STARTING_ROUTES,
+    getRegionNumber,
+    getRegionLevelCap,
+    getRegionBonusXP,
+    scaleLevelForRegion,
+} from "./constants.js";
 // src/battleSystem.js
 import * as mathEngine from './mathEngine.js';
 import { escapeHTML } from './utils/stringUtils.js';
@@ -1102,7 +1110,7 @@ class BattleSystem {
         if (!pokemonDef) return; // Should have been handled in defeat
 
         const pokemonBase = this.getPokemonBase(pokemonDef.id);
-        const level = pokemonDef.level;
+        const level = scaleLevelForRegion(pokemonDef.level, this.state.currentRegionName);
 
         // Gym leaders and trainers have fixed quality (e.g. Regular or Uncommon)
         const isLeader = this.gymState.currentTrainerIndex === gym.trainers.length - 1;
@@ -1258,6 +1266,7 @@ class BattleSystem {
             }
 
             if (isRoamingEncounter) {
+                const regionNum = getRegionNumber(this.state.currentRegionName);
                 if (activeRoamingChallenge === 'Roaming Hoenn Skies' || (this.state.currentRegionName === 'Hoenn' && activeRoamingChallenge === 'Extra Challenge (Roaming)')) {
                     // Randomly select Latias (380) or Latios (381) for Hoenn
                     const beasts = [380, 381];
@@ -1265,20 +1274,19 @@ class BattleSystem {
                     actualPokemonBase = this.getPokemonBase(selectedBeastId);
                     pokemonBase = actualPokemonBase;
 
-                    // Flat level 110 for Hoenn roaming encounters
-                    level = 110;
+                    level = scaleLevelForRegion(110, this.state.currentRegionName);
                 } else if (activeRoamingChallenge === 'Extra Challenge F (Roaming)') {
                     const beasts = [144, 145, 146]; // Articuno, Zapdos, Moltres
                     const selectedBeastId = beasts[Math.floor(Math.random() * beasts.length)];
                     actualPokemonBase = this.getPokemonBase(selectedBeastId);
                     pokemonBase = actualPokemonBase;
-                    level = 110;
+                    level = scaleLevelForRegion(110, this.state.currentRegionName);
                 } else if (activeRoamingChallenge === 'Extra Challenge G (Roaming)') {
                     const beasts = [721, 719, 720]; // Volcanion, Diancie, Hoopa
                     const selectedBeastId = beasts[Math.floor(Math.random() * beasts.length)];
                     actualPokemonBase = this.getPokemonBase(selectedBeastId);
                     pokemonBase = actualPokemonBase;
-                    level = 110;
+                    level = scaleLevelForRegion(110, this.state.currentRegionName);
                 } else {
                     // Default/Johto: Randomly select Raikou (243), Entei (244), or Suicune (245)
                     const beasts = [243, 244, 245];
@@ -1286,11 +1294,13 @@ class BattleSystem {
                     actualPokemonBase = this.getPokemonBase(selectedBeastId);
                     pokemonBase = actualPokemonBase;
 
-                    // Level = Player Pokemon + 10 (min 30, max 70)
+                    // Level = Player Pokemon + 10 * regionNum (scaled bounds)
                     const playerLevel = this.state.party[0] ? this.state.party[0].level : 1;
-                    level = playerLevel + 10;
-                    if (level < 30) level = 30;
-                    if (level > 70) level = 70;
+                    level = playerLevel + 10 * regionNum;
+                    const minRoam = 30 * regionNum;
+                    const maxRoam = 70 * regionNum;
+                    if (level < minRoam) level = minRoam;
+                    if (level > maxRoam) level = maxRoam;
                 }
             } else {
                 selectedSpawn = this.getSpawnForRoute(route);
@@ -1302,7 +1312,8 @@ class BattleSystem {
 
                 actualPokemonBase = this.getPokemonBase(selectedSpawn.pokemonId);
                 pokemonBase = actualPokemonBase;
-                level = Math.floor(Math.random() * (selectedSpawn.maxLevel - selectedSpawn.minLevel + 1)) + selectedSpawn.minLevel;
+                const rawLevel = Math.floor(Math.random() * (selectedSpawn.maxLevel - selectedSpawn.minLevel + 1)) + selectedSpawn.minLevel;
+                level = scaleLevelForRegion(rawLevel, this.state.currentRegionName);
             }
 
             if (pokemonBase.id === 132 && route.spawns.length > 1) {
@@ -1335,8 +1346,8 @@ class BattleSystem {
 
             ivs = mathEngine.generateIVs(this.state.stats, q.name === "Shiny");
 
-            // Route 1 Level Cap
-            if (this.state.currentRoute === "Route 1" || this.state.currentRoute === "Route 1 (Kanto)") {
+            // Starting Route Level Cap (prevents Lv 1 starter softlock when region scales)
+            if (STARTING_ROUTES.has(this.state.currentRoute)) {
                 const playerLevel = this.state.party[0] ? this.state.party[0].level : 1;
                 level = Math.min(level, playerLevel);
             }
@@ -1406,6 +1417,26 @@ class BattleSystem {
         return learned.slice(-4);
     }
 
+    /**
+     * Compute attack delays (ms at 1x speed) for leader and enemy.
+     * If either exceeds the 250ms attack-speed cap, both delays scale
+     * proportionally so the faster Pokémon lands at 250ms while preserving
+     * its relative speed advantage.
+     */
+    getAdjustedAttackDelays(leaderSpe, enemySpe) {
+        const baseMs = this.state.config.balance.baseAttackDelay * 1000;
+        const rawLeaderDelay = baseMs * (100 / (100 + Math.max(0, leaderSpe || 0)));
+        const rawEnemyDelay = baseMs * (100 / (100 + Math.max(0, enemySpe || 0)));
+
+        const minRawDelay = Math.min(rawLeaderDelay, rawEnemyDelay);
+        const scale = minRawDelay < 250 ? (250 / minRawDelay) : 1;
+
+        return {
+            leaderDelay: rawLeaderDelay * scale,
+            enemyDelay: rawEnemyDelay * scale,
+        };
+    }
+
     scheduleTurn() {
         if (this.isFainting) return;
 
@@ -1416,13 +1447,13 @@ class BattleSystem {
             return;
         }
 
-        // Leader attack delay
-        let leaderDelay = this.state.config.balance.baseAttackDelay * 1000 * (100 / (100 + leader.currentStats.spe));
-        leaderDelay = Math.max(250, leaderDelay) / this.state.settings.gameSpeed;
-
-        // Enemy attack delay
-        let enemyDelay = this.state.config.balance.baseAttackDelay * 1000 * (100 / (100 + this.activeEncounter.currentStats.spe));
-        enemyDelay = Math.max(250, enemyDelay) / this.state.settings.gameSpeed;
+        const gameSpeed = this.state.settings.gameSpeed || 1;
+        const { leaderDelay: baseLeaderDelay, enemyDelay: baseEnemyDelay } = this.getAdjustedAttackDelays(
+            leader.currentStats?.spe,
+            this.activeEncounter.currentStats?.spe
+        );
+        const leaderDelay = baseLeaderDelay / gameSpeed;
+        const enemyDelay = baseEnemyDelay / gameSpeed;
 
         // Which goes first
         const isLeaderFaster = leaderDelay <= enemyDelay;
@@ -1567,15 +1598,12 @@ class BattleSystem {
         if (!this.activeEncounter) return;
 
         const leader = this.state.party[0];
-        let delay;
-        if (attacker === leader) {
-            // Next is enemy
-            delay = this.state.config.balance.baseAttackDelay * 1000 * (100 / (100 + this.activeEncounter.currentStats.spe));
-        } else {
-            delay = this.state.config.balance.baseAttackDelay * 1000 * (100 / (100 + leader.currentStats.spe));
-        }
-
-        delay = Math.max(250, delay) / this.state.settings.gameSpeed;
+        const gameSpeed = this.state.settings.gameSpeed || 1;
+        const { leaderDelay, enemyDelay } = this.getAdjustedAttackDelays(
+            leader.currentStats?.spe,
+            this.activeEncounter.currentStats?.spe
+        );
+        const delay = (attacker === leader ? enemyDelay : leaderDelay) / gameSpeed;
 
         this.combatLoop = this._scheduleTimer(() => {
             this.executeTurn(defender, attacker); // Swap roles
@@ -1844,11 +1872,12 @@ class BattleSystem {
                         if (sumIV < 450) this.state.stats.caughtIVUnder450 = (this.state.stats.caughtIVUnder450 || 0) + 1;
                         if (sumIV < 500) this.state.stats.caughtIVUnder500 = (this.state.stats.caughtIVUnder500 || 0) + 1;
 
-                        if (caughtPokemon.level >= 15) this.state.stats.caughtLvl15 = (this.state.stats.caughtLvl15 || 0) + 1;
-                        if (caughtPokemon.level >= 30) this.state.stats.caughtLvl30 = (this.state.stats.caughtLvl30 || 0) + 1;
-                        if (caughtPokemon.level >= 45) this.state.stats.caughtLvl45 = (this.state.stats.caughtLvl45 || 0) + 1;
-                        if (caughtPokemon.level >= 60) this.state.stats.caughtLvl60 = (this.state.stats.caughtLvl60 || 0) + 1;
-                        if (caughtPokemon.level >= 75) this.state.stats.caughtLvl75 = (this.state.stats.caughtLvl75 || 0) + 1;
+                        const regionNum = getRegionNumber(this.state.currentRegionName);
+                        if (caughtPokemon.level >= 15 * regionNum) this.state.stats.caughtLvl15 = (this.state.stats.caughtLvl15 || 0) + 1;
+                        if (caughtPokemon.level >= 30 * regionNum) this.state.stats.caughtLvl30 = (this.state.stats.caughtLvl30 || 0) + 1;
+                        if (caughtPokemon.level >= 45 * regionNum) this.state.stats.caughtLvl45 = (this.state.stats.caughtLvl45 || 0) + 1;
+                        if (caughtPokemon.level >= 60 * regionNum) this.state.stats.caughtLvl60 = (this.state.stats.caughtLvl60 || 0) + 1;
+                        if (caughtPokemon.level >= 75 * regionNum) this.state.stats.caughtLvl75 = (this.state.stats.caughtLvl75 || 0) + 1;
 
                         // Track species catches for unlocks
                         if (!this.state.stats.caughtSpecies) this.state.stats.caughtSpecies = {};
@@ -2210,22 +2239,26 @@ class BattleSystem {
         } else if (pokemon.level === 4) {
             amount = Math.ceil((mathEngine.calculateTotalXP(5) - mathEngine.calculateTotalXP(4)) / 6);
         } else {
+            const regionName = this.state.currentRegionName;
+            const regionNum = getRegionNumber(regionName);
             let levelTaskTier = this.state.stats.levelTaskTier || 0;
             let bonus = 0;
-            if (levelTaskTier >= 1 && pokemon.level < 15) bonus += 0.5;
-            if (levelTaskTier >= 2 && pokemon.level < 30) bonus += 0.5;
-            if (levelTaskTier >= 3 && pokemon.level < 45) bonus += 0.5;
-            if (levelTaskTier >= 4 && pokemon.level < 60) bonus += 0.5;
-            if (levelTaskTier >= 5 && pokemon.level < 75) bonus += 0.5;
-            // Purple Candy XP Bonus
+            if (levelTaskTier >= 1 && pokemon.level < 15 * regionNum) bonus += 0.5;
+            if (levelTaskTier >= 2 && pokemon.level < 30 * regionNum) bonus += 0.5;
+            if (levelTaskTier >= 3 && pokemon.level < 45 * regionNum) bonus += 0.5;
+            if (levelTaskTier >= 4 && pokemon.level < 60 * regionNum) bonus += 0.5;
+            if (levelTaskTier >= 5 && pokemon.level < 75 * regionNum) bonus += 0.5;
+            // Purple Candy XP Bonus + Region Prestige Bonus (+100% per region)
             const xpMultiplier = 1 + (0.02 * (this.state.stats.purpleCandies || 0));
-            amount = amount * (1 + bonus) * xpMultiplier;
+            const regionBonusXP = getRegionBonusXP(regionName);
+            amount = amount * (1 + bonus) * xpMultiplier * regionBonusXP;
         }
 
         pokemon.xp += amount;
 
         // Check level up
-        let newLvl = mathEngine.getLevelFromXP(pokemon.xp);
+        const maxLevel = getRegionLevelCap(this.state.currentRegionName);
+        let newLvl = mathEngine.getLevelFromXP(pokemon.xp, maxLevel);
         if (newLvl > pokemon.level) {
             let levelsGained = newLvl - pokemon.level;
             pokemon.level = newLvl;
@@ -2495,9 +2528,10 @@ class BattleSystem {
             }
 
             pokemonBase = this.getPokemonBase(selectedSpawn.pokemonId);
-            level = Math.floor(Math.random() * (selectedSpawn.maxLevel - selectedSpawn.minLevel + 1)) + selectedSpawn.minLevel;
+            const rawLevel = Math.floor(Math.random() * (selectedSpawn.maxLevel - selectedSpawn.minLevel + 1)) + selectedSpawn.minLevel;
+            level = scaleLevelForRegion(rawLevel, this.state.currentRegionName);
 
-            if (this.state.currentRoute === "Route 1" || this.state.currentRoute === "Route 1 (Kanto)") {
+            if (STARTING_ROUTES.has(this.state.currentRoute)) {
                 const playerLevel = leader.level || 1;
                 level = Math.min(level, playerLevel);
             }
@@ -2568,11 +2602,8 @@ class BattleSystem {
             let combatTime = 0;
             let leaderConsecutiveHeals = 0;
 
-            // Leader and Enemy attack delays
-            let leaderDelay = this.state.config.balance.baseAttackDelay * 1000 * (100 / (100 + leaderSpe));
-            leaderDelay = Math.max(250, leaderDelay);
-            let enemyDelay = this.state.config.balance.baseAttackDelay * 1000 * (100 / (100 + enemySpe));
-            enemyDelay = Math.max(250, enemyDelay);
+            // Leader and Enemy attack delays (scaled proportionally when faster hits 250ms cap)
+            const { leaderDelay, enemyDelay } = this.getAdjustedAttackDelays(leaderSpe, enemySpe);
 
             // Which goes first
             let isLeaderFaster = leaderDelay <= enemyDelay;

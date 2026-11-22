@@ -10,13 +10,20 @@ function calculateStat(baseStat, ivStat, level, quality, vitamins = 0) {
     return Math.floor((Math.floor(((2 * baseStat + ivStat + Math.floor(vitamins / 4)) * level) / 100) + 5) * quality);
 }
 
-const REQ_XP_TABLE = new Int32Array(201);
-const TOTAL_XP_TABLE = new Int32Array(201);
+const MAX_PRECOMPUTED_LEVEL = 1000;
+const REQ_XP_TABLE = new Float64Array(MAX_PRECOMPUTED_LEVEL + 1);
+const TOTAL_XP_TABLE = new Float64Array(MAX_PRECOMPUTED_LEVEL + 1);
+
+function _computeReqXP(level) {
+    // Unified curve for any L: floor((4 + (6 * L^2) / (L + 30)) * (5 + 8 * L))
+    const factor = 4 + (6 * level * level) / (level + 30);
+    return Math.floor(factor * (5 + 8 * level));
+}
 
 {
     let runningTotal = 0;
-    for (let lvl = 1; lvl <= 200; lvl++) {
-        const req = Math.floor((4 + 496 * Math.pow((lvl - 1) / 98, 1.60)) * (5 + 8 * lvl));
+    for (let lvl = 1; lvl <= MAX_PRECOMPUTED_LEVEL; lvl++) {
+        const req = _computeReqXP(lvl);
         REQ_XP_TABLE[lvl] = req;
         TOTAL_XP_TABLE[lvl] = runningTotal;
         runningTotal += req;
@@ -24,15 +31,14 @@ const TOTAL_XP_TABLE = new Int32Array(201);
 }
 
 function calculateReqXP(level) {
-    if (Number.isInteger(level) && level >= 1 && level <= 200) {
+    if (Number.isInteger(level) && level >= 1 && level <= MAX_PRECOMPUTED_LEVEL) {
         return REQ_XP_TABLE[level];
     }
-    // ReqXP(L) = floor((4 + 496 * ((L - 1) / 98)^1.60) * (5 + 8 * L))
-    return Math.floor((4 + 496 * Math.pow((level - 1) / 98, 1.60)) * (5 + 8 * level));
+    return _computeReqXP(level);
 }
 
 function calculateTotalXP(level) {
-    if (Number.isInteger(level) && level >= 1 && level <= 200) {
+    if (Number.isInteger(level) && level >= 1 && level <= MAX_PRECOMPUTED_LEVEL) {
         return TOTAL_XP_TABLE[level];
     }
     let total = 0;
@@ -42,10 +48,10 @@ function calculateTotalXP(level) {
     return total;
 }
 
-function getLevelFromXP(xp) {
+function getLevelFromXP(xp, maxLevel = 100) {
     let level = 1;
     let totalXpNeeded = 0;
-    while (level < 100) {
+    while (level < maxLevel) {
         totalXpNeeded += calculateReqXP(level);
         if (xp < totalXpNeeded) {
             break;
@@ -55,9 +61,17 @@ function getLevelFromXP(xp) {
     return level;
 }
 
-function calculateEVXP(bst, level, quality, totalIV) {
-    // EVXP = max(1, floor((5 + 8 * Level) * (BST / 300) * Q * (0.85 + 0.15 * (IV_Total / 600))))
-    const evxp = Math.floor((5 + 8 * level) * (bst / 300) * quality * (0.85 + 0.15 * (totalIV / 600)));
+function calculateEVXP(bst, level, quality) {
+    // Q < 1.4: no impact (1.0x)
+    // 1.4 <= Q < 2.0 (Rare / Epic): bonus equal to Q (1.4x - 1.8x+)
+    // Q >= 2.0 (Shiny): super bonus (5.0x)
+    let qMod = 1.0;
+    if (quality >= 2.0) {
+        qMod = 5.0;
+    } else if (quality >= 1.4) {
+        qMod = quality;
+    }
+    const evxp = Math.floor((5 + 8 * level) * (bst / 300) * qMod);
     return Math.max(1, evxp);
 }
 
