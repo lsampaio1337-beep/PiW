@@ -414,4 +414,81 @@ describe('WindowManager', () => {
             win.remove();
         }
     });
+
+    test('main-control-window keeps scaler in flow when height is auto and does not falsely trigger weird proportions due to header height', () => {
+        const originalInnerWidth = window.innerWidth;
+        const originalInnerHeight = window.innerHeight;
+        Object.defineProperty(window, 'innerWidth', { value: 1200, configurable: true });
+        Object.defineProperty(window, 'innerHeight', { value: 800, configurable: true });
+
+        const win = document.createElement('div');
+        win.id = 'main-control-window';
+        win.className = 'floating-window';
+        win.style.display = 'none';
+        win.style.width = 'auto';
+        win.style.height = 'auto';
+        win.style.left = '100px';
+        win.style.top = '20px';
+        win.innerHTML = `
+            <div id="main-control-header" class="window-header">Main Control</div>
+            <div class="window-content-container">
+                <div class="window-content-scaler" style="position: relative;">
+                    <div id="main-control">Icons</div>
+                </div>
+            </div>
+        `;
+        const header = win.querySelector('.window-header');
+        Object.defineProperty(header, 'offsetHeight', { value: 34, configurable: true });
+
+        const scaler = win.querySelector('.window-content-scaler');
+        scaler.getBoundingClientRect = () => ({ width: 520, height: 56 });
+        win.getBoundingClientRect = () => ({
+            width: parseFloat(win.style.width) || 520,
+            height: scaler.style.position === 'absolute' && win.style.height === 'auto' ? 34 : 90
+        });
+        document.body.appendChild(win);
+
+        try {
+            windowManager.toggleWindow('main-control-window', true);
+            expect(scaler.style.position).toBe('relative');
+            expect(win.style.width).toBe('520px');
+
+            // Even after explicit height is locked and constrainWindow runs, header height must not trigger reset
+            win.style.height = '90px';
+            scaler.style.position = 'absolute';
+            windowManager.constrainWindow(win);
+            expect(win.style.height).toBe('90px');
+            expect(scaler.style.position).toBe('absolute');
+        } finally {
+            Object.defineProperty(window, 'innerWidth', { value: originalInnerWidth, configurable: true });
+            Object.defineProperty(window, 'innerHeight', { value: originalInnerHeight, configurable: true });
+            win.remove();
+        }
+    });
+
+    test('_resetToOriginalSize resets scaler position to relative when setting window height to auto', () => {
+        const win = document.createElement('div');
+        win.id = 'reset-pos-window';
+        win.className = 'floating-window';
+        win.style.width = '800px';
+        win.style.height = '600px';
+        win._originalWidth = 400;
+        win._originalHeight = 300;
+        win.innerHTML = `
+            <div class="window-content-container">
+                <div class="window-content-scaler" style="position: absolute; top: 0px; left: 0px; transform: scale(2);"></div>
+            </div>
+        `;
+        document.body.appendChild(win);
+
+        try {
+            windowManager._resetToOriginalSize(win);
+            const scaler = win.querySelector('.window-content-scaler');
+            expect(scaler.style.position).toBe('relative');
+            expect(scaler.style.transform).toBe('none');
+            expect(win.style.height).toBe('auto');
+        } finally {
+            win.remove();
+        }
+    });
 });

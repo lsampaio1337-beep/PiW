@@ -1097,9 +1097,18 @@ export class WindowManager {
         if (finalOriginalWidth > 0) {
             const currentW = parseFloat(winElement.style.width) || finalOriginalWidth;
             const scale = currentW / finalOriginalWidth;
-            scalerElement.style.position = 'absolute';
-            scalerElement.style.top = '0px';
-            scalerElement.style.left = '0px';
+            // Only position the scaler absolutely when the window has an explicit pixel height;
+            // if height is 'auto', absolute positioning collapses .window-content-container to 0px.
+            const hasExplicitHeight = Boolean(winElement.style.height && winElement.style.height !== 'auto');
+            if (hasExplicitHeight) {
+                scalerElement.style.position = 'absolute';
+                scalerElement.style.top = '0px';
+                scalerElement.style.left = '0px';
+            } else {
+                scalerElement.style.position = 'relative';
+                scalerElement.style.top = '';
+                scalerElement.style.left = '';
+            }
             scalerElement.style.width = finalOriginalWidth + 'px';
             scalerElement.style.height = oldScalerHeight;
             scalerElement.style.transform = `scale(${scale})`;
@@ -1244,6 +1253,9 @@ export class WindowManager {
             }
 
             if (scalerElement) {
+                scalerElement.style.position = 'relative';
+                scalerElement.style.top = '';
+                scalerElement.style.left = '';
                 scalerElement.style.transform = 'none';
                 scalerElement.style.width = winElement._originalWidth + 'px';
                 scalerElement.style.height = 'auto';
@@ -1269,10 +1281,24 @@ export class WindowManager {
 
         let hasWeirdProportions = false;
         if (winElement._originalWidth && winElement._originalHeight && rect.width > 0 && rect.height > 0) {
-            const originalRatio = winElement._originalRatio || (winElement._originalWidth / winElement._originalHeight);
-            const currentRatio = rect.width / rect.height;
-            if (originalRatio > 0 && Math.abs(currentRatio - originalRatio) / originalRatio > 0.25) {
-                hasWeirdProportions = true;
+            const headerElement = winElement.querySelector('.window-header');
+            const headerH = headerElement ? headerElement.offsetHeight : 0;
+            const contentContainer = winElement.querySelector('.window-content-container');
+            let horizontalPadding = 0;
+            let verticalPadding = 0;
+            if (contentContainer) {
+                const style = window.getComputedStyle(contentContainer);
+                horizontalPadding = parseFloat(style.paddingLeft || 0) + parseFloat(style.paddingRight || 0);
+                verticalPadding = parseFloat(style.paddingTop || 0) + parseFloat(style.paddingBottom || 0);
+            }
+            const contentWidth = rect.width - horizontalPadding;
+            const contentHeight = rect.height - headerH - verticalPadding;
+            if (contentWidth > 0 && contentHeight > 0) {
+                const originalRatio = winElement._originalRatio || (winElement._originalWidth / winElement._originalHeight);
+                const currentRatio = contentWidth / contentHeight;
+                if (originalRatio > 0 && Math.abs(currentRatio - originalRatio) / originalRatio > 0.25) {
+                    hasWeirdProportions = true;
+                }
             }
         }
 
