@@ -85,7 +85,12 @@ class BattleSystem {
         if (!pokemonData) return;
 
         for (const p of pokemonData) {
-            this.pokemonBaseMap.set(p.id, p);
+            if (p.canonId) {
+                this.pokemonBaseMap.set(p.canonId, p);
+            }
+            if (!this.pokemonBaseMap.has(p.id)) {
+                this.pokemonBaseMap.set(p.id, p);
+            }
         }
     }
 
@@ -93,7 +98,7 @@ class BattleSystem {
         if (!this.pokemonBaseMap) {
             this._initPokemonBaseMap();
         }
-        return this.pokemonBaseMap.get(id);
+        return this.pokemonBaseMap.get(id) ?? this.pokemonBaseMap.get(Number(id));
     }
 
     _initRouteMap(routes, currentRegion) {
@@ -1110,7 +1115,7 @@ class BattleSystem {
         const totalIV = ivs.hp + ivs.atk + ivs.def + ivs.spa + ivs.spd + ivs.spe;
 
         this.activeEncounter = {
-            id: pokemonBase.id,
+            id: (pokemonBase.canonId && pokemonBase.canonId.includes('.')) ? pokemonBase.canonId : pokemonBase.id,
             name: pokemonBase.name,
             level: level,
             types: pokemonBase.types,
@@ -1301,7 +1306,7 @@ class BattleSystem {
         const bst = pokemonBase.hp + pokemonBase.atk + pokemonBase.def + pokemonBase.spa + pokemonBase.spd + pokemonBase.spe;
 
         this.activeEncounter = {
-            id: pokemonBase.id,
+            id: (pokemonBase.canonId && pokemonBase.canonId.includes('.')) ? pokemonBase.canonId : pokemonBase.id,
             name: pokemonBase.name,
             types: pokemonBase.types,
             level: level,
@@ -2122,9 +2127,12 @@ class BattleSystem {
                     this.state.stats.challengeRouteDefeats = (this.state.stats.challengeRouteDefeats || 0) + 1;
                 }
 
-                if (req.defeatSpecific && this.activeEncounter.name === req.defeatSpecific.name) {
+                if (req.defeatSpecific && (
+                    this.activeEncounter.name === req.defeatSpecific.name ||
+                    (req.defeatSpecific.name === 'Unown' && this.activeEncounter.name.startsWith('Unown ('))
+                )) {
                      if (!this.state.stats.challengeSpecificDefeats) this.state.stats.challengeSpecificDefeats = {};
-                     this.state.stats.challengeSpecificDefeats[this.activeEncounter.name] = (this.state.stats.challengeSpecificDefeats[this.activeEncounter.name] || 0) + 1;
+                     this.state.stats.challengeSpecificDefeats[req.defeatSpecific.name] = (this.state.stats.challengeSpecificDefeats[req.defeatSpecific.name] || 0) + 1;
                 }
 
                 if (req.defeatMultipleSpecific) {
@@ -2460,7 +2468,7 @@ class BattleSystem {
 
             this.turnCount = 0;
             this.activeEncounter = {
-                id: pokemonBase.id,
+                id: (pokemonBase.canonId && pokemonBase.canonId.includes('.')) ? pokemonBase.canonId : pokemonBase.id,
                 name: pokemonBase.name,
                 types: pokemonBase.types,
                 level: level,

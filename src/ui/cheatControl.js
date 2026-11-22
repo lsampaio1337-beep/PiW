@@ -179,7 +179,7 @@ export function cheatAction(action) {
 
             // Recalculate stats based on new level
             const data = state.config?.pokemonMap
-                ? (state.config.pokemonMap.get(Number(p.id)) || state.config.pokemonMap.get(p.id))
+                ? (state.config.pokemonMap.get(p.id) || state.config.pokemonMap.get(Number(p.id)))
                 : state.config?.pokemonData?.find(pd => pd && pd.id === p.id);
             if (data) {
                 const oldMaxHp = p.maxHp;

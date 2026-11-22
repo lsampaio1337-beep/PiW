@@ -267,7 +267,7 @@ document.addEventListener('click', (e) => {
 function findPokemonConfig(id) {
     if (!state.config) return null;
     if (state.config.pokemonMap) {
-        return state.config.pokemonMap.get(Number(id)) || state.config.pokemonMap.get(id);
+        return state.config.pokemonMap.get(id) || state.config.pokemonMap.get(Number(id));
     }
     return state.config.pokemonData ? state.config.pokemonData.find(p => p.id === id) : null;
 }

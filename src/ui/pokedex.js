@@ -17,9 +17,82 @@ export function formatTypes(obj) {
 function getPokemonById(id, state) {
     if (!state?.config) return undefined;
     if (state.config.pokemonMap) {
-        return state.config.pokemonMap.get(Number(id)) || state.config.pokemonMap.get(id);
+        return state.config.pokemonMap.get(id) || state.config.pokemonMap.get(Number(id));
     }
-    return state.config.pokemonData?.find(p => p.id === id);
+    return state.config.pokemonData?.find(p => p.id === id || p.canonId === id);
+}
+
+function getUnownVariations(state) {
+    const all = (state?.config?.pokemonData || []).filter(
+        p => p && typeof p.canonId === 'string' && p.canonId.startsWith('0201.')
+    );
+    const regionName = state?.currentRegionName || 'Kanto';
+    const filtered = regionName === 'Johto'
+        ? all.filter(p => !Array.isArray(p._folders) || p._folders.includes(1))
+        : all;
+
+    const getFormLabel = (name) => {
+        const m = /\(([^)]+)\)/.exec(name || '');
+        return m ? m[1] : name || '';
+    };
+    return filtered.slice().sort((a, b) => {
+        const la = getFormLabel(a.name);
+        const lb = getFormLabel(b.name);
+        const aIsSpecial = la === 'Em' || la === 'Qm';
+        const bIsSpecial = lb === 'Em' || lb === 'Qm';
+        if (aIsSpecial !== bIsSpecial) return aIsSpecial ? 1 : -1;
+        return la.localeCompare(lb);
+    });
+}
+
+function getUnownAggregateStatus(state, ownedIds) {
+    const variations = getUnownVariations(state);
+    let isSeen = false;
+    let isCaught = false;
+    let hasSeenShiny = false;
+    let hasCaughtShiny = false;
+    let caughtVarCount = 0;
+
+    const checkEntry = (entry) => {
+        if (!entry) return { seen: false, caught: false, seenShiny: false, caughtShiny: false };
+        const key = entry.canonId || entry.id;
+        const seen = Boolean(state.stats.seenSpecies && state.stats.seenSpecies[entry.name]);
+        const caught = Boolean(
+            (state.stats.caughtSpecies && state.stats.caughtSpecies[entry.name]) ||
+            ownedIds.has(entry.id) ||
+            ownedIds.has(key)
+        );
+        const seenShiny = Boolean(state.stats.seenShiniesSpecies && state.stats.seenShiniesSpecies[entry.name]);
+        const caughtShiny = Boolean(state.stats.caughtShiniesSpecies && state.stats.caughtShiniesSpecies[entry.name]);
+        return { seen, caught, seenShiny, caughtShiny };
+    };
+
+    const baseEntry = getPokemonById(201, state);
+    const baseSt = checkEntry(baseEntry);
+    if (baseSt.seen) isSeen = true;
+    if (baseSt.caught) isCaught = true;
+    if (baseSt.seenShiny) hasSeenShiny = true;
+    if (baseSt.caughtShiny) hasCaughtShiny = true;
+
+    for (const v of variations) {
+        const st = checkEntry(v);
+        if (st.seen) isSeen = true;
+        if (st.caught) {
+            isCaught = true;
+            caughtVarCount++;
+        }
+        if (st.seenShiny) hasSeenShiny = true;
+        if (st.caughtShiny) hasCaughtShiny = true;
+    }
+
+    return {
+        isSeen,
+        isCaught,
+        hasSeenShiny,
+        hasCaughtShiny,
+        caughtVarCount,
+        totalVarCount: variations.length,
+    };
 }
 
 function getOwnedSpeciesIds(state) {
@@ -155,10 +228,22 @@ export function showPokedex() {
         const typeSet = new Set();
 
         for (const pData of regionalDex) {
-            const isSeen = Boolean(state.stats.seenSpecies && state.stats.seenSpecies[pData.name]);
-            const isCaught = Boolean((state.stats.caughtSpecies && state.stats.caughtSpecies[pData.name]) || ownedIds.has(pData.id));
-            const hasSeenShiny = Boolean(state.stats.seenShiniesSpecies && state.stats.seenShiniesSpecies[pData.name]);
-            const hasCaughtShiny = Boolean(state.stats.caughtShiniesSpecies && state.stats.caughtShiniesSpecies[pData.name]);
+            let isSeen = Boolean(state.stats.seenSpecies && state.stats.seenSpecies[pData.name]);
+            let isCaught = Boolean((state.stats.caughtSpecies && state.stats.caughtSpecies[pData.name]) || ownedIds.has(pData.id));
+            let hasSeenShiny = Boolean(state.stats.seenShiniesSpecies && state.stats.seenShiniesSpecies[pData.name]);
+            let hasCaughtShiny = Boolean(state.stats.caughtShiniesSpecies && state.stats.caughtShiniesSpecies[pData.name]);
+            let variationMarkHtml = '';
+
+            if (pData.id === 201) {
+                const unownAgg = getUnownAggregateStatus(state, ownedIds);
+                isSeen = unownAgg.isSeen;
+                isCaught = unownAgg.isCaught;
+                hasSeenShiny = unownAgg.hasSeenShiny;
+                hasCaughtShiny = unownAgg.hasCaughtShiny;
+                if (isCaught && unownAgg.totalVarCount > 0) {
+                    variationMarkHtml = `<button type="button" class="pokedex-variation-mark" title="Unown Variations (${unownAgg.caughtVarCount}/${unownAgg.totalVarCount})" onclick="window.showUnownVariationsModal(event)">◆</button>`;
+                }
+            }
 
             if (isSeen || isCaught) seenCount++;
             if (isCaught) caughtCount++;
@@ -191,6 +276,7 @@ export function showPokedex() {
             }
 
             cardsHtml += `<div class="${cardClass}" data-name="${isRevealed ? pData.name : ''}" data-num="${pData[regionIdField]}" data-status="${status}" data-shiny="${hasCaughtShiny ? '1' : '0'}" data-types="${isRevealed ? pTypes.join(',').toLowerCase() : ''}" data-bst="${bst}" ${onClick}>
+                ${variationMarkHtml}
                 <div class="pokedex-card-num">#${pData[regionIdField]}</div>
                 <div class="pokedex-card-name" title="${displayName}">${displayName}</div>
                 <img class="pokedex-card-img" src="${window.getSpriteUrl(pData.id, false)}" style="filter: ${filter};">
@@ -239,7 +325,17 @@ export function showPokedex() {
         `;
     }
 
-    html += `</div>`;
+    html += `
+        <div id="pokedex-inner-modal-overlay" class="pokedex-inner-modal-overlay" style="display: none;" onclick="window.closePokedexInnerModal(event)">
+            <div class="pokedex-inner-modal">
+                <div class="pokedex-inner-modal-header">
+                    <span id="pokedex-inner-modal-title">Unown Variations</span>
+                    <button type="button" class="window-ctrl-btn is-close" onclick="window.closePokedexInnerModal()">X</button>
+                </div>
+                <div id="pokedex-inner-modal-content" class="pokedex-inner-modal-content"></div>
+            </div>
+        </div>
+    </div>`;
     showModal(`${regionName} Pokedex`, html, "window-pokedex");
 
     const searchInput = document.getElementById('pokedex-search-input');
@@ -254,10 +350,116 @@ export function showPokedex() {
     });
 }
 
+export function closePokedexInnerModal(e) {
+    const overlay = document.getElementById('pokedex-inner-modal-overlay');
+    if (!overlay) return;
+    if (e && e.target !== overlay) return;
+    overlay.style.display = 'none';
+}
+window.closePokedexInnerModal = closePokedexInnerModal;
+
+export function showUnownVariationsModal(e) {
+    if (e && typeof e.stopPropagation === 'function') {
+        e.stopPropagation();
+    }
+    const variations = getUnownVariations(state);
+    const ownedIds = getOwnedSpeciesIds(state);
+    let seenCount = 0;
+    let caughtCount = 0;
+    let shinyCount = 0;
+    let cardsHtml = '';
+
+    for (const v of variations) {
+        const varId = v.canonId || v.id;
+        const isSeen = Boolean(state.stats.seenSpecies && state.stats.seenSpecies[v.name]);
+        const isCaught = Boolean(
+            (state.stats.caughtSpecies && state.stats.caughtSpecies[v.name]) ||
+            ownedIds.has(v.id) ||
+            ownedIds.has(varId)
+        );
+        const hasSeenShiny = Boolean(state.stats.seenShiniesSpecies && state.stats.seenShiniesSpecies[v.name]);
+        const hasCaughtShiny = Boolean(state.stats.caughtShiniesSpecies && state.stats.caughtShiniesSpecies[v.name]);
+
+        if (isSeen || isCaught) seenCount++;
+        if (isCaught) caughtCount++;
+        if (hasCaughtShiny) shinyCount++;
+
+        const isRevealed = isCaught || hasCaughtShiny;
+        const filter = isRevealed ? 'none' : 'brightness(0)';
+        const formMatch = /\(([^)]+)\)/.exec(v.name || '');
+        const formLabel = formMatch ? formMatch[1] : v.name;
+        const displayName = isRevealed ? v.name : '???';
+        const onClick = isRevealed ? `onclick="window.showDexEntry('${varId}')"` : '';
+
+        let cardClass = 'pokedex-card';
+        if (isRevealed) cardClass += ' is-clickable';
+        if (!isSeen && !isCaught) {
+            cardClass += ' is-unseen';
+        } else if (!isRevealed) {
+            cardClass += ' is-seen-only';
+        }
+        if (isSeen || isCaught) {
+            if (hasSeenShiny || hasCaughtShiny) cardClass += ' pokedex-card-shiny';
+            if (hasCaughtShiny) cardClass += ' pokedex-card-shiny-rotate';
+        }
+
+        cardsHtml += `<div class="${cardClass}" ${onClick}>
+            <div class="pokedex-card-num">#201 ${formLabel}</div>
+            <div class="pokedex-card-name" title="${displayName}">${displayName}</div>
+            <img class="pokedex-card-img" src="${window.getSpriteUrl(varId, false)}" style="filter: ${filter};">
+        </div>`;
+    }
+
+    const total = variations.length;
+    const pct = total > 0 ? Math.round((caughtCount / total) * 100) : 0;
+    const html = `
+        <div class="pokedex-container">
+            <div class="pokedex-header">
+                <div class="pokedex-stats-row">
+                    <div class="pokedex-stats-pills">
+                        <span class="pokedex-stat-pill is-caught">Caught: ${caughtCount}/${total} (${pct}%)</span>
+                        <span class="pokedex-stat-pill">Seen: ${seenCount}/${total}</span>
+                        <span class="pokedex-stat-pill is-shiny">Shiny: ${shinyCount}/${total}</span>
+                    </div>
+                    <div class="pokedex-progress-wrap" title="Unown Variations Completion: ${pct}%">
+                        <div class="pokedex-progress-bar" style="width: ${pct}%;"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="pokedex-grid">
+                ${cardsHtml}
+            </div>
+        </div>
+    `;
+
+    const overlay = document.getElementById('pokedex-inner-modal-overlay');
+    const titleEl = document.getElementById('pokedex-inner-modal-title');
+    const contentEl = document.getElementById('pokedex-inner-modal-content');
+    if (overlay && contentEl && (
+        (window.windowManager && typeof window.windowManager._parseAndSanitizeToElement === 'function') ||
+        (typeof DOMParser !== 'undefined' && typeof contentEl.replaceChildren === 'function')
+    )) {
+        if (titleEl) titleEl.textContent = 'Unown Variations';
+        if (window.windowManager && typeof window.windowManager._parseAndSanitizeToElement === 'function') {
+            window.windowManager._parseAndSanitizeToElement(html, contentEl);
+        } else {
+            const doc = new DOMParser().parseFromString(html, 'text/html');
+            contentEl.replaceChildren(...doc.body.childNodes);
+        }
+        overlay.style.display = 'flex';
+        return;
+    }
+
+    showModal('Unown Variations', html, 'window-pokedex-unown-variations');
+}
+window.showUnownVariationsModal = showUnownVariationsModal;
+
 export function showDexEntry(id) {
     const pData = getPokemonById(id, state);
     if (!pData) return;
 
+    const spriteId = (pData.canonId && pData.canonId.includes('.')) ? pData.canonId : pData.id;
+    const domSafeId = String(spriteId).replace(/[^a-zA-Z0-9_-]/g, '-');
     const hasSeenShiny = state.stats.seenShiniesSpecies && state.stats.seenShiniesSpecies[pData.name];
     const buttonStyle = hasSeenShiny ? "display: inline-block;" : "display: none;";
 
@@ -268,10 +470,10 @@ export function showDexEntry(id) {
         <div class="content-panel" style="text-align:center; height: 100%; overflow-y: auto; padding: 14px; box-sizing: border-box;">
             <div class="pstats-card" style="margin-bottom: 12px; display: flex; flex-direction: column; align-items: center;">
                 <h2 style="margin: 0 0 8px 0; color: var(--piw-text-primary);">#${pData.id} ${pData.name}</h2>
-                <img id="dex-sprite-${pData.id}" src="${window.getSpriteUrl(pData.id, false)}" style="width: 100px; height: 100px; object-fit: contain;">
+                <img id="dex-sprite-${domSafeId}" src="${window.getSpriteUrl(spriteId, false)}" style="width: 100px; height: 100px; object-fit: contain;">
                 <div style="margin: 8px 0; display: flex; gap: 8px;">
-                    <button class="piw-btn piw-btn-warning piw-btn-sm" style="${buttonStyle}" onclick="document.getElementById('dex-sprite-${pData.id}').src = '${window.getSpriteUrl(pData.id, true)}'">Shiny</button>
-                    <button class="piw-btn piw-btn-secondary piw-btn-sm" style="${buttonStyle}" onclick="document.getElementById('dex-sprite-${pData.id}').src = '${window.getSpriteUrl(pData.id, false)}'">Normal</button>
+                    <button class="piw-btn piw-btn-warning piw-btn-sm" style="${buttonStyle}" onclick="document.getElementById('dex-sprite-${domSafeId}').src = '${window.getSpriteUrl(spriteId, true)}'">Shiny</button>
+                    <button class="piw-btn piw-btn-secondary piw-btn-sm" style="${buttonStyle}" onclick="document.getElementById('dex-sprite-${domSafeId}').src = '${window.getSpriteUrl(spriteId, false)}'">Normal</button>
                 </div>
                 <div style="font-size: 14px;"><b>Type:</b> ${pData.types.map(t => formatType(t)).join(' ')}</div>
             </div>
@@ -281,19 +483,19 @@ export function showDexEntry(id) {
         </div>
     `;
 
-    showModal(`Pokedex Entry - ${pData.name}`, html, `window-pokedex-entry-${pData.id}`);
+    showModal(`Pokedex Entry - ${pData.name}`, html, `window-pokedex-entry-${domSafeId}`);
 
-    const entryWin = document.getElementById(`window-pokedex-entry-${pData.id}`);
+    const entryWin = document.getElementById(`window-pokedex-entry-${domSafeId}`);
     if (entryWin && typeof entryWin.querySelectorAll === 'function') {
-        const spriteEl = entryWin.querySelector(`#dex-sprite-${pData.id}`);
+        const spriteEl = entryWin.querySelector(`#dex-sprite-${domSafeId}`);
         entryWin.querySelectorAll('button').forEach(btn => {
             if (btn.textContent === 'Shiny') {
                 btn.onclick = () => {
-                    if (spriteEl) spriteEl.src = window.getSpriteUrl(pData.id, true);
+                    if (spriteEl) spriteEl.src = window.getSpriteUrl(spriteId, true);
                 };
             } else if (btn.textContent === 'Normal') {
                 btn.onclick = () => {
-                    if (spriteEl) spriteEl.src = window.getSpriteUrl(pData.id, false);
+                    if (spriteEl) spriteEl.src = window.getSpriteUrl(spriteId, false);
                 };
             }
         });

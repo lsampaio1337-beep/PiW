@@ -1149,7 +1149,7 @@ export function showMapTooltip(e, locationName) {
                     let baseName = null;
                     if (state.config.pokemonMap || state.config.pokemonData) {
                         const pd = state.config.pokemonMap
-                            ? (state.config.pokemonMap.get(Number(s.pokemonId)) || state.config.pokemonMap.get(s.pokemonId))
+                            ? (state.config.pokemonMap.get(s.pokemonId) || state.config.pokemonMap.get(Number(s.pokemonId)))
                             : state.config.pokemonData.find(pd => pd.id === s.pokemonId);
                         if (pd) {
                             baseName = pd.name;

@@ -105,7 +105,7 @@ describe('Pokemon Data & Sprite Sync Integrity', () => {
             }
         }
 
-        expect(totalPngs).toBe(13044);
+        expect(totalPngs).toBe(13068);
 
         const conflicts = Array.from(varFormIds.entries()).filter(([, ids]) => ids.size > 1);
         expect(conflicts).toEqual([]);

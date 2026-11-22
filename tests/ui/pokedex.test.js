@@ -12,7 +12,9 @@ import {
     setSmartCaptureShinyMode,
     showSmartCaptureBallSelection,
     selectSmartCaptureBall,
-    selectGlobalSmartCaptureBall
+    selectGlobalSmartCaptureBall,
+    showUnownVariationsModal,
+    closePokedexInnerModal
 } from '../../src/ui/pokedex.js';
 import { state } from '../../src/state.js';
 import { showModal } from '../../src/ui.js';
@@ -550,6 +552,107 @@ describe('Smart Capture Mode', () => {
         document.body.innerHTML = '<img id="smartwatch-ball-img" />';
         selectGlobalSmartCaptureBall(false, -1);
         expect(document.getElementById('smartwatch-ball-img').src).toContain('Assets/Extra/No.png');
+    });
+});
+
+describe('Unown Variations Pokedex & Modal', () => {
+    beforeEach(() => {
+        jest.clearAllMocks();
+        state.currentRegionName = 'Johto';
+        state.stats = { seenSpecies: {}, caughtSpecies: {}, seenShiniesSpecies: {}, caughtShiniesSpecies: {} };
+        state.party = [];
+        state.storage = [];
+        state.safe = [];
+        state.breeding = [];
+        state.training = [];
+        state.config.pokemonData = [
+            { id: 201, canonId: '0201', johto_id: 201, name: 'Unown', types: ['Psychic'], hp: 48, atk: 72, def: 48, spa: 72, spd: 48, spe: 48 },
+            { id: 201.1, canonId: '0201.1', name: 'Unown (A)', types: ['Psychic'], hp: 48, atk: 72, def: 48, spa: 72, spd: 48, spe: 48, _folders: [1, 2, 3, 4, 7, 8] },
+            { id: 201.6, canonId: '0201.6', name: 'Unown (Em)', types: ['Psychic'], hp: 48, atk: 72, def: 48, spa: 72, spd: 48, spe: 48, _folders: [2, 3, 4, 7, 8] },
+            { id: 201.1, canonId: '0201.10', name: 'Unown (J)', types: ['Psychic'], hp: 48, atk: 72, def: 48, spa: 72, spd: 48, spe: 48, _folders: [1, 2, 3, 4, 7, 8] },
+            { id: 201.27, canonId: '0201.27', name: 'Unown (F)', types: ['Psychic'], hp: 48, atk: 72, def: 48, spa: 72, spd: 48, spe: 48, _folders: [1, 2, 3, 4, 7, 8] },
+        ];
+    });
+
+    it('does not render variation mark on Unown card before any Unown is caught', () => {
+        showPokedex();
+        const html = showModal.mock.calls[0][1];
+        expect(html).not.toContain('pokedex-variation-mark');
+    });
+
+    it('renders variation mark and reveals Unown card when any Unown variation is caught', () => {
+        state.stats.caughtSpecies['Unown (J)'] = 1;
+        showPokedex();
+        const html = showModal.mock.calls[0][1];
+        expect(html).toContain('pokedex-variation-mark');
+        expect(html).toContain('window.showUnownVariationsModal(event)');
+        expect(html).toContain('Unown');
+    });
+
+    it('opens inner modal with pokedex cards for region Unown variations', () => {
+        state.stats.caughtSpecies['Unown (J)'] = 1;
+        const stopPropagation = jest.fn();
+        showUnownVariationsModal({ stopPropagation });
+
+        expect(stopPropagation).toHaveBeenCalled();
+        expect(showModal).toHaveBeenCalledWith(
+            'Unown Variations',
+            expect.any(String),
+            'window-pokedex-unown-variations'
+        );
+        const html = showModal.mock.calls[0][1];
+        expect(html).toContain('pokedex-grid');
+        expect(html).toContain('pokedex-card');
+        expect(html).toContain('#201 A');
+        expect(html).toContain('#201 F');
+        expect(html).toContain('#201 J');
+        expect(html).toContain('Unown (J)');
+        expect(html).toContain('Caught: 1/3');
+        // Unown (Em) is not in Johto (folder 1)
+        expect(html).not.toContain('#201 Em');
+    });
+
+    it('renders into inner modal overlay inside Pokedex window when present and closes cleanly', () => {
+        state.stats.caughtSpecies['Unown (J)'] = 1;
+        const overlay = document.createElement('div');
+        overlay.id = 'pokedex-inner-modal-overlay';
+        overlay.style.display = 'none';
+        const titleEl = document.createElement('span');
+        titleEl.id = 'pokedex-inner-modal-title';
+        const content = document.createElement('div');
+        content.id = 'pokedex-inner-modal-content';
+        const map = {
+            'pokedex-inner-modal-overlay': overlay,
+            'pokedex-inner-modal-title': titleEl,
+            'pokedex-inner-modal-content': content,
+        };
+        const getByIdSpy = jest.spyOn(document, 'getElementById').mockImplementation(id => map[id] || null);
+        try {
+            showUnownVariationsModal({ stopPropagation: jest.fn() });
+
+            expect(showModal).not.toHaveBeenCalled();
+            expect(overlay.style.display).toBe('flex');
+            expect(content.innerHTML).toContain('#201 J');
+            expect(content.innerHTML).toContain('Unown (J)');
+
+            closePokedexInnerModal();
+            expect(overlay.style.display).toBe('none');
+        } finally {
+            getByIdSpy.mockRestore();
+        }
+    });
+
+    it('uses canonId in showDexEntry so 0201.10 (Unown J) does not collide with 201.1 (Unown A)', () => {
+        state.config.pokemonMap = new Map([
+            ['0201.1', state.config.pokemonData[1]],
+            [201.1, state.config.pokemonData[1]],
+            ['0201.10', state.config.pokemonData[3]],
+        ]);
+        showDexEntry('0201.10');
+        expect(window.getSpriteUrl).toHaveBeenCalledWith('0201.10', false);
+        const html = showModal.mock.calls[0][1];
+        expect(html).toContain('Unown (J)');
+        expect(html).toContain('dex-sprite-0201-10');
     });
 });
 });

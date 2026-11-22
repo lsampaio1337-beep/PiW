@@ -65006,6 +65006,30 @@
         8
       ]
     },
+    "0201.27": {
+      "name": "Unown (F)",
+      "sprite": "Unown_F",
+      "folders": [
+        1,
+        2,
+        3,
+        4,
+        7,
+        8
+      ]
+    },
+    "0201.28": {
+      "name": "Unown (M)",
+      "sprite": "Unown_M",
+      "folders": [
+        1,
+        2,
+        3,
+        4,
+        7,
+        8
+      ]
+    },
     "0202": {
       "name": "Wobbuffet",
       "types": [

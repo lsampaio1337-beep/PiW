@@ -76,6 +76,16 @@ export function getSpriteUrl(id, isShiny = false) {
             if (preferredMeta && entry.folders.includes(preferredMeta.id) && (!isShiny || preferredMeta.hasShiny)) {
                 chosen = preferredMeta;
             } else {
+                const firstVarSuffix = FIRST_VARIATION_SPRITES[Number(id)];
+                if (preferredMeta && firstVarSuffix && (!isShiny || preferredMeta.hasShiny)) {
+                    const firstVarNum = firstVarSuffix.slice(1).split('_')[0];
+                    const firstVarCanonId = `${canonId}.${firstVarNum}`;
+                    const firstVarEntry = pokemonInfo.pokemon[firstVarCanonId];
+                    if (firstVarEntry && Array.isArray(firstVarEntry.folders) && firstVarEntry.folders.includes(preferredMeta.id)) {
+                        const shinySuffix = isShiny && preferredMeta.hasShiny ? '_shiny' : '';
+                        return `Assets/Pokemon Sprites/${preferredMeta.folder}/${preferredMeta.prefix}_${firstVarCanonId}_${firstVarEntry.sprite}${shinySuffix}.png`;
+                    }
+                }
                 for (const fId of SPRITE_FOLDER_FALLBACK_ORDER) {
                     if (!entry.folders.includes(fId)) continue;
                     const fm = pokemonInfo.folders.find(f => f.id === fId);
