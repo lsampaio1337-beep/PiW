@@ -326,7 +326,7 @@ export const alolaRoutes = [
     "secondaryName": "Trial Site"
   },
   {
-    "name": "Route 3 - North",
+    "name": "Route 3 - West",
     "primaryName": "Route 3",
     "spawns": [
       {
@@ -360,10 +360,10 @@ export const alolaRoutes = [
         "chance": 0.23
       }
     ],
-    "secondaryName": "North"
+    "secondaryName": "West"
   },
   {
-    "name": "Route 3 - South",
+    "name": "Route 3 - East",
     "primaryName": "Route 3",
     "spawns": [
       {
@@ -391,7 +391,7 @@ export const alolaRoutes = [
         "chance": 0.22
       }
     ],
-    "secondaryName": "South"
+    "secondaryName": "East"
   },
   {
     "name": "Melemele Meadow",
@@ -3542,7 +3542,7 @@ export const alolaUnlocks = [
     "challengeName": "Challenge 09",
     "areaId": "Verdant Cavern - Trial Site",
     "unlocks": [
-      "Route 3 - North"
+      "Route 3 - West"
     ],
     "requirements": {
       "catchSpecies": [
@@ -3555,9 +3555,9 @@ export const alolaUnlocks = [
   },
   {
     "challengeName": "Challenge 10",
-    "areaId": "Route 3 - North",
+    "areaId": "Route 3 - West",
     "unlocks": [
-      "Route 3 - South"
+      "Route 3 - East"
     ],
     "requirements": {
       "defeatSpecific": {
@@ -3568,7 +3568,7 @@ export const alolaUnlocks = [
   },
   {
     "challengeName": "Challenge 11",
-    "areaId": "Route 3 - South",
+    "areaId": "Route 3 - East",
     "unlocks": [
       "Melemele Meadow"
     ],

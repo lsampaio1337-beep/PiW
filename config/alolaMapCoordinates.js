@@ -65,14 +65,14 @@ export const alolaMapCoordinates = {
     "y": 25,
     "zIndex": 78
   },
-  "Route 3 - North": {
-    "name": "Route 3 - North",
+  "Route 3 - West": {
+    "name": "Route 3 - West",
     "x": 50,
     "y": 25,
     "zIndex": 77
   },
-  "Route 3 - South": {
-    "name": "Route 3 - South",
+  "Route 3 - East": {
+    "name": "Route 3 - East",
     "x": 50,
     "y": 25,
     "zIndex": 76
