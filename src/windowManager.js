@@ -30,25 +30,88 @@ export class WindowManager {
         return headerElement.offsetHeight || fallback;
     }
 
-    /** Return extra vertical space below the lowest HP bar/shadow in minimal combat mode so the HP bar can touch the taskbar. */
-    _getMinimalCombatBottomSlack(winElement, rect) {
-        if (!winElement || !winElement.classList || !winElement.classList.contains('is-minimal-combat')) {
-            return 0;
+    /** Return extra left/right/bottom space between minimal combat HP bars (or shadows) and window edges so HP bars can touch screen borders. */
+    _getMinimalCombatEdgeSlack(winElement, rect) {
+        const zero = { left: 0, right: 0, bottom: 0 };
+        if (!winElement || !winElement.classList || !winElement.classList.contains('is-minimal-combat') || !rect) {
+            return zero;
         }
-        const anchors = winElement.querySelectorAll('#player-battle-hp-container, #enemy-battle-hp-container, #player-side .battle-ground-shadow, #enemy-side .battle-ground-shadow');
-        let lowestAnchorBottom = null;
-        for (const el of anchors) {
-            const r = el.getBoundingClientRect();
-            if (r && r.height > 0 && r.width > 0) {
-                if (lowestAnchorBottom === null || r.bottom > lowestAnchorBottom) {
-                    lowestAnchorBottom = r.bottom;
+        const getVisibleBounds = (selector) => {
+            let minLeft = null;
+            let maxRight = null;
+            let maxBottom = null;
+            for (const el of winElement.querySelectorAll(selector)) {
+                const r = el.getBoundingClientRect();
+                if (r && r.height > 0 && r.width > 0) {
+                    if (minLeft === null || r.left < minLeft) minLeft = r.left;
+                    if (maxRight === null || r.right > maxRight) maxRight = r.right;
+                    if (maxBottom === null || r.bottom > maxBottom) maxBottom = r.bottom;
                 }
             }
+            return { minLeft, maxRight, maxBottom };
+        };
+
+        const playerBounds = getVisibleBounds('#player-battle-hp-container, #player-side .battle-ground-shadow');
+        const enemyBounds = getVisibleBounds('#enemy-battle-hp-container, #enemy-side .battle-ground-shadow');
+
+        const left = (playerBounds.minLeft !== null && playerBounds.minLeft > rect.left)
+            ? (playerBounds.minLeft - rect.left)
+            : 0;
+        const right = (enemyBounds.maxRight !== null && rect.right > enemyBounds.maxRight)
+            ? (rect.right - enemyBounds.maxRight)
+            : 0;
+        const lowestBottom = (playerBounds.maxBottom !== null && enemyBounds.maxBottom !== null)
+            ? Math.max(playerBounds.maxBottom, enemyBounds.maxBottom)
+            : (playerBounds.maxBottom ?? enemyBounds.maxBottom);
+        const bottom = (lowestBottom !== null && rect.bottom > lowestBottom)
+            ? (rect.bottom - lowestBottom)
+            : Math.max(0, Math.round((rect.height || 0) * 0.06));
+
+        return { left, right, bottom };
+    }
+
+    _applyAxisDragBounds(rawPos, currentPos, minNormal, maxNormal, minSlackPos, maxSlackPos, unlockState, minKey, maxKey, breakDistance = 25) {
+        let pos = currentPos;
+
+        if (pos < minNormal) {
+            if (minSlackPos < minNormal) {
+                if (!unlockState[minKey]) {
+                    if (rawPos < minNormal - breakDistance) {
+                        unlockState[minKey] = true;
+                        pos = Math.max(minSlackPos, rawPos);
+                    } else {
+                        pos = minNormal;
+                    }
+                } else {
+                    pos = Math.max(minSlackPos, pos);
+                }
+            } else {
+                pos = minNormal;
+            }
+        } else if (unlockState[minKey] && rawPos >= minNormal) {
+            unlockState[minKey] = false;
         }
-        if (lowestAnchorBottom !== null && rect && rect.bottom > lowestAnchorBottom) {
-            return rect.bottom - lowestAnchorBottom;
+
+        if (pos > maxNormal) {
+            if (maxSlackPos > maxNormal) {
+                if (!unlockState[maxKey]) {
+                    if (rawPos > maxNormal + breakDistance) {
+                        unlockState[maxKey] = true;
+                        pos = Math.min(maxSlackPos, rawPos);
+                    } else {
+                        pos = maxNormal;
+                    }
+                } else {
+                    pos = Math.min(maxSlackPos, pos);
+                }
+            } else {
+                pos = maxNormal;
+            }
+        } else if (unlockState[maxKey] && rawPos <= maxNormal) {
+            unlockState[maxKey] = false;
         }
-        return Math.max(0, Math.round((rect?.height || 0) * 0.06));
+
+        return pos;
     }
 
     _getContentPadding(winElement) {
@@ -325,7 +388,7 @@ export class WindowManager {
             'clearPokemonFilter', 'clickEmptyBreedSlot', 'close', 'closeBackpackModal', 'closeBackpackPocket',
             'closeMapInnerModal', 'closeModal', 'closeVitaminsInnerWindow', 'completeChallenge', 'concludeProfTutorial', 'confirmTokenItemSelect',
             'dismissBonusCandyMessage', 'dismissDaycareMessage', 'dragOver', 'dragStart', 'enterSafariZone',
-            'evolvePokemon', 'exportLog', 'forceNextEncounter', 'forceNextCapture', 'giveFreeTokens', 'handleDrop',
+            'evolvePokemon', 'exportLog', 'forceNextEncounter', 'forceNextCapture', 'gigantamaxPokemon', 'giveFreeTokens', 'handleDrop',
             'handleGameSpeedSlider', 'handleMapInnerModalBackdropClick', 'hideMapTooltip', 'initMultiplayerView',
             'marketDeselectAllPokemonForSale', 'marketSelectAllPokemonForSale', 'marketSellSelectedPokemon',
             'megaEvolvePokemon',
@@ -339,7 +402,7 @@ export class WindowManager {
             'setPokedexSort', 'setPokedexTypeFilter', 'setPokemonStorageSort',
             'setSmartCaptureFilter', 'setSmartCaptureGlobalMode',
             'setSmartCaptureShinyMode', 'showActiveItemSelection', 'showAddPokemonModal', 'showBackpackAndFocus',
-            'showCalendar', 'showChallengesModal', 'showDexEntry', 'showEvolveConfirmModal', 'showGameAlert', 'showLevelUp',
+            'showCalendar', 'showChallengesModal', 'showDexEntry', 'showEvolveConfirmModal', 'showGameAlert', 'showGigantamaxModal', 'showLevelUp',
             'showMapTooltip', 'showModal', 'showMegaEvolveModal', 'showMultipleEvolveModal', 'showPokemonStats', 'showPokemonStatsByUuid', 'showProfLabModal',
             'showSmartCaptureBallSelection', 'showSmartCaptureMode', 'showTimeLapseModal', 'showTimeLapseResults',
             'showTokenItemSelect', 'showTrainerStats', 'showVitaminsModal', 'showZzZConfirmationModal',
@@ -609,6 +672,7 @@ export class WindowManager {
 
         let snapLockX = null;
         let snapLockY = null;
+        const borderUnlocked = { left: false, right: false, bottom: false };
 
         headerElement.style.cursor = 'grab';
 
@@ -625,6 +689,10 @@ export class WindowManager {
             const rect = winElement.getBoundingClientRect();
             initialLeft = rect.left;
             initialTop = rect.top;
+
+            borderUnlocked.left = initialLeft < 0;
+            borderUnlocked.right = initialLeft + rect.width > this.containerWidth;
+            borderUnlocked.bottom = initialTop + rect.height > this.containerHeight;
 
             winElement.style.left = initialLeft + 'px';
             winElement.style.top = initialTop + 'px';
@@ -720,12 +788,32 @@ export class WindowManager {
             if (snapLockX !== null) finalLeft = snapLockX.snappedValue;
             if (snapLockY !== null) finalTop = snapLockY.snappedValue;
 
-            // Container Boundary constraints (allow minimal combat window to push empty space below HP bar past bottom edge)
-            const bottomSlack = this._getMinimalCombatBottomSlack(winElement, rect);
-            if (finalLeft + rect.width > this.containerWidth) finalLeft = Math.max(0, this.containerWidth - rect.width);
-            if (finalTop + rect.height > this.containerHeight + bottomSlack) finalTop = Math.max(0, this.containerHeight - rect.height + bottomSlack);
-            if (finalLeft < 0) finalLeft = 0;
-            if (finalTop < 0) finalTop = 0;
+            // Container Boundary constraints (soft lock at normal border; break past to let HP bars touch screen edges)
+            const slack = this._getMinimalCombatEdgeSlack(winElement, rect);
+            const normalMaxLeft = Math.max(0, this.containerWidth - rect.width);
+            const normalMaxTop = Math.max(0, this.containerHeight - rect.height);
+            finalLeft = this._applyAxisDragBounds(
+                rawLeft,
+                finalLeft,
+                0,
+                normalMaxLeft,
+                -slack.left,
+                normalMaxLeft + slack.right,
+                borderUnlocked,
+                'left',
+                'right'
+            );
+            finalTop = this._applyAxisDragBounds(
+                rawTop,
+                finalTop,
+                0,
+                normalMaxTop,
+                0,
+                normalMaxTop + slack.bottom,
+                borderUnlocked,
+                '_topUnused',
+                'bottom'
+            );
 
             winElement.style.left = finalLeft + 'px';
             winElement.style.top = finalTop + 'px';
@@ -1497,18 +1585,18 @@ export class WindowManager {
         }
 
         const currentRect = winElement.getBoundingClientRect();
-        const bottomSlack = this._getMinimalCombatBottomSlack(winElement, currentRect);
+        const slack = this._getMinimalCombatEdgeSlack(winElement, currentRect);
 
-        if (left + currentRect.width > this.containerWidth) {
-            left = Math.max(0, this.containerWidth - currentRect.width);
+        if (left + currentRect.width > this.containerWidth + slack.right) {
+            left = Math.max(-slack.left, this.containerWidth - currentRect.width + slack.right);
             changed = true;
         }
-        if (top + currentRect.height > this.containerHeight + bottomSlack) {
-            top = Math.max(0, this.containerHeight - currentRect.height + bottomSlack);
+        if (top + currentRect.height > this.containerHeight + slack.bottom) {
+            top = Math.max(0, this.containerHeight - currentRect.height + slack.bottom);
             changed = true;
         }
-        if (left < 0) {
-            left = 0;
+        if (left < -slack.left) {
+            left = -slack.left;
             changed = true;
         }
         if (top < 0) {

@@ -877,4 +877,105 @@ describe('WindowManager', () => {
             win.remove();
         }
     });
+
+    test('minimal combat soft-locks at normal borders and snaps past when forced so left/right/bottom HP bars touch screen borders', () => {
+        const originalInnerWidth = window.innerWidth;
+        const originalInnerHeight = window.innerHeight;
+        Object.defineProperty(window, 'innerWidth', { value: 1920, configurable: true });
+        Object.defineProperty(window, 'innerHeight', { value: 1080, configurable: true });
+
+        const win = document.createElement('div');
+        win.id = 'main-view-window';
+        win.className = 'floating-window is-battle-mode is-minimal-combat';
+        win.style.display = 'flex';
+        win.style.left = '20px';
+        win.style.top = '100px';
+        win.style.width = '400px';
+        win.style.height = '140px';
+        win.innerHTML = `
+            <div id="main-view-header" class="window-header">Main View</div>
+            <div class="window-content-container">
+                <div class="window-content-scaler">
+                    <div id="player-side">
+                        <img id="player-pokemon-sprite" class="battle-pokemon-sprite" />
+                        <div id="player-battle-hp-container" class="battle-hp-container"></div>
+                    </div>
+                    <div id="enemy-side">
+                        <img id="enemy-pokemon-sprite" class="battle-pokemon-sprite" />
+                        <div id="enemy-battle-hp-container" class="battle-hp-container"></div>
+                    </div>
+                </div>
+            </div>
+        `;
+        const playerHp = win.querySelector('#player-battle-hp-container');
+        const enemyHp = win.querySelector('#enemy-battle-hp-container');
+        win.getBoundingClientRect = () => {
+            const l = parseFloat(win.style.left);
+            const t = parseFloat(win.style.top);
+            return { left: l, top: t, width: 400, height: 140, right: l + 400, bottom: t + 140 };
+        };
+        // Player HP bar starts 70px inside left edge; enemy HP bar ends 86px before right edge (314px) and 8px before bottom (132px)
+        playerHp.getBoundingClientRect = () => {
+            const l = parseFloat(win.style.left);
+            const t = parseFloat(win.style.top);
+            return { left: l + 70, top: t + 115, width: 112, height: 17, right: l + 182, bottom: t + 132 };
+        };
+        enemyHp.getBoundingClientRect = () => {
+            const l = parseFloat(win.style.left);
+            const t = parseFloat(win.style.top);
+            return { left: l + 202, top: t + 115, width: 112, height: 17, right: l + 314, bottom: t + 132 };
+        };
+        document.body.appendChild(win);
+
+        try {
+            windowManager.containerWidth = 1920;
+            windowManager.containerHeight = 1080;
+            windowManager.registerWindow('main-view-window', 'main-view-header', '20px', '100px');
+
+            // 1. Left edge: small pull past 0 (-15px) soft-locks at 0px
+            playerHp.dispatchEvent(new MouseEvent('mousedown', { clientX: 100, clientY: 220, bubbles: true }));
+            document.dispatchEvent(new MouseEvent('mousemove', { clientX: 65, clientY: 220, bubbles: true })); // rawLeft = 20 - 35 = -15
+            expect(win.style.left).toBe('0px');
+
+            // Force further left (-30px < -25px): lock breaks, player HP bar can touch x=0 (-70px)
+            document.dispatchEvent(new MouseEvent('mousemove', { clientX: 50, clientY: 220, bubbles: true })); // rawLeft = -30
+            expect(win.style.left).toBe('-30px');
+            document.dispatchEvent(new MouseEvent('mousemove', { clientX: -20, clientY: 220, bubbles: true })); // rawLeft = -100 -> clamped to -70
+            expect(win.style.left).toBe('-70px');
+            document.dispatchEvent(new MouseEvent('mouseup', { bubbles: true }));
+
+            // constrainWindow preserves -70px
+            windowManager.constrainWindow(win);
+            expect(win.style.left).toBe('-70px');
+
+            // 2. Right edge: drag near right border (1520 = 1920 - 400)
+            win.style.left = '1500px';
+            enemyHp.dispatchEvent(new MouseEvent('mousedown', { clientX: 1750, clientY: 220, bubbles: true }));
+            document.dispatchEvent(new MouseEvent('mousemove', { clientX: 1785, clientY: 220, bubbles: true })); // rawLeft = 1535 (+15 past 1520) -> soft lock at 1520
+            expect(win.style.left).toBe('1520px');
+            document.dispatchEvent(new MouseEvent('mousemove', { clientX: 1850, clientY: 220, bubbles: true })); // rawLeft = 1600 -> breaks lock
+            expect(win.style.left).toBe('1600px');
+            document.dispatchEvent(new MouseEvent('mousemove', { clientX: 1900, clientY: 220, bubbles: true })); // clamped to 1520 + 86 = 1606
+            expect(win.style.left).toBe('1606px');
+            document.dispatchEvent(new MouseEvent('mouseup', { bubbles: true }));
+
+            // constrainWindow preserves 1606px
+            windowManager.constrainWindow(win);
+            expect(win.style.left).toBe('1606px');
+
+            // 3. Bottom edge: small pull past 940 soft-locks at 940px before breaking to 948px
+            win.style.top = '930px';
+            enemyHp.dispatchEvent(new MouseEvent('mousedown', { clientX: 1850, clientY: 1050, bubbles: true }));
+            document.dispatchEvent(new MouseEvent('mousemove', { clientX: 1850, clientY: 1075, bubbles: true })); // rawTop = 955 (+15 past 940) -> soft lock at 940
+            expect(win.style.top).toBe('940px');
+            document.dispatchEvent(new MouseEvent('mousemove', { clientX: 1850, clientY: 1095, bubbles: true })); // rawTop = 975 (> 940 + 25) -> breaks lock, clamped to 948
+            expect(win.style.top).toBe('948px');
+            document.dispatchEvent(new MouseEvent('mouseup', { bubbles: true }));
+        } finally {
+            Object.defineProperty(window, 'innerWidth', { value: originalInnerWidth, configurable: true });
+            Object.defineProperty(window, 'innerHeight', { value: originalInnerHeight, configurable: true });
+            window.__piwIsDraggingWindow = false;
+            win.remove();
+        }
+    });
 });
