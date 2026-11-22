@@ -422,12 +422,7 @@ export function showMap() {
         { name: 'Paldea', mapFile: '10 Paldea Map.png', width: 1280, height: 905 }
     ];
 
-    let unlockedRegions = regions
-        .filter(r => {
-            const coords = getRegionCoordinatesMap(r.name);
-            return r.name === state.currentRegionName || (coords && Object.keys(coords).length > 0);
-        })
-        .map(r => r.name);
+    let unlockedRegions = regions.map(r => r.name);
 
     if (unlockedRegions.includes('Johto')) { state.globalStats.hasSeenJohtoMap = true; }
 
