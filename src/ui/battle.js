@@ -627,6 +627,7 @@ function updateEnemyUI(enemy, battleSystem, glassTier, isSearching = false) {
         if (hpContainerEnemy) hpContainerEnemy.style.display = 'none';
         if (enemyDataModals) enemyDataModals.style.display = 'none';
         if (elEnemySide) {
+            elEnemySide.dataset.sliding = 'false';
             elEnemySide.style.transition = 'none';
             elEnemySide.style.left = '100%';
             elEnemySide.style.opacity = '1';
