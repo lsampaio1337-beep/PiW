@@ -39,7 +39,7 @@ jest.mock('../../src/ui.js', () => ({
 
 import { state } from '../../src/state.js';
 import { hydratePokemonInfo } from '../../src/utils/pokemonDataLoader.js';
-import { evolvePokemon, showPokemonStats, showMegaEvolveModal, megaEvolvePokemon } from '../../src/ui/pokemonStats.js';
+import { evolvePokemon, showPokemonStats, showMegaEvolveModal, megaEvolvePokemon, showGigantamaxModal, gigantamaxPokemon } from '../../src/ui/pokemonStats.js';
 import { buildEvolutionLineHtml } from '../../src/ui/pokedex.js';
 
 describe('Arceus Variation Evolutions', () => {
@@ -291,5 +291,132 @@ describe('Mega Evolution UI & Stacking Timer', () => {
         expect(overlay.style.display).toBe('flex');
         expect(innerWin.style.display).toBe('flex');
         expect(mockUpdateUI).toHaveBeenCalledTimes(2);
+    });
+});
+
+describe('Gigantamax UI Integration', () => {
+    const pokemonInfoPath = path.resolve(process.cwd(), 'data/pokemon_info.json');
+    const pokemonInfo = JSON.parse(fs.readFileSync(pokemonInfoPath, 'utf8'));
+
+    beforeEach(() => {
+        jest.clearAllMocks();
+        const hydrated = hydratePokemonInfo(pokemonInfo, {}, null);
+        state.currentRegionName = 'Galar';
+        state.config = {
+            pokemonData: hydrated.pokemonData,
+            pokemonMap: hydrated.pokemonMap,
+            moves: hydrated.moves,
+            pokemonInfo,
+        };
+        state.stats = {
+            seenSpecies: {},
+            caughtSpecies: { Charizard: true },
+            caughtSpeciesCount: 1,
+            caught: 1,
+            caughtShiniesSpecies: {},
+            caughtShiniesSpeciesCount: 0
+        };
+        state.backpack = {
+            stones: {
+                'Fire Stone': 3,
+                'Flying Stone': 3,
+                'HP Up': 2,
+            }
+        };
+        state.party = [];
+        global.window = {
+            getSpriteUrl: (id) => `sprite_${id}.png`,
+            showModal: (...args) => mockShowModal(...args),
+            showGameAlert: jest.fn(),
+        };
+    });
+
+    test('showPokemonStats shows Gigantamax button only in Galar', () => {
+        const charizard = {
+            uuid: 'gmax-ui-1',
+            id: 6,
+            name: 'Charizard',
+            types: ['Fire', 'Flying'],
+            level: 50,
+            quality: 1.4,
+            ivs: { hp: 50, atk: 50, def: 50, spa: 50, spd: 50, spe: 50 },
+            currentStats: { hp: 150, atk: 100, def: 90, spa: 120, spd: 95, spe: 110 },
+            maxHp: 150,
+            currentHp: 150,
+            vitamins: {}
+        };
+        state.party = [charizard];
+
+        showPokemonStats(0, 'party');
+        expect(mockShowModal.mock.calls[0][1]).toContain('Gigantamax');
+        expect(mockShowModal.mock.calls[0][1]).toContain("window.showGigantamaxModal('party', 0)");
+        expect(mockShowModal.mock.calls[0][1]).not.toContain('Mega Evolve');
+
+        mockShowModal.mockClear();
+        state.currentRegionName = 'Kalos';
+        showPokemonStats(0, 'party');
+        expect(mockShowModal.mock.calls[0][1]).not.toContain("window.showGigantamaxModal('party', 0)");
+    });
+
+    test('gigantamaxPokemon doubles HP, stacks +5m without double-scaling HP, and HP Up preserves 2x multiplier', () => {
+        const charizard = {
+            uuid: 'gmax-ui-2',
+            id: 6,
+            name: 'Charizard',
+            types: ['Fire', 'Flying'],
+            level: 50,
+            quality: 1.4,
+            ivs: { hp: 50, atk: 50, def: 50, spa: 50, spd: 50, spe: 50 },
+            currentStats: { hp: 0, atk: 0, def: 0, spa: 0, spd: 0, spe: 0 },
+            maxHp: 0,
+            currentHp: 0,
+            vitamins: {}
+        };
+        const { applyPokemonBaseData } = require('../../src/utils/megaEvolution.js');
+        applyPokemonBaseData(charizard, state.config.pokemonMap.get('0006'), { healToMax: true });
+        const baseMaxHp = charizard.maxHp;
+        charizard.currentHp = baseMaxHp - 20;
+        state.party = [charizard];
+
+        const overlay = document.createElement('div');
+        overlay.style.display = 'none';
+        const innerWin = document.createElement('div');
+        innerWin.style.display = 'none';
+        const innerTitle = document.createElement('span');
+        const innerContent = document.createElement('div');
+        const domMap = {
+            'pokemon-vitamins-inner-overlay': overlay,
+            'pokemon-vitamins-inner-window': innerWin,
+            'pokemon-vitamins-inner-title': innerTitle,
+            'pokemon-vitamins-inner-content': innerContent,
+        };
+        document.getElementById = jest.fn(id => domMap[id] || null);
+
+        showGigantamaxModal('party', 0);
+        expect(innerTitle.textContent).toBe('Gigantamax Charizard');
+        expect(innerContent.innerHTML).toContain('Gigantamax<br>+100% HP');
+
+        gigantamaxPokemon('party', 0, '0006.1');
+        expect(charizard.id).toBe('0006.1');
+        expect(charizard.name).toBe('Charizard (Gigantamax)');
+        expect(charizard.maxHp).toBe(baseMaxHp * 2);
+        expect(charizard.currentHp).toBe((baseMaxHp - 20) * 2);
+        expect(state.backpack.stones['Fire Stone']).toBe(2);
+        expect(state.backpack.stones['Flying Stone']).toBe(2);
+        expect(state.stats.caughtSpecies['Charizard (Gigantamax)']).toBe(true);
+        expect(innerContent.innerHTML).toContain('Gigantamax Active:');
+        const firstExp = charizard.gmaxExpiresAt;
+
+        // Second consume extends timer without doubling HP again
+        gigantamaxPokemon('party', 0, '0006.1');
+        expect(charizard.gmaxExpiresAt).toBe(firstExp + 5 * 60 * 1000);
+        expect(charizard.maxHp).toBe(baseMaxHp * 2);
+        expect(charizard.currentHp).toBe((baseMaxHp - 20) * 2);
+
+        // Consuming HP Up while Gigantamaxed keeps the 2x HP bonus
+        window.showVitaminsModal = jest.fn();
+        window.useVitaminBatch('party', 0, 'HP Up', 'hp', 1);
+        expect(charizard.maxHp).toBeGreaterThan(baseMaxHp * 2);
+        expect(charizard.maxHp % 2).toBe(0);
     });
 });

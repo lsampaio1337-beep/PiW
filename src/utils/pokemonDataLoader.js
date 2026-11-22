@@ -116,6 +116,7 @@ export function hydratePokemonInfo(pokemonInfo, existingMoves = {}, pokedexIndex
         const movesetObj = raw.moveset ?? baseRaw?.moveset ?? {};
         const evolutions = raw.evolutions ?? [];
         const megaEvolutions = raw.megaEvolutions ?? [];
+        const gigantamaxForms = raw.gigantamaxForms ?? [];
 
         const numId = isVariation ? Number(canonId) : parseInt(canonId, 10);
         const record = {
@@ -131,6 +132,7 @@ export function hydratePokemonInfo(pokemonInfo, existingMoves = {}, pokedexIndex
             spe: stats[5],
             evolutions,
             megaEvolutions,
+            gigantamaxForms,
             learnset: pickDefaultLearnset(movesetObj, mergedMoves),
             _moveset: movesetObj,
             _sprite: raw.sprite ?? null,

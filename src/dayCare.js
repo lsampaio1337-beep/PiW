@@ -1,5 +1,6 @@
 // src/dayCare.js
 import { calculateHP, calculateStat, calculateEVXP, calculateEVM, calculatePP } from './mathEngine.js';
+import { getGigantamaxHpMultiplier } from './utils/gigantamax.js';
 
 class DayCare {
     constructor(gameState) {
@@ -104,7 +105,7 @@ class DayCare {
         if (!baseData) return;
 
         const vitamins = p.vitamins || {};
-        const newMaxHp = calculateHP(baseData.hp, p.ivs.hp, p.level, p.quality, vitamins.hp || 0);
+        const newMaxHp = calculateHP(baseData.hp, p.ivs.hp, p.level, p.quality, vitamins.hp || 0) * getGigantamaxHpMultiplier(p);
         p.maxHp = newMaxHp;
         if (typeof p.currentHp === 'number') {
             p.currentHp = Math.min(p.currentHp, newMaxHp);

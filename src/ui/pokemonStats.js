@@ -14,6 +14,16 @@ import {
     applyPokemonBaseData,
     getPokemonConfigById
 } from '../utils/megaEvolution.js';
+import {
+    isGigantamaxRegion,
+    isPokemonGigantamaxed,
+    getGigantamaxRemainingMs,
+    getGigantamaxTargetIdsForPokemon,
+    getGigantamaxStoneRequirements,
+    getGigantamaxHpMultiplier,
+    getGigantamaxEffectDescription,
+    applyGigantamaxForm,
+} from '../utils/gigantamax.js';
 
 let activeStatsContext = null;
 
@@ -171,9 +181,24 @@ function getActionsHtml(p, pData, location, idx) {
         `;
     }
 
+    const gmaxTargets = getGigantamaxTargetIdsForPokemon(p, pData, state);
+    let gmaxHtml = "";
+    if (gmaxTargets.length > 0) {
+        const isGmax = isPokemonGigantamaxed(p);
+        const gmaxTimerHtml = isGmax
+            ? `<span class="js-gmax-btn-timer" data-gmax-uuid="${escapeHTML(p.uuid || '')}" style="font-size: 11px; opacity: 0.92; font-weight: 600;">Active: ${formatMegaCountdown(getGigantamaxRemainingMs(p))}</span>`
+            : '';
+        gmaxHtml = `
+            <div>
+                <button class="piw-btn piw-btn-purple" onclick="window.showGigantamaxModal('${location}', ${idx})" style="min-width: 200px; min-height: 46px; flex-direction: column;"><span>Gigantamax</span>${gmaxTimerHtml}</button>
+            </div>
+        `;
+    }
+
     return `<div style="margin-top: 14px; border-top: var(--piw-border-subtle); padding: 14px 0 4px 0; display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 12px;">
         ${evolveHtml}
         ${megaHtml}
+        ${gmaxHtml}
         <div>
             <button class="piw-btn piw-btn-teal" onclick="window.showVitaminsModal('${location}', ${idx})" style="min-width: 200px; min-height: 46px;">Consume Vitamins</button>
         </div>
@@ -224,11 +249,16 @@ function getBasicInfoHtml(p, sumIV, navControlsHtml = '') {
     const megaBadgeHtml = isPokemonMegaEvolved(p)
         ? `<div class="piw-badge is-purple js-mega-stats-timer" data-mega-uuid="${escapeHTML(p.uuid || '')}">Mega: ${formatMegaCountdown(getMegaRemainingMs(p))}</div>`
         : '';
+    const gmaxDesc = isPokemonGigantamaxed(p) ? getGigantamaxEffectDescription(p.id) : '';
+    const gmaxBadgeHtml = isPokemonGigantamaxed(p)
+        ? `<div class="piw-badge is-purple js-gmax-stats-timer" data-gmax-uuid="${escapeHTML(p.uuid || '')}"${gmaxDesc ? ` title="${escapeHTML(gmaxDesc)}"` : ''}>G-Max: ${formatMegaCountdown(getGigantamaxRemainingMs(p))}</div>`
+        : '';
     return `
         <div class="pstats-card" style="text-align: center; flex: 1; font-size: 13.5px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 6px;">
             ${navControlsHtml}
             <img class="${glowClass}" src="${window.getSpriteUrl(p.id, p.qualityName === 'Shiny')}" style="width: 96px; height: 96px; object-fit: contain;">
             ${megaBadgeHtml}
+            ${gmaxBadgeHtml}
             <div style="margin: 2px 0;"><b>Type:</b> ${p.types.map(t => formatType(t)).join(' ')}</div>
             <div class="piw-badge ${qBadgeClass}">${p.qualityName || 'Weak'} (Q=${p.quality.toFixed(2)})</div>
             <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin-top: 2px;">
@@ -596,52 +626,65 @@ window.showEvolveConfirmModal = function(location, idx, toId) {
     openStatsInnerModal(`Evolve ${p.name}`, html);
 };
 
-export function showMegaEvolveModal(location, idx) {
+function showTimedFormModal(location, idx, cfg) {
     const list = state[location];
     if (!list || !list[idx]) return;
     const p = list[idx];
     const pData = getPokemonConfig(p.id, state);
     if (!pData) return;
 
-    const megaTargets = getMegaTargetIdsForPokemon(p, pData, state);
-    if (megaTargets.length === 0) return;
+    const targets = cfg.getTargets(p, pData, state);
+    if (targets.length === 0) return;
 
-    const fromData = (p.megaOriginalId !== undefined && p.megaOriginalId !== null)
-        ? (getPokemonConfig(p.megaOriginalId, state) || pData)
+    const origId = p[cfg.originalIdKey];
+    const fromData = (origId !== undefined && origId !== null)
+        ? (getPokemonConfig(origId, state) || pData)
         : pData;
     const fromId = (fromData.canonId && fromData.canonId.includes('.')) ? fromData.canonId : fromData.id;
     const isShiny = !!(p.isShiny || p.quality === 'Shiny' || p.qualityName === 'Shiny');
     const fromImgPath = window.getSpriteUrl(fromId, isShiny);
 
-    const isMega = isPokemonMegaEvolved(p);
-    const remMs = getMegaRemainingMs(p);
-    const timerBannerHtml = isMega
-        ? `<div id="mega-modal-timer" class="piw-badge is-purple" data-mega-uuid="${escapeHTML(p.uuid || '')}">Mega Active: ${formatMegaCountdown(remMs)} (+5:00 per consume)</div>`
-        : `<div id="mega-modal-timer" class="piw-badge is-blue" data-mega-uuid="${escapeHTML(p.uuid || '')}">Duration: 05:00 (+5:00 per consume)</div>`;
+    const isActive = cfg.isActive(p);
+    const remMs = cfg.getRemainingMs(p);
+    const timerBannerHtml = isActive
+        ? `<div id="${cfg.bannerId}" class="piw-badge ${cfg.activeBadgeClass}" ${cfg.dataUuidAttr}="${escapeHTML(p.uuid || '')}">${cfg.activeLabel}: ${formatMegaCountdown(remMs)} (+5:00 per consume)</div>`
+        : `<div id="${cfg.bannerId}" class="piw-badge is-blue" ${cfg.dataUuidAttr}="${escapeHTML(p.uuid || '')}">${cfg.inactiveText}</div>`;
 
-    const cardsHtml = megaTargets.map(targetId => {
+    let anyRevealed = false;
+    const effectTexts = [];
+    const cardsHtml = targets.map(targetId => {
         const toData = getPokemonConfig(targetId, state);
         if (!toData) return '';
-        const req = getMegaStoneRequirements(fromData, toData, state);
+        const req = cfg.getStoneReqs(fromData, toData, state);
         const isRevealed = Boolean((state.stats?.seenSpecies?.[toData.name]) || (state.stats?.caughtSpecies?.[toData.name]));
+        if (isRevealed) anyRevealed = true;
+        if (cfg.getEffectText) {
+            const effText = cfg.getEffectText(targetId);
+            if (effText) effectTexts.push(isRevealed ? effText : '???');
+        }
         const toName = isRevealed ? escapeHTML(toData.name) : "???";
         const toImgPath = window.getSpriteUrl(targetId, isShiny);
         return buildEvolutionCardHtml({
             fromImgPath,
             fromName: fromData.name,
-            badgeHtml: `<span class="piw-badge is-blue" style="text-align: center; line-height: 1.15;">Mega<br>Evolution</span>`,
+            badgeHtml: cfg.cardBadgeHtml,
             toImgPath,
             toName,
             isRevealed,
-            canConfirm: req.canMega,
-            onclickCode: `window.megaEvolvePokemon('${location}', ${idx}, '${targetId}')`,
+            canConfirm: req[cfg.canConfirmKey],
+            onclickCode: `window.${cfg.handlerName}('${location}', ${idx}, '${targetId}')`,
             stonesHtml: req.missingStonesHtml
         });
     }).join('');
 
+    const effectBannerHtml = (cfg.getEffectText && effectTexts.length > 0)
+        ? `<div style="font-size: 12px; color: #e2e8f0; text-align: center; opacity: 0.92;">Bonus: ${escapeHTML(anyRevealed ? effectTexts.join(' / ') : '???')}</div>`
+        : '';
+
     const html = `
         <div style="display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 6px 10px 10px 10px;">
             ${timerBannerHtml}
+            ${effectBannerHtml}
             <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; max-height: 60vh; overflow-y: auto; width: 100%; padding: 4px;">
                 ${cardsHtml}
             </div>
@@ -649,12 +692,12 @@ export function showMegaEvolveModal(location, idx) {
         </div>
     `;
 
-    if (activeStatsContext) activeStatsContext.innerModal = 'mega';
-    openStatsInnerModal(`Mega Evolve ${fromData.name}`, html, 'window-mega-evolve');
+    if (activeStatsContext) activeStatsContext.innerModal = cfg.innerModalKey;
+    openStatsInnerModal(`${cfg.modalTitlePrefix} ${fromData.name}`, html, cfg.modalId);
 }
 
-export function megaEvolvePokemon(location, idx, toId) {
-    if (!isMegaRegion(state.currentRegionName)) return;
+function activateTimedForm(location, idx, toId, cfg) {
+    if (!cfg.isAllowedRegion(state.currentRegionName)) return;
     const list = state[location];
     if (!list || !list[idx]) return;
 
@@ -662,17 +705,18 @@ export function megaEvolvePokemon(location, idx, toId) {
     const currentData = getPokemonConfig(p.id, state);
     if (!currentData) return;
 
-    const megaTargets = getMegaTargetIdsForPokemon(p, currentData, state);
-    if (!megaTargets.some(id => String(id) === String(toId))) return;
+    const targets = cfg.getTargets(p, currentData, state);
+    if (!targets.some(id => String(id) === String(toId))) return;
 
     const targetData = getPokemonConfig(toId, state);
     if (!targetData) return;
 
-    const sourceData = (p.megaOriginalId !== undefined && p.megaOriginalId !== null)
-        ? (getPokemonConfig(p.megaOriginalId, state) || currentData)
+    const origId = p[cfg.originalIdKey];
+    const sourceData = (origId !== undefined && origId !== null)
+        ? (getPokemonConfig(origId, state) || currentData)
         : currentData;
-    const req = getMegaStoneRequirements(sourceData, targetData, state);
-    if (!req.canMega) {
+    const req = cfg.getStoneReqs(sourceData, targetData, state);
+    if (!req[cfg.canConfirmKey]) {
         if (window.showGameAlert) window.showGameAlert("Requirements not met!");
         return;
     }
@@ -684,12 +728,73 @@ export function megaEvolvePokemon(location, idx, toId) {
         state.backpack.stones[stoneName] = (state.backpack.stones[stoneName] || 0) - req.stonesReq;
     }
 
-    applyMegaForm(p, targetData);
+    cfg.applyForm(p, targetData);
     markEvolvedSpeciesCaught(targetData.name, p.quality >= 2 || p.qualityName === 'Shiny');
 
     updateUI();
     showPokemonStats(idx, location);
-    showMegaEvolveModal(location, idx);
+    cfg.reopenModal(location, idx);
+}
+
+const MEGA_MODAL_CFG = {
+    originalIdKey: 'megaOriginalId',
+    getTargets: getMegaTargetIdsForPokemon,
+    isActive: isPokemonMegaEvolved,
+    getRemainingMs: getMegaRemainingMs,
+    getStoneReqs: getMegaStoneRequirements,
+    canConfirmKey: 'canMega',
+    bannerId: 'mega-modal-timer',
+    activeBadgeClass: 'is-purple',
+    dataUuidAttr: 'data-mega-uuid',
+    activeLabel: 'Mega Active',
+    inactiveText: 'Duration: 05:00 (+5:00 per consume)',
+    cardBadgeHtml: `<span class="piw-badge is-blue" style="text-align: center; line-height: 1.15;">Mega<br>Evolution</span>`,
+    handlerName: 'megaEvolvePokemon',
+    innerModalKey: 'mega',
+    modalTitlePrefix: 'Mega Evolve',
+    modalId: 'window-mega-evolve',
+    isAllowedRegion: isMegaRegion,
+    applyForm: applyMegaForm,
+    reopenModal: (loc, i) => showMegaEvolveModal(loc, i),
+};
+
+const GMAX_MODAL_CFG = {
+    originalIdKey: 'gmaxOriginalId',
+    getTargets: getGigantamaxTargetIdsForPokemon,
+    isActive: isPokemonGigantamaxed,
+    getRemainingMs: getGigantamaxRemainingMs,
+    getStoneReqs: getGigantamaxStoneRequirements,
+    canConfirmKey: 'canGigantamax',
+    bannerId: 'gmax-modal-timer',
+    activeBadgeClass: 'is-purple',
+    dataUuidAttr: 'data-gmax-uuid',
+    activeLabel: 'Gigantamax Active',
+    inactiveText: 'Duration: 05:00 (+5:00 per consume) · +100% Max HP',
+    cardBadgeHtml: `<span class="piw-badge is-blue" style="text-align: center; line-height: 1.15;">Gigantamax<br>+100% HP</span>`,
+    handlerName: 'gigantamaxPokemon',
+    innerModalKey: 'gmax',
+    modalTitlePrefix: 'Gigantamax',
+    modalId: 'window-gigantamax',
+    isAllowedRegion: isGigantamaxRegion,
+    applyForm: applyGigantamaxForm,
+    getEffectText: getGigantamaxEffectDescription,
+    reopenModal: (loc, i) => showGigantamaxModal(loc, i),
+};
+
+export function showMegaEvolveModal(location, idx) {
+    showTimedFormModal(location, idx, MEGA_MODAL_CFG);
+}
+
+export function megaEvolvePokemon(location, idx, toId) {
+    activateTimedForm(location, idx, toId, MEGA_MODAL_CFG);
+}
+
+export function showGigantamaxModal(location, idx) {
+    showTimedFormModal(location, idx, GMAX_MODAL_CFG);
+}
+
+export function gigantamaxPokemon(location, idx, toId) {
+    activateTimedForm(location, idx, toId, GMAX_MODAL_CFG);
 }
 
 export function refreshPokemonStatsIfMegaReverted(revertedItems) {
@@ -704,11 +809,15 @@ export function refreshPokemonStatsIfMegaReverted(revertedItems) {
     showPokemonStats(activeStatsContext.idx, activeStatsContext.location);
     if (prevInner === 'mega' && isMegaRegion(state.currentRegionName)) {
         showMegaEvolveModal(activeStatsContext.location, activeStatsContext.idx);
+    } else if (prevInner === 'gmax' && isGigantamaxRegion(state.currentRegionName)) {
+        showGigantamaxModal(activeStatsContext.location, activeStatsContext.idx);
     }
 }
 
 window.showMegaEvolveModal = showMegaEvolveModal;
 window.megaEvolvePokemon = megaEvolvePokemon;
+window.showGigantamaxModal = showGigantamaxModal;
+window.gigantamaxPokemon = gigantamaxPokemon;
 
 window.showVitaminsModal = function(location, idx) {
     const list = state[location];
@@ -803,7 +912,8 @@ window.useVitaminBatch = function(location, idx, vitaminName, statKey, count = 1
     if (pBase) {
         if (statKey === 'hp') {
             const oldMax = p.maxHp;
-            p.maxHp = mathEngine.calculateHP(pBase.hp, p.ivs.hp, p.level, p.quality, p.vitamins.hp);
+            p.maxHp = mathEngine.calculateHP(pBase.hp, p.ivs.hp, p.level, p.quality, p.vitamins.hp) * getGigantamaxHpMultiplier(p);
+            if (p.currentStats) p.currentStats.hp = p.maxHp;
             p.currentHp = Math.min(p.maxHp, p.currentHp + (p.maxHp - oldMax));
         } else {
             p.currentStats[statKey] = mathEngine.calculateStat(pBase[statKey], p.ivs[statKey], p.level, p.quality, p.vitamins[statKey]);

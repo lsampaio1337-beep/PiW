@@ -93,8 +93,9 @@ import './ui/multiplayer.js';
 import { showGiftModal } from './ui/gift.js';
 import { showMap, navigateToLocation, showMapTooltip, hideMapTooltip, openGalarDlcModal } from './ui/map.js';
 import { showPokedex, showDexEntry, showSmartCaptureMode, setSmartCaptureShinyMode, showSmartCaptureBallSelection, selectSmartCaptureBall, selectGlobalSmartCaptureBall } from './ui/pokedex.js';
-import { showPokemonStats, showPokemonStatsByUuid, evolvePokemon, showMegaEvolveModal, megaEvolvePokemon, refreshPokemonStatsIfMegaReverted } from './ui/pokemonStats.js';
+import { showPokemonStats, showPokemonStatsByUuid, evolvePokemon, showMegaEvolveModal, megaEvolvePokemon, showGigantamaxModal, gigantamaxPokemon, refreshPokemonStatsIfMegaReverted } from './ui/pokemonStats.js';
 import { checkMegaEvolutionTimers, formatMegaCountdown, getMegaRemainingMs, isPokemonMegaEvolved } from './utils/megaEvolution.js';
+import { checkGigantamaxTimers, getGigantamaxRemainingMs, isPokemonGigantamaxed } from './utils/gigantamax.js';
 import { showBonusCandyModal } from './ui/bonusCandy.js';
 window.showBonusCandyModal = showBonusCandyModal;
 window.showGiftModal = showGiftModal;
@@ -148,6 +149,8 @@ window.showPokemonStatsByUuid = showPokemonStatsByUuid;
 window.evolvePokemon = evolvePokemon;
 window.showMegaEvolveModal = showMegaEvolveModal;
 window.megaEvolvePokemon = megaEvolvePokemon;
+window.showGigantamaxModal = showGigantamaxModal;
+window.gigantamaxPokemon = gigantamaxPokemon;
 window.showSettings = showSettings;
 window.exportLog = exportLog;
 window.exportData = exportData;
@@ -1946,7 +1949,10 @@ function _findPokemonByUuidInState(uuid) {
 }
 
 function _tickMegaEvolutions() {
-    const reverted = checkMegaEvolutionTimers(state);
+    const reverted = [
+        ...checkMegaEvolutionTimers(state),
+        ...checkGigantamaxTimers(state),
+    ];
     if (reverted.length > 0) {
         updateUI();
         refreshPokemonStatsIfMegaReverted(reverted);
@@ -1965,20 +1971,47 @@ function _tickMegaEvolutions() {
 
     if (typeof document === 'undefined' || typeof document.querySelectorAll !== 'function') return;
     const now = Date.now();
-    document.querySelectorAll('[data-mega-uuid]').forEach(el => {
-        const uuid = el.dataset.megaUuid;
-        const p = _findPokemonByUuidInState(uuid);
-        if (!p || !isPokemonMegaEvolved(p, now)) return;
-        const formatted = formatMegaCountdown(getMegaRemainingMs(p, now));
-        if (el.id === 'mega-modal-timer') {
-            el.textContent = `Mega Active: ${formatted} (+5:00 per consume)`;
-        } else if (el.classList.contains('js-mega-btn-timer')) {
-            el.textContent = `Active: ${formatted}`;
-        } else if (el.classList.contains('js-mega-stats-timer')) {
-            el.textContent = `Mega: ${formatted}`;
-        } else if (el.classList.contains('js-mega-timer')) {
-            el.textContent = formatted;
-        }
+    const updateFormTimers = ({ attr, dataKey, isActive, getRemainingMs, modalId, activePrefix, statsPrefix, btnClass, statsClass, slotClass }) => {
+        document.querySelectorAll(`[${attr}]`).forEach(el => {
+            const uuid = el.dataset[dataKey];
+            const p = _findPokemonByUuidInState(uuid);
+            if (!p || !isActive(p, now)) return;
+            const formatted = formatMegaCountdown(getRemainingMs(p, now));
+            if (el.id === modalId) {
+                el.textContent = `${activePrefix}: ${formatted} (+5:00 per consume)`;
+            } else if (el.classList.contains(btnClass)) {
+                el.textContent = `Active: ${formatted}`;
+            } else if (el.classList.contains(statsClass)) {
+                el.textContent = `${statsPrefix}: ${formatted}`;
+            } else if (el.classList.contains(slotClass)) {
+                el.textContent = formatted;
+            }
+        });
+    };
+
+    updateFormTimers({
+        attr: 'data-mega-uuid',
+        dataKey: 'megaUuid',
+        isActive: isPokemonMegaEvolved,
+        getRemainingMs: getMegaRemainingMs,
+        modalId: 'mega-modal-timer',
+        activePrefix: 'Mega Active',
+        statsPrefix: 'Mega',
+        btnClass: 'js-mega-btn-timer',
+        statsClass: 'js-mega-stats-timer',
+        slotClass: 'js-mega-timer',
+    });
+    updateFormTimers({
+        attr: 'data-gmax-uuid',
+        dataKey: 'gmaxUuid',
+        isActive: isPokemonGigantamaxed,
+        getRemainingMs: getGigantamaxRemainingMs,
+        modalId: 'gmax-modal-timer',
+        activePrefix: 'Gigantamax Active',
+        statsPrefix: 'G-Max',
+        btnClass: 'js-gmax-btn-timer',
+        statsClass: 'js-gmax-stats-timer',
+        slotClass: 'js-gmax-timer',
     });
 }
 
@@ -1987,6 +2020,7 @@ function startGame() {
         globals.battleSystem.stop();
     }
     checkMegaEvolutionTimers(state);
+    checkGigantamaxTimers(state);
     let bs = new BattleSystem(state, updateUI);
     setBattleSystem(bs);
     updateUI();

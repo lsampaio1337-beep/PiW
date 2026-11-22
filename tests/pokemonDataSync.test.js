@@ -115,7 +115,7 @@ describe('Pokemon Data & Sprite Sync Integrity', () => {
         expect(Array.isArray(pokemonInfo.folders)).toBe(true);
         expect(pokemonInfo.folders.length).toBe(11);
         expect(pokemonInfo.moves && typeof pokemonInfo.moves).toBe('object');
-        expect(Object.keys(pokemonInfo.moves).length).toBe(620);
+        expect(Object.keys(pokemonInfo.moves).length).toBe(622);
 
         const entries = Object.entries(pokemonInfo.pokemon);
         expect(entries.length).toBe(1554);

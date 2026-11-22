@@ -3,6 +3,7 @@ import { state } from '../state.js';
 import * as mathEngine from '../mathEngine.js';
 import { updateUI, showModal } from '../ui.js';
 import { VITAMINS } from '../constants.js';
+import { getGigantamaxHpMultiplier } from '../utils/gigantamax.js';
 
 export function showCheatControlModal() {
     const html = `
@@ -184,7 +185,7 @@ export function cheatAction(action) {
             if (data) {
                 const oldMaxHp = p.maxHp;
                 const v = p.vitamins || {};
-                p.maxHp = mathEngine.calculateHP(data.hp, p.ivs.hp, p.level, p.quality, v.hp || 0);
+                p.maxHp = mathEngine.calculateHP(data.hp, p.ivs.hp, p.level, p.quality, v.hp || 0) * getGigantamaxHpMultiplier(p);
                 p.currentStats = {
                     hp: p.maxHp,
                     atk: mathEngine.calculateStat(data.atk, p.ivs.atk, p.level, p.quality, v.atk || 0),

@@ -753,7 +753,7 @@ describe('Mega Evolution Pokedex Variations & Evolution Line', () => {
         state.config.pokemonData = [
             { id: 4, canonId: '0004', kalos_id: 80, kanto_id: 4, name: 'Charmander', types: ['Fire'], hp: 39, atk: 52, def: 43, spa: 60, spd: 50, spe: 65, evolutions: [{ level: 16, to: 5 }] },
             { id: 5, canonId: '0005', kalos_id: 81, kanto_id: 5, name: 'Charmeleon', types: ['Fire'], hp: 58, atk: 64, def: 58, spa: 80, spd: 65, spe: 80, evolutions: [{ level: 36, to: 6 }] },
-            { id: 6, canonId: '0006', kalos_id: 82, kanto_id: 6, name: 'Charizard', types: ['Fire', 'Flying'], hp: 78, atk: 84, def: 78, spa: 109, spd: 85, spe: 100, evolutions: [], megaEvolutions: ['0006.2', '0006.3'] },
+            { id: 6, canonId: '0006', kalos_id: 82, galar_id: 380, kanto_id: 6, name: 'Charizard', types: ['Fire', 'Flying'], hp: 78, atk: 84, def: 78, spa: 109, spd: 85, spe: 100, evolutions: [], megaEvolutions: ['0006.2', '0006.3'], gigantamaxForms: ['0006.1'] },
             { id: 6.1, canonId: '0006.1', name: 'Charizard (Gigantamax)', types: ['Fire', 'Flying'], hp: 78, atk: 84, def: 78, spa: 109, spd: 85, spe: 100 },
             { id: 6.2, canonId: '0006.2', name: 'Mega Charizard X', types: ['Fire', 'Dragon'], hp: 78, atk: 130, def: 111, spa: 130, spd: 85, spe: 100 },
             { id: 6.3, canonId: '0006.3', name: 'Mega Charizard Y', types: ['Fire', 'Flying'], hp: 78, atk: 104, def: 78, spa: 159, spd: 115, spe: 100 },
@@ -810,6 +810,33 @@ describe('Mega Evolution Pokedex Variations & Evolution Line', () => {
         const charizardData = state.config.pokemonMap.get('0006');
         const kantoEvoHtml = buildEvolutionLineHtml(charizardData, state);
         expect(kantoEvoHtml).not.toContain('Mega<br>Evolution');
+        expect(kantoEvoHtml).not.toContain('Gigantamax');
+    });
+
+    it('shows Gigantamax variation and evolution branch only in Galar', () => {
+        const { showVariationsModal } = require('../../src/ui/pokedex.js');
+        state.currentRegionName = 'Galar';
+        state.stats.caughtSpecies['Charizard'] = true;
+        state.stats.caughtSpecies['Charizard (Gigantamax)'] = true;
+
+        showPokedex();
+        const galarHtml = showModal.mock.calls[0][1];
+        expect(galarHtml).toContain('title="Charizard Variations (1/1)"');
+        expect(galarHtml).toContain('window.showVariationsModal(6, event)');
+
+        jest.clearAllMocks();
+        showVariationsModal(6, { stopPropagation: jest.fn() });
+        const varModalHtml = showModal.mock.calls[0][1];
+        expect(varModalHtml).toContain('Charizard (Gigantamax)');
+        expect(varModalHtml).toContain('Caught: 1/1');
+        expect(varModalHtml).not.toContain('Mega Charizard');
+
+        const gmaxData = state.config.pokemonMap.get('0006.1');
+        const galarEvoHtml = buildEvolutionLineHtml(gmaxData, state);
+        expect(galarEvoHtml).toContain('Charizard');
+        expect(galarEvoHtml).toContain('Gigantamax');
+        expect(galarEvoHtml).toContain('Charizard (Gigantamax)');
+        expect(galarEvoHtml).not.toContain('Mega<br>Evolution');
     });
 });
 });

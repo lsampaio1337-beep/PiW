@@ -3167,6 +3167,16 @@
       "type": "Ice",
       "cat": "Special",
       "power": 65
+    },
+    "Wicked Blow": {
+      "type": "Dark",
+      "cat": "Physical",
+      "power": 80
+    },
+    "Surging Strikes": {
+      "type": "Water",
+      "cat": "Physical",
+      "power": 25
     }
   },
   "pokemon": {
@@ -5961,6 +5971,9 @@
       },
       "megaEvolutions": [
         "0003.2"
+      ],
+      "gigantamaxForms": [
+        "0003.1"
       ]
     },
     "0003.1": {
@@ -7113,6 +7126,9 @@
       "megaEvolutions": [
         "0006.2",
         "0006.3"
+      ],
+      "gigantamaxForms": [
+        "0006.1"
       ]
     },
     "0006.1": {
@@ -8168,6 +8184,9 @@
       },
       "megaEvolutions": [
         "0009.2"
+      ],
+      "gigantamaxForms": [
+        "0009.1"
       ]
     },
     "0009.1": {
@@ -8586,7 +8605,10 @@
             "Bug Buzz"
           ]
         ]
-      }
+      },
+      "gigantamaxForms": [
+        "0012.1"
+      ]
     },
     "0012.1": {
       "name": "Butterfree (Gigantamax)",
@@ -11621,7 +11643,10 @@
             "Thunder"
           ]
         ]
-      }
+      },
+      "gigantamaxForms": [
+        "0025.2"
+      ]
     },
     "0025.1": {
       "name": "Pikachu (Alola Cap)",
@@ -18904,8 +18929,87 @@
             50,
             "Feint"
           ]
+        ],
+        "Reg8": [
+          [
+            1,
+            "Fake Out"
+          ],
+          [
+            4,
+            "Feint"
+          ],
+          [
+            8,
+            "Scratch"
+          ],
+          [
+            12,
+            "Pay Day"
+          ],
+          [
+            16,
+            "Bite"
+          ],
+          [
+            24,
+            "Assurance"
+          ],
+          [
+            29,
+            "Fury Swipes"
+          ],
+          [
+            36,
+            "Slash"
+          ],
+          [
+            44,
+            "Play Rough"
+          ]
+        ],
+        "Reg10": [
+          [
+            1,
+            "Fake Out"
+          ],
+          [
+            4,
+            "Feint"
+          ],
+          [
+            8,
+            "Scratch"
+          ],
+          [
+            12,
+            "Pay Day"
+          ],
+          [
+            16,
+            "Bite"
+          ],
+          [
+            24,
+            "Assurance"
+          ],
+          [
+            29,
+            "Fury Swipes"
+          ],
+          [
+            36,
+            "Slash"
+          ],
+          [
+            44,
+            "Play Rough"
+          ]
         ]
-      }
+      },
+      "gigantamaxForms": [
+        "0052.3"
+      ]
     },
     "0052.1": {
       "name": "Meowth (Alolan Meowth)",
@@ -24145,7 +24249,10 @@
             "Close Combat"
           ]
         ]
-      }
+      },
+      "gigantamaxForms": [
+        "0068.1"
+      ]
     },
     "0068.1": {
       "name": "Machamp (Gigantamax)",
@@ -32630,6 +32737,9 @@
       },
       "megaEvolutions": [
         "0094.2"
+      ],
+      "gigantamaxForms": [
+        "0094.1"
       ]
     },
     "0094.1": {
@@ -34262,7 +34372,10 @@
             "Guillotine"
           ]
         ]
-      }
+      },
+      "gigantamaxForms": [
+        "0099.1"
+      ]
     },
     "0099.1": {
       "name": "Kingler (Gigantamax)",
@@ -45095,7 +45208,10 @@
             "Sheer Cold"
           ]
         ]
-      }
+      },
+      "gigantamaxForms": [
+        "0131.1"
+      ]
     },
     "0131.1": {
       "name": "Lapras (Gigantamax)",
@@ -45509,7 +45625,10 @@
             "Last Resort"
           ]
         ]
-      }
+      },
+      "gigantamaxForms": [
+        "0133.1"
+      ]
     },
     "0133.1": {
       "name": "Eevee (Gigantamax)",
@@ -48825,7 +48944,10 @@
             "Giga Impact"
           ]
         ]
-      }
+      },
+      "gigantamaxForms": [
+        "0143.1"
+      ]
     },
     "0143.1": {
       "name": "Snorlax (Gigantamax)",
@@ -166249,7 +166371,10 @@
             "Explosion"
           ]
         ]
-      }
+      },
+      "gigantamaxForms": [
+        "0569.1"
+      ]
     },
     "0569.1": {
       "name": "Garbodor (Gigantamax)",
@@ -215204,7 +215329,10 @@
             "Hyper Beam"
           ]
         ]
-      }
+      },
+      "gigantamaxForms": [
+        "0809.1"
+      ]
     },
     "0809.1": {
       "name": "Melmetal (Gigantamax)",
@@ -215520,7 +215648,10 @@
             "Boomburst"
           ]
         ]
-      }
+      },
+      "gigantamaxForms": [
+        "0812.1"
+      ]
     },
     "0812.1": {
       "name": "Rillaboom (Gigantamax)",
@@ -215848,7 +215979,10 @@
             "Double-Edge"
           ]
         ]
-      }
+      },
+      "gigantamaxForms": [
+        "0815.1"
+      ]
     },
     "0815.1": {
       "name": "Cinderace (Gigantamax)",
@@ -216136,7 +216270,10 @@
             "Hydro Pump"
           ]
         ]
-      }
+      },
+      "gigantamaxForms": [
+        "0818.1"
+      ]
     },
     "0818.1": {
       "name": "Inteleon (Gigantamax)",
@@ -216577,7 +216714,10 @@
             "Brave Bird"
           ]
         ]
-      }
+      },
+      "gigantamaxForms": [
+        "0823.1"
+      ]
     },
     "0823.1": {
       "name": "Corviknight (Gigantamax)",
@@ -216703,7 +216843,10 @@
             "Psychic"
           ]
         ]
-      }
+      },
+      "gigantamaxForms": [
+        "0826.1"
+      ]
     },
     "0826.1": {
       "name": "Orbeetle (Gigantamax)",
@@ -217259,7 +217402,10 @@
             "Head Smash"
           ]
         ]
-      }
+      },
+      "gigantamaxForms": [
+        "0834.1"
+      ]
     },
     "0834.1": {
       "name": "Drednaw (Gigantamax)",
@@ -217665,7 +217811,10 @@
             "Stone Edge"
           ]
         ]
-      }
+      },
+      "gigantamaxForms": [
+        "0839.1"
+      ]
     },
     "0839.1": {
       "name": "Coalossal (Gigantamax)",
@@ -217826,7 +217975,10 @@
             "Dragon Rush"
           ]
         ]
-      }
+      },
+      "gigantamaxForms": [
+        "0841.1"
+      ]
     },
     "0841.1": {
       "name": "Flapple (Gigantamax)",
@@ -217921,7 +218073,10 @@
             "Energy Ball"
           ]
         ]
-      }
+      },
+      "gigantamaxForms": [
+        "0842.1"
+      ]
     },
     "0842.1": {
       "name": "Appletun (Gigantamax)",
@@ -218104,7 +218259,10 @@
             "Sand Tomb"
           ]
         ]
-      }
+      },
+      "gigantamaxForms": [
+        "0844.1"
+      ]
     },
     "0844.1": {
       "name": "Sandaconda (Gigantamax)",
@@ -218515,61 +218673,110 @@
         9
       ],
       "moveset": {
-        "Reg2": [
-          [
-            1,
-            "Tackle"
-          ]
-        ],
-        "Reg3": [
-          [
-            1,
-            "Tackle"
-          ]
-        ],
-        "Reg4": [
-          [
-            1,
-            "Tackle"
-          ]
-        ],
-        "Reg5": [
-          [
-            1,
-            "Tackle"
-          ]
-        ],
-        "Reg6": [
-          [
-            1,
-            "Tackle"
-          ]
-        ],
-        "Reg7": [
-          [
-            1,
-            "Tackle"
-          ]
-        ],
         "Reg8": [
           [
             1,
-            "Tackle"
+            "Acid"
+          ],
+          [
+            1,
+            "Acid Spray"
+          ],
+          [
+            1,
+            "Belch"
+          ],
+          [
+            1,
+            "Flail"
+          ],
+          [
+            1,
+            "Nuzzle"
+          ],
+          [
+            1,
+            "Spark"
+          ],
+          [
+            1,
+            "Thunder Shock"
+          ],
+          [
+            8,
+            "Shock Wave"
+          ],
+          [
+            20,
+            "Venoshock"
+          ],
+          [
+            36,
+            "Discharge"
+          ],
+          [
+            40,
+            "Poison Jab"
+          ],
+          [
+            44,
+            "Overdrive"
+          ],
+          [
+            48,
+            "Boomburst"
           ]
         ],
         "Reg10": [
           [
             1,
-            "Tackle"
-          ]
-        ],
-        "Reg9": [
+            "Acid"
+          ],
           [
             1,
-            "Tackle"
+            "Acid Spray"
+          ],
+          [
+            1,
+            "Belch"
+          ],
+          [
+            1,
+            "Flail"
+          ],
+          [
+            1,
+            "Nuzzle"
+          ],
+          [
+            1,
+            "Thunder Shock"
+          ],
+          [
+            8,
+            "Shock Wave"
+          ],
+          [
+            36,
+            "Discharge"
+          ],
+          [
+            40,
+            "Poison Jab"
+          ],
+          [
+            44,
+            "Overdrive"
+          ],
+          [
+            48,
+            "Boomburst"
           ]
         ]
-      }
+      },
+      "gigantamaxForms": [
+        "0849.2"
+      ]
     },
     "0849.1": {
       "name": "Toxtricity (Amped Form)",
@@ -218679,7 +218886,10 @@
             "Boomburst"
           ]
         ]
-      }
+      },
+      "gigantamaxForms": [
+        "0849.2"
+      ]
     },
     "0849.2": {
       "name": "Toxtricity (Gigantamax)",
@@ -218792,7 +219002,10 @@
             "Boomburst"
           ]
         ]
-      }
+      },
+      "gigantamaxForms": [
+        "0849.2"
+      ]
     },
     "0850": {
       "name": "Sizzlipede",
@@ -218938,7 +219151,10 @@
             "Burn Up"
           ]
         ]
-      }
+      },
+      "gigantamaxForms": [
+        "0851.1"
+      ]
     },
     "0851.1": {
       "name": "Centiskorch (Gigantamax)",
@@ -219427,7 +219643,10 @@
             "Psychic"
           ]
         ]
-      }
+      },
+      "gigantamaxForms": [
+        "0858.1"
+      ]
     },
     "0858.1": {
       "name": "Hatterene (Gigantamax)",
@@ -219726,7 +219945,10 @@
             "Hammer Arm"
           ]
         ]
-      }
+      },
+      "gigantamaxForms": [
+        "0861.1"
+      ]
     },
     "0861.1": {
       "name": "Grimmsnarl (Gigantamax)",
@@ -220255,13 +220477,19 @@
             "Dazzling Gleam"
           ]
         ]
-      }
+      },
+      "gigantamaxForms": [
+        "0869.9"
+      ]
     },
     "0869.1": {
       "name": "Alcremie (Caramel Swirl)",
       "sprite": "Alcremie_CaramelSwirl",
       "folders": [
         10
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.2": {
@@ -220269,6 +220497,9 @@
       "sprite": "Alcremie_CaramelSwirlBerry",
       "folders": [
         7
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.3": {
@@ -220276,6 +220507,9 @@
       "sprite": "Alcremie_CaramelSwirlClover",
       "folders": [
         7
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.4": {
@@ -220283,6 +220517,9 @@
       "sprite": "Alcremie_CaramelSwirlFlower",
       "folders": [
         7
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.5": {
@@ -220290,6 +220527,9 @@
       "sprite": "Alcremie_CaramelSwirlLove",
       "folders": [
         7
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.6": {
@@ -220297,6 +220537,9 @@
       "sprite": "Alcremie_CaramelSwirlRibbon",
       "folders": [
         7
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.7": {
@@ -220304,6 +220547,9 @@
       "sprite": "Alcremie_CaramelSwirlStar",
       "folders": [
         7
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.8": {
@@ -220311,6 +220557,9 @@
       "sprite": "Alcremie_CaramelSwirlStrawberry",
       "folders": [
         7
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.9": {
@@ -220325,6 +220574,9 @@
       "sprite": "Alcremie_LemonCream",
       "folders": [
         10
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.11": {
@@ -220332,6 +220584,9 @@
       "sprite": "Alcremie_LemonCreamBerry",
       "folders": [
         7
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.12": {
@@ -220339,6 +220594,9 @@
       "sprite": "Alcremie_LemonCreamClover",
       "folders": [
         7
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.13": {
@@ -220346,6 +220604,9 @@
       "sprite": "Alcremie_LemonCreamFlower",
       "folders": [
         7
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.14": {
@@ -220353,6 +220614,9 @@
       "sprite": "Alcremie_LemonCreamLove",
       "folders": [
         7
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.15": {
@@ -220360,6 +220624,9 @@
       "sprite": "Alcremie_LemonCreamRibbon",
       "folders": [
         7
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.16": {
@@ -220367,6 +220634,9 @@
       "sprite": "Alcremie_LemonCreamStar",
       "folders": [
         7
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.17": {
@@ -220374,6 +220644,9 @@
       "sprite": "Alcremie_LemonCreamStrawberry",
       "folders": [
         7
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.18": {
@@ -220381,6 +220654,9 @@
       "sprite": "Alcremie_MatchaCream",
       "folders": [
         10
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.19": {
@@ -220388,6 +220664,9 @@
       "sprite": "Alcremie_MatchaCreamBerry",
       "folders": [
         7
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.20": {
@@ -220395,6 +220674,9 @@
       "sprite": "Alcremie_MatchaCreamClover",
       "folders": [
         7
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.21": {
@@ -220402,6 +220684,9 @@
       "sprite": "Alcremie_MatchaCreamFlower",
       "folders": [
         7
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.22": {
@@ -220409,6 +220694,9 @@
       "sprite": "Alcremie_MatchaCreamLove",
       "folders": [
         7
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.23": {
@@ -220416,6 +220704,9 @@
       "sprite": "Alcremie_MatchaCreamRibbon",
       "folders": [
         7
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.24": {
@@ -220423,6 +220714,9 @@
       "sprite": "Alcremie_MatchaCreamStar",
       "folders": [
         7
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.25": {
@@ -220430,6 +220724,9 @@
       "sprite": "Alcremie_MatchaCreamStrawberry",
       "folders": [
         7
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.26": {
@@ -220437,6 +220734,9 @@
       "sprite": "Alcremie_MintCream",
       "folders": [
         10
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.27": {
@@ -220444,6 +220744,9 @@
       "sprite": "Alcremie_MintCreamBerry",
       "folders": [
         7
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.28": {
@@ -220451,6 +220754,9 @@
       "sprite": "Alcremie_MintCreamClover",
       "folders": [
         7
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.29": {
@@ -220458,6 +220764,9 @@
       "sprite": "Alcremie_MintCreamFlower",
       "folders": [
         7
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.30": {
@@ -220465,6 +220774,9 @@
       "sprite": "Alcremie_MintCreamLove",
       "folders": [
         7
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.31": {
@@ -220472,6 +220784,9 @@
       "sprite": "Alcremie_MintCreamRibbon",
       "folders": [
         7
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.32": {
@@ -220479,6 +220794,9 @@
       "sprite": "Alcremie_MintCreamStar",
       "folders": [
         7
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.33": {
@@ -220486,6 +220804,9 @@
       "sprite": "Alcremie_MintCreamStrawberry",
       "folders": [
         7
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.34": {
@@ -220493,6 +220814,9 @@
       "sprite": "Alcremie_RainbowSwirl",
       "folders": [
         10
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.35": {
@@ -220500,6 +220824,9 @@
       "sprite": "Alcremie_RainbowSwirlBerry",
       "folders": [
         7
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.36": {
@@ -220507,6 +220834,9 @@
       "sprite": "Alcremie_RainbowSwirlClover",
       "folders": [
         7
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.37": {
@@ -220514,6 +220844,9 @@
       "sprite": "Alcremie_RainbowSwirlFlower",
       "folders": [
         7
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.38": {
@@ -220521,6 +220854,9 @@
       "sprite": "Alcremie_RainbowSwirlLove",
       "folders": [
         7
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.39": {
@@ -220528,6 +220864,9 @@
       "sprite": "Alcremie_RainbowSwirlRibbon",
       "folders": [
         7
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.40": {
@@ -220535,6 +220874,9 @@
       "sprite": "Alcremie_RainbowSwirlStar",
       "folders": [
         7
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.41": {
@@ -220542,6 +220884,9 @@
       "sprite": "Alcremie_RainbowSwirlStrawberry",
       "folders": [
         7
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.42": {
@@ -220549,6 +220894,9 @@
       "sprite": "Alcremie_RubyCream",
       "folders": [
         10
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.43": {
@@ -220556,6 +220904,9 @@
       "sprite": "Alcremie_RubyCreamBerry",
       "folders": [
         7
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.44": {
@@ -220563,6 +220914,9 @@
       "sprite": "Alcremie_RubyCreamClover",
       "folders": [
         7
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.45": {
@@ -220570,6 +220924,9 @@
       "sprite": "Alcremie_RubyCreamFlower",
       "folders": [
         7
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.46": {
@@ -220577,6 +220934,9 @@
       "sprite": "Alcremie_RubyCreamLove",
       "folders": [
         7
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.47": {
@@ -220584,6 +220944,9 @@
       "sprite": "Alcremie_RubyCreamRibbon",
       "folders": [
         7
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.48": {
@@ -220591,6 +220954,9 @@
       "sprite": "Alcremie_RubyCreamStar",
       "folders": [
         7
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.49": {
@@ -220598,6 +220964,9 @@
       "sprite": "Alcremie_RubyCreamStrawberry",
       "folders": [
         7
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.50": {
@@ -220605,6 +220974,9 @@
       "sprite": "Alcremie_RubySwirl",
       "folders": [
         10
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.51": {
@@ -220612,6 +220984,9 @@
       "sprite": "Alcremie_RubySwirlBerry",
       "folders": [
         7
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.52": {
@@ -220619,6 +220994,9 @@
       "sprite": "Alcremie_RubySwirlClover",
       "folders": [
         7
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.53": {
@@ -220626,6 +221004,9 @@
       "sprite": "Alcremie_RubySwirlFlower",
       "folders": [
         7
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.54": {
@@ -220633,6 +221014,9 @@
       "sprite": "Alcremie_RubySwirlLove",
       "folders": [
         7
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.55": {
@@ -220640,6 +221024,9 @@
       "sprite": "Alcremie_RubySwirlRibbon",
       "folders": [
         7
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.56": {
@@ -220647,6 +221034,9 @@
       "sprite": "Alcremie_RubySwirlStar",
       "folders": [
         7
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.57": {
@@ -220654,6 +221044,9 @@
       "sprite": "Alcremie_RubySwirlStrawberry",
       "folders": [
         7
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.58": {
@@ -220661,6 +221054,9 @@
       "sprite": "Alcremie_SaltedCream",
       "folders": [
         10
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.59": {
@@ -220668,6 +221064,9 @@
       "sprite": "Alcremie_SaltedCreamBerry",
       "folders": [
         7
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.60": {
@@ -220675,6 +221074,9 @@
       "sprite": "Alcremie_SaltedCreamClover",
       "folders": [
         7
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.61": {
@@ -220682,6 +221084,9 @@
       "sprite": "Alcremie_SaltedCreamFlower",
       "folders": [
         7
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.62": {
@@ -220689,6 +221094,9 @@
       "sprite": "Alcremie_SaltedCreamLove",
       "folders": [
         7
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.63": {
@@ -220696,6 +221104,9 @@
       "sprite": "Alcremie_SaltedCreamRibbon",
       "folders": [
         7
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.64": {
@@ -220703,6 +221114,9 @@
       "sprite": "Alcremie_SaltedCreamStar",
       "folders": [
         7
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.65": {
@@ -220710,6 +221124,9 @@
       "sprite": "Alcremie_SaltedCreamStrawberry",
       "folders": [
         7
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.66": {
@@ -220717,6 +221134,9 @@
       "sprite": "Alcremie_VanillaCream",
       "folders": [
         10
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.67": {
@@ -220724,6 +221144,9 @@
       "sprite": "Alcremie_VanillaCreamBerry",
       "folders": [
         7
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.68": {
@@ -220731,6 +221154,9 @@
       "sprite": "Alcremie_VanillaCreamClover",
       "folders": [
         7
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.69": {
@@ -220738,6 +221164,9 @@
       "sprite": "Alcremie_VanillaCreamFlower",
       "folders": [
         7
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.70": {
@@ -220745,6 +221174,9 @@
       "sprite": "Alcremie_VanillaCreamLove",
       "folders": [
         7
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.71": {
@@ -220752,6 +221184,9 @@
       "sprite": "Alcremie_VanillaCreamRibbon",
       "folders": [
         7
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.72": {
@@ -220759,6 +221194,9 @@
       "sprite": "Alcremie_VanillaCreamStar",
       "folders": [
         7
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0869.73": {
@@ -220766,6 +221204,9 @@
       "sprite": "Alcremie_VanillaCreamStrawberry",
       "folders": [
         7
+      ],
+      "gigantamaxForms": [
+        "0869.9"
       ]
     },
     "0870": {
@@ -222016,7 +222457,10 @@
             "Superpower"
           ]
         ]
-      }
+      },
+      "gigantamaxForms": [
+        "0879.1"
+      ]
     },
     "0879.1": {
       "name": "Copperajah (Gigantamax)",
@@ -222405,7 +222849,10 @@
             "Hyper Beam"
           ]
         ]
-      }
+      },
+      "gigantamaxForms": [
+        "0884.1"
+      ]
     },
     "0884.1": {
       "name": "Duraludon (Gigantamax)",
@@ -223569,61 +224016,98 @@
         10
       ],
       "moveset": {
-        "Reg2": [
-          [
-            1,
-            "Tackle"
-          ]
-        ],
-        "Reg3": [
-          [
-            1,
-            "Tackle"
-          ]
-        ],
-        "Reg4": [
-          [
-            1,
-            "Tackle"
-          ]
-        ],
-        "Reg5": [
-          [
-            1,
-            "Tackle"
-          ]
-        ],
-        "Reg6": [
-          [
-            1,
-            "Tackle"
-          ]
-        ],
-        "Reg7": [
-          [
-            1,
-            "Tackle"
-          ]
-        ],
         "Reg8": [
           [
             1,
-            "Tackle"
+            "Rock Smash"
+          ],
+          [
+            1,
+            "Sucker Punch"
+          ],
+          [
+            1,
+            "Wicked Blow"
+          ],
+          [
+            12,
+            "Aerial Ace"
+          ],
+          [
+            20,
+            "Headbutt"
+          ],
+          [
+            24,
+            "Brick Break"
+          ],
+          [
+            36,
+            "Iron Head"
+          ],
+          [
+            40,
+            "Dynamic Punch"
+          ],
+          [
+            44,
+            "Counter"
+          ],
+          [
+            48,
+            "Close Combat"
+          ],
+          [
+            52,
+            "Focus Punch"
           ]
         ],
         "Reg10": [
           [
             1,
-            "Tackle"
-          ]
-        ],
-        "Reg9": [
+            "Rock Smash"
+          ],
           [
             1,
-            "Tackle"
+            "Sucker Punch"
+          ],
+          [
+            12,
+            "Aerial Ace"
+          ],
+          [
+            20,
+            "Headbutt"
+          ],
+          [
+            24,
+            "Brick Break"
+          ],
+          [
+            36,
+            "Iron Head"
+          ],
+          [
+            40,
+            "Dynamic Punch"
+          ],
+          [
+            44,
+            "Counter"
+          ],
+          [
+            48,
+            "Close Combat"
+          ],
+          [
+            52,
+            "Focus Punch"
           ]
         ]
-      }
+      },
+      "gigantamaxForms": [
+        "0892.4"
+      ]
     },
     "0892.1": {
       "name": "Urshifu (Rapid Strike Style)",
@@ -223634,21 +224118,301 @@
       "sprite": "Urshifu_RapidStrike",
       "folders": [
         7
-      ]
+      ],
+      "gigantamaxForms": [
+        "0892.2"
+      ],
+      "moveset": {
+        "Reg8": [
+          [
+            1,
+            "Aqua Jet"
+          ],
+          [
+            1,
+            "Rock Smash"
+          ],
+          [
+            1,
+            "Surging Strikes"
+          ],
+          [
+            12,
+            "Aerial Ace"
+          ],
+          [
+            20,
+            "Headbutt"
+          ],
+          [
+            24,
+            "Brick Break"
+          ],
+          [
+            36,
+            "Iron Head"
+          ],
+          [
+            40,
+            "Dynamic Punch"
+          ],
+          [
+            44,
+            "Counter"
+          ],
+          [
+            48,
+            "Close Combat"
+          ],
+          [
+            52,
+            "Focus Punch"
+          ]
+        ],
+        "Reg10": [
+          [
+            1,
+            "Aqua Jet"
+          ],
+          [
+            1,
+            "Rock Smash"
+          ],
+          [
+            12,
+            "Aerial Ace"
+          ],
+          [
+            20,
+            "Headbutt"
+          ],
+          [
+            24,
+            "Brick Break"
+          ],
+          [
+            36,
+            "Iron Head"
+          ],
+          [
+            40,
+            "Dynamic Punch"
+          ],
+          [
+            44,
+            "Counter"
+          ],
+          [
+            48,
+            "Close Combat"
+          ],
+          [
+            52,
+            "Focus Punch"
+          ]
+        ]
+      }
     },
     "0892.2": {
       "name": "Urshifu (Rapid Strike Gigantamax)",
+      "types": [
+        "Fighting",
+        "Water"
+      ],
       "sprite": "Urshifu_RapidStrikeGigantamax",
       "folders": [
         7
-      ]
+      ],
+      "moveset": {
+        "Reg8": [
+          [
+            1,
+            "Aqua Jet"
+          ],
+          [
+            1,
+            "Rock Smash"
+          ],
+          [
+            1,
+            "Surging Strikes"
+          ],
+          [
+            12,
+            "Aerial Ace"
+          ],
+          [
+            20,
+            "Headbutt"
+          ],
+          [
+            24,
+            "Brick Break"
+          ],
+          [
+            36,
+            "Iron Head"
+          ],
+          [
+            40,
+            "Dynamic Punch"
+          ],
+          [
+            44,
+            "Counter"
+          ],
+          [
+            48,
+            "Close Combat"
+          ],
+          [
+            52,
+            "Focus Punch"
+          ]
+        ],
+        "Reg10": [
+          [
+            1,
+            "Aqua Jet"
+          ],
+          [
+            1,
+            "Rock Smash"
+          ],
+          [
+            12,
+            "Aerial Ace"
+          ],
+          [
+            20,
+            "Headbutt"
+          ],
+          [
+            24,
+            "Brick Break"
+          ],
+          [
+            36,
+            "Iron Head"
+          ],
+          [
+            40,
+            "Dynamic Punch"
+          ],
+          [
+            44,
+            "Counter"
+          ],
+          [
+            48,
+            "Close Combat"
+          ],
+          [
+            52,
+            "Focus Punch"
+          ]
+        ]
+      }
     },
     "0892.3": {
       "name": "Urshifu (Single Strike Style)",
       "sprite": "Urshifu_SingleStrike",
       "folders": [
         7
-      ]
+      ],
+      "gigantamaxForms": [
+        "0892.4"
+      ],
+      "moveset": {
+        "Reg8": [
+          [
+            1,
+            "Rock Smash"
+          ],
+          [
+            1,
+            "Sucker Punch"
+          ],
+          [
+            1,
+            "Wicked Blow"
+          ],
+          [
+            12,
+            "Aerial Ace"
+          ],
+          [
+            20,
+            "Headbutt"
+          ],
+          [
+            24,
+            "Brick Break"
+          ],
+          [
+            36,
+            "Iron Head"
+          ],
+          [
+            40,
+            "Dynamic Punch"
+          ],
+          [
+            44,
+            "Counter"
+          ],
+          [
+            48,
+            "Close Combat"
+          ],
+          [
+            52,
+            "Focus Punch"
+          ]
+        ],
+        "Reg10": [
+          [
+            1,
+            "Rock Smash"
+          ],
+          [
+            1,
+            "Sucker Punch"
+          ],
+          [
+            12,
+            "Aerial Ace"
+          ],
+          [
+            20,
+            "Headbutt"
+          ],
+          [
+            24,
+            "Brick Break"
+          ],
+          [
+            36,
+            "Iron Head"
+          ],
+          [
+            40,
+            "Dynamic Punch"
+          ],
+          [
+            44,
+            "Counter"
+          ],
+          [
+            48,
+            "Close Combat"
+          ],
+          [
+            52,
+            "Focus Punch"
+          ]
+        ]
+      }
     },
     "0892.4": {
       "name": "Urshifu (Single Strike Gigantamax)",

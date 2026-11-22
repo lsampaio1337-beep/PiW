@@ -260,15 +260,17 @@ function generateIVs(stats = {}, isShiny = false) {
     };
 }
 
-function calculateDamage(level, power, attackStat, defenseStat, typeEffectiveness, quality) {
+function calculateDamage(level, power, attackStat, defenseStat, typeEffectiveness, quality, options = {}) {
     // BaseDamage = floor(((Level + 5) / 125) * ((Power * AttackStat) / DefenseStat) + 2)
     // Modifier involves type, critical, random. But do NOT include direct Quality multiplier as per AGENTS.md / constraints!
     // Memory: "Base damage calculation modifiers involve type effectiveness, critical hits, and random variance, but they do NOT include a direct Quality multiplier since Quality is already factored into the Attack and Defense stats."
-    const isCritical = Math.random() < 0.04;
+    const critChance = typeof options.critChance === 'number' ? options.critChance : 0.04;
+    const isCritical = Math.random() < critChance;
     const criticalMult = isCritical ? 1.5 : 1.0;
-    const randomMult = 0.85 + Math.random() * 0.15; // Uniform float in [0.85, 1.00]
+    const randomMult = options.maxRoll ? 1.0 : (0.85 + Math.random() * 0.15); // Uniform float in [0.85, 1.00]
+    const damageMult = typeof options.damageMult === 'number' ? options.damageMult : 1.0;
 
-    const modifier = typeEffectiveness * criticalMult * randomMult;
+    const modifier = typeEffectiveness * criticalMult * randomMult * damageMult;
     const safeDefense = defenseStat > 0 ? defenseStat : 1;
 
     let baseDamage = Math.floor(((level + 5) / 125) * ((power * attackStat) / safeDefense) + 2);

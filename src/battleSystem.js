@@ -11,6 +11,7 @@ import {
 import * as mathEngine from './mathEngine.js';
 import { escapeHTML } from './utils/stringUtils.js';
 import { getLearnsetForRegion } from './utils/pokemonDataLoader.js';
+import { getGigantamaxHpMultiplier, getGigantamaxEffect } from './utils/gigantamax.js';
 
 // Scale slide-in duration proportionally to the 50%-width battle arena so visual slide speed stays consistent
 const BATTLE_SLIDE_TIME_SCALE = 0.5;
@@ -381,6 +382,73 @@ class BattleSystem {
         return eff;
     }
 
+    _computeAttackHit(attacker, defender, move) {
+        const isPhysical = move.category === 'Physical';
+        const atkStat = isPhysical ? attacker.currentStats.atk : attacker.currentStats.spa;
+        const rawDefStat = isPhysical ? defender.currentStats.def : defender.currentStats.spd;
+        const eff = this.getTypeEffectiveness(move.type, defender.types);
+
+        const atkEffect = getGigantamaxEffect(attacker);
+        const defEffect = getGigantamaxEffect(defender);
+        const defIgnore = atkEffect?.defIgnore || 0;
+        const effectiveDefStat = defIgnore > 0 ? Math.max(1, Math.floor(rawDefStat * (1 - defIgnore))) : rawDefStat;
+        const damageMult = (atkEffect?.damageMult ?? 1) * (defEffect?.damageTakenMult ?? 1);
+
+        const hit = mathEngine.calculateDamage(
+            attacker.level,
+            move.power,
+            atkStat,
+            effectiveDefStat,
+            eff,
+            attacker.quality,
+            {
+                critChance: atkEffect?.critChance,
+                maxRoll: Boolean(atkEffect?.maxRoll),
+                damageMult,
+            }
+        );
+        return { hit, eff };
+    }
+
+    _applyPostHitGmaxEffects(attacker, defender, hit) {
+        const atkEffect = getGigantamaxEffect(attacker);
+        if (!atkEffect) return 0;
+
+        if (atkEffect.healPct > 0 && attacker.currentHp > 0 && attacker.maxHp > 0) {
+            const healAmt = Math.max(1, Math.round(attacker.maxHp * atkEffect.healPct));
+            attacker.currentHp = Math.min(attacker.maxHp, attacker.currentHp + healAmt);
+        }
+
+        let dotDamage = 0;
+        if (atkEffect.dotRatio > 0 && defender.currentHp > 0) {
+            const isImmune = atkEffect.immuneType && Array.isArray(defender.types) && defender.types.includes(atkEffect.immuneType);
+            if (!isImmune) {
+                dotDamage = Math.max(1, Math.round(hit.damage * atkEffect.dotRatio));
+                defender.currentHp = Math.max(0, defender.currentHp - dotDamage);
+            }
+        }
+
+        if (atkEffect.stunChance > 0 && defender.currentHp > 0 && Math.random() < atkEffect.stunChance) {
+            defender._gmaxStunned = true;
+        }
+
+        return dotDamage;
+    }
+
+    _applyOpeningGmaxEffect(encounter) {
+        if (!encounter || encounter.maxHp <= 0) return;
+        const leaderEffect = getGigantamaxEffect(this.state?.party?.[0]);
+        if (!leaderEffect?.openingHpPct) return;
+        const openDmg = Math.max(1, Math.round(encounter.maxHp * leaderEffect.openingHpPct));
+        encounter.currentHp = Math.max(1, encounter.currentHp - openDmg);
+    }
+
+    _consumeGmaxStun(actor) {
+        if (!actor || !actor._gmaxStunned) return false;
+        delete actor._gmaxStunned;
+        return true;
+    }
+
     getExplosionMove(pokemon) {
         if (!pokemon || !pokemon.moves) return null;
         let bestExplosion = null;
@@ -600,12 +668,7 @@ class BattleSystem {
 
             let move = this.getBestMove(attacker, defender);
             if (!move) move = { name: 'Struggle', type: 'Normal', category: 'Physical', power: 50 };
-            const isPhysical = move.category === 'Physical';
-            const atkStat = isPhysical ? attacker.currentStats.atk : attacker.currentStats.spa;
-            const defStat = isPhysical ? defender.currentStats.def : defender.currentStats.spd;
-            const eff = this.getTypeEffectiveness(move.type, defender.types);
-
-            const hit = mathEngine.calculateDamage(attacker.level, move.power, atkStat, defStat, eff, attacker.quality);
+            const { hit } = this._computeAttackHit(attacker, defender, move);
 
             const targetSide = attacker === this.state.party[0] ? 'enemy' : 'player';
             const animDuration = 500 / this.state.settings.gameSpeed;
@@ -618,6 +681,7 @@ class BattleSystem {
 
             this._scheduleTimer(() => {
                 defender.currentHp -= hit.damage;
+                this._applyPostHitGmaxEffects(attacker, defender, hit);
                 if (defender.currentHp <= 0) {
                     defender.currentHp = 0;
                     fainted = true;
@@ -1175,6 +1239,7 @@ class BattleSystem {
             bst: bst,
             moves: this.getLearnsetMoves(pokemonBase, level)
         };
+        this._applyOpeningGmaxEffect(this.activeEncounter);
 
         this.isSearching = false;
         this.isSliding = true;
@@ -1379,6 +1444,7 @@ class BattleSystem {
             moves: this.getLearnsetMoves(pokemonBase, level),
             isDisguisedDitto: isDisguisedDitto
         };
+        this._applyOpeningGmaxEffect(this.activeEncounter);
 
         this.isSearching = false;
         this.isSliding = true;
@@ -1420,8 +1486,9 @@ class BattleSystem {
      */
     getAdjustedAttackDelays(leaderSpe, enemySpe) {
         const baseMs = this.state.config.balance.baseAttackDelay * 1000;
-        const rawLeaderDelay = baseMs * (100 / (100 + Math.max(0, leaderSpe || 0)));
-        const rawEnemyDelay = baseMs * (100 / (100 + Math.max(0, enemySpe || 0)));
+        const leaderEffect = getGigantamaxEffect(this.state?.party?.[0]);
+        const rawLeaderDelay = baseMs * (100 / (100 + Math.max(0, leaderSpe || 0))) * (leaderEffect?.playerDelayMult ?? 1);
+        const rawEnemyDelay = baseMs * (100 / (100 + Math.max(0, enemySpe || 0))) * (leaderEffect?.enemyDelayMult ?? 1);
 
         const minRawDelay = Math.min(rawLeaderDelay, rawEnemyDelay);
         const scale = minRawDelay < 250 ? (250 / minRawDelay) : 1;
@@ -1468,6 +1535,11 @@ class BattleSystem {
 
         const leader = this.state.party[0];
 
+        if (this._consumeGmaxStun(attacker)) {
+            this.scheduleNextStrike(attacker, defender);
+            return;
+        }
+
         // Check if player uses potion
         if (attacker === leader && this.state.settings.autoPotion) {
             // Check if we hit the threshold
@@ -1497,12 +1569,7 @@ class BattleSystem {
             this.turnCount++;
         }
         const move = this.getBestMove(attacker, defender);
-        const isPhysical = move.category === 'Physical';
-        const atkStat = isPhysical ? attacker.currentStats.atk : attacker.currentStats.spa;
-        const defStat = isPhysical ? defender.currentStats.def : defender.currentStats.spd;
-        const eff = this.getTypeEffectiveness(move.type, defender.types);
-
-        const hit = mathEngine.calculateDamage(attacker.level, move.power, atkStat, defStat, eff, attacker.quality);
+        const { hit, eff } = this._computeAttackHit(attacker, defender, move);
 
         const targetSide = attacker === leader ? 'enemy' : 'player';
         const animDuration = 500 / this.state.settings.gameSpeed;
@@ -1516,10 +1583,12 @@ class BattleSystem {
             if (this.isFainting || !this.activeEncounter) return;
 
             defender.currentHp -= hit.damage;
+            const dotDamage = this._applyPostHitGmaxEffects(attacker, defender, hit);
+            const totalShownDamage = hit.damage + dotDamage;
 
             // Show floating damage and splash
             if (typeof window.showDamage === 'function') {
-                window.showDamage(targetSide, hit.damage, hit.isCritical, move.name, move.type, eff);
+                window.showDamage(targetSide, totalShownDamage, hit.isCritical, move.name, move.type, eff);
             }
 
             this.updateUI();
@@ -1689,7 +1758,9 @@ class BattleSystem {
         }
 
         const totalIV = this.activeEncounter.ivs.hp + this.activeEncounter.ivs.atk + this.activeEncounter.ivs.def + this.activeEncounter.ivs.spa + this.activeEncounter.ivs.spd + this.activeEncounter.ivs.spe;
-        const chance = mathEngine.calculateCatchChance(this.activeEncounter.bst, this.activeEncounter.level, this.activeEncounter.quality, totalIV, multiplier, this.state.stats, this.activeEncounter.qualityName === "Shiny");
+        const baseChance = mathEngine.calculateCatchChance(this.activeEncounter.bst, this.activeEncounter.level, this.activeEncounter.quality, totalIV, multiplier, this.state.stats, this.activeEncounter.qualityName === "Shiny");
+        const gmaxCatchBonusPct = getGigantamaxEffect(this.state.party?.[0])?.catchBonusPct || 0;
+        const chance = gmaxCatchBonusPct > 0 ? Math.min(100, baseChance * (1 + gmaxCatchBonusPct / 100)) : baseChance;
 
         const randomArray = new Uint32Array(1);
         crypto.getRandomValues(randomArray);
@@ -1942,7 +2013,8 @@ class BattleSystem {
         // Award XP and Money (EV)
         this.grantXP(leader, evxp, false);
         if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') window.trackDailyChallenge('gain_exp', { amount: evxp });
-        let earned = Math.floor(evm * moneyMultiplier);
+        const gmaxMoneyMult = getGigantamaxEffect(leader)?.moneyMult ?? 1;
+        let earned = Math.floor(evm * moneyMultiplier * gmaxMoneyMult);
         this.state.trainer.money += earned;
         if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') {
             window.trackDailyChallenge('earn_money', { amount: earned });
@@ -2263,7 +2335,7 @@ class BattleSystem {
             const pBase = this.getPokemonBase(pokemon.id);
             if (pBase) {
                 const vitamins = pokemon.vitamins || {};
-                pokemon.maxHp = mathEngine.calculateHP(pBase.hp, pokemon.ivs.hp, pokemon.level, pokemon.quality, vitamins.hp || 0);
+                pokemon.maxHp = mathEngine.calculateHP(pBase.hp, pokemon.ivs.hp, pokemon.level, pokemon.quality, vitamins.hp || 0) * getGigantamaxHpMultiplier(pokemon);
                 pokemon.currentStats.atk = mathEngine.calculateStat(pBase.atk, pokemon.ivs.atk, pokemon.level, pokemon.quality, vitamins.atk || 0);
                 pokemon.currentStats.def = mathEngine.calculateStat(pBase.def, pokemon.ivs.def, pokemon.level, pokemon.quality, vitamins.def || 0);
                 pokemon.currentStats.spa = mathEngine.calculateStat(pBase.spa, pokemon.ivs.spa, pokemon.level, pokemon.quality, vitamins.spa || 0);
@@ -2571,6 +2643,7 @@ class BattleSystem {
                 bst: bst,
                 moves: this.getLearnsetMoves(pokemonBase, level)
             };
+            this._applyOpeningGmaxEffect(this.activeEncounter);
 
             let leaderSpe = leader.currentStats ? leader.currentStats.spe : 10;
             let enemySpe = this.activeEncounter.currentStats ? this.activeEncounter.currentStats.spe : 10;
@@ -2594,6 +2667,10 @@ class BattleSystem {
             let firstDelay = Math.min(leaderDelay, enemyDelay);
 
             const executeSimulatedTurn = (attacker, defender, isLeader) => {
+                if (this._consumeGmaxStun(attacker)) {
+                    return false;
+                }
+
                 if (isLeader && this.state.settings.autoPotion) {
                     let threshold = this.state.settings.autoPotionThreshold !== undefined ? this.state.settings.autoPotionThreshold : 25;
                     let hpPercentage = (attacker.currentHp / attacker.maxHp) * 100;
@@ -2617,13 +2694,9 @@ class BattleSystem {
                     this.turnCount++;
                 }
                 const move = this.getBestMove(attacker, defender);
-                const isPhysical = move.category === 'Physical';
-                const atkStat = isPhysical ? attacker.currentStats.atk : attacker.currentStats.spa;
-                const defStat = isPhysical ? defender.currentStats.def : defender.currentStats.spd;
-                const eff = this.getTypeEffectiveness(move.type, defender.types);
-
-                const hit = mathEngine.calculateDamage(attacker.level, move.power, atkStat, defStat, eff, attacker.quality);
+                const { hit } = this._computeAttackHit(attacker, defender, move);
                 defender.currentHp -= hit.damage;
+                this._applyPostHitGmaxEffects(attacker, defender, hit);
 
                 if (defender.currentHp <= 0) {
                     let explosionMove = this.getExplosionMove(defender);
@@ -2785,7 +2858,8 @@ class BattleSystem {
                 this.grantXP(leader, evxp, false);
                 results.xpEarned += evxp;
         if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') window.trackDailyChallenge('gain_exp', { amount: evxp });
-                let earnedZzZ = Math.floor(evm * moneyMultiplier);
+                const gmaxMoneyMultZzZ = getGigantamaxEffect(leader)?.moneyMult ?? 1;
+                let earnedZzZ = Math.floor(evm * moneyMultiplier * gmaxMoneyMultZzZ);
                 if (!Number.isFinite(earnedZzZ)) earnedZzZ = 0;
                 this.state.trainer.money = (Number.isFinite(this.state.trainer.money) ? this.state.trainer.money : 0) + earnedZzZ;
                 if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') {

@@ -685,6 +685,11 @@ export function handleDrop(event, targetCol) {
                 }
                 delete newPokemon.megaOriginalId;
                 delete newPokemon.megaExpiresAt;
+                if (newPokemon.gmaxOriginalId !== undefined && newPokemon.gmaxOriginalId !== null) {
+                    newPokemon.id = newPokemon.gmaxOriginalId;
+                }
+                delete newPokemon.gmaxOriginalId;
+                delete newPokemon.gmaxExpiresAt;
 
                 // Check for pre-evolution based on current region, stepping back to base stage
                 const regionName = state.currentRegionName || 'Kanto';
