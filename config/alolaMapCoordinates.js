@@ -171,8 +171,8 @@ export const alolaMapCoordinates = {
   },
   "Grand Trial - Kahuna Olivia": {
     "name": "Grand Trial - Kahuna Olivia",
-    "x": 50.29,
-    "y": 41.81
+    "x": 60.79,
+    "y": 40.12
   },
   "Malie City": {
     "name": "Malie City",
@@ -251,8 +251,8 @@ export const alolaMapCoordinates = {
   },
   "Grand Trial - Kahuna Nanu": {
     "name": "Grand Trial - Kahuna Nanu",
-    "x": 62.3,
-    "y": 72.76
+    "x": 94.95,
+    "y": 55.53
   },
   "Seafolk Village": {
     "name": "Seafolk Village",
@@ -291,8 +291,8 @@ export const alolaMapCoordinates = {
   },
   "Grand Trial - Kahuna Hapu": {
     "name": "Grand Trial - Kahuna Hapu",
-    "x": 23.29,
-    "y": 61.09
+    "x": 5.68,
+    "y": 68.48
   },
   "Poni Grove": {
     "name": "Poni Grove",
