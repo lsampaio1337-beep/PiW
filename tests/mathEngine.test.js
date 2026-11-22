@@ -2,23 +2,23 @@ import { calculateDamage, calculateReqXP, calculateTotalXP, getLevelFromXP, calc
 
 describe('calculateReqXP', () => {
     test('should calculate required XP correctly for level 1', () => {
-        expect(calculateReqXP(1)).toBe(52);
+        expect(calculateReqXP(1)).toBe(54);
     });
 
     test('should calculate required XP correctly for level 2', () => {
-        expect(calculateReqXP(2)).toBe(90);
+        expect(calculateReqXP(2)).toBe(99);
     });
 
     test('should calculate required XP correctly for level 50', () => {
-        expect(calculateReqXP(50)).toBe(67885);
+        expect(calculateReqXP(50)).toBe(77557);
     });
 
     test('should calculate required XP correctly for level 99', () => {
-        expect(calculateReqXP(99)).toBe(398500);
+        expect(calculateReqXP(99)).toBe(366508);
     });
 
     test('should calculate required XP correctly for level 100', () => {
-        expect(calculateReqXP(100)).toBe(409038);
+        expect(calculateReqXP(100)).toBe(374758);
     });
 });
 
@@ -32,11 +32,11 @@ describe('calculateTotalXP', () => {
     });
 
     test('should calculate total XP correctly for level 50', () => {
-        expect(calculateTotalXP(50)).toBe(920397);
+        expect(calculateTotalXP(50)).toBe(1110317);
     });
 
     test('should calculate total XP correctly for level 100', () => {
-        expect(calculateTotalXP(100)).toBe(11187635);
+        expect(calculateTotalXP(100)).toBe(11294473);
     });
 });
 
@@ -421,11 +421,12 @@ describe('getCurrentCount', () => {
 });
 
 describe('Prestige XP Scaling (> Lv 100)', () => {
-    test('uses 5 * L * (5 + 8 * L) for levels above 100', () => {
-        expect(calculateReqXP(101)).toBe(5 * 101 * (5 + 8 * 101));
-        expect(calculateReqXP(200)).toBe(5 * 200 * (5 + 8 * 200));
-        expect(calculateReqXP(500)).toBe(5 * 500 * (5 + 8 * 500));
-        expect(calculateReqXP(1000)).toBe(5 * 1000 * (5 + 8 * 1000));
+    test('uses unified formula floor((4 + 6*L^2/(L+30)) * (5 + 8*L)) above level 100', () => {
+        const expected = (L) => Math.floor((4 + (6 * L * L) / (L + 30)) * (5 + 8 * L));
+        expect(calculateReqXP(101)).toBe(expected(101));
+        expect(calculateReqXP(200)).toBe(expected(200));
+        expect(calculateReqXP(500)).toBe(expected(500));
+        expect(calculateReqXP(1000)).toBe(expected(1000));
     });
 
     test('computes monotonic non-overflowing total XP up to level 1000', () => {

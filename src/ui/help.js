@@ -52,7 +52,7 @@ const helpContent = {
             `,
             "Leveling Requirements": `
                 <h3>Leveling Requirements</h3>
-                <p>Required XP scales smoothly up to Lv 100 and uses <code>5 * Level * (5 + 8 * Level)</code> beyond Lv 100.</p>
+                <p>Required XP uses the unified formula <code>floor((4 + 6 * Level^2 / (Level + 30)) * (5 + 8 * Level))</code> for every level.</p>
                 <p>Each new region raises the level cap by +100 (Kanto: 100, Johto: 200, etc.) and grants +100% Bonus XP.</p>
             `
         }

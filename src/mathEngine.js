@@ -15,11 +15,8 @@ const REQ_XP_TABLE = new Float64Array(MAX_PRECOMPUTED_LEVEL + 1);
 const TOTAL_XP_TABLE = new Float64Array(MAX_PRECOMPUTED_LEVEL + 1);
 
 function _computeReqXP(level) {
-    // Lv <= 100: floor((4 + 496 * ((L - 1) / 98)^1.60) * (5 + 8 * L))
-    // Lv >  100: floor(5 * L * (5 + 8 * L))
-    const factor = level <= 100
-        ? (4 + 496 * Math.pow((level - 1) / 98, 1.60))
-        : (5 * level);
+    // Unified curve for any L: floor((4 + (6 * L^2) / (L + 30)) * (5 + 8 * L))
+    const factor = 4 + (6 * level * level) / (level + 30);
     return Math.floor(factor * (5 + 8 * level));
 }
 
