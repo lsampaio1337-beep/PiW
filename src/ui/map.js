@@ -405,14 +405,14 @@ function setupMapWindowDimensions(currentRegionObj, targetWidth) {
 const GALAR_DLC_MAPS = {
     ioa: {
         title: 'The Isle of Armor',
-        iconFile: 'IoA.png',
-        mapFile: 'Isla of Armor.jpg',
+        iconFile: '8 Galar Isle of Armor Logo.png',
+        mapFile: '8 Galar Isle of Armor.png',
         positionStyle: 'top: 2%; left: 2%;'
     },
     tct: {
         title: 'The Crown Tundra',
-        iconFile: 'tCT.png',
-        mapFile: 'Crown Tundra.jpg',
+        iconFile: '8 Galar The Crown Tundra Logo.png',
+        mapFile: '8 Galar The Crown Tundra.png',
         positionStyle: 'top: 2%; right: 2%;'
     }
 };

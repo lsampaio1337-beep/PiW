@@ -260,13 +260,13 @@ describe('Galar DLC Map Inner Modals', () => {
         const tctImg = doc.querySelector('img[data-dlc="tct"]');
 
         expect(ioaImg).not.toBeNull();
-        expect(ioaImg.getAttribute('src')).toBe('./Assets/Map/IoA.png');
+        expect(ioaImg.getAttribute('src')).toBe('./Assets/Map/8 Galar Isle of Armor Logo.png');
         expect(ioaImg.style.top).toBe('2%');
         expect(ioaImg.style.left).toBe('2%');
         expect(ioaImg.getAttribute('onclick')).toBe("window.openGalarDlcModal('ioa')");
 
         expect(tctImg).not.toBeNull();
-        expect(tctImg.getAttribute('src')).toBe('./Assets/Map/tCT.png');
+        expect(tctImg.getAttribute('src')).toBe('./Assets/Map/8 Galar The Crown Tundra Logo.png');
         expect(tctImg.style.top).toBe('2%');
         expect(tctImg.style.right).toBe('2%');
         expect(tctImg.getAttribute('onclick')).toBe("window.openGalarDlcModal('tct')");
@@ -302,14 +302,14 @@ describe('Galar DLC Map Inner Modals', () => {
         expect(titleEl.innerText).toBe('The Isle of Armor');
         const ioaModalImg = contentEl.querySelector('img.galar-dlc-modal-img');
         expect(ioaModalImg).not.toBeNull();
-        expect(ioaModalImg.getAttribute('src')).toBe('./Assets/Map/Isla of Armor.jpg');
+        expect(ioaModalImg.getAttribute('src')).toBe('./Assets/Map/8 Galar Isle of Armor.png');
 
         openGalarDlcModal('tct');
         expect(overlay.style.display).toBe('flex');
         expect(titleEl.innerText).toBe('The Crown Tundra');
         const tctModalImg = contentEl.querySelector('img.galar-dlc-modal-img');
         expect(tctModalImg).not.toBeNull();
-        expect(tctModalImg.getAttribute('src')).toBe('./Assets/Map/Crown Tundra.jpg');
+        expect(tctModalImg.getAttribute('src')).toBe('./Assets/Map/8 Galar The Crown Tundra.png');
 
         window.handleMapInnerModalBackdropClick({ target: overlay });
         expect(overlay.style.display).toBe('none');
