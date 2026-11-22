@@ -191,3 +191,131 @@ describe('Map Inner Modal Outside Click Behavior', () => {
         expect(uiContainer.classList.contains('gym-ui-container')).toBe(true);
     });
 });
+
+describe('Galar DLC Map Inner Modals', () => {
+    let showMap;
+    let openGalarDlcModal;
+    let WindowManager;
+    let uiMod;
+
+    beforeAll(async () => {
+        const wmMod = await import('../../src/windowManager.js');
+        WindowManager = wmMod.WindowManager;
+        const mapMod = await import('../../src/ui/map.js');
+        showMap = mapMod.showMap;
+        openGalarDlcModal = mapMod.openGalarDlcModal;
+        uiMod = require('../../src/ui.js');
+    });
+
+    let originalGetElementById;
+
+    beforeEach(() => {
+        originalGetElementById = document.getElementById;
+        document.getElementById = (id) => document.querySelector(`[id="${id}"]`);
+        global.state.party = [];
+        global.state.storage = [];
+        global.state.stats = {};
+        global.state.globalStats = {};
+        global.state.currentRegionName = 'Galar';
+        window.showModal = uiMod.showModal;
+        uiMod.showModal.mockClear();
+
+        document.body.innerHTML = `
+            <div id="window-map" class="floating-window">
+                <div class="window-header">
+                    <span class="window-title">Map</span>
+                </div>
+                <div class="window-content-container">
+                    <div class="window-content-scaler">
+                        <div class="content-panel">
+                            <div id="interactive-map">
+                                <div id="map-inner-modal-overlay" style="display: none;">
+                                    <div id="map-inner-modal" class="floating-window">
+                                        <div class="window-header">
+                                            <span id="map-inner-modal-title">Gym</span>
+                                            <span id="btn-close-map-inner-modal">X</span>
+                                        </div>
+                                        <div class="window-content-container">
+                                            <div id="map-inner-modal-content"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+    });
+
+    test('showMap renders IoA on top-left and tCT on top-right only on Galar map', () => {
+        window.currentMapRegion = 'Galar';
+        showMap();
+
+        expect(uiMod.showModal).toHaveBeenCalledTimes(1);
+        const galarHtml = uiMod.showModal.mock.calls[0][1];
+        const doc = new DOMParser().parseFromString(galarHtml, 'text/html');
+
+        const ioaImg = doc.querySelector('img[data-dlc="ioa"]');
+        const tctImg = doc.querySelector('img[data-dlc="tct"]');
+
+        expect(ioaImg).not.toBeNull();
+        expect(ioaImg.getAttribute('src')).toBe('./Assets/Map/IoA.png');
+        expect(ioaImg.style.top).toBe('2%');
+        expect(ioaImg.style.left).toBe('2%');
+        expect(ioaImg.getAttribute('onclick')).toBe("window.openGalarDlcModal('ioa')");
+
+        expect(tctImg).not.toBeNull();
+        expect(tctImg.getAttribute('src')).toBe('./Assets/Map/tCT.png');
+        expect(tctImg.style.top).toBe('2%');
+        expect(tctImg.style.right).toBe('2%');
+        expect(tctImg.getAttribute('onclick')).toBe("window.openGalarDlcModal('tct')");
+
+        uiMod.showModal.mockClear();
+        window.currentMapRegion = 'Kanto';
+        showMap();
+        const kantoHtml = uiMod.showModal.mock.calls[0][1];
+        const kantoDoc = new DOMParser().parseFromString(kantoHtml, 'text/html');
+        expect(kantoDoc.querySelector('.galar-dlc-btn')).toBeNull();
+    });
+
+    test('WindowManager executes openGalarDlcModal inline handlers for ioa and tct', () => {
+        const wm = new WindowManager();
+        const spy = jest.spyOn(window, 'openGalarDlcModal');
+
+        wm._executeInlineEvent("window.openGalarDlcModal('ioa')", { stopPropagation: jest.fn() }, document.body);
+        expect(spy).toHaveBeenCalledWith('ioa');
+
+        wm._executeInlineEvent("window.openGalarDlcModal('tct')", { stopPropagation: jest.fn() }, document.body);
+        expect(spy).toHaveBeenCalledWith('tct');
+
+        spy.mockRestore();
+    });
+
+    test('openGalarDlcModal displays Isla of Armor for ioa and Crown Tundra for tct and closes on backdrop click', () => {
+        const overlay = document.getElementById('map-inner-modal-overlay');
+        const titleEl = document.getElementById('map-inner-modal-title');
+        const contentEl = document.getElementById('map-inner-modal-content');
+
+        openGalarDlcModal('ioa');
+        expect(overlay.style.display).toBe('flex');
+        expect(titleEl.innerText).toBe('The Isle of Armor');
+        const ioaModalImg = contentEl.querySelector('img.galar-dlc-modal-img');
+        expect(ioaModalImg).not.toBeNull();
+        expect(ioaModalImg.getAttribute('src')).toBe('./Assets/Map/Isla of Armor.jpg');
+
+        openGalarDlcModal('tct');
+        expect(overlay.style.display).toBe('flex');
+        expect(titleEl.innerText).toBe('The Crown Tundra');
+        const tctModalImg = contentEl.querySelector('img.galar-dlc-modal-img');
+        expect(tctModalImg).not.toBeNull();
+        expect(tctModalImg.getAttribute('src')).toBe('./Assets/Map/Crown Tundra.jpg');
+
+        window.handleMapInnerModalBackdropClick({ target: overlay });
+        expect(overlay.style.display).toBe('none');
+    });
+
+    afterEach(() => {
+        document.getElementById = originalGetElementById;
+    });
+});

@@ -402,6 +402,98 @@ function setupMapWindowDimensions(currentRegionObj, targetWidth) {
     }
 }
 
+const GALAR_DLC_MAPS = {
+    ioa: {
+        title: 'The Isle of Armor',
+        iconFile: 'IoA.png',
+        mapFile: 'Isla of Armor.jpg',
+        positionStyle: 'top: 2%; left: 2%;'
+    },
+    tct: {
+        title: 'The Crown Tundra',
+        iconFile: 'tCT.png',
+        mapFile: 'Crown Tundra.jpg',
+        positionStyle: 'top: 2%; right: 2%;'
+    }
+};
+
+function generateGalarDlcButtonsHtml(region) {
+    if (region !== 'Galar') return '';
+
+    return Object.entries(GALAR_DLC_MAPS).map(([key, dlc]) => `
+        <img class="galar-dlc-btn"
+             data-dlc="${key}"
+             src="./Assets/Map/${dlc.iconFile}"
+             alt="${dlc.title}"
+             title="${dlc.title}"
+             onclick="window.openGalarDlcModal('${key}')"
+             onmousedown="event.stopPropagation()"
+             style="position: absolute; ${dlc.positionStyle} width: 22%; height: auto; cursor: pointer; z-index: 20;" />
+    `).join('');
+}
+
+/** Open the map inner modal displaying the selected Galar DLC island map. */
+export function openGalarDlcModal(dlcKey) {
+    const dlc = GALAR_DLC_MAPS[dlcKey];
+    if (!dlc) return;
+
+    const overlay = document.getElementById('map-inner-modal-overlay');
+    const modal = document.getElementById('map-inner-modal');
+    const titleEl = document.getElementById('map-inner-modal-title');
+    const contentEl = document.getElementById('map-inner-modal-content');
+
+    if (titleEl) {
+        titleEl.innerText = dlc.title;
+    }
+
+    if (contentEl) {
+        if (typeof contentEl.replaceChildren === 'function') {
+            contentEl.replaceChildren();
+        }
+        contentEl.style.position = 'relative';
+        contentEl.style.width = '100%';
+        contentEl.style.height = '100%';
+        contentEl.style.display = 'flex';
+        contentEl.style.alignItems = 'center';
+        contentEl.style.justifyContent = 'center';
+        contentEl.style.padding = '0';
+        contentEl.style.overflowY = 'hidden';
+        contentEl.style.backgroundImage = 'none';
+        contentEl.style.backgroundSize = '';
+        contentEl.style.backgroundPosition = '';
+
+        const img = document.createElement('img');
+        img.className = 'galar-dlc-modal-img';
+        img.src = `./Assets/Map/${dlc.mapFile}`;
+        img.alt = dlc.title;
+        img.style.display = 'block';
+        img.style.width = '100%';
+        img.style.height = 'auto';
+        img.style.maxWidth = '100%';
+        img.style.maxHeight = '100%';
+        img.style.objectFit = 'contain';
+        contentEl.appendChild(img);
+    }
+
+    if (overlay && modal) {
+        overlay.style.display = 'flex';
+
+        const mapWin = document.getElementById('interactive-map');
+        const mapW = mapWin ? mapWin.offsetWidth : 0;
+        const mapH = mapWin ? mapWin.offsetHeight : 0;
+        const maxDim = Math.max(mapW, mapH);
+        overlay.style.padding = maxDim > 0 ? `${maxDim * 0.02}px` : '2%';
+
+        modal.style.width = '85%';
+        modal.style.height = 'auto';
+        modal.style.aspectRatio = 'auto';
+        modal.style.maxWidth = '100%';
+        modal.style.maxHeight = '100%';
+    }
+}
+
+window.openGalarDlcModal = openGalarDlcModal;
+
 export function showMap() {
     if (state.stats.hasUnseenMap || state.stats.showMapProfNotification) {
         state.stats.hasUnseenMap = false;
@@ -439,6 +531,7 @@ export function showMap() {
     `;
 
     html += generateMarkersForRegion(window.currentMapRegion, unlockedAreas);
+    html += generateGalarDlcButtonsHtml(window.currentMapRegion);
 
     // Inner modal for gym overlays natively locked to the map
     html += `
