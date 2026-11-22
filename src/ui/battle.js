@@ -683,6 +683,7 @@ function updateEnemyUI(enemy, battleSystem, glassTier, isSearching = false) {
     }
 
     if (elEnemySide) {
+        elEnemySide.style.zIndex = '30'; // Render incoming/active enemy above fainting defeated clone
         if (battleSystem.isSliding) {
             if (elEnemySide.dataset.sliding !== 'true') {
                 elEnemySide.dataset.sliding = 'true';
@@ -946,6 +947,13 @@ function animatePokemonSprite(cloneWrapper) {
     if (waterEffect) {
         waterEffect.style.transition = 'opacity 1000ms linear';
         waterEffect.style.opacity = '0';
+    }
+
+    const groundShadow = cloneWrapper.querySelector('.battle-ground-shadow');
+    if (groundShadow) {
+        groundShadow.style.transition = 'opacity 1500ms linear, transform 1500ms linear';
+        groundShadow.style.opacity = '0';
+        groundShadow.style.transform = 'scale(0.25)';
     }
 }
 

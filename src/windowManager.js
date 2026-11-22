@@ -582,6 +582,7 @@ export class WindowManager {
 
     _setupDrag(winElement, headerElement) {
         let isDragging = false;
+        let activeDragHandle = headerElement;
         let startX, startY;
         let initialLeft, initialTop;
 
@@ -590,8 +591,10 @@ export class WindowManager {
 
         headerElement.style.cursor = 'grab';
 
-        headerElement.addEventListener('mousedown', (e) => {
+        const startDrag = (e, handleEl) => {
             isDragging = true;
+            activeDragHandle = handleEl || headerElement;
+            window.__piwIsDraggingWindow = true;
             startX = e.clientX;
             startY = e.clientY;
 
@@ -606,11 +609,27 @@ export class WindowManager {
             winElement.style.top = initialTop + 'px';
             winElement.style.transform = 'none';
 
-            headerElement.style.cursor = 'grabbing';
+            activeDragHandle.style.cursor = 'grabbing';
             snapLockX = null;
             snapLockY = null;
             e.preventDefault();
+        };
+
+        headerElement.addEventListener('mousedown', (e) => {
+            startDrag(e, headerElement);
         });
+
+        if (winElement.id === 'main-view-window') {
+            winElement.addEventListener('mousedown', (e) => {
+                if (!winElement.classList.contains('is-minimal-combat')) return;
+                const targetEl = e.target && typeof e.target.closest === 'function'
+                    ? e.target.closest('#player-side .battle-pokemon-sprite, #enemy-side .battle-pokemon-sprite, #player-battle-hp-container, #enemy-battle-hp-container')
+                    : null;
+                if (targetEl) {
+                    startDrag(e, targetEl);
+                }
+            });
+        }
 
         document.addEventListener('mousemove', (e) => {
             if (!isDragging) return;
@@ -693,7 +712,12 @@ export class WindowManager {
         document.addEventListener('mouseup', () => {
             if (isDragging) {
                 isDragging = false;
-                headerElement.style.cursor = 'grab';
+                window.__piwIsDraggingWindow = false;
+                if (activeDragHandle === headerElement) {
+                    headerElement.style.cursor = 'grab';
+                } else if (activeDragHandle && activeDragHandle.style) {
+                    activeDragHandle.style.cursor = '';
+                }
                 this.saveWindowData(winElement.id);
             }
         });

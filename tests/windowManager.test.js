@@ -813,4 +813,59 @@ describe('WindowManager', () => {
             win.remove();
         }
     });
+
+    test('in minimal combat mode, dragging pokemon sprite or hp bar moves main-view-window', () => {
+        const win = document.createElement('div');
+        win.id = 'main-view-window';
+        win.className = 'floating-window is-battle-mode is-minimal-combat';
+        win.style.display = 'flex';
+        win.style.left = '100px';
+        win.style.top = '100px';
+        win.style.width = '400px';
+        win.style.height = '140px';
+        win.innerHTML = `
+            <div id="main-view-header" class="window-header">Main View</div>
+            <div class="window-content-container">
+                <div class="window-content-scaler">
+                    <div id="player-side">
+                        <img id="player-pokemon-sprite" class="battle-pokemon-sprite" />
+                        <div id="player-battle-hp-container" class="battle-hp-container"></div>
+                    </div>
+                    <div id="enemy-side">
+                        <img id="enemy-pokemon-sprite" class="battle-pokemon-sprite" />
+                        <div id="enemy-battle-hp-container" class="battle-hp-container"></div>
+                    </div>
+                </div>
+            </div>
+        `;
+        win.getBoundingClientRect = () => ({ left: parseFloat(win.style.left), top: parseFloat(win.style.top), width: 400, height: 140, right: 500, bottom: 240 });
+        document.body.appendChild(win);
+
+        try {
+            windowManager.containerWidth = 1920;
+            windowManager.containerHeight = 1080;
+            windowManager.registerWindow('main-view-window', 'main-view-header', '100px', '100px');
+
+            const playerSprite = win.querySelector('#player-pokemon-sprite');
+            playerSprite.dispatchEvent(new MouseEvent('mousedown', { clientX: 150, clientY: 150, bubbles: true }));
+            expect(window.__piwIsDraggingWindow).toBe(true);
+
+            document.dispatchEvent(new MouseEvent('mousemove', { clientX: 210, clientY: 180, bubbles: true }));
+            expect(win.style.left).toBe('160px');
+            expect(win.style.top).toBe('130px');
+
+            document.dispatchEvent(new MouseEvent('mouseup', { bubbles: true }));
+            expect(window.__piwIsDraggingWindow).toBe(false);
+
+            const enemyHp = win.querySelector('#enemy-battle-hp-container');
+            enemyHp.dispatchEvent(new MouseEvent('mousedown', { clientX: 250, clientY: 200, bubbles: true }));
+            document.dispatchEvent(new MouseEvent('mousemove', { clientX: 270, clientY: 225, bubbles: true }));
+            expect(win.style.left).toBe('180px');
+            expect(win.style.top).toBe('155px');
+            document.dispatchEvent(new MouseEvent('mouseup', { bubbles: true }));
+        } finally {
+            window.__piwIsDraggingWindow = false;
+            win.remove();
+        }
+    });
 });

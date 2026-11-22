@@ -11,7 +11,9 @@ function setupClickThrough() {
         // or specifically designated transparent full-screen wrappers.
         let shouldIgnore = false;
 
-        if (!elementUnderMouse) {
+        if (window.__piwIsDraggingWindow) {
+            shouldIgnore = false;
+        } else if (!elementUnderMouse) {
             shouldIgnore = true;
         } else if (elementUnderMouse === document.body || elementUnderMouse === document.documentElement) {
             shouldIgnore = true;

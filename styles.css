@@ -1547,6 +1547,16 @@ input[type="number"] {
     pointer-events: none !important;
 }
 
+#main-view-window.is-minimal-combat #player-side .battle-pokemon-sprite,
+#main-view-window.is-minimal-combat #enemy-side .battle-pokemon-sprite,
+#main-view-window.is-minimal-combat #player-battle-hp-container,
+#main-view-window.is-minimal-combat #enemy-battle-hp-container,
+#main-view-window.is-minimal-combat #player-battle-hp-container *,
+#main-view-window.is-minimal-combat #enemy-battle-hp-container * {
+    pointer-events: auto !important;
+    cursor: grab;
+}
+
 #main-view-window.is-minimal-combat #main-view-header,
 #main-view-window.is-minimal-combat .window-resize-handle,
 #main-view-window.is-minimal-combat #smartwatch,

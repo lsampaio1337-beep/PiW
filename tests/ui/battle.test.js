@@ -61,12 +61,13 @@ function setupBattleDOM() {
         <div id="main-view-window" style="width: 800px; height: 600px;">
             <div id="combat-arena">
                 <div id="battle-sprites-container">
-                    <div id="enemy-side" class="battle-actor battle-actor-enemy" style="position: absolute; bottom: 20%; left: 100%;">
+                    <div id="enemy-side" class="battle-actor battle-actor-enemy" style="position: absolute; bottom: 20%; left: 100%; z-index: 30;">
                         <div id="enemy-sprite-wrapper" class="battle-sprite-stage">
                             <div class="battle-sprite-motion">
                                 <div id="enemy-water-effect" class="battle-water-effect"></div>
                                 <img id="enemy-pokemon-sprite" class="battle-pokemon-sprite" src="">
                             </div>
+                            <div class="battle-ground-shadow"></div>
                             <div id="enemy-data-modals">
                                 <div id="enemy-battle-level"></div>
                                 <div id="enemy-battle-sumiv"></div>
@@ -406,6 +407,14 @@ describe('Battle Main View UI', () => {
             expect(clonedSprite).not.toBeNull();
             expect(clonedSprite.style.opacity).toBe('0');
             expect(clonedSprite.style.transform).toBe('scale(0.25)');
+
+            const clonedShadow = defeatContainer.querySelector('.battle-ground-shadow');
+            expect(clonedShadow).not.toBeNull();
+            expect(clonedShadow.style.opacity).toBe('0');
+            expect(clonedShadow.style.transform).toBe('scale(0.25)');
+
+            const enemySide = document.getElementById('enemy-side');
+            expect(Number(enemySide.style.zIndex)).toBeGreaterThan(Number(defeatContainer.style.zIndex));
 
             const ball = defeatContainer.querySelector('img[src*="Assets/Items/Balls/Pokeball.png"]');
             expect(ball).not.toBeNull();
