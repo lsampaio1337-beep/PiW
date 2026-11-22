@@ -88,4 +88,30 @@ describe('BattleSystem Prestige XP & Region Level Scaling', () => {
         bs.generateEncounter(0);
         expect(bs.activeEncounter.level).toBe(1);
     });
+
+    test('getAdjustedAttackDelays preserves relative speed when faster Pokemon exceeds 250ms cap', () => {
+        const state = createRegionState('Johto', 'Route 30', 150);
+        state.config.balance.baseAttackDelay = 2.0; // 2000ms base
+        const bs = new BattleSystem(state);
+
+        // Neither exceeds cap: SPE 100 (1000ms) vs SPE 300 (500ms)
+        expect(bs.getAdjustedAttackDelays(100, 300)).toEqual({
+            leaderDelay: 1000,
+            enemyDelay: 500,
+        });
+
+        // User example: raw leader 125ms (SPE=1500) vs raw enemy 1000ms (SPE=100)
+        // Doubles both -> leader 250ms, enemy 2000ms
+        expect(bs.getAdjustedAttackDelays(1500, 100)).toEqual({
+            leaderDelay: 250,
+            enemyDelay: 2000,
+        });
+
+        // Both over 700 SPE: Snorlax SPE 900 (raw 200ms) vs Electrode SPE 1900 (raw 100ms)
+        // Scales by 2.5x -> Electrode 250ms, Snorlax 500ms
+        expect(bs.getAdjustedAttackDelays(900, 1900)).toEqual({
+            leaderDelay: 500,
+            enemyDelay: 250,
+        });
+    });
 });

@@ -1417,6 +1417,26 @@ class BattleSystem {
         return learned.slice(-4);
     }
 
+    /**
+     * Compute attack delays (ms at 1x speed) for leader and enemy.
+     * If either exceeds the 250ms attack-speed cap, both delays scale
+     * proportionally so the faster Pokémon lands at 250ms while preserving
+     * its relative speed advantage.
+     */
+    getAdjustedAttackDelays(leaderSpe, enemySpe) {
+        const baseMs = this.state.config.balance.baseAttackDelay * 1000;
+        const rawLeaderDelay = baseMs * (100 / (100 + Math.max(0, leaderSpe || 0)));
+        const rawEnemyDelay = baseMs * (100 / (100 + Math.max(0, enemySpe || 0)));
+
+        const minRawDelay = Math.min(rawLeaderDelay, rawEnemyDelay);
+        const scale = minRawDelay < 250 ? (250 / minRawDelay) : 1;
+
+        return {
+            leaderDelay: rawLeaderDelay * scale,
+            enemyDelay: rawEnemyDelay * scale,
+        };
+    }
+
     scheduleTurn() {
         if (this.isFainting) return;
 
@@ -1427,13 +1447,13 @@ class BattleSystem {
             return;
         }
 
-        // Leader attack delay
-        let leaderDelay = this.state.config.balance.baseAttackDelay * 1000 * (100 / (100 + leader.currentStats.spe));
-        leaderDelay = Math.max(250, leaderDelay) / this.state.settings.gameSpeed;
-
-        // Enemy attack delay
-        let enemyDelay = this.state.config.balance.baseAttackDelay * 1000 * (100 / (100 + this.activeEncounter.currentStats.spe));
-        enemyDelay = Math.max(250, enemyDelay) / this.state.settings.gameSpeed;
+        const gameSpeed = this.state.settings.gameSpeed || 1;
+        const { leaderDelay: baseLeaderDelay, enemyDelay: baseEnemyDelay } = this.getAdjustedAttackDelays(
+            leader.currentStats?.spe,
+            this.activeEncounter.currentStats?.spe
+        );
+        const leaderDelay = baseLeaderDelay / gameSpeed;
+        const enemyDelay = baseEnemyDelay / gameSpeed;
 
         // Which goes first
         const isLeaderFaster = leaderDelay <= enemyDelay;
@@ -1578,15 +1598,12 @@ class BattleSystem {
         if (!this.activeEncounter) return;
 
         const leader = this.state.party[0];
-        let delay;
-        if (attacker === leader) {
-            // Next is enemy
-            delay = this.state.config.balance.baseAttackDelay * 1000 * (100 / (100 + this.activeEncounter.currentStats.spe));
-        } else {
-            delay = this.state.config.balance.baseAttackDelay * 1000 * (100 / (100 + leader.currentStats.spe));
-        }
-
-        delay = Math.max(250, delay) / this.state.settings.gameSpeed;
+        const gameSpeed = this.state.settings.gameSpeed || 1;
+        const { leaderDelay, enemyDelay } = this.getAdjustedAttackDelays(
+            leader.currentStats?.spe,
+            this.activeEncounter.currentStats?.spe
+        );
+        const delay = (attacker === leader ? enemyDelay : leaderDelay) / gameSpeed;
 
         this.combatLoop = this._scheduleTimer(() => {
             this.executeTurn(defender, attacker); // Swap roles
@@ -2585,11 +2602,8 @@ class BattleSystem {
             let combatTime = 0;
             let leaderConsecutiveHeals = 0;
 
-            // Leader and Enemy attack delays
-            let leaderDelay = this.state.config.balance.baseAttackDelay * 1000 * (100 / (100 + leaderSpe));
-            leaderDelay = Math.max(250, leaderDelay);
-            let enemyDelay = this.state.config.balance.baseAttackDelay * 1000 * (100 / (100 + enemySpe));
-            enemyDelay = Math.max(250, enemyDelay);
+            // Leader and Enemy attack delays (scaled proportionally when faster hits 250ms cap)
+            const { leaderDelay, enemyDelay } = this.getAdjustedAttackDelays(leaderSpe, enemySpe);
 
             // Which goes first
             let isLeaderFaster = leaderDelay <= enemyDelay;
