@@ -169,24 +169,32 @@ export const johtoRoutes = [
   {
     "name": "Ruins of Alph",
     "spawns": [
-      {
-        "pokemonId": 201,
-        "minLevel": 14,
-        "maxLevel": 17,
-        "chance": 0.7
-      },
-      {
-        "pokemonId": 177,
-        "minLevel": 14,
-        "maxLevel": 17,
-        "chance": 0.2
-      },
-      {
-        "pokemonId": 235,
-        "minLevel": 13,
-        "maxLevel": 16,
-        "chance": 0.1
-      }
+      { "pokemonId": "0201.1", "minLevel": 14, "maxLevel": 17, "chance": 0.038461538461538464 },
+      { "pokemonId": "0201.2", "minLevel": 14, "maxLevel": 17, "chance": 0.038461538461538464 },
+      { "pokemonId": "0201.3", "minLevel": 14, "maxLevel": 17, "chance": 0.038461538461538464 },
+      { "pokemonId": "0201.4", "minLevel": 14, "maxLevel": 17, "chance": 0.038461538461538464 },
+      { "pokemonId": "0201.5", "minLevel": 14, "maxLevel": 17, "chance": 0.038461538461538464 },
+      { "pokemonId": "0201.27", "minLevel": 14, "maxLevel": 17, "chance": 0.038461538461538464 },
+      { "pokemonId": "0201.7", "minLevel": 14, "maxLevel": 17, "chance": 0.038461538461538464 },
+      { "pokemonId": "0201.8", "minLevel": 14, "maxLevel": 17, "chance": 0.038461538461538464 },
+      { "pokemonId": "0201.9", "minLevel": 14, "maxLevel": 17, "chance": 0.038461538461538464 },
+      { "pokemonId": "0201.10", "minLevel": 14, "maxLevel": 17, "chance": 0.038461538461538464 },
+      { "pokemonId": "0201.11", "minLevel": 14, "maxLevel": 17, "chance": 0.038461538461538464 },
+      { "pokemonId": "0201.12", "minLevel": 14, "maxLevel": 17, "chance": 0.038461538461538464 },
+      { "pokemonId": "0201.28", "minLevel": 14, "maxLevel": 17, "chance": 0.038461538461538464 },
+      { "pokemonId": "0201.13", "minLevel": 14, "maxLevel": 17, "chance": 0.038461538461538464 },
+      { "pokemonId": "0201.14", "minLevel": 14, "maxLevel": 17, "chance": 0.038461538461538464 },
+      { "pokemonId": "0201.15", "minLevel": 14, "maxLevel": 17, "chance": 0.038461538461538464 },
+      { "pokemonId": "0201.16", "minLevel": 14, "maxLevel": 17, "chance": 0.038461538461538464 },
+      { "pokemonId": "0201.18", "minLevel": 14, "maxLevel": 17, "chance": 0.038461538461538464 },
+      { "pokemonId": "0201.19", "minLevel": 14, "maxLevel": 17, "chance": 0.038461538461538464 },
+      { "pokemonId": "0201.20", "minLevel": 14, "maxLevel": 17, "chance": 0.038461538461538464 },
+      { "pokemonId": "0201.21", "minLevel": 14, "maxLevel": 17, "chance": 0.038461538461538464 },
+      { "pokemonId": "0201.22", "minLevel": 14, "maxLevel": 17, "chance": 0.038461538461538464 },
+      { "pokemonId": "0201.23", "minLevel": 14, "maxLevel": 17, "chance": 0.038461538461538464 },
+      { "pokemonId": "0201.24", "minLevel": 14, "maxLevel": 17, "chance": 0.038461538461538464 },
+      { "pokemonId": "0201.25", "minLevel": 14, "maxLevel": 17, "chance": 0.038461538461538464 },
+      { "pokemonId": "0201.26", "minLevel": 14, "maxLevel": 17, "chance": 0.038461538461538464 }
     ]
   },
   {
@@ -217,7 +225,7 @@ export const johtoRoutes = [
         "chance": 0.2
       },
       {
-        "pokemonId": 163,
+        "pokemonId": 235,
         "minLevel": 12,
         "maxLevel": 15,
         "chance": 0.3

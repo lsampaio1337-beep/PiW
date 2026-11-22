@@ -289,7 +289,7 @@ export class WindowManager {
             'toggleSaleSelection', 'trackDailyChallenge', 'transformDitto', 'updateBuyItemPrice',
             'updateMainControl', 'updatePokemonFilter', 'updateSellItemPrice', 'updateSmartCaptureIcon',
             'updateUI', 'useVitamin', 'useVitaminBatch', 'applyForceEncounterPreset', 'applySmartCaptureFilters',
-            'claimAllPendingGifts', 'resetWindowLayout', 'showCatchRateModal'
+            'claimAllPendingGifts', 'resetWindowLayout', 'showCatchRateModal', 'showUnownVariationsModal', 'closePokedexInnerModal'
         ];
 
         // Match balanced arguments (supports Unicode, punctuation, nested parens/objects).

@@ -27,8 +27,8 @@ describe('pokemonDataLoader & runtime pokemon_info.json integration', () => {
         state.config.moves = moves;
     });
 
-    it('hydrates all 1,552 entries with regional dex IDs, stats, types, and learnsets', () => {
-        expect(pokemonData.length).toBe(1552);
+    it('hydrates all 1,554 entries with regional dex IDs, stats, types, and learnsets', () => {
+        expect(pokemonData.length).toBe(1554);
         expect(pokemonMap.get(1).name).toBe('Bulbasaur');
         expect(pokemonMap.get(1).kanto_id).toBe(1);
         expect(pokemonMap.get('0003.2').name).toBe('Venusaur (Mega Venusaur)');

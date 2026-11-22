@@ -94,4 +94,24 @@ describe('getSpriteUrl', () => {
         expect(getSpriteUrl(386)).toBe('Assets/Pokemon Sprites/Reg3 E/Gen3E_0386.4_Deoxys_Speed.png');
         state.settings.legacySprites = false;
     });
+
+    it('should prefer first variation in current region folder over Reg10 SV fallback when pokemonInfo is loaded', () => {
+        state.config.pokemonInfo = {
+            folders: [
+                { id: 1, folder: 'Reg2 C', prefix: 'Gen2C', hasShiny: true },
+                { id: 4, folder: 'Reg5 BW', prefix: 'Gen5BW', hasShiny: true },
+                { id: 9, folder: 'Reg10 SV', prefix: 'Gen10SV', hasShiny: true },
+            ],
+            pokemon: {
+                '0201': { name: 'Unown', sprite: 'Unown', folders: [9] },
+                '0201.1': { name: 'Unown (A)', sprite: 'Unown_A', folders: [1, 4] },
+            },
+        };
+        state.settings = { legacySprites: true };
+        state.currentRegionName = 'Johto';
+        expect(getSpriteUrl(201)).toBe('Assets/Pokemon Sprites/Reg2 C/Gen2C_0201.1_Unown_A.png');
+
+        state.settings = { legacySprites: false };
+        expect(getSpriteUrl(201)).toBe('Assets/Pokemon Sprites/Reg5 BW/Gen5BW_0201.1_Unown_A.png');
+    });
 });

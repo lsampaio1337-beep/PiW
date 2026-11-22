@@ -99,7 +99,7 @@ class DayCare {
         if (!p || !p.currentStats || !p.ivs || !this.state?.config?.pokemonData) return;
 
         const baseData = this.state.config.pokemonMap
-            ? (this.state.config.pokemonMap.get(Number(p.id)) || this.state.config.pokemonMap.get(p.id))
+            ? (this.state.config.pokemonMap.get(p.id) || this.state.config.pokemonMap.get(Number(p.id)))
             : this.state.config.pokemonData.find(pd => pd.id === p.id);
         if (!baseData) return;
 

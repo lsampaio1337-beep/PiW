@@ -32,7 +32,7 @@ function getPokemonDataMap() {
 
 function lookupPokemonInMap(map, id) {
     if (!map || id == null) return undefined;
-    return map.get(Number(id)) || map.get(id);
+    return map.get(id) || map.get(Number(id));
 }
 
 function escapeJS(str) {

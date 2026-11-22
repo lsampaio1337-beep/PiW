@@ -8,7 +8,7 @@ import { escapeHTML } from '../utils/stringUtils.js';
 function getPokemonConfig(id, state) {
     if (!state?.config) return undefined;
     if (state.config.pokemonMap) {
-        return state.config.pokemonMap.get(Number(id)) || state.config.pokemonMap.get(id);
+        return state.config.pokemonMap.get(id) || state.config.pokemonMap.get(Number(id));
     }
     return state.config.pokemonData?.find(d => Number(d.id) === Number(id) || d.id === id);
 }

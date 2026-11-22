@@ -393,7 +393,7 @@ export function forceNextCapture() {
     const { id, level, qValue, sumIV } = getForceEncounterInputs();
 
     const pokemonBase = state.config?.pokemonMap
-        ? (state.config.pokemonMap.get(Number(id)) || state.config.pokemonMap.get(id))
+        ? (state.config.pokemonMap.get(id) || state.config.pokemonMap.get(Number(id)))
         : state.config?.pokemonData?.find(p => p && p.id === id);
     const resolvedBase = pokemonBase || state.config?.pokemonData?.[1];
     if (!resolvedBase) return;
