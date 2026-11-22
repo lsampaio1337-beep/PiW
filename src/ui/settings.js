@@ -34,6 +34,8 @@ export function resetWindowLayout() {
             delete winEl._originalWidth;
             delete winEl._originalHeight;
             delete winEl._originalRatio;
+            delete winEl._baseOriginalWidth;
+            delete winEl._widthMultiplier;
 
             const scaler = winEl.querySelector('.window-content-scaler');
             if (scaler && scaler.style) {
@@ -55,6 +57,9 @@ export function resetWindowLayout() {
     });
     if (typeof window !== 'undefined' && window.windowManager) {
         window.windowManager.autoAdjustWidth('main-control-window');
+        if (state.currentView && typeof window.switchView === 'function') {
+            window.switchView(state.currentView);
+        }
     }
     const storage = state.storageRef || (typeof window !== 'undefined' ? window.storageRef : null);
     if (storage && typeof storage.save === 'function') {

@@ -658,7 +658,7 @@ input[type="number"] {
     flex-direction: column;
     align-items: center;
     justify-content: flex-end;
-    min-width: 14cqw;
+    min-width: max(14cqw, 92px);
     min-height: 32px;
 }
 
@@ -1512,6 +1512,28 @@ input[type="number"] {
     height: 600px;
 }
 
+#main-view-window.is-battle-mode .main-view-header-bar {
+    padding: 3px 6px;
+    gap: 4px;
+}
+
+#main-view-window.is-battle-mode .mv-timer-pill {
+    font-size: 9.5px;
+    padding: 1px 5px;
+    flex-shrink: 0;
+}
+
+#main-view-window.is-battle-mode #main-view-title {
+    font-size: 11px;
+    white-space: nowrap;
+}
+
+#main-view-window.is-battle-mode #main-view-route-badge {
+    max-width: 95px;
+    font-size: 9px;
+    padding: 1px 5px;
+}
+
 .main-view-header-bar {
     justify-content: space-between;
     padding: 4px 10px;
@@ -1584,7 +1606,7 @@ input[type="number"] {
 
 .battle-hp-container {
     width: 15.5cqw;
-    min-width: 118px;
+    min-width: 112px;
     height: 1.75cqw;
     min-height: 14px;
     background: rgba(9, 13, 22, 0.88);
@@ -1662,7 +1684,7 @@ input[type="number"] {
     display: none;
     flex-direction: column;
     gap: 4px;
-    margin-left: 8px;
+    margin-left: 6px;
     z-index: 10;
 }
 

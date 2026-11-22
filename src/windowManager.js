@@ -981,7 +981,7 @@ export class WindowManager {
         }
     }
 
-    setWindowProportions(windowId, widthToHeightRatio) {
+    setWindowProportions(windowId, widthToHeightRatio, widthMultiplier = 1) {
         const winElement = document.getElementById(windowId);
         if (!winElement) return;
 
@@ -991,37 +991,54 @@ export class WindowManager {
 
         // Force a layout flush to ensure header height is accurate
         const headerH = headerElement ? headerElement.offsetHeight || 30 : 0;
+        const { horizontalPadding, verticalPadding } = this._getContentPadding(winElement);
 
         if (!winElement._originalWidth) {
              winElement._originalWidth = 800;
         }
+        const prevOriginalWidth = winElement._originalWidth;
+        if (!winElement._baseOriginalWidth) {
+            const prevMultiplier = winElement._widthMultiplier || 1;
+            winElement._baseOriginalWidth = prevOriginalWidth / prevMultiplier;
+        }
 
-        // We MUST preserve originalWidth and scale, and only update originalHeight
-        const originalWidth = winElement._originalWidth;
+        // Preserve user zoom scale when changing mode width multiplier
+        let currentWidth = winElement.offsetWidth;
+        if (currentWidth === 0) currentWidth = parseFloat(winElement.style.width) || (prevOriginalWidth + horizontalPadding);
+        const currentContentWidth = Math.max(1, currentWidth - horizontalPadding);
+        const scale = Math.max(0.05, currentContentWidth / prevOriginalWidth);
+
+        const originalWidth = winElement._baseOriginalWidth * widthMultiplier;
         // height = width / (width/height ratio)
         const originalHeight = originalWidth / widthToHeightRatio;
 
+        winElement._originalWidth = originalWidth;
         winElement._originalHeight = originalHeight;
         winElement._originalRatio = widthToHeightRatio;
+        winElement._widthMultiplier = widthMultiplier;
 
         scalerElement.style.setProperty('--original-width', originalWidth + 'px');
         scalerElement.style.setProperty('--original-height', originalHeight + 'px');
 
-        // Find current width to keep scale the same
-        let currentWidth = winElement.offsetWidth;
-        if (currentWidth === 0) currentWidth = parseInt(winElement.style.width) || 800;
-
-        const scale = currentWidth / originalWidth;
+        const newContentWidth = originalWidth * scale;
+        const newWidth = newContentWidth + horizontalPadding;
         const newContentHeight = originalHeight * scale;
-        const newHeight = headerH + newContentHeight;
+        const newHeight = headerH + newContentHeight + verticalPadding;
 
-        // Apply exactly
+        // Apply exactly while keeping user scale intact
+        winElement.style.width = newWidth + 'px';
         winElement.style.height = newHeight + 'px';
-        scalerElement.style.height = originalHeight + 'px';
-        // Enforce top margin to prevent overlapping the header
+        scalerElement.style.position = 'absolute';
         scalerElement.style.top = '0px';
+        scalerElement.style.left = '0px';
+        scalerElement.style.width = originalWidth + 'px';
+        scalerElement.style.height = originalHeight + 'px';
+        scalerElement.style.transform = `scale(${scale})`;
 
-        // DO NOT change transform or scalerElement.style.width, we preserve the existing scale!
+        if (!this._isElementHidden(winElement)) {
+            this.constrainWindow(winElement);
+        }
+
         this.saveWindowData(windowId);
     }
 
@@ -1035,9 +1052,18 @@ export class WindowManager {
             const prevSettings = state.settings.windowSettings[windowId] || {};
             const parsedW = parseFloat(winElement.style.width);
             const parsedH = parseFloat(winElement.style.height);
-            const safeWidth = (winElement.style.width && winElement.style.width !== '0px' && (winElement.style.width === 'auto' || isNaN(parsedW) || parsedW > 0))
+            let safeWidth = (winElement.style.width && winElement.style.width !== '0px' && (winElement.style.width === 'auto' || isNaN(parsedW) || parsedW > 0))
                 ? winElement.style.width
                 : (prevSettings.width || 'auto');
+            // Persist width normalized to 1x base multiplier so Hub Mode reloads at full width
+            const widthMultiplier = winElement._widthMultiplier || 1;
+            if (widthMultiplier !== 1 && typeof safeWidth === 'string' && safeWidth.endsWith('px')) {
+                const { horizontalPadding } = this._getContentPadding(winElement);
+                const parsedSafeW = parseFloat(safeWidth);
+                if (!isNaN(parsedSafeW) && parsedSafeW > horizontalPadding) {
+                    safeWidth = (((parsedSafeW - horizontalPadding) / widthMultiplier) + horizontalPadding) + 'px';
+                }
+            }
             const safeHeight = (winElement.style.height && winElement.style.height !== '0px' && (winElement.style.height === 'auto' || isNaN(parsedH) || parsedH > 0))
                 ? winElement.style.height
                 : (prevSettings.height || 'auto');

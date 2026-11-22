@@ -12,6 +12,9 @@ import * as mathEngine from './mathEngine.js';
 import { escapeHTML } from './utils/stringUtils.js';
 import { getLearnsetForRegion } from './utils/pokemonDataLoader.js';
 
+// Scale slide-in duration proportionally to the 50%-width battle arena so visual slide speed stays consistent
+const BATTLE_SLIDE_TIME_SCALE = 0.5;
+
 class BattleSystem {
 
     cloneEncounter(encounter) {
@@ -228,6 +231,19 @@ class BattleSystem {
         return Math.max(0.5, mult);
     }
 
+    /** Calculate base encounter search delay in ms (unchanged by arena width). */
+    getSearchDelay(useSpeedMult = true) {
+        const leaderSpeed = this.state.party[0] ? this.state.party[0].currentStats.spe : 100;
+        const speedMult = useSpeedMult ? this.getSpeedMultiplier() : 1;
+        const rawDelay = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpeed)) * speedMult;
+        return Math.max(300, rawDelay) / this.state.settings.gameSpeed;
+    }
+
+    /** Calculate slide-in duration in ms scaled for the 50%-width battle arena. */
+    getSlideDelay(useSpeedMult = true) {
+        return this.getSearchDelay(useSpeedMult) * BATTLE_SLIDE_TIME_SCALE;
+    }
+
     getLootTier() {
         return this.state.stats?.upgrades?.lootTier || 0;
     }
@@ -289,11 +305,7 @@ class BattleSystem {
     start() {
 
         if (!this.combatLoop) {
-            const leaderSpeed = this.state.party[0].currentStats.spe;
-            const speedMult = this.getSpeedMultiplier();
-            let slideDelay = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpeed)) * speedMult;
-            slideDelay = Math.max(300, slideDelay) / this.state.settings.gameSpeed;
-            this.generateEncounter(slideDelay);
+            this.generateEncounter(this.getSlideDelay(true));
         }
     }
 
@@ -434,11 +446,7 @@ class BattleSystem {
             window.switchView("BATTLE_ARENA");
         }
 
-        const leaderSpeed = this.state.party[0].currentStats.spe;
-        let slideDelay = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpeed));
-        slideDelay = Math.max(300, slideDelay) / this.state.settings.gameSpeed;
-
-        this.generateMultiplayerEncounter(slideDelay);
+        this.generateMultiplayerEncounter(this.getSlideDelay(false));
     }
 
     stopMultiplayerBattle() {
@@ -470,10 +478,7 @@ class BattleSystem {
             }
 
             // Re-generate idle encounter
-            const leaderSpeed = this.state.party[0] ? this.state.party[0].currentStats.spe : 100;
-            let slideDelay = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpeed));
-            slideDelay = Math.max(300, slideDelay) / this.state.settings.gameSpeed;
-            this.generateEncounter(slideDelay);
+            this.generateEncounter(this.getSlideDelay(false));
 
             // Switch view back to battle stadium and reset ready states so players stay connected
             if (typeof window.resetMultiplayerReady === 'function') {
@@ -690,10 +695,7 @@ class BattleSystem {
                          }
                      }, 100);
                  } else {
-                     const leaderSpeed = this.state.party[0].currentStats.spe;
-                     let slideDelay = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpeed));
-                     slideDelay = Math.max(300, slideDelay) / this.state.settings.gameSpeed;
-                     this.generateMultiplayerEncounter(slideDelay);
+                     this.generateMultiplayerEncounter(this.getSlideDelay(false));
                  }
              }, 1000);
         } else {
@@ -947,11 +949,7 @@ class BattleSystem {
                 // Apply gym background to the main battle arena view
                 this._applyGymArenaBackground(gym, this.gymState.gymIndex);
 
-                const leaderSpeed = this.state.party[0].currentStats.spe;
-                const speedMult = this.getSpeedMultiplier();
-                let slideDelay = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpeed)) * speedMult;
-                slideDelay = Math.max(300, slideDelay) / this.state.settings.gameSpeed;
-                this.generateGymEncounter(slideDelay);
+                this.generateGymEncounter(this.getSlideDelay(true));
             };
         } else {
             // Gym completed
@@ -1067,20 +1065,17 @@ class BattleSystem {
         this.updateUI();
 
         // Speed Delays: Search Time: BaseSearchTime(3.0s) * (100 / (100 + Speed)), minimum 0.30s
-        const leaderSpeed = this.state.party[0].currentStats.spe;
-        const speedMult = this.getSpeedMultiplier();
-        let delay = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpeed)) * speedMult;
-        delay = Math.max(300, delay) / this.state.settings.gameSpeed;
-
+        const delay = this.getSearchDelay(true);
         this.searchDuration = delay;
+        const slideDelay = this.getSlideDelay(true);
 
-        // Start encounter generation after search delay, slide duration will be same as search delay
+        // Start encounter generation after search delay; slide duration scales to arena width
         this._cancelPendingCombatTimers();
         this.combatLoop = this._scheduleTimer(() => {
             if (this.gymState.isActive) {
-                this.generateGymEncounter(delay);
+                this.generateGymEncounter(slideDelay);
             } else {
-                this.generateEncounter(delay);
+                this.generateEncounter(slideDelay);
             }
         }, delay);
     }
@@ -2090,11 +2085,7 @@ class BattleSystem {
         if (this.gymState && this.gymState.isActive) {
             this.handleGymEnemyDefeat();
         } else {
-            const leaderSpeed = this.state.party[0].currentStats.spe;
-            const speedMult = this.getSpeedMultiplier();
-            let slideDelay = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpeed)) * speedMult;
-            slideDelay = Math.max(300, slideDelay) / this.state.settings.gameSpeed;
-            this.generateEncounter(slideDelay);
+            this.generateEncounter(this.getSlideDelay(true));
         }
     }
 
@@ -2168,11 +2159,7 @@ class BattleSystem {
             }
         } else {
             // Next pokemon
-            const leaderSpeed = this.state.party[0].currentStats.spe;
-            const speedMult = this.getSpeedMultiplier();
-            let slideDelay = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpeed)) * speedMult;
-            slideDelay = Math.max(300, slideDelay) / this.state.settings.gameSpeed;
-            this.generateGymEncounter(slideDelay);
+            this.generateGymEncounter(this.getSlideDelay(true));
         }
     }
 
@@ -2338,10 +2325,7 @@ class BattleSystem {
                 }
 
                 // Prepare slide in duration for next pokemon
-                const leaderSpeed = this.state.party[0].currentStats.spe;
-                const speedMult = this.getSpeedMultiplier();
-                let slideDelay = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpeed)) * speedMult;
-                slideDelay = Math.max(300, slideDelay) / this.state.settings.gameSpeed; // Arbitrary 1s slide in
+                const slideDelay = this.getSlideDelay(true);
                 this.isPlayerPreSlidingIn = true;
                 this.updateUI(); // Move offscreen
 

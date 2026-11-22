@@ -19,7 +19,7 @@
 | Spearow | 6 | Route 2 |
 | Hoothoot | 6 | Route 2 |
 | Bonsly | 7 | Lush Jungle North |
-| Happiny | 7 | Route 1 East |
+| Happiny | 7 | Route 1 North |
 | Blissey | 7 | Poni Plains |
 | Abra | 7 | Route 7 |
 | Mankey | 7 | Route 7 |
@@ -47,7 +47,7 @@
 | Scyther | 7 | Poni Plains |
 | Dragonite | 7 | Route 16 |
 | Aerodactyl | 7 | Seafolk Village |
-| Buneary | 7 | Route 1 East |
+| Buneary | 7 | Route 1 North |
 | Furfrou | 7 | Poni Wilds |
 | Dunsparce | 7 | Route 6 |
 | Hawlucha | 7 | Route 6 |
