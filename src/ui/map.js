@@ -140,12 +140,13 @@ function generateMarkerHtml(locationId, locationName, coords, isUnlocked, hasNew
     let displayLocationName = locationName.replace(/\s*\([^)]+\)$/, '');
     let safeLocationName = displayLocationName.replace(/'/g, "&#39;");
     let jsLocationName = locationName.replace(/'/g, "\\'");
+    const zIndexStyle = coords.zIndex !== undefined ? ` z-index: ${coords.zIndex};` : '';
 
     return `
         <div class="${markerClass}"
              data-location="${safeLocationName}"
              title="${safeLocationName}${isCurrentLocation ? ' (Current)' : ''}"
-             style="position: absolute; left: ${coords.x}%; top: ${coords.y}%; width: ${markerWidth}; height: ${markerHeight}; background-image: url('${markerImg}'); background-size: contain; background-repeat: no-repeat; transform: translate(-50%, -50%); filter: ${dropShadow}; cursor: ${isClickable ? 'pointer' : 'default'};"
+             style="position: absolute; left: ${coords.x}%; top: ${coords.y}%;${zIndexStyle} width: ${markerWidth}; height: ${markerHeight}; background-image: url('${markerImg}'); background-size: contain; background-repeat: no-repeat; transform: translate(-50%, -50%); filter: ${dropShadow}; cursor: ${isClickable ? 'pointer' : 'default'};"
              ${isClickable ? `onclick="window.navigateToLocation('${jsLocationName}')"` : ''}
              onmousemove="window.showMapTooltip(event, '${jsLocationName}')"
              onmouseout="window.hideMapTooltip()">
