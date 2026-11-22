@@ -326,37 +326,6 @@ export const alolaRoutes = [
     "secondaryName": "Trial Site"
   },
   {
-    "name": "Route 3 - South",
-    "primaryName": "Route 3",
-    "spawns": [
-      {
-        "pokemonId": 371,
-        "minLevel": 19,
-        "maxLevel": 22,
-        "chance": 0.26
-      },
-      {
-        "pokemonId": 739,
-        "minLevel": 19,
-        "maxLevel": 22,
-        "chance": 0.26
-      },
-      {
-        "pokemonId": 88,
-        "minLevel": 19,
-        "maxLevel": 22,
-        "chance": 0.26
-      },
-      {
-        "pokemonId": 629,
-        "minLevel": 19,
-        "maxLevel": 22,
-        "chance": 0.22
-      }
-    ],
-    "secondaryName": "South"
-  },
-  {
     "name": "Route 3 - North",
     "primaryName": "Route 3",
     "spawns": [
@@ -392,6 +361,37 @@ export const alolaRoutes = [
       }
     ],
     "secondaryName": "North"
+  },
+  {
+    "name": "Route 3 - South",
+    "primaryName": "Route 3",
+    "spawns": [
+      {
+        "pokemonId": 371,
+        "minLevel": 19,
+        "maxLevel": 22,
+        "chance": 0.26
+      },
+      {
+        "pokemonId": 739,
+        "minLevel": 19,
+        "maxLevel": 22,
+        "chance": 0.26
+      },
+      {
+        "pokemonId": 88,
+        "minLevel": 19,
+        "maxLevel": 22,
+        "chance": 0.26
+      },
+      {
+        "pokemonId": 629,
+        "minLevel": 19,
+        "maxLevel": 22,
+        "chance": 0.22
+      }
+    ],
+    "secondaryName": "South"
   },
   {
     "name": "Melemele Meadow",
@@ -3542,7 +3542,7 @@ export const alolaUnlocks = [
     "challengeName": "Challenge 09",
     "areaId": "Verdant Cavern - Trial Site",
     "unlocks": [
-      "Route 3 - South"
+      "Route 3 - North"
     ],
     "requirements": {
       "catchSpecies": [
@@ -3555,9 +3555,22 @@ export const alolaUnlocks = [
   },
   {
     "challengeName": "Challenge 10",
+    "areaId": "Route 3 - North",
+    "unlocks": [
+      "Route 3 - South"
+    ],
+    "requirements": {
+      "defeatSpecific": {
+        "name": "Hawlucha",
+        "count": 1
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 11",
     "areaId": "Route 3 - South",
     "unlocks": [
-      "Route 3 - North"
+      "Melemele Meadow"
     ],
     "requirements": {
       "catchSpeciesByQualityOrHigher": [
@@ -3567,19 +3580,6 @@ export const alolaUnlocks = [
           "count": 1
         }
       ]
-    }
-  },
-  {
-    "challengeName": "Challenge 11",
-    "areaId": "Route 3 - North",
-    "unlocks": [
-      "Melemele Meadow"
-    ],
-    "requirements": {
-      "defeatSpecific": {
-        "name": "Hawlucha",
-        "count": 1
-      }
     }
   },
   {
