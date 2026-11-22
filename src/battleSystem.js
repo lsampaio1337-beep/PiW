@@ -59,7 +59,12 @@ class BattleSystem {
         this.activeEncounter = null;
         this.combatLoop = null;
         this.isSearching = false;
+        this.isSliding = false;
         this.isFainting = false;
+        this.isPlayerPreSlidingIn = false;
+        this.isPlayerSlidingIn = false;
+        this._combatSessionId = 0;
+        this._pendingTimers = new Set();
 
         this.consecutiveHeals = 0;
         this.turnCount = 0;
@@ -284,11 +289,39 @@ class BattleSystem {
         }
     }
 
-    stop() {
+    _scheduleTimer(fn, delay) {
+        const sessionId = this._combatSessionId;
+        const timerId = setTimeout(() => {
+            this._pendingTimers.delete(timerId);
+            if (this.combatLoop === timerId) {
+                this.combatLoop = null;
+            }
+            if (this._combatSessionId !== sessionId) return;
+            fn();
+        }, delay);
+        this._pendingTimers.add(timerId);
+        return timerId;
+    }
+
+    _cancelPendingCombatTimers() {
+        this._combatSessionId++;
         if (this.combatLoop) {
             clearTimeout(this.combatLoop);
             this.combatLoop = null;
         }
+        for (const timerId of this._pendingTimers) {
+            clearTimeout(timerId);
+        }
+        this._pendingTimers.clear();
+    }
+
+    stop() {
+        this._cancelPendingCombatTimers();
+        this.isSearching = false;
+        this.isSliding = false;
+        this.isFainting = false;
+        this.isPlayerPreSlidingIn = false;
+        this.isPlayerSlidingIn = false;
     }
 
     getTypeEffectiveness(moveType, defenderTypes) {
@@ -500,7 +533,7 @@ class BattleSystem {
         this.isSliding = true;
         this.slideDuration = slideDelay;
 
-        this.combatLoop = setTimeout(() => {
+        this.combatLoop = this._scheduleTimer(() => {
             this.isSliding = false;
             this.updateUI();
 
@@ -528,7 +561,7 @@ class BattleSystem {
                 window.playCombatAnimations(event.target, event.moveType, animDuration);
             }
 
-            setTimeout(() => {
+            this._scheduleTimer(() => {
                 defender.currentHp = event.newHp;
 
                 if (typeof window.showDamage === 'function') {
@@ -546,8 +579,9 @@ class BattleSystem {
 
     executeMultiplayerTurn(attacker, defender) {
         if (!this.multiplayerState.isHost) return; // Only host calculates combat
+        const sessionId = this._combatSessionId;
         import('./ui/multiplayer.js').then((mp) => {
-
+            if (this._combatSessionId !== sessionId) return;
             if (this.isFainting) return;
             if (!this.activeEncounter) return;
 
@@ -569,7 +603,7 @@ class BattleSystem {
 
             let fainted = false;
 
-            setTimeout(() => {
+            this._scheduleTimer(() => {
                 defender.currentHp -= hit.damage;
                 if (defender.currentHp <= 0) {
                     defender.currentHp = 0;
@@ -617,7 +651,7 @@ class BattleSystem {
                     this.handleMultiplayerDefeat(defender);
                 } else {
                     const delay = Math.max(200, 1000 / this.state.settings.gameSpeed);
-                    this.combatLoop = setTimeout(() => {
+                    this.combatLoop = this._scheduleTimer(() => {
                         this.executeMultiplayerTurn(defender, attacker);
                     }, delay);
                 }
@@ -626,8 +660,8 @@ class BattleSystem {
     }
 
     handleMultiplayerDefeat(defeated) {
-        this.isFainting = true;
         this.stop(); // Clear loop
+        this.isFainting = true;
 
         if (defeated === this.activeEncounter) {
              if (typeof window.triggerDefeatAnimation === 'function') {
@@ -636,7 +670,7 @@ class BattleSystem {
 
              this.multiplayerState.currentPokemonIndex++;
 
-             setTimeout(() => {
+             this._scheduleTimer(() => {
                  this.isFainting = false;
                  if (this.multiplayerState.currentPokemonIndex >= this.multiplayerState.opponentParty.length) {
                      this.stopMultiplayerBattle();
@@ -659,7 +693,7 @@ class BattleSystem {
                  window.triggerDefeatAnimation('player');
              }
              // Wait for defeat animation
-             setTimeout(() => {
+             this._scheduleTimer(() => {
                  this.state.party.shift(); // Remove fainted pokemon
                  this.updateUI();
 
@@ -680,9 +714,9 @@ class BattleSystem {
                      const delay = Math.max(200, 1000 / this.state.settings.gameSpeed);
 
                      if (playerPokemon.currentStats.spe >= enemyPokemon.currentStats.spe) {
-                         this.combatLoop = setTimeout(() => this.executeMultiplayerTurn(playerPokemon, enemyPokemon), delay);
+                         this.combatLoop = this._scheduleTimer(() => this.executeMultiplayerTurn(playerPokemon, enemyPokemon), delay);
                      } else {
-                         this.combatLoop = setTimeout(() => this.executeMultiplayerTurn(enemyPokemon, playerPokemon), delay);
+                         this.combatLoop = this._scheduleTimer(() => this.executeMultiplayerTurn(enemyPokemon, playerPokemon), delay);
                      }
                  }
              }, 1000);
@@ -957,6 +991,7 @@ class BattleSystem {
 
         // When leaving after winning, keep player's Pokemon static in gym main view until another spot is clicked
         if (!keepStaticInGym && typeof window.navigateToLocation === 'function') {
+             window.currentMapRegion = this.state.currentRegionName;
              window.navigateToLocation(this.state.currentRoute);
         } else if (keepStaticInGym) {
              if (typeof window.updateUI === 'function') {
@@ -1032,7 +1067,8 @@ class BattleSystem {
         this.searchDuration = delay;
 
         // Start encounter generation after search delay, slide duration will be same as search delay
-        this.combatLoop = setTimeout(() => {
+        this._cancelPendingCombatTimers();
+        this.combatLoop = this._scheduleTimer(() => {
             if (this.gymState.isActive) {
                 this.generateGymEncounter(delay);
             } else {
@@ -1142,7 +1178,7 @@ class BattleSystem {
         this.slideDuration = slideDelay;
         this.updateUI();
 
-        this.combatLoop = setTimeout(() => {
+        this.combatLoop = this._scheduleTimer(() => {
             this.isSliding = false;
             this.updateUI();
             this.scheduleTurn();
@@ -1194,7 +1230,11 @@ class BattleSystem {
         } else {
             // Find route spawns based on state.currentRoute
             const route = this.getRoute(this.state.currentRoute);
-            if (!route) return;
+            if (!route) {
+                this.isSearching = false;
+                this.updateUI();
+                return;
+            }
 
             let actualPokemonBase;
             let isRoamingEncounter = false;
@@ -1254,6 +1294,11 @@ class BattleSystem {
                 }
             } else {
                 selectedSpawn = this.getSpawnForRoute(route);
+                if (!selectedSpawn) {
+                    this.isSearching = false;
+                    this.updateUI();
+                    return;
+                }
 
                 actualPokemonBase = this.getPokemonBase(selectedSpawn.pokemonId);
                 pokemonBase = actualPokemonBase;
@@ -1334,7 +1379,7 @@ class BattleSystem {
         this.slideDuration = slideDelay;
         this.updateUI();
 
-        this.combatLoop = setTimeout(() => {
+        this.combatLoop = this._scheduleTimer(() => {
             this.isSliding = false;
             this.updateUI();
             this.scheduleTurn();
@@ -1385,7 +1430,7 @@ class BattleSystem {
         const secondActor = isLeaderFaster ? this.activeEncounter : leader;
         const firstDelay = Math.min(leaderDelay, enemyDelay);
 
-        this.combatLoop = setTimeout(() => {
+        this.combatLoop = this._scheduleTimer(() => {
             this.executeTurn(firstActor, secondActor);
         }, firstDelay);
     }
@@ -1441,7 +1486,9 @@ class BattleSystem {
         }
 
         // Delay damage and next turn by projectile travel time
-        setTimeout(() => {
+        this._scheduleTimer(() => {
+            if (this.isFainting || !this.activeEncounter) return;
+
             defender.currentHp -= hit.damage;
 
             // Show floating damage and splash
@@ -1474,24 +1521,24 @@ class BattleSystem {
                     if (attacker.currentHp <= 0) {
                         // Both fainted
                         // Wait slightly to show damage before tearing down
-                        setTimeout(() => {
+                        this._scheduleTimer(() => {
                             if (defender === this.activeEncounter) {
                                 this.handleEnemyDefeat(); // Get rewards
-                                setTimeout(() => {
+                                this._scheduleTimer(() => {
                                     if (!this.isFainting) this.handleFaint();
                                 }, 500);
-                            } else {
+                            } else if (defender === this.state.party[0]) {
                                 if (!this.isFainting) this.handleFaint();
-                                setTimeout(() => {
+                                this._scheduleTimer(() => {
                                     this.handleEnemyDefeat();
                                 }, 500);
                             }
                         }, 500 / this.state.settings.gameSpeed);
                     } else {
-                        setTimeout(() => {
+                        this._scheduleTimer(() => {
                             if (defender === this.activeEncounter) {
                                 this.handleEnemyDefeat();
-                            } else {
+                            } else if (defender === this.state.party[0]) {
                                 if (!this.isFainting) {
                                     this.handleFaint();
                                 }
@@ -1501,7 +1548,7 @@ class BattleSystem {
                 } else {
                     if (defender === this.activeEncounter) {
                         this.handleEnemyDefeat();
-                    } else {
+                    } else if (defender === this.state.party[0]) {
                         if (!this.isFainting) {
                             this.handleFaint();
                         }
@@ -1530,7 +1577,7 @@ class BattleSystem {
 
         delay = Math.max(250, delay) / this.state.settings.gameSpeed;
 
-        this.combatLoop = setTimeout(() => {
+        this.combatLoop = this._scheduleTimer(() => {
             this.executeTurn(defender, attacker); // Swap roles
         }, delay);
     }
@@ -2213,6 +2260,14 @@ class BattleSystem {
     }
 
     handleFaint() {
+        const currentLeader = this.state.party[0];
+        if (!currentLeader || currentLeader.currentHp > 0) {
+            return;
+        }
+        if (this.combatLoop) {
+            clearTimeout(this.combatLoop);
+            this.combatLoop = null;
+        }
         this.isFainting = true;
         if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') {
             window.trackDailyChallenge('defeat_endurance', { streak: 0 });
@@ -2220,7 +2275,14 @@ class BattleSystem {
         this.updateUI(); // This will trigger the fade out via UI logic
 
         // Wait 4 seconds (2s fade out + 2s extra wait)
-        setTimeout(() => {
+        this._scheduleTimer(() => {
+            if (this.state.party[0] && this.state.party[0].currentHp > 0) {
+                this.isFainting = false;
+                this.updateUI();
+                this.scheduleTurn();
+                return;
+            }
+
             // move fainted pokemon to end of party
             const fainted = this.state.party.shift();
 
@@ -2245,18 +2307,18 @@ class BattleSystem {
                 // Prepare slide in duration for next pokemon
                 const leaderSpeed = this.state.party[0].currentStats.spe;
                 const speedMult = this.getSpeedMultiplier();
-            let slideDelay = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpeed)) * speedMult;
-            slideDelay = Math.max(300, slideDelay) / this.state.settings.gameSpeed; // Arbitrary 1s slide in
+                let slideDelay = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpeed)) * speedMult;
+                slideDelay = Math.max(300, slideDelay) / this.state.settings.gameSpeed; // Arbitrary 1s slide in
                 this.isPlayerPreSlidingIn = true;
                 this.updateUI(); // Move offscreen
 
-                setTimeout(() => {
+                this._scheduleTimer(() => {
                     this.isPlayerPreSlidingIn = false;
                     this.isPlayerSlidingIn = true;
                     this.slideDuration = slideDelay;
                     this.updateUI(); // Set position and start sliding animation
 
-                    setTimeout(() => {
+                    this._scheduleTimer(() => {
                         this.isPlayerSlidingIn = false;
                         this.updateUI();
                         this.scheduleTurn(); // restart turn with new leader
@@ -2337,14 +2399,15 @@ class BattleSystem {
 
     switchLeader(index) {
         if (index === 0 || index >= this.state.party.length) return;
+        if (this.isFainting) return;
         const target = this.state.party[index];
         if (target && target.currentHp > 0) {
             const newLeader = this.state.party.splice(index, 1)[0];
             this.state.party.unshift(newLeader);
             this.updateUI();
 
-            if (this.activeEncounter && this.combatLoop) {
-                clearTimeout(this.combatLoop);
+            if (this.activeEncounter && !this.isSliding) {
+                this._cancelPendingCombatTimers();
                 this.scheduleTurn();
             }
         }
