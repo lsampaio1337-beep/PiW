@@ -491,4 +491,64 @@ describe('WindowManager', () => {
             win.remove();
         }
     });
+
+    test('adjustHeightForNewContent grows height up to maxHeightRatio (1.5 * width) and keeps proportions valid for constrainWindow', () => {
+        const originalInnerWidth = window.innerWidth;
+        const originalInnerHeight = window.innerHeight;
+        Object.defineProperty(window, 'innerWidth', { value: 1920, configurable: true });
+        Object.defineProperty(window, 'innerHeight', { value: 1440, configurable: true });
+        windowManager.containerWidth = 1920;
+        windowManager.containerHeight = 1440;
+
+        const win = document.createElement('div');
+        win.id = 'window-challenges';
+        win.className = 'floating-window';
+        win.style.display = 'flex';
+        win.style.width = '800px';
+        win.style.height = '400px';
+        win.dataset.maxHeightRatio = '1.5';
+        win.innerHTML = `
+            <div id="window-challenges-header" class="window-header">Progress Challenges</div>
+            <div class="window-content-container">
+                <div class="window-content-scaler"></div>
+            </div>
+            <div class="window-resize-handle"></div>
+        `;
+        document.body.appendChild(win);
+
+        const header = win.querySelector('.window-header');
+        const scaler = win.querySelector('.window-content-scaler');
+        Object.defineProperty(header, 'offsetHeight', { value: 30, configurable: true });
+        Object.defineProperty(win, 'offsetWidth', { value: 800, configurable: true });
+        Object.defineProperty(win, 'offsetHeight', { value: 400, configurable: true });
+
+        scaler.getBoundingClientRect = jest.fn(() => ({ width: 800, height: 1500 }));
+        win.getBoundingClientRect = jest.fn(() => ({
+            width: parseFloat(win.style.width) || 800,
+            height: parseFloat(win.style.height) || 1200,
+            left: 0,
+            top: 0
+        }));
+
+        try {
+            windowManager.registerWindow('window-challenges', 'window-challenges-header');
+            win._originalWidth = 800;
+            win._originalHeight = 370;
+            win._originalRatio = 800 / 370;
+
+            win.adjustHeightForNewContent();
+
+            expect(win.style.height).toBe('1200px');
+            expect(win._originalRatio).toBeCloseTo(800 / 1170, 3);
+
+            // constrainWindow should not reset or shrink the capped window
+            windowManager.constrainWindow(win);
+            expect(win.style.height).toBe('1200px');
+            expect(win.style.width).toBe('800px');
+        } finally {
+            Object.defineProperty(window, 'innerWidth', { value: originalInnerWidth, configurable: true });
+            Object.defineProperty(window, 'innerHeight', { value: originalInnerHeight, configurable: true });
+            win.remove();
+        }
+    });
 });

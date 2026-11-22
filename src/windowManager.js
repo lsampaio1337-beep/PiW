@@ -728,12 +728,21 @@ export class WindowManager {
                 } else if (winElement.dataset.maxHeightRatio) {
                     const ratio = parseFloat(winElement.dataset.maxHeightRatio);
                     if (!isNaN(ratio) && ratio > 0) {
-                        maxHeight = winElement._originalWidth * ratio * currentScale;
+                        maxHeight = parsedCurrentWidth * ratio;
                     }
+                }
+
+                const viewportHeight = this.containerHeight || window.innerHeight || 0;
+                if (maxHeight > 0 && viewportHeight > 0 && maxHeight > viewportHeight) {
+                    maxHeight = viewportHeight;
                 }
 
                 if (maxHeight > 0 && newHeight > maxHeight) {
                     newHeight = maxHeight;
+                    const cappedOriginalHeight = Math.max(1, (newHeight - headerH - verticalPadding) / currentScale);
+                    winElement._originalHeight = cappedOriginalHeight;
+                    scalerElement.style.setProperty('--original-height', winElement._originalHeight + 'px');
+                    winElement._originalRatio = winElement._originalWidth / winElement._originalHeight;
                 }
 
                 // Lock dimensions

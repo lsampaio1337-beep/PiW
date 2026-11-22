@@ -626,6 +626,10 @@ window.togglePastChallenges = function() {
     const isHidden = list.style.display === 'none';
     list.style.display = isHidden ? 'flex' : 'none';
     btn.textContent = isHidden ? 'Hide' : 'Show';
+    const win = document.getElementById('window-challenges');
+    if (win && typeof win.adjustHeightForNewContent === 'function') {
+        win.adjustHeightForNewContent();
+    }
 };
 
 window.showChallengesModal = function() {
@@ -800,8 +804,8 @@ window.showChallengesModal = function() {
     showModal("Progress Challenges", html, "window-challenges", "800px");
     const win = document.getElementById("window-challenges");
     if (win) {
-        const maxModalHeight = Math.max(360, Math.round((window.innerHeight || 900) * 0.8));
-        win.style.maxHeight = `${maxModalHeight}px`;
+        win.style.maxHeight = '';
+        win.dataset.maxHeightRatio = '1.5';
         const contentContainer = win.querySelector('.window-content-container');
         if (contentContainer) {
             contentContainer.style.overflowY = 'auto';
@@ -819,6 +823,9 @@ window.showChallengesModal = function() {
                     window.windowManager.recalculateWindowSize('window-challenges');
                 }
             }
+        }
+        if (typeof win.adjustHeightForNewContent === 'function') {
+            win.adjustHeightForNewContent();
         }
     }
 };
