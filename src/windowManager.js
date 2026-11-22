@@ -1165,7 +1165,7 @@ export class WindowManager {
         const parsedH = parseFloat(winElement.style.height);
         const hasCollapsedExplicitHeight = Boolean(winElement.style.height && winElement.style.height !== 'auto' && (isNaN(parsedH) || parsedH <= headerH));
 
-        // If width hasn't changed and window is already initialized, restore safely and skip
+        // If width hasn't changed, window is already initialized, and height is healthy, restore and skip
         if (currentOriginalWidthStr && !isNaN(parseInt(currentOriginalWidthStr)) && newOriginalWidth === currentOriginalWidth) {
             if (newOriginalHeight > 0 && (!winElement._originalHeight || winElement._originalHeight <= 0)) {
                 winElement._originalHeight = newOriginalHeight;
@@ -1173,18 +1173,17 @@ export class WindowManager {
                 winElement._originalRatio = winElement._originalWidth / winElement._originalHeight;
             }
             const hasValidExplicitHeight = Boolean(winElement.style.height && winElement.style.height !== 'auto' && !hasCollapsedExplicitHeight);
-            if (oldPosition === 'absolute' && hasValidExplicitHeight) {
-                scalerElement.style.position = oldPosition;
-                scalerElement.style.transform = oldScale;
-                scalerElement.style.width = currentOriginalWidth + 'px';
-                scalerElement.style.height = oldScalerHeight;
-            } else {
-                this._setScalerInFlow(scalerElement, currentOriginalWidth + 'px');
-                if (hasCollapsedExplicitHeight) {
-                    winElement.style.height = 'auto';
+            if (!hasCollapsedExplicitHeight && (oldPosition !== 'absolute' || hasValidExplicitHeight)) {
+                if (oldPosition === 'absolute') {
+                    scalerElement.style.position = oldPosition;
+                    scalerElement.style.transform = oldScale;
+                    scalerElement.style.width = currentOriginalWidth + 'px';
+                    scalerElement.style.height = oldScalerHeight;
+                } else {
+                    this._setScalerInFlow(scalerElement, currentOriginalWidth + 'px');
                 }
+                return;
             }
-            return;
         }
 
         // Restore positioning and width without collapsing height

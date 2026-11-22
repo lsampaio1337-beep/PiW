@@ -33,7 +33,11 @@ import { state } from '../../src/state.js';
 import { resetWindowLayout } from '../../src/ui/settings.js';
 
 describe('resetWindowLayout', () => {
+    let origGetElementById;
+
     beforeEach(() => {
+        origGetElementById = document.getElementById;
+        document.getElementById = (id) => document.querySelector(`[id="${id}"]`);
         document.body.innerHTML = `
             <div id="main-control-window" class="floating-window" style="display: flex; width: 300px; height: 65px; left: 50px; top: 50px;">
                 <div id="main-control-header" class="window-header">Main Control</div>
@@ -49,6 +53,7 @@ describe('resetWindowLayout', () => {
     });
 
     afterEach(() => {
+        document.getElementById = origGetElementById;
         delete window.windowManager;
         delete window.showGameAlert;
         document.body.innerHTML = '';
