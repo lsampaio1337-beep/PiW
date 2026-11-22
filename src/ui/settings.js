@@ -17,7 +17,13 @@ export function resetWindowLayout() {
     if (!state.settings) state.settings = {};
     const prevKeys = state.settings.windowSettings ? Object.keys(state.settings.windowSettings) : [];
     state.settings.windowSettings = {};
-    prevKeys.forEach((winId) => {
+    const defaultPositions = {
+        'main-control-window': { left: '10%', top: '3%' },
+        'party-window': { left: '5%', top: '15%' },
+        'main-view-window': { left: '30%', top: '15%' }
+    };
+    const allIds = new Set([...prevKeys, ...Object.keys(defaultPositions)]);
+    allIds.forEach((winId) => {
         const winEl = document.getElementById(winId);
         if (winEl && winEl.style) {
             winEl.style.removeProperty('width');
@@ -25,8 +31,31 @@ export function resetWindowLayout() {
             winEl.style.removeProperty('left');
             winEl.style.removeProperty('top');
             winEl.style.removeProperty('transform');
+            delete winEl._originalWidth;
+            delete winEl._originalHeight;
+            delete winEl._originalRatio;
+
+            const scaler = winEl.querySelector('.window-content-scaler');
+            if (scaler && scaler.style) {
+                scaler.style.position = 'relative';
+                scaler.style.top = '';
+                scaler.style.left = '';
+                scaler.style.transform = 'none';
+                scaler.style.width = 'auto';
+                scaler.style.height = 'auto';
+                scaler.style.removeProperty('--original-width');
+                scaler.style.removeProperty('--original-height');
+            }
+
+            if (defaultPositions[winId]) {
+                winEl.style.left = defaultPositions[winId].left;
+                winEl.style.top = defaultPositions[winId].top;
+            }
         }
     });
+    if (typeof window !== 'undefined' && window.windowManager) {
+        window.windowManager.autoAdjustWidth('main-control-window');
+    }
     const storage = state.storageRef || (typeof window !== 'undefined' ? window.storageRef : null);
     if (storage && typeof storage.save === 'function') {
         storage.save(state);

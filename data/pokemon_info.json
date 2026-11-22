@@ -64756,9 +64756,10 @@
       ]
     },
     "0201.6": {
-      "name": "Unown (Em)",
-      "sprite": "Unown_Em",
+      "name": "Unown (F)",
+      "sprite": "Unown_F",
       "folders": [
+        1,
         2,
         3,
         4,
@@ -64839,6 +64840,18 @@
       ]
     },
     "0201.13": {
+      "name": "Unown (M)",
+      "sprite": "Unown_M",
+      "folders": [
+        1,
+        2,
+        3,
+        4,
+        7,
+        8
+      ]
+    },
+    "0201.14": {
       "name": "Unown (N)",
       "sprite": "Unown_N",
       "folders": [
@@ -64850,7 +64863,7 @@
         8
       ]
     },
-    "0201.14": {
+    "0201.15": {
       "name": "Unown (O)",
       "sprite": "Unown_O",
       "folders": [
@@ -64862,7 +64875,7 @@
         8
       ]
     },
-    "0201.15": {
+    "0201.16": {
       "name": "Unown (P)",
       "sprite": "Unown_P",
       "folders": [
@@ -64874,22 +64887,11 @@
         8
       ]
     },
-    "0201.16": {
+    "0201.17": {
       "name": "Unown (Q)",
       "sprite": "Unown_Q",
       "folders": [
         1,
-        2,
-        3,
-        4,
-        7,
-        8
-      ]
-    },
-    "0201.17": {
-      "name": "Unown (Qm)",
-      "sprite": "Unown_Qm",
-      "folders": [
         2,
         3,
         4,
@@ -65007,10 +65009,9 @@
       ]
     },
     "0201.27": {
-      "name": "Unown (F)",
-      "sprite": "Unown_F",
+      "name": "Unown (Em)",
+      "sprite": "Unown_Em",
       "folders": [
-        1,
         2,
         3,
         4,
@@ -65019,10 +65020,9 @@
       ]
     },
     "0201.28": {
-      "name": "Unown (M)",
-      "sprite": "Unown_M",
+      "name": "Unown (Qm)",
+      "sprite": "Unown_Qm",
       "folders": [
-        1,
         2,
         3,
         4,

@@ -15,6 +15,36 @@ export class WindowManager {
         });
     }
 
+    _isElementHidden(el) {
+        if (!el || el.style.display === 'none') return true;
+        if (window.getComputedStyle && window.getComputedStyle(el).display === 'none') {
+            return true;
+        }
+        return false;
+    }
+
+    _getContentPadding(winElement) {
+        let horizontalPadding = 0;
+        let verticalPadding = 0;
+        const contentContainer = winElement ? winElement.querySelector('.window-content-container') : null;
+        if (contentContainer && window.getComputedStyle) {
+            const style = window.getComputedStyle(contentContainer);
+            horizontalPadding = parseFloat(style.paddingLeft || 0) + parseFloat(style.paddingRight || 0);
+            verticalPadding = parseFloat(style.paddingTop || 0) + parseFloat(style.paddingBottom || 0);
+        }
+        return { horizontalPadding, verticalPadding };
+    }
+
+    _setScalerInFlow(scalerElement, widthValue = 'auto') {
+        if (!scalerElement) return;
+        scalerElement.style.position = 'relative';
+        scalerElement.style.top = '';
+        scalerElement.style.left = '';
+        scalerElement.style.transform = 'none';
+        scalerElement.style.width = widthValue;
+        scalerElement.style.height = 'auto';
+    }
+
     _parseArgs(argStr, contextValue, eventObj, el) {
         const rawArgs = [];
         let currentArg = '';
@@ -491,10 +521,20 @@ export class WindowManager {
                             delete savedSettings.height;
                         } else if (windowId === 'main-control-window') {
                             delete savedSettings.height;
-                            if (savedSettings.width) winElement.style.width = savedSettings.width;
+                            const parsedSavedWidth = parseFloat(savedSettings.width);
+                            if (savedSettings.width && (savedSettings.width === 'auto' || (!isNaN(parsedSavedWidth) && parsedSavedWidth >= 150))) {
+                                winElement.style.width = savedSettings.width;
+                            } else {
+                                delete savedSettings.width;
+                                winElement.style.width = 'auto';
+                            }
                             winElement.style.height = 'auto';
                             if (typeof winElement.adjustHeightForNewContent === 'function') {
-                                setTimeout(() => winElement.adjustHeightForNewContent(), 100);
+                                setTimeout(() => {
+                                    if (!this._isElementHidden(winElement) && winElement.dataset.minimized !== 'true') {
+                                        winElement.adjustHeightForNewContent();
+                                    }
+                                }, 100);
                             }
                         } else {
                             if (savedSettings.width) winElement.style.width = savedSettings.width;
@@ -506,6 +546,7 @@ export class WindowManager {
                         winElement.style.width = 'auto';
                         winElement.style.height = 'auto';
                         setTimeout(() => {
+                            if (this._isElementHidden(winElement) || winElement.dataset.minimized === 'true') return;
                             if (typeof winElement.resetResizeDims === 'function') {
                                 winElement.resetResizeDims();
                             }
@@ -659,6 +700,8 @@ export class WindowManager {
 
 
         winElement.adjustHeightForNewContent = () => {
+            if (this._isElementHidden(winElement)) return;
+
             if (winElement.id === 'window-map') {
                 if (winElement._mapAspectRatio) {
                     const currentWidth = winElement.offsetWidth || parseInt(winElement.style.width) || 800;
@@ -669,7 +712,7 @@ export class WindowManager {
                 return;
             }
 
-            if (!winElement._originalWidth) {
+            if (!winElement._originalWidth || !winElement._originalHeight) {
                 initDims();
             }
             if (!winElement._originalWidth) return;
@@ -679,36 +722,36 @@ export class WindowManager {
             // To find the unscaled content height without removing scaling which causes flicker/warp,
             // we can temporarily reset width to original, height to auto, and transform to none.
             const currentWidth = winElement.style.width; // Use explicit style width to avoid border/padding accumulation
+            const { horizontalPadding, verticalPadding } = this._getContentPadding(winElement);
 
-            let contentContainer = winElement.querySelector('.window-content-container');
-            let horizontalPadding = 0;
-            let verticalPadding = 0;
-            if (contentContainer) {
-                const style = window.getComputedStyle(contentContainer);
-                horizontalPadding = parseFloat(style.paddingLeft || 0) + parseFloat(style.paddingRight || 0);
-                verticalPadding = parseFloat(style.paddingTop || 0) + parseFloat(style.paddingBottom || 0);
+            let parsedCurrentWidth = currentWidth && currentWidth.endsWith('px') ? parseFloat(currentWidth) : winElement.offsetWidth;
+            if (!parsedCurrentWidth || parsedCurrentWidth <= horizontalPadding) {
+                parsedCurrentWidth = winElement._originalWidth + horizontalPadding;
             }
-
-            const parsedCurrentWidth = currentWidth && currentWidth.endsWith('px') ? parseFloat(currentWidth) : winElement.offsetWidth;
             const currentScale = (parsedCurrentWidth - horizontalPadding) / winElement._originalWidth;
+            if (!isFinite(currentScale) || currentScale <= 0) return;
+
+            const prevWinWidth = winElement.style.width;
+            const prevWinHeight = winElement.style.height;
+            const prevTransform = scalerElement.style.transform;
+            const prevScalerWidth = scalerElement.style.width;
+            const prevScalerHeight = scalerElement.style.height;
+            const prevScalerPos = scalerElement.style.position;
 
             // Stop auto-adjusting if user has resized manually, indicated by --original-width being set or manual interaction
             // To be safe, if we are in adjustHeightForNewContent, we only adjust height, not width.
 
             // Strip scaling temporarily
-            winElement.style.width = winElement._originalWidth + 'px';
+            winElement.style.width = (winElement._originalWidth + horizontalPadding) + 'px';
             winElement.style.height = 'auto';
-            scalerElement.style.transform = 'none';
-            scalerElement.style.width = 'auto';
-            scalerElement.style.height = 'auto';
-            scalerElement.style.position = 'relative';
+            this._setScalerInFlow(scalerElement, 'auto');
 
             // Need to let browser reflow
             void winElement.offsetHeight;
 
             let newOriginalHeight = Math.ceil(scalerElement.getBoundingClientRect().height);
             if (newOriginalHeight <= 0) {
-                newOriginalHeight = Math.ceil(winElement.getBoundingClientRect().height) - headerH;
+                newOriginalHeight = Math.ceil(winElement.getBoundingClientRect().height) - headerH - verticalPadding;
             }
 
             if (newOriginalHeight > 0) {
@@ -737,7 +780,7 @@ export class WindowManager {
                     maxHeight = viewportHeight;
                 }
 
-                if (maxHeight > 0 && newHeight > maxHeight) {
+                if (maxHeight > headerH && newHeight > maxHeight) {
                     newHeight = maxHeight;
                     const cappedOriginalHeight = Math.max(1, (newHeight - headerH - verticalPadding) / currentScale);
                     winElement._originalHeight = cappedOriginalHeight;
@@ -747,6 +790,8 @@ export class WindowManager {
 
                 // Lock dimensions
                 scalerElement.style.position = 'absolute';
+                scalerElement.style.top = '0px';
+                scalerElement.style.left = '0px';
                 scalerElement.style.width = winElement._originalWidth + 'px';
                 scalerElement.style.height = winElement._originalHeight + 'px';
                 scalerElement.style.transform = `scale(${currentScale})`;
@@ -757,7 +802,15 @@ export class WindowManager {
                 if (this.windows.includes(winElement)) {
                     this.saveWindowData(winElement.id);
                 }
-
+            } else {
+                winElement.style.width = prevWinWidth;
+                winElement.style.height = prevWinHeight;
+                if (prevScalerPos === 'absolute' && prevWinHeight && prevWinHeight !== 'auto' && parseFloat(prevWinHeight) > headerH) {
+                    scalerElement.style.position = prevScalerPos;
+                    scalerElement.style.transform = prevTransform;
+                    scalerElement.style.width = prevScalerWidth;
+                    scalerElement.style.height = prevScalerHeight;
+                }
             }
 
         };
@@ -786,20 +839,23 @@ export class WindowManager {
                 }
                 return;
             }
-            if (!winElement._originalWidth) {
+            if (!winElement._originalWidth || !winElement._originalHeight) {
                 const headerH = headerElement ? headerElement.offsetHeight : 0;
 
-                if (winElement.style.display !== 'none' && winElement.offsetWidth > 0) {
-                    let contentContainer = winElement.querySelector('.window-content-container');
-                    let horizontalPadding = 0;
-                    let verticalPadding = 0;
-                    if (contentContainer) {
-                        const style = window.getComputedStyle(contentContainer);
-                        horizontalPadding = parseFloat(style.paddingLeft || 0) + parseFloat(style.paddingRight || 0);
-                        verticalPadding = parseFloat(style.paddingTop || 0) + parseFloat(style.paddingBottom || 0);
+                if (!this._isElementHidden(winElement) && winElement.offsetWidth > 0) {
+                    const { horizontalPadding, verticalPadding } = this._getContentPadding(winElement);
+                    if (scalerElement && (winElement.style.height === 'auto' || winElement.style.height === '' || winElement.offsetHeight <= headerH)) {
+                        this._setScalerInFlow(scalerElement, 'auto');
+                        void winElement.offsetHeight;
                     }
-                    winElement._originalWidth = winElement.offsetWidth - horizontalPadding;
+                    if (!winElement._originalWidth) {
+                        winElement._originalWidth = winElement.offsetWidth - horizontalPadding;
+                    }
                     winElement._originalHeight = winElement.offsetHeight - headerH - verticalPadding;
+                    if (winElement._originalHeight <= 0 && scalerElement) {
+                        const scalerRectH = Math.ceil(scalerElement.getBoundingClientRect().height);
+                        winElement._originalHeight = scalerRectH > 0 ? scalerRectH : (scalerElement.scrollHeight || 0);
+                    }
                     let maxH = parseInt(winElement.style.maxHeight);
                     if (!isNaN(maxH)) {
                          let actualContentHeight = scalerElement ? (scalerElement.scrollHeight || winElement._originalHeight) : winElement._originalHeight;
@@ -812,12 +868,13 @@ export class WindowManager {
 
                         // Lock the window to its exact measured height so it doesn't collapse
                         // when the scaler changes to absolute positioning.
-                        winElement.style.height = (headerH + winElement._originalHeight) + 'px';
+                        winElement.style.height = (headerH + winElement._originalHeight + verticalPadding) + 'px';
 
                         scalerElement.style.width = winElement._originalWidth + 'px';
                         scalerElement.style.position = 'absolute';
                         scalerElement.style.height = winElement._originalHeight + 'px';
                         scalerElement.style.top = '0px';
+                        scalerElement.style.left = '0px';
                     }
                 }
             }
@@ -836,6 +893,17 @@ export class WindowManager {
             startWidth = winElement.offsetWidth;
             startHeight = winElement.offsetHeight;
 
+            if (winElement._originalWidth && winElement._originalHeight && scalerElement) {
+                if (startHeight > 0) {
+                    winElement.style.height = startHeight + 'px';
+                }
+                scalerElement.style.position = 'absolute';
+                scalerElement.style.top = '0px';
+                scalerElement.style.left = '0px';
+                scalerElement.style.width = winElement._originalWidth + 'px';
+                scalerElement.style.height = winElement._originalHeight + 'px';
+            }
+
             this.focusWindow(winElement);
             e.stopPropagation();
             e.preventDefault();
@@ -852,29 +920,21 @@ export class WindowManager {
                 const headerH = headerElement ? headerElement.offsetHeight : 0;
                 let maxWFromHeight = (this.containerHeight - headerH) * winElement._mapAspectRatio;
                 let maxW = Math.min(this.containerWidth, maxWFromHeight);
-                if (newWidth > maxW) newWidth = maxW;
+                if (maxW >= minWidth && newWidth > maxW) newWidth = maxW;
 
                 const targetHeight = (newWidth / winElement._mapAspectRatio) + headerH;
                 winElement.style.width = newWidth + 'px';
                 winElement.style.height = targetHeight + 'px';
             } else if (winElement._originalWidth && winElement._originalRatio) {
                 const headerH = headerElement ? headerElement.offsetHeight : 0;
-
-                let contentContainer = winElement.querySelector('.window-content-container');
-                let horizontalPadding = 0;
-                let verticalPadding = 0;
-                if (contentContainer) {
-                    const style = window.getComputedStyle(contentContainer);
-                    horizontalPadding = parseFloat(style.paddingLeft || 0) + parseFloat(style.paddingRight || 0);
-                    verticalPadding = parseFloat(style.paddingTop || 0) + parseFloat(style.paddingBottom || 0);
-                }
+                const { horizontalPadding, verticalPadding } = this._getContentPadding(winElement);
 
                 // Enforce max width during resize to prevent it from going out of screen boundaries
                 let maxWFromHeight = horizontalPadding + ((this.containerHeight - headerH - verticalPadding) * (winElement._originalWidth / winElement._originalHeight));
                 let maxW = Math.min(this.containerWidth, maxWFromHeight);
-                if (newWidth > maxW) newWidth = maxW;
+                if (maxW >= minWidth && newWidth > maxW) newWidth = maxW;
 
-                const currentContentWidth = newWidth - horizontalPadding;
+                const currentContentWidth = Math.max(1, newWidth - horizontalPadding);
                 const scale = currentContentWidth / winElement._originalWidth;
                 const newContentHeight = winElement._originalHeight * scale;
                 let newHeight = headerH + newContentHeight + verticalPadding;
@@ -971,11 +1031,21 @@ export class WindowManager {
         }
         const winElement = document.getElementById(windowId);
         if (winElement) {
+            const prevSettings = state.settings.windowSettings[windowId] || {};
+            const parsedW = parseFloat(winElement.style.width);
+            const parsedH = parseFloat(winElement.style.height);
+            const safeWidth = (winElement.style.width && winElement.style.width !== '0px' && (winElement.style.width === 'auto' || isNaN(parsedW) || parsedW > 0))
+                ? winElement.style.width
+                : (prevSettings.width || 'auto');
+            const safeHeight = (winElement.style.height && winElement.style.height !== '0px' && (winElement.style.height === 'auto' || isNaN(parsedH) || parsedH > 0))
+                ? winElement.style.height
+                : (prevSettings.height || 'auto');
+
             state.settings.windowSettings[windowId] = {
                 left: winElement.style.left,
                 top: winElement.style.top,
-                width: winElement.style.width,
-                height: winElement.style.height
+                width: safeWidth,
+                height: safeHeight
             };
             if (window.storageRef) {
                 window.storageRef.save(state);
@@ -989,7 +1059,7 @@ export class WindowManager {
     autoAdjustWidth(windowId) {
         const winElement = document.getElementById(windowId);
         if (!winElement) return;
-        if (winElement.dataset.minimized === 'true' || winElement.style.display === 'none') {
+        if (winElement.dataset.minimized === 'true' || this._isElementHidden(winElement)) {
             winElement.dataset.needsAutoAdjust = 'true';
             return;
         }
@@ -1005,17 +1075,22 @@ export class WindowManager {
         const oldScalerHeight = scalerElement.style.height;
 
         // Temporarily clear constraints to let it flow to natural width
-        scalerElement.style.position = 'relative';
-        scalerElement.style.transform = 'none';
-        scalerElement.style.width = 'max-content';
-        scalerElement.style.height = 'auto';
+        this._setScalerInFlow(scalerElement, 'max-content');
 
         const newOriginalWidth = Math.ceil(scalerElement.getBoundingClientRect().width);
         if (newOriginalWidth <= 0) {
-            scalerElement.style.position = oldPosition;
-            scalerElement.style.transform = oldScale;
-            scalerElement.style.width = scalerElement.style.getPropertyValue('--original-width') || 'auto';
-            scalerElement.style.height = oldScalerHeight;
+            const headerElement = winElement.querySelector('.window-header');
+            const headerH = headerElement ? headerElement.offsetHeight : 0;
+            const parsedH = parseFloat(winElement.style.height);
+            const hasValidExplicitHeight = Boolean(winElement.style.height && winElement.style.height !== 'auto' && !isNaN(parsedH) && parsedH > headerH);
+            if (oldPosition === 'absolute' && hasValidExplicitHeight) {
+                scalerElement.style.position = oldPosition;
+                scalerElement.style.transform = oldScale;
+                scalerElement.style.width = scalerElement.style.getPropertyValue('--original-width') || 'auto';
+                scalerElement.style.height = oldScalerHeight;
+            } else {
+                this._setScalerInFlow(scalerElement, scalerElement.style.getPropertyValue('--original-width') || 'auto');
+            }
             return;
         }
 
@@ -1038,11 +1113,16 @@ export class WindowManager {
             newOriginalHeight = actualContentHeight;
         }
 
+        const { horizontalPadding, verticalPadding } = this._getContentPadding(winElement);
+
         // Force natural layout on uninitialized window
         if (newOriginalWidth > 0 && (!currentOriginalWidthStr || isNaN(parseInt(currentOriginalWidthStr)))) {
             scalerElement.style.setProperty('--original-width', newOriginalWidth + 'px');
             winElement._originalWidth = newOriginalWidth;
-            if (newOriginalHeight > 0) winElement._originalHeight = newOriginalHeight;
+            if (newOriginalHeight > 0) {
+                winElement._originalHeight = newOriginalHeight;
+                scalerElement.style.setProperty('--original-height', newOriginalHeight + 'px');
+            }
 
             if (winElement._originalHeight) {
                 winElement._originalRatio = winElement._originalWidth / winElement._originalHeight;
@@ -1050,13 +1130,7 @@ export class WindowManager {
 
             // If window is uninitialized, assign the calculated max-content width to the actual element width
             // to allow it to wrap properly, avoiding the 80x80 initial bug where the wrapper is small.
-            if (!oldWidth || oldWidth === 'auto' || parseInt(oldWidth) < 150) {
-                let contentContainer = winElement.querySelector('.window-content-container');
-                let horizontalPadding = 0;
-                if (contentContainer) {
-                    const style = window.getComputedStyle(contentContainer);
-                    horizontalPadding = parseFloat(style.paddingLeft || 0) + parseFloat(style.paddingRight || 0);
-                }
+            if (!oldWidth || oldWidth === 'auto' || isNaN(parseInt(oldWidth)) || parseInt(oldWidth) < 150) {
                 winElement.style.width = (newOriginalWidth + horizontalPadding) + 'px';
             }
         } else if (newOriginalWidth !== currentOriginalWidth) {
@@ -1069,19 +1143,13 @@ export class WindowManager {
             if (oldWidth && oldWidth.endsWith('px')) {
                 const currentWidth = parseInt(oldWidth);
                 // to allow it to wrap properly, avoiding the 80x80 initial bug where the wrapper is small.
-                if (currentWidth < 150) {
-                    let contentContainer = winElement.querySelector('.window-content-container');
-                    let horizontalPadding = 0;
-                    if (contentContainer) {
-                        const style = window.getComputedStyle(contentContainer);
-                        horizontalPadding = parseFloat(style.paddingLeft || 0) + parseFloat(style.paddingRight || 0);
-                    }
+                if (isNaN(currentWidth) || currentWidth < 150) {
                     winElement.style.width = (newOriginalWidth + horizontalPadding) + 'px';
                 } else {
                     winElement.style.width = (currentWidth * growthRatio) + 'px';
                 }
             } else {
-                winElement.style.width = newOriginalWidth + 'px';
+                winElement.style.width = (newOriginalWidth + horizontalPadding) + 'px';
             }
 
             winElement._originalWidth = newOriginalWidth;
@@ -1092,41 +1160,64 @@ export class WindowManager {
             }
         }
 
-        // If width hasn't changed and window is already initialized, restore and skip
+        const headerElement = winElement.querySelector('.window-header');
+        const headerH = headerElement ? headerElement.offsetHeight : 0;
+        const parsedH = parseFloat(winElement.style.height);
+        const hasCollapsedExplicitHeight = Boolean(winElement.style.height && winElement.style.height !== 'auto' && (isNaN(parsedH) || parsedH <= headerH));
+
+        // If width hasn't changed and window is already initialized, restore safely and skip
         if (currentOriginalWidthStr && !isNaN(parseInt(currentOriginalWidthStr)) && newOriginalWidth === currentOriginalWidth) {
-            scalerElement.style.position = oldPosition;
-            scalerElement.style.transform = oldScale;
-            scalerElement.style.width = currentOriginalWidth + 'px';
-            scalerElement.style.height = oldScalerHeight;
+            if (newOriginalHeight > 0 && (!winElement._originalHeight || winElement._originalHeight <= 0)) {
+                winElement._originalHeight = newOriginalHeight;
+                scalerElement.style.setProperty('--original-height', newOriginalHeight + 'px');
+                winElement._originalRatio = winElement._originalWidth / winElement._originalHeight;
+            }
+            const hasValidExplicitHeight = Boolean(winElement.style.height && winElement.style.height !== 'auto' && !hasCollapsedExplicitHeight);
+            if (oldPosition === 'absolute' && hasValidExplicitHeight) {
+                scalerElement.style.position = oldPosition;
+                scalerElement.style.transform = oldScale;
+                scalerElement.style.width = currentOriginalWidth + 'px';
+                scalerElement.style.height = oldScalerHeight;
+            } else {
+                this._setScalerInFlow(scalerElement, currentOriginalWidth + 'px');
+                if (hasCollapsedExplicitHeight) {
+                    winElement.style.height = 'auto';
+                }
+            }
             return;
         }
 
-        // Restore positioning and width without ever adjusting height
+        // Restore positioning and width without collapsing height
         const finalOriginalWidth = winElement._originalWidth || newOriginalWidth;
         if (finalOriginalWidth > 0) {
-            const currentW = parseFloat(winElement.style.width) || finalOriginalWidth;
-            const scale = currentW / finalOriginalWidth;
-            // Only position the scaler absolutely when the window has an explicit pixel height;
-            // if height is 'auto', absolute positioning collapses .window-content-container to 0px.
-            const hasExplicitHeight = Boolean(winElement.style.height && winElement.style.height !== 'auto');
-            if (hasExplicitHeight) {
+            const currentW = parseFloat(winElement.style.width) || (finalOriginalWidth + horizontalPadding);
+            const currentContentW = Math.max(1, currentW - horizontalPadding);
+            const scale = currentContentW / finalOriginalWidth;
+            const isScaled = Math.abs(scale - 1) > 0.01;
+            const hasExplicitHeight = Boolean(winElement.style.height && winElement.style.height !== 'auto' && !hasCollapsedExplicitHeight);
+
+            if ((isScaled || hasExplicitHeight) && winElement._originalHeight > 0) {
                 scalerElement.style.position = 'absolute';
                 scalerElement.style.top = '0px';
                 scalerElement.style.left = '0px';
+                scalerElement.style.width = finalOriginalWidth + 'px';
+                scalerElement.style.height = winElement._originalHeight + 'px';
+                scalerElement.style.transform = `scale(${scale})`;
+                if (!winElement.style.height || winElement.style.height === 'auto' || hasCollapsedExplicitHeight) {
+                    winElement.style.height = (headerH + (winElement._originalHeight * scale) + verticalPadding) + 'px';
+                }
             } else {
-                scalerElement.style.position = 'relative';
-                scalerElement.style.top = '';
-                scalerElement.style.left = '';
+                this._setScalerInFlow(scalerElement, finalOriginalWidth + 'px');
+                if (hasCollapsedExplicitHeight) {
+                    winElement.style.height = 'auto';
+                }
             }
-            scalerElement.style.width = finalOriginalWidth + 'px';
-            scalerElement.style.height = oldScalerHeight;
-            scalerElement.style.transform = `scale(${scale})`;
             this.saveWindowData(windowId);
         } else {
-            scalerElement.style.position = oldPosition;
-            scalerElement.style.transform = oldScale;
-            scalerElement.style.width = scalerElement.style.getPropertyValue('--original-width');
-            scalerElement.style.height = oldScalerHeight;
+            this._setScalerInFlow(scalerElement, scalerElement.style.getPropertyValue('--original-width') || 'auto');
+            if (hasCollapsedExplicitHeight) {
+                winElement.style.height = 'auto';
+            }
         }
     }
 
@@ -1184,20 +1275,16 @@ export class WindowManager {
 
 
     _shrinkWindow(winElement) {
+        if (!this.containerWidth || this.containerWidth <= 0 || !this.containerHeight || this.containerHeight <= 0) {
+            return;
+        }
         if (winElement._originalWidth && winElement._originalHeight) {
             const headerElement = winElement.querySelector('.window-header');
             const scalerElement = winElement.querySelector('.window-content-scaler');
             if (!scalerElement) return;
 
             const headerH = headerElement ? headerElement.offsetHeight : 0;
-            let contentContainer = winElement.querySelector('.window-content-container');
-            let horizontalPadding = 0;
-            let verticalPadding = 0;
-            if (contentContainer) {
-                const style = window.getComputedStyle(contentContainer);
-                horizontalPadding = parseFloat(style.paddingLeft || 0) + parseFloat(style.paddingRight || 0);
-                verticalPadding = parseFloat(style.paddingTop || 0) + parseFloat(style.paddingBottom || 0);
-            }
+            const { horizontalPadding, verticalPadding } = this._getContentPadding(winElement);
 
             let targetHeight = 720;
             if (targetHeight > this.containerHeight) {
@@ -1214,30 +1301,35 @@ export class WindowManager {
                 if (!isNaN(ratio) && ratio > 0) {
                     let currentW = winElement.offsetWidth;
                     if (!currentW || currentW <= 0) currentW = parseInt(winElement.style.width) || 800;
-                    let currentScale = (currentW - horizontalPadding) / winElement._originalWidth;
+                    let currentScale = Math.max(0.05, (currentW - horizontalPadding) / winElement._originalWidth);
                     maxHeight = winElement._originalWidth * ratio * currentScale;
                 }
             }
 
-            if (maxHeight > 0 && targetHeight > maxHeight) {
+            if (maxHeight > headerH && targetHeight > maxHeight) {
                 targetHeight = maxHeight;
             }
 
             let newContentHeight = targetHeight - headerH - verticalPadding;
-            if (newContentHeight <= 0) newContentHeight = 100;
-            let scale = newContentHeight / winElement._originalHeight;
+            if (newContentHeight <= 0) newContentHeight = Math.max(1, Math.min(100, this.containerHeight - headerH - verticalPadding));
+            let scale = Math.max(0.05, newContentHeight / winElement._originalHeight);
 
             let currentContentWidth = scale * winElement._originalWidth;
             let newWidth = currentContentWidth + horizontalPadding;
 
             if (newWidth > this.containerWidth) {
                 newWidth = this.containerWidth;
-                currentContentWidth = newWidth - horizontalPadding;
-                scale = currentContentWidth / winElement._originalWidth;
+                currentContentWidth = Math.max(1, newWidth - horizontalPadding);
+                scale = Math.max(0.05, currentContentWidth / winElement._originalWidth);
                 newContentHeight = winElement._originalHeight * scale;
                 targetHeight = headerH + newContentHeight + verticalPadding;
             }
 
+            scalerElement.style.position = 'absolute';
+            scalerElement.style.top = '0px';
+            scalerElement.style.left = '0px';
+            scalerElement.style.width = winElement._originalWidth + 'px';
+            scalerElement.style.height = winElement._originalHeight + 'px';
             winElement.style.width = newWidth + 'px';
             winElement.style.height = targetHeight + 'px';
             scalerElement.style.transform = `scale(${scale})`;
@@ -1252,35 +1344,35 @@ export class WindowManager {
     }
 
     _resetToOriginalSize(winElement) {
+        const scalerElement = winElement.querySelector('.window-content-scaler');
         if (winElement._originalWidth && winElement._originalHeight) {
-            const scalerElement = winElement.querySelector('.window-content-scaler');
-            const contentContainer = winElement.querySelector('.window-content-container');
-            let horizontalPadding = 0;
-            if (contentContainer) {
-                const style = window.getComputedStyle(contentContainer);
-                horizontalPadding = parseFloat(style.paddingLeft || 0) + parseFloat(style.paddingRight || 0);
-            }
-
-            if (scalerElement) {
-                scalerElement.style.position = 'relative';
-                scalerElement.style.top = '';
-                scalerElement.style.left = '';
-                scalerElement.style.transform = 'none';
-                scalerElement.style.width = winElement._originalWidth + 'px';
-                scalerElement.style.height = 'auto';
-            }
-
+            const { horizontalPadding } = this._getContentPadding(winElement);
+            this._setScalerInFlow(scalerElement, winElement._originalWidth + 'px');
             winElement.style.width = (winElement._originalWidth + horizontalPadding) + 'px';
+            winElement.style.height = 'auto';
+            void winElement.offsetWidth;
+        } else if (scalerElement && scalerElement.style.position === 'absolute') {
+            this._setScalerInFlow(scalerElement, 'auto');
             winElement.style.height = 'auto';
             void winElement.offsetWidth;
         }
     }
 
     constrainWindow(winElement) {
-        if (!winElement || winElement.style.display === 'none') return;
+        if (!winElement || this._isElementHidden(winElement)) return;
 
         this.containerWidth = window.innerWidth;
         this.containerHeight = window.innerHeight;
+        if (!this.containerWidth || this.containerWidth <= 0 || !this.containerHeight || this.containerHeight <= 0) {
+            return;
+        }
+
+        if (winElement.style.height === '0px') {
+            winElement.style.height = 'auto';
+        }
+        if (winElement.style.width === '0px') {
+            winElement.style.width = 'auto';
+        }
 
         const rect = winElement.getBoundingClientRect();
         let left = parseInt(winElement.style.left) || 0;
@@ -1288,21 +1380,26 @@ export class WindowManager {
 
         let changed = false;
 
+        const scalerElement = winElement.querySelector('.window-content-scaler');
+        const headerElement = winElement.querySelector('.window-header');
+        const headerH = headerElement ? headerElement.offsetHeight : 0;
+        const { horizontalPadding, verticalPadding } = this._getContentPadding(winElement);
+
+        const parsedExplicitH = parseFloat(winElement.style.height);
+        const isScalerCollapsed = Boolean(
+            scalerElement &&
+            scalerElement.style.position === 'absolute' &&
+            (!winElement.style.height || winElement.style.height === 'auto' || isNaN(parsedExplicitH) || parsedExplicitH <= headerH)
+        );
+
         let hasWeirdProportions = false;
-        if (winElement._originalWidth && winElement._originalHeight && rect.width > 0 && rect.height > 0) {
-            const headerElement = winElement.querySelector('.window-header');
-            const headerH = headerElement ? headerElement.offsetHeight : 0;
-            const contentContainer = winElement.querySelector('.window-content-container');
-            let horizontalPadding = 0;
-            let verticalPadding = 0;
-            if (contentContainer) {
-                const style = window.getComputedStyle(contentContainer);
-                horizontalPadding = parseFloat(style.paddingLeft || 0) + parseFloat(style.paddingRight || 0);
-                verticalPadding = parseFloat(style.paddingTop || 0) + parseFloat(style.paddingBottom || 0);
-            }
+        let hasCollapsedHeight = false;
+        if (winElement._originalWidth && winElement._originalHeight && rect.width > 0) {
             const contentWidth = rect.width - horizontalPadding;
             const contentHeight = rect.height - headerH - verticalPadding;
-            if (contentWidth > 0 && contentHeight > 0) {
+            if (rect.height <= 0 || contentHeight <= 0) {
+                hasCollapsedHeight = true;
+            } else if (contentWidth > 0) {
                 const originalRatio = winElement._originalRatio || (winElement._originalWidth / winElement._originalHeight);
                 const currentRatio = contentWidth / contentHeight;
                 if (originalRatio > 0 && Math.abs(currentRatio - originalRatio) / originalRatio > 0.25) {
@@ -1311,7 +1408,7 @@ export class WindowManager {
             }
         }
 
-        if (rect.width > this.containerWidth || rect.height > this.containerHeight || hasWeirdProportions) {
+        if (rect.width > this.containerWidth || rect.height > this.containerHeight || hasWeirdProportions || hasCollapsedHeight || isScalerCollapsed) {
             this._resetToOriginalSize(winElement);
             const resetRect = winElement.getBoundingClientRect();
             if (resetRect.width > this.containerWidth || resetRect.height > this.containerHeight) {

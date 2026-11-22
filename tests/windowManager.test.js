@@ -551,4 +551,210 @@ describe('WindowManager', () => {
             win.remove();
         }
     });
+
+    test('constrainWindow ignores transient 0x0 viewport without collapsing main-control-window to 0', () => {
+        const originalInnerWidth = window.innerWidth;
+        const originalInnerHeight = window.innerHeight;
+        Object.defineProperty(window, 'innerWidth', { value: 0, configurable: true });
+        Object.defineProperty(window, 'innerHeight', { value: 0, configurable: true });
+
+        const win = document.createElement('div');
+        win.id = 'main-control-window';
+        win.className = 'floating-window';
+        win.style.display = 'flex';
+        win.style.width = '520px';
+        win.style.height = '90px';
+        win._originalWidth = 520;
+        win._originalHeight = 56;
+        win._originalRatio = 520 / 56;
+        win.innerHTML = `
+            <div id="main-control-header" class="window-header">Main Control</div>
+            <div class="window-content-container">
+                <div class="window-content-scaler" style="position: absolute; transform: scale(1);"></div>
+            </div>
+        `;
+        win.getBoundingClientRect = () => ({ width: 520, height: 90 });
+        document.body.appendChild(win);
+
+        try {
+            windowManager.constrainWindow(win);
+            const scaler = win.querySelector('.window-content-scaler');
+            expect(win.style.width).toBe('520px');
+            expect(win.style.height).toBe('90px');
+            expect(scaler.style.transform).toBe('scale(1)');
+        } finally {
+            Object.defineProperty(window, 'innerWidth', { value: originalInnerWidth, configurable: true });
+            Object.defineProperty(window, 'innerHeight', { value: originalInnerHeight, configurable: true });
+            win.remove();
+        }
+    });
+
+    test('constrainWindow heals collapsed main-control-window (absolute scaler with auto/0 height)', () => {
+        const originalInnerWidth = window.innerWidth;
+        const originalInnerHeight = window.innerHeight;
+        Object.defineProperty(window, 'innerWidth', { value: 1200, configurable: true });
+        Object.defineProperty(window, 'innerHeight', { value: 800, configurable: true });
+
+        const win = document.createElement('div');
+        win.id = 'main-control-window';
+        win.className = 'floating-window';
+        win.style.display = 'flex';
+        win.style.width = '520px';
+        win.style.height = 'auto';
+        win._originalWidth = 520;
+        win._originalHeight = 56;
+        win._originalRatio = 520 / 56;
+        win.innerHTML = `
+            <div id="main-control-header" class="window-header">Main Control</div>
+            <div class="window-content-container">
+                <div class="window-content-scaler" style="position: absolute; top: 0px; left: 0px; transform: scale(1);"></div>
+            </div>
+        `;
+        const header = win.querySelector('.window-header');
+        Object.defineProperty(header, 'offsetHeight', { value: 34, configurable: true });
+        win.getBoundingClientRect = () => ({
+            width: 520,
+            height: win.querySelector('.window-content-scaler').style.position === 'absolute' && win.style.height === 'auto' ? 34 : 90
+        });
+        document.body.appendChild(win);
+
+        try {
+            windowManager.constrainWindow(win);
+            const scaler = win.querySelector('.window-content-scaler');
+            expect(scaler.style.position).toBe('relative');
+            expect(scaler.style.transform).toBe('none');
+            expect(win.style.height).toBe('auto');
+        } finally {
+            Object.defineProperty(window, 'innerWidth', { value: originalInnerWidth, configurable: true });
+            Object.defineProperty(window, 'innerHeight', { value: originalInnerHeight, configurable: true });
+            win.remove();
+        }
+    });
+
+    test('autoAdjustWidth sets explicit height when scaled and heals collapsed explicit height', () => {
+        const win = document.createElement('div');
+        win.id = 'main-control-window';
+        win.className = 'floating-window';
+        win.style.display = 'flex';
+        win.style.width = '260px'; // 0.5x scale of 520px
+        win.style.height = 'auto';
+        win.innerHTML = `
+            <div id="main-control-header" class="window-header">Main Control</div>
+            <div class="window-content-container">
+                <div class="window-content-scaler" style="position: relative;"></div>
+            </div>
+        `;
+        const header = win.querySelector('.window-header');
+        Object.defineProperty(header, 'offsetHeight', { value: 34, configurable: true });
+        const scaler = win.querySelector('.window-content-scaler');
+        scaler.getBoundingClientRect = () => ({ width: 520, height: 56 });
+        document.body.appendChild(win);
+
+        try {
+            windowManager.autoAdjustWidth('main-control-window');
+            expect(scaler.style.position).toBe('absolute');
+            expect(scaler.style.transform).toBe('scale(0.5)');
+            // headerH (34) + 56 * 0.5 (28) = 62px (not left as 'auto')
+            expect(win.style.height).toBe('62px');
+
+            // If height ever gets collapsed to header-only (34px), autoAdjustWidth heals it
+            win.style.height = '34px';
+            windowManager.autoAdjustWidth('main-control-window');
+            expect(win.style.height).toBe('62px');
+        } finally {
+            win.remove();
+        }
+    });
+
+    test('adjustHeightForNewContent is a no-op when window is hidden (display: none)', () => {
+        const win = document.createElement('div');
+        win.id = 'main-control-window';
+        win.className = 'floating-window';
+        win.style.display = 'none';
+        win.style.width = '300px';
+        win.style.height = '70px';
+        win.innerHTML = `
+            <div id="main-control-header" class="window-header">Main Control</div>
+            <div class="window-content-container">
+                <div class="window-content-scaler" style="position: absolute; transform: scale(0.5);"></div>
+            </div>
+            <div class="window-resize-handle"></div>
+        `;
+        document.body.appendChild(win);
+
+        try {
+            windowManager.registerWindow('main-control-window', 'main-control-header');
+            win._originalWidth = 600;
+            win._originalHeight = 80;
+            win.adjustHeightForNewContent();
+
+            expect(win.style.width).toBe('300px');
+            expect(win.style.height).toBe('70px');
+        } finally {
+            win.remove();
+        }
+    });
+
+    test('saveWindowData never persists 0px width or height', () => {
+        const win = document.createElement('div');
+        win.id = 'main-control-window';
+        win.style.width = '0px';
+        win.style.height = '0px';
+        win.style.left = '10px';
+        win.style.top = '20px';
+        document.body.appendChild(win);
+
+        try {
+            windowManager.saveWindowData('main-control-window');
+            expect(window.state?.settings?.windowSettings?.['main-control-window']?.width ?? 'auto').not.toBe('0px');
+        } finally {
+            win.remove();
+        }
+    });
+
+    test('toggleWindow ignores corrupted 0px saved width for main-control-window and skips deferred timer when minimized', () => {
+        jest.useFakeTimers();
+        const prevState = window.state;
+        window.state = {
+            settings: {
+                windowSettings: {
+                    'main-control-window': { left: '10px', top: '20px', width: '0px', height: '0px' }
+                }
+            }
+        };
+
+        const win = document.createElement('div');
+        win.id = 'main-control-window';
+        win.className = 'floating-window';
+        win.style.display = 'none';
+        win.innerHTML = `
+            <div id="main-control-header" class="window-header">Main Control</div>
+            <div class="window-content-container">
+                <div class="window-content-scaler" style="position: relative;"></div>
+            </div>
+            <div class="window-resize-handle"></div>
+        `;
+        const scaler = win.querySelector('.window-content-scaler');
+        scaler.getBoundingClientRect = () => ({ width: 520, height: 56 });
+        document.body.appendChild(win);
+
+        try {
+            windowManager.registerWindow('main-control-window', 'main-control-header');
+            win.adjustHeightForNewContent = jest.fn();
+
+            windowManager.toggleWindow('main-control-window', true);
+            expect(win.style.width).toBe('520px');
+            expect(win.style.height).toBe('auto');
+
+            // Minimize before the 100ms timer fires
+            win.style.display = 'none';
+            win.dataset.minimized = 'true';
+            jest.advanceTimersByTime(150);
+            expect(win.adjustHeightForNewContent).not.toHaveBeenCalled();
+        } finally {
+            jest.useRealTimers();
+            window.state = prevState;
+            win.remove();
+        }
+    });
 });
