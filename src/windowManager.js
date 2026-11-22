@@ -30,6 +30,27 @@ export class WindowManager {
         return headerElement.offsetHeight || fallback;
     }
 
+    /** Return extra vertical space below the lowest HP bar/shadow in minimal combat mode so the HP bar can touch the taskbar. */
+    _getMinimalCombatBottomSlack(winElement, rect) {
+        if (!winElement || !winElement.classList || !winElement.classList.contains('is-minimal-combat')) {
+            return 0;
+        }
+        const anchors = winElement.querySelectorAll('#player-battle-hp-container, #enemy-battle-hp-container, #player-side .battle-ground-shadow, #enemy-side .battle-ground-shadow');
+        let lowestAnchorBottom = null;
+        for (const el of anchors) {
+            const r = el.getBoundingClientRect();
+            if (r && r.height > 0 && r.width > 0) {
+                if (lowestAnchorBottom === null || r.bottom > lowestAnchorBottom) {
+                    lowestAnchorBottom = r.bottom;
+                }
+            }
+        }
+        if (lowestAnchorBottom !== null && rect && rect.bottom > lowestAnchorBottom) {
+            return rect.bottom - lowestAnchorBottom;
+        }
+        return Math.max(0, Math.round((rect?.height || 0) * 0.06));
+    }
+
     _getContentPadding(winElement) {
         let horizontalPadding = 0;
         let verticalPadding = 0;
@@ -699,9 +720,10 @@ export class WindowManager {
             if (snapLockX !== null) finalLeft = snapLockX.snappedValue;
             if (snapLockY !== null) finalTop = snapLockY.snappedValue;
 
-            // Container Boundary constraints
+            // Container Boundary constraints (allow minimal combat window to push empty space below HP bar past bottom edge)
+            const bottomSlack = this._getMinimalCombatBottomSlack(winElement, rect);
             if (finalLeft + rect.width > this.containerWidth) finalLeft = Math.max(0, this.containerWidth - rect.width);
-            if (finalTop + rect.height > this.containerHeight) finalTop = Math.max(0, this.containerHeight - rect.height);
+            if (finalTop + rect.height > this.containerHeight + bottomSlack) finalTop = Math.max(0, this.containerHeight - rect.height + bottomSlack);
             if (finalLeft < 0) finalLeft = 0;
             if (finalTop < 0) finalTop = 0;
 
@@ -1475,13 +1497,14 @@ export class WindowManager {
         }
 
         const currentRect = winElement.getBoundingClientRect();
+        const bottomSlack = this._getMinimalCombatBottomSlack(winElement, currentRect);
 
         if (left + currentRect.width > this.containerWidth) {
             left = Math.max(0, this.containerWidth - currentRect.width);
             changed = true;
         }
-        if (top + currentRect.height > this.containerHeight) {
-            top = Math.max(0, this.containerHeight - currentRect.height);
+        if (top + currentRect.height > this.containerHeight + bottomSlack) {
+            top = Math.max(0, this.containerHeight - currentRect.height + bottomSlack);
             changed = true;
         }
         if (left < 0) {

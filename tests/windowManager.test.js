@@ -863,6 +863,15 @@ describe('WindowManager', () => {
             expect(win.style.left).toBe('180px');
             expect(win.style.top).toBe('155px');
             document.dispatchEvent(new MouseEvent('mouseup', { bubbles: true }));
+
+            // Dragging down to taskbar allows HP bar bottom to touch containerHeight (ignoring empty space below HP bar)
+            win.getBoundingClientRect = () => ({ left: 180, top: parseFloat(win.style.top), width: 400, height: 140, right: 580, bottom: parseFloat(win.style.top) + 140 });
+            enemyHp.getBoundingClientRect = () => ({ left: 300, top: parseFloat(win.style.top) + 115, width: 112, height: 17, right: 412, bottom: parseFloat(win.style.top) + 132 });
+            enemyHp.dispatchEvent(new MouseEvent('mousedown', { clientX: 350, clientY: 275, bubbles: true }));
+            document.dispatchEvent(new MouseEvent('mousemove', { clientX: 350, clientY: 1200, bubbles: true }));
+            // 1080 - 140 + (140 - 132 = 8px slack) = 948px so HP bar bottom lands at 1080px
+            expect(win.style.top).toBe('948px');
+            document.dispatchEvent(new MouseEvent('mouseup', { bubbles: true }));
         } finally {
             window.__piwIsDraggingWindow = false;
             win.remove();
