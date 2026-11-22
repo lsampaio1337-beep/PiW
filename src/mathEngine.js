@@ -64,9 +64,17 @@ function getLevelFromXP(xp, maxLevel = 100) {
     return level;
 }
 
-function calculateEVXP(bst, level, quality, totalIV) {
-    // EVXP = max(1, floor((5 + 8 * Level) * (BST / 300) * Q * (0.85 + 0.15 * (IV_Total / 600))))
-    const evxp = Math.floor((5 + 8 * level) * (bst / 300) * quality * (0.85 + 0.15 * (totalIV / 600)));
+function calculateEVXP(bst, level, quality) {
+    // Q < 1.4: no impact (1.0x)
+    // 1.4 <= Q < 2.0 (Rare / Epic): bonus equal to Q (1.4x - 1.8x+)
+    // Q >= 2.0 (Shiny): super bonus (5.0x)
+    let qMod = 1.0;
+    if (quality >= 2.0) {
+        qMod = 5.0;
+    } else if (quality >= 1.4) {
+        qMod = quality;
+    }
+    const evxp = Math.floor((5 + 8 * level) * (bst / 300) * qMod);
     return Math.max(1, evxp);
 }
 

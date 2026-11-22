@@ -1,4 +1,4 @@
-import { calculateDamage, calculateReqXP, calculateTotalXP, getLevelFromXP, calculateStat, calculateCatchChance, getCurrentCount } from '../src/mathEngine.js';
+import { calculateDamage, calculateReqXP, calculateTotalXP, getLevelFromXP, calculateEVXP, calculateStat, calculateCatchChance, getCurrentCount } from '../src/mathEngine.js';
 
 describe('calculateReqXP', () => {
     test('should calculate required XP correctly for level 1', () => {
@@ -443,5 +443,25 @@ describe('Prestige XP Scaling (> Lv 100)', () => {
         expect(getLevelFromXP(xpFor200, 100)).toBe(100);
         expect(getLevelFromXP(xpFor200, 200)).toBe(200);
         expect(getLevelFromXP(calculateTotalXP(250), 200)).toBe(200);
+    });
+});
+
+describe('calculateEVXP', () => {
+    test('ignores totalIV and applies no Q impact when Q < 1.4', () => {
+        const base = Math.floor((5 + 8 * 20) * (300 / 300) * 1.0);
+        expect(calculateEVXP(300, 20, 0.80, 0)).toBe(base);
+        expect(calculateEVXP(300, 20, 1.00, 600)).toBe(base);
+        expect(calculateEVXP(300, 20, 1.39, 300)).toBe(base);
+    });
+
+    test('grants Q bonus for 1.4 <= Q <= 1.8 and 5x super bonus for Q >= 2.0', () => {
+        const rare = Math.floor((5 + 8 * 20) * (300 / 300) * 1.40);
+        const epic = Math.floor((5 + 8 * 20) * (300 / 300) * 1.80);
+        const shiny = Math.floor((5 + 8 * 20) * (300 / 300) * 5.0);
+
+        expect(calculateEVXP(300, 20, 1.40, 0)).toBe(rare);
+        expect(calculateEVXP(300, 20, 1.80, 600)).toBe(epic);
+        expect(calculateEVXP(300, 20, 2.00, 100)).toBe(shiny);
+        expect(calculateEVXP(300, 20, 2.50, 600)).toBe(shiny);
     });
 });

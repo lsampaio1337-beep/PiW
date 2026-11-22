@@ -45,15 +45,15 @@ const helpContent = {
                 <h3>EVXP Calculation</h3>
                 <p>Defeating a wild Pokémon grants EVXP (Effort Value Experience).</p>
                 <ul>
-                    <li><strong>Base Formula</strong>: <code>(Base Stat Total / 5) * (Level / 2)</code></li>
-                    <li><strong>Multipliers</strong>: Multiplied by the defeated Pokémon's Quality and IV scaling.</li>
-                    <li><strong>Boosts</strong>: Increased globally by your Professor Oak Task Tier and active Purple Candies.</li>
+                    <li><strong>Base Formula</strong>: <code>(5 + 8 * Level) * (BST / 300)</code></li>
+                    <li><strong>Quality Bonus</strong>: No impact below <code>1.40</code>; grants a bonus equal to Quality for Rare/Epic (<code>1.40–1.80</code>) and a <code>5x</code> super bonus for Shiny (<code>2.00+</code>).</li>
+                    <li><strong>Boosts</strong>: Increased by your Region Prestige Bonus (+100% per region), Professor Oak Task Tier, and active Purple Candies.</li>
                 </ul>
             `,
             "Leveling Requirements": `
                 <h3>Leveling Requirements</h3>
-                <p>The required XP to reach the next level grows exponentially: <code>100 * (Next Level ^ 2)</code>.</p>
-                <p>The maximum level cap for any Pokémon is 100. However, extra XP can still be gathered for rankings and stats.</p>
+                <p>Required XP scales smoothly up to Lv 100 and uses <code>5 * Level * (5 + 8 * Level)</code> beyond Lv 100.</p>
+                <p>Each new region raises the level cap by +100 (Kanto: 100, Johto: 200, etc.) and grants +100% Bonus XP.</p>
             `
         }
     },
